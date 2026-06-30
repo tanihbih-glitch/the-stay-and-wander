@@ -1,25 +1,565 @@
+import { useState } from "react";
+import { ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Loader2 } from "lucide-react";
-import { Streamdown } from 'streamdown';
+import { Input } from "@/components/ui/input";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Card, CardContent } from "@/components/ui/card";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import MobileBottomNav from "@/components/MobileBottomNav";
 
-/**
- * All content in this page are only for example, replace with your own feature implementation
- * When building pages, remember your instructions in Frontend Best Practices, Design Guide and Common Pitfalls
- */
 export default function Home() {
-  // If theme is switchable in App.tsx, we can implement theme toggling like this:
-  // const { theme, toggleTheme } = useTheme();
+  const [activeTab, setActiveTab] = useState("hotels");
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <main>
-        {/* Example: lucide-react for icons */}
-        <Loader2 className="animate-spin" />
-        Example Page
-        {/* Example: Streamdown for markdown rendering */}
-        <Streamdown>Any **markdown** content</Streamdown>
-        <Button variant="default">Example Button</Button>
-      </main>
+    <div className="min-h-screen bg-white">
+      <Header />
+
+      {/* Hero Section */}
+      <section className="relative w-full h-screen flex items-center justify-center overflow-hidden">
+        <img
+          src="/manus-storage/hero-main_005302f1.png"
+          alt="Beautiful travel destination"
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent" />
+
+        <div className="relative z-10 text-center text-white px-4 max-w-3xl mx-auto">
+          <div className="text-sm font-light tracking-widest mb-4 text-yellow-300">
+            WELCOME TO THE STAY & WANDER
+          </div>
+          <h1 className="font-display text-5xl md:text-6xl font-bold mb-6 leading-tight">
+            Discover Beautiful Places, Unique Stays & Unforgettable Journeys
+          </h1>
+          <p className="text-lg md:text-xl font-light mb-8 text-gray-100">
+            Hand-picked hotels, custom itineraries and travel inspiration for
+            Europe, Asia & Brazil
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button className="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold px-8 py-6 text-lg h-auto">
+              Start Planning Your Trip
+            </Button>
+            <Button
+              variant="outline"
+              className="border-white text-white hover:bg-white/10 font-semibold px-8 py-6 text-lg h-auto"
+            >
+              Browse Itineraries
+            </Button>
+          </div>
+        </div>
+
+        {/* Scroll Down Arrow */}
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10 animate-bounce">
+          <ChevronDown className="w-8 h-8 text-white" />
+        </div>
+      </section>
+
+      {/* Booking Widget */}
+      <section className="relative -mt-20 mb-20 z-20 px-4">
+        <div className="container max-w-4xl mx-auto bg-white rounded-2xl shadow-lg p-8">
+          <Tabs value={activeTab} onValueChange={setActiveTab}>
+            <TabsList className="grid w-full grid-cols-4 mb-8 border-b">
+              <TabsTrigger value="hotels" className="pb-3">
+                Hotels
+              </TabsTrigger>
+              <TabsTrigger value="flights" className="pb-3">
+                Flights
+              </TabsTrigger>
+              <TabsTrigger value="cruises" className="pb-3">
+                Cruises
+              </TabsTrigger>
+              <TabsTrigger value="cars" className="pb-3">
+                Car Rentals
+              </TabsTrigger>
+            </TabsList>
+
+            {/* Hotels Tab */}
+            <TabsContent value="hotels" className="space-y-4">
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div>
+                  <label className="text-sm font-semibold text-gray-700 mb-2 block">
+                    Destination
+                  </label>
+                  <Input placeholder="Where to?" />
+                </div>
+                <div>
+                  <label className="text-sm font-semibold text-gray-700 mb-2 block">
+                    Check-in
+                  </label>
+                  <Input type="date" />
+                </div>
+                <div>
+                  <label className="text-sm font-semibold text-gray-700 mb-2 block">
+                    Check-out
+                  </label>
+                  <Input type="date" />
+                </div>
+                <div>
+                  <label className="text-sm font-semibold text-gray-700 mb-2 block">
+                    Guests
+                  </label>
+                  <Input placeholder="2 guests" />
+                </div>
+              </div>
+              <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white py-6 text-lg h-auto">
+                Search Hotels (Booking.com)
+              </Button>
+            </TabsContent>
+
+            {/* Flights Tab */}
+            <TabsContent value="flights" className="space-y-4">
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div>
+                  <label className="text-sm font-semibold text-gray-700 mb-2 block">
+                    From
+                  </label>
+                  <Input placeholder="Departure city" />
+                </div>
+                <div>
+                  <label className="text-sm font-semibold text-gray-700 mb-2 block">
+                    To
+                  </label>
+                  <Input placeholder="Destination" />
+                </div>
+                <div>
+                  <label className="text-sm font-semibold text-gray-700 mb-2 block">
+                    Depart
+                  </label>
+                  <Input type="date" />
+                </div>
+                <div>
+                  <label className="text-sm font-semibold text-gray-700 mb-2 block">
+                    Return
+                  </label>
+                  <Input type="date" />
+                </div>
+              </div>
+              <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white py-6 text-lg h-auto">
+                Search Flights (Aviasales)
+              </Button>
+            </TabsContent>
+
+            {/* Cruises Tab */}
+            <TabsContent value="cruises" className="space-y-4">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                  <label className="text-sm font-semibold text-gray-700 mb-2 block">
+                    Destination
+                  </label>
+                  <Input placeholder="Where to?" />
+                </div>
+                <div>
+                  <label className="text-sm font-semibold text-gray-700 mb-2 block">
+                    Departure Month
+                  </label>
+                  <Input type="month" />
+                </div>
+                <div>
+                  <label className="text-sm font-semibold text-gray-700 mb-2 block">
+                    Duration (days)
+                  </label>
+                  <Input placeholder="7" type="number" />
+                </div>
+              </div>
+              <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white py-6 text-lg h-auto">
+                Search Cruises (CruiseDirect)
+              </Button>
+            </TabsContent>
+
+            {/* Car Rentals Tab */}
+            <TabsContent value="cars" className="space-y-4">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                  <label className="text-sm font-semibold text-gray-700 mb-2 block">
+                    Pick-up Location
+                  </label>
+                  <Input placeholder="City or airport" />
+                </div>
+                <div>
+                  <label className="text-sm font-semibold text-gray-700 mb-2 block">
+                    Pick-up Date
+                  </label>
+                  <Input type="date" />
+                </div>
+                <div>
+                  <label className="text-sm font-semibold text-gray-700 mb-2 block">
+                    Return Date
+                  </label>
+                  <Input type="date" />
+                </div>
+              </div>
+              <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white py-6 text-lg h-auto">
+                Search Cars
+              </Button>
+            </TabsContent>
+          </Tabs>
+
+          {/* Trust Bar */}
+          <div className="mt-8 pt-6 border-t border-gray-200 text-center text-sm text-gray-600">
+            <p className="font-semibold mb-2">
+              Trusted by 25,000+ Travellers
+            </p>
+            <p>
+              Partnered with Booking.com, Aviasales, GetYourGuide & CruiseDirect
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Destinations Section */}
+      <section className="py-20 px-4 bg-white">
+        <div className="container">
+          <div className="text-center mb-16">
+            <h2 className="font-display text-4xl font-bold text-gray-900 mb-4">
+              Where Will You Wander Next?
+            </h2>
+            <p className="text-lg text-gray-600">
+              Hand-picked destinations across Europe, Asia & Brazil
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* Asia Card */}
+            <Card className="overflow-hidden hover:shadow-xl transition-shadow">
+              <div className="relative h-64 overflow-hidden group">
+                <img
+                  src="/manus-storage/asia-destination_b126f0fb.png"
+                  alt="Asia"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                <div className="absolute top-4 left-4 text-yellow-400 font-semibold text-sm">
+                  ASIA
+                </div>
+              </div>
+              <CardContent className="p-6">
+                <h3 className="font-display text-2xl font-bold text-gray-900 mb-2">
+                  Culture, temples & K-cool vibes
+                </h3>
+                <p className="text-gray-600 mb-6">
+                  From Tokyo's electric streets to Seoul's creative districts —
+                  Asia captivates like nowhere else.
+                </p>
+                <div className="flex gap-3">
+                  <Button className="flex-1 bg-yellow-500 hover:bg-yellow-600 text-white">
+                    Explore Asia
+                  </Button>
+                  <Button
+                    variant="outline"
+                    className="flex-1 border-yellow-500 text-yellow-600 hover:bg-yellow-50"
+                  >
+                    Find Hotels
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Europe Card */}
+            <Card className="overflow-hidden hover:shadow-xl transition-shadow">
+              <div className="relative h-64 overflow-hidden group">
+                <img
+                  src="/manus-storage/europe-destination_1b1208ab.png"
+                  alt="Europe"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                <div className="absolute top-4 left-4 text-yellow-400 font-semibold text-sm">
+                  EUROPE
+                </div>
+              </div>
+              <CardContent className="p-6">
+                <h3 className="font-display text-2xl font-bold text-gray-900 mb-2">
+                  Sun-drenched escapes & timeless cities
+                </h3>
+                <p className="text-gray-600 mb-6">
+                  Cobblestone streets, clifftop sunsets, and boutique hotels —
+                  Europe delivers magic at every turn.
+                </p>
+                <div className="flex gap-3">
+                  <Button className="flex-1 bg-yellow-500 hover:bg-yellow-600 text-white">
+                    Explore Europe
+                  </Button>
+                  <Button
+                    variant="outline"
+                    className="flex-1 border-yellow-500 text-yellow-600 hover:bg-yellow-50"
+                  >
+                    Find Hotels
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Brazil Card */}
+            <Card className="overflow-hidden hover:shadow-xl transition-shadow">
+              <div className="relative h-64 overflow-hidden group">
+                <img
+                  src="/manus-storage/brazil-destination_ea7c39d7.png"
+                  alt="Brazil"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                <div className="absolute top-4 left-4 text-yellow-400 font-semibold text-sm">
+                  BRAZIL
+                </div>
+              </div>
+              <CardContent className="p-6">
+                <h3 className="font-display text-2xl font-bold text-gray-900 mb-2">
+                  Vibrant, wild & utterly unforgettable
+                </h3>
+                <p className="text-gray-600 mb-6">
+                  From Carnival energy in Rio to the depths of the Amazon —
+                  Brazil is unlike anywhere on earth.
+                </p>
+                <div className="flex gap-3">
+                  <Button className="flex-1 bg-yellow-500 hover:bg-yellow-600 text-white">
+                    Explore Brazil
+                  </Button>
+                  <Button
+                    variant="outline"
+                    className="flex-1 border-yellow-500 text-yellow-600 hover:bg-yellow-50"
+                  >
+                    Find Hotels
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Flight Deals Section */}
+      <section className="py-20 px-4 bg-blue-600">
+        <div className="container">
+          <div className="text-center mb-12">
+            <h2 className="font-display text-4xl font-bold text-white mb-2">
+              Best Flight Deals This Week
+            </h2>
+            <p className="text-yellow-300 font-semibold">
+              Powered by Aviasales — updated daily
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              { route: "London → Tokyo", price: "$620", month: "July 2026" },
+              { route: "New York → Lisbon", price: "$380", month: "August 2026" },
+              { route: "Dubai → Bali", price: "$290", month: "September 2026" },
+            ].map((deal, idx) => (
+              <Card key={idx} className="bg-white">
+                <CardContent className="p-6">
+                  <h3 className="font-display text-xl font-bold text-gray-900 mb-2">
+                    {deal.route}
+                  </h3>
+                  <p className="text-gray-600 text-sm mb-4">{deal.month}</p>
+                  <div className="text-3xl font-bold text-yellow-500 mb-6">
+                    {deal.price}
+                  </div>
+                  <p className="text-xs text-gray-500 mb-4">return</p>
+                  <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white">
+                    Book This Flight
+                  </Button>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+
+          <p className="text-center text-sm text-gray-200 mt-8">
+            Prices are indicative and subject to availability. Powered by
+            Aviasales via Travelpayouts.
+          </p>
+        </div>
+      </section>
+
+      {/* Itinerary Previews */}
+      <section className="py-20 px-4 bg-white">
+        <div className="container">
+          <div className="text-center mb-16">
+            <h2 className="font-display text-4xl font-bold text-gray-900 mb-4">
+              Your Perfect Trip, Already Planned
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              {
+                title: "10 Days in Tokyo & Seoul",
+                image: "/manus-storage/itinerary-tokyo-seoul_dbb9c3ea.png",
+                region: "ASIA",
+                duration: "10 Days",
+                description:
+                  "Culture, temples, street food and K-pop districts across Japan and South Korea.",
+                destinations: 4,
+                hotels: 8,
+                activities: 15,
+              },
+              {
+                title: "Two-Week Mediterranean Escape",
+                image: "/manus-storage/itinerary-mediterranean_27a74144.png",
+                region: "EUROPE",
+                duration: "14 Days",
+                description:
+                  "Lisbon, Dubrovnik, Santorini and the Amalfi Coast in one perfect summer trip.",
+                destinations: 4,
+                hotels: 7,
+                activities: 18,
+              },
+              {
+                title: "Ultimate Brazil Adventure",
+                image: "/manus-storage/brazil-destination_ea7c39d7.png",
+                region: "BRAZIL",
+                duration: "14 Days",
+                description:
+                  "Rio de Janeiro, the Amazon, São Paulo and Florianópolis beaches in 14 days.",
+                destinations: 4,
+                hotels: 6,
+                activities: 20,
+              },
+            ].map((itinerary, idx) => (
+              <Card key={idx} className="overflow-hidden hover:shadow-lg transition-shadow">
+                <div className="relative h-48 overflow-hidden">
+                  <img
+                    src={itinerary.image}
+                    alt={itinerary.title}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                  <div className="absolute top-4 left-4 text-yellow-400 font-semibold text-sm">
+                    {itinerary.region}
+                  </div>
+                  <div className="absolute top-4 right-4 bg-white/90 px-3 py-1 rounded-full text-sm font-semibold text-gray-900">
+                    {itinerary.duration}
+                  </div>
+                </div>
+                <CardContent className="p-6">
+                  <h3 className="font-display text-xl font-bold text-gray-900 mb-2">
+                    {itinerary.title}
+                  </h3>
+                  <p className="text-gray-600 text-sm mb-4">
+                    {itinerary.description}
+                  </p>
+                  <div className="flex justify-between text-xs text-gray-600 mb-6 py-3 border-t border-b">
+                    <div>📍 {itinerary.destinations} Destinations</div>
+                    <div>🏨 {itinerary.hotels} Hotels</div>
+                    <div>🎯 {itinerary.activities} Activities</div>
+                  </div>
+                  <Button className="w-full bg-yellow-500 hover:bg-yellow-600 text-white">
+                    View Full Itinerary
+                  </Button>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Email Capture Section */}
+      <section className="py-20 px-4 bg-yellow-50">
+        <div className="container max-w-2xl mx-auto text-center">
+          <div className="mb-6 flex justify-center">
+            <img
+              src="/manus-storage/logo-compass_7d46aa77.png"
+              alt="Compass"
+              className="w-12 h-12"
+            />
+          </div>
+          <h2 className="font-display text-3xl font-bold text-gray-900 mb-4">
+            Get Our Free Summer 2026 Europe & Asia Travel Guide
+          </h2>
+          <p className="text-gray-600 mb-8 text-lg">
+            Itineraries, hotel picks, packing lists and insider tips — delivered
+            instantly to your inbox.
+          </p>
+
+          <div className="flex flex-col sm:flex-row gap-3 mb-4">
+            <Input
+              placeholder="First Name"
+              className="flex-1"
+            />
+            <Input
+              placeholder="Email Address"
+              type="email"
+              className="flex-1"
+            />
+            <Button className="bg-blue-600 hover:bg-blue-700 text-white px-8 h-auto py-3 whitespace-nowrap">
+              Send Me the Free Guide
+            </Button>
+          </div>
+          <p className="text-xs text-gray-600">
+            No spam, ever. Unsubscribe anytime.
+          </p>
+        </div>
+      </section>
+
+      {/* Blog Preview Section */}
+      <section className="py-20 px-4 bg-white">
+        <div className="container">
+          <div className="text-center mb-16">
+            <h2 className="font-display text-4xl font-bold text-gray-900 mb-4">
+              Latest from the Blog
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              {
+                title: "Best Hotels in Bali for Every Budget 2026",
+                image: "/manus-storage/blog-bali_5a40f78c.png",
+                category: "Hotel Reviews",
+                excerpt: "Discover luxury, mid-range, and budget-friendly stays in Bali.",
+                readTime: "5 min read",
+              },
+              {
+                title: "7 Best Cities to Visit in Europe This Summer",
+                image: "/manus-storage/blog-europe-cities_de773d0d.png",
+                category: "Destination Guides",
+                excerpt:
+                  "From Lisbon to Prague, explore Europe's most enchanting cities.",
+                readTime: "7 min read",
+              },
+              {
+                title: "Tokyo vs Bangkok — Which Should You Visit First?",
+                image: "/manus-storage/blog-tokyo-bangkok_0467868b.png",
+                category: "Itinerary Ideas",
+                excerpt:
+                  "A detailed comparison to help you choose your next Asian adventure.",
+                readTime: "6 min read",
+              },
+            ].map((post, idx) => (
+              <Card key={idx} className="overflow-hidden hover:shadow-lg transition-shadow">
+                <div className="relative h-48 overflow-hidden">
+                  <img
+                    src={post.image}
+                    alt={post.title}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute top-4 left-4 bg-yellow-500 text-white px-3 py-1 rounded-full text-xs font-semibold">
+                    {post.category}
+                  </div>
+                </div>
+                <CardContent className="p-6">
+                  <h3 className="font-display text-lg font-bold text-gray-900 mb-2">
+                    {post.title}
+                  </h3>
+                  <p className="text-gray-600 text-sm mb-4">{post.excerpt}</p>
+                  <div className="flex justify-between items-center text-xs text-gray-600 mb-4">
+                    <span>By Travel Team</span>
+                    <span>{post.readTime}</span>
+                  </div>
+                  <Button
+                    variant="outline"
+                    className="w-full border-yellow-500 text-yellow-600 hover:bg-yellow-50"
+                  >
+                    Read More
+                  </Button>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <Footer />
+      <MobileBottomNav />
     </div>
   );
 }
