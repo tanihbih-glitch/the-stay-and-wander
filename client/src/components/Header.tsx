@@ -17,31 +17,27 @@ export default function Header() {
     <header className="sticky top-0 z-50 w-full bg-white border-b border-gray-200 shadow-sm">
       <div className="container flex items-center justify-between h-20">
         {/* Logo */}
-        <Link href="/">
-          <a className="flex items-center gap-2 no-underline">
-            <img
-              src="/manus-storage/logo-compass_7d46aa77.png"
-              alt="The Stay & Wander"
-              className="w-8 h-8"
-            />
-            <div className="flex flex-col">
-              <span className="font-display text-xl font-bold text-gray-900">
-                The Stay & Wander
-              </span>
-              <span className="text-xs font-light text-gray-600 tracking-widest">
-                DISCOVER · STAY · EXPLORE
-              </span>
-            </div>
-          </a>
+        <Link href="/" className="flex items-center gap-2 no-underline">
+          <img
+            src="/manus-storage/logo-compass_7d46aa77.png"
+            alt="The Stay & Wander"
+            className="w-8 h-8"
+          />
+          <div className="flex flex-col">
+            <span className="font-display text-xl font-bold text-gray-900">
+              The Stay & Wander
+            </span>
+            <span className="text-xs font-light text-gray-600 tracking-widest">
+              DISCOVER · STAY · EXPLORE
+            </span>
+          </div>
         </Link>
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
-            <Link key={link.href} href={link.href}>
-              <a className="text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors no-underline">
-                {link.label}
-              </a>
+            <Link key={link.href} href={link.href} className="text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors no-underline">
+              {link.label}
             </Link>
           ))}
           <Button className="bg-blue-600 hover:bg-blue-700 text-white">
@@ -68,13 +64,13 @@ export default function Header() {
         <div className="md:hidden border-t border-gray-200 bg-white">
           <nav className="container py-4 flex flex-col gap-4">
             {navLinks.map((link) => (
-              <Link key={link.href} href={link.href}>
-                <a
-                  className="text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors no-underline"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  {link.label}
-                </a>
+              <Link
+                key={link.href}
+                href={link.href}
+                className="text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors no-underline"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                {link.label}
               </Link>
             ))}
             <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white">
