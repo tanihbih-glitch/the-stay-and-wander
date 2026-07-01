@@ -9,8 +9,8 @@ import Itineraries from "./pages/Itineraries";
 import Booking from "./pages/Booking";
 import Blog from "./pages/Blog";
 
-
 function Router() {
+  // make sure to consider if you need authentication for certain routes
   return (
     <Switch>
       <Route path={"/"} component={Home} />
