@@ -8,6 +8,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MobileBottomNav from "@/components/MobileBottomNav";
+import TravelpayoutsFlightWidget from "@/components/TravelpayoutsFlightWidget";
 
 export default function Home() {
   // The userAuth hooks provides authentication state
@@ -40,6 +41,9 @@ export default function Home() {
             Hand-picked hotels, custom itineraries and travel inspiration for
             Europe, Asia & Brazil
           </p>
+          <div className="mb-8 max-w-2xl mx-auto">
+            <TravelpayoutsFlightWidget />
+          </div>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button className="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold px-8 py-6 text-lg h-auto">
               Start Planning Your Trip
