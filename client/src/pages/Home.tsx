@@ -9,6 +9,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MobileBottomNav from "@/components/MobileBottomNav";
 import NewsletterSignup from "@/components/NewsletterSignup";
+import AviasalesFlightWidget from "@/components/AviasalesFlightWidget";
 
 
 export default function Home() {
@@ -116,35 +117,7 @@ export default function Home() {
 
             {/* Flights Tab */}
             <TabsContent value="flights" className="space-y-4">
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                <div>
-                  <label className="text-sm font-semibold text-gray-700 mb-2 block">
-                    From
-                  </label>
-                  <Input placeholder="Departure city" />
-                </div>
-                <div>
-                  <label className="text-sm font-semibold text-gray-700 mb-2 block">
-                    To
-                  </label>
-                  <Input placeholder="Destination" />
-                </div>
-                <div>
-                  <label className="text-sm font-semibold text-gray-700 mb-2 block">
-                    Depart
-                  </label>
-                  <Input type="date" />
-                </div>
-                <div>
-                  <label className="text-sm font-semibold text-gray-700 mb-2 block">
-                    Return
-                  </label>
-                  <Input type="date" />
-                </div>
-              </div>
-              <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white py-6 text-lg h-auto">
-                Search Flights (Aviasales)
-              </Button>
+              <AviasalesFlightWidget />
             </TabsContent>
 
             {/* Cruises Tab */}
