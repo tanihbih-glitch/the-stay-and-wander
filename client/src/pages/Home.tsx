@@ -8,6 +8,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MobileBottomNav from "@/components/MobileBottomNav";
+import NewsletterSignup from "@/components/NewsletterSignup";
 
 
 export default function Home() {
@@ -459,43 +460,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Email Capture Section */}
-      <section className="py-20 px-4 bg-yellow-50">
-        <div className="container max-w-2xl mx-auto text-center">
-          <div className="mb-6 flex justify-center">
-            <img
-              src="/manus-storage/logo-compass_7d46aa77.png"
-              alt="Compass"
-              className="w-12 h-12"
-            />
-          </div>
-          <h2 className="font-display text-3xl font-bold text-gray-900 mb-4">
-            Get Our Free Summer 2026 Europe & Asia Travel Guide
-          </h2>
-          <p className="text-gray-600 mb-8 text-lg">
-            Itineraries, hotel picks, packing lists and insider tips — delivered
-            instantly to your inbox.
-          </p>
-
-          <div className="flex flex-col sm:flex-row gap-3 mb-4">
-            <Input
-              placeholder="First Name"
-              className="flex-1"
-            />
-            <Input
-              placeholder="Email Address"
-              type="email"
-              className="flex-1"
-            />
-            <Button className="bg-blue-600 hover:bg-blue-700 text-white px-8 h-auto py-3 whitespace-nowrap">
-              Send Me the Free Guide
-            </Button>
-          </div>
-          <p className="text-xs text-gray-600">
-            No spam, ever. Unsubscribe anytime.
-          </p>
-        </div>
-      </section>
+      {/* Newsletter Signup Section */}
+      <NewsletterSignup />
 
       {/* Blog Preview Section */}
       <section className="py-20 px-4 bg-white">
