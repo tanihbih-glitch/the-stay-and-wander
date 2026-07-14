@@ -4,6 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MobileBottomNav from "@/components/MobileBottomNav";
+import { OrganizationSchema, BreadcrumbSchema } from "@/components/BlogArticleSchema";
 
 export default function Blog() {
   const [activeCategory, setActiveCategory] = useState("all");
@@ -93,8 +94,15 @@ export default function Blog() {
             article.category.toLowerCase() === activeCategory.toLowerCase()
         );
 
+  const breadcrumbItems = [
+    { name: "Home", url: "https://thestayandwander.com" },
+    { name: "Blog", url: "https://thestayandwander.com/blog" },
+  ];
+
   return (
     <div className="min-h-screen bg-white pb-20 md:pb-0">
+      <OrganizationSchema />
+      {BreadcrumbSchema(breadcrumbItems)}
       <Header />
 
       {/* Page Header */}

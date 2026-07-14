@@ -1,0 +1,15 @@
+# Robots.txt for The Stay & Wander
+# Allow all search engines to crawl the site
+
+User-agent: *
+Allow: /
+
+# Disallow private pages (if any)
+Disallow: /admin
+Disallow: /private
+
+# Sitemap location
+Sitemap: https://thestayandwander.com/sitemap.xml
+
+# Crawl delay (optional - set to 1 second to be respectful)
+Crawl-delay: 1
