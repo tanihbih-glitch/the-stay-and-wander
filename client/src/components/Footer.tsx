@@ -56,24 +56,18 @@ export default function Footer() {
             <h4 className="font-semibold text-gray-900 mb-4">Explore</h4>
             <ul className="space-y-2">
               <li>
-                <Link href="/itineraries">
-                  <a className="text-sm text-gray-600 hover:text-blue-600 transition-colors no-underline">
-                    Itineraries
-                  </a>
+                <Link href="/itineraries" className="text-sm text-gray-600 hover:text-blue-600 transition-colors no-underline">
+                  Itineraries
                 </Link>
               </li>
               <li>
-                <Link href="/booking">
-                  <a className="text-sm text-gray-600 hover:text-blue-600 transition-colors no-underline">
-                    Book Now
-                  </a>
+                <Link href="/booking" className="text-sm text-gray-600 hover:text-blue-600 transition-colors no-underline">
+                  Book Now
                 </Link>
               </li>
               <li>
-                <Link href="/blog">
-                  <a className="text-sm text-gray-600 hover:text-blue-600 transition-colors no-underline">
-                    Travel Blog
-                  </a>
+                <Link href="/blog" className="text-sm text-gray-600 hover:text-blue-600 transition-colors no-underline">
+                  Travel Blog
                 </Link>
               </li>
               <li>
