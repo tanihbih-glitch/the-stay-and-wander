@@ -2,9 +2,10 @@ import { useEffect, useRef } from "react";
 
 /**
  * AviasalesFlightWidget Component
- * Integrates Travelpayouts Aviasales flight search widget
- * Tracks all searches with affiliate ID 745048 (marker 745048)
- * Updated embed code with limit=6 for 6 flight results display
+ * Integrates Travelpayouts Aviasales flight search widget with custom branding
+ * Tracks all searches with affiliate ID 745048
+ * Fully responsive on mobile, tablet, and desktop
+ * Includes hotel search option and trust badges
  */
 
 export default function AviasalesFlightWidget() {
@@ -20,7 +21,7 @@ export default function AviasalesFlightWidget() {
     const script = document.createElement("script");
     script.async = true;
     script.src =
-      "https://tpwidg.com/content?currency=usd&trs=544987&shmarker=745048&target_host=www.aviasales.com%2Fsearch&locale=en&limit=6&powered_by=true&primary=%230085FF&promo_id=4044&campaign_id=100";
+      "https://tpwidg.com/content?currency=usd&trs=544987&shmarker=745048&show_hotels=true&powered_by=true&locale=en&searchUrl=www.aviasales.com%2Fsearch&primary_override=%2332a8dd&color_button=%2332a8dd&color_icons=%2332a8dd&dark=%23262626&light=%23FFFFFF&secondary=%23FFFFFF&special=%23C4C4C4&color_focused=%2332a8dd&border_radius=0&plain=false&promo_id=7879&campaign_id=100";
     script.charset = "utf-8";
 
     // Add script to container if it exists
