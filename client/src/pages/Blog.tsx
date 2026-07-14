@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import Header from "@/components/Header";
@@ -167,12 +168,14 @@ export default function Blog() {
 
                   <div className="flex justify-between items-center">
                     <span className="text-xs text-gray-500">{article.date}</span>
-                    <Button
-                      variant="outline"
-                      className="border-yellow-500 text-yellow-600 hover:bg-yellow-50 text-sm"
-                    >
-                      Read More
-                    </Button>
+                    <Link href={`/blog/${article.id}`}>
+                      <Button
+                        variant="outline"
+                        className="border-yellow-500 text-yellow-600 hover:bg-yellow-50 text-sm"
+                      >
+                        Read More
+                      </Button>
+                    </Link>
                   </div>
                 </CardContent>
               </Card>

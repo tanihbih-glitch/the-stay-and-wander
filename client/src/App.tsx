@@ -8,6 +8,7 @@ import Home from "./pages/Home";
 import Itineraries from "./pages/Itineraries";
 import Booking from "./pages/Booking";
 import Blog from "./pages/Blog";
+import BlogArticle from "./pages/BlogArticle";
 
 function Router() {
   // make sure to consider if you need authentication for certain routes
@@ -17,6 +18,10 @@ function Router() {
       <Route path={"/itineraries"} component={Itineraries} />
       <Route path={"/booking"} component={Booking} />
       <Route path={"/blog"} component={Blog} />
+      <Route path={/^\/blog\/(\d+)$/} component={({ params }) => {
+        const articleId = parseInt((params as any)[0]);
+        return <BlogArticle articleId={articleId} />;
+      }} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />
