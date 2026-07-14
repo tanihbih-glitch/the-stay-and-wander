@@ -20,7 +20,7 @@
  * Get your Travelpayout affiliate ID from: https://travelpayouts.com/developers/api
  * Replace 'YOUR_TRAVELPAYOUT_AFFILIATE_ID' with your actual ID
  */
-const TRAVELPAYOUT_AFFILIATE_ID = "YOUR_TRAVELPAYOUT_AFFILIATE_ID";
+const TRAVELPAYOUT_AFFILIATE_ID = process.env.VITE_TRAVELPAYOUT_AFFILIATE_ID || "745048";
 const TRAVELPAYOUT_UTM_SOURCE = "staywander";
 const TRAVELPAYOUT_UTM_MEDIUM = "affiliate";
 
@@ -43,7 +43,7 @@ function generateTravelpayoutLink(
  * Get your Booking.com affiliate ID from: https://partner.booking.com
  * Replace 'YOUR_BOOKING_AFFILIATE_ID' with your actual ID
  */
-const BOOKING_AFFILIATE_ID = "YOUR_BOOKING_AFFILIATE_ID";
+const BOOKING_AFFILIATE_ID = process.env.VITE_BOOKING_AFFILIATE_ID || "";
 
 /**
  * Helper function to generate Booking.com hotel search links
@@ -283,3 +283,13 @@ export const affiliateConfig = {
     affiliateId: BOOKING_AFFILIATE_ID,
   },
 };
+
+/**
+ * Debug: Log current affiliate configuration
+ */
+if (typeof window !== "undefined") {
+  console.log("[Affiliate Config]", {
+    travelpayoutId: TRAVELPAYOUT_AFFILIATE_ID,
+    bookingId: BOOKING_AFFILIATE_ID,
+  });
+}

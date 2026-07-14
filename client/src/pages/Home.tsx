@@ -8,6 +8,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MobileBottomNav from "@/components/MobileBottomNav";
+import { TravelpayoutFlightDeals } from "@/components/TravelpayoutFlightDeals";
 
 export default function Home() {
   // The userAuth hooks provides authentication state
@@ -332,48 +333,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Flight Deals Section */}
-      <section className="py-20 px-4 bg-blue-600">
-        <div className="container">
-          <div className="text-center mb-12">
-            <h2 className="font-display text-4xl font-bold text-white mb-2">
-              Best Flight Deals This Week
-            </h2>
-            <p className="text-yellow-300 font-semibold">
-              Powered by Aviasales — updated daily
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              { route: "London → Tokyo", price: "$620", month: "July 2026" },
-              { route: "New York → Lisbon", price: "$380", month: "August 2026" },
-              { route: "Dubai → Bali", price: "$290", month: "September 2026" },
-            ].map((deal, idx) => (
-              <Card key={idx} className="bg-white">
-                <CardContent className="p-6">
-                  <h3 className="font-display text-xl font-bold text-gray-900 mb-2">
-                    {deal.route}
-                  </h3>
-                  <p className="text-gray-600 text-sm mb-4">{deal.month}</p>
-                  <div className="text-3xl font-bold text-yellow-500 mb-6">
-                    {deal.price}
-                  </div>
-                  <p className="text-xs text-gray-500 mb-4">return</p>
-                  <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white">
-                    Book This Flight
-                  </Button>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-
-          <p className="text-center text-sm text-gray-200 mt-8">
-            Prices are indicative and subject to availability. Powered by
-            Aviasales via Travelpayouts.
-          </p>
-        </div>
-      </section>
+      {/* Flight Deals Section - Powered by Travelpayout */}
+      <TravelpayoutFlightDeals />
 
       {/* Itinerary Previews */}
       <section className="py-20 px-4 bg-white">
