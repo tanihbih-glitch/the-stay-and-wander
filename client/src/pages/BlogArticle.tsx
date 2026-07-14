@@ -351,12 +351,28 @@ const TokyoBangkokArticle: ArticleContent = {
   ),
 };
 
+// Import new articles
+import {
+  PackingListSEAsiaArticle,
+  RioGuideArticle,
+  PackingListEuropeArticle,
+  PortugalGemsArticle,
+  AsiaStreetFoodArticle,
+  BudgetDestinationsArticle,
+} from "./BlogArticles2";
+
 // Map articles by ID
 const articlesMap: Record<number, ArticleContent> = {
   1: BaliHotelsArticle,
   2: EuropeCitiesArticle,
   3: TokyoBangkokArticle,
-};
+  4: PackingListSEAsiaArticle,
+  5: RioGuideArticle,
+  6: PackingListEuropeArticle,
+  7: PortugalGemsArticle,
+  8: AsiaStreetFoodArticle,
+  9: BudgetDestinationsArticle,
+}
 
 interface BlogArticleProps {
   articleId?: number;
