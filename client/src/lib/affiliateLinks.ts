@@ -25,6 +25,12 @@ const TRAVELPAYOUT_UTM_SOURCE = "staywander";
 const TRAVELPAYOUT_UTM_MEDIUM = "affiliate";
 
 /**
+ * Travelpayouts Deep Link for Flight Bookings
+ * This is the main flight booking link with your affiliate tracking
+ */
+const TRAVELPAYOUTS_FLIGHT_LINK = "https://aviasales.tpo.lu/f9QeB1mu";
+
+/**
  * Helper function to generate Travelpayout search links
  * @param searchKey - The search key from Travelpayout API
  * @param campaign - Campaign name for tracking
@@ -34,7 +40,7 @@ function generateTravelpayoutLink(
   searchKey: string,
   campaign: string = "deals"
 ): string {
-  return `https://www.travelpayouts.com/searches/${searchKey}?utm_source=${TRAVELPAYOUT_UTM_SOURCE}&utm_medium=${TRAVELPAYOUT_UTM_MEDIUM}&utm_campaign=${campaign}`;
+  return TRAVELPAYOUTS_FLIGHT_LINK;
 }
 
 /**
@@ -83,25 +89,25 @@ export const affiliateLinks = {
   flights: {
     london_tokyo: {
       route: "London → Tokyo",
-      searchKey: "YOUR_SEARCH_KEY_HERE", // Replace with actual Travelpayout search key
+      searchKey: "london-tokyo",
       price: "From $620",
-      link: generateTravelpayoutLink("YOUR_SEARCH_KEY_HERE", "london-tokyo"),
+      link: TRAVELPAYOUTS_FLIGHT_LINK,
       category: "flight",
       network: "travelpayout",
     },
     newyork_lisbon: {
       route: "New York → Lisbon",
-      searchKey: "YOUR_SEARCH_KEY_HERE",
+      searchKey: "newyork-lisbon",
       price: "From $380",
-      link: generateTravelpayoutLink("YOUR_SEARCH_KEY_HERE", "newyork-lisbon"),
+      link: TRAVELPAYOUTS_FLIGHT_LINK,
       category: "flight",
       network: "travelpayout",
     },
     dubai_bali: {
       route: "Dubai → Bali",
-      searchKey: "YOUR_SEARCH_KEY_HERE",
+      searchKey: "dubai-bali",
       price: "From $290",
-      link: generateTravelpayoutLink("YOUR_SEARCH_KEY_HERE", "dubai-bali"),
+      link: TRAVELPAYOUTS_FLIGHT_LINK,
       category: "flight",
       network: "travelpayout",
     },
@@ -211,17 +217,17 @@ export const affiliateLinks = {
     tokyo_seoul: {
       title: "10 Days in Tokyo & Seoul",
       bookingLink: generateBookingLink("Tokyo", "2026-07-15", "2026-07-25", 2),
-      flightLink: generateTravelpayoutLink("YOUR_SEARCH_KEY_HERE", "tokyo-seoul"),
+      flightLink: TRAVELPAYOUTS_FLIGHT_LINK,
     },
     mediterranean: {
       title: "Two-Week Mediterranean Escape",
       bookingLink: generateBookingLink("Barcelona", "2026-07-15", "2026-07-29", 2),
-      flightLink: generateTravelpayoutLink("YOUR_SEARCH_KEY_HERE", "mediterranean"),
+      flightLink: TRAVELPAYOUTS_FLIGHT_LINK,
     },
     brazil_adventure: {
       title: "Ultimate Brazil Adventure",
       bookingLink: generateBookingLink("Rio de Janeiro", "2026-07-15", "2026-07-29", 2),
-      flightLink: generateTravelpayoutLink("YOUR_SEARCH_KEY_HERE", "brazil"),
+      flightLink: TRAVELPAYOUTS_FLIGHT_LINK,
     },
   },
 
@@ -237,7 +243,7 @@ export const affiliateLinks = {
     },
     europe_flights: {
       articleTitle: "7 Best Cities to Visit in Europe This Summer",
-      flightLink: generateTravelpayoutLink("YOUR_SEARCH_KEY_HERE", "europe-cities"),
+      flightLink: TRAVELPAYOUTS_FLIGHT_LINK,
       category: "flight",
     },
   },
