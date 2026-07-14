@@ -10,6 +10,7 @@ import Footer from "@/components/Footer";
 import MobileBottomNav from "@/components/MobileBottomNav";
 import NewsletterSignup from "@/components/NewsletterSignup";
 import AviasalesFlightWidget from "@/components/AviasalesFlightWidget";
+import PopularFlightRoutes from "@/components/PopularFlightRoutes";
 
 
 export default function Home() {
@@ -186,6 +187,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Popular Flight Routes Section */}
+      <PopularFlightRoutes />
 
       {/* Destinations Section */}
       <section className="py-20 px-4 bg-white">
