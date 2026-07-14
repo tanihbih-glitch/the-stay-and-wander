@@ -11,6 +11,7 @@ import MobileBottomNav from "@/components/MobileBottomNav";
 import NewsletterSignup from "@/components/NewsletterSignup";
 import AviasalesFlightWidget from "@/components/AviasalesFlightWidget";
 import PopularFlightRoutes from "@/components/PopularFlightRoutes";
+import PopularRoutesWidget from "@/components/PopularRoutesWidget";
 
 
 export default function Home() {
@@ -354,6 +355,9 @@ export default function Home() {
           </p>
         </div>
       </section>
+
+      {/* Popular Routes Widget Section */}
+      <PopularRoutesWidget />
 
       {/* Itinerary Previews */}
       <section className="py-20 px-4 bg-white">
