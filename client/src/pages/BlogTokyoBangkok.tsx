@@ -294,6 +294,12 @@ export default function BlogTokyoBangkok() {
                 </Button>
               </a>
             </div>
+
+            {/* GetYourGuide Widget - After Bangkok Hotels */}
+            <div className="my-8 py-6 border-t border-b">
+              <p className="text-sm font-semibold text-yellow-600 mb-4">🎫 TOURS & EXPERIENCES IN BANGKOK</p>
+              <div data-gyg-widget="auto" data-gyg-partner-id="YOPATWV"></div>
+            </div>
           </section>
 
           {/* Round 4 - Culture */}

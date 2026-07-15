@@ -175,6 +175,12 @@ export default function BlogBaliHotels() {
             </div>
           </section>
 
+          {/* GetYourGuide Widget - After Intro */}
+          <section className="mb-12 py-8 border-t border-b">
+            <p className="text-sm font-semibold text-yellow-600 mb-4">🎫 TOP-RATED BALI TOURS & ACTIVITIES</p>
+            <div data-gyg-widget="auto" data-gyg-partner-id="YOPATWV"></div>
+          </section>
+
           {/* What to Know */}
           <section className="mb-12">
             <h2 className="font-playfair text-3xl font-bold text-gray-900 mb-6">
@@ -364,6 +370,12 @@ export default function BlogBaliHotels() {
             <p className="text-gray-700 mb-4">
               Whatever your budget, book with free cancellation and book early for summer travel — Bali's best hotels sell out fast.
             </p>
+          </section>
+
+          {/* GetYourGuide Widget - After Final Hotel */}
+          <section className="mb-12 py-8 border-t border-b">
+            <p className="text-sm font-semibold text-yellow-600 mb-4">🎫 COMPLETE YOUR BALI TRIP — BOOK ACTIVITIES</p>
+            <div data-gyg-widget="auto" data-gyg-partner-id="YOPATWV"></div>
           </section>
 
           {/* Related Articles */}

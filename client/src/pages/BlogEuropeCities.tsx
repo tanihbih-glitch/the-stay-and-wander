@@ -292,6 +292,12 @@ export default function BlogEuropeCities() {
                   </Button>
                 </a>
               </div>
+
+              {/* GetYourGuide Widget - After Each City */}
+              <div className="mb-8 py-6 border-t border-b">
+                <p className="text-sm font-semibold text-yellow-600 mb-4">🎫 TOURS & EXPERIENCES IN {city.name.split(',')[0].toUpperCase()}</p>
+                <div data-gyg-widget="auto" data-gyg-partner-id="YOPATWV"></div>
+              </div>
             </section>
           ))}
 
@@ -323,6 +329,12 @@ export default function BlogEuropeCities() {
                 </tbody>
               </table>
             </div>
+          </section>
+
+          {/* GetYourGuide Widget - Bottom of Article */}
+          <section className="mb-12 py-8 border-t border-b">
+            <p className="text-sm font-semibold text-yellow-600 mb-4">🎫 BROWSE ALL EUROPEAN TOURS & EXPERIENCES</p>
+            <div data-gyg-widget="auto" data-gyg-partner-id="YOPATWV"></div>
           </section>
 
           {/* Booking Tips */}
