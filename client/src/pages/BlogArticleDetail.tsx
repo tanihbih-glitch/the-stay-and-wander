@@ -166,6 +166,12 @@ const articles: Record<number, BlogArticle> = {
         <li>Efficient public transportation</li>
       </ul>
       
+      <h3>Where to Stay in Tokyo</h3>
+      <p>Tokyo offers luxury options like the Park Hyatt Tokyo with stunning city views, and mid-range favorites like Hotel Gracery Shinjuku for convenient access to shopping and dining.</p>
+      
+      <p style="text-align: center; margin-top: 20px; margin-bottom: 10px;"><span style="background-color: #D4AF37; color: #000; padding: 4px 12px; border-radius: 4px; font-size: 12px; font-weight: bold;">Top-Rated Tokyo Tours & Experiences</span></p>
+      <div data-gyg-widget="auto" data-gyg-partner-id="YOPATWV"></div>
+      
       <h2>Bangkok: The City of Smiles</h2>
       <p>Bangkok is Thailand's vibrant capital, known for its ornate shrines, bustling street markets, and world-class cuisine. It's more laid-back than Tokyo but equally exciting.</p>
       
@@ -178,11 +184,20 @@ const articles: Record<number, BlogArticle> = {
         <li>Easy access to nearby islands and beaches</li>
       </ul>
       
+      <h3>Where to Stay in Bangkok</h3>
+      <p>Bangkok features luxury properties like the Mandarin Oriental with riverside elegance, and budget-friendly options like NapPark Design Hotel for authentic local experiences.</p>
+      
+      <p style="text-align: center; margin-top: 20px; margin-bottom: 10px;"><span style="background-color: #D4AF37; color: #000; padding: 4px 12px; border-radius: 4px; font-size: 12px; font-weight: bold;">Top-Rated Bangkok Tours & Experiences</span></p>
+      <div data-gyg-widget="auto" data-gyg-partner-id="YOPATWV"></div>
+      
       <h2>The Verdict</h2>
       <p>Both cities are incredible in their own ways. Tokyo is better for those seeking cutting-edge technology and refined cuisine, while Bangkok is ideal for budget travelers seeking authentic Asian culture and adventure.</p>
       
       <h2>Pro Tip</h2>
       <p>Consider visiting both! Many travelers do a Tokyo-Bangkok combo trip, spending 5-7 days in each city for a comprehensive Asian experience.</p>
+      
+      <p style="text-align: center; margin-top: 30px; margin-bottom: 10px;"><span style="background-color: #D4AF37; color: #000; padding: 4px 12px; border-radius: 4px; font-size: 12px; font-weight: bold;">Browse All Asia Tours</span></p>
+      <div data-gyg-widget="auto" data-gyg-partner-id="YOPATWV"></div>
     `,
     relatedArticles: [1, 2],
   },
