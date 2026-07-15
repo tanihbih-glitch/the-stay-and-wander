@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Mail, Gift, CheckCircle } from "lucide-react";
@@ -42,7 +42,17 @@ export default function NewsletterSignup() {
       return;
     }
 
+    // Submit to our backend
     subscribeMutation.mutate({ email, name });
+
+    // Also submit to Mailchimp if available
+    if (typeof window !== 'undefined' && (window as any).mce_form && (window as any).mce_form.submit) {
+      try {
+        (window as any).mce_form.submit();
+      } catch (e) {
+        // Mailchimp form not available, that's okay
+      }
+    }
   };
 
   return (

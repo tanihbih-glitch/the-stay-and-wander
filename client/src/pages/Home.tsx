@@ -15,7 +15,7 @@ import AviasalesFlightWidget from "@/components/AviasalesFlightWidget";
 import PopularFlightRoutes from "@/components/PopularFlightRoutes";
 import PopularRoutesWidget from "@/components/PopularRoutesWidget";
 import GetYourGuideTours from "@/components/GetYourGuideTours";
-
+import MailchimpPopup from "@/components/MailchimpPopup";
 
 export default function Home() {
   // The userAuth hooks provides authentication state
@@ -28,6 +28,13 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-white">
+      {/* Exit-intent popup */}
+      <MailchimpPopup
+        title="Don't Miss Out!"
+        description="Get exclusive travel tips, deals, and inspiration delivered to your inbox."
+        trigger="exit-intent"
+      />
+
       <Head
         title={homeMetadata.title}
         description={homeMetadata.description}

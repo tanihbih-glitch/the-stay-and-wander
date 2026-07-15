@@ -9,6 +9,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MobileBottomNav from "@/components/MobileBottomNav";
 import PopularRoutesWidgetBlogSidebar from "@/components/PopularRoutesWidgetBlogSidebar";
+import MailchimpPopup from "@/components/MailchimpPopup";
 
 interface BlogArticle {
   id: number;
@@ -346,6 +347,23 @@ export default function BlogArticleDetail() {
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Email Signup Section */}
+      <section className="py-16 px-4 bg-gradient-to-r from-blue-50 to-indigo-50">
+        <div className="max-w-2xl mx-auto text-center">
+          <h2 className="text-3xl font-bold text-gray-900 mb-4">
+            Get More Travel Inspiration
+          </h2>
+          <p className="text-lg text-gray-600 mb-8">
+            Subscribe to our newsletter for exclusive travel tips, destination guides, and special offers.
+          </p>
+          <MailchimpPopup
+            title="Subscribe to Our Newsletter"
+            description="Get exclusive travel tips, deals, and inspiration delivered to your inbox."
+            trigger="manual"
+          />
         </div>
       </section>
 

@@ -59,9 +59,9 @@
 - [x] Add GetYourGuide Tours & Activities tab to Booking Portal with widget
 
 ## Mailchimp Integration (5 signup flows)
-- [ ] Install Mailchimp script in head section of all pages
-- [ ] Connect homepage email capture form to Mailchimp
-- [ ] Create Mailchimp email capture popup for itinerary downloads (Tokyo & Seoul, Mediterranean, Brazil)
-- [ ] Implement exit-intent popup sitewide with Mailchimp integration
-- [ ] Add email signup section to blog article footer connected to Mailchimp
-- [ ] Test all email capture flows and verify Mailchimp integration
+- [x] Install Mailchimp script in head section of all pages
+- [x] Connect homepage email capture form to Mailchimp
+- [x] Create Mailchimp email capture popup for itinerary downloads (Tokyo & Seoul, Mediterranean, Brazil)
+- [x] Implement exit-intent popup sitewide with Mailchimp integration
+- [x] Add email signup section to blog article footer connected to Mailchimp
+- [x] Test all email capture flows and verify Mailchimp integration
