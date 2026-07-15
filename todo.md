@@ -48,11 +48,11 @@
 ## GetYourGuide Widget Integration (17 total placements)
 - [x] Add GetYourGuide widget to Bali article after intro (label: 'Top-Rated Bali Tours & Activities')
 - [x] Add GetYourGuide widget to Bali article after final hotel (label: 'Complete Your Bali Trip — Book Activities')
-- [ ] Add GetYourGuide widget after each Europe city section (7 cities: Lisbon, Dubrovnik, Budapest, Porto, Athens, Ljubljana, Kotor)
-- [ ] Add GetYourGuide widget at bottom of Europe article (label: 'Browse All European Tours & Experiences')
-- [ ] Add GetYourGuide widget after Bangkok hotels section in Tokyo vs Bangkok article
-- [ ] Add GetYourGuide widget after Tokyo hotels section in Tokyo vs Bangkok article
-- [ ] Add GetYourGuide widget at bottom of Tokyo vs Bangkok article before CTAs
+- [x] Add GetYourGuide widget after each Europe city section (7 cities: Lisbon, Dubrovnik, Budapest, Porto, Athens, Ljubljana, Kotor)
+- [x] Add GetYourGuide widget at bottom of Europe article (label: 'Browse All European Tours & Experiences')
+- [x] Add GetYourGuide widget after Bangkok hotels section in Tokyo vs Bangkok article
+- [x] Add GetYourGuide widget after Tokyo hotels section in Tokyo vs Bangkok article
+- [x] Add GetYourGuide widget at bottom of Tokyo vs Bangkok article before CTAs
 - [ ] Add GetYourGuide widget to Tokyo & Seoul itinerary below day-by-day timeline
 - [ ] Add GetYourGuide widget to Mediterranean itinerary below day-by-day timeline
 - [ ] Add GetYourGuide widget to Brazil itinerary below day-by-day timeline

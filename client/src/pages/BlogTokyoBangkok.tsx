@@ -435,6 +435,12 @@ export default function BlogTokyoBangkok() {
             </div>
           </section>
 
+          {/* GetYourGuide Widget - Bottom Before CTA */}
+          <section className="mb-12 py-8 border-t border-b">
+            <p className="text-sm font-semibold text-yellow-600 mb-4">🎫 COMPLETE YOUR ASIA TRIP — BOOK TOURS & ACTIVITIES</p>
+            <div data-gyg-widget="auto" data-gyg-partner-id="YOPATWV"></div>
+          </section>
+
           {/* Related Articles */}
           <section className="mb-12 pb-12 border-t pt-8">
             <h3 className="font-playfair text-2xl font-bold text-gray-900 mb-6">You Might Also Like</h3>
