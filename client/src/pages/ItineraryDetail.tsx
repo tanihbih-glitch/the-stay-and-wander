@@ -1,7 +1,9 @@
 import { useLocation } from "wouter";
+import Head from "@/components/Head";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ChevronDown, MapPin, DollarSign, Users, Calendar } from "lucide-react";
+import { generateMetaTags } from "@shared/seo";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MobileBottomNav from "@/components/MobileBottomNav";
@@ -353,6 +355,16 @@ export default function ItineraryDetail() {
   const itinerary = itineraryId ? itineraries[itineraryId] : null;
   const [expandedDays, setExpandedDays] = useState<number[]>([1]);
 
+  // Generate unique meta tags for each itinerary
+  const itineraryMetadata = itinerary ? {
+    title: `${itinerary.title} - Custom Itinerary | The Stay & Wander`,
+    description: `${itinerary.description} ${itinerary.duration} itinerary with ${itinerary.hotels} hotels and ${itinerary.activities} activities. Starting from ${itinerary.price}.`,
+    image: itinerary.image,
+    url: `/itinerary/${itinerary.id}`,
+    keywords: `${itinerary.title}, ${itinerary.region}, travel itinerary, vacation planning`,
+  } : null;
+  const itineraryTags = itineraryMetadata ? generateMetaTags(itineraryMetadata) : null;
+
   if (!itinerary) {
     return (
       <div className="min-h-screen bg-white">
@@ -381,6 +393,18 @@ export default function ItineraryDetail() {
 
   return (
     <div className="min-h-screen bg-white pb-20 md:pb-0">
+      {itineraryTags && (
+        <Head
+          title={itineraryTags.title}
+          description={itineraryTags.description}
+          canonical={itineraryTags.canonical}
+          ogTitle={itineraryTags.ogTitle}
+          ogDescription={itineraryTags.ogDescription}
+          ogImage={itineraryTags.ogImage}
+          ogUrl={itineraryTags.ogUrl}
+          keywords={itineraryTags.keywords}
+        />
+      )}
       <Header />
 
       {/* Hero Section */}

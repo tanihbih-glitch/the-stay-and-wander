@@ -1,6 +1,8 @@
 import { useState } from "react";
+import Head from "@/components/Head";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
+import { generateBlogMetadata, generateMetaTags } from "@shared/seo";
 import { Card, CardContent } from "@/components/ui/card";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -100,8 +102,27 @@ export default function Blog() {
     { name: "Blog", url: "https://thestayandwander.com/blog" },
   ];
 
+  const blogPageMetadata = {
+    title: "Travel Blog - Tips, Guides & Inspiration | The Stay & Wander",
+    description: "Expert travel guides, hotel reviews, packing tips, and insider stories from destinations around the world.",
+    image: "https://thestayandwander.com/og-image.png",
+    url: "/blog",
+    keywords: "travel blog, travel guides, hotel reviews, packing tips, travel tips",
+  };
+  const blogTags = generateMetaTags(blogPageMetadata);
+
   return (
     <div className="min-h-screen bg-white pb-20 md:pb-0">
+      <Head
+        title={blogTags.title}
+        description={blogTags.description}
+        canonical={blogTags.canonical}
+        ogTitle={blogTags.ogTitle}
+        ogDescription={blogTags.ogDescription}
+        ogImage={blogTags.ogImage}
+        ogUrl={blogTags.ogUrl}
+        keywords={blogTags.keywords}
+      />
       <OrganizationSchema />
       {BreadcrumbSchema(breadcrumbItems)}
       <Header />

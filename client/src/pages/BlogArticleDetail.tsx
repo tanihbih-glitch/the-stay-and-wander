@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { useLocation } from "wouter";
+import Head from "@/components/Head";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Share2, ArrowLeft } from "lucide-react";
+import { generateMetaTags } from "@shared/seo";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MobileBottomNav from "@/components/MobileBottomNav";
@@ -148,8 +150,20 @@ const articles: Record<number, BlogArticle> = {
 
 export default function BlogArticleDetail() {
   const [location] = useLocation();
-  const articleId = parseInt(location.split("/").pop() || "1");
+  const articleId = parseInt(location.split("/blog/")[1] || "1");
   const article = articles[articleId];
+
+  // Generate unique meta tags for each article
+  const articleMetadata = {
+    title: `${article.title} | The Stay & Wander`,
+    description: article.excerpt,
+    image: article.image,
+    url: `/blog/${article.id}`,
+    keywords: `${article.category}, travel, ${article.title.toLowerCase()}`,
+    author: article.author,
+    publishedDate: new Date(article.date).toISOString(),
+  };
+  const articleTags = generateMetaTags(articleMetadata);
 
   if (!article) {
     return (
@@ -170,6 +184,18 @@ export default function BlogArticleDetail() {
 
   return (
     <div className="min-h-screen bg-white pb-20 md:pb-0">
+      <Head
+        title={articleTags.title}
+        description={articleTags.description}
+        canonical={articleTags.canonical}
+        ogTitle={articleTags.ogTitle}
+        ogDescription={articleTags.ogDescription}
+        ogImage={articleTags.ogImage}
+        ogUrl={articleTags.ogUrl}
+        keywords={articleTags.keywords}
+        author={articleTags.author}
+        publishedDate={articleTags.publishedDate}
+      />
       <Header />
 
       {/* Hero Section */}

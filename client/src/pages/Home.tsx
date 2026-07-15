@@ -1,6 +1,8 @@
 import { useState } from "react";
+import Head from "@/components/Head";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { ChevronDown } from "lucide-react";
+import { pageMetadataConfig } from "@shared/seo";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -21,8 +23,20 @@ export default function Home() {
 
   const [activeTab, setActiveTab] = useState("hotels");
 
+  const homeMetadata = pageMetadataConfig.home;
+
   return (
     <div className="min-h-screen bg-white">
+      <Head
+        title={homeMetadata.title}
+        description={homeMetadata.description}
+        canonical={`https://thestayandwander.com${homeMetadata.url}`}
+        ogTitle={homeMetadata.title}
+        ogDescription={homeMetadata.description}
+        ogImage={homeMetadata.image}
+        ogUrl={`https://thestayandwander.com${homeMetadata.url}`}
+        keywords={homeMetadata.keywords}
+      />
       <Header />
 
       {/* Hero Section */}

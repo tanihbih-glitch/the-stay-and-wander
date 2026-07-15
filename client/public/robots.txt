@@ -1,15 +1,72 @@
-# Robots.txt for The Stay & Wander
-# Allow all search engines to crawl the site
+# The Stay & Wander - robots.txt
+# Allows Google and all search engines to crawl all public pages
+# Disallows crawling of admin, auth, and internal API endpoints
 
+# Default rules for all bots
 User-agent: *
 Allow: /
+Allow: /blog/
+Allow: /itineraries/
+Allow: /itinerary/
+Allow: /booking/
+Allow: /destinations/
+Allow: /about/
+Allow: /contact/
+Allow: /sitemap.xml
 
-# Disallow private pages (if any)
-Disallow: /admin
-Disallow: /private
+# Disallow admin and authentication URLs
+Disallow: /admin/
+Disallow: /api/
+Disallow: /auth/
+Disallow: /login/
+Disallow: /logout/
+Disallow: /register/
+Disallow: /account/
+Disallow: /profile/
+Disallow: /settings/
+Disallow: /dashboard/
+Disallow: /.next/
+Disallow: /_next/
+Disallow: /node_modules/
+Disallow: /.env
+Disallow: /.env.*
+
+# Specific rules for Google
+User-agent: Googlebot
+Allow: /
+Allow: /blog/
+Allow: /itineraries/
+Allow: /itinerary/
+Allow: /booking/
+Allow: /destinations/
+Allow: /about/
+Allow: /contact/
+Allow: /sitemap.xml
+Disallow: /admin/
+Disallow: /api/
+Disallow: /auth/
+
+# Specific rules for Bing
+User-agent: Bingbot
+Allow: /
+Allow: /blog/
+Allow: /itineraries/
+Allow: /itinerary/
+Allow: /booking/
+Allow: /destinations/
+Allow: /about/
+Allow: /contact/
+Allow: /sitemap.xml
+Disallow: /admin/
+Disallow: /api/
+Disallow: /auth/
+
+# Crawl delay for all bots (in seconds)
+Crawl-delay: 1
+
+# Request rate for Google
+User-agent: Googlebot
+Crawl-delay: 0
 
 # Sitemap location
 Sitemap: https://thestayandwander.com/sitemap.xml
-
-# Crawl delay (optional - set to 1 second to be respectful)
-Crawl-delay: 1
