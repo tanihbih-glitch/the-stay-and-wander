@@ -534,7 +534,12 @@ export default function ItineraryDetail() {
       </section>
 
       {/* GetYourGuide Tours & Activities */}
-      <GetYourGuideTours />
+      <GetYourGuideTours 
+        label={itinerary.id === 'tokyo-seoul' ? 'Book Your Tokyo & Seoul Tours Here' : itinerary.id === 'mediterranean' ? 'Book Your Mediterranean Tours Here' : 'Book Your Brazil Tours Here'}
+        cardStyle={true}
+        showHeadline={true}
+        showButton={false}
+      />
 
       {/* CTA Section */}
       <section className="py-16 px-4 bg-blue-600">
