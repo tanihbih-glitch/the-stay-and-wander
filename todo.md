@@ -53,10 +53,10 @@
 - [x] Add GetYourGuide widget after Bangkok hotels section in Tokyo vs Bangkok article
 - [x] Add GetYourGuide widget after Tokyo hotels section in Tokyo vs Bangkok article
 - [x] Add GetYourGuide widget at bottom of Tokyo vs Bangkok article before CTAs
-- [ ] Add GetYourGuide widget to Tokyo & Seoul itinerary below day-by-day timeline
-- [ ] Add GetYourGuide widget to Mediterranean itinerary below day-by-day timeline
-- [ ] Add GetYourGuide widget to Brazil itinerary below day-by-day timeline
-- [ ] Add GetYourGuide Tours & Activities tab to Booking Portal with widget
+- [x] Add GetYourGuide widget to Tokyo & Seoul itinerary below day-by-day timeline
+- [x] Add GetYourGuide widget to Mediterranean itinerary below day-by-day timeline
+- [x] Add GetYourGuide widget to Brazil itinerary below day-by-day timeline
+- [x] Add GetYourGuide Tours & Activities tab to Booking Portal with widget
 
 ## Mailchimp Integration (5 signup flows)
 - [ ] Install Mailchimp script in head section of all pages

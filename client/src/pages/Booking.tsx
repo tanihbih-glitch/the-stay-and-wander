@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -8,6 +7,8 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MobileBottomNav from "@/components/MobileBottomNav";
 import PopularRoutesWidgetBooking from "@/components/PopularRoutesWidgetBooking";
+import GetYourGuideTours from "@/components/GetYourGuideTours";
+import { useState } from "react";
 
 export default function Booking() {
   const [activeTab, setActiveTab] = useState("hotels");
@@ -32,7 +33,7 @@ export default function Booking() {
       <div className="sticky top-20 z-30 bg-white border-b border-gray-200 shadow-sm">
         <div className="container">
           <Tabs value={activeTab} onValueChange={setActiveTab}>
-            <TabsList className="grid w-full grid-cols-4 bg-transparent border-b-0">
+            <TabsList className="grid w-full grid-cols-5 bg-transparent border-b-0">
               <TabsTrigger
                 value="hotels"
                 className="pb-4 border-b-2 border-transparent data-[state=active]:border-blue-600 rounded-none"
@@ -56,6 +57,12 @@ export default function Booking() {
                 className="pb-4 border-b-2 border-transparent data-[state=active]:border-blue-600 rounded-none"
               >
                 Car Rentals
+              </TabsTrigger>
+              <TabsTrigger
+                value="tours"
+                className="pb-4 border-b-2 border-transparent data-[state=active]:border-blue-600 rounded-none"
+              >
+                Tours & Activities
               </TabsTrigger>
             </TabsList>
           </Tabs>
@@ -320,6 +327,13 @@ export default function Booking() {
                 ))}
               </div>
             </div>
+          </div>
+        )}
+
+        {/* Tours & Activities Tab */}
+        {activeTab === "tours" && (
+          <div className="space-y-12">
+            <GetYourGuideTours />
           </div>
         )}
       </div>

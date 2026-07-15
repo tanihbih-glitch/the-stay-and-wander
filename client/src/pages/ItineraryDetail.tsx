@@ -1,4 +1,3 @@
-import { useLocation } from "wouter";
 import Head from "@/components/Head";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -8,7 +7,9 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MobileBottomNav from "@/components/MobileBottomNav";
 import PopularRoutesWidgetItinerary from "@/components/PopularRoutesWidgetItinerary";
+import GetYourGuideTours from "@/components/GetYourGuideTours";
 import { useState } from "react";
+import { useLocation } from "wouter";
 
 interface ItineraryData {
   id: string;
@@ -531,6 +532,9 @@ export default function ItineraryDetail() {
           </div>
         </div>
       </section>
+
+      {/* GetYourGuide Tours & Activities */}
+      <GetYourGuideTours />
 
       {/* CTA Section */}
       <section className="py-16 px-4 bg-blue-600">
