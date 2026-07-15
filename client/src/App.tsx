@@ -12,6 +12,7 @@ import Blog from "./pages/Blog";
 import BlogArticleDetail from "./pages/BlogArticleDetail";
 import BlogBaliHotels from "./pages/BlogBaliHotels";
 import BlogEuropeCities from "./pages/BlogEuropeCities";
+import BlogTokyoBangkok from "./pages/BlogTokyoBangkok";
 
 function Router() {
   // make sure to consider if you need authentication for certain routes
@@ -24,6 +25,7 @@ function Router() {
       <Route path={"/blog"} component={Blog} />
       <Route path={"/blog/best-hotels-bali-2026"} component={BlogBaliHotels} />
       <Route path={"/blog/best-cities-europe-summer-2026"} component={BlogEuropeCities} />
+      <Route path={"/blog/tokyo-vs-bangkok-2026"} component={BlogTokyoBangkok} />
       <Route path={"/blog/:id"} component={BlogArticleDetail} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
