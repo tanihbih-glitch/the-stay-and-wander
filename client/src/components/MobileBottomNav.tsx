@@ -17,17 +17,17 @@ export default function MobileBottomNav() {
         {navItems.map(({ icon: Icon, label, href }) => {
           const isActive = location === href;
           return (
-            <Link key={href} href={href}>
-              <a
-                className={`flex flex-col items-center justify-center w-full h-full gap-1 no-underline transition-colors ${
-                  isActive
-                    ? "text-blue-600"
-                    : "text-gray-600 hover:text-blue-600"
-                }`}
-              >
-                <Icon className="w-6 h-6" />
-                <span className="text-xs font-medium">{label}</span>
-              </a>
+            <Link
+              key={href}
+              href={href}
+              className={`flex flex-col items-center justify-center w-full h-full gap-1 no-underline transition-colors ${
+                isActive
+                  ? "text-blue-600"
+                  : "text-gray-600 hover:text-blue-600"
+              }`}
+            >
+              <Icon className="w-6 h-6" />
+              <span className="text-xs font-medium">{label}</span>
             </Link>
           );
         })}
