@@ -14,6 +14,7 @@ import NewsletterSignup from "@/components/NewsletterSignup";
 import AviasalesFlightWidget from "@/components/AviasalesFlightWidget";
 import PopularFlightRoutes from "@/components/PopularFlightRoutes";
 import PopularRoutesWidget from "@/components/PopularRoutesWidget";
+import GetYourGuideTours from "@/components/GetYourGuideTours";
 
 
 export default function Home() {
@@ -372,6 +373,9 @@ export default function Home() {
 
       {/* Popular Routes Widget Section */}
       <PopularRoutesWidget />
+
+      {/* GetYourGuide Tours Section */}
+      <GetYourGuideTours />
 
       {/* Itinerary Previews */}
       <section className="py-20 px-4 bg-white">
