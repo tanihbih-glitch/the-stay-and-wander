@@ -7,6 +7,7 @@ import { Lock, CheckCircle, XCircle } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MobileBottomNav from "@/components/MobileBottomNav";
+import PopularRoutesWidgetBooking from "@/components/PopularRoutesWidgetBooking";
 
 export default function Booking() {
   const [activeTab, setActiveTab] = useState("hotels");
@@ -190,32 +191,12 @@ export default function Booking() {
               </Button>
             </div>
 
-            {/* Popular Routes */}
+            {/* Popular Routes Widget */}
             <div>
-              <h2 className="font-display text-2xl font-bold text-gray-900 mb-6">
+              <h2 className="font-display text-2xl font-bold mb-6" style={{ color: "#F4A261" }}>
                 Popular Routes
               </h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {[
-                  { route: "London → Tokyo", price: "From $620" },
-                  { route: "New York → Lisbon", price: "From $380" },
-                  { route: "Dubai → Bali", price: "From $290" },
-                ].map((route) => (
-                  <Card key={route.route}>
-                    <CardContent className="p-6">
-                      <h3 className="font-display text-lg font-bold text-gray-900 mb-2">
-                        {route.route}
-                      </h3>
-                      <p className="text-2xl font-bold text-blue-600 mb-4">
-                        {route.price}
-                      </p>
-                      <Button className="w-full bg-yellow-500 hover:bg-yellow-600 text-white">
-                        Book This Flight
-                      </Button>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
+              <PopularRoutesWidgetBooking />
             </div>
           </div>
         )}
