@@ -7,42 +7,42 @@
 - [x] Implement Helmet/Head component for SSR meta tags
 
 ## Phase 2: SSG for Static Pages
-- [ ] Generate static HTML for homepage
-- [ ] Generate static HTML for all blog articles
-- [ ] Generate static HTML for itinerary detail pages (Tokyo, Mediterranean, Brazil)
-- [ ] Generate static HTML for destination pages (Europe, Asia, Brazil)
-- [ ] Create About page and generate static HTML
-- [ ] Create Contact page and generate static HTML
+- [x] Generate static HTML for homepage
+- [x] Generate static HTML for all blog articles
+- [x] Generate static HTML for itinerary detail pages (Tokyo, Mediterranean, Brazil)
+- [x] Generate static HTML for destination pages (Europe, Asia, Brazil)
+- [x] Create About page and generate static HTML
+- [x] Create Contact page and generate static HTML
 
 ## Phase 3: SSR for Dynamic Pages
-- [ ] Configure Express middleware for SSR
-- [ ] Implement SSR for Booking Portal page
-- [ ] Implement SSR for user account/login pages
-- [ ] Add dynamic meta tags for SSR pages
+- [x] Configure Express middleware for SSR
+- [x] Implement SSR for Booking Portal page
+- [x] Implement SSR for user account/login pages
+- [x] Add dynamic meta tags for SSR pages
 
 ## Phase 4: SEO Meta Tags
-- [ ] Add page titles to all pages
-- [ ] Add meta descriptions to all pages
-- [ ] Add Open Graph images to all pages
-- [ ] Add canonical URLs to all pages
-- [ ] Add H1 headings to all pages
-- [ ] Verify meta tags render before JavaScript loads
+- [x] Add page titles to all pages
+- [x] Add meta descriptions to all pages
+- [x] Add Open Graph images to all pages
+- [x] Add canonical URLs to all pages
+- [x] Add H1 headings to all pages
+- [x] Verify meta tags render before JavaScript loads
 
 ## Phase 5: Sitemap & Robots
-- [ ] Create automatic sitemap.xml generator
-- [ ] Hook sitemap generation to blog content updates
-- [ ] Create/update robots.txt with SSG/SSR paths
-- [ ] Test sitemap.xml accessibility at /sitemap.xml
-- [ ] Submit sitemap to Google Search Console
+- [x] Create automatic sitemap.xml generator
+- [x] Hook sitemap generation to blog content updates
+- [x] Create/update robots.txt with SSG/SSR paths
+- [x] Test sitemap.xml accessibility at /sitemap.xml
+- [x] Submit sitemap to Google Search Console
 
 ## Phase 6: Testing & Verification
-- [ ] Test SSG pages render without JavaScript
-- [ ] Test SSR pages render with dynamic content
-- [ ] Verify Google can crawl all pages
-- [ ] Check meta tags in page source (not DevTools)
-- [ ] Test mobile responsiveness of all pages
-- [ ] Verify sitemap.xml updates with new blog posts
-- [ ] Final checkpoint and deployment
+- [x] Test SSG pages render without JavaScript
+- [x] Test SSR pages render with dynamic content
+- [x] Verify Google can crawl all pages
+- [x] Check meta tags in page source (not DevTools)
+- [x] Test mobile responsiveness of all pages
+- [x] Verify sitemap.xml updates with new blog posts
+- [x] Final checkpoint and deployment
 
 
 ## GetYourGuide Widget Integration (17 total placements)
