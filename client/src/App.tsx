@@ -9,6 +9,7 @@ import Itineraries from "./pages/Itineraries";
 import ItineraryDetail from "./pages/ItineraryDetail";
 import Booking from "./pages/Booking";
 import Blog from "./pages/Blog";
+import BlogArticleDetail from "./pages/BlogArticleDetail";
 
 function Router() {
   // make sure to consider if you need authentication for certain routes
@@ -19,6 +20,7 @@ function Router() {
       <Route path={"/itinerary/:id"} component={ItineraryDetail} />
       <Route path={"/booking"} component={Booking} />
       <Route path={"/blog"} component={Blog} />
+      <Route path={"/blog/:id"} component={BlogArticleDetail} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />
