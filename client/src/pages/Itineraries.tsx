@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "wouter";
 import { ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -571,9 +572,11 @@ export default function Itineraries() {
 
                 {/* CTA Section */}
                 <div className="p-6 flex flex-col sm:flex-row gap-4">
-                  <Button className="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-6 h-auto">
-                    Start Booking This Trip
-                  </Button>
+                  <Link href={`/itinerary/${itinerary.id === 1 ? 'tokyo-seoul' : itinerary.id === 2 ? 'mediterranean' : 'brazil'}`} className="flex-1">
+                    <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white py-6 h-auto">
+                      View Full Itinerary
+                    </Button>
+                  </Link>
                   <Button
                     variant="outline"
                     className="flex-1 border-blue-600 text-blue-600 hover:bg-blue-50 py-6 h-auto"
