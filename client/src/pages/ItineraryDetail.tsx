@@ -516,9 +516,20 @@ export default function ItineraryDetail() {
                             ))}
                           </div>
                           {dayData.hotel && (
-                            <p className="text-sm text-gray-600 font-semibold">
-                              🏨 {dayData.hotel}
-                            </p>
+                            <div>
+                              <p className="text-sm text-gray-600 font-semibold mb-3">
+                                🏨 {dayData.hotel}
+                              </p>
+                              <a
+                                href="https://www.trip.com/t/tUMFPimoXV2"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-block bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded text-sm font-semibold transition-colors"
+                              >
+                                Check Availability
+                              </a>
+                              <p className="text-xs text-gray-400 mt-1">Powered by Trip.com</p>
+                            </div>
                           )}
                         </div>
                       )}

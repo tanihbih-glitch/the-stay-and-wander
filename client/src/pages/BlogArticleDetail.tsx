@@ -170,6 +170,8 @@ const articles: Record<number, BlogArticle> = {
       
       <h3>Where to Stay in Tokyo</h3>
       <p>Tokyo offers luxury options like the Park Hyatt Tokyo with stunning city views, and mid-range favorites like Hotel Gracery Shinjuku for convenient access to shopping and dining.</p>
+      <p style="text-align: center; margin-top: 15px;"><a href="https://www.trip.com/t/tUMFPimoXV2" target="_blank" rel="noopener noreferrer" style="display: inline-block; background-color: #F4A261; color: white; padding: 10px 24px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 14px;">Check Availability</a></p>
+      <p style="text-align: center; margin-top: 4px; font-size: 11px; color: #999;">Powered by Trip.com</p>
       
       <p style="text-align: center; margin-top: 20px; margin-bottom: 10px;"><span style="background-color: #D4AF37; color: #000; padding: 4px 12px; border-radius: 4px; font-size: 12px; font-weight: bold;">Top-Rated Tokyo Tours & Experiences</span></p>
       <div data-gyg-widget="auto" data-gyg-partner-id="YOPATWV"></div>
@@ -188,6 +190,8 @@ const articles: Record<number, BlogArticle> = {
       
       <h3>Where to Stay in Bangkok</h3>
       <p>Bangkok features luxury properties like the Mandarin Oriental with riverside elegance, and budget-friendly options like NapPark Design Hotel for authentic local experiences.</p>
+      <p style="text-align: center; margin-top: 15px;"><a href="https://www.trip.com/t/tUMFPimoXV2" target="_blank" rel="noopener noreferrer" style="display: inline-block; background-color: #F4A261; color: white; padding: 10px 24px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 14px;">Check Availability</a></p>
+      <p style="text-align: center; margin-top: 4px; font-size: 11px; color: #999;">Powered by Trip.com</p>
       
       <p style="text-align: center; margin-top: 20px; margin-bottom: 10px;"><span style="background-color: #D4AF37; color: #000; padding: 4px 12px; border-radius: 4px; font-size: 12px; font-weight: bold;">Top-Rated Bangkok Tours & Experiences</span></p>
       <div data-gyg-widget="auto" data-gyg-partner-id="YOPATWV"></div>
