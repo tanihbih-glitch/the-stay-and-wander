@@ -9,6 +9,7 @@ import Footer from "@/components/Footer";
 import MobileBottomNav from "@/components/MobileBottomNav";
 import PopularRoutesWidgetBlogSidebar from "@/components/PopularRoutesWidgetBlogSidebar";
 import MailchimpPopup from "@/components/MailchimpPopup";
+import BlogEmailSignup from "@/components/BlogEmailSignup";
 
 interface BlogArticle {
   id: number;
@@ -319,6 +320,9 @@ export default function BlogArticleDetail() {
           />
         </div>
       </section>
+
+      {/* Email Signup Section */}
+      <BlogEmailSignup />
 
       {/* Related Articles */}
       {article.relatedArticles && article.relatedArticles.length > 0 && (
