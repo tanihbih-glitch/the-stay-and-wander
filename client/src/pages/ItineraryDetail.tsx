@@ -8,6 +8,7 @@ import Footer from "@/components/Footer";
 import MobileBottomNav from "@/components/MobileBottomNav";
 import PopularRoutesWidgetItinerary from "@/components/PopularRoutesWidgetItinerary";
 import GetYourGuideTours from "@/components/GetYourGuideTours";
+import ItineraryDownloadPopup from "@/components/ItineraryDownloadPopup";
 import { useState } from "react";
 import { useLocation } from "wouter";
 
@@ -355,6 +356,7 @@ export default function ItineraryDetail() {
   const itineraryId = location.split("/").pop();
   const itinerary = itineraryId ? itineraries[itineraryId] : null;
   const [expandedDays, setExpandedDays] = useState<number[]>([1]);
+  const [showDownloadPopup, setShowDownloadPopup] = useState(false);
 
   // Generate unique meta tags for each itinerary
   const itineraryMetadata = itinerary ? {
@@ -551,11 +553,26 @@ export default function ItineraryDetail() {
             Start planning your {itinerary.title.toLowerCase()} with our expert
             travel consultants.
           </p>
-          <Button className="bg-yellow-500 hover:bg-yellow-600 text-white px-8 py-6 text-lg h-auto">
-            Book This Itinerary
-          </Button>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button className="bg-yellow-500 hover:bg-yellow-600 text-white px-8 py-6 text-lg h-auto">
+              Book This Itinerary
+            </Button>
+            <Button 
+              onClick={() => setShowDownloadPopup(true)}
+              className="bg-white hover:bg-gray-100 text-blue-600 px-8 py-6 text-lg h-auto font-semibold"
+            >
+              Download This Itinerary Free
+            </Button>
+          </div>
         </div>
       </section>
+
+      {/* Download Popup */}
+      <ItineraryDownloadPopup
+        isOpen={showDownloadPopup}
+        onClose={() => setShowDownloadPopup(false)}
+        itineraryTitle={itinerary.title}
+      />
 
       <Footer />
       <MobileBottomNav />
