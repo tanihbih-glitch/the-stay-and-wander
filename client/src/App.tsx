@@ -13,6 +13,7 @@ import BlogArticleDetail from "./pages/BlogArticleDetail";
 import BlogBaliHotels from "./pages/BlogBaliHotels";
 import BlogEuropeCities from "./pages/BlogEuropeCities";
 import BlogTokyoBangkok from "./pages/BlogTokyoBangkok";
+import ExitIntentPopup from "./components/ExitIntentPopup";
 
 function Router() {
   // make sure to consider if you need authentication for certain routes
@@ -48,6 +49,7 @@ function App() {
       >
         <TooltipProvider>
           <Toaster />
+          <ExitIntentPopup />
           <Router />
         </TooltipProvider>
       </ThemeProvider>
