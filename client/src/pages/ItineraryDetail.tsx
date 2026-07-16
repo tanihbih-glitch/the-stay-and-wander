@@ -9,6 +9,7 @@ import MobileBottomNav from "@/components/MobileBottomNav";
 import PopularRoutesWidgetItinerary from "@/components/PopularRoutesWidgetItinerary";
 import GetYourGuideTours from "@/components/GetYourGuideTours";
 import ItineraryDownloadPopup from "@/components/ItineraryDownloadPopup";
+import TripComHotelWidget from "@/components/TripComHotelWidget";
 import { useState } from "react";
 import { useLocation } from "wouter";
 
@@ -542,6 +543,9 @@ export default function ItineraryDetail() {
         showHeadline={true}
         showButton={false}
       />
+
+      {/* Trip.com Hotel Widget for Tokyo & Seoul itinerary */}
+      {itinerary.id === 'tokyo-seoul' && <TripComHotelWidget />}
 
       {/* CTA Section */}
       <section className="py-16 px-4 bg-blue-600">

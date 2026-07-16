@@ -10,6 +10,7 @@ import MobileBottomNav from "@/components/MobileBottomNav";
 import PopularRoutesWidgetBlogSidebar from "@/components/PopularRoutesWidgetBlogSidebar";
 import MailchimpPopup from "@/components/MailchimpPopup";
 import BlogEmailSignup from "@/components/BlogEmailSignup";
+import TripComHotelWidget from "@/components/TripComHotelWidget";
 
 interface BlogArticle {
   id: number;
@@ -323,6 +324,9 @@ export default function BlogArticleDetail() {
 
       {/* Email Signup Section */}
       <BlogEmailSignup />
+
+      {/* Trip.com Hotel Widget for Asia articles */}
+      {(article.id === 1 || article.id === 3) && <TripComHotelWidget />}
 
       {/* Related Articles */}
       {article.relatedArticles && article.relatedArticles.length > 0 && (
