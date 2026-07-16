@@ -521,14 +521,14 @@ export default function ItineraryDetail() {
                                 🏨 {dayData.hotel}
                               </p>
                               <a
-                                href="https://www.trip.com/t/tUMFPimoXV2"
+                                href="https://booking.stay22.com/thestayandwander/cGvguWxCv2"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="inline-block bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded text-sm font-semibold transition-colors"
                               >
                                 Check Availability
                               </a>
-                              <p className="text-xs text-gray-400 mt-1">Powered by Trip.com</p>
+                              <p className="text-xs text-gray-400 mt-1">Powered by Booking.com</p>
                             </div>
                           )}
                         </div>
