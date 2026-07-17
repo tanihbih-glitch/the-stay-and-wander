@@ -27,6 +27,10 @@ function Router() {
       <Route path={"/blog/best-hotels-bali-2026"} component={BlogBaliHotels} />
       <Route path={"/blog/best-cities-europe-summer-2026"} component={BlogEuropeCities} />
       <Route path={"/blog/tokyo-vs-bangkok-2026"} component={BlogTokyoBangkok} />
+      {/* Redirects from old numeric URLs to new semantic slugs */}
+      <Route path={"/blog/1"} component={() => { window.location.href = '/blog/best-hotels-bali-2026'; return null; }} />
+      <Route path={"/blog/2"} component={() => { window.location.href = '/blog/best-cities-europe-summer-2026'; return null; }} />
+      <Route path={"/blog/3"} component={() => { window.location.href = '/blog/tokyo-vs-bangkok-2026'; return null; }} />
       <Route path={"/blog/:id"} component={BlogArticleDetail} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
