@@ -404,6 +404,316 @@ const articles: Record<number, BlogArticle> = {
     `,
     relatedArticles: [1, 2],
   },
+  4: {
+    id: 4,
+    title: "7 Best Cities to Visit in Europe This Summer (2026) — And Exactly Where to Stay",
+    category: "Europe Travel · Destination Guides",
+    image: "/manus-storage/blog-europe-cities_de773d0d.png",
+    excerpt: "Planning a European summer trip in 2026? Here are the 7 best cities to visit in Europe this summer — with hand-picked hotel recommendations for every budget. Book now before prices rise.",
+    author: "The Stay & Wander",
+    date: "July 17, 2026",
+    readTime: "9 min read",
+    content: `
+      <p>Europe in summer is pure magic. Long golden evenings, rooftop bars, ancient cities buzzing with life, and beaches that rival anywhere in the world. But with dozens of incredible destinations to choose from, deciding where to go can feel paralysing.</p>
+      
+      <p>We've narrowed it down for you. These are the <strong>7 best cities to visit in Europe in summer 2026</strong> — a mix of iconic favourites and hidden gems — with honest neighbourhood guides and hand-picked hotel recommendations for every budget.</p>
+      
+      <blockquote style="background-color: #f0f4f8; padding: 15px; border-left: 4px solid #0077B6; margin: 20px 0; border-radius: 4px;">
+        <p><strong>💡 Book now.</strong> European summer hotel prices rise 30–50% between now and August. Every city on this list is seeing record demand in 2026. Book with free cancellation to protect your flexibility.</p>
+      </blockquote>
+      
+      <h2>How We Chose These Cities</h2>
+      
+      <p>We selected cities based on four criteria: summer weather, cultural richness, value for money, and how well they reward first-time visitors. Every city on this list delivers a memorable experience regardless of your budget.</p>
+      
+      <h2>1. Lisbon, Portugal 🇵🇹</h2>
+      <p><strong>Best for:</strong> First-time Europe visitors, food lovers, budget travellers</p>
+      
+      <p>Lisbon is having a moment — and rightfully so. Portugal's sun-drenched capital offers the perfect combination of history, culture, food, and nightlife at prices that feel impossibly reasonable for a Western European capital. Cobblestone hills, vintage trams, pastel-coloured buildings, and some of the freshest seafood in Europe make Lisbon an easy favourite.</p>
+      
+      <p><strong>Best neighbourhoods to stay:</strong></p>
+      <ul>
+        <li><strong>Chiado</strong> — central, elegant, walkable to everything</li>
+        <li><strong>Alfama</strong> — historic, atmospheric, fado music at every corner</li>
+        <li><strong>Príncipe Real</strong> — boutique hotels, great restaurants, quieter feel</li>
+      </ul>
+      
+      <p><strong>Best time to visit:</strong> June and September — July and August are busy and hot (35°C+)</p>
+      
+      <p><strong>Don't miss:</strong> Pastéis de Belém for the world's best custard tart, a sunset at Miradouro da Graça, and a day trip to Sintra's fairy-tale palaces.</p>
+      
+      <p><strong>Where to Stay in Lisbon:</strong></p>
+      
+      <p><strong>🏨 Budget — The Independente Hostel & Suites</strong><br>From $45/night · Stunning historic building · Rooftop terrace<br><a href="https://booking.stay22.com/thestayandwander/_3gvRmesd0" target="_blank" rel="noopener noreferrer" style="display: inline-block; background-color: #F4A261; color: white; padding: 10px 24px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 14px;">Check Availability →</a></p>
+      
+      <p><strong>🏨 Mid-range — Bairro Alto Hotel</strong><br>From $180/night · Iconic Lisbon boutique hotel · Rooftop with city views<br><a href="https://booking.stay22.com/thestayandwander/_3gvRmesd0" target="_blank" rel="noopener noreferrer" style="display: inline-block; background-color: #F4A261; color: white; padding: 10px 24px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 14px;">Check Availability →</a></p>
+      
+      <p><strong>🏨 Luxury — Memmo Alfama Hotel</strong><br>From $320/night · Design icon · The best address in Lisbon<br><a href="https://booking.stay22.com/thestayandwander/_3gvRmesd0" target="_blank" rel="noopener noreferrer" style="display: inline-block; background-color: #F4A261; color: white; padding: 10px 24px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 14px;">Check Availability →</a></p>
+      
+      <p style="text-align: center; margin-top: 15px;"><a href="https://booking.stay22.com/thestayandwander/_3gvRmesd0" target="_blank" rel="noopener noreferrer" style="display: inline-block; background-color: #F4A261; color: white; padding: 10px 24px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 14px;">Search All Lisbon Hotels →</a></p>
+      
+      <p style="text-align: center; margin-top: 20px; margin-bottom: 10px;"><span style="background-color: #D4AF37; color: #000; padding: 4px 12px; border-radius: 4px; font-size: 12px; font-weight: bold;">Explore Lisbon Tours & Activities</span></p>
+      <div data-gyg-widget="auto" data-gyg-partner-id="YOPATWV"></div>
+      
+      <h2>2. Dubrovnik, Croatia 🇭🇷</h2>
+      <p><strong>Best for:</strong> Couples, Game of Thrones fans, coastal scenery</p>
+      
+      <p>Few cities in Europe are as immediately breathtaking as Dubrovnik. The UNESCO-listed walled Old Town, the impossibly blue Adriatic Sea, and the dramatic limestone cliffs create a setting that feels almost cinematic. Walk the city walls at sunrise before the crowds arrive and you'll understand why Dubrovnik consistently tops every European bucket list.</p>
+      
+      <p><strong>Best neighbourhoods to stay:</strong></p>
+      <ul>
+        <li><strong>Old Town</strong> — most atmospheric, expensive, book far in advance</li>
+        <li><strong>Lapad</strong> — quieter, beach access, 10-minute bus to Old Town</li>
+        <li><strong>Pile</strong> — gateway to Old Town, more affordable than inside the walls</li>
+      </ul>
+      
+      <p><strong>Best time to visit:</strong> June or September — July and August see massive cruise ship crowds and peak prices</p>
+      
+      <p><strong>Don't miss:</strong> The City Walls walk, Lokrum Island day trip, sunset kayaking around the old walls, and the cable car to Mount Srđ.</p>
+      
+      <p><strong>Where to Stay in Dubrovnik:</strong></p>
+      
+      <p><strong>🏨 Budget — Hostel Angelina Old Town</strong><br>From $55/night · Inside the Old Town walls · Rooftop views of the Adriatic<br><a href="https://booking.stay22.com/thestayandwander/FBzzZenMr0" target="_blank" rel="noopener noreferrer" style="display: inline-block; background-color: #F4A261; color: white; padding: 10px 24px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 14px;">Check Availability →</a></p>
+      
+      <p><strong>🏨 Mid-range — Hotel Stari Grad</strong><br>From $165/night · Boutique hotel inside the walls · Stunning terrace<br><a href="https://booking.stay22.com/thestayandwander/FBzzZenMr0" target="_blank" rel="noopener noreferrer" style="display: inline-block; background-color: #F4A261; color: white; padding: 10px 24px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 14px;">Check Availability →</a></p>
+      
+      <p><strong>🏨 Luxury — Villa Dubrovnik</strong><br>From $480/night · Clifftop · Private beach · Legendary service<br><a href="https://booking.stay22.com/thestayandwander/FBzzZenMr0" target="_blank" rel="noopener noreferrer" style="display: inline-block; background-color: #F4A261; color: white; padding: 10px 24px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 14px;">Check Availability →</a></p>
+      
+      <p style="text-align: center; margin-top: 15px;"><a href="https://booking.stay22.com/thestayandwander/FBzzZenMr0" target="_blank" rel="noopener noreferrer" style="display: inline-block; background-color: #F4A261; color: white; padding: 10px 24px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 14px;">Search All Dubrovnik Hotels →</a></p>
+      
+      <p style="text-align: center; margin-top: 20px; margin-bottom: 10px;"><span style="background-color: #D4AF37; color: #000; padding: 4px 12px; border-radius: 4px; font-size: 12px; font-weight: bold;">Explore Dubrovnik Tours & Activities</span></p>
+      <div data-gyg-widget="auto" data-gyg-partner-id="YOPATWV"></div>
+      
+      <h2>3. Budapest, Hungary 🇭🇺</h2>
+      <p><strong>Best for:</strong> Value travellers, architecture lovers, nightlife</p>
+      
+      <p>Budapest is Europe's best-value capital — full stop. Two cities (Buda and Pest) separated by the Danube, connected by some of the most beautiful bridges in the world. Grand thermal baths, extraordinary ruin bars, a jaw-dropping Parliament building, and a food scene that punches well above its weight — all at prices roughly half what you'd pay in Paris or Amsterdam.</p>
+      
+      <p><strong>Best neighbourhoods to stay:</strong></p>
+      <ul>
+        <li><strong>District V (Belváros)</strong> — central, walkable, classic Budapest feel</li>
+        <li><strong>District VII (Jewish Quarter)</strong> — ruin bars, nightlife, incredible energy</li>
+        <li><strong>District I (Castle District)</strong> — historic, quiet, stunning views</li>
+      </ul>
+      
+      <p><strong>Best time to visit:</strong> June–August — warm, festivals, outdoor baths at their best</p>
+      
+      <p><strong>Don't miss:</strong> Széchenyi Thermal Bath, the Great Market Hall, a Danube river cruise at night, and a ruin bar crawl in District VII.</p>
+      
+      <p><strong>Where to Stay in Budapest:</strong></p>
+      
+      <p><strong>🏨 Budget — Maverick City Lodge</strong><br>From $28/night · Stylish design hostel · District VII location<br><a href="https://booking.stay22.com/thestayandwander/_3gvRmesd0" target="_blank" rel="noopener noreferrer" style="display: inline-block; background-color: #F4A261; color: white; padding: 10px 24px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 14px;">Check Availability →</a></p>
+      
+      <p><strong>🏨 Mid-range — Aria Hotel Budapest</strong><br>From $145/night · Music-themed boutique · Rooftop bar with Parliament views<br><a href="https://booking.stay22.com/thestayandwander/_3gvRmesd0" target="_blank" rel="noopener noreferrer" style="display: inline-block; background-color: #F4A261; color: white; padding: 10px 24px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 14px;">Check Availability →</a></p>
+      
+      <p><strong>🏨 Luxury — Four Seasons Hotel Gresham Palace</strong><br>From $420/night · Art Nouveau masterpiece · Danube riverfront<br><a href="https://booking.stay22.com/thestayandwander/_3gvRmesd0" target="_blank" rel="noopener noreferrer" style="display: inline-block; background-color: #F4A261; color: white; padding: 10px 24px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 14px;">Check Availability →</a></p>
+      
+      <p style="text-align: center; margin-top: 15px;"><a href="https://booking.stay22.com/thestayandwander/_3gvRmesd0" target="_blank" rel="noopener noreferrer" style="display: inline-block; background-color: #F4A261; color: white; padding: 10px 24px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 14px;">Search All Budapest Hotels →</a></p>
+      
+      <p style="text-align: center; margin-top: 20px; margin-bottom: 10px;"><span style="background-color: #D4AF37; color: #000; padding: 4px 12px; border-radius: 4px; font-size: 12px; font-weight: bold;">Explore Budapest Tours & Activities</span></p>
+      <div data-gyg-widget="auto" data-gyg-partner-id="YOPATWV"></div>
+      
+      <h2>4. Porto, Portugal 🇵🇹</h2>
+      <p><strong>Best for:</strong> Wine lovers, photographers, off-the-beaten-path seekers</p>
+      
+      <p>Porto is Lisbon's cooler, grittier, more authentic cousin — and many travellers end up preferring it. The UNESCO-listed Ribeira waterfront, the port wine caves of Vila Nova de Gaia, the extraordinary azulejo tile facades, and the legendary francesinha sandwich make Porto one of Europe's most rewarding cities. It's also noticeably cheaper than Lisbon.</p>
+      
+      <p><strong>Best neighbourhoods to stay:</strong></p>
+      <ul>
+        <li><strong>Ribeira</strong> — waterfront, most photogenic, lively atmosphere</li>
+        <li><strong>Bonfim</strong> — up-and-coming, local feel, great cafes</li>
+        <li><strong>Aliados</strong> — central, grand boulevard, good transport links</li>
+      </ul>
+      
+      <p><strong>Best time to visit:</strong> June and September — July gets busy but the Douro Valley day trip is spectacular all summer</p>
+      
+      <p><strong>Don't miss:</strong> Livraria Lello bookshop, a port wine tasting in Vila Nova de Gaia, sunset on Dom Luís I Bridge, and a day trip up the Douro Valley by train.</p>
+      
+      <p><strong>Where to Stay in Porto:</strong></p>
+      
+      <p><strong>🏨 Budget — Gallery Hostel</strong><br>From $35/night · Award-winning design · Bonfim neighbourhood<br><a href="https://booking.stay22.com/thestayandwander/_3gvRmesd0" target="_blank" rel="noopener noreferrer" style="display: inline-block; background-color: #F4A261; color: white; padding: 10px 24px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 14px;">Check Availability →</a></p>
+      
+      <p><strong>🏨 Mid-range — Torel Avantgarde</strong><br>From $120/night · Art hotel · Panoramic city views<br><a href="https://booking.stay22.com/thestayandwander/_3gvRmesd0" target="_blank" rel="noopener noreferrer" style="display: inline-block; background-color: #F4A261; color: white; padding: 10px 24px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 14px;">Check Availability →</a></p>
+      
+      <p><strong>🏨 Luxury — The Yeatman</strong><br>From $350/night · Wine hotel · Overlooking Porto and the Douro<br><a href="https://booking.stay22.com/thestayandwander/_3gvRmesd0" target="_blank" rel="noopener noreferrer" style="display: inline-block; background-color: #F4A261; color: white; padding: 10px 24px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 14px;">Check Availability →</a></p>
+      
+      <p style="text-align: center; margin-top: 15px;"><a href="https://booking.stay22.com/thestayandwander/_3gvRmesd0" target="_blank" rel="noopener noreferrer" style="display: inline-block; background-color: #F4A261; color: white; padding: 10px 24px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 14px;">Search All Porto Hotels →</a></p>
+      
+      <p style="text-align: center; margin-top: 20px; margin-bottom: 10px;"><span style="background-color: #D4AF37; color: #000; padding: 4px 12px; border-radius: 4px; font-size: 12px; font-weight: bold;">Explore Porto Tours & Activities</span></p>
+      <div data-gyg-widget="auto" data-gyg-partner-id="YOPATWV"></div>
+      
+      <h2>5. Athens, Greece 🇬🇷</h2>
+      <p><strong>Best for:</strong> History lovers, island hoppers, food scene</p>
+      
+      <p>Athens is having a serious renaissance. Long overshadowed by the Greek islands, the capital has emerged as one of Europe's most exciting city destinations — a thriving food scene, world-class rooftop bars with Acropolis views, and the greatest concentration of ancient history anywhere on earth. Use Athens as your base for island hopping to Santorini, Mykonos, or the underrated Aegina.</p>
+      
+      <p><strong>Best neighbourhoods to stay:</strong></p>
+      <ul>
+        <li><strong>Plaka</strong> — beneath the Acropolis, most atmospheric, tourist-friendly</li>
+        <li><strong>Monastiraki</strong> — flea market, street food, incredible energy</li>
+        <li><strong>Koukaki</strong> — local, residential, best value, 10-minute walk to Acropolis</li>
+      </ul>
+      
+      <p><strong>Best time to visit:</strong> June and September — July and August are very hot (38°C+) and crowded</p>
+      
+      <p><strong>Don't miss:</strong> Acropolis at sunrise, the National Archaeological Museum, the Athens food tour in Monastiraki, and a ferry to Hydra for a perfect day trip.</p>
+      
+      <p><strong>Where to Stay in Athens:</strong></p>
+      
+      <p><strong>🏨 Budget — Athens Backpackers</strong><br>From $32/night · Rooftop bar with Acropolis views · Makrygianni area<br><a href="https://booking.stay22.com/thestayandwander/_3gvRmesd0" target="_blank" rel="noopener noreferrer" style="display: inline-block; background-color: #F4A261; color: white; padding: 10px 24px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 14px;">Check Availability →</a></p>
+      
+      <p><strong>🏨 Mid-range — Hotel Grande Bretagne</strong><br>From $210/night · Historic landmark · Syntagma Square · Rooftop pool<br><a href="https://booking.stay22.com/thestayandwander/_3gvRmesd0" target="_blank" rel="noopener noreferrer" style="display: inline-block; background-color: #F4A261; color: white; padding: 10px 24px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 14px;">Check Availability →</a></p>
+      
+      <p><strong>🏨 Luxury — NEW Hotel Athens</strong><br>From $280/night · Design hotel · Philippe Starck interiors · Central location<br><a href="https://booking.stay22.com/thestayandwander/_3gvRmesd0" target="_blank" rel="noopener noreferrer" style="display: inline-block; background-color: #F4A261; color: white; padding: 10px 24px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 14px;">Check Availability →</a></p>
+      
+      <p style="text-align: center; margin-top: 15px;"><a href="https://booking.stay22.com/thestayandwander/_3gvRmesd0" target="_blank" rel="noopener noreferrer" style="display: inline-block; background-color: #F4A261; color: white; padding: 10px 24px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 14px;">Search All Athens Hotels →</a></p>
+      
+      <p style="text-align: center; margin-top: 20px; margin-bottom: 10px;"><span style="background-color: #D4AF37; color: #000; padding: 4px 12px; border-radius: 4px; font-size: 12px; font-weight: bold;">Explore Athens Tours & Activities</span></p>
+      <div data-gyg-widget="auto" data-gyg-partner-id="YOPATWV"></div>
+      
+      <h2>6. Ljubljana, Slovenia 🇸🇮</h2>
+      <p><strong>Best for:</strong> Hidden gem seekers, nature lovers, sustainable travel</p>
+      
+      <p>Ljubljana is Europe's best-kept secret and one of the continent's most liveable, loveable small capitals. The car-free old town, the hilltop castle, the outdoor cafe culture along the Ljubljanica River, and the extraordinary day trips to Lake Bled and Triglav National Park make Slovenia's capital a revelation for travellers who've already done the obvious European cities.</p>
+      
+      <p><strong>Best neighbourhoods to stay:</strong></p>
+      <ul>
+        <li><strong>Old Town</strong> — most atmospheric, walkable, car-free</li>
+        <li><strong>Krakovo</strong> — local neighbourhood, riverside, charming</li>
+        <li><strong>Center</strong> — modern, transport links, wider choice of hotels</li>
+      </ul>
+      
+      <p><strong>Best time to visit:</strong> June–August — warm, Lake Bled is at its best, outdoor markets in full swing</p>
+      
+      <p><strong>Don't miss:</strong> Ljubljana Castle, Metelkova alternative art district, the Central Market, and the unmissable day trip to Lake Bled — one of the most photographed places in Europe.</p>
+      
+      <p><strong>Where to Stay in Ljubljana:</strong></p>
+      
+      <p><strong>🏨 Budget — Hostel Celica</strong><br>From $30/night · Former prison converted to design hostel · Metelkova<br><a href="https://booking.stay22.com/thestayandwander/_3gvRmesd0" target="_blank" rel="noopener noreferrer" style="display: inline-block; background-color: #F4A261; color: white; padding: 10px 24px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 14px;">Check Availability →</a></p>
+      
+      <p><strong>🏨 Mid-range — Hotel Cubo</strong><br>From $130/night · Boutique design hotel · Old Town · Excellent breakfast<br><a href="https://booking.stay22.com/thestayandwander/_3gvRmesd0" target="_blank" rel="noopener noreferrer" style="display: inline-block; background-color: #F4A261; color: white; padding: 10px 24px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 14px;">Check Availability →</a></p>
+      
+      <p><strong>🏨 Luxury — Intercontinental Ljubljana</strong><br>From $220/night · Best views in the city · Rooftop infinity pool<br><a href="https://booking.stay22.com/thestayandwander/_3gvRmesd0" target="_blank" rel="noopener noreferrer" style="display: inline-block; background-color: #F4A261; color: white; padding: 10px 24px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 14px;">Check Availability →</a></p>
+      
+      <p style="text-align: center; margin-top: 15px;"><a href="https://booking.stay22.com/thestayandwander/_3gvRmesd0" target="_blank" rel="noopener noreferrer" style="display: inline-block; background-color: #F4A261; color: white; padding: 10px 24px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 14px;">Search All Ljubljana Hotels →</a></p>
+      
+      <p style="text-align: center; margin-top: 20px; margin-bottom: 10px;"><span style="background-color: #D4AF37; color: #000; padding: 4px 12px; border-radius: 4px; font-size: 12px; font-weight: bold;">Explore Ljubljana Tours & Activities</span></p>
+      <div data-gyg-widget="auto" data-gyg-partner-id="YOPATWV"></div>
+      
+      <h2>7. Kotor, Montenegro 🇲🇪</h2>
+      <p><strong>Best for:</strong> Adventurous travellers, medieval history, Adriatic beauty</p>
+      
+      <p>Kotor is the Adriatic's most underrated gem. Nestled between dramatic limestone mountains and a stunning bay, the UNESCO-listed medieval old town is one of the best-preserved in Europe — and because Montenegro hasn't yet been fully discovered by mass tourism, prices are still remarkably reasonable. The views from the ancient city walls are worth every step of the climb.</p>
+      
+      <p><strong>Best neighbourhoods to stay:</strong></p>
+      <ul>
+        <li><strong>Old Town</strong> — most atmospheric, inside the medieval walls</li>
+        <li><strong>Dobrota</strong> — waterfront, quieter, beautiful bay views</li>
+        <li><strong>Prčanj</strong> — village feel, most affordable, 10 minutes from Old Town</li>
+      </ul>
+      
+      <p><strong>Best time to visit:</strong> June and September — July and August bring cruise ship crowds but the bay is spectacular</p>
+      
+      <p><strong>Don't miss:</strong> The city walls climb to St John's Fortress, the Bay of Kotor boat tour, a day trip to Perast and Our Lady of the Rocks, and sunset from the fortress walls.</p>
+      
+      <p><strong>Where to Stay in Kotor:</strong></p>
+      
+      <p><strong>🏨 Budget — Old Town Hostel Kotor</strong><br>From $22/night · Inside the medieval walls · Social atmosphere<br><a href="https://booking.stay22.com/thestayandwander/FBzzZenMr0" target="_blank" rel="noopener noreferrer" style="display: inline-block; background-color: #F4A261; color: white; padding: 10px 24px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 14px;">Check Availability →</a></p>
+      
+      <p><strong>🏨 Mid-range — Hotel Vardar</strong><br>From $95/night · Historic hotel · Old Town square · Excellent location<br><a href="https://booking.stay22.com/thestayandwander/FBzzZenMr0" target="_blank" rel="noopener noreferrer" style="display: inline-block; background-color: #F4A261; color: white; padding: 10px 24px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 14px;">Check Availability →</a></p>
+      
+      <p><strong>🏨 Luxury — Cattaro Design Hotel</strong><br>From $185/night · Boutique · Old Town · Bay views from every room<br><a href="https://booking.stay22.com/thestayandwander/FBzzZenMr0" target="_blank" rel="noopener noreferrer" style="display: inline-block; background-color: #F4A261; color: white; padding: 10px 24px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 14px;">Check Availability →</a></p>
+      
+      <p style="text-align: center; margin-top: 15px;"><a href="https://booking.stay22.com/thestayandwander/FBzzZenMr0" target="_blank" rel="noopener noreferrer" style="display: inline-block; background-color: #F4A261; color: white; padding: 10px 24px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 14px;">Search All Kotor Hotels →</a></p>
+      
+      <p style="text-align: center; margin-top: 20px; margin-bottom: 10px;"><span style="background-color: #D4AF37; color: #000; padding: 4px 12px; border-radius: 4px; font-size: 12px; font-weight: bold;">Explore Kotor Tours & Activities</span></p>
+      <div data-gyg-widget="auto" data-gyg-partner-id="YOPATWV"></div>
+      
+      <h2>Europe Summer 2026 — Quick Comparison Guide</h2>
+      
+      <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+        <tr style="background-color: #f5f5f5;">
+          <td style="border: 1px solid #ddd; padding: 12px; font-weight: bold;">City</td>
+          <td style="border: 1px solid #ddd; padding: 12px; font-weight: bold;">Country</td>
+          <td style="border: 1px solid #ddd; padding: 12px; font-weight: bold;">Vibe</td>
+          <td style="border: 1px solid #ddd; padding: 12px; font-weight: bold;">Budget/Night</td>
+          <td style="border: 1px solid #ddd; padding: 12px; font-weight: bold;">Best Month</td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid #ddd; padding: 12px;"><strong>Lisbon</strong></td>
+          <td style="border: 1px solid #ddd; padding: 12px;">Portugal</td>
+          <td style="border: 1px solid #ddd; padding: 12px;">Relaxed, cultural</td>
+          <td style="border: 1px solid #ddd; padding: 12px;">$45+</td>
+          <td style="border: 1px solid #ddd; padding: 12px;">June/Sept</td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid #ddd; padding: 12px;"><strong>Dubrovnik</strong></td>
+          <td style="border: 1px solid #ddd; padding: 12px;">Croatia</td>
+          <td style="border: 1px solid #ddd; padding: 12px;">Dramatic, romantic</td>
+          <td style="border: 1px solid #ddd; padding: 12px;">$55+</td>
+          <td style="border: 1px solid #ddd; padding: 12px;">June/Sept</td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid #ddd; padding: 12px;"><strong>Budapest</strong></td>
+          <td style="border: 1px solid #ddd; padding: 12px;">Hungary</td>
+          <td style="border: 1px solid #ddd; padding: 12px;">Vibrant, value</td>
+          <td style="border: 1px solid #ddd; padding: 12px;">$28+</td>
+          <td style="border: 1px solid #ddd; padding: 12px;">June–Aug</td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid #ddd; padding: 12px;"><strong>Porto</strong></td>
+          <td style="border: 1px solid #ddd; padding: 12px;">Portugal</td>
+          <td style="border: 1px solid #ddd; padding: 12px;">Authentic, scenic</td>
+          <td style="border: 1px solid #ddd; padding: 12px;">$35+</td>
+          <td style="border: 1px solid #ddd; padding: 12px;">June/Sept</td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid #ddd; padding: 12px;"><strong>Athens</strong></td>
+          <td style="border: 1px solid #ddd; padding: 12px;">Greece</td>
+          <td style="border: 1px solid #ddd; padding: 12px;">Historic, buzzing</td>
+          <td style="border: 1px solid #ddd; padding: 12px;">$32+</td>
+          <td style="border: 1px solid #ddd; padding: 12px;">June/Sept</td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid #ddd; padding: 12px;"><strong>Ljubljana</strong></td>
+          <td style="border: 1px solid #ddd; padding: 12px;">Slovenia</td>
+          <td style="border: 1px solid #ddd; padding: 12px;">Hidden gem, calm</td>
+          <td style="border: 1px solid #ddd; padding: 12px;">$30+</td>
+          <td style="border: 1px solid #ddd; padding: 12px;">June–Aug</td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid #ddd; padding: 12px;"><strong>Kotor</strong></td>
+          <td style="border: 1px solid #ddd; padding: 12px;">Montenegro</td>
+          <td style="border: 1px solid #ddd; padding: 12px;">Dramatic, unspoilt</td>
+          <td style="border: 1px solid #ddd; padding: 12px;">$22+</td>
+          <td style="border: 1px solid #ddd; padding: 12px;">June/Sept</td>
+        </tr>
+      </table>
+      
+      <h2>Tips for Booking Hotels in Europe This Summer</h2>
+      
+      <p><strong>Book refundable rates.</strong> European summer can bring flight disruptions, heatwaves, and itinerary changes. Always book hotels with free cancellation — most properties on Booking.com offer this at no extra cost.</p>
+      
+      <p><strong>Don't wait.</strong> Summer 2026 European hotel inventory is tracking 20–30% lower than demand. The hotels listed in this guide are already filling up for July and August. Book now, cancel later if plans change.</p>
+      
+      <p><strong>Go shoulder season if you can.</strong> June and September offer 80% of the summer experience at 60% of the price and 40% of the crowds. It's genuinely the best way to do Europe.</p>
+      
+      <p><strong>Mix cities and coastal towns.</strong> Two or three cities paired with a coastal destination gives you the ideal European summer balance — history and culture plus beach and relaxation.</p>
+      
+      <h2>Ready to Book Your European Summer?</h2>
+      
+      <p>All hotels in this guide are bookable through Booking.com with price matching and free cancellation on most properties. Click any "Check Availability" link above to see live prices for your dates.</p>
+      
+      <p style="text-align: center; margin-top: 20px; margin-bottom: 10px;"><a href="https://booking.stay22.com/thestayandwander/_3gvRmesd0" target="_blank" rel="noopener noreferrer" style="display: inline-block; background-color: #F4A261; color: white; padding: 10px 24px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 14px;">🔵 Search All European Hotels — Best Prices →</a></p>
+      
+      <p style="text-align: center;"><a href="https://gyg.me/JwtO7kBb" target="_blank" rel="noopener noreferrer" style="display: inline-block; background-color: #F4A261; color: white; padding: 10px 24px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 14px;">🟡 Browse European Tour Experiences on GetYourGuide →</a></p>
+      
+      <hr style="margin: 30px 0; border: none; border-top: 1px solid #ddd;">
+      
+      <p style="font-size: 12px; color: #999; text-align: center; margin-top: 20px;"><em>This article contains affiliate links. If you book through our links, we earn a small commission at no extra cost to you. Thank you for supporting The Stay & Wander.</em></p>
+    `,
+    relatedArticles: [1, 3],
+  },
 };
 
 export default function BlogArticleDetail() {
