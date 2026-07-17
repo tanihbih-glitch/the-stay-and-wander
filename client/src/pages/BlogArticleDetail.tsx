@@ -345,250 +345,64 @@ const articles: Record<number, BlogArticle> = {
   },
   3: {
     id: 3,
-    title: "Tokyo vs Bangkok: Which Should You Visit First? (2026 Honest Guide)",
-    category: "Asia Travel · Destination Guides",
-    image: "/manus-storage/blog-tokyo-bangkok_a1b2c3d4.png",
-    excerpt: "Tokyo vs Bangkok — which Asian city should you visit first? We compare cost, food, hotels, nightlife, transport and culture so you can make the perfect choice. Plus hand-picked hotels for both cities.",
-    author: "The Stay & Wander",
-    date: "July 17, 2026",
-    readTime: "10 min read",
+    title: "Tokyo vs Bangkok — Which Should You Visit First?",
+    category: "Itinerary Ideas",
+    image: "/manus-storage/blog-tokyo-bangkok_0467868b.png",
+    excerpt: "A detailed comparison to help you choose your next Asian adventure.",
+    author: "Emma Rodriguez",
+    date: "June 5, 2026",
+    readTime: "6 min read",
     content: `
-      <p>It's the great first-timer's Asia dilemma. Two of the world's most iconic cities. Two completely different experiences. One trip. Which do you choose?</p>
+      <h2>Tokyo: The Megacity</h2>
+      <p>Tokyo is a sprawling metropolis that blends ancient traditions with cutting-edge technology. With over 37 million people, it's one of the world's largest cities.</p>
       
-      <p>Tokyo and Bangkok are both extraordinary — but they're extraordinary in entirely different ways. Tokyo is precision, elegance, and quiet wonder. Bangkok is chaos, colour, and sensory overload in the best possible sense. Both will change how you see the world.</p>
-      
-      <p>This guide cuts through the noise and gives you an honest, practical comparison across every category that matters — cost, food, hotels, nightlife, transport, culture, and safety — so you can decide which city deserves your first Asia stamp.</p>
-      
-      <blockquote style="background-color: #f0f4f8; padding: 15px; border-left: 4px solid #0077B6; margin: 20px 0; border-radius: 4px;">
-        <p><strong>💡 The short answer:</strong> If this is your first time in Asia and you're on a budget — start with Bangkok. If you want a smoother, more structured first experience and budget isn't a concern — start with Tokyo. Read on for the full picture.</p>
-      </blockquote>
-      
-      <h2>At a Glance — Tokyo vs Bangkok</h2>
-      
-      <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
-        <tr style="background-color: #f5f5f5;">
-          <td style="border: 1px solid #ddd; padding: 12px; font-weight: bold;">Category</td>
-          <td style="border: 1px solid #ddd; padding: 12px; font-weight: bold;">Tokyo 🇯🇵</td>
-          <td style="border: 1px solid #ddd; padding: 12px; font-weight: bold;">Bangkok 🇹🇭</td>
-        </tr>
-        <tr>
-          <td style="border: 1px solid #ddd; padding: 12px;"><strong>Daily budget</strong></td>
-          <td style="border: 1px solid #ddd; padding: 12px;">$80–$200</td>
-          <td style="border: 1px solid #ddd; padding: 12px;">$30–$80</td>
-        </tr>
-        <tr>
-          <td style="border: 1px solid #ddd; padding: 12px;"><strong>Food scene</strong></td>
-          <td style="border: 1px solid #ddd; padding: 12px;">World-class, precise, refined</td>
-          <td style="border: 1px solid #ddd; padding: 12px;">World-class, bold, street-level</td>
-        </tr>
-        <tr>
-          <td style="border: 1px solid #ddd; padding: 12px;"><strong>Best for</strong></td>
-          <td style="border: 1px solid #ddd; padding: 12px;">Culture, precision, safety</td>
-          <td style="border: 1px solid #ddd; padding: 12px;">Value, nightlife, energy</td>
-        </tr>
-        <tr>
-          <td style="border: 1px solid #ddd; padding: 12px;"><strong>English</strong></td>
-          <td style="border: 1px solid #ddd; padding: 12px;">Limited but manageable</td>
-          <td style="border: 1px solid #ddd; padding: 12px;">Widely spoken in tourist areas</td>
-        </tr>
-        <tr>
-          <td style="border: 1px solid #ddd; padding: 12px;"><strong>Transport</strong></td>
-          <td style="border: 1px solid #ddd; padding: 12px;">Best metro in the world</td>
-          <td style="border: 1px solid #ddd; padding: 12px;">BTS Skytrain + tuk-tuks</td>
-        </tr>
-        <tr>
-          <td style="border: 1px solid #ddd; padding: 12px;"><strong>Safety</strong></td>
-          <td style="border: 1px solid #ddd; padding: 12px;">Extremely safe</td>
-          <td style="border: 1px solid #ddd; padding: 12px;">Generally safe, take normal precautions</td>
-        </tr>
-        <tr>
-          <td style="border: 1px solid #ddd; padding: 12px;"><strong>Weather (Summer)</strong></td>
-          <td style="border: 1px solid #ddd; padding: 12px;">Hot and humid (30°C)</td>
-          <td style="border: 1px solid #ddd; padding: 12px;">Very hot and humid (35°C+)</td>
-        </tr>
-        <tr>
-          <td style="border: 1px solid #ddd; padding: 12px;"><strong>Nightlife</strong></td>
-          <td style="border: 1px solid #ddd; padding: 12px;">Sophisticated, subtle</td>
-          <td style="border: 1px solid #ddd; padding: 12px;">Legendary, full-on</td>
-        </tr>
-      </table>
-      
-      <h2>Round 1 — Cost & Budget 💰</h2>
-      <p><strong>Winner: Bangkok — by a significant margin</strong></p>
-      
-      <p>Bangkok is one of Asia's greatest value destinations. A genuinely excellent street food meal costs $1–3. A comfortable mid-range hotel room in a great location runs $40–70 per night. A tuk-tuk across the city costs pennies. Even luxury experiences — rooftop bars, Thai massage, river cruises — cost a fraction of what you'd pay in Tokyo.</p>
-      
-      <p><strong>Bangkok daily budget breakdown:</strong></p>
+      <h3>Why Visit Tokyo?</h3>
       <ul>
-        <li>Budget traveller: $25–40/day</li>
-        <li>Mid-range traveller: $60–100/day</li>
-        <li>Luxury traveller: $150–300/day</li>
+        <li>Incredible food scene with Michelin-starred restaurants and street food</li>
+        <li>Unique neighborhoods like Shibuya, Harajuku, and Shinjuku</li>
+        <li>Traditional temples and gardens</li>
+        <li>World-class museums and galleries</li>
+        <li>Efficient public transportation</li>
       </ul>
       
-      <p>Tokyo is not cheap — but it's not as expensive as its reputation suggests either. The biggest costs are accommodation and transport. Food can actually be very affordable if you eat at convenience stores (a legitimate Tokyo experience), ramen shops, and standing sushi bars. Where Tokyo gets expensive is accommodation — decent hotels in central areas start at $120–180/night.</p>
+      <h3>Where to Stay in Tokyo</h3>
+      <p>Tokyo offers luxury options like the Park Hyatt Tokyo with stunning city views, and mid-range favorites like Hotel Gracery Shinjuku for convenient access to shopping and dining.</p>
+      <p style="text-align: center; margin-top: 15px;"><a href="https://booking.stay22.com/thestayandwander/3YcggMqhIn" target="_blank" rel="noopener noreferrer" style="display: inline-block; background-color: #F4A261; color: white; padding: 10px 24px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 14px;">Check Availability</a></p>
+      <p style="text-align: center; margin-top: 4px; font-size: 11px; color: #999;">Powered by Booking.com</p>
       
-      <p><strong>Tokyo daily budget breakdown:</strong></p>
-      <ul>
-        <li>Budget traveller: $70–100/day</li>
-        <li>Mid-range traveller: $150–220/day</li>
-        <li>Luxury traveller: $300–600/day</li>
-      </ul>
-      
-      <p><strong>Verdict:</strong> Bangkok wins on cost. For the same two-week budget you'd spend in Tokyo, you could spend three weeks in Bangkok living extremely well.</p>
-      
-      <h2>Round 2 — Food Scene 🍜</h2>
-      <p><strong>Winner: Draw — both are world-class, just completely different</strong></p>
-      
-      <p>This is the category where both cities are genuinely world-class and the winner comes down entirely to personal taste.</p>
-      
-      <p><strong>Tokyo</strong> has more Michelin-starred restaurants than any other city on earth. The food culture is built on precision, respect for ingredients, and decades of craft. You'll eat the best sushi, ramen, tempura, and yakitori of your life. Even convenience store food in Tokyo is extraordinary. The city rewards patient, curious eaters who are willing to queue for a bowl of ramen at a tiny 8-seat counter.</p>
-      
-      <p><strong>Bangkok</strong> is arguably the world's greatest street food city. Pad thai cooked on a wok over open flame at midnight, spicy tom yum soup that makes your eyes water, mango sticky rice that tastes like dessert from another dimension — all available for $1–3 from street vendors who've been perfecting the same dish for 30 years. Bangkok also has an extraordinary fine dining scene for those willing to explore beyond the street.</p>
-      
-      <p><strong>If you love:</strong> Japanese food, precision, quiet dining → Tokyo<br><strong>If you love:</strong> Bold flavours, street food, spice → Bangkok</p>
-      
-      <h2>Round 3 — Hotels & Accommodation 🏨</h2>
-      <p><strong>Winner: Bangkok on value, Tokyo on design</strong></p>
-      
-      <p>Both cities have exceptional hotels across every price point — but Bangkok gives you dramatically more for your money.</p>
-      
-      <h3>Best Hotels in Bangkok</h3>
-      
-      <p><strong>🏨 Budget — Lub d Bangkok Silom</strong><br>From $25/night · Award-winning design hostel · Social atmosphere · BTS Sala Daeng<br><a href="https://booking.stay22.com/thestayandwander/r-lvU3PLVF" target="_blank" rel="noopener noreferrer" style="display: inline-block; background-color: #F4A261; color: white; padding: 10px 24px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 14px;">Check Availability →</a></p>
-      
-      <p><strong>🏨 Mid-range — Chatrium Hotel Riverside Bangkok</strong><br>From $75/night · Stunning Chao Phraya River views · Rooftop pool · Excellent service<br><a href="https://booking.stay22.com/thestayandwander/r-lvU3PLVF" target="_blank" rel="noopener noreferrer" style="display: inline-block; background-color: #F4A261; color: white; padding: 10px 24px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 14px;">Check Availability →</a></p>
-      
-      <p><strong>🏨 Luxury — Mandarin Oriental Bangkok</strong><br>From $380/night · Legendary 5-star · Riverside · One of Asia's finest hotels since 1876<br><a href="https://booking.stay22.com/thestayandwander/r-lvU3PLVF" target="_blank" rel="noopener noreferrer" style="display: inline-block; background-color: #F4A261; color: white; padding: 10px 24px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 14px;">Check Availability →</a></p>
-      
-      <p><strong>🏨 Luxury — The Peninsula Bangkok</strong><br>From $420/night · Riverfront · Legendary service · Helicopter pad · Three pools<br><a href="https://booking.stay22.com/thestayandwander/r-lvU3PLVF" target="_blank" rel="noopener noreferrer" style="display: inline-block; background-color: #F4A261; color: white; padding: 10px 24px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 14px;">Check Availability →</a></p>
-      
-      <p style="text-align: center; margin-top: 15px;"><a href="https://booking.stay22.com/thestayandwander/r-lvU3PLVF" target="_blank" rel="noopener noreferrer" style="display: inline-block; background-color: #F4A261; color: white; padding: 10px 24px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 14px;">Search All Bangkok Hotels →</a></p>
-      
-      <p style="text-align: center; margin-top: 20px; margin-bottom: 10px;"><span style="background-color: #D4AF37; color: #000; padding: 4px 12px; border-radius: 4px; font-size: 12px; font-weight: bold;">Top-Rated Bangkok Tours & Activities</span></p>
+      <p style="text-align: center; margin-top: 20px; margin-bottom: 10px;"><span style="background-color: #D4AF37; color: #000; padding: 4px 12px; border-radius: 4px; font-size: 12px; font-weight: bold;">Top-Rated Tokyo Tours & Experiences</span></p>
       <div data-gyg-widget="auto" data-gyg-partner-id="YOPATWV"></div>
       
-      <h3>Best Hotels in Tokyo</h3>
+      <h2>Bangkok: The City of Smiles</h2>
+      <p>Bangkok is Thailand's vibrant capital, known for its ornate shrines, bustling street markets, and world-class cuisine. It's more laid-back than Tokyo but equally exciting.</p>
       
-      <p><strong>🏨 Budget — Khaosan Tokyo Laboratory</strong><br>From $35/night · Design hostel · Asakusa · Walking distance to Senso-ji Temple<br><a href="https://agoda.stay22.com/thestayandwander/thngueyN2R" target="_blank" rel="noopener noreferrer" style="display: inline-block; background-color: #F4A261; color: white; padding: 10px 24px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 14px;">Check Availability →</a></p>
+      <h3>Why Visit Bangkok?</h3>
+      <ul>
+        <li>Affordable prices for food, accommodation, and activities</li>
+        <li>Stunning Buddhist temples and palaces</li>
+        <li>Vibrant street food scene</li>
+        <li>Warm, welcoming locals</li>
+        <li>Easy access to nearby islands and beaches</li>
+      </ul>
       
-      <p><strong>🏨 Mid-range — Hotel Gracery Shinjuku</strong><br>From $130/night · Iconic Godzilla head on the building · Central Shinjuku · Great value<br><a href="https://booking.stay22.com/thestayandwander/xaad-D11z0" target="_blank" rel="noopener noreferrer" style="display: inline-block; background-color: #F4A261; color: white; padding: 10px 24px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 14px;">Check Availability →</a></p>
+      <h3>Where to Stay in Bangkok</h3>
+      <p>Bangkok features luxury properties like the Mandarin Oriental with riverside elegance, and budget-friendly options like NapPark Design Hotel for authentic local experiences.</p>
+      <p style="text-align: center; margin-top: 15px;"><a href="https://booking.stay22.com/thestayandwander/MrqOVuXDZx" target="_blank" rel="noopener noreferrer" style="display: inline-block; background-color: #F4A261; color: white; padding: 10px 24px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 14px;">Check Availability</a></p>
+      <p style="text-align: center; margin-top: 4px; font-size: 11px; color: #999;">Powered by Booking.com</p>
       
-      <p><strong>🏨 Mid-range — Sequence Miyashita Park Shibuya</strong><br>From $150/night · Rooftop · Above Miyashita Park · Walking distance to Shibuya Crossing<br><a href="https://booking.stay22.com/thestayandwander/xaad-D11z0" target="_blank" rel="noopener noreferrer" style="display: inline-block; background-color: #F4A261; color: white; padding: 10px 24px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 14px;">Check Availability →</a></p>
-      
-      <p><strong>🏨 Luxury — Park Hyatt Tokyo</strong><br>From $550/night · Lost in Translation hotel · Shinjuku · Legendary New York Bar<br><a href="https://booking.stay22.com/thestayandwander/YC0GqDjEy8" target="_blank" rel="noopener noreferrer" style="display: inline-block; background-color: #F4A261; color: white; padding: 10px 24px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 14px;">Check Availability →</a></p>
-      
-      <p><strong>🏨 Luxury — Aman Tokyo</strong><br>From $1,200/night · Japanese minimalism perfected · Best hotel in Japan<br><a href="https://booking.stay22.com/thestayandwander/YC0GqDjEy8" target="_blank" rel="noopener noreferrer" style="display: inline-block; background-color: #F4A261; color: white; padding: 10px 24px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 14px;">Check Availability →</a></p>
-      
-      <p style="text-align: center; margin-top: 15px;"><a href="https://booking.stay22.com/thestayandwander/r-lvU3PLVF" target="_blank" rel="noopener noreferrer" style="display: inline-block; background-color: #F4A261; color: white; padding: 10px 24px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 14px;">Search All Tokyo Hotels →</a></p>
-      
-      <p style="text-align: center; margin-top: 20px; margin-bottom: 10px;"><span style="background-color: #D4AF37; color: #000; padding: 4px 12px; border-radius: 4px; font-size: 12px; font-weight: bold;">Top-Rated Tokyo Tours & Activities</span></p>
+      <p style="text-align: center; margin-top: 20px; margin-bottom: 10px;"><span style="background-color: #D4AF37; color: #000; padding: 4px 12px; border-radius: 4px; font-size: 12px; font-weight: bold;">Top-Rated Bangkok Tours & Experiences</span></p>
       <div data-gyg-widget="auto" data-gyg-partner-id="YOPATWV"></div>
       
-      <h2>Round 4 — Culture & Sightseeing 🏛️</h2>
-      <p><strong>Winner: Tokyo — deeper cultural immersion</strong></p>
+      <h2>The Verdict</h2>
+      <p>Both cities are incredible in their own ways. Tokyo is better for those seeking cutting-edge technology and refined cuisine, while Bangkok is ideal for budget travelers seeking authentic Asian culture and adventure.</p>
       
-      <p>Both cities offer extraordinary cultural experiences but Tokyo wins for the sheer depth and consistency of its cultural offering.</p>
+      <h2>Pro Tip</h2>
+      <p>Consider visiting both! Many travelers do a Tokyo-Bangkok combo trip, spending 5-7 days in each city for a comprehensive Asian experience.</p>
       
-      <p><strong>Tokyo highlights:</strong></p>
-      <ul>
-        <li>Senso-ji Temple in Asakusa — Tokyo's oldest and most beautiful temple</li>
-        <li>Shibuya Crossing — the world's busiest pedestrian intersection, genuinely mesmerising</li>
-        <li>teamLab Planets — the most extraordinary digital art experience on earth</li>
-        <li>Meiji Shrine — ancient calm in the middle of a modern megacity</li>
-        <li>Tsukiji Outer Market — the freshest sushi breakfast of your life</li>
-        <li>Harajuku & Takeshita Street — Tokyo's fashion subculture at its most extreme</li>
-        <li>Shinjuku at night — the greatest urban landscape you'll ever walk through</li>
-      </ul>
-      
-      <p><strong>Bangkok highlights:</strong></p>
-      <ul>
-        <li>Wat Phra Kaew (Grand Palace) — the most spectacular temple complex in Southeast Asia</li>
-        <li>Wat Pho — home to the magnificent 46-metre reclining Buddha</li>
-        <li>Chatuchak Weekend Market — 15,000 stalls, the world's greatest market</li>
-        <li>Chao Phraya River — explore by longtail boat for a completely different city perspective</li>
-        <li>Khao San Road — the legendary backpacker street, love it or hate it</li>
-        <li>Lumphini Park — Bangkok's breathing space, extraordinary at sunrise</li>
-      </ul>
-      
-      <p><strong>Day trip advantage:</strong> Both cities offer incredible day trips but Bangkok has the edge — Ayutthaya's ancient temple ruins are 90 minutes away, and you can reach stunning islands in southern Thailand with a short domestic flight.</p>
-      
-      <h2>Round 5 — Nightlife 🌙</h2>
-      <p><strong>Winner: Bangkok — legendary status</strong></p>
-      
-      <p>Bangkok's nightlife is the stuff of legend — rooftop bars at 60 floors above the city, night markets that run until 4am, world-class DJ venues, riverside cocktail bars, and the famous Khao San Road for those who want pure chaos.</p>
-      
-      <p>Tokyo's nightlife is sophisticated and surprising — tiny jazz bars in Shinjuku's Golden Gai, extraordinary whisky bars in Ginza, rooftop lounges with Mt Fuji views on clear days, and the world-famous Robot Restaurant (touristy but unmissable). Tokyo doesn't shout about its nightlife — you have to find it, which makes it all the more rewarding.</p>
-      
-      <p><strong>If you want:</strong> Wild, accessible, legendary nights → Bangkok<br><strong>If you want:</strong> Sophisticated, hidden, memorable nights → Tokyo</p>
-      
-      <h2>Round 6 — Transport & Getting Around 🚇</h2>
-      <p><strong>Winner: Tokyo — the world's greatest metro system</strong></p>
-      
-      <p>Tokyo's metro is genuinely the finest public transport system on earth. Clean, punctual to the second, comprehensive, and remarkably easy to navigate with the IC card system. Getting anywhere in Tokyo is straightforward even without speaking Japanese.</p>
-      
-      <p>Bangkok's BTS Skytrain and MRT metro are modern and efficient but don't cover the whole city — you'll also need tuk-tuks, taxis, and Grab (Southeast Asia's Uber) for areas not covered by rail. Traffic in Bangkok can be genuinely brutal — what looks like a 2km journey on the map can take 45 minutes by road.</p>
-      
-      <p><strong>Verdict:</strong> Tokyo wins this round emphatically. Bangkok requires more patience and flexibility with transport.</p>
-      
-      <h2>Round 7 — Safety 🔒</h2>
-      <p><strong>Winner: Tokyo — one of the safest cities on earth</strong></p>
-      
-      <p>Tokyo is arguably the safest major city in the world. Violent crime is extraordinarily rare, people routinely leave laptops in cafes while they go to the bathroom, and lost wallets are returned to police stations fully intact. First-time solo travellers consistently describe Tokyo as the most comfortable city they've ever visited.</p>
-      
-      <p>Bangkok is generally safe for tourists — millions visit every year without incident. Standard precautions apply: watch out for tuk-tuk scams, gem scams, and overly friendly strangers offering to take you somewhere "special." Solo female travellers should take normal precautions, particularly at night. Overall Bangkok is a safe destination but requires more awareness than Tokyo.</p>
-      
-      <h2>The Verdict — Which City Should You Visit First?</h2>
-      
-      <p><strong>Choose Bangkok First If:</strong></p>
-      <ul>
-        <li>✅ This is your first time in Asia and budget matters</li>
-        <li>✅ You love street food, bold flavours, and chaotic energy</li>
-        <li>✅ You want maximum experience per dollar spent</li>
-        <li>✅ You plan to island hop in Thailand after the city</li>
-        <li>✅ You want legendary nightlife and round-the-clock energy</li>
-      </ul>
-      
-      <p><strong>Choose Tokyo First If:</strong></p>
-      <ul>
-        <li>✅ You want a smooth, organised, stress-free first Asia experience</li>
-        <li>✅ You love Japanese food, culture, and precision</li>
-        <li>✅ Budget is less of a concern</li>
-        <li>✅ You're a solo traveller who values safety above all</li>
-        <li>✅ You want to combine with Kyoto, Osaka, or a Japan rail trip</li>
-      </ul>
-      
-      <p><strong>The Best Answer — Visit Both</strong><br>If your budget and time allow, the ideal first Asia trip combines <strong>5 days in Tokyo + 5 days in Bangkok</strong> — or the classic circuit of Tokyo, Kyoto, and Bangkok across two weeks. The contrast between the two cities makes each one more vivid.</p>
-      
-      <h2>How to Get There</h2>
-      
-      <p><strong>Flights to Tokyo (Narita/Haneda):</strong><br>Major hubs with direct connections from London, Dubai, New York, Sydney and most major cities. Flight time from London: 12 hours. From Dubai: 9 hours.</p>
-      
-      <p style="text-align: center;"><a href="https://aviasales.tpo.lu/f9QeB1mu" target="_blank" rel="noopener noreferrer" style="display: inline-block; background-color: #F4A261; color: white; padding: 10px 24px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 14px;">🟡 Search Flights to Tokyo →</a></p>
-      
-      <p><strong>Flights to Bangkok (Suvarnabhumi):</strong><br>One of Asia's busiest hub airports with connections from everywhere. Often cheaper than Tokyo flights. Flight time from London: 11 hours. From Dubai: 6 hours.</p>
-      
-      <p style="text-align: center;"><a href="https://aviasales.tpo.lu/f9QeB1mu" target="_blank" rel="noopener noreferrer" style="display: inline-block; background-color: #F4A261; color: white; padding: 10px 24px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 14px;">🟡 Search Flights to Bangkok →</a></p>
-      
-      <p><strong>Tokyo to Bangkok flight:</strong><br>Direct flights take approximately 6 hours. Budget airlines like AirAsia and Scoot make this connection very affordable — often $80–150 return if booked in advance.</p>
-      
-      <p style="text-align: center;"><a href="https://aviasales.tpo.lu/f9QeB1mu" target="_blank" rel="noopener noreferrer" style="display: inline-block; background-color: #F4A261; color: white; padding: 10px 24px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 14px;">🟡 Search Tokyo to Bangkok Flights →</a></p>
-      
-      <p style="text-align: center; margin-top: 20px; margin-bottom: 10px;"><span style="background-color: #D4AF37; color: #000; padding: 4px 12px; border-radius: 4px; font-size: 12px; font-weight: bold;">Browse All Bangkok & Tokyo Tours</span></p>
+      <p style="text-align: center; margin-top: 30px; margin-bottom: 10px;"><span style="background-color: #D4AF37; color: #000; padding: 4px 12px; border-radius: 4px; font-size: 12px; font-weight: bold;">Browse All Asia Tours</span></p>
       <div data-gyg-widget="auto" data-gyg-partner-id="YOPATWV"></div>
-      
-      <h2>Search Hotels in Both Cities</h2>
-      
-      <p style="text-align: center; margin-top: 20px;"><a href="https://booking.stay22.com/thestayandwander/r-lvU3PLVF" target="_blank" rel="noopener noreferrer" style="display: inline-block; background-color: #F4A261; color: white; padding: 10px 24px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 14px;">🔵 Search All Tokyo Hotels — Best Prices →</a></p>
-      
-      <p style="text-align: center;"><a href="https://booking.stay22.com/thestayandwander/r-lvU3PLVF" target="_blank" rel="noopener noreferrer" style="display: inline-block; background-color: #F4A261; color: white; padding: 10px 24px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 14px;">🔵 Search All Bangkok Hotels — Best Prices →</a></p>
-      
-      <p style="text-align: center;"><a href="https://gyg.me/0eA5eqhT" target="_blank" rel="noopener noreferrer" style="display: inline-block; background-color: #F4A261; color: white; padding: 10px 24px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 14px;">🟡 Browse Bangkok & Tokyo Tours on GetYourGuide →</a></p>
-      
-      <hr style="margin: 30px 0; border: none; border-top: 1px solid #ddd;">
-      
-      <p style="font-size: 12px; color: #999; text-align: center; margin-top: 20px;"><em>This article contains affiliate links. If you book through our links, we earn a small commission at no extra cost to you. Thank you for supporting The Stay & Wander.</em></p>
     `,
-    relatedArticles: [1, 4],
+    relatedArticles: [1, 2],
   },
   4: {
     id: 4,
