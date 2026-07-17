@@ -7,6 +7,19 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import PopularRoutesWidgetBlogSidebar from '@/components/PopularRoutesWidgetBlogSidebar';
 
+const getAffiliateLink = (cityId: number): string => {
+  const links: { [key: number]: string } = {
+    1: 'https://booking.stay22.com/thestayandwander/_3gvRmesd0', // Lisbon
+    2: 'https://booking.stay22.com/thestayandwander/FBzzZenMr0', // Dubrovnik
+    3: 'https://booking.stay22.com/thestayandwander/_3gvRmesd0', // Budapest
+    4: 'https://booking.stay22.com/thestayandwander/_3gvRmesd0', // Porto
+    5: 'https://booking.stay22.com/thestayandwander/_3gvRmesd0', // Athens
+    6: 'https://booking.stay22.com/thestayandwander/_3gvRmesd0', // Ljubljana
+    7: 'https://booking.stay22.com/thestayandwander/FBzzZenMr0', // Kotor
+  };
+  return links[cityId] || 'https://booking.stay22.com/thestayandwander/_3gvRmesd0';
+};
+
 const articleMetadata = {
   title: '7 Best Cities to Visit in Europe This Summer (2026) — And Exactly Where to Stay',
   description: 'Planning a European summer trip in 2026? Here are the 7 best cities to visit in Europe this summer — with hand-picked hotel recommendations for every budget. Book now before prices rise.',
@@ -277,17 +290,18 @@ export default function BlogEuropeCities() {
                           <p className="text-lg font-bold text-yellow-600">{hotel.price}</p>
                         </div>
                         <p className="text-sm text-gray-600 mb-4">✓ {hotel.highlights}</p>
-                        <a href="https://aviasales.tpo.lu/f9QeB1mu" target="_blank" rel="noopener noreferrer">
-                          <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm">
+                        <a href={getAffiliateLink(city.id)} target="_blank" rel="noopener noreferrer">
+                          <Button className="w-full bg-yellow-500 hover:bg-yellow-600 text-white text-sm">
                             Check Availability →
                           </Button>
                         </a>
+                        <p className="text-xs text-gray-500 mt-2">Powered by Booking.com</p>
                       </CardContent>
                     </Card>
                   ))}
                 </div>
-                <a href="https://aviasales.tpo.lu/f9QeB1mu" target="_blank" rel="noopener noreferrer">
-                  <Button variant="outline" className="w-full mt-4">
+                <a href={getAffiliateLink(city.id)} target="_blank" rel="noopener noreferrer">
+                  <Button className="w-full mt-4 bg-yellow-500 hover:bg-yellow-600 text-white">
                     Search All {city.name.split(',')[0]} Hotels →
                   </Button>
                 </a>
@@ -337,6 +351,12 @@ export default function BlogEuropeCities() {
             <div data-gyg-widget="auto" data-gyg-partner-id="YOPATWV"></div>
           </section>
 
+          {/* Final GetYourGuide Widget */}
+          <section className="mb-12 py-6 border-t border-b">
+            <p className="text-sm font-semibold text-yellow-600 mb-4">Browse All European Tours</p>
+            <div data-gyg-widget="auto" data-gyg-partner-id="YOPATWV"></div>
+          </section>
+
           {/* Booking Tips */}
           <section className="mb-12">
             <h2 className="font-playfair text-3xl font-bold text-gray-900 mb-6">
@@ -371,9 +391,14 @@ export default function BlogEuropeCities() {
               All hotels in this guide are bookable through Booking.com with price matching and free cancellation on most properties. Click any "Check Availability" link above to see live prices for your dates.
             </p>
             <div className="flex flex-col md:flex-row gap-4">
-              <a href="https://aviasales.tpo.lu/f9QeB1mu" target="_blank" rel="noopener noreferrer">
-                <Button className="w-full md:w-auto bg-blue-600 hover:bg-blue-700 text-white">
-                  🔵 Search All European Hotels — Best Prices →
+              <a href="https://booking.stay22.com/thestayandwander/_3gvRmesd0" target="_blank" rel="noopener noreferrer">
+                <Button className="w-full md:w-auto bg-yellow-500 hover:bg-yellow-600 text-white">
+                  Search All European Hotels — Best Prices →
+                </Button>
+              </a>
+              <a href="https://gyg.me/JwtO7kBb" target="_blank" rel="noopener noreferrer">
+                <Button className="w-full md:w-auto bg-yellow-500 hover:bg-yellow-600 text-white">
+                  Browse European Tours →
                 </Button>
               </a>
             </div>
