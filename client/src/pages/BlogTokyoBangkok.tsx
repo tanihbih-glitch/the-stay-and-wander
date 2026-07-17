@@ -20,6 +20,17 @@ const articleMetadata = {
   publishDate: '2026-07-15',
 };
 
+const getAffiliateLink = (hotelName: string, city: 'tokyo' | 'bangkok'): string => {
+  if (city === 'bangkok') {
+    return 'https://booking.stay22.com/thestayandwander/r-lvU3PLVF';
+  }
+  // Tokyo hotels
+  if (hotelName.includes('Khaosan')) return 'https://agoda.stay22.com/thestayandwander/thngueyN2R';
+  if (hotelName.includes('Gracery') || hotelName.includes('Sequence')) return 'https://booking.stay22.com/thestayandwander/xaad-D11z0';
+  if (hotelName.includes('Park Hyatt') || hotelName.includes('Aman')) return 'https://booking.stay22.com/thestayandwander/YC0GqDjEy8';
+  return 'https://booking.stay22.com/thestayandwander/xaad-D11z0';
+};
+
 const comparisonData = [
   { category: 'Daily budget', tokyo: '$80–$200', bangkok: '$30–$80' },
   { category: 'Food scene', tokyo: 'World-class, precise, refined', bangkok: 'World-class, bold, street-level' },
@@ -249,7 +260,7 @@ export default function BlogTokyoBangkok() {
                         <p className="text-lg font-bold text-blue-600">{hotel.price}</p>
                       </div>
                       <p className="text-sm text-gray-600 mb-4">✓ {hotel.highlights}</p>
-                      <a href="https://aviasales.tpo.lu/f9QeB1mu" target="_blank" rel="noopener noreferrer">
+                      <a href={getAffiliateLink(hotel.name, 'bangkok')} target="_blank" rel="noopener noreferrer">
                         <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm">
                           Check Availability →
                         </Button>
@@ -258,8 +269,8 @@ export default function BlogTokyoBangkok() {
                   </Card>
                 ))}
               </div>
-              <a href="https://aviasales.tpo.lu/f9QeB1mu" target="_blank" rel="noopener noreferrer">
-                <Button variant="outline" className="w-full mt-4">
+              <a href="https://booking.stay22.com/thestayandwander/r-lvU3PLVF" target="_blank" rel="noopener noreferrer">
+                <Button className="w-full mt-4 bg-blue-600 hover:bg-blue-700 text-white">
                   Search All Bangkok Hotels →
                 </Button>
               </a>
@@ -279,7 +290,7 @@ export default function BlogTokyoBangkok() {
                         <p className="text-lg font-bold text-blue-600">{hotel.price}</p>
                       </div>
                       <p className="text-sm text-gray-600 mb-4">✓ {hotel.highlights}</p>
-                      <a href="https://aviasales.tpo.lu/f9QeB1mu" target="_blank" rel="noopener noreferrer">
+                      <a href={getAffiliateLink(hotel.name, 'tokyo')} target="_blank" rel="noopener noreferrer">
                         <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm">
                           Check Availability →
                         </Button>
@@ -288,8 +299,8 @@ export default function BlogTokyoBangkok() {
                   </Card>
                 ))}
               </div>
-              <a href="https://aviasales.tpo.lu/f9QeB1mu" target="_blank" rel="noopener noreferrer">
-                <Button variant="outline" className="w-full mt-4">
+              <a href="https://booking.stay22.com/thestayandwander/r-lvU3PLVF" target="_blank" rel="noopener noreferrer">
+                <Button className="w-full mt-4 bg-blue-600 hover:bg-blue-700 text-white">
                   Search All Tokyo Hotels →
                 </Button>
               </a>
@@ -439,6 +450,28 @@ export default function BlogTokyoBangkok() {
           <section className="mb-12 py-8 border-t border-b">
             <p className="text-sm font-semibold text-yellow-600 mb-4">🎫 COMPLETE YOUR ASIA TRIP — BOOK TOURS & ACTIVITIES</p>
             <div data-gyg-widget="auto" data-gyg-partner-id="YOPATWV"></div>
+          </section>
+
+          {/* Final CTA Section */}
+          <section className="mb-12 p-8 bg-blue-50 rounded-lg">
+            <h3 className="font-playfair text-2xl font-bold text-gray-900 mb-4">
+              Ready to Book Your Asia Trip?
+            </h3>
+            <p className="text-gray-700 mb-6">
+              Use the links above to search for flights, hotels, and tours. All links are affiliate partners that help support The Stay & Wander.
+            </p>
+            <div className="flex flex-col md:flex-row gap-4">
+              <a href="https://booking.stay22.com/thestayandwander/r-lvU3PLVF" target="_blank" rel="noopener noreferrer">
+                <Button className="w-full md:w-auto bg-blue-600 hover:bg-blue-700 text-white">
+                  Search All Hotels →
+                </Button>
+              </a>
+              <a href="https://gyg.me/0eA5eqhT" target="_blank" rel="noopener noreferrer">
+                <Button className="w-full md:w-auto bg-blue-600 hover:bg-blue-700 text-white">
+                  Browse Tours & Activities →
+                </Button>
+              </a>
+            </div>
           </section>
 
           {/* Related Articles */}
