@@ -14,6 +14,7 @@ import BlogBaliHotels from "./pages/BlogBaliHotels";
 import BlogEuropeCities from "./pages/BlogEuropeCities";
 import BlogTokyoBangkok from "./pages/BlogTokyoBangkok";
 import BlogBrazil from "./pages/BlogBrazil";
+import BlogFlightDeals from "./pages/BlogFlightDeals";
 import ExitIntentPopup from "./components/ExitIntentPopup";
 
 function Router() {
@@ -29,6 +30,7 @@ function Router() {
       <Route path={"/blog/best-cities-europe-summer-2026"} component={BlogEuropeCities} />
       <Route path={"/blog/tokyo-vs-bangkok-2026"} component={BlogTokyoBangkok} />
       <Route path={"/blog/brazil-travel-guide-2026"} component={BlogBrazil} />
+      <Route path={"/blog/best-flight-deals-asia-2026"} component={BlogFlightDeals} />
       {/* Redirects from old numeric URLs to new semantic slugs */}
       <Route path={"/blog/1"} component={() => { window.location.href = '/blog/best-hotels-bali-2026'; return null; }} />
       <Route path={"/blog/2"} component={() => { window.location.href = '/blog/best-cities-europe-summer-2026'; return null; }} />
