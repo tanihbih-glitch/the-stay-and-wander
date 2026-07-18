@@ -16,6 +16,7 @@ import BlogTokyoBangkok from "./pages/BlogTokyoBangkok";
 import BlogBrazil from "./pages/BlogBrazil";
 import BlogFlightDeals from "./pages/BlogFlightDeals";
 import ExitIntentPopup from "./components/ExitIntentPopup";
+import { AffiliateAnalytics } from "./pages/AffiliateAnalytics";
 
 function Router() {
   // make sure to consider if you need authentication for certain routes
@@ -36,6 +37,8 @@ function Router() {
       <Route path={"/blog/2"} component={() => { window.location.href = '/blog/best-cities-europe-summer-2026'; return null; }} />
       <Route path={"/blog/3"} component={() => { window.location.href = '/blog/tokyo-vs-bangkok-2026'; return null; }} />
       <Route path={"/blog/:id"} component={BlogArticleDetail} />
+      {/* Admin routes */}
+      <Route path={"/admin/analytics"} component={AffiliateAnalytics} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />

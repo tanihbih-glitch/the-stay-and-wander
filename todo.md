@@ -65,3 +65,19 @@
 - [x] Implement exit-intent popup sitewide with Mailchimp integration
 - [x] Add email signup section to blog article footer connected to Mailchimp
 - [x] Test all email capture flows and verify Mailchimp integration
+
+
+## Affiliate Analytics Dashboard
+- [x] Create database schema for affiliateClicks and affiliateConversions tables
+- [x] Create server-side tracking helpers in server/affiliateTracking.ts
+- [x] Create tRPC analytics router with procedures for tracking and fetching analytics
+- [x] Build affiliate analytics dashboard UI component
+- [x] Connect dashboard UI to tRPC queries
+- [x] Register /admin/analytics route in App.tsx
+- [x] Implement click-tracking wrapper component (AffiliateLink.tsx)
+- [x] Create vitest tests for affiliate tracking system (17 tests passing)
+- [x] Create comprehensive implementation guide (AFFILIATE_ANALYTICS_GUIDE.md)
+- [ ] Add click tracking to all affiliate links (GetYourGuide, Stay22, Aviasales, Trip.com)
+- [ ] Implement conversion tracking via webhooks from affiliate partners
+- [ ] Test end-to-end tracking flow from link click to dashboard visualization
+- [ ] Add admin navigation link to analytics dashboard
