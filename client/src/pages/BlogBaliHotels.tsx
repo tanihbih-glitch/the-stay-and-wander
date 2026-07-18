@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { pageMetadataConfig } from '@shared/seo';
 import PopularRoutesWidgetBlogSidebar from '@/components/PopularRoutesWidgetBlogSidebar';
+import { AffiliateLink } from '@/components/AffiliateLink';
 
 const articleMetadata = {
   title: 'Best Hotels in Bali for Every Budget (2026) — From $30 to $500/Night',
@@ -351,11 +352,18 @@ export default function BlogBaliHotels() {
               <p className="text-gray-800 mb-4">
                 <strong>🔵 Ready to book?</strong>
               </p>
-              <a href="https://aviasales.tpo.lu/f9QeB1mu" target="_blank" rel="noopener noreferrer">
+              <AffiliateLink
+                href="https://aviasales.tpo.lu/f9QeB1mu"
+                partner="Stay22"
+                category="Hotels"
+                source="Blog"
+                destination="Search All Bali Hotels"
+                className="block"
+              >
                 <Button className="bg-blue-600 hover:bg-blue-700 text-white">
                   Search All Bali Hotels on Booking.com
                 </Button>
-              </a>
+              </AffiliateLink>
             </div>
           </section>
 

@@ -77,7 +77,13 @@
 - [x] Implement click-tracking wrapper component (AffiliateLink.tsx)
 - [x] Create vitest tests for affiliate tracking system (17 tests passing)
 - [x] Create comprehensive implementation guide (AFFILIATE_ANALYTICS_GUIDE.md)
-- [ ] Add click tracking to all affiliate links (GetYourGuide, Stay22, Aviasales, Trip.com)
+- [x] Make trackClick procedure public for unauthenticated visitors
+- [x] Add robust error handling to prevent blocking user navigation
+- [x] Integrate AffiliateLink into Bali Hotels blog article
+- [x] Create AffiliateLink component tests (6 tests)
+- [ ] Integrate AffiliateLink into remaining blog articles (Europe, Tokyo vs Bangkok, Brazil, Flight Deals)
+- [ ] Integrate AffiliateLink into itinerary pages (Tokyo & Seoul, Mediterranean, Brazil)
+- [ ] Integrate AffiliateLink into homepage affiliate links
+- [ ] Integrate AffiliateLink into booking portal
 - [ ] Implement conversion tracking via webhooks from affiliate partners
-- [ ] Test end-to-end tracking flow from link click to dashboard visualization
 - [ ] Add admin navigation link to analytics dashboard
