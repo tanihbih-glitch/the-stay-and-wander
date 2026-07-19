@@ -13,6 +13,32 @@ import TripComHotelWidget from "@/components/TripComHotelWidget";
 import { useState } from "react";
 import { useLocation } from "wouter";
 
+// Hotel affiliate link mapping
+const getHotelLink = (hotelName: string, itineraryId: string): string => {
+  // Tokyo & Seoul hotels
+  if (itineraryId === 'tokyo-seoul') {
+    if (hotelName.includes('Shinjuku Prince')) return 'https://booking.stay22.com/thestayandwander/xaad-D11z0';
+    if (hotelName.includes('Myeongdong Lotte')) return 'https://agoda.stay22.com/thestayandwander/xruji4-v14';
+    if (hotelName.includes('Tokyo')) return 'https://booking.stay22.com/thestayandwander/r-lvU3PLVF';
+    if (hotelName.includes('Seoul')) return 'https://booking.stay22.com/thestayandwander/TFtgmasXPl';
+  }
+  // Mediterranean hotels
+  if (itineraryId === 'mediterranean') {
+    if (hotelName.includes('Memmo Alfama')) return 'https://booking.stay22.com/thestayandwander/_3gvRmesd0';
+    if (hotelName.includes('Hilton Imperial')) return 'https://booking.stay22.com/thestayandwander/FBzzZenMr0';
+    if (hotelName.includes('Mystique')) return 'https://booking.stay22.com/thestayandwander/GTP9FOQSFn';
+    if (hotelName.includes('Lidomare')) return 'https://booking.stay22.com/thestayandwander/1ImQzDS7Rb';
+    // Default Mediterranean link
+    return 'https://booking.stay22.com/thestayandwander/_3gvRmesd0';
+  }
+  // Brazil hotels - all use same link
+  if (itineraryId === 'brazil') {
+    return 'https://booking.stay22.com/thestayandwander/zRyDL-E_PN';
+  }
+  // Default fallback
+  return 'https://booking.stay22.com/thestayandwander/cGvguWxCv2';
+};
+
 interface ItineraryData {
   id: string;
   title: string;
@@ -521,7 +547,7 @@ export default function ItineraryDetail() {
                                 🏨 {dayData.hotel}
                               </p>
                               <a
-                                href="https://booking.stay22.com/thestayandwander/cGvguWxCv2"
+                                href={getHotelLink(dayData.hotel, itinerary.id)}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="inline-block bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded text-sm font-semibold transition-colors"
@@ -569,15 +595,21 @@ export default function ItineraryDetail() {
             travel consultants.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button className="bg-yellow-500 hover:bg-yellow-600 text-white px-8 py-6 text-lg h-auto">
-              Book This Itinerary
-            </Button>
-            <Button 
-              onClick={() => setShowDownloadPopup(true)}
-              className="bg-white hover:bg-gray-100 text-blue-600 px-8 py-6 text-lg h-auto font-semibold"
+            <a href="/booking" className="block">
+              <Button className="bg-yellow-500 hover:bg-yellow-600 text-white px-8 py-6 text-lg h-auto">
+                Book This Itinerary
+              </Button>
+            </a>
+            <a 
+              href={itinerary.id === 'tokyo-seoul' ? 'https://thestayandwander.com/tokyo-seoul-itinerary.pdf' : itinerary.id === 'mediterranean' ? 'https://thestayandwander.com/mediterranean-itinerary.pdf' : 'https://thestayandwander.com/brazil-itinerary.pdf'}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block"
             >
-              Download This Itinerary Free
-            </Button>
+              <Button className="bg-white hover:bg-gray-100 text-blue-600 px-8 py-6 text-lg h-auto font-semibold">
+                Download This Itinerary Free
+              </Button>
+            </a>
           </div>
         </div>
       </section>
