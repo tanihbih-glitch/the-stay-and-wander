@@ -342,9 +342,9 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
-              { route: "London → Tokyo", price: "$620", month: "July 2026" },
-              { route: "New York → Lisbon", price: "$380", month: "August 2026" },
-              { route: "Dubai → Bali", price: "$290", month: "September 2026" },
+              { route: "Dubai → Tokyo", price: "From $420", month: "September 2026", link: "https://aviasales.tpo.lu/f9QeB1mu" },
+              { route: "Abu Dhabi → London", price: "From $380", month: "October 2026", link: "https://aviasales.tpo.lu/f9QeB1mu" },
+              { route: "Dubai → Bali", price: "From $290", month: "September 2026", link: "https://aviasales.tpo.lu/f9QeB1mu" },
             ].map((deal, idx) => (
               <Card key={idx} className="bg-white">
                 <CardContent className="p-6">
@@ -356,9 +356,11 @@ export default function Home() {
                     {deal.price}
                   </div>
                   <p className="text-xs text-gray-500 mb-4">return</p>
-                  <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white">
-                    Book This Flight
-                  </Button>
+                  <a href={deal.link} target="_blank" rel="noopener noreferrer" className="block">
+                    <Button className="w-full bg-[#F4A261] hover:bg-[#E89B4B] text-white">
+                      Book This Flight
+                    </Button>
+                  </a>
                 </CardContent>
               </Card>
             ))}
