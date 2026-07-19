@@ -14,7 +14,12 @@ if (typeof window !== 'undefined') {
   // Handle error events with capture phase
   window.addEventListener('error', (event) => {
     const msg = event.message || event.error?.message || '';
-    if (msg.includes('ResizeObserver loop completed with undelivered notifications')) {
+    const errorString = String(event.error || '');
+    if (
+      msg.includes('ResizeObserver loop completed with undelivered notifications') ||
+      errorString.includes('ResizeObserver loop completed with undelivered notifications') ||
+      (event.error && event.error.name === 'ResizeObserverError')
+    ) {
       event.preventDefault();
     }
   }, true);
