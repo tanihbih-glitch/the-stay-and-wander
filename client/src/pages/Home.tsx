@@ -62,15 +62,19 @@ export default function Home() {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button className="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold px-8 py-6 text-lg h-auto">
-              Start Planning Your Trip
-            </Button>
-            <Button
-              variant="outline"
-              className="border-white text-white hover:bg-white/10 font-semibold px-8 py-6 text-lg h-auto"
-            >
-              Browse Itineraries
-            </Button>
+            <a href="/itineraries" className="block">
+              <Button className="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold px-8 py-6 text-lg h-auto">
+                Start Planning Your Trip
+              </Button>
+            </a>
+            <a href="/itineraries" className="block">
+              <Button
+                variant="outline"
+                className="border-white text-white hover:bg-white/10 font-semibold px-8 py-6 text-lg h-auto"
+              >
+                Browse Itineraries
+              </Button>
+            </a>
           </div>
         </div>
 
@@ -242,15 +246,19 @@ export default function Home() {
                   Asia captivates like nowhere else.
                 </p>
                 <div className="flex gap-3">
-                  <Button className="flex-1 bg-yellow-500 hover:bg-yellow-600 text-white">
-                    Explore Asia
-                  </Button>
-                  <Button
-                    variant="outline"
-                    className="flex-1 border-yellow-500 text-yellow-600 hover:bg-yellow-50"
-                  >
-                    Find Hotels
-                  </Button>
+                  <a href="https://thestayandwander.com/blog/tokyo-vs-bangkok-2026" className="flex-1">
+                    <Button className="flex-1 bg-yellow-500 hover:bg-yellow-600 text-white">
+                      Explore Asia
+                    </Button>
+                  </a>
+                  <a href="https://booking.stay22.com/thestayandwander/r-lvU3PLVF" target="_blank" rel="noopener noreferrer" className="flex-1">
+                    <Button
+                      variant="outline"
+                      className="flex-1 border-yellow-500 text-yellow-600 hover:bg-yellow-50"
+                    >
+                      Find Hotels
+                    </Button>
+                  </a>
                 </div>
               </CardContent>
             </Card>
@@ -277,15 +285,19 @@ export default function Home() {
                   Europe delivers magic at every turn.
                 </p>
                 <div className="flex gap-3">
-                  <Button className="flex-1 bg-yellow-500 hover:bg-yellow-600 text-white">
-                    Explore Europe
-                  </Button>
-                  <Button
-                    variant="outline"
-                    className="flex-1 border-yellow-500 text-yellow-600 hover:bg-yellow-50"
-                  >
-                    Find Hotels
-                  </Button>
+                  <a href="https://thestayandwander.com/blog/best-cities-europe-summer-2026" className="flex-1">
+                    <Button className="flex-1 bg-yellow-500 hover:bg-yellow-600 text-white">
+                      Explore Europe
+                    </Button>
+                  </a>
+                  <a href="https://booking.stay22.com/thestayandwander/_3gvRmesd0" target="_blank" rel="noopener noreferrer" className="flex-1">
+                    <Button
+                      variant="outline"
+                      className="flex-1 border-yellow-500 text-yellow-600 hover:bg-yellow-50"
+                    >
+                      Find Hotels
+                    </Button>
+                  </a>
                 </div>
               </CardContent>
             </Card>
@@ -312,15 +324,19 @@ export default function Home() {
                   Brazil is unlike anywhere on earth.
                 </p>
                 <div className="flex gap-3">
-                  <Button className="flex-1 bg-yellow-500 hover:bg-yellow-600 text-white">
-                    Explore Brazil
-                  </Button>
-                  <Button
-                    variant="outline"
-                    className="flex-1 border-yellow-500 text-yellow-600 hover:bg-yellow-50"
-                  >
-                    Find Hotels
-                  </Button>
+                  <a href="https://thestayandwander.com/blog/brazil-travel-guide-2026" className="flex-1">
+                    <Button className="flex-1 bg-yellow-500 hover:bg-yellow-600 text-white">
+                      Explore Brazil
+                    </Button>
+                  </a>
+                  <a href="https://booking.stay22.com/thestayandwander/zRyDL-E_PN" target="_blank" rel="noopener noreferrer" className="flex-1">
+                    <Button
+                      variant="outline"
+                      className="flex-1 border-yellow-500 text-yellow-600 hover:bg-yellow-50"
+                    >
+                      Find Hotels
+                    </Button>
+                  </a>
                 </div>
               </CardContent>
             </Card>
@@ -451,9 +467,11 @@ export default function Home() {
                     <div>🏨 {itinerary.hotels} Hotels</div>
                     <div>🎯 {itinerary.activities} Activities</div>
                   </div>
-                  <Button className="w-full bg-yellow-500 hover:bg-yellow-600 text-white">
-                    View Full Itinerary
-                  </Button>
+                  <a href="https://thestayandwander.com/itineraries" className="block w-full">
+                    <Button className="w-full bg-yellow-500 hover:bg-yellow-600 text-white">
+                      View Full Itinerary
+                    </Button>
+                  </a>
                 </CardContent>
               </Card>
             ))}
