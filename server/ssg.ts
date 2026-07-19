@@ -109,25 +109,8 @@ ${urls}
 export function generateRobotsTxt(): string {
   return `User-agent: *
 Allow: /
-Allow: /blog/
-Allow: /itineraries/
-Allow: /itinerary/
-Allow: /booking/
-Allow: /destinations/
-Allow: /about/
-Allow: /contact/
-Disallow: /admin/
-Disallow: /api/
-Disallow: /_next/
-Disallow: /.next/
 
 Sitemap: https://thestayandwander.com/sitemap.xml
-
-User-agent: Googlebot
-Allow: /
-
-User-agent: Bingbot
-Allow: /
 `;
 }
 
