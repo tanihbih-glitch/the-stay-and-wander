@@ -61,7 +61,7 @@ const florianopolisHotels = [
 export default function BlogBrazil() {
   return (
     <>
-      <Head {...articleMetadata} />
+      <Head {...articleMetadata} canonical={`https://thestayandwander.com${articleMetadata.url}`} />
       <Header />
       
       <main className="min-h-screen bg-white">
