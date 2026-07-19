@@ -554,7 +554,19 @@ export default function ItineraryDetail() {
                                 href={getHotelLink(dayData.hotel, itinerary.id)}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="inline-block bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded text-sm font-semibold transition-colors"
+                                style={{
+                                  display: 'block',
+                                  textAlign: 'center',
+                                  padding: '14px',
+                                  backgroundColor: '#F4A261',
+                                  color: 'white',
+                                  borderRadius: '8px',
+                                  textDecoration: 'none',
+                                  fontWeight: '600',
+                                  cursor: 'pointer',
+                                  marginTop: '8px',
+                                  fontSize: '14px'
+                                }}
                               >
                                 Check Availability on Booking.com
                               </a>
@@ -604,15 +616,25 @@ export default function ItineraryDetail() {
                 Book This Itinerary
               </Button>
             </a>
-            <a 
+            <a
               href={itinerary.id === 'tokyo-seoul' ? 'https://mcusercontent.com/48ee0dc10117e46d5a5e32365/files/911d0081-9637-721b-5c81-6c30aa7a4d4c/tokyo_seoul_itinerary_FINAL.pdf' : itinerary.id === 'mediterranean' ? 'https://mcusercontent.com/48ee0dc10117e46d5a5e32365/files/3cc2266f-cb96-82b2-7eed-221c699edee1/mediterranean_escape_itinerary_FINAL.pdf' : 'https://mcusercontent.com/48ee0dc10117e46d5a5e32365/files/5beb10ea-503e-f463-312b-0919b3181eb3/brazil_adventure_itinerary_FINAL.pdf'}
               target="_blank"
               rel="noopener noreferrer"
-              className="block"
+              style={{
+                display: 'block',
+                textAlign: 'center',
+                padding: '14px',
+                backgroundColor: 'white',
+                color: '#0077B6',
+                border: '1px solid #0077B6',
+                borderRadius: '8px',
+                textDecoration: 'none',
+                fontWeight: '600',
+                cursor: 'pointer',
+                fontSize: '16px'
+              }}
             >
-              <Button className="bg-white hover:bg-gray-100 text-blue-600 px-8 py-6 text-lg h-auto font-semibold">
-                Download This Itinerary Free
-              </Button>
+              Download This Itinerary (PDF)
             </a>
           </div>
         </div>
