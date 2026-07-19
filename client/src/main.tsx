@@ -8,6 +8,18 @@ import App from "./App";
 import { getLoginUrl } from "./const";
 import "./index.css";
 
+// Suppress ResizeObserver loop error from third-party widgets (e.g., Travelpayouts)
+// This error is non-critical and doesn't affect functionality
+if (typeof window !== 'undefined') {
+  // Handle error events with capture phase
+  window.addEventListener('error', (event) => {
+    const msg = event.message || event.error?.message || '';
+    if (msg.includes('ResizeObserver loop completed with undelivered notifications')) {
+      event.preventDefault();
+    }
+  }, true);
+}
+
 const queryClient = new QueryClient();
 
 const redirectToLoginIfUnauthorized = (error: unknown) => {
