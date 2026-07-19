@@ -8,7 +8,7 @@ import Footer from "@/components/Footer";
 import MobileBottomNav from "@/components/MobileBottomNav";
 import PopularRoutesWidgetItinerary from "@/components/PopularRoutesWidgetItinerary";
 import GetYourGuideTours from "@/components/GetYourGuideTours";
-import ItineraryDownloadPopup from "@/components/ItineraryDownloadPopup";
+
 import TripComHotelWidget from "@/components/TripComHotelWidget";
 import { useState } from "react";
 import { useLocation } from "wouter";
@@ -581,13 +581,6 @@ export default function ItineraryDetail() {
           </div>
         </div>
       </section>
-
-      {/* Download Popup */}
-      <ItineraryDownloadPopup
-        isOpen={showDownloadPopup}
-        onClose={() => setShowDownloadPopup(false)}
-        itineraryTitle={itinerary.title}
-      />
 
       <Footer />
       <MobileBottomNav />

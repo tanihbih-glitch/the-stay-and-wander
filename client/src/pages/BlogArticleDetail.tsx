@@ -8,7 +8,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MobileBottomNav from "@/components/MobileBottomNav";
 import PopularRoutesWidgetBlogSidebar from "@/components/PopularRoutesWidgetBlogSidebar";
-import MailchimpPopup from "@/components/MailchimpPopup";
+
 import BlogEmailSignup from "@/components/BlogEmailSignup";
 import TripComHotelWidget from "@/components/TripComHotelWidget";
 
@@ -825,11 +825,7 @@ export default function BlogArticleDetail() {
           <p className="text-lg text-gray-600 mb-8">
             Subscribe to our newsletter for exclusive travel tips, destination guides, and special offers.
           </p>
-          <MailchimpPopup
-            title="Subscribe to Our Newsletter"
-            description="Get exclusive travel tips, deals, and inspiration delivered to your inbox."
-            trigger="manual"
-          />
+
         </div>
       </section>
 

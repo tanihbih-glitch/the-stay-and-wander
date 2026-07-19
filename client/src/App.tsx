@@ -15,7 +15,7 @@ import BlogEuropeCities from "./pages/BlogEuropeCities";
 import BlogTokyoBangkok from "./pages/BlogTokyoBangkok";
 import BlogBrazil from "./pages/BlogBrazil";
 import BlogFlightDeals from "./pages/BlogFlightDeals";
-import ExitIntentPopup from "./components/ExitIntentPopup";
+
 import { AffiliateAnalytics } from "./pages/AffiliateAnalytics";
 
 function Router() {
@@ -60,7 +60,6 @@ function App() {
       >
         <TooltipProvider>
           <Toaster />
-          <ExitIntentPopup />
           <Router />
         </TooltipProvider>
       </ThemeProvider>
