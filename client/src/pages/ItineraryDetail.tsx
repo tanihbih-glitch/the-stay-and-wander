@@ -601,7 +601,7 @@ export default function ItineraryDetail() {
               </Button>
             </a>
             <a 
-              href={itinerary.id === 'tokyo-seoul' ? 'https://booking.stay22.com/thestayandwander/r-lvU3PLVF' : itinerary.id === 'mediterranean' ? 'https://booking.stay22.com/thestayandwander/_3gvRmesd0' : 'https://booking.stay22.com/thestayandwander/zRyDL-E_PN'}
+              href={itinerary.id === 'tokyo-seoul' ? 'https://mcusercontent.com/48ee0dc10117e46d5a5e32365/files/911d0081-9637-721b-5c81-6c30aa7a4d4c/tokyo_seoul_itinerary_FINAL.pdf' : itinerary.id === 'mediterranean' ? 'https://mcusercontent.com/48ee0dc10117e46d5a5e32365/files/3cc2266f-cb96-82b2-7eed-221c699edee1/mediterranean_escape_itinerary_FINAL.pdf' : 'https://mcusercontent.com/48ee0dc10117e46d5a5e32365/files/5beb10ea-503e-f463-312b-0919b3181eb3/brazil_adventure_itinerary_FINAL.pdf'}
               target="_blank"
               rel="noopener noreferrer"
               className="block"
