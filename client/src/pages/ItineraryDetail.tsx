@@ -15,30 +15,35 @@ import { useLocation } from "wouter";
 
 // Hotel affiliate link mapping
 const getHotelLink = (hotelName: string, itineraryId: string): string => {
+  const name = (hotelName || '').toLowerCase();
+  
   // Tokyo & Seoul hotels
   if (itineraryId === 'tokyo-seoul') {
-    if (hotelName.includes('Shinjuku Prince')) return 'https://booking.stay22.com/thestayandwander/xaad-D11z0';
-    if (hotelName.includes('Myeongdong Lotte')) return 'https://agoda.stay22.com/thestayandwander/xruji4-v14';
-    if (hotelName.includes('Tokyo')) return 'https://booking.stay22.com/thestayandwander/r-lvU3PLVF';
-    if (hotelName.includes('Seoul')) return 'https://booking.stay22.com/thestayandwander/TFtgmasXPl';
+    if (name.includes('shibuya')) return 'https://booking.stay22.com/thestayandwander/xaad-D11z0';
+    if (name.includes('myeongdong')) return 'https://agoda.stay22.com/thestayandwander/xruji4-v14';
+    if (name.includes('tokyo')) return 'https://booking.stay22.com/thestayandwander/r-lvU3PLVF';
+    if (name.includes('seoul')) return 'https://booking.stay22.com/thestayandwander/TFtgmasXPl';
+    return 'https://booking.stay22.com/thestayandwander/r-lvU3PLVF';
   }
+  
   // Mediterranean hotels
   if (itineraryId === 'mediterranean') {
-    if (hotelName.includes('Memmo Alfama')) return 'https://booking.stay22.com/thestayandwander/_3gvRmesd0';
-    if (hotelName.includes('Hilton Imperial')) return 'https://booking.stay22.com/thestayandwander/FBzzZenMr0';
-    if (hotelName.includes('Mystique')) return 'https://booking.stay22.com/thestayandwander/GTP9FOQSFn';
-    if (hotelName.includes('Lidomare')) return 'https://booking.stay22.com/thestayandwander/1ImQzDS7Rb';
-    // Default Mediterranean link
+    if (name.includes('memmo') || name.includes('alfama') || name.includes('lisbon')) return 'https://booking.stay22.com/thestayandwander/_3gvRmesd0';
+    if (name.includes('hilton') || name.includes('dubrovnik')) return 'https://booking.stay22.com/thestayandwander/FBzzZenMr0';
+    if (name.includes('mystique') || name.includes('santorini')) return 'https://booking.stay22.com/thestayandwander/GTP9FOQSFn';
+    if (name.includes('sirenuse') || name.includes('positano') || name.includes('amalfi')) return 'https://booking.stay22.com/thestayandwander/1ImQzDS7Rb';
     return 'https://booking.stay22.com/thestayandwander/_3gvRmesd0';
   }
+  
   // Brazil hotels
   if (itineraryId === 'brazil') {
-    if (hotelName.includes('Jungle Lodge')) return 'https://booking.stay22.com/thestayandwander/9lYbziHE4c';
-    if (hotelName.includes('Fasano')) return 'https://booking.stay22.com/thestayandwander/5x2vv0_ZR9';
-    if (hotelName.includes('Jurerê')) return 'https://booking.stay22.com/thestayandwander/8nvt_gi849';
-    // Default Brazil link
+    if (name.includes('jungle')) return 'https://booking.stay22.com/thestayandwander/9lYbziHE4c';
+    if (name.includes('copacabana') || name.includes('palace')) return 'https://booking.stay22.com/thestayandwander/5x2vv0_ZR9';
+    if (name.includes('unique') || name.includes('paulo')) return 'https://booking.stay22.com/thestayandwander/5x2vv0_ZR9';
+    if (name.includes('costao') || name.includes('santinho') || name.includes('florianopolis')) return 'https://booking.stay22.com/thestayandwander/8nvt_gi849';
     return 'https://booking.stay22.com/thestayandwander/zRyDL-E_PN';
   }
+  
   // Default fallback
   return 'https://booking.stay22.com/thestayandwander/cGvguWxCv2';
 };
@@ -618,13 +623,17 @@ export default function ItineraryDetail() {
               </Button>
             </a>
             <a
-              href={
-                itinerary.id === 'tokyo-seoul' || itinerary.region === 'ASIA'
-                  ? 'https://mcusercontent.com/48ee0dc10117e46d5a5e32365/files/911d0081-9637-721b-5c81-6c30aa7a4d4c/tokyo_seoul_itinerary_FINAL.pdf'
-                  : itinerary.id === 'mediterranean' || itinerary.region === 'EUROPE'
-                  ? 'https://mcusercontent.com/48ee0dc10117e46d5a5e32365/files/3cc2266f-cb96-82b2-7eed-221c699edee1/mediterranean_escape_itinerary_FINAL.pdf'
-                  : 'https://mcusercontent.com/48ee0dc10117e46d5a5e32365/files/5beb10ea-503e-f463-312b-0919b3181eb3/brazil_adventure_itinerary_FINAL.pdf'
-              }
+              href={(() => {
+                const id = (itinerary.id || '').toLowerCase();
+                const region = (itinerary.region || '').toLowerCase();
+                if (id === 'tokyo-seoul' || region === 'asia') {
+                  return 'https://mcusercontent.com/48ee0dc10117e46d5a5e32365/files/911d0081-9637-721b-5c81-6c30aa7a4d4c/tokyo_seoul_itinerary_FINAL.pdf';
+                } else if (id === 'mediterranean' || region === 'europe') {
+                  return 'https://mcusercontent.com/48ee0dc10117e46d5a5e32365/files/3cc2266f-cb96-82b2-7eed-221c699edee1/mediterranean_escape_itinerary_FINAL.pdf';
+                } else {
+                  return 'https://mcusercontent.com/48ee0dc10117e46d5a5e32365/files/5beb10ea-503e-f463-312b-0919b3181eb3/brazil_adventure_itinerary_FINAL.pdf';
+                }
+              })()}
               target="_blank"
               rel="noopener noreferrer"
               style={{
