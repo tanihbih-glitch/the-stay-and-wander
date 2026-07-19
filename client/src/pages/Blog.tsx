@@ -15,6 +15,7 @@ export default function Blog() {
   const articles = [
     {
       id: 1,
+      slug: "best-hotels-bali-2026",
       title: "Best Hotels in Bali for Every Budget 2026",
       category: "Hotel Reviews",
       image: "/manus-storage/blog-bali_5a40f78c.png",
@@ -25,6 +26,7 @@ export default function Blog() {
     },
     {
       id: 2,
+      slug: "best-cities-europe-summer-2026",
       title: "7 Best Cities to Visit in Europe This Summer",
       category: "Destination Guides",
       image: "/manus-storage/blog-europe-cities_de773d0d.png",
@@ -36,6 +38,7 @@ export default function Blog() {
     },
     {
       id: 3,
+      slug: "tokyo-vs-bangkok-2026",
       title: "Tokyo vs Bangkok — Which Should You Visit First?",
       category: "Itinerary Ideas",
       image: "/manus-storage/blog-tokyo-bangkok_0467868b.png",
@@ -47,6 +50,7 @@ export default function Blog() {
     },
     {
       id: 4,
+      slug: "where-to-stay-lisbon-2026",
       title: "Where to Stay in Lisbon — Neighbourhood Guide",
       category: "Destination Guides",
       image: "/manus-storage/blog-europe-cities_de773d0d.png",
@@ -58,6 +62,7 @@ export default function Blog() {
     },
     {
       id: 5,
+      slug: "brazil-travel-guide-2026",
       title: "Brazil Travel Guide — Everything You Need to Know",
       category: "Destination Guides",
       image: "/manus-storage/brazil-destination_ea7c39d7.png",
@@ -69,6 +74,7 @@ export default function Blog() {
     },
     {
       id: 6,
+      slug: "best-flight-deals-asia-2026",
       title: "Best Flight Deals to Asia in 2026",
       category: "Affiliate Picks",
       image: "/manus-storage/asia-destination_b126f0fb.png",
@@ -197,7 +203,7 @@ export default function Blog() {
 
                   <div className="flex justify-between items-center">
                     <span className="text-xs text-gray-500">{article.date}</span>
-                    <Link href={`/blog/${article.id}`}>
+                    <Link href={`/blog/${article.slug}`}>
                       <Button
                         variant="outline"
                         className="border-yellow-500 text-yellow-600 hover:bg-yellow-50 text-sm"

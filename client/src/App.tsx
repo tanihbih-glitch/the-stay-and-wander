@@ -32,10 +32,14 @@ function Router() {
       <Route path={"/blog/tokyo-vs-bangkok-2026"} component={BlogTokyoBangkok} />
       <Route path={"/blog/brazil-travel-guide-2026"} component={BlogBrazil} />
       <Route path={"/blog/best-flight-deals-asia-2026"} component={BlogFlightDeals} />
+      <Route path={"/blog/where-to-stay-lisbon-2026"} component={BlogEuropeCities} />
       {/* Redirects from old numeric URLs to new semantic slugs */}
       <Route path={"/blog/1"} component={() => { window.location.href = '/blog/best-hotels-bali-2026'; return null; }} />
       <Route path={"/blog/2"} component={() => { window.location.href = '/blog/best-cities-europe-summer-2026'; return null; }} />
       <Route path={"/blog/3"} component={() => { window.location.href = '/blog/tokyo-vs-bangkok-2026'; return null; }} />
+      <Route path={"/blog/4"} component={() => { window.location.href = '/blog/where-to-stay-lisbon-2026'; return null; }} />
+      <Route path={"/blog/5"} component={() => { window.location.href = '/blog/brazil-travel-guide-2026'; return null; }} />
+      <Route path={"/blog/6"} component={() => { window.location.href = '/blog/best-flight-deals-asia-2026'; return null; }} />
       <Route path={"/blog/:id"} component={BlogArticleDetail} />
       {/* Admin routes */}
       <Route path={"/admin/analytics"} component={AffiliateAnalytics} />
