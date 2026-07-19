@@ -1,6 +1,3 @@
-# The Stay & Wander - robots.txt
-# Allows Google and all search engines to crawl all pages
-
 User-agent: *
 Allow: /
 
