@@ -557,7 +557,7 @@ export default function ItineraryDetail() {
                                 style={{
                                   display: 'block',
                                   textAlign: 'center',
-                                  padding: '14px',
+                                  padding: '14px 20px',
                                   backgroundColor: '#F4A261',
                                   color: 'white',
                                   borderRadius: '8px',
@@ -565,7 +565,8 @@ export default function ItineraryDetail() {
                                   fontWeight: '600',
                                   cursor: 'pointer',
                                   marginTop: '8px',
-                                  fontSize: '14px'
+                                  width: '100%',
+                                  boxSizing: 'border-box'
                                 }}
                               >
                                 Check Availability on Booking.com
@@ -617,13 +618,19 @@ export default function ItineraryDetail() {
               </Button>
             </a>
             <a
-              href={itinerary.id === 'tokyo-seoul' ? 'https://mcusercontent.com/48ee0dc10117e46d5a5e32365/files/911d0081-9637-721b-5c81-6c30aa7a4d4c/tokyo_seoul_itinerary_FINAL.pdf' : itinerary.id === 'mediterranean' ? 'https://mcusercontent.com/48ee0dc10117e46d5a5e32365/files/3cc2266f-cb96-82b2-7eed-221c699edee1/mediterranean_escape_itinerary_FINAL.pdf' : 'https://mcusercontent.com/48ee0dc10117e46d5a5e32365/files/5beb10ea-503e-f463-312b-0919b3181eb3/brazil_adventure_itinerary_FINAL.pdf'}
+              href={
+                itinerary.id === 'tokyo-seoul' || itinerary.region === 'ASIA'
+                  ? 'https://mcusercontent.com/48ee0dc10117e46d5a5e32365/files/911d0081-9637-721b-5c81-6c30aa7a4d4c/tokyo_seoul_itinerary_FINAL.pdf'
+                  : itinerary.id === 'mediterranean' || itinerary.region === 'EUROPE'
+                  ? 'https://mcusercontent.com/48ee0dc10117e46d5a5e32365/files/3cc2266f-cb96-82b2-7eed-221c699edee1/mediterranean_escape_itinerary_FINAL.pdf'
+                  : 'https://mcusercontent.com/48ee0dc10117e46d5a5e32365/files/5beb10ea-503e-f463-312b-0919b3181eb3/brazil_adventure_itinerary_FINAL.pdf'
+              }
               target="_blank"
               rel="noopener noreferrer"
               style={{
                 display: 'block',
                 textAlign: 'center',
-                padding: '14px',
+                padding: '14px 20px',
                 backgroundColor: 'white',
                 color: '#0077B6',
                 border: '1px solid #0077B6',
@@ -631,7 +638,8 @@ export default function ItineraryDetail() {
                 textDecoration: 'none',
                 fontWeight: '600',
                 cursor: 'pointer',
-                fontSize: '16px'
+                width: '100%',
+                boxSizing: 'border-box'
               }}
             >
               Download This Itinerary (PDF)
