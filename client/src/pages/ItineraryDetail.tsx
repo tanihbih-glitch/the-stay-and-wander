@@ -31,8 +31,12 @@ const getHotelLink = (hotelName: string, itineraryId: string): string => {
     // Default Mediterranean link
     return 'https://booking.stay22.com/thestayandwander/_3gvRmesd0';
   }
-  // Brazil hotels - all use same link
+  // Brazil hotels
   if (itineraryId === 'brazil') {
+    if (hotelName.includes('Jungle Lodge')) return 'https://booking.stay22.com/thestayandwander/9lYbziHE4c';
+    if (hotelName.includes('Fasano')) return 'https://booking.stay22.com/thestayandwander/5x2vv0_ZR9';
+    if (hotelName.includes('Jurerê')) return 'https://booking.stay22.com/thestayandwander/8nvt_gi849';
+    // Default Brazil link
     return 'https://booking.stay22.com/thestayandwander/zRyDL-E_PN';
   }
   // Default fallback
@@ -547,12 +551,12 @@ export default function ItineraryDetail() {
                                 🏨 {dayData.hotel}
                               </p>
                               <a
-                                href={itinerary.id === 'tokyo-seoul' ? 'https://booking.stay22.com/thestayandwander/r-lvU3PLVF' : itinerary.id === 'mediterranean' ? 'https://booking.stay22.com/thestayandwander/_3gvRmesd0' : 'https://booking.stay22.com/thestayandwander/zRyDL-E_PN'}
+                                href={getHotelLink(dayData.hotel, itinerary.id)}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="inline-block bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded text-sm font-semibold transition-colors"
                               >
-                                Check Availability
+                                Check Availability on Booking.com
                               </a>
                               <p className="text-xs text-gray-400 mt-1">Powered by Booking.com</p>
                             </div>
