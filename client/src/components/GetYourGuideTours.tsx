@@ -1,6 +1,15 @@
 import { useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 
+type GetYourGuideWindow = Window & {
+  gygWidget?: {
+    render?: () => void;
+  };
+};
+
+const PARTNER_ID = 'YOPATWV';
+const GYG_SCRIPT_SELECTOR = `script[data-gyg-partner-id="${PARTNER_ID}"]`;
+
 interface GetYourGuideToursProps {
   label?: string;
   showHeadline?: boolean;
@@ -17,17 +26,29 @@ export default function GetYourGuideTours({
   cardStyle = false
 }: GetYourGuideToursProps) {
   useEffect(() => {
-    // Load GetYourGuide widget script if not already loaded
-    const win = window as any;
+    const win = window as GetYourGuideWindow;
+    const renderWidget = () => win.gygWidget?.render?.();
+    const existingScript = document.querySelector<HTMLScriptElement>(GYG_SCRIPT_SELECTOR);
+
     if (win.gygWidget) {
-      win.gygWidget.render();
-    } else {
-      const script = document.createElement('script');
-      script.src = 'https://widget.getyourguide.com/dist/pa.umd.production.min.js';
-      script.async = true;
-      script.defer = true;
-      document.head.appendChild(script);
+      renderWidget();
+      return;
     }
+
+    if (existingScript) {
+      existingScript.addEventListener('load', renderWidget, { once: true });
+      return () => existingScript.removeEventListener('load', renderWidget);
+    }
+
+    const script = document.createElement('script');
+    script.src = 'https://widget.getyourguide.com/dist/pa.umd.production.min.js';
+    script.async = true;
+    script.defer = true;
+    script.dataset.gygPartnerId = PARTNER_ID;
+    script.addEventListener('load', renderWidget, { once: true });
+    document.head.appendChild(script);
+
+    return () => script.removeEventListener('load', renderWidget);
   }, []);
 
   if (cardStyle) {
@@ -42,7 +63,7 @@ export default function GetYourGuideTours({
             <div className="flex justify-center">
               <div 
                 data-gyg-widget="auto" 
-                data-gyg-partner-id="YOPATWV"
+                data-gyg-partner-id={PARTNER_ID}
                 className="w-full"
               />
             </div>
@@ -70,7 +91,7 @@ export default function GetYourGuideTours({
         <div className="mb-8 flex justify-center">
           <div 
             data-gyg-widget="auto" 
-            data-gyg-partner-id="YOPATWV"
+            data-gyg-partner-id={PARTNER_ID}
             className="w-full max-w-4xl"
           />
         </div>
@@ -78,7 +99,7 @@ export default function GetYourGuideTours({
         {showButton && (
           <div className="flex justify-center">
             <a
-              href="https://www.getyourguide.com/?partner_id=YOPATWV"
+              href={`https://www.getyourguide.com/?partner_id=${PARTNER_ID}`}
               target="_blank"
               rel="noopener noreferrer"
             >

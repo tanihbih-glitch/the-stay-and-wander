@@ -14,6 +14,17 @@ export default function Blog() {
 
   const articles = [
     {
+      id: 7,
+      slug: "best-4-star-hotels-bali-2026",
+      title: "Best 4 Star Hotels in Bali 2026 — Top Picks From $80/Night",
+      category: "Hotel Reviews · Asia Travel",
+      image: "/manus-storage/blog-bali_5a40f78c.png",
+      excerpt: "Top four-star Bali stays across Seminyak, Ubud, Canggu, Uluwatu, and Nusa Dua.",
+      author: "The Stay & Wander",
+      date: "July 20, 2026",
+      readTime: "9 min read",
+    },
+    {
       id: 1,
       slug: "best-hotels-bali-2026",
       title: "Best Hotels in Bali for Every Budget 2026",
@@ -100,7 +111,7 @@ export default function Blog() {
       ? articles
       : articles.filter(
           (article) =>
-            article.category.toLowerCase() === activeCategory.toLowerCase()
+            article.category.toLowerCase().includes(activeCategory.toLowerCase())
         );
 
   const breadcrumbItems = [
