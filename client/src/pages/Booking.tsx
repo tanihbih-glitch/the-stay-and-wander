@@ -210,60 +210,30 @@ export default function Booking() {
 
         {/* Cruises Tab */}
         {activeTab === "cruises" && (
-          <div className="space-y-12">
-            {/* Search Widget */}
-            <div className="bg-gray-50 p-8 rounded-xl">
-              <h2 className="font-display text-2xl font-bold text-gray-900 mb-6">
-                Explore Cruise Destinations
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-                <div>
-                  <label className="text-sm font-semibold text-gray-700 mb-2 block">
-                    Destination
-                  </label>
-                  <Input placeholder="Where to?" />
-                </div>
-                <div>
-                  <label className="text-sm font-semibold text-gray-700 mb-2 block">
-                    Departure Month
-                  </label>
-                  <Input type="month" />
-                </div>
-                <div>
-                  <label className="text-sm font-semibold text-gray-700 mb-2 block">
-                    Duration (days)
-                  </label>
-                  <Input placeholder="7" type="number" />
-                </div>
+          <div className="p-8 text-center">
+            <h3 className="text-2xl font-bold text-blue-600 mb-4">Browse Cruise Deals</h3>
+            <p className="text-gray-500 mb-6">Mediterranean, Southeast Asia and South America cruise routes</p>
+            <a href="https://www.cruisedirect.com" target="_blank" rel="noopener noreferrer" className="bg-yellow-500 text-white px-8 py-3 rounded-full font-semibold inline-block">
+              Search Cruise Deals
+            </a>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
+              <div className="bg-gray-50 rounded-xl p-5 border-l-4 border-blue-600">
+                <div className="text-3xl mb-2">🌊</div>
+                <div className="font-bold text-blue-600">Mediterranean</div>
+                <div className="text-sm text-gray-400 mb-3">Italy, Greece, Croatia</div>
+                <a href="https://www.cruisedirect.com" target="_blank" rel="noopener noreferrer" className="bg-yellow-500 text-white px-4 py-2 rounded-full text-xs font-bold inline-block">Explore</a>
               </div>
-              <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white py-6 text-lg h-auto">
-                Search Cruises on CruiseDirect
-              </Button>
-            </div>
-
-            {/* Cruise Routes */}
-            <div>
-              <h2 className="font-display text-2xl font-bold text-gray-900 mb-6">
-                Featured Cruise Routes
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {[
-                  { name: "Mediterranean", duration: "7-14 days" },
-                  { name: "Southeast Asia", duration: "10-21 days" },
-                  { name: "South America", duration: "14-28 days" },
-                ].map((cruise) => (
-                  <Card key={cruise.name}>
-                    <CardContent className="p-6">
-                      <h3 className="font-display text-lg font-bold text-gray-900 mb-2">
-                        {cruise.name}
-                      </h3>
-                      <p className="text-gray-600 mb-4">{cruise.duration}</p>
-                      <Button className="w-full bg-yellow-500 hover:bg-yellow-600 text-white">
-                        Explore Cruises
-                      </Button>
-                    </CardContent>
-                  </Card>
-                ))}
+              <div className="bg-gray-50 rounded-xl p-5 border-l-4 border-blue-600">
+                <div className="text-3xl mb-2">🌏</div>
+                <div className="font-bold text-blue-600">Southeast Asia</div>
+                <div className="text-sm text-gray-400 mb-3">Thailand, Vietnam</div>
+                <a href="https://www.cruisedirect.com" target="_blank" rel="noopener noreferrer" className="bg-yellow-500 text-white px-4 py-2 rounded-full text-xs font-bold inline-block">Explore</a>
+              </div>
+              <div className="bg-gray-50 rounded-xl p-5 border-l-4 border-blue-600">
+                <div className="text-3xl mb-2">🌎</div>
+                <div className="font-bold text-blue-600">South America</div>
+                <div className="text-sm text-gray-400 mb-3">Brazil, Argentina</div>
+                <a href="https://www.cruisedirect.com" target="_blank" rel="noopener noreferrer" className="bg-yellow-500 text-white px-4 py-2 rounded-full text-xs font-bold inline-block">Explore</a>
               </div>
             </div>
           </div>
