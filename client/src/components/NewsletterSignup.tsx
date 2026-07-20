@@ -4,79 +4,39 @@ import { Input } from "@/components/ui/input";
 import { Mail, Gift, CheckCircle } from "lucide-react";
 
 export default function NewsletterSignup() {
-  const [email, setEmail] = useState("");
-  const [name, setName] = useState("");
-  const [submitted, setSubmitted] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-
-  // Email validation regex
-  const validateEmail = (email: string): boolean => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  };
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success'>('idle');
+  const [message, setMessage] = useState('');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Validate inputs
-    if (!name.trim() || !email.trim() || !validateEmail(email)) {
-      return;
-    }
+    const form = e.target as HTMLFormElement;
+    const email = (form.querySelector('input[type="email"]') as HTMLInputElement)?.value;
+    const firstName = (form.querySelector('input[type="text"]') as HTMLInputElement)?.value || '';
 
-    setIsLoading(true);
+    if (!email) return;
 
-    try {
-      // Submit to Mailchimp API
-      const response = await fetch(
-        'https://thestayandwander.us10.list-manage.com/subscribe/post?u=48ee0dc10117e46d5a5e32365&id=4512b2fda5',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            email_address: email,
-            status: 'subscribed',
-            merge_fields: {
-              FNAME: name,
-            },
-          }),
-        }
-      );
+    const mailchimpUrl = `https://thestayandwander.us10.list-manage.com/subscribe/post?u=48ee0dc10117e46d5a5e32365&id=4512b2fda5&EMAIL=${encodeURIComponent(email)}&FNAME=${encodeURIComponent(firstName)}&f_id=00a0e0e1f0`;
 
-      if (response.ok) {
-        // Show success message
-        setSubmitted(true);
-        setEmail('');
-        setName('');
-        
-        // Auto-hide success message after 5 seconds
-        setTimeout(() => {
-          setSubmitted(false);
-        }, 5000);
-      } else {
-        // Fallback: redirect to Mailchimp signup page
-        const mailchimpUrl = `https://us10.list-manage.com/subscribe?u=48ee0dc10117e46d5a5e32365&id=4512b2fda5&EMAIL=${encodeURIComponent(email)}&FNAME=${encodeURIComponent(name)}`;
-        window.open(mailchimpUrl, '_blank');
-        setSubmitted(true);
-        setEmail('');
-        setName('');
-        setTimeout(() => {
-          setSubmitted(false);
-        }, 5000);
-      }
-    } catch (err) {
-      console.error("Subscription error:", err);
-    } finally {
-      setIsLoading(false);
-    }
+    window.open(mailchimpUrl, '_blank');
+
+    // Show success message immediately
+    setSubmitStatus('success');
+    setMessage('Thank you! Your free guide is on its way. Check your inbox! 🎉');
+    form.reset();
+
+    // Reset form after 5 seconds
+    setTimeout(() => {
+      setSubmitStatus('idle');
+      setMessage('');
+    }, 5000);
   };
 
   return (
     <section className="bg-gradient-to-r from-blue-50 to-indigo-50 py-16 px-4">
       <div className="max-w-2xl mx-auto">
         <div className="bg-white rounded-2xl shadow-lg p-8 md:p-12">
-          {!submitted ? (
+          {submitStatus !== 'success' ? (
             <>
               {/* Header */}
               <div className="text-center mb-8">
@@ -127,10 +87,7 @@ export default function NewsletterSignup() {
                     <Input
                       type="text"
                       placeholder="John"
-                      value={name}
-                      onChange={(e) => setName(e.target.value)}
                       className="w-full"
-                      disabled={isLoading}
                       required
                     />
                   </div>
@@ -141,10 +98,7 @@ export default function NewsletterSignup() {
                     <Input
                       type="email"
                       placeholder="you@example.com"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
                       className="w-full"
-                      disabled={isLoading}
                       required
                     />
                   </div>
@@ -152,17 +106,12 @@ export default function NewsletterSignup() {
 
                 <Button
                   type="submit"
-                  disabled={isLoading}
                   className="w-full bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-3 text-lg"
                 >
-                  {isLoading ? (
-                    "Sending..."
-                  ) : (
-                    <>
-                      <Mail className="w-5 h-5 mr-2 inline" />
-                      Send Me the Free Guide
-                    </>
-                  )}
+                  <>
+                    <Mail className="w-5 h-5 mr-2 inline" />
+                    Send Me the Free Guide
+                  </>
                 </Button>
 
                 <p className="text-xs text-gray-500 text-center">
@@ -181,22 +130,11 @@ export default function NewsletterSignup() {
                   Thank You!
                 </h3>
                 <p style={{ color: "#F4A261" }} className="text-lg font-semibold mb-2">
-                  Thank you! Your free guide is on its way. Check your inbox!
+                  {message}
                 </p>
                 <p className="text-gray-600 mb-6">
                   Look for an email from us with your exclusive travel guide and special offers.
                 </p>
-
-                <button
-                  onClick={() => {
-                    setSubmitted(false);
-                    setEmail("");
-                    setName("");
-                  }}
-                  className="text-blue-600 hover:text-blue-700 font-semibold"
-                >
-                  Subscribe another email
-                </button>
               </div>
             </>
           )}
