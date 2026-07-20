@@ -241,60 +241,32 @@ export default function Booking() {
 
         {/* Car Rentals Tab */}
         {activeTab === "cars" && (
-          <div className="space-y-12">
-            {/* Search Widget */}
-            <div className="bg-gray-50 p-8 rounded-xl">
-              <h2 className="font-display text-2xl font-bold text-gray-900 mb-6">
-                Rent a Car at Your Destination
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-                <div>
-                  <label className="text-sm font-semibold text-gray-700 mb-2 block">
-                    Pick-up Location
-                  </label>
-                  <Input placeholder="City or airport" />
-                </div>
-                <div>
-                  <label className="text-sm font-semibold text-gray-700 mb-2 block">
-                    Pick-up Date
-                  </label>
-                  <Input type="date" />
-                </div>
-                <div>
-                  <label className="text-sm font-semibold text-gray-700 mb-2 block">
-                    Return Date
-                  </label>
-                  <Input type="date" />
-                </div>
-              </div>
-              <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white py-6 text-lg h-auto">
-                Search Cars
-              </Button>
+          <div className="p-8 text-center">
+            <h3 className="text-2xl font-bold text-blue-600 mb-4">Find the Best Car Rental Deals</h3>
+            <p className="text-gray-500 mb-6">Compare 500+ suppliers worldwide including Hertz, Avis, Enterprise</p>
+            <div className="flex gap-4 justify-center mb-8 flex-wrap">
+              <a href="https://www.discovercars.com" target="_blank" rel="noopener noreferrer" className="bg-yellow-500 text-white px-8 py-3 rounded-full font-semibold inline-block">
+                Search Car Rentals
+              </a>
+              <a href="https://www.rentalcars.com" target="_blank" rel="noopener noreferrer" className="bg-blue-600 text-white px-8 py-3 rounded-full font-semibold inline-block">
+                Compare Prices
+              </a>
             </div>
-
-            {/* Popular Destinations */}
-            <div>
-              <h2 className="font-display text-2xl font-bold text-gray-900 mb-6">
-                Popular Car Rental Destinations
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {[
-                  { city: "Tokyo", country: "Japan" },
-                  { city: "Lisbon", country: "Portugal" },
-                  { city: "Rio de Janeiro", country: "Brazil" },
-                ].map((dest) => (
-                  <Card key={dest.city}>
-                    <CardContent className="p-6">
-                      <h3 className="font-display text-lg font-bold text-gray-900 mb-1">
-                        {dest.city}
-                      </h3>
-                      <p className="text-gray-600 mb-4">{dest.country}</p>
-                      <Button className="w-full bg-yellow-500 hover:bg-yellow-600 text-white">
-                        Browse Cars
-                      </Button>
-                    </CardContent>
-                  </Card>
-                ))}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="bg-gray-50 rounded-xl p-5 text-center">
+                <div className="text-3xl mb-2">🚗</div>
+                <div className="font-bold text-blue-600">Economy</div>
+                <div className="text-sm text-gray-400">From $15/day</div>
+              </div>
+              <div className="bg-gray-50 rounded-xl p-5 text-center">
+                <div className="text-3xl mb-2">🚙</div>
+                <div className="font-bold text-blue-600">SUV & Family</div>
+                <div className="text-sm text-gray-400">From $35/day</div>
+              </div>
+              <div className="bg-gray-50 rounded-xl p-5 text-center">
+                <div className="text-3xl mb-2">🏎️</div>
+                <div className="font-bold text-blue-600">Luxury</div>
+                <div className="text-sm text-gray-400">From $80/day</div>
               </div>
             </div>
           </div>
