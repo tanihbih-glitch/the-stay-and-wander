@@ -127,14 +127,16 @@ export default function Footer() {
               Get travel tips and exclusive deals delivered to your inbox.
             </p>
             <div className="flex gap-2">
-              <Input
-                type="email"
-                placeholder="Your email"
-                className="text-sm"
-              />
-              <Button className="bg-blue-600 hover:bg-blue-700 text-white whitespace-nowrap">
-                Subscribe
-              </Button>
+              <a
+                href="https://us10.list-manage.com/subscribe?u=48ee0dc10117e46d5a5e32365&id=4512b2fda5"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-1"
+              >
+                <Button className="bg-blue-600 hover:bg-blue-700 text-white whitespace-nowrap w-full">
+                  Subscribe
+                </Button>
+              </a>
             </div>
           </div>
         </div>

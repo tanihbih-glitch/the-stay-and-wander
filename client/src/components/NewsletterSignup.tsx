@@ -26,19 +26,45 @@ export default function NewsletterSignup() {
     setIsLoading(true);
 
     try {
-      // Redirect to Mailchimp signup page with email pre-filled
-      const mailchimpUrl = `https://us10.list-manage.com/subscribe?u=48ee0dc10117e46d5a5e32365&id=894671&EMAIL=${encodeURIComponent(email)}&FNAME=${encodeURIComponent(name)}`;
-      window.open(mailchimpUrl, '_blank');
-      
-      // Show success message
-      setSubmitted(true);
-      setEmail("");
-      setName("");
-      
-      // Auto-hide success message after 5 seconds
-      setTimeout(() => {
-        setSubmitted(false);
-      }, 5000);
+      // Submit to Mailchimp API
+      const response = await fetch(
+        'https://thestayandwander.us10.list-manage.com/subscribe/post?u=48ee0dc10117e46d5a5e32365&id=4512b2fda5',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            email_address: email,
+            status: 'subscribed',
+            merge_fields: {
+              FNAME: name,
+            },
+          }),
+        }
+      );
+
+      if (response.ok) {
+        // Show success message
+        setSubmitted(true);
+        setEmail('');
+        setName('');
+        
+        // Auto-hide success message after 5 seconds
+        setTimeout(() => {
+          setSubmitted(false);
+        }, 5000);
+      } else {
+        // Fallback: redirect to Mailchimp signup page
+        const mailchimpUrl = `https://us10.list-manage.com/subscribe?u=48ee0dc10117e46d5a5e32365&id=4512b2fda5&EMAIL=${encodeURIComponent(email)}&FNAME=${encodeURIComponent(name)}`;
+        window.open(mailchimpUrl, '_blank');
+        setSubmitted(true);
+        setEmail('');
+        setName('');
+        setTimeout(() => {
+          setSubmitted(false);
+        }, 5000);
+      }
     } catch (err) {
       console.error("Subscription error:", err);
     } finally {
@@ -155,7 +181,7 @@ export default function NewsletterSignup() {
                   Thank You!
                 </h3>
                 <p style={{ color: "#F4A261" }} className="text-lg font-semibold mb-2">
-                  Check your inbox for your free guide.
+                  Thank you! Your free guide is on its way. Check your inbox!
                 </p>
                 <p className="text-gray-600 mb-6">
                   Look for an email from us with your exclusive travel guide and special offers.
