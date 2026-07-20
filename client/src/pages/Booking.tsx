@@ -275,6 +275,11 @@ export default function Booking() {
         {/* Tours & Activities Tab */}
         {activeTab === "tours" && (
           <div className="space-y-12">
+            <div className="p-4 text-center mb-4">
+              <h3 className="text-2xl font-bold text-blue-600 mb-2">Top-Rated Tours & Activities</h3>
+              <p className="text-gray-500">Book instantly — free cancellation on most experiences</p>
+            </div>
+            <div data-gyg-widget="auto" data-gyg-partner-id="YOPATWV"></div>
             <GetYourGuideTours />
           </div>
         )}
