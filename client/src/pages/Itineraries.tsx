@@ -562,9 +562,20 @@ export default function Itineraries() {
                             {hotel.pricePerNight}
                           </p>
                         </div>
-                        <Button className="w-full bg-yellow-500 hover:bg-yellow-600 text-white text-sm">
+                        <a
+                          href={
+                            itinerary.id === 1
+                              ? 'https://booking.stay22.com/thestayandwander/r-lvU3PLVF'
+                              : itinerary.id === 2
+                              ? 'https://booking.stay22.com/thestayandwander/_3gvRmesd0'
+                              : 'https://booking.stay22.com/thestayandwander/zRyDL-E_PN'
+                          }
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="w-full block bg-yellow-500 hover:bg-yellow-600 text-white text-sm p-2 rounded text-center font-semibold"
+                        >
                           Check Availability on Booking.com
-                        </Button>
+                        </a>
                       </div>
                     ))}
                   </div>
@@ -577,12 +588,20 @@ export default function Itineraries() {
                       View Full Itinerary
                     </Button>
                   </Link>
-                  <Button
-                    variant="outline"
-                    className="flex-1 border-blue-600 text-blue-600 hover:bg-blue-50 py-6 h-auto"
+                  <a
+                    href={
+                      itinerary.id === 1
+                        ? 'https://mcusercontent.com/48ee0dc10117e46d5a5e32365/files/911d0081-9637-721b-5c81-6c30aa7a4d4c/tokyo_seoul_itinerary_FINAL.pdf'
+                        : itinerary.id === 2
+                        ? 'https://mcusercontent.com/48ee0dc10117e46d5a5e32365/files/3cc2266f-cb96-82b2-7eed-221c699edee1/mediterranean_escape_itinerary_FINAL.pdf'
+                        : 'https://mcusercontent.com/48ee0dc10117e46d5a5e32365/files/5beb10ea-503e-f463-312b-0919b3181eb3/brazil_adventure_itinerary_FINAL.pdf'
+                    }
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-1 border border-blue-600 text-blue-600 hover:bg-blue-50 py-6 h-auto px-4 rounded text-center font-semibold"
                   >
                     Download This Itinerary (PDF)
-                  </Button>
+                  </a>
                 </div>
               </div>
             ))}
