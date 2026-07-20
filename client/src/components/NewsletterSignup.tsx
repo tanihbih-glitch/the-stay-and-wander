@@ -1,15 +1,13 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Mail, Gift, CheckCircle, AlertCircle } from "lucide-react";
-import { toast } from "sonner";
+import { Mail, Gift, CheckCircle } from "lucide-react";
 
 export default function NewsletterSignup() {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
 
   // Email validation regex
   const validateEmail = (email: string): boolean => {
@@ -19,84 +17,29 @@ export default function NewsletterSignup() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError(null);
 
     // Validate inputs
-    if (!name.trim()) {
-      setError("Please enter your first name");
-      return;
-    }
-
-    if (!email.trim()) {
-      setError("Please enter your email address");
-      return;
-    }
-
-    if (!validateEmail(email)) {
-      setError("Please enter a valid email address");
+    if (!name.trim() || !email.trim() || !validateEmail(email)) {
       return;
     }
 
     setIsLoading(true);
 
     try {
-      // Submit to Mailchimp using the global script
-      const win = window as any;
+      // Redirect to Mailchimp signup page with email pre-filled
+      const mailchimpUrl = `https://us10.list-manage.com/subscribe?u=48ee0dc10117e46d5a5e32365&id=894671&EMAIL=${encodeURIComponent(email)}&FNAME=${encodeURIComponent(name)}`;
+      window.open(mailchimpUrl, '_blank');
       
-      if (win.mce_form && typeof win.mce_form.submit === 'function') {
-        // Set the form fields
-        const emailInput = document.querySelector('input[name="EMAIL"]') as HTMLInputElement;
-        const nameInput = document.querySelector('input[name="FNAME"]') as HTMLInputElement;
-        
-        if (emailInput) emailInput.value = email;
-        if (nameInput) nameInput.value = name;
-
-        // Submit the form
-        win.mce_form.submit();
-        
-        // Show success message
-        setSubmitted(true);
-        setEmail("");
-        setName("");
-        
-        // Auto-hide success message after 5 seconds
-        setTimeout(() => {
-          setSubmitted(false);
-        }, 5000);
-      } else {
-        // Fallback: Use Mailchimp API directly
-        const response = await fetch(
-          "https://chimpstatic.com/mcjs-connected/js/users/48ee0dc10117e46d5a5e32365/420603a8e8e11623f80d61e27.js",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              email_address: email,
-              status: "subscribed",
-              merge_fields: {
-                FNAME: name,
-              },
-            }),
-          }
-        );
-
-        if (response.ok) {
-          setSubmitted(true);
-          setEmail("");
-          setName("");
-          
-          // Auto-hide success message after 5 seconds
-          setTimeout(() => {
-            setSubmitted(false);
-          }, 5000);
-        } else {
-          setError("Failed to subscribe. Please try again.");
-        }
-      }
+      // Show success message
+      setSubmitted(true);
+      setEmail("");
+      setName("");
+      
+      // Auto-hide success message after 5 seconds
+      setTimeout(() => {
+        setSubmitted(false);
+      }, 5000);
     } catch (err) {
-      setError("An error occurred. Please try again.");
       console.error("Subscription error:", err);
     } finally {
       setIsLoading(false);
@@ -148,14 +91,6 @@ export default function NewsletterSignup() {
                 </div>
               </div>
 
-              {/* Error Message */}
-              {error && (
-                <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg flex items-start gap-3">
-                  <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
-                  <p className="text-red-700 font-medium">{error}</p>
-                </div>
-              )}
-
               {/* Form */}
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -167,12 +102,10 @@ export default function NewsletterSignup() {
                       type="text"
                       placeholder="John"
                       value={name}
-                      onChange={(e) => {
-                        setName(e.target.value);
-                        setError(null);
-                      }}
+                      onChange={(e) => setName(e.target.value)}
                       className="w-full"
                       disabled={isLoading}
+                      required
                     />
                   </div>
                   <div>
@@ -183,12 +116,10 @@ export default function NewsletterSignup() {
                       type="email"
                       placeholder="you@example.com"
                       value={email}
-                      onChange={(e) => {
-                        setEmail(e.target.value);
-                        setError(null);
-                      }}
+                      onChange={(e) => setEmail(e.target.value)}
                       className="w-full"
                       disabled={isLoading}
+                      required
                     />
                   </div>
                 </div>
@@ -221,10 +152,10 @@ export default function NewsletterSignup() {
                   <CheckCircle className="w-16 h-16" style={{ color: "#F4A261" }} />
                 </div>
                 <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-3">
-                  Success!
+                  Thank You!
                 </h3>
                 <p style={{ color: "#F4A261" }} className="text-lg font-semibold mb-2">
-                  Your free travel guide is on its way! Check your inbox.
+                  Check your inbox for your free guide.
                 </p>
                 <p className="text-gray-600 mb-6">
                   Look for an email from us with your exclusive travel guide and special offers.
@@ -235,7 +166,6 @@ export default function NewsletterSignup() {
                     setSubmitted(false);
                     setEmail("");
                     setName("");
-                    setError(null);
                   }}
                   className="text-blue-600 hover:text-blue-700 font-semibold"
                 >
