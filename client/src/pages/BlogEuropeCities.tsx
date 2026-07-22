@@ -6,6 +6,7 @@ import MobileBottomNav from '@/components/MobileBottomNav';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import PopularRoutesWidgetBlogSidebar from '@/components/PopularRoutesWidgetBlogSidebar';
+import { DISCOVERCARS_AFFILIATE_URL } from '@/lib/affiliateLinks';
 
 const getAffiliateLink = (cityId: number): string => {
   const links: { [key: number]: string } = {
@@ -390,6 +391,12 @@ export default function BlogEuropeCities() {
             <p className="text-gray-700 mb-6">
               All hotels in this guide are bookable through Booking.com with price matching and free cancellation on most properties. Click any "Check Availability" link above to see live prices for your dates.
             </p>
+            <div className="mb-6 rounded-xl border border-[#F4A261]/40 bg-[#fff8f3] p-5">
+              <p className="text-gray-800">🚗 Renting a Car in Europe? Compare the best prices across all major suppliers.</p>
+              <a href={DISCOVERCARS_AFFILIATE_URL} target="_blank" rel="noopener noreferrer" className="mt-4 inline-block">
+                <Button className="bg-[#F4A261] text-white hover:bg-[#e78b4d]">Search Car Rentals in Europe</Button>
+              </a>
+            </div>
             <div className="flex flex-col md:flex-row gap-4">
               <a href="https://booking.stay22.com/thestayandwander/_3gvRmesd0" target="_blank" rel="noopener noreferrer">
                 <Button className="w-full md:w-auto bg-yellow-500 hover:bg-yellow-600 text-white">

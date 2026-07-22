@@ -2,6 +2,7 @@ import { Link } from "wouter";
 import { Instagram, Heart, Music } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { DISCOVERCARS_AFFILIATE_URL } from "@/lib/affiliateLinks";
 
 export default function Footer() {
   return (
@@ -64,6 +65,16 @@ export default function Footer() {
                 <Link href="/booking" className="text-sm text-gray-600 hover:text-blue-600 transition-colors no-underline">
                   Book Now
                 </Link>
+              </li>
+              <li>
+                <a
+                  href={DISCOVERCARS_AFFILIATE_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-gray-600 hover:text-blue-600 transition-colors no-underline"
+                >
+                  Car Rentals
+                </a>
               </li>
               <li>
                 <Link href="/blog" className="text-sm text-gray-600 hover:text-blue-600 transition-colors no-underline">

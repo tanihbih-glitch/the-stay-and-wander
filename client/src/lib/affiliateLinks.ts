@@ -31,6 +31,11 @@ const TRAVELPAYOUT_UTM_MEDIUM = "affiliate";
 const TRAVELPAYOUTS_FLIGHT_LINK = "https://aviasales.tpo.lu/f9QeB1mu";
 
 /**
+ * Shared DiscoverCars affiliate destination for every car-rental action.
+ */
+export const DISCOVERCARS_AFFILIATE_URL = "https://www.discovercars.com/?a_aid=Thestayandwander";
+
+/**
  * Helper function to generate Travelpayout search links
  * @param searchKey - The search key from Travelpayout API
  * @param campaign - Campaign name for tracking
@@ -189,23 +194,23 @@ export const affiliateLinks = {
     tokyo: {
       city: "Tokyo",
       country: "Japan",
-      link: "https://www.rentalcars.com/en/locations/japan/tokyo/?utm_source=staywander",
+      link: DISCOVERCARS_AFFILIATE_URL,
       category: "car",
-      network: "rentalcars",
+      network: "discovercars",
     },
     lisbon: {
       city: "Lisbon",
       country: "Portugal",
-      link: "https://www.rentalcars.com/en/locations/portugal/lisbon/?utm_source=staywander",
+      link: DISCOVERCARS_AFFILIATE_URL,
       category: "car",
-      network: "rentalcars",
+      network: "discovercars",
     },
     rio: {
       city: "Rio de Janeiro",
       country: "Brazil",
-      link: "https://www.rentalcars.com/en/locations/brazil/rio-de-janeiro/?utm_source=staywander",
+      link: DISCOVERCARS_AFFILIATE_URL,
       category: "car",
-      network: "rentalcars",
+      network: "discovercars",
     },
   },
 

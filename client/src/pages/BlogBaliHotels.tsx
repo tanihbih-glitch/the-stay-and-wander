@@ -8,6 +8,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { pageMetadataConfig } from '@shared/seo';
 import PopularRoutesWidgetBlogSidebar from '@/components/PopularRoutesWidgetBlogSidebar';
 import { AffiliateLink } from '@/components/AffiliateLink';
+import { DISCOVERCARS_AFFILIATE_URL } from '@/lib/affiliateLinks';
 
 const articleMetadata = {
   title: 'Best Hotels in Bali for Every Budget (2026) — From $30 to $500/Night',
@@ -352,6 +353,12 @@ export default function BlogBaliHotels() {
               <p className="text-gray-800 mb-4">
                 <strong>🔵 Ready to book?</strong>
               </p>
+              <div className="mb-6 rounded-lg border border-[#F4A261]/40 bg-white p-5">
+                <p className="text-gray-800 mb-4">🚗 Need a Car in Bali? Compare the best rental prices from 500+ suppliers worldwide.</p>
+                <a href={DISCOVERCARS_AFFILIATE_URL} target="_blank" rel="noopener noreferrer" className="inline-block">
+                  <Button className="bg-[#F4A261] text-white hover:bg-[#e78b4d]">Search Car Rentals in Bali</Button>
+                </a>
+              </div>
               <AffiliateLink
                 href="https://aviasales.tpo.lu/f9QeB1mu"
                 partner="Stay22"

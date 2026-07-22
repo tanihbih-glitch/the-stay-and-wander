@@ -10,3 +10,11 @@
 - [x] Ensure every hotel availability call-to-action and the final search button opens the specified Stay22 affiliate link in a new tab.
 - [x] Place the GetYourGuide tours widget with partner ID `YOPATWV` immediately after the article introduction.
 - [x] Add the article to the site blog index using the established card pattern.
+- [x] Inventory every car-rental link and car-rental mention across the booking page, homepage widget, footer, and related site components.
+- [x] Replace all car-rental affiliate destinations with `https://www.discovercars.com/?a_aid=Thestayandwander`.
+- [x] Ensure all updated car-rental buttons and links use `target="_blank"` and `rel="noopener noreferrer"`.
+- [x] Add or update focused tests for DiscoverCars destinations and new-tab attributes.
+- [x] Verify the updated booking, homepage, and footer experiences before saving a published checkpoint.
+- [x] Add the specified Bali DiscoverCars call-to-action above the final hotel-search button in both Bali hotel articles.
+- [x] Add the specified Europe DiscoverCars call-to-action above the final hotel-search button in the Europe summer-cities article.
+- [x] Verify article CTA placement, gold styling, target, rel, and DiscoverCars destination alongside the site-wide link updates.

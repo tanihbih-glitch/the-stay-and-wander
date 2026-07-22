@@ -8,6 +8,7 @@ import Footer from "@/components/Footer";
 import MobileBottomNav from "@/components/MobileBottomNav";
 import PopularRoutesWidgetBooking from "@/components/PopularRoutesWidgetBooking";
 import GetYourGuideTours from "@/components/GetYourGuideTours";
+import { DISCOVERCARS_AFFILIATE_URL } from "@/lib/affiliateLinks";
 import { useState } from "react";
 
 export default function Booking() {
@@ -245,29 +246,35 @@ export default function Booking() {
             <h3 className="text-2xl font-bold text-blue-600 mb-4">Find the Best Car Rental Deals</h3>
             <p className="text-gray-500 mb-6">Compare 500+ suppliers worldwide including Hertz, Avis, Enterprise</p>
             <div className="flex gap-4 justify-center mb-8 flex-wrap">
-              <a href="https://www.discovercars.com" target="_blank" rel="noopener noreferrer" className="bg-yellow-500 text-white px-8 py-3 rounded-full font-semibold inline-block">
+              <a href={DISCOVERCARS_AFFILIATE_URL} target="_blank" rel="noopener noreferrer" className="bg-yellow-500 text-white px-8 py-3 rounded-full font-semibold inline-block">
                 Search Car Rentals
               </a>
-              <a href="https://www.rentalcars.com" target="_blank" rel="noopener noreferrer" className="bg-blue-600 text-white px-8 py-3 rounded-full font-semibold inline-block">
+              <a href={DISCOVERCARS_AFFILIATE_URL} target="_blank" rel="noopener noreferrer" className="bg-blue-600 text-white px-8 py-3 rounded-full font-semibold inline-block">
                 Compare Prices
               </a>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="bg-gray-50 rounded-xl p-5 text-center">
-                <div className="text-3xl mb-2">🚗</div>
-                <div className="font-bold text-blue-600">Economy</div>
-                <div className="text-sm text-gray-400">From $15/day</div>
-              </div>
-              <div className="bg-gray-50 rounded-xl p-5 text-center">
-                <div className="text-3xl mb-2">🚙</div>
-                <div className="font-bold text-blue-600">SUV & Family</div>
-                <div className="text-sm text-gray-400">From $35/day</div>
-              </div>
-              <div className="bg-gray-50 rounded-xl p-5 text-center">
-                <div className="text-3xl mb-2">🏎️</div>
-                <div className="font-bold text-blue-600">Luxury</div>
-                <div className="text-sm text-gray-400">From $80/day</div>
-              </div>
+              <a href={DISCOVERCARS_AFFILIATE_URL} target="_blank" rel="noopener noreferrer" aria-label="Search economy car rentals" className="rounded-xl transition-transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2">
+                <div className="bg-gray-50 rounded-xl p-5 text-center">
+                  <div className="text-3xl mb-2">🚗</div>
+                  <div className="font-bold text-blue-600">Economy</div>
+                  <div className="text-sm text-gray-400">From $15/day</div>
+                </div>
+              </a>
+              <a href={DISCOVERCARS_AFFILIATE_URL} target="_blank" rel="noopener noreferrer" aria-label="Search SUV and family car rentals" className="rounded-xl transition-transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2">
+                <div className="bg-gray-50 rounded-xl p-5 text-center">
+                  <div className="text-3xl mb-2">🚙</div>
+                  <div className="font-bold text-blue-600">SUV & Family</div>
+                  <div className="text-sm text-gray-400">From $35/day</div>
+                </div>
+              </a>
+              <a href={DISCOVERCARS_AFFILIATE_URL} target="_blank" rel="noopener noreferrer" aria-label="Search luxury car rentals" className="rounded-xl transition-transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2">
+                <div className="bg-gray-50 rounded-xl p-5 text-center">
+                  <div className="text-3xl mb-2">🏎️</div>
+                  <div className="font-bold text-blue-600">Luxury</div>
+                  <div className="text-sm text-gray-400">From $80/day</div>
+                </div>
+              </a>
             </div>
           </div>
         )}

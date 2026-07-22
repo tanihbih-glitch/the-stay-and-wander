@@ -6,6 +6,7 @@ import GetYourGuideTours from '@/components/GetYourGuideTours';
 import BlogArticleSchema, { BreadcrumbSchema } from '@/components/BlogArticleSchema';
 import PopularRoutesWidgetBlogSidebar from '@/components/PopularRoutesWidgetBlogSidebar';
 import { AffiliateLink } from '@/components/AffiliateLink';
+import { DISCOVERCARS_AFFILIATE_URL } from '@/lib/affiliateLinks';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 
@@ -316,6 +317,12 @@ export default function BlogBaliFourStarHotels() {
           <section className="mb-12">
             <h2 className="font-playfair text-3xl font-bold text-gray-900">How to Get the Best 4 Star Hotel Rates in Bali:</h2>
             <p className="mt-6 leading-relaxed text-gray-700">Book with free cancellation always. Book 6-8 weeks ahead for peak season. Check Booking.com and Agoda for best Asia prices. Consider shoulder season — April May September October offer 80% experience at 60% price.</p>
+            <div className="mt-7 rounded-xl border border-[#F4A261]/40 bg-[#fff8f3] p-5">
+              <p className="leading-relaxed text-gray-800">🚗 Need a Car in Bali? Compare the best rental prices from 500+ suppliers worldwide.</p>
+              <a href={DISCOVERCARS_AFFILIATE_URL} target="_blank" rel="noopener noreferrer" className="mt-4 inline-block">
+                <Button className="bg-[#F4A261] text-white hover:bg-[#e78b4d]">Search Car Rentals in Bali</Button>
+              </a>
+            </div>
             <AffiliateLink
               href={STAY22_AFFILIATE_URL}
               partner="Stay22"
