@@ -26,3 +26,6 @@
 - [x] Add the same Trip.com iframe widget beneath the Booking-page Hotels section without changing its other booking tabs.
 - [x] Center both widgets, preserve surrounding spacing, and ensure a responsive 320px maximum width with no mobile overflow.
 - [x] Add focused tests and verify the homepage and Booking page at desktop and mobile sizes before publishing.
+- [x] Inspect the homepage and Booking-page car-rental action controls against the supplied DiscoverCars affiliate URL.
+- [x] Ensure Booking-page Search Car Rentals and Compare Prices actions, plus the homepage Search Car Rentals action, open DiscoverCars in safe new tabs.
+- [x] Preserve the pricing cards and unrelated Hotels, Flights, Cruises, and Tours sections; add focused verification and publish a checkpoint.
