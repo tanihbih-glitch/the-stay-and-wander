@@ -7,6 +7,7 @@ const root = resolve(import.meta.dirname, "..");
 const homeSource = readFileSync(resolve(root, "client/src/pages/Home.tsx"), "utf8");
 const bookingSource = readFileSync(resolve(root, "client/src/pages/Booking.tsx"), "utf8");
 const widgetSource = readFileSync(resolve(root, "client/src/components/TripComHotelWidget.tsx"), "utf8");
+const aviasalesWidgetSource = readFileSync(resolve(root, "client/src/components/AviasalesFlightWidget.tsx"), "utf8");
 
 describe("Trip.com hotel widget placements", () => {
   it("uses the supplied Trip.com partner widget URL with responsive dimensions", () => {
@@ -15,6 +16,9 @@ describe("Trip.com hotel widget placements", () => {
     expect(widgetSource).toContain('width: "100%"');
     expect(widgetSource).toContain('height: "320px"');
     expect(widgetSource).toContain('scrolling="no"');
+    expect(widgetSource).toContain('const [isLoaded, setIsLoaded] = useState(false)');
+    expect(widgetSource).toContain('onLoad={() => setIsLoaded(true)}');
+    expect(widgetSource).toContain('isLoaded ? "opacity-0" : "opacity-100"');
   });
 
   it("uses the widget in both requested Hotel locations while retaining the other home tabs", () => {
@@ -33,5 +37,12 @@ describe("Trip.com hotel widget placements", () => {
     ["Destination", "Check-in", "Check-out", "Guests", "Browse Cruise Deals", "Find the Best Car Rental Deals"].forEach((control) => {
       expect(bookingSource).toContain(control);
     });
+  });
+
+  it("hides the Aviasales loading placeholder once the shared live widget loads", () => {
+    expect(aviasalesWidgetSource).toContain('const [widgetLoaded, setWidgetLoaded] = useState(false)');
+    expect(aviasalesWidgetSource).toContain('script.onload = () => setWidgetLoaded(true)');
+    expect(aviasalesWidgetSource).toContain('data-widget-loaded={widgetLoaded ? "true" : "false"}');
+    expect(aviasalesWidgetSource).toContain('widgetLoaded ? "opacity-0" : "opacity-100"');
   });
 });

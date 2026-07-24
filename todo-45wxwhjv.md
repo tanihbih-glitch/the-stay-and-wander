@@ -49,3 +49,11 @@
 - [x] Replace the Booking-page Hotels redirect button and separate banner with the inline responsive Trip.com widget used on the homepage.
 - [x] Replace the Booking-page Flights redirect button with the existing live Aviasales component used on the homepage.
 - [x] Preserve the hotel fields and leave Booking-page Cruises and Car Rentals unchanged.
+- [x] Inspect the deployed and local Booking-page Hotels and Flights tabs to identify why the live widgets are not visible.
+- [x] Correct the Booking-page Hotels tab to show the inline Trip.com iframe and remove any Booking.com redirect or detached banner remnants.
+- [x] Correct the Booking-page Flights tab to show the existing homepage Aviasales widget and remove any static redirect remnants.
+- [x] Verify the corrected Hotels and Flights tabs directly in the rendered Booking page, then save a published checkpoint.
+- [x] Remove the persistent visible Aviasales loading placeholder once its external search widget mounts, while retaining a brief loading fallback before mount.
+- [x] Remove the persistent visible Aviasales loading placeholder once its external search widget mounts, while retaining a brief loading fallback before mount.
+- [x] Add a shared Trip.com iframe loading fallback that fades away when the live hotel widget is ready, without changing the iframe destination or dimensions.
+- [x] Publish the verified Trip.com loading fallback and Aviasales loading-state correction for the Booking page.
