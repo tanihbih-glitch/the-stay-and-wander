@@ -9,6 +9,7 @@ export default function Header() {
   const navLinks = [
     { label: "Home", href: "/" },
     { label: "Itineraries", href: "/itineraries" },
+    { label: "Trip Planner", href: "/trip-planner" },
     { label: "Booking", href: "/booking" },
     { label: "Blog", href: "/blog" },
   ];
@@ -40,9 +41,7 @@ export default function Header() {
               {link.label}
             </Link>
           ))}
-          <Button className="bg-blue-600 hover:bg-blue-700 text-white">
-            Start Planning
-          </Button>
+          <Button asChild className="bg-[#b3842d] hover:bg-[#946b20] text-white"><Link href="/trip-planner">Start Planning</Link></Button>
         </nav>
 
         {/* Mobile Menu Button */}
@@ -73,9 +72,7 @@ export default function Header() {
                 {link.label}
               </Link>
             ))}
-            <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white">
-              Start Planning
-            </Button>
+            <Button asChild className="w-full bg-[#b3842d] hover:bg-[#946b20] text-white"><Link href="/trip-planner" onClick={() => setMobileMenuOpen(false)}>Start Planning</Link></Button>
           </nav>
         </div>
       )}

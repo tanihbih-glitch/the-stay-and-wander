@@ -15,6 +15,13 @@
       "when": 1784385872965,
       "tag": "0001_equal_maestro",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1784908220938,
+      "tag": "0002_ambitious_gabe_jones",
+      "breakpoints": true
     }
   ]
 }

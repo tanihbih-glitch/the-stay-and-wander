@@ -16,6 +16,8 @@ import BlogEuropeCities from "./pages/BlogEuropeCities";
 import BlogTokyoBangkok from "./pages/BlogTokyoBangkok";
 import BlogBrazil from "./pages/BlogBrazil";
 import BlogFlightDeals from "./pages/BlogFlightDeals";
+import TripPlanner from "./pages/TripPlanner";
+import TripPlannerSuccess from "./pages/TripPlannerSuccess";
 
 import { AffiliateAnalytics } from "./pages/AffiliateAnalytics";
 
@@ -27,6 +29,8 @@ function Router() {
       <Route path={"/itineraries"} component={Itineraries} />
       <Route path={"/itinerary/:id"} component={ItineraryDetail} />
       <Route path={"/booking"} component={Booking} />
+      <Route path={"/trip-planner"} component={TripPlanner} />
+      <Route path={"/trip-planner/success"} component={TripPlannerSuccess} />
       <Route path={"/blog"} component={Blog} />
       <Route path={"/blog/best-hotels-bali-2026"} component={BlogBaliHotels} />
       <Route path={"/blog/best-4-star-hotels-bali-2026"} component={BlogBaliFourStarHotels} />

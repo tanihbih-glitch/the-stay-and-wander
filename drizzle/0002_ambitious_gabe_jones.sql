@@ -1,0 +1,56 @@
+CREATE TABLE `tripPlanRevisions` (
+	`id` int AUTO_INCREMENT NOT NULL,
+	`tripPlanId` int NOT NULL,
+	`revisionRequest` text NOT NULL,
+	`revisedItinerary` text,
+	`revisedPdfStorageKey` varchar(512),
+	`revisedPdfUrl` varchar(1024),
+	`fulfillmentStatus` enum('submitted','generating','ready','failed') NOT NULL DEFAULT 'submitted',
+	`failureReason` varchar(512),
+	`submittedAt` timestamp NOT NULL DEFAULT (now()),
+	`completedAt` timestamp,
+	`createdAt` timestamp NOT NULL DEFAULT (now()),
+	`updatedAt` timestamp NOT NULL DEFAULT (now()) ON UPDATE CURRENT_TIMESTAMP,
+	CONSTRAINT `tripPlanRevisions_id` PRIMARY KEY(`id`),
+	CONSTRAINT `tripPlanRevisions_tripPlanId_unique` UNIQUE(`tripPlanId`)
+);
+--> statement-breakpoint
+CREATE TABLE `tripPlans` (
+	`id` int AUTO_INCREMENT NOT NULL,
+	`publicId` varchar(36) NOT NULL,
+	`accessTokenHash` varchar(64) NOT NULL,
+	`userId` int,
+	`customerEmail` varchar(320),
+	`destination` varchar(255) NOT NULL,
+	`tripLength` int NOT NULL,
+	`travelDates` varchar(128),
+	`interests` json NOT NULL,
+	`budgetLevel` enum('Budget','Mid-range','Luxury') NOT NULL,
+	`travelStyle` varchar(64) NOT NULL,
+	`pace` enum('Relaxed','Balanced','Packed') NOT NULL,
+	`previewItinerary` text,
+	`previewGeneratedAt` timestamp,
+	`selectedTier` enum('basic','standard','premium','concierge'),
+	`stripeCheckoutSessionId` varchar(255),
+	`stripePaymentIntentId` varchar(255),
+	`stripeCustomerId` varchar(255),
+	`fulfillmentStatus` enum('draft','preview_ready','checkout_created','paid','generating','ready','failed','cancelled') NOT NULL DEFAULT 'draft',
+	`fullItinerary` text,
+	`pdfStorageKey` varchar(512),
+	`pdfUrl` varchar(1024),
+	`purchasedAt` timestamp,
+	`deliveredAt` timestamp,
+	`conciergeRevisionAvailable` boolean NOT NULL DEFAULT false,
+	`conciergeRevisionUsedAt` timestamp,
+	`failureReason` varchar(512),
+	`createdAt` timestamp NOT NULL DEFAULT (now()),
+	`updatedAt` timestamp NOT NULL DEFAULT (now()) ON UPDATE CURRENT_TIMESTAMP,
+	CONSTRAINT `tripPlans_id` PRIMARY KEY(`id`),
+	CONSTRAINT `tripPlans_publicId_unique` UNIQUE(`publicId`),
+	CONSTRAINT `tripPlans_accessTokenHash_unique` UNIQUE(`accessTokenHash`),
+	CONSTRAINT `tripPlans_stripeCheckoutSessionId_unique` UNIQUE(`stripeCheckoutSessionId`),
+	CONSTRAINT `tripPlans_stripePaymentIntentId_unique` UNIQUE(`stripePaymentIntentId`)
+);
+--> statement-breakpoint
+ALTER TABLE `tripPlanRevisions` ADD CONSTRAINT `tripPlanRevisions_tripPlanId_tripPlans_id_fk` FOREIGN KEY (`tripPlanId`) REFERENCES `tripPlans`(`id`) ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE `tripPlans` ADD CONSTRAINT `tripPlans_userId_users_id_fk` FOREIGN KEY (`userId`) REFERENCES `users`(`id`) ON DELETE set null ON UPDATE no action;

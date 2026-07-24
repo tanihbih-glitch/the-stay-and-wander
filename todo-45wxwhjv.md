@@ -57,3 +57,16 @@
 - [x] Remove the persistent visible Aviasales loading placeholder once its external search widget mounts, while retaining a brief loading fallback before mount.
 - [x] Add a shared Trip.com iframe loading fallback that fades away when the live hotel widget is ready, without changing the iframe destination or dimensions.
 - [x] Publish the verified Trip.com loading fallback and Aviasales loading-state correction for the Booking page.
+- [x] Preserve the exact supplied Free Preview, Basic, Standard, Premium, Concierge, and Concierge revision prompt text in server-side prompt templates with only form-variable substitution.
+- [x] Design and migrate persistent trip-plan, checkout, generated-PDF, and Concierge-revision records with safe fulfillment and access controls.
+- [x] Enable Stripe Checkout support and configure the four fixed price tiers: Basic $2, Standard $5, Premium $10, and Concierge $15.
+- [x] Implement server-side Day 1 free-preview generation from the supplied Free Preview prompt and display the complete preview without exposing payment-only content.
+- [x] Implement payment-confirmed, fresh full-itinerary generation using the matching tier prompt rather than extending the free preview.
+- [x] Generate branded downloadable itinerary PDFs using the site’s gold, ocean-blue, and compass identity, then store the files securely.
+- [x] Build a responsive public Trip Planner route with the requested inputs, multi-select interests, preview display, locked Day 2+ teaser, tier selection, and purchase handoff.
+- [x] Build a post-checkout itinerary-access screen that delivers the generated document safely and captures the customer email for delivery.
+- [x] Configure transactional customer-email delivery for the generated PDF link or document, with provider credentials requested only when required.
+- [ ] Add a one-time Concierge feedback form and server-side affected-parts-only revision pass using the supplied exact revision prompt.
+- [x] Add focused automated tests and browser validation for the core form-to-preview-to-payment-to-PDF flow.
+- [x] Save a published checkpoint after the core purchase and PDF-delivery flow works, before optional Concierge revision and map-image implementation.
+- [x] Document that Premium and Concierge `LOCATION:` lines require a connected Google Maps Static API or Mapbox Static Images API to render map images in PDFs.
