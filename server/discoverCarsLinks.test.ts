@@ -52,4 +52,22 @@ describe("DiscoverCars affiliate destinations", () => {
     expect(europe).toContain('target="_blank"');
     expect(europe).toContain('rel="noopener noreferrer"');
   });
+
+  it("keeps the homepage Cruise and Car Rentals tabs on their confirmed affiliate destinations", () => {
+    const home = readSource("client/src/pages/Home.tsx");
+
+    expect(home).toContain('const CRUISEDIRECT_SEARCH_URL = "https://www.cruisedirect.com/?utm_source=thestayandwander&utm_medium=affiliate"');
+    expect(home).toContain("Browse Cruise Deals");
+    expect(home).toContain("Mediterranean, Caribbean, Asia and beyond.");
+    expect(home).toContain("Search Cruise Deals →");
+    expect(home).toContain("Southeast Asia");
+    expect(home).toContain("South America");
+    expect(home).toContain("Find the Best Car Rental Deals");
+    expect(home).toContain("Compare Prices →");
+    ["Economy", "SUV & Family", "Luxury"].forEach((label) => expect(home).toContain(label));
+    expect(home).toContain("DISCOVERCARS_AFFILIATE_URL");
+    expect(home).not.toContain("rentalcars.com");
+    expect(home).toContain('<TabsContent value="hotels"');
+    expect(home).toContain('<TabsContent value="flights"');
+  });
 });

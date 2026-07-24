@@ -18,6 +18,8 @@ import GetYourGuideTours from "@/components/GetYourGuideTours";
 import TripComHotelWidget from "@/components/TripComHotelWidget";
 import { DISCOVERCARS_AFFILIATE_URL } from "@/lib/affiliateLinks";
 
+const CRUISEDIRECT_SEARCH_URL = "https://www.cruisedirect.com/?utm_source=thestayandwander&utm_medium=affiliate";
+const CRUISEDIRECT_EXPLORE_URL = "https://www.cruisedirect.com/?utm_source=thestayandwander";
 
 export default function Home() {
   // The userAuth hooks provides authentication state
@@ -117,58 +119,95 @@ export default function Home() {
 
             {/* Cruises Tab */}
             <TabsContent value="cruises" className="space-y-4">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div>
-                  <label className="text-sm font-semibold text-gray-700 mb-2 block">
-                    Destination
-                  </label>
-                  <Input placeholder="Where to?" />
-                </div>
-                <div>
-                  <label className="text-sm font-semibold text-gray-700 mb-2 block">
-                    Departure Month
-                  </label>
-                  <Input type="month" />
-                </div>
-                <div>
-                  <label className="text-sm font-semibold text-gray-700 mb-2 block">
-                    Duration (days)
-                  </label>
-                  <Input placeholder="7" type="number" />
-                </div>
+              <div className="px-5 py-10 text-center">
+                <h3 className="mb-3 text-2xl text-[#0077B6]" style={{ fontFamily: "Georgia, serif" }}>
+                  Browse Cruise Deals
+                </h3>
+                <p className="mb-6 text-gray-600">
+                  Compare hundreds of cruise routes worldwide — Mediterranean, Caribbean, Asia and beyond.
+                </p>
+                <a
+                  href={CRUISEDIRECT_SEARCH_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block rounded-full bg-[#F4A261] px-8 py-3.5 text-sm font-semibold text-white no-underline transition-colors hover:bg-[#e78b4d]"
+                >
+                  Search Cruise Deals →
+                </a>
               </div>
-              <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white py-6 text-lg h-auto">
-                Search Cruises (CruiseDirect)
-              </Button>
+              <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-3">
+                {[
+                  { icon: "🌊", title: "Mediterranean", description: "Italy, Greece, Spain, Croatia" },
+                  { icon: "🌏", title: "Southeast Asia", description: "Thailand, Vietnam, Singapore" },
+                  { icon: "🌎", title: "South America", description: "Brazil, Argentina, Chile" },
+                ].map((cruise) => (
+                  <div key={cruise.title} className="rounded-xl border-l-[3px] border-[#0077B6] bg-[#F8F4EE] p-5 text-center">
+                    <div className="mb-2 text-2xl">{cruise.icon}</div>
+                    <div className="mb-1 font-semibold text-[#0077B6]">{cruise.title}</div>
+                    <div className="mb-3 text-xs text-gray-500">{cruise.description}</div>
+                    <a
+                      href={CRUISEDIRECT_EXPLORE_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-block rounded-full bg-[#F4A261] px-4 py-2 text-xs font-semibold text-white no-underline transition-colors hover:bg-[#e78b4d]"
+                    >
+                      Explore Cruises
+                    </a>
+                  </div>
+                ))}
+              </div>
             </TabsContent>
 
             {/* Car Rentals Tab */}
-            <TabsContent value="cars" className="space-y-4">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div>
-                  <label className="text-sm font-semibold text-gray-700 mb-2 block">
-                    Pick-up Location
-                  </label>
-                  <Input placeholder="City or airport" />
-                </div>
-                <div>
-                  <label className="text-sm font-semibold text-gray-700 mb-2 block">
-                    Pick-up Date
-                  </label>
-                  <Input type="date" />
-                </div>
-                <div>
-                  <label className="text-sm font-semibold text-gray-700 mb-2 block">
-                    Return Date
-                  </label>
-                  <Input type="date" />
+            <TabsContent value="cars" className="space-y-6">
+              <div className="px-5 py-10 text-center">
+                <h3 className="mb-3 text-2xl text-[#0077B6]" style={{ fontFamily: "Georgia, serif" }}>
+                  Find the Best Car Rental Deals
+                </h3>
+                <p className="mb-6 text-gray-600">
+                  Compare prices from Hertz, Avis, Enterprise, Budget and 500+ suppliers worldwide.
+                </p>
+                <div className="flex flex-wrap justify-center gap-3">
+                  <a
+                    href={DISCOVERCARS_AFFILIATE_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-block rounded-full bg-[#F4A261] px-8 py-3.5 text-sm font-semibold text-white no-underline transition-colors hover:bg-[#e78b4d]"
+                  >
+                    Search Car Rentals →
+                  </a>
+                  <a
+                    href={DISCOVERCARS_AFFILIATE_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-block rounded-full bg-[#0077B6] px-8 py-3.5 text-sm font-semibold text-white no-underline transition-colors hover:bg-[#00669e]"
+                  >
+                    Compare Prices →
+                  </a>
                 </div>
               </div>
-              <a href={DISCOVERCARS_AFFILIATE_URL} target="_blank" rel="noopener noreferrer" className="block">
-                <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white py-6 text-lg h-auto">
-                  Search Car Rentals
-                </Button>
-              </a>
+              <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-3">
+                {[
+                  { icon: "🚗", title: "Economy", price: "From $15/day" },
+                  { icon: "🚙", title: "SUV & Family", price: "From $35/day" },
+                  { icon: "🏎️", title: "Luxury", price: "From $80/day" },
+                ].map((car) => (
+                  <a
+                    key={car.title}
+                    href={DISCOVERCARS_AFFILIATE_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`Search ${car.title} car rentals`}
+                    className="rounded-xl text-center no-underline transition-transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-[#F4A261] focus:ring-offset-2"
+                  >
+                    <div className="rounded-xl bg-[#F8F4EE] p-5">
+                      <div className="mb-2 text-2xl">{car.icon}</div>
+                      <div className="mb-1 font-semibold text-[#0077B6]">{car.title}</div>
+                      <div className="text-xs text-gray-500">{car.price}</div>
+                    </div>
+                  </a>
+                ))}
+              </div>
             </TabsContent>
           </Tabs>
 

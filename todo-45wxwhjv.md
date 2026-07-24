@@ -35,3 +35,9 @@
 - [x] Inventory every homepage and footer car-rental link, button, card, or mention against the supplied DiscoverCars URL.
 - [x] Correct any homepage or footer car-rental destinations or new-tab attributes while leaving Hotels, Flights, Cruises, and Tours untouched.
 - [x] Run focused regression checks, visually verify the unchanged homepage and footer layout, and save a published checkpoint.
+- [x] Review the supplied homepage Cruise and Car Rentals tab content against the matching Booking-page layouts.
+- [x] Resolve whether the supplied RentalCars button should replace the previously mandated DiscoverCars-only car-rental destination.
+- [x] Update the homepage Cruise and Car Rentals tabs using the confirmed affiliate-link destinations without altering Hotels, Flights, or Tours.
+- [x] Add focused tests, visually verify the revised homepage tabs, and save a published checkpoint.
+- [x] Implement the confirmed DiscoverCars-only second car-rental action rather than a RentalCars.com destination.
+- [x] Implement the confirmed DiscoverCars-only second car-rental action rather than a RentalCars.com destination.

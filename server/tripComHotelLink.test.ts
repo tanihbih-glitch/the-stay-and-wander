@@ -20,7 +20,7 @@ describe("Trip.com hotel widget placements", () => {
   it("uses the widget in both requested Hotel locations while retaining the other home tabs", () => {
     expect(homeSource).toContain("<TripComHotelWidget />");
     expect(bookingSource).toContain("<TripComHotelWidget />");
-    ["Flights", "Cruises", "Car Rentals", "AviasalesFlightWidget", "Search Cruises (CruiseDirect)", "Search Car Rentals"].forEach((control) => {
+    ["Flights", "Cruises", "Car Rentals", "AviasalesFlightWidget", "Search Cruise Deals →", "Search Car Rentals →", "Compare Prices →"].forEach((control) => {
       expect(homeSource).toContain(control);
     });
   });
