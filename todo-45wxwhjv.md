@@ -29,3 +29,6 @@
 - [x] Inspect the homepage and Booking-page car-rental action controls against the supplied DiscoverCars affiliate URL.
 - [x] Ensure Booking-page Search Car Rentals and Compare Prices actions, plus the homepage Search Car Rentals action, open DiscoverCars in safe new tabs.
 - [x] Preserve the pricing cards and unrelated Hotels, Flights, Cruises, and Tours sections; add focused verification and publish a checkpoint.
+- [x] Reinspect the repeated homepage and Booking-page DiscoverCars car-rental requirements against the current published implementation.
+- [x] Correct any missing DiscoverCars or safe new-tab configuration without changing pricing cards or unrelated travel tabs.
+- [x] Re-run focused validation and publish the confirmed car-rental configuration.
