@@ -72,7 +72,7 @@ export function generateMetaTags(metadata: PageMetadata): MetaTags {
  */
 export const pageMetadataConfig: Record<string, PageMetadata> = {
   home: {
-    title: "The Stay & Wander - Discover Beautiful Places & Unique Travel Experiences",
+    title: "The Stay & Wander | Curated Stays & Travel Itineraries",
     description:
       "Discover beautiful places, unique stays, and unforgettable journeys. Hand-picked hotels, custom itineraries, and travel inspiration for Europe, Asia & Brazil.",
     image: DEFAULT_IMAGE,

@@ -72,3 +72,6 @@
 - [x] Document that Premium and Concierge `LOCATION:` lines require a connected Google Maps Static API or Mapbox Static Images API to render map images in PDFs.
 - [x] Hide the Concierge feedback form after the included revision has been consumed by honoring the server-provided revision-availability state on every visit.
 - [x] Add regression coverage for the already-used Concierge revision state so customers do not see a misleading second-revision form after reload.
+- [x] Replace the homepage document title with a search-friendly title between 30 and 60 characters.
+- [x] Verify the homepage title length and rendered metadata, then publish the SEO correction.
+- [x] Save a published checkpoint for the verified 54-character homepage document-title correction.
