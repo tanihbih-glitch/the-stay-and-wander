@@ -36,6 +36,11 @@ const TRAVELPAYOUTS_FLIGHT_LINK = "https://aviasales.tpo.lu/f9QeB1mu";
 export const DISCOVERCARS_AFFILIATE_URL = "https://www.discovercars.com/?a_aid=Thestayandwander";
 
 /**
+ * Shared Trip.com affiliate destination for homepage hotel searches.
+ */
+export const TRIP_COM_HOTELS_AFFILIATE_URL = "https://www.trip.com/t/cRAt9tqPeV2";
+
+/**
  * Helper function to generate Travelpayout search links
  * @param searchKey - The search key from Travelpayout API
  * @param campaign - Campaign name for tracking

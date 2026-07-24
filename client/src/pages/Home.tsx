@@ -15,7 +15,7 @@ import AviasalesFlightWidget from "@/components/AviasalesFlightWidget";
 import PopularFlightRoutes from "@/components/PopularFlightRoutes";
 import PopularRoutesWidget from "@/components/PopularRoutesWidget";
 import GetYourGuideTours from "@/components/GetYourGuideTours";
-import { DISCOVERCARS_AFFILIATE_URL } from "@/lib/affiliateLinks";
+import { DISCOVERCARS_AFFILIATE_URL, TRIP_COM_HOTELS_AFFILIATE_URL } from "@/lib/affiliateLinks";
 
 
 export default function Home() {
@@ -132,9 +132,11 @@ export default function Home() {
                   <Input placeholder="2 guests" />
                 </div>
               </div>
-              <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white py-6 text-lg h-auto">
-                Search Hotels (Booking.com)
-              </Button>
+              <a href={TRIP_COM_HOTELS_AFFILIATE_URL} target="_blank" rel="noopener noreferrer" className="block">
+                <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white py-6 text-lg h-auto">
+                  Search Hotels
+                </Button>
+              </a>
             </TabsContent>
 
             {/* Flights Tab */}

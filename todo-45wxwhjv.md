@@ -18,3 +18,6 @@
 - [x] Add the specified Bali DiscoverCars call-to-action above the final hotel-search button in both Bali hotel articles.
 - [x] Add the specified Europe DiscoverCars call-to-action above the final hotel-search button in the Europe summer-cities article.
 - [x] Verify article CTA placement, gold styling, target, rel, and DiscoverCars destination alongside the site-wide link updates.
+- [x] Inspect the homepage Hotels-tab search control and preserve its existing booking-form layout.
+- [x] Link the existing blue Search Hotels button to `https://www.trip.com/t/cRAt9tqPeV2` with safe new-tab attributes.
+- [x] Confirm Flights, Cruises, and Car Rentals tabs remain unchanged, add focused test coverage, and visually verify the homepage before publishing.
