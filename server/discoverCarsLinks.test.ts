@@ -29,6 +29,8 @@ describe("DiscoverCars affiliate destinations", () => {
     });
     expect(home).toContain("Search Car Rentals");
     expect(footer).toContain("Car Rentals");
+    expect(footer.indexOf("Book Now")).toBeLessThan(footer.indexOf("Car Rentals"));
+    expect(home).not.toContain("rentalcars.com");
   });
 
   it("adds the requested Bali and Europe CTA copy above the final booking controls", () => {
@@ -51,4 +53,3 @@ describe("DiscoverCars affiliate destinations", () => {
     expect(europe).toContain('rel="noopener noreferrer"');
   });
 });
-

@@ -32,3 +32,6 @@
 - [x] Reinspect the repeated homepage and Booking-page DiscoverCars car-rental requirements against the current published implementation.
 - [x] Correct any missing DiscoverCars or safe new-tab configuration without changing pricing cards or unrelated travel tabs.
 - [x] Re-run focused validation and publish the confirmed car-rental configuration.
+- [x] Inventory every homepage and footer car-rental link, button, card, or mention against the supplied DiscoverCars URL.
+- [x] Correct any homepage or footer car-rental destinations or new-tab attributes while leaving Hotels, Flights, Cruises, and Tours untouched.
+- [x] Run focused regression checks, visually verify the unchanged homepage and footer layout, and save a published checkpoint.
