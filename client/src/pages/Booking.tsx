@@ -9,6 +9,7 @@ import MobileBottomNav from "@/components/MobileBottomNav";
 import PopularRoutesWidgetBooking from "@/components/PopularRoutesWidgetBooking";
 import GetYourGuideTours from "@/components/GetYourGuideTours";
 import TripComHotelWidget from "@/components/TripComHotelWidget";
+import AviasalesFlightWidget from "@/components/AviasalesFlightWidget";
 import { DISCOVERCARS_AFFILIATE_URL } from "@/lib/affiliateLinks";
 import { useState } from "react";
 
@@ -107,11 +108,8 @@ export default function Booking() {
                   <Input placeholder="2 guests" />
                 </div>
               </div>
-              <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white py-6 text-lg h-auto">
-                Search Hotels on Booking.com
-              </Button>
-              <div className="mt-8 border-t border-gray-200 pt-8">
-                <TripComHotelWidget />
+              <div className="pt-2">
+                <TripComHotelWidget title="Search hotels with Trip.com" />
               </div>
             </div>
 
@@ -172,35 +170,7 @@ export default function Booking() {
               <h2 className="font-display text-2xl font-bold text-gray-900 mb-6">
                 Find the Best Flight Deals
               </h2>
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-                <div>
-                  <label className="text-sm font-semibold text-gray-700 mb-2 block">
-                    From
-                  </label>
-                  <Input placeholder="Departure city" />
-                </div>
-                <div>
-                  <label className="text-sm font-semibold text-gray-700 mb-2 block">
-                    To
-                  </label>
-                  <Input placeholder="Destination" />
-                </div>
-                <div>
-                  <label className="text-sm font-semibold text-gray-700 mb-2 block">
-                    Depart
-                  </label>
-                  <Input type="date" />
-                </div>
-                <div>
-                  <label className="text-sm font-semibold text-gray-700 mb-2 block">
-                    Return
-                  </label>
-                  <Input type="date" />
-                </div>
-              </div>
-              <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white py-6 text-lg h-auto">
-                Search Flights on Aviasales
-              </Button>
+              <AviasalesFlightWidget />
             </div>
 
             {/* Popular Routes Widget */}

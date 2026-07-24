@@ -19,9 +19,19 @@ describe("Trip.com hotel widget placements", () => {
 
   it("uses the widget in both requested Hotel locations while retaining the other home tabs", () => {
     expect(homeSource).toContain("<TripComHotelWidget />");
-    expect(bookingSource).toContain("<TripComHotelWidget />");
+    expect(bookingSource).toContain('<TripComHotelWidget title="Search hotels with Trip.com" />');
     ["Flights", "Cruises", "Car Rentals", "AviasalesFlightWidget", "Search Cruise Deals →", "Search Car Rentals →", "Compare Prices →"].forEach((control) => {
       expect(homeSource).toContain(control);
+    });
+  });
+
+  it("uses the live homepage widgets inline on the Booking-page Hotels and Flights tabs", () => {
+    expect(bookingSource).toContain('<TripComHotelWidget title="Search hotels with Trip.com" />');
+    expect(bookingSource).toContain("<AviasalesFlightWidget />");
+    expect(bookingSource).not.toContain("Search Hotels on Booking.com");
+    expect(bookingSource).not.toContain("Search Flights on Aviasales");
+    ["Destination", "Check-in", "Check-out", "Guests", "Browse Cruise Deals", "Find the Best Car Rental Deals"].forEach((control) => {
+      expect(bookingSource).toContain(control);
     });
   });
 });

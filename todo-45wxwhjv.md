@@ -41,3 +41,11 @@
 - [x] Add focused tests, visually verify the revised homepage tabs, and save a published checkpoint.
 - [x] Implement the confirmed DiscoverCars-only second car-rental action rather than a RentalCars.com destination.
 - [x] Implement the confirmed DiscoverCars-only second car-rental action rather than a RentalCars.com destination.
+- [x] Inspect the homepage and Booking-page Hotels and Flights tabs to identify redirect controls and existing shared widget components.
+- [x] Replace the Booking-page Hotels redirect button and separate banner with the inline responsive Trip.com widget used on the homepage.
+- [x] Replace the Booking-page Flights redirect button with the existing live Aviasales component used on the homepage.
+- [x] Preserve the hotel fields and leave Booking-page Cruises and Car Rentals unchanged.
+- [x] Add focused regression coverage, verify desktop and mobile parity, and save a published checkpoint.
+- [x] Replace the Booking-page Hotels redirect button and separate banner with the inline responsive Trip.com widget used on the homepage.
+- [x] Replace the Booking-page Flights redirect button with the existing live Aviasales component used on the homepage.
+- [x] Preserve the hotel fields and leave Booking-page Cruises and Car Rentals unchanged.
