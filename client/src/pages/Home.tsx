@@ -15,7 +15,8 @@ import AviasalesFlightWidget from "@/components/AviasalesFlightWidget";
 import PopularFlightRoutes from "@/components/PopularFlightRoutes";
 import PopularRoutesWidget from "@/components/PopularRoutesWidget";
 import GetYourGuideTours from "@/components/GetYourGuideTours";
-import { DISCOVERCARS_AFFILIATE_URL, TRIP_COM_HOTELS_AFFILIATE_URL } from "@/lib/affiliateLinks";
+import TripComHotelWidget from "@/components/TripComHotelWidget";
+import { DISCOVERCARS_AFFILIATE_URL } from "@/lib/affiliateLinks";
 
 
 export default function Home() {
@@ -106,37 +107,7 @@ export default function Home() {
 
             {/* Hotels Tab */}
             <TabsContent value="hotels" className="space-y-4">
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                <div>
-                  <label className="text-sm font-semibold text-gray-700 mb-2 block">
-                    Destination
-                  </label>
-                  <Input placeholder="Where to?" />
-                </div>
-                <div>
-                  <label className="text-sm font-semibold text-gray-700 mb-2 block">
-                    Check-in
-                  </label>
-                  <Input type="date" />
-                </div>
-                <div>
-                  <label className="text-sm font-semibold text-gray-700 mb-2 block">
-                    Check-out
-                  </label>
-                  <Input type="date" />
-                </div>
-                <div>
-                  <label className="text-sm font-semibold text-gray-700 mb-2 block">
-                    Guests
-                  </label>
-                  <Input placeholder="2 guests" />
-                </div>
-              </div>
-              <a href={TRIP_COM_HOTELS_AFFILIATE_URL} target="_blank" rel="noopener noreferrer" className="block">
-                <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white py-6 text-lg h-auto">
-                  Search Hotels
-                </Button>
-              </a>
+              <TripComHotelWidget />
             </TabsContent>
 
             {/* Flights Tab */}

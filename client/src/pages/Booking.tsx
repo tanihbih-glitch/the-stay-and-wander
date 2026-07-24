@@ -8,6 +8,7 @@ import Footer from "@/components/Footer";
 import MobileBottomNav from "@/components/MobileBottomNav";
 import PopularRoutesWidgetBooking from "@/components/PopularRoutesWidgetBooking";
 import GetYourGuideTours from "@/components/GetYourGuideTours";
+import TripComHotelWidget from "@/components/TripComHotelWidget";
 import { DISCOVERCARS_AFFILIATE_URL } from "@/lib/affiliateLinks";
 import { useState } from "react";
 
@@ -109,6 +110,9 @@ export default function Booking() {
               <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white py-6 text-lg h-auto">
                 Search Hotels on Booking.com
               </Button>
+              <div className="mt-8 border-t border-gray-200 pt-8">
+                <TripComHotelWidget />
+              </div>
             </div>
 
             {/* Featured Destinations */}

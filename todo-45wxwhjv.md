@@ -21,3 +21,8 @@
 - [x] Inspect the homepage Hotels-tab search control and preserve its existing booking-form layout.
 - [x] Link the existing blue Search Hotels button to `https://www.trip.com/t/cRAt9tqPeV2` with safe new-tab attributes.
 - [x] Confirm Flights, Cruises, and Car Rentals tabs remain unchanged, add focused test coverage, and visually verify the homepage before publishing.
+- [x] Inspect the current homepage Hotels tab and Booking-page Hotels section before replacing or augmenting their hotel-search content.
+- [x] Replace only the homepage Hotels-tab mockup with the supplied Trip.com iframe widget.
+- [x] Add the same Trip.com iframe widget beneath the Booking-page Hotels section without changing its other booking tabs.
+- [x] Center both widgets, preserve surrounding spacing, and ensure a responsive 320px maximum width with no mobile overflow.
+- [x] Add focused tests and verify the homepage and Booking page at desktop and mobile sizes before publishing.
