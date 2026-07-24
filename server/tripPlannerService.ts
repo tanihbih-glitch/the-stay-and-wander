@@ -295,6 +295,22 @@ export async function submitConciergeRevision(options: { access: TripPlannerAcce
       .update(tripPlans)
       .set({ fullItinerary: revisedItinerary, pdfStorageKey: stored.key, pdfUrl: stored.url, deliveredAt: new Date() })
       .where(eq(tripPlans.id, plan.id));
+
+    if (plan.customerEmail) {
+      try {
+        await sendItineraryDeliveryEmail({
+          recipient: plan.customerEmail,
+          destination: plan.destination,
+          tier: "revised Concierge",
+          downloadPath: stored.url,
+        });
+      } catch (emailError) {
+        // The revised PDF is already available through the protected delivery
+        // screen, so an email-provider failure must not invalidate the revision.
+        console.error("[Trip Planner] Revised itinerary email delivery failed", emailError);
+      }
+    }
+
     return { revisedItinerary, pdfUrl: stored.url };
   } catch (error) {
     const message = error instanceof Error ? error.message.slice(0, 512) : "Revision generation failed.";

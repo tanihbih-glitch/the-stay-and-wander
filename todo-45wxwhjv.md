@@ -66,7 +66,9 @@
 - [x] Build a responsive public Trip Planner route with the requested inputs, multi-select interests, preview display, locked Day 2+ teaser, tier selection, and purchase handoff.
 - [x] Build a post-checkout itinerary-access screen that delivers the generated document safely and captures the customer email for delivery.
 - [x] Configure transactional customer-email delivery for the generated PDF link or document, with provider credentials requested only when required.
-- [ ] Add a one-time Concierge feedback form and server-side affected-parts-only revision pass using the supplied exact revision prompt.
+- [x] Add a one-time Concierge feedback form and server-side affected-parts-only revision pass using the supplied exact revision prompt.
 - [x] Add focused automated tests and browser validation for the core form-to-preview-to-payment-to-PDF flow.
 - [x] Save a published checkpoint after the core purchase and PDF-delivery flow works, before optional Concierge revision and map-image implementation.
 - [x] Document that Premium and Concierge `LOCATION:` lines require a connected Google Maps Static API or Mapbox Static Images API to render map images in PDFs.
+- [x] Hide the Concierge feedback form after the included revision has been consumed by honoring the server-provided revision-availability state on every visit.
+- [x] Add regression coverage for the already-used Concierge revision state so customers do not see a misleading second-revision form after reload.

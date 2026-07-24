@@ -7,6 +7,7 @@ import {
   type TripPlannerInput,
 } from "./tripPlannerPrompts";
 import { tierSupportsTripLength } from "./stripe";
+import { canRequestConciergeRevision } from "../client/src/lib/conciergeRevision";
 
 const input: TripPlannerInput = {
   destination: "Lisbon, Portugal",
@@ -52,6 +53,14 @@ describe("trip-planner tier eligibility", () => {
     expect(tierSupportsTripLength("premium", 7)).toBe(true);
     expect(tierSupportsTripLength("premium", 6)).toBe(false);
     expect(tierSupportsTripLength("concierge", 10)).toBe(true);
+  });
+});
+
+describe("Concierge revision visibility", () => {
+  it("hides the one-time feedback form after a Concierge revision has been consumed, including on a later revisit", () => {
+    expect(canRequestConciergeRevision({ tier: "concierge", conciergeRevisionAvailable: true, revisionComplete: false })).toBe(true);
+    expect(canRequestConciergeRevision({ tier: "concierge", conciergeRevisionAvailable: false, revisionComplete: false })).toBe(false);
+    expect(canRequestConciergeRevision({ tier: "concierge", conciergeRevisionAvailable: true, revisionComplete: true })).toBe(false);
   });
 });
 
