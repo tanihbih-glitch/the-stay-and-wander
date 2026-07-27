@@ -75,3 +75,9 @@
 - [x] Replace the homepage document title with a search-friendly title between 30 and 60 characters.
 - [x] Verify the homepage title length and rendered metadata, then publish the SEO correction.
 - [x] Save a published checkpoint for the verified 54-character homepage document-title correction.
+- [x] Review the supplied Bali hotel-prices article and confirm its title, source text, and structured content requirements.
+- [x] Add the Bali hotel-prices article to the site’s blog content and metadata system with a stable public route.
+- [x] Present the new article in the blog listing and article page using the established site design and navigation.
+- [x] Add focused regression coverage and validate the new article route, title, metadata, and rendered layout.
+- [x] Save a published checkpoint for the verified Bali hotel-prices blog post.
+- [x] Save and verify a new published checkpoint for the Bali hotel-prices blog post after the completed article, route, listing, tests, and visual validation changes.

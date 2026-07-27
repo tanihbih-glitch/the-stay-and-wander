@@ -14,6 +14,17 @@ export default function Blog() {
 
   const articles = [
     {
+      id: 8,
+      slug: "bali-hotel-prices-2026",
+      title: "Bali Hotel Prices in 2026: What You'll Actually Pay by Region",
+      category: "Hotel Reviews · Asia Travel",
+      image: "/manus-storage/blog-bali_5a40f78c.png",
+      excerpt: "Compare Bali hotel prices by region for 2026, from budget stays to luxury resorts in Seminyak, Ubud, Uluwatu, and Canggu.",
+      author: "The Stay & Wander",
+      date: "July 27, 2026",
+      readTime: "5 min read",
+    },
+    {
       id: 7,
       slug: "best-4-star-hotels-bali-2026",
       title: "Best 4 Star Hotels in Bali 2026 — Top Picks From $80/Night",
