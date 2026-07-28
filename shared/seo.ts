@@ -111,6 +111,28 @@ export const pageMetadataConfig: Record<string, PageMetadata> = {
     type: "website",
   },
 
+  about: {
+    title: "About The Stay & Wander | Travel Guides, Stays & Itineraries",
+    description:
+      "Learn how The Stay & Wander helps travellers discover beautiful places, unique stays, honest recommendations, and unforgettable journeys.",
+    image: DEFAULT_IMAGE,
+    url: "/about",
+    type: "website",
+    keywords:
+      "about The Stay & Wander, travel guides, curated hotels, travel itineraries, honest travel recommendations",
+  },
+
+  privacyPolicy: {
+    title: "Privacy Policy | The Stay & Wander",
+    description:
+      "Learn how The Stay & Wander handles cookies, analytics, affiliate links, newsletter sign-ups, and personal information.",
+    image: DEFAULT_IMAGE,
+    url: "/privacy-policy",
+    type: "website",
+    keywords:
+      "The Stay & Wander privacy policy, travel blog cookies, Google Analytics, Mailchimp, affiliate disclosure",
+  },
+
 };
 
 /**

@@ -101,6 +101,10 @@ export function ssrMiddleware(req: Request, res: Response, next: NextFunction) {
     metadata = pageMetadataConfig.itineraries;
   } else if (path === "/booking") {
     metadata = pageMetadataConfig.booking;
+  } else if (path === "/about") {
+    metadata = pageMetadataConfig.about;
+  } else if (path === "/privacy-policy") {
+    metadata = pageMetadataConfig.privacyPolicy;
   }
 
   // Attach to request for use in route handlers

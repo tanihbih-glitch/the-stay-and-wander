@@ -97,16 +97,16 @@ export default function Footer() {
             <h4 className="font-semibold text-gray-900 mb-4">Company</h4>
             <ul className="space-y-2">
               <li>
-                <a
-                  href="#"
+                <Link
+                  href="/about"
                   className="text-sm text-gray-600 hover:text-blue-600 transition-colors no-underline"
                 >
                   About Us
-                </a>
+                </Link>
               </li>
               <li>
                 <a
-                  href="#"
+                  href="mailto:thestayandwander@thestayandwander.com"
                   className="text-sm text-gray-600 hover:text-blue-600 transition-colors no-underline"
                 >
                   Contact
@@ -161,12 +161,12 @@ export default function Footer() {
               extra cost to you.
             </p>
             <div className="flex gap-6 text-xs">
-              <a
-                href="#"
+              <Link
+                href="/privacy-policy"
                 className="text-gray-600 hover:text-blue-600 transition-colors no-underline"
               >
                 Privacy Policy
-              </a>
+              </Link>
               <a
                 href="#"
                 className="text-gray-600 hover:text-blue-600 transition-colors no-underline"

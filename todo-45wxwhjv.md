@@ -89,3 +89,9 @@
 - [x] Add focused regression coverage for route cleanup and publish a verified site-cleanup checkpoint.
 - [x] Align the legacy SSG sitemap generator with the canonical public-route registry so it cannot recreate stale URLs.
 - [x] Save and verify the published site-cleanup checkpoint after all final audit changes are complete.
+- [x] Review existing public-page, footer, routing, and metadata conventions for the new legal and brand pages.
+- [x] Create a responsive `/privacy-policy` page covering cookies, affiliate links, Google Analytics, Mailchimp collection, contact details, and standard travel-blog privacy practices.
+- [x] Create a responsive `/about` page using the supplied brand message and contact address.
+- [x] Add both pages to the footer and canonical public-route, sitemap, and SEO metadata inventories.
+- [x] Add focused automated coverage and visually verify the new pages and footer navigation at desktop and mobile widths.
+- [ ] Save and verify the published About Us and Privacy Policy update.
