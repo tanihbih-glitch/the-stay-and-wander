@@ -94,4 +94,4 @@
 - [x] Create a responsive `/about` page using the supplied brand message and contact address.
 - [x] Add both pages to the footer and canonical public-route, sitemap, and SEO metadata inventories.
 - [x] Add focused automated coverage and visually verify the new pages and footer navigation at desktop and mobile widths.
-- [ ] Save and verify the published About Us and Privacy Policy update.
+- [x] Save and verify the published About Us and Privacy Policy update.
