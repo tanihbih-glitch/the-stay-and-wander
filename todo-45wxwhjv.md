@@ -95,3 +95,12 @@
 - [x] Add both pages to the footer and canonical public-route, sitemap, and SEO metadata inventories.
 - [x] Add focused automated coverage and visually verify the new pages and footer navigation at desktop and mobile widths.
 - [x] Save and verify the published About Us and Privacy Policy update.
+- [x] Review the attached Deals-page copy and affiliate URLs alongside the site’s existing navigation, affiliate, widget, and Mailchimp conventions.
+- [x] Build a responsive `/deals` page using the supplied content, ocean-blue, gold, and sand visual treatment, all supplied affiliate links, a GetYourGuide Tours widget with partner ID `YOPATWV`, Mailchimp subscription flow for list `4512b2fda5`, and an affiliate disclosure.
+- [x] Add Deals between Booking and Blog in the desktop and mobile navigation; register it in the canonical route, metadata, SSR, and sitemap inventories.
+- [x] Add focused tests for Deals content, affiliate-link safety, navigation placement, widget, email subscription, and canonical route coverage; verify desktop and mobile rendering.
+- [ ] Save, publish, and verify the live Deals page at `https://thestayandwander.com/deals`.
+- [x] Apply the user-approved omission of numeric ratings and crossed-out comparison prices, add the specified hotel and tour badges, and preserve all supplied verified offer details and affiliate links.
+- [x] Replace the optimistic Deals newsletter behavior with a resilient Mailchimp submission flow for audience `4512b2fda5`, including clear validation and failure feedback.
+- [x] Add regression evidence that the Deals item appears in the shared Header’s desktop and mobile menus between Booking and Blog.
+- [ ] Re-run full validation, verify responsive behavior, publish, and confirm the live Deals URL.

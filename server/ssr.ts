@@ -101,6 +101,8 @@ export function ssrMiddleware(req: Request, res: Response, next: NextFunction) {
     metadata = pageMetadataConfig.itineraries;
   } else if (path === "/booking") {
     metadata = pageMetadataConfig.booking;
+  } else if (path === "/deals") {
+    metadata = pageMetadataConfig.deals;
   } else if (path === "/about") {
     metadata = pageMetadataConfig.about;
   } else if (path === "/privacy-policy") {

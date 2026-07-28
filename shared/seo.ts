@@ -111,6 +111,17 @@ export const pageMetadataConfig: Record<string, PageMetadata> = {
     type: "website",
   },
 
+  deals: {
+    title: "Best Travel Deals This Week — Hotels · Flights · Tours",
+    description:
+      "Discover this week's hand-picked hotel offers, flight fares, tours, and car-rental deals from The Stay & Wander.",
+    image: DEFAULT_IMAGE,
+    url: "/deals",
+    type: "website",
+    keywords:
+      "travel deals, hotel deals, flight deals, tours, car rental deals, travel offers",
+  },
+
   about: {
     title: "About The Stay & Wander | Travel Guides, Stays & Itineraries",
     description:

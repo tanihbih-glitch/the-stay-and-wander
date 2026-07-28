@@ -21,6 +21,7 @@ import TripPlanner from "./pages/TripPlanner";
 import TripPlannerSuccess from "./pages/TripPlannerSuccess";
 import About from "./pages/About";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
+import Deals from "./pages/Deals";
 
 import { AffiliateAnalytics } from "./pages/AffiliateAnalytics";
 
@@ -36,6 +37,7 @@ function Router() {
       <Route path={"/trip-planner/success"} component={TripPlannerSuccess} />
       <Route path={"/about"} component={About} />
       <Route path={"/privacy-policy"} component={PrivacyPolicy} />
+      <Route path={"/deals"} component={Deals} />
       <Route path={"/blog"} component={Blog} />
       <Route path={"/blog/best-hotels-bali-2026"} component={BlogBaliHotels} />
       <Route path={"/blog/best-4-star-hotels-bali-2026"} component={BlogBaliFourStarHotels} />

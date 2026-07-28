@@ -41,6 +41,28 @@ export const DISCOVERCARS_AFFILIATE_URL = "https://www.discovercars.com/?a_aid=T
 export const TRIP_COM_HOTELS_AFFILIATE_URL = "https://www.trip.com/t/cRAt9tqPeV2";
 
 /**
+ * Verified affiliate destinations used by the public Deals page.
+ */
+export const DEALS_AFFILIATE_LINKS = {
+  hotels: {
+    bali: "https://booking.stay22.com/thestayandwander/r-lvU3PLVF",
+    lisbon: "https://booking.stay22.com/thestayandwander/_3gvRmesd0",
+    dubrovnik: "https://booking.stay22.com/thestayandwander/FBzzZenMr0",
+    santorini: "https://booking.stay22.com/thestayandwander/GTP9FOQSFn",
+    tokyo: "https://booking.stay22.com/thestayandwander/xaad-D11z0",
+    rio: "https://booking.stay22.com/thestayandwander/zRyDL-E_PN",
+  },
+  flights: TRAVELPAYOUTS_FLIGHT_LINK,
+  tours: {
+    bali: "https://gyg.me/As25WS5K",
+    brazil: "https://gyg.me/As25WS5K",
+    dubrovnik: "https://gyg.me/JwtO7kBb",
+    santorini: "https://gyg.me/nmBnWoSe",
+  },
+  carRentals: DISCOVERCARS_AFFILIATE_URL,
+} as const;
+
+/**
  * Helper function to generate Travelpayout search links
  * @param searchKey - The search key from Travelpayout API
  * @param campaign - Campaign name for tracking
