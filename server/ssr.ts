@@ -89,10 +89,6 @@ export function ssrMiddleware(req: Request, res: Response, next: NextFunction) {
   // Match routes to metadata
   if (path === "/") {
     metadata = pageMetadataConfig.home;
-  } else if (path === "/about") {
-    metadata = pageMetadataConfig.about;
-  } else if (path === "/contact") {
-    metadata = pageMetadataConfig.contact;
   } else if (path === "/blog") {
     metadata = pageMetadataConfig.blog;
   } else if (path.startsWith("/blog/")) {
@@ -105,12 +101,6 @@ export function ssrMiddleware(req: Request, res: Response, next: NextFunction) {
     metadata = pageMetadataConfig.itineraries;
   } else if (path === "/booking") {
     metadata = pageMetadataConfig.booking;
-  } else if (path === "/destinations/europe") {
-    metadata = pageMetadataConfig.destinationEurope;
-  } else if (path === "/destinations/asia") {
-    metadata = pageMetadataConfig.destinationAsia;
-  } else if (path === "/destinations/brazil") {
-    metadata = pageMetadataConfig.destinationBrazil;
   }
 
   // Attach to request for use in route handlers

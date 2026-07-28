@@ -5,6 +5,7 @@ import { nanoid } from "nanoid";
 import path from "path";
 import { createServer as createViteServer } from "vite";
 import viteConfig from "../../vite.config";
+import { isApplicationRoute } from "../../shared/publicRoutes";
 
 export async function setupVite(app: Express, server: Server) {
   const serverOptions = {
@@ -39,7 +40,8 @@ export async function setupVite(app: Express, server: Server) {
         `src="/src/main.tsx?v=${nanoid()}"`
       );
       const page = await vite.transformIndexHtml(url, template);
-      res.status(200).set({ "Content-Type": "text/html" }).end(page);
+      const statusCode = isApplicationRoute(req.originalUrl) ? 200 : 404;
+      res.status(statusCode).set({ "Content-Type": "text/html" }).end(page);
     } catch (e) {
       vite.ssrFixStacktrace(e as Error);
       next(e);
@@ -60,8 +62,10 @@ export function serveStatic(app: Express) {
 
   app.use(express.static(distPath));
 
-  // fall through to index.html if the file doesn't exist
-  app.use("*", (_req, res) => {
-    res.sendFile(path.resolve(distPath, "index.html"));
+  // Serve the SPA shell for known client routes only. Unknown URLs retain the
+  // client NotFound presentation while returning a real HTTP 404 for crawlers.
+  app.use("*", (req, res) => {
+    const statusCode = isApplicationRoute(req.originalUrl) ? 200 : 404;
+    res.status(statusCode).sendFile(path.resolve(distPath, "index.html"));
   });
 }

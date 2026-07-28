@@ -81,3 +81,11 @@
 - [x] Add focused regression coverage and validate the new article route, title, metadata, and rendered layout.
 - [x] Save a published checkpoint for the verified Bali hotel-prices blog post.
 - [x] Save and verify a new published checkpoint for the Bali hotel-prices blog post after the completed article, route, listing, tests, and visual validation changes.
+- [x] Capture the live content, status, and source implementation of `/exploring-the-best-travel-destinations-for-modern-wanderlust/`.
+- [x] Audit internal navigation, footer links, blog content, sitemap, robots directives, and registered routes for references to the reported URL.
+- [x] Scan the codebase and live route inventory for other unlinked template or demo pages, distinguishing intentional private routes from removable remnants.
+- [x] Remove confirmed leftover pages and references, including sitemap entries and obsolete robots directives when applicable.
+- [x] Verify removed URLs return a proper 404 response while intended public routes remain healthy.
+- [x] Add focused regression coverage for route cleanup and publish a verified site-cleanup checkpoint.
+- [x] Align the legacy SSG sitemap generator with the canonical public-route registry so it cannot recreate stale URLs.
+- [ ] Save and verify the published site-cleanup checkpoint after all final audit changes are complete.

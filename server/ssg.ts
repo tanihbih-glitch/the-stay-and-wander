@@ -7,6 +7,7 @@
 import fs from "fs";
 import path from "path";
 import { pageMetadataConfig, generateMetaTags, generateBlogMetadata, generateItineraryMetadata } from "../shared/seo";
+import { generateCompleteSitemap } from "./generateSitemap";
 
 interface StaticPage {
   path: string;
@@ -82,25 +83,7 @@ function getStaticPages(): StaticPage[] {
  * Generate sitemap.xml
  */
 export function generateSitemap(): string {
-  const pages = getStaticPages();
-  const baseUrl = "https://thestayandwander.com";
-
-  const urls = pages
-    .map(
-      (page) => `
-  <url>
-    <loc>${baseUrl}${page.path}</loc>
-    <lastmod>${new Date().toISOString().split("T")[0]}</lastmod>
-    <changefreq>${page.path === "/" ? "weekly" : "monthly"}</changefreq>
-    <priority>${page.path === "/" ? "1.0" : "0.8"}</priority>
-  </url>`
-    )
-    .join("");
-
-  return `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${urls}
-</urlset>`;
+  return generateCompleteSitemap();
 }
 
 /**

@@ -82,24 +82,6 @@ export const pageMetadataConfig: Record<string, PageMetadata> = {
       "travel, hotels, itineraries, destinations, Europe, Asia, Brazil, travel planning",
   },
 
-  about: {
-    title: "About The Stay & Wander - Our Travel Philosophy",
-    description:
-      "Learn about The Stay & Wander's mission to inspire and guide travelers to discover beautiful places and create unforgettable memories.",
-    image: DEFAULT_IMAGE,
-    url: "/about",
-    type: "website",
-  },
-
-  contact: {
-    title: "Contact The Stay & Wander - Get in Touch",
-    description:
-      "Have questions about our itineraries or travel recommendations? Get in touch with The Stay & Wander team.",
-    image: DEFAULT_IMAGE,
-    url: "/contact",
-    type: "website",
-  },
-
   blog: {
     title: "Travel Blog - Tips, Guides & Inspiration | The Stay & Wander",
     description:
@@ -129,35 +111,6 @@ export const pageMetadataConfig: Record<string, PageMetadata> = {
     type: "website",
   },
 
-  destinationEurope: {
-    title: "Europe Travel Guide - Best Cities & Destinations | The Stay & Wander",
-    description:
-      "Discover Europe's most enchanting cities and destinations. Travel guides, hotel recommendations, and insider tips for Paris, Rome, Barcelona, and more.",
-    image: DEFAULT_IMAGE,
-    url: "/destinations/europe",
-    type: "website",
-    keywords: "Europe, travel, cities, destinations, Paris, Rome, Barcelona",
-  },
-
-  destinationAsia: {
-    title: "Asia Travel Guide - Best Cities & Destinations | The Stay & Wander",
-    description:
-      "Explore Asia's most vibrant destinations. Travel guides for Tokyo, Bangkok, Bali, and more with hotel recommendations and travel tips.",
-    image: DEFAULT_IMAGE,
-    url: "/destinations/asia",
-    type: "website",
-    keywords: "Asia, travel, cities, destinations, Tokyo, Bangkok, Bali",
-  },
-
-  destinationBrazil: {
-    title: "Brazil Travel Guide - Best Cities & Destinations | The Stay & Wander",
-    description:
-      "Discover Brazil's most beautiful destinations. Travel guides for Rio, São Paulo, Salvador, and more with local insights and recommendations.",
-    image: DEFAULT_IMAGE,
-    url: "/destinations/brazil",
-    type: "website",
-    keywords: "Brazil, travel, cities, destinations, Rio, São Paulo, Salvador",
-  },
 };
 
 /**
