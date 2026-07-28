@@ -88,4 +88,4 @@
 - [x] Verify removed URLs return a proper 404 response while intended public routes remain healthy.
 - [x] Add focused regression coverage for route cleanup and publish a verified site-cleanup checkpoint.
 - [x] Align the legacy SSG sitemap generator with the canonical public-route registry so it cannot recreate stale URLs.
-- [ ] Save and verify the published site-cleanup checkpoint after all final audit changes are complete.
+- [x] Save and verify the published site-cleanup checkpoint after all final audit changes are complete.
