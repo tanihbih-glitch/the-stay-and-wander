@@ -14,6 +14,17 @@ export default function Blog() {
 
   const articles = [
     {
+      id: 10,
+      slug: "things-to-do-in-bali-2026",
+      title: "Things to Do in Bali: 50 Best Experiences for 2026",
+      category: "Bali Guide · Indonesia Travel",
+      image: "/manus-storage/bali-tegallalang-rice-terraces-hero_030f04ef.jpg",
+      excerpt: "Plan a more considered Bali trip with 50 experiences across temples, beaches, food, nature, wellness, and island escapes.",
+      author: "The Stay & Wander",
+      date: "July 30, 2026",
+      readTime: "18 min read",
+    },
+    {
       id: 9,
       slug: "best-hotels-dubai-2026",
       title: "Best Hotels in Dubai & Abu Dhabi for Every Kind of Stay",

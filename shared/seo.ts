@@ -181,6 +181,19 @@ export const pageMetadataConfig: Record<string, PageMetadata> = {
       "where to stay in Lisbon 2026, Lisbon hotels, Alfama hotels, Chiado hotels, Bairro Alto hotels, Belém hotels, Lisbon neighbourhood guide",
   },
 
+  baliExperiencesGuide: {
+    title: "Things to Do in Bali: 50 Best Experiences for 2026 | The Stay & Wander",
+    description:
+      "Plan an unforgettable Bali trip with 50 memorable experiences across temples, beaches, food, nature, wellness, adventure, and island escapes — plus practical planning tips for 2026.",
+    image: `${SITE_URL}/manus-storage/bali-tegallalang-rice-terraces-hero_030f04ef.jpg`,
+    url: "/blog/things-to-do-in-bali-2026",
+    type: "article",
+    author: "The Stay & Wander",
+    publishedDate: "2026-07-30",
+    keywords:
+      "things to do in Bali 2026, Bali experiences, Bali temples, Bali beaches, Ubud guide, Nusa Penida, Bali itinerary, Bali travel guide",
+  },
+
 };
 
 /**

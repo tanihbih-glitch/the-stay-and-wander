@@ -146,3 +146,13 @@
 - [x] Improve the visible fallback treatment for the two Lisbon GetYourGuide widget placements, preserving the requested partner widget while ensuring a clear Lisbon tours action is available if embedded content loads late or is blocked.
 - [x] Restore compatibility with the existing GetYourGuide partner-ID regression assertion after exporting the partner constant for Lisbon article coverage.
 - [x] Record the user-confirmed Google Search Console sitemap resubmission and close the duplicate-submission task without performing another external action.
+- [x] Create `/blog/things-to-do-in-bali-2026` as “Things to Do in Bali: 50 Best Experiences for 2026” in the established blog-article design using the previously supplied Bali content.
+- [x] Add the requested GetYourGuide widget with partner ID `YOPATWV` and centralize the supplied Bali tours, hotels, and flights affiliate destinations with secure new-tab behavior.
+- [x] Register the Bali experiences article in application routing, blog navigation, server-rendered SEO, structured data, and the XML sitemap.
+- [x] Add or update regression coverage and validate the article at desktop and mobile widths. The Bali guide test, project type-check, and 80-test full suite pass; full-page desktop and 390px mobile checks show the long-form sections, CTAs, widget fallbacks, tables, and footer render in sequence without an apparent layout break.
+- [ ] Publish the Bali guide and verify the live canonical URL, crawler-visible metadata, hero asset, and sitemap entry.
+- [ ] Prepare Search Console indexing requests once the user supplies the complete URL list following their unfinished prompt.
+- [x] Write all 50 Bali experiences across the seven supplied categories, with practical timing, location, cost, and insider-tip guidance for each entry.
+- [x] Generate and integrate the requested Tegallalang rice-terrace golden-hour hero image in approved external project storage.
+- [x] Place four GetYourGuide partner widgets after the introduction, after Culture and Temples, after Beaches and Water, and before the final CTA; ensure visible partner-linked fallbacks remain usable if embeds load late.
+- [x] Add the requested Where to Stay and Bali Budget Guide comparison tables, three-action final CTA, four related articles, top-and-bottom social sharing, and exact affiliate disclosure.

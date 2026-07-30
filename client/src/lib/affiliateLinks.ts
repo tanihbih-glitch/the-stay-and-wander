@@ -95,6 +95,17 @@ export const LISBON_ARTICLE_AFFILIATE_LINKS = {
 } as const;
 
 /**
+ * Canonical affiliate destinations for the Bali 50-experiences article.
+ * Centralize these three actions so every hotel, flight, and tour link on the
+ * guide remains consistent with the supplied campaign destinations.
+ */
+export const BALI_EXPERIENCES_AFFILIATE_LINKS = {
+  tours: "https://gyg.me/As25WS5K",
+  hotels: "https://booking.stay22.com/thestayandwander/r-lvU3PLVF",
+  flights: TRAVELPAYOUTS_FLIGHT_LINK,
+} as const;
+
+/**
  * Helper function to generate Travelpayout search links
  * @param searchKey - The search key from Travelpayout API
  * @param campaign - Campaign name for tracking
