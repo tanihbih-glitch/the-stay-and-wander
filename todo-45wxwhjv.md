@@ -121,9 +121,13 @@
 - [x] Implement a validated contact form that delivers enquiries to `thestayandwander@thestayandwander.com` and sends a reliable automatic reply.
 - [x] Add Corporate Travel to the main navigation and register page metadata, canonical route, SSR, sitemap, and robots support.
 - [x] Add focused coverage and validate desktop/mobile layouts, affiliate safety, contact flow, navigation, metadata, sitemap, and search support.
-- [ ] Save, publish, and confirm the live Corporate Travel page at `https://thestayandwander.com/corporate-travel`.
+- [x] Save, publish, and confirm the live Corporate Travel page at `https://thestayandwander.com/corporate-travel`.
 - [x] Ensure the Corporate Travel title, description, Open Graph data, and canonical URL are injected into server-rendered HTML for crawler-visible SEO.
-- [ ] Verify the deployed Resend configuration can deliver a Corporate Travel enquiry and its automatic reply without using an unapproved live recipient.
+- [x] Verify the deployed Resend configuration can deliver a Corporate Travel enquiry and its automatic reply without using an unapproved live recipient. The user approved a test to `thestayandwander@thestayandwander.com`; Resend reported `last_event: delivered` for both messages.
 - [x] Add and run focused success and failure-path coverage for Corporate Travel contact delivery, then record the contact-flow validation outcome. Mocked Resend tests confirm notification and auto-reply dispatch payloads, unconfigured handling, and provider-error behavior without emailing an unapproved recipient.
 - [x] Handle partial email delivery so an owner-notification success remains visible even if the customer auto-reply fails, and cover that behavior with regression tests.
-- [x] Capture explicit mobile rendering validation for `/corporate-travel` and document the non-invasive live-email verification boundary. The mobile page was visually checked at 390px wide; live email dispatch remains intentionally untriggered until an approved test recipient is available.
+- [x] Capture explicit mobile rendering validation for `/corporate-travel` and document the non-invasive live-email verification boundary. The page was rechecked at 390px wide after the approved production submission; its mobile header, hero, calls to action, and bottom navigation are usable.
+- [x] Submit the user-approved production Corporate Travel test enquiry using the supplied Test User details and `thestayandwander@thestayandwander.com` as the recipient and reply address.
+- [x] Confirm the live form exposes the correct success state after the approved submission and record the server-side delivery outcome without exposing credentials. The live page displayed: “Thank you! We will send your personalised corporate travel proposal within 24 hours. A confirmation has been emailed to you.”
+- [x] Verify the approved owner notification and automatic reply against the configured Resend delivery service, then capture a current live mobile page screenshot for the user. Both expected messages to the approved address reported `last_event: delivered` in Resend.
+- [x] Capture and review explicit browser evidence of the post-submit success message on the live Corporate Travel page before finalizing validation. The reviewed live screenshot shows the visible green confirmation message beneath the reset form.
