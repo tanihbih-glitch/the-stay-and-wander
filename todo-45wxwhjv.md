@@ -110,5 +110,8 @@
 - [x] Add Middle East to the itineraries page, blog-category board, header/footer/about destination copy, and every relevant site-wide destination mention.
 - [x] Update the requested homepage/site meta description plus canonical route, sitemap, and robots support as required.
 - [x] Add focused regression coverage and validate desktop/mobile destination discovery, links, metadata, and search-indexing support.
-- [ ] Save, publish, and confirm the live Middle East expansion.
+- [x] Save, publish, and confirm the live Middle East expansion.
 - [x] Verify and, where needed, update every remaining site-wide Europe/Asia/Brazil-only destination reference—including the About page—then add targeted regression coverage before publication.
+- [x] Live-verify the custom-domain homepage exposes the Middle East tagline, destination card, and both requested calls to action.
+- [x] Live-verify the custom-domain itineraries page exposes the Middle East tab and Dubai–Abu Dhabi itinerary.
+- [x] Live-verify the custom-domain blog page exposes the Middle East category and Dubai guide entry before completing publication verification.
