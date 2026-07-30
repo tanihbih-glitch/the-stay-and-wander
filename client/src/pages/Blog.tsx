@@ -14,6 +14,17 @@ export default function Blog() {
 
   const articles = [
     {
+      id: 9,
+      slug: "best-hotels-dubai-2026",
+      title: "Best Hotels in Dubai & Abu Dhabi for Every Kind of Stay",
+      category: "Middle East · Hotel Reviews",
+      image: "/manus-storage/dubai-middle-east-destination_1431ce58.png",
+      excerpt: "Use this Dubai and Abu Dhabi guide to choose a UAE base for skyline views, beach time, culture, and desert experiences.",
+      author: "The Stay & Wander",
+      date: "July 30, 2026",
+      readTime: "7 min read",
+    },
+    {
       id: 8,
       slug: "bali-hotel-prices-2026",
       title: "Bali Hotel Prices in 2026: What You'll Actually Pay by Region",
@@ -115,6 +126,7 @@ export default function Blog() {
     "packing lists",
     "affiliate picks",
     "itinerary ideas",
+    "middle east",
   ];
 
   const filteredArticles =
@@ -132,7 +144,7 @@ export default function Blog() {
 
   const blogPageMetadata = {
     title: "Travel Blog - Tips, Guides & Inspiration | The Stay & Wander",
-    description: "Expert travel guides, hotel reviews, packing tips, and insider stories from destinations around the world.",
+    description: "Expert travel guides, hotel reviews, packing tips, and insider stories from Europe, Asia, Brazil and the Middle East.",
     image: "https://thestayandwander.com/og-image.png",
     url: "/blog",
     keywords: "travel blog, travel guides, hotel reviews, packing tips, travel tips",

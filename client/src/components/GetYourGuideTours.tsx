@@ -82,7 +82,7 @@ export default function GetYourGuideTours({
               {label}
             </h2>
             <p className="text-lg md:text-xl text-gray-700">
-              Hand-picked activities across Europe, Asia & Brazil — book instantly.
+              Hand-picked activities across Europe, Asia, Brazil &amp; the Middle East — book instantly.
             </p>
           </div>
         )}

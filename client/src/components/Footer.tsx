@@ -24,6 +24,9 @@ export default function Footer() {
             <p className="text-sm text-gray-600 mb-4">
               Discover beautiful places, unique stays & unforgettable journeys.
             </p>
+            <p className="mb-4 text-xs font-semibold uppercase tracking-[0.14em] text-[#b3842d]">
+              Europe · Asia · Brazil · Middle East
+            </p>
             <div className="flex gap-4">
               <a
                 href="https://instagram.com"

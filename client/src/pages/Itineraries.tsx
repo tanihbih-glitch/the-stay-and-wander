@@ -394,6 +394,30 @@ export default function Itineraries() {
       ],
       totalCost: "$3,200",
     },
+    {
+      id: 4,
+      title: "Dubai & Abu Dhabi City-to-Desert Escape",
+      region: "MIDDLE EAST",
+      duration: "5 Days",
+      season: "October - April",
+      budget: "$2,000 - $3,200",
+      difficulty: "Easy",
+      image: "/manus-storage/dubai-middle-east-destination_1431ce58.png",
+      description:
+        "A five-day UAE route pairing Dubai's skyline and desert edges with Abu Dhabi's cultural landmarks and waterfront calm.",
+      days: [
+        { day: 1, title: "Arrive in Dubai", morning: "Arrive and check into your hotel", afternoon: "Walk the Downtown Dubai district", evening: "Watch the city lights from a skyline viewpoint" },
+        { day: 2, title: "Old & New Dubai", morning: "Explore Dubai Creek and the historic quarter", afternoon: "Browse a modern design district", evening: "Dinner by the marina" },
+        { day: 3, title: "Desert Afternoon", morning: "Slow breakfast and pool time", afternoon: "Join a desert safari experience", evening: "Return to the city for a relaxed dinner" },
+        { day: 4, title: "Travel to Abu Dhabi", morning: "Transfer to Abu Dhabi", afternoon: "Visit the cultural district", evening: "Sunset along the Corniche" },
+        { day: 5, title: "Abu Dhabi & Departure", morning: "Choose a final museum, beach, or market stop", afternoon: "Depart for the airport", evening: "Fly home" },
+      ],
+      hotels: [
+        { city: "Dubai", name: "Downtown or Dubai Marina base", nights: 3, pricePerNight: "From $89/night" },
+        { city: "Abu Dhabi", name: "Corniche or Saadiyat Island base", nights: 1, pricePerNight: "From $95/night" },
+      ],
+      totalCost: "$2,600",
+    },
   ];
 
   const filteredItineraries =
@@ -412,7 +436,7 @@ export default function Itineraries() {
             Your Perfect Trip, Already Planned
           </h1>
           <p className="text-lg text-gray-600">
-            Expert day-by-day travel guides for Europe, Asia & Brazil
+            Expert day-by-day travel guides for Europe, Asia, Brazil &amp; the Middle East
           </p>
         </div>
       </section>
@@ -420,7 +444,7 @@ export default function Itineraries() {
       {/* Filter Bar */}
       <section className="sticky top-20 z-30 bg-white border-b border-gray-200 py-4 px-4">
         <div className="container flex gap-4 overflow-x-auto">
-          {["all", "asia", "europe", "brazil"].map((filter) => (
+          {["all", "asia", "europe", "brazil", "middle east"].map((filter) => (
             <button
               key={filter}
               onClick={() => setActiveFilter(filter)}
@@ -568,6 +592,8 @@ export default function Itineraries() {
                               ? 'https://booking.stay22.com/thestayandwander/r-lvU3PLVF'
                               : itinerary.id === 2
                               ? 'https://booking.stay22.com/thestayandwander/_3gvRmesd0'
+                              : itinerary.id === 4
+                              ? 'https://booking.stay22.com/thestayandwander/r-lvU3PLVF'
                               : 'https://booking.stay22.com/thestayandwander/zRyDL-E_PN'
                           }
                           target="_blank"
@@ -583,25 +609,36 @@ export default function Itineraries() {
 
                 {/* CTA Section */}
                 <div className="p-6 flex flex-col sm:flex-row gap-4">
-                  <Link href={`/itinerary/${itinerary.id === 1 ? 'tokyo-seoul' : itinerary.id === 2 ? 'mediterranean' : 'brazil'}`} className="flex-1">
+                  <Link href={itinerary.id === 4 ? "/blog/best-hotels-dubai-2026" : `/itinerary/${itinerary.id === 1 ? 'tokyo-seoul' : itinerary.id === 2 ? 'mediterranean' : 'brazil'}`} className="flex-1">
                     <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white py-6 h-auto">
-                      View Full Itinerary
+                      {itinerary.id === 4 ? "Explore Dubai Hotels" : "View Full Itinerary"}
                     </Button>
                   </Link>
-                  <a
-                    href={
-                      itinerary.id === 1
-                        ? 'https://mcusercontent.com/48ee0dc10117e46d5a5e32365/files/911d0081-9637-721b-5c81-6c30aa7a4d4c/tokyo_seoul_itinerary_FINAL.pdf'
-                        : itinerary.id === 2
-                        ? 'https://mcusercontent.com/48ee0dc10117e46d5a5e32365/files/3cc2266f-cb96-82b2-7eed-221c699edee1/mediterranean_escape_itinerary_FINAL.pdf'
-                        : 'https://mcusercontent.com/48ee0dc10117e46d5a5e32365/files/5beb10ea-503e-f463-312b-0919b3181eb3/brazil_adventure_itinerary_FINAL.pdf'
-                    }
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex-1 border border-blue-600 text-blue-600 hover:bg-blue-50 py-6 h-auto px-4 rounded text-center font-semibold"
-                  >
-                    Download This Itinerary (PDF)
-                  </a>
+                  {itinerary.id === 4 ? (
+                    <a
+                      href="https://booking.stay22.com/thestayandwander/r-lvU3PLVF"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 border border-blue-600 text-blue-600 hover:bg-blue-50 py-6 h-auto px-4 rounded text-center font-semibold"
+                    >
+                      Find UAE Hotels
+                    </a>
+                  ) : (
+                    <a
+                      href={
+                        itinerary.id === 1
+                          ? 'https://mcusercontent.com/48ee0dc10117e46d5a5e32365/files/911d0081-9637-721b-5c81-6c30aa7a4d4c/tokyo_seoul_itinerary_FINAL.pdf'
+                          : itinerary.id === 2
+                          ? 'https://mcusercontent.com/48ee0dc10117e46d5a5e32365/files/3cc2266f-cb96-82b2-7eed-221c699edee1/mediterranean_escape_itinerary_FINAL.pdf'
+                          : 'https://mcusercontent.com/48ee0dc10117e46d5a5e32365/files/5beb10ea-503e-f463-312b-0919b3181eb3/brazil_adventure_itinerary_FINAL.pdf'
+                      }
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 border border-blue-600 text-blue-600 hover:bg-blue-50 py-6 h-auto px-4 rounded text-center font-semibold"
+                    >
+                      Download This Itinerary (PDF)
+                    </a>
+                  )}
                 </div>
               </div>
             ))}

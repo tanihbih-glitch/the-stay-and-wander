@@ -74,18 +74,18 @@ export const pageMetadataConfig: Record<string, PageMetadata> = {
   home: {
     title: "The Stay & Wander | Curated Stays & Travel Itineraries",
     description:
-      "Discover beautiful places, unique stays, and unforgettable journeys. Hand-picked hotels, custom itineraries, and travel inspiration for Europe, Asia & Brazil.",
+      "Discover beautiful places, unique stays and unforgettable journeys across Europe, Asia, Brazil and the Middle East — hand-picked hotels, flight deals and complete travel itineraries",
     image: DEFAULT_IMAGE,
     url: "/",
     type: "website",
     keywords:
-      "travel, hotels, itineraries, destinations, Europe, Asia, Brazil, travel planning",
+      "travel, hotels, itineraries, destinations, Europe, Asia, Brazil, Middle East, Dubai, Abu Dhabi, travel planning",
   },
 
   blog: {
     title: "Travel Blog - Tips, Guides & Inspiration | The Stay & Wander",
     description:
-      "Expert travel guides, hotel reviews, packing tips, and insider stories from destinations around the world.",
+      "Expert travel guides, hotel reviews, packing tips, and insider stories from Europe, Asia, Brazil and the Middle East.",
     image: DEFAULT_IMAGE,
     url: "/blog",
     type: "website",
@@ -93,9 +93,9 @@ export const pageMetadataConfig: Record<string, PageMetadata> = {
   },
 
   itineraries: {
-    title: "Curated Travel Itineraries - Europe, Asia & Brazil | The Stay & Wander",
+    title: "Curated Travel Itineraries - Europe, Asia, Brazil & Middle East | The Stay & Wander",
     description:
-      "Explore our hand-picked travel itineraries for Tokyo, Mediterranean, Brazil, and more. Perfect for your next adventure.",
+      "Explore our hand-picked travel itineraries for Tokyo, the Mediterranean, Brazil, Dubai, Abu Dhabi, and more. Perfect for your next adventure.",
     image: DEFAULT_IMAGE,
     url: "/itineraries",
     type: "website",
@@ -125,7 +125,7 @@ export const pageMetadataConfig: Record<string, PageMetadata> = {
   about: {
     title: "About The Stay & Wander | Travel Guides, Stays & Itineraries",
     description:
-      "Learn how The Stay & Wander helps travellers discover beautiful places, unique stays, honest recommendations, and unforgettable journeys.",
+      "Learn how The Stay & Wander helps travellers discover beautiful places, unique stays, honest recommendations, and unforgettable journeys across Europe, Asia, Brazil and the Middle East.",
     image: DEFAULT_IMAGE,
     url: "/about",
     type: "website",
@@ -142,6 +142,19 @@ export const pageMetadataConfig: Record<string, PageMetadata> = {
     type: "website",
     keywords:
       "The Stay & Wander privacy policy, travel blog cookies, Google Analytics, Mailchimp, affiliate disclosure",
+  },
+
+  dubaiHotelGuide: {
+    title: "Best Hotels in Dubai & Abu Dhabi | The Stay & Wander",
+    description:
+      "Plan a Dubai and Abu Dhabi stay with our guide to the best UAE neighbourhoods for skyline views, beach time, culture, and desert experiences.",
+    image: `${SITE_URL}/manus-storage/dubai-middle-east-destination_1431ce58.png`,
+    url: "/blog/best-hotels-dubai-2026",
+    type: "article",
+    author: "The Stay & Wander",
+    publishedDate: "2026-07-30",
+    keywords:
+      "Dubai hotels, Abu Dhabi hotels, UAE travel guide, Dubai travel, Middle East hotels, Burj Khalifa views",
   },
 
 };

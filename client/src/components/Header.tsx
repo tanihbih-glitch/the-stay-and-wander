@@ -29,8 +29,8 @@ export default function Header() {
             <span className="font-display text-xl font-bold text-gray-900">
               The Stay & Wander
             </span>
-            <span className="text-xs font-light text-gray-600 tracking-widest">
-              DISCOVER · STAY · EXPLORE
+            <span className="text-[10px] font-light text-gray-600 tracking-[0.12em] sm:text-xs sm:tracking-widest">
+              EUROPE · ASIA · BRAZIL · MIDDLE EAST
             </span>
           </div>
         </Link>

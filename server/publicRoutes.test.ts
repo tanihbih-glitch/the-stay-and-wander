@@ -19,6 +19,8 @@ describe("public route and sitemap cleanup", () => {
     expect(isApplicationRoute("/itinerary/tokyo-seoul")).toBe(true);
     expect(isApplicationRoute("/trip-planner")).toBe(true);
     expect(isApplicationRoute("/deals")).toBe(true);
+    expect(isApplicationRoute("/blog/best-hotels-dubai-2026")).toBe(true);
+    expect(isApplicationRoute("/blog/best-hotels-dubai-2026/")).toBe(true);
     expect(isApplicationRoute("/deals/")).toBe(true);
     expect(isApplicationRoute("/about")).toBe(true);
     expect(isApplicationRoute("/privacy-policy/")).toBe(true);
@@ -30,6 +32,7 @@ describe("public route and sitemap cleanup", () => {
     expect(sitemap).toContain("/blog/bali-hotel-prices-2026");
     expect(sitemap).toContain("/itinerary/tokyo-seoul");
     expect(sitemap).toContain("/deals");
+    expect(sitemap).toContain("/blog/best-hotels-dubai-2026");
     expect(sitemap).toContain("/about");
     expect(sitemap).toContain("/privacy-policy");
     expect(sitemap).not.toContain("/exploring-the-best-travel-destinations-for-modern-wanderlust");

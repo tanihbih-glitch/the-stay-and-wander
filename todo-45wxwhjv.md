@@ -104,3 +104,11 @@
 - [x] Replace the optimistic Deals newsletter behavior with a resilient Mailchimp submission flow for audience `4512b2fda5`, including clear validation and failure feedback.
 - [x] Add regression evidence that the Deals item appears in the shared Header’s desktop and mobile menus between Booking and Blog.
 - [x] Re-run full validation, verify responsive behavior, publish, and confirm the live Deals URL.
+- [x] Audit current Europe, Asia, and Brazil messaging, homepage cards, itinerary filters, blog-category boards, metadata, sitemap, and robots records for Middle East expansion points.
+- [x] Create or source a production-ready dramatic, golden Dubai-at-night skyline visual featuring the Burj Khalifa, stored and referenced through the site asset workflow.
+- [x] Add the specified Middle East destination card to the homepage with its two requested calls to action and approved design treatment.
+- [x] Add Middle East to the itineraries page, blog-category board, header/footer/about destination copy, and every relevant site-wide destination mention.
+- [x] Update the requested homepage/site meta description plus canonical route, sitemap, and robots support as required.
+- [x] Add focused regression coverage and validate desktop/mobile destination discovery, links, metadata, and search-indexing support.
+- [ ] Save, publish, and confirm the live Middle East expansion.
+- [x] Verify and, where needed, update every remaining site-wide Europe/Asia/Brazil-only destination reference—including the About page—then add targeted regression coverage before publication.

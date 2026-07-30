@@ -91,6 +91,8 @@ export function ssrMiddleware(req: Request, res: Response, next: NextFunction) {
     metadata = pageMetadataConfig.home;
   } else if (path === "/blog") {
     metadata = pageMetadataConfig.blog;
+  } else if (path === "/blog/best-hotels-dubai-2026") {
+    metadata = pageMetadataConfig.dubaiHotelGuide;
   } else if (path.startsWith("/blog/")) {
     // Blog article - metadata would be dynamically generated
     metadata = pageMetadataConfig.blog;

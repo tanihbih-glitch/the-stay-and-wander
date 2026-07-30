@@ -62,7 +62,7 @@ export default function Home() {
           </h1>
           <p className="text-lg md:text-xl font-light mb-8 text-gray-100">
             Hand-picked hotels, custom itineraries and travel inspiration for
-            Europe, Asia & Brazil
+            Europe · Asia · Brazil · Middle East
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -234,11 +234,11 @@ export default function Home() {
               Where Will You Wander Next?
             </h2>
             <p className="text-lg text-gray-600">
-              Hand-picked destinations across Europe, Asia & Brazil
+              Hand-picked destinations across Europe · Asia · Brazil · Middle East
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-4">
             {/* Asia Card */}
             <Card className="overflow-hidden hover:shadow-xl transition-shadow">
               <div className="relative h-64 overflow-hidden group">
@@ -348,6 +348,44 @@ export default function Home() {
                     <Button
                       variant="outline"
                       className="flex-1 border-yellow-500 text-yellow-600 hover:bg-yellow-50"
+                    >
+                      Find Hotels
+                    </Button>
+                  </a>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Middle East Card */}
+            <Card className="overflow-hidden hover:shadow-xl transition-shadow">
+              <div className="relative h-64 overflow-hidden group">
+                <img
+                  src="/manus-storage/dubai-middle-east-destination_1431ce58.png"
+                  alt="Dubai skyline at night with the Burj Khalifa"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                <div className="absolute top-4 left-4 text-[#f4c56c] font-semibold text-sm">
+                  MIDDLE EAST
+                </div>
+              </div>
+              <CardContent className="p-6">
+                <h3 className="font-display text-2xl font-bold text-gray-900 mb-2">
+                  Golden Sands &amp; City Skylines
+                </h3>
+                <p className="text-gray-600 mb-6">
+                  From Burj Khalifa views to desert safaris and world-class hotels — the Middle East captivates like nowhere else.
+                </p>
+                <div className="flex gap-3">
+                  <a href="/blog/best-hotels-dubai-2026" className="flex-1">
+                    <Button className="flex-1 bg-[#0077B6] hover:bg-[#005c91] text-white">
+                      Explore Middle East
+                    </Button>
+                  </a>
+                  <a href="https://booking.stay22.com/thestayandwander/r-lvU3PLVF" target="_blank" rel="noopener noreferrer" className="flex-1">
+                    <Button
+                      variant="outline"
+                      className="flex-1 border-[#F4A261] text-[#c96725] hover:bg-[#fff4ec]"
                     >
                       Find Hotels
                     </Button>

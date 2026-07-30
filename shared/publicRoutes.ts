@@ -35,6 +35,7 @@ const BASE_APPLICATION_PATHS = [
   "/blog/where-to-stay-lisbon-2026",
   "/blog/brazil-travel-guide-2026",
   "/blog/best-flight-deals-asia-2026",
+  "/blog/best-hotels-dubai-2026",
   "/blog/1",
   "/blog/2",
   "/blog/3",
@@ -67,6 +68,7 @@ export const sitemapRoutes: readonly SitemapRoute[] = [
   { path: "/blog/where-to-stay-lisbon-2026", lastmod: "2026-05-28", changefreq: "monthly", priority: 0.8 },
   { path: "/blog/brazil-travel-guide-2026", lastmod: "2026-05-20", changefreq: "monthly", priority: 0.8 },
   { path: "/blog/best-flight-deals-asia-2026", lastmod: "2026-05-15", changefreq: "monthly", priority: 0.8 },
+  { path: "/blog/best-hotels-dubai-2026", lastmod: "2026-07-30", changefreq: "monthly", priority: 0.8 },
 ];
 
 function normalizePath(pathname: string): string {

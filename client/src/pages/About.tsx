@@ -7,7 +7,7 @@ import { Compass, HandHeart, Mail, MapPinned, Plane } from "lucide-react";
 export const aboutPageMetadata = {
   title: "About The Stay & Wander | Travel Guides, Stays & Itineraries",
   description:
-    "Learn how The Stay & Wander helps travellers discover beautiful places, unique stays, honest recommendations, and unforgettable journeys.",
+    "Learn how The Stay & Wander helps travellers discover beautiful places, unique stays, honest recommendations, and unforgettable journeys across Europe, Asia, Brazil and the Middle East.",
   url: "/about",
   image: "https://thestayandwander.com/og-image.png",
   keywords:
@@ -75,7 +75,10 @@ export default function About() {
               </h2>
               <div className="mt-7 space-y-5 text-lg leading-relaxed text-slate-700">
                 <p>
-                  The Stay &amp; Wander is a travel resource dedicated to helping travellers discover beautiful places, unique stays and unforgettable journeys across Europe, Asia and Brazil.
+                  The Stay &amp; Wander is a travel resource dedicated to helping travellers discover beautiful places, unique stays and unforgettable journeys across Europe, Asia, Brazil and the Middle East.
+                </p>
+                <p className="font-semibold tracking-wide text-[#b3842d]">
+                  Europe · Asia · Brazil · Middle East
                 </p>
                 <p>
                   We hand-pick hotels for every budget, create detailed day-by-day itineraries and find the best flight deals so you can spend less time planning and more time exploring.
