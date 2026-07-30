@@ -84,14 +84,14 @@ export default function Blog() {
     {
       id: 4,
       slug: "where-to-stay-lisbon-2026",
-      title: "Where to Stay in Lisbon — Neighbourhood Guide",
-      category: "Destination Guides",
-      image: "/manus-storage/blog-europe-cities_de773d0d.png",
+      title: "Where to Stay in Lisbon 2026 — Best Neighbourhoods and Hotels for Every Budget",
+      category: "Hotel Reviews · Europe Travel",
+      image: "/manus-storage/lisbon-yellow-tram-hero_11c0dde1.jpg",
       excerpt:
-        "Navigate Lisbon's vibrant neighborhoods and find your perfect base.",
-      author: "Pedro Silva",
-      date: "May 28, 2026",
-      readTime: "8 min read",
+        "Not sure where to stay in Lisbon? Choose between Alfama, Chiado, Bairro Alto, Belém and beyond — with hotel ideas for every budget.",
+      author: "The Stay & Wander",
+      date: "July 30, 2026",
+      readTime: "10 min read",
     },
     {
       id: 5,

@@ -135,3 +135,12 @@
 - [x] Validate the sitemap content locally and on `https://thestayandwander.com/sitemap.xml` after publication. The targeted sitemap test passed and the public XML response contains all four canonical URLs.
 - [ ] Resubmit the verified sitemap in the project’s Google Search Console property after obtaining confirmation immediately before the external submission.
 - [x] Complete the sitemap verification without browser access; defer Google Search Console resubmission until the user selects an approved non-browser access method.
+- [ ] Use the browser to prepare Google Search Console sitemap resubmission, request confirmation immediately before submitting, and record the submitted result. The authenticated property selector shows both the `thestayandwander.com` domain property and the `https://thestayandwander.com/` URL-prefix property; a transient property-selection timeout occurred before submission preparation. A later direct attempt reached a Google sign-in/CAPTCHA page in the sandbox browser, so authenticated access must be restored before the sitemap can be prepared.
+- [x] Create `/blog/where-to-stay-lisbon-2026` in the established blog-article design with the supplied title, category, ten-minute read time, Lisbon neighbourhood guide content, social sharing, related content, and affiliate disclosure.
+- [x] Generate and integrate a Lisbon yellow-tram hero image, keeping all static media in approved external project storage.
+- [x] Add the requested GetYourGuide partner widgets after the introduction and Belém section, and configure all hotel, flight, tour, and Lisbon-hotel search actions with the supplied secure new-tab affiliate URLs.
+- [x] Register exact SEO metadata and the new Lisbon URL in the public route registry, XML sitemap, server-rendered metadata, and relevant blog navigation.
+- [x] Add or update focused regression coverage and validate the article at desktop and mobile viewports. The focused Lisbon tests, full suite (77 tests), and TypeScript check pass; desktop and 390px mobile layouts were visually checked.
+- [ ] Publish the Lisbon article and verify its live canonical URL, metadata, and updated sitemap entry.
+- [x] Improve the visible fallback treatment for the two Lisbon GetYourGuide widget placements, preserving the requested partner widget while ensuring a clear Lisbon tours action is available if embedded content loads late or is blocked.
+- [x] Restore compatibility with the existing GetYourGuide partner-ID regression assertion after exporting the partner constant for Lisbon article coverage.

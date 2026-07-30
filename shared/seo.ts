@@ -168,6 +168,19 @@ export const pageMetadataConfig: Record<string, PageMetadata> = {
       "Dubai hotels, Abu Dhabi hotels, UAE travel guide, Dubai travel, Middle East hotels, Burj Khalifa views",
   },
 
+  lisbonHotelGuide: {
+    title: "Where to Stay in Lisbon 2026 — Best Neighbourhoods and Hotels for Every Budget | The Stay & Wander",
+    description:
+      "Not sure where to stay in Lisbon in 2026? Our complete neighbourhood guide covers Alfama, Chiado, Bairro Alto, Belém and beyond — with hand-picked hotels from $45/night.",
+    image: `${SITE_URL}/manus-storage/lisbon-yellow-tram-hero_11c0dde1.jpg`,
+    url: "/blog/where-to-stay-lisbon-2026",
+    type: "article",
+    author: "The Stay & Wander",
+    publishedDate: "2026-07-30",
+    keywords:
+      "where to stay in Lisbon 2026, Lisbon hotels, Alfama hotels, Chiado hotels, Bairro Alto hotels, Belém hotels, Lisbon neighbourhood guide",
+  },
+
 };
 
 /**

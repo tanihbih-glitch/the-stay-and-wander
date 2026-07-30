@@ -84,6 +84,17 @@ export const CORPORATE_TRAVEL_AFFILIATE_LINKS = {
 } as const;
 
 /**
+ * Canonical affiliate destinations for the Lisbon hotel-neighbourhood article.
+ * Keep the three public calls to action in one place so hotel, flight, and tour
+ * tracking stay consistent throughout the article.
+ */
+export const LISBON_ARTICLE_AFFILIATE_LINKS = {
+  hotels: DEALS_AFFILIATE_LINKS.hotels.lisbon,
+  flights: TRAVELPAYOUTS_FLIGHT_LINK,
+  tours: "https://gyg.me/JwtO7kBb",
+} as const;
+
+/**
  * Helper function to generate Travelpayout search links
  * @param searchKey - The search key from Travelpayout API
  * @param campaign - Campaign name for tracking

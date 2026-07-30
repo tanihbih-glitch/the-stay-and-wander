@@ -8,7 +8,8 @@ type GetYourGuideWindow = Window & {
 };
 
 const PARTNER_ID = 'YOPATWV';
-const GYG_SCRIPT_SELECTOR = `script[data-gyg-partner-id="${PARTNER_ID}"]`;
+export const GYG_PARTNER_ID = PARTNER_ID;
+const GYG_SCRIPT_SELECTOR = `script[data-gyg-partner-id="${GYG_PARTNER_ID}"]`;
 
 interface GetYourGuideToursProps {
   label?: string;
@@ -16,6 +17,8 @@ interface GetYourGuideToursProps {
   showButton?: boolean;
   backgroundColor?: string;
   cardStyle?: boolean;
+  fallbackHref?: string;
+  fallbackLabel?: string;
 }
 
 export default function GetYourGuideTours({ 
@@ -23,7 +26,9 @@ export default function GetYourGuideTours({
   showHeadline = true,
   showButton = true,
   backgroundColor = '#F8EFE0',
-  cardStyle = false
+  cardStyle = false,
+  fallbackHref,
+  fallbackLabel = 'Browse tours'
 }: GetYourGuideToursProps) {
   useEffect(() => {
     const win = window as GetYourGuideWindow;
@@ -44,7 +49,7 @@ export default function GetYourGuideTours({
     script.src = 'https://widget.getyourguide.com/dist/pa.umd.production.min.js';
     script.async = true;
     script.defer = true;
-    script.dataset.gygPartnerId = PARTNER_ID;
+    script.dataset.gygPartnerId = GYG_PARTNER_ID;
     script.addEventListener('load', renderWidget, { once: true });
     document.head.appendChild(script);
 
@@ -63,10 +68,22 @@ export default function GetYourGuideTours({
             <div className="flex justify-center">
               <div 
                 data-gyg-widget="auto" 
-                data-gyg-partner-id={PARTNER_ID}
+                data-gyg-partner-id={GYG_PARTNER_ID}
                 className="w-full"
               />
             </div>
+            {fallbackHref && (
+              <div className="mt-5 flex justify-center">
+                <a
+                  href={fallbackHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center rounded-lg bg-[#0077B6] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#005c91]"
+                >
+                  {fallbackLabel}
+                </a>
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -91,15 +108,28 @@ export default function GetYourGuideTours({
         <div className="mb-8 flex justify-center">
           <div 
             data-gyg-widget="auto" 
-            data-gyg-partner-id={PARTNER_ID}
+            data-gyg-partner-id={GYG_PARTNER_ID}
             className="w-full max-w-4xl"
           />
         </div>
 
+        {fallbackHref && (
+          <div className="mb-8 flex justify-center">
+            <a
+              href={fallbackHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center rounded-lg bg-[#0077B6] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#005c91]"
+            >
+              {fallbackLabel}
+            </a>
+          </div>
+        )}
+
         {showButton && (
           <div className="flex justify-center">
             <a
-              href={`https://www.getyourguide.com/?partner_id=${PARTNER_ID}`}
+              href={`https://www.getyourguide.com/?partner_id=${GYG_PARTNER_ID}`}
               target="_blank"
               rel="noopener noreferrer"
             >

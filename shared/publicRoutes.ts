@@ -67,7 +67,7 @@ export const sitemapRoutes: readonly SitemapRoute[] = [
   { path: "/blog/bali-hotel-prices-2026", lastmod: "2026-07-28", changefreq: "monthly", priority: 0.8 },
   { path: "/blog/best-cities-europe-summer-2026", lastmod: "2026-07-10", changefreq: "monthly", priority: 0.8 },
   { path: "/blog/tokyo-vs-bangkok-2026", lastmod: "2026-07-05", changefreq: "monthly", priority: 0.8 },
-  { path: "/blog/where-to-stay-lisbon-2026", lastmod: "2026-05-28", changefreq: "monthly", priority: 0.8 },
+  { path: "/blog/where-to-stay-lisbon-2026", lastmod: "2026-07-30", changefreq: "monthly", priority: 0.8 },
   { path: "/blog/brazil-travel-guide-2026", lastmod: "2026-05-20", changefreq: "monthly", priority: 0.8 },
   { path: "/blog/best-flight-deals-asia-2026", lastmod: "2026-05-15", changefreq: "monthly", priority: 0.8 },
   { path: "/blog/best-hotels-dubai-2026", lastmod: "2026-07-30", changefreq: "monthly", priority: 0.8 },
