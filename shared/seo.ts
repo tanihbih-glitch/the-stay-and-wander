@@ -122,6 +122,17 @@ export const pageMetadataConfig: Record<string, PageMetadata> = {
       "travel deals, hotel deals, flight deals, tours, car rental deals, travel offers",
   },
 
+  corporateTravel: {
+    title: "Corporate Travel Planning — ADIPEC 2026 · GITEX 2026 · ADSW 2027 · Global Business Travel | The Stay & Wander",
+    description:
+      "Professional corporate travel planning for ADIPEC 2026, GITEX 2026 and Abu Dhabi Sustainability Week 2027. Hotels near ADNEC and DWTC · Executive itineraries · Team retreat planning for companies from USA, UK, Canada, Australia, India and Nigeria.",
+    image: `${SITE_URL}/manus-storage/corporate-travel-hero_9abcd7f4.png`,
+    url: "/corporate-travel",
+    type: "website",
+    keywords:
+      "corporate travel planning, ADIPEC 2026 hotels, GITEX 2026 hotels, Abu Dhabi Sustainability Week, executive travel, team retreats, UAE business travel",
+  },
+
   about: {
     title: "About The Stay & Wander | Travel Guides, Stays & Itineraries",
     description:

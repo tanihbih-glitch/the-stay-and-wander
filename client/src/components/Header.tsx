@@ -12,6 +12,7 @@ export default function Header() {
     { label: "Trip Planner", href: "/trip-planner" },
     { label: "Booking", href: "/booking" },
     { label: "Deals", href: "/deals" },
+    { label: "Corporate Travel", href: "/corporate-travel" },
     { label: "Blog", href: "/blog" },
   ];
 
@@ -36,7 +37,7 @@ export default function Header() {
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-8">
+        <nav className="hidden lg:flex items-center gap-5 xl:gap-7">
           {navLinks.map((link) => (
             <Link key={link.href} href={link.href} className="text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors no-underline">
               {link.label}
@@ -47,7 +48,7 @@ export default function Header() {
 
         {/* Mobile Menu Button */}
         <button
-          className="md:hidden p-2"
+          className="lg:hidden p-2"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           aria-label="Toggle menu"
         >
@@ -61,7 +62,7 @@ export default function Header() {
 
       {/* Mobile Navigation */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-t border-gray-200 bg-white">
+        <div className="lg:hidden border-t border-gray-200 bg-white">
           <nav className="container py-4 flex flex-col gap-4">
             {navLinks.map((link) => (
               <Link

@@ -63,6 +63,25 @@ export function generateSSRHead(metadata: PageMetadata): string {
 }
 
 /**
+ * Insert route-specific metadata into the document head before the SPA boots.
+ * The client template already supplies its charset, viewport, font, and script
+ * tags; replace only its generic title and append the route-specific SEO tags.
+ */
+export function injectSSRHead(template: string, metadata?: PageMetadata): string {
+  if (!metadata) return template;
+
+  const withoutDefaultTitle = template.replace(
+    /<title\b[^>]*>[\s\S]*?<\/title>\s*/i,
+    ""
+  );
+
+  return withoutDefaultTitle.replace(
+    /<\/head>/i,
+    `${generateSSRHead(metadata)}\n  </head>`
+  );
+}
+
+/**
  * Escape HTML special characters
  */
 function escapeHtml(text: string): string {
@@ -105,6 +124,8 @@ export function ssrMiddleware(req: Request, res: Response, next: NextFunction) {
     metadata = pageMetadataConfig.booking;
   } else if (path === "/deals") {
     metadata = pageMetadataConfig.deals;
+  } else if (path === "/corporate-travel") {
+    metadata = pageMetadataConfig.corporateTravel;
   } else if (path === "/about") {
     metadata = pageMetadataConfig.about;
   } else if (path === "/privacy-policy") {

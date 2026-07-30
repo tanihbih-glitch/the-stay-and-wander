@@ -1,0 +1,29 @@
+import { describe, expect, it } from "vitest";
+import { pageMetadataConfig } from "../shared/seo";
+import { injectSSRHead } from "./ssr";
+
+describe("server-rendered page metadata", () => {
+  it("replaces the generic title with Corporate Travel crawler metadata", () => {
+    const rendered = injectSSRHead(
+      "<html><head><title>Default site title</title></head><body></body></html>",
+      pageMetadataConfig.corporateTravel
+    );
+
+    expect(rendered).toContain(
+      "<title>Corporate Travel Planning — ADIPEC 2026 · GITEX 2026 · ADSW 2027 · Global Business Travel | The Stay &amp; Wander</title>"
+    );
+    expect(rendered).toContain(
+      'name="description" content="Professional corporate travel planning for ADIPEC 2026, GITEX 2026 and Abu Dhabi Sustainability Week 2027. Hotels near ADNEC and DWTC · Executive itineraries · Team retreat planning for companies from USA, UK, Canada, Australia, India and Nigeria."'
+    );
+    expect(rendered).toContain(
+      'href="https://thestayandwander.com/corporate-travel"'
+    );
+    expect(rendered).not.toContain("Default site title");
+  });
+
+  it("preserves the unmodified document when a route has no metadata", () => {
+    const template = "<html><head><title>Default site title</title></head></html>";
+
+    expect(injectSSRHead(template)).toBe(template);
+  });
+});

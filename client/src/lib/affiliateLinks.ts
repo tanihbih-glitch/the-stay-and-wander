@@ -63,6 +63,27 @@ export const DEALS_AFFILIATE_LINKS = {
 } as const;
 
 /**
+ * Verified affiliate destinations used by the Corporate Travel page.
+ * Keep these URLs centralized so event, hotel, flight, car, and tour actions
+ * remain consistent across the corporate travel experience.
+ */
+export const CORPORATE_TRAVEL_AFFILIATE_LINKS = {
+  hotels: "https://booking.stay22.com/thestayandwander/r-lvU3PLVF",
+  flights: TRAVELPAYOUTS_FLIGHT_LINK,
+  carRentals: DISCOVERCARS_AFFILIATE_URL,
+  tours: "https://gyg.me/As25WS5K",
+  insurance: "https://safetywing.com",
+  destinationHotels: {
+    tokyo: "https://booking.stay22.com/thestayandwander/xaad-D11z0",
+    lisbon: "https://booking.stay22.com/thestayandwander/_3gvRmesd0",
+    bali: "https://booking.stay22.com/thestayandwander/r-lvU3PLVF",
+    saoPaulo: "https://booking.stay22.com/thestayandwander/5x2vv0_ZR9",
+    santorini: "https://booking.stay22.com/thestayandwander/GTP9FOQSFn",
+    dubrovnik: "https://booking.stay22.com/thestayandwander/FBzzZenMr0",
+  },
+} as const;
+
+/**
  * Helper function to generate Travelpayout search links
  * @param searchKey - The search key from Travelpayout API
  * @param campaign - Campaign name for tracking

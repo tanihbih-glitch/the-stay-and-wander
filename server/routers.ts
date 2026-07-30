@@ -6,6 +6,7 @@ import { newsletterRouter } from "./routers/newsletter";
 import { sitemapRouter } from "./routers/sitemap";
 import { analyticsRouter } from "./routers/analytics";
 import { tripPlannerRouter } from "./routers/tripPlanner";
+import { corporateTravelRouter } from "./routers/corporateTravel";
 
 export const appRouter = router({
     // if you need to use socket.io, read and register route in server/_core/index.ts, all api should start with '/api/' so that the gateway can route correctly
@@ -24,6 +25,7 @@ export const appRouter = router({
   sitemap: sitemapRouter,
   analytics: analyticsRouter,
   tripPlanner: tripPlannerRouter,
+  corporateTravel: corporateTravelRouter,
 
   // TODO: add feature routers here, e.g.
   // todo: router({

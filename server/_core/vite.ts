@@ -6,6 +6,7 @@ import path from "path";
 import { createServer as createViteServer } from "vite";
 import viteConfig from "../../vite.config";
 import { isApplicationRoute } from "../../shared/publicRoutes";
+import { injectSSRHead } from "../ssr";
 
 export async function setupVite(app: Express, server: Server) {
   const serverOptions = {
@@ -39,7 +40,8 @@ export async function setupVite(app: Express, server: Server) {
         `src="/src/main.tsx"`,
         `src="/src/main.tsx?v=${nanoid()}"`
       );
-      const page = await vite.transformIndexHtml(url, template);
+      const transformedPage = await vite.transformIndexHtml(url, template);
+      const page = injectSSRHead(transformedPage, (req as any).ssrMetadata);
       const statusCode = isApplicationRoute(req.originalUrl) ? 200 : 404;
       res.status(statusCode).set({ "Content-Type": "text/html" }).end(page);
     } catch (e) {
@@ -60,12 +62,23 @@ export function serveStatic(app: Express) {
     );
   }
 
-  app.use(express.static(distPath));
+  // Let the fallback deliver index.html so its route-specific metadata can be
+  // injected for both the homepage and known SPA routes.
+  app.use(express.static(distPath, { index: false }));
 
   // Serve the SPA shell for known client routes only. Unknown URLs retain the
   // client NotFound presentation while returning a real HTTP 404 for crawlers.
-  app.use("*", (req, res) => {
-    const statusCode = isApplicationRoute(req.originalUrl) ? 200 : 404;
-    res.status(statusCode).sendFile(path.resolve(distPath, "index.html"));
+  app.use("*", async (req, res, next) => {
+    try {
+      const template = await fs.promises.readFile(
+        path.resolve(distPath, "index.html"),
+        "utf-8"
+      );
+      const page = injectSSRHead(template, (req as any).ssrMetadata);
+      const statusCode = isApplicationRoute(req.originalUrl) ? 200 : 404;
+      res.status(statusCode).set({ "Content-Type": "text/html" }).end(page);
+    } catch (error) {
+      next(error);
+    }
   });
 }

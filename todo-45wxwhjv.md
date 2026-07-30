@@ -115,3 +115,15 @@
 - [x] Live-verify the custom-domain homepage exposes the Middle East tagline, destination card, and both requested calls to action.
 - [x] Live-verify the custom-domain itineraries page exposes the Middle East tab and Dubai–Abu Dhabi itinerary.
 - [x] Live-verify the custom-domain blog page exposes the Middle East category and Dubai guide entry before completing publication verification.
+- [x] Review the supplied Corporate Travel brief, existing affiliate patterns, contact-email workflows, navigation, metadata, and sitemap conventions.
+- [x] Build a responsive `/corporate-travel` page using the supplied content, approved color palette, required affiliate actions, and affiliate disclosure.
+- [x] Configure every hotel, flight, car-rental, and tour action to use the specified destination and secure new-tab behavior.
+- [x] Implement a validated contact form that delivers enquiries to `thestayandwander@thestayandwander.com` and sends a reliable automatic reply.
+- [x] Add Corporate Travel to the main navigation and register page metadata, canonical route, SSR, sitemap, and robots support.
+- [x] Add focused coverage and validate desktop/mobile layouts, affiliate safety, contact flow, navigation, metadata, sitemap, and search support.
+- [ ] Save, publish, and confirm the live Corporate Travel page at `https://thestayandwander.com/corporate-travel`.
+- [x] Ensure the Corporate Travel title, description, Open Graph data, and canonical URL are injected into server-rendered HTML for crawler-visible SEO.
+- [ ] Verify the deployed Resend configuration can deliver a Corporate Travel enquiry and its automatic reply without using an unapproved live recipient.
+- [x] Add and run focused success and failure-path coverage for Corporate Travel contact delivery, then record the contact-flow validation outcome. Mocked Resend tests confirm notification and auto-reply dispatch payloads, unconfigured handling, and provider-error behavior without emailing an unapproved recipient.
+- [x] Handle partial email delivery so an owner-notification success remains visible even if the customer auto-reply fails, and cover that behavior with regression tests.
+- [x] Capture explicit mobile rendering validation for `/corporate-travel` and document the non-invasive live-email verification boundary. The mobile page was visually checked at 390px wide; live email dispatch remains intentionally untriggered until an approved test recipient is available.
