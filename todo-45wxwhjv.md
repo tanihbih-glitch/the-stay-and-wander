@@ -150,8 +150,12 @@
 - [x] Add the requested GetYourGuide widget with partner ID `YOPATWV` and centralize the supplied Bali tours, hotels, and flights affiliate destinations with secure new-tab behavior.
 - [x] Register the Bali experiences article in application routing, blog navigation, server-rendered SEO, structured data, and the XML sitemap.
 - [x] Add or update regression coverage and validate the article at desktop and mobile widths. The Bali guide test, project type-check, and 80-test full suite pass; full-page desktop and 390px mobile checks show the long-form sections, CTAs, widget fallbacks, tables, and footer render in sequence without an apparent layout break.
-- [ ] Publish the Bali guide and verify the live canonical URL, crawler-visible metadata, hero asset, and sitemap entry.
-- [ ] Prepare Search Console indexing requests once the user supplies the complete URL list following their unfinished prompt.
+- [x] Publish the Bali guide and verify the live canonical URL, crawler-visible metadata, hero asset, and sitemap entry. The custom-domain route now returns HTTP 200 with the intended title and canonical URL, and the live sitemap includes the article.
+- [x] Diagnose and correct the live Bali publication mismatch: the post-checkpoint custom-domain sitemap initially lacked `/blog/things-to-do-in-bali-2026`, but deployment propagation completed and the direct response now confirms the live route and sitemap entry.
+- [x] Prepare Search Console indexing requests once the user supplies the complete URL list following their unfinished prompt. The user supplied eight URLs and then elected to verify indexing independently.
+- [x] Prepare Google Search Console URL Inspection indexing requests for all eight supplied URLs: Bali experiences, Lisbon hotels, Corporate Travel, Deals, About, Dubai hotels, Bali hotel prices, and Trip Planner. The browser required Google sign-in and CAPTCHA completion before the verified property could be opened, so no request was prepared in-session.
+- [x] Obtain final confirmation immediately before triggering the eight external indexing requests, then record the accepted or blocked result for each URL. No confirmation was requested because the user chose to manage verification independently.
+- [x] Record that the user will verify indexing for the eight URLs independently, then close the browser-dependent request without submitting from this session.
 - [x] Write all 50 Bali experiences across the seven supplied categories, with practical timing, location, cost, and insider-tip guidance for each entry.
 - [x] Generate and integrate the requested Tegallalang rice-terrace golden-hour hero image in approved external project storage.
 - [x] Place four GetYourGuide partner widgets after the introduction, after Culture and Temples, after Beaches and Water, and before the final CTA; ensure visible partner-linked fallbacks remain usable if embeds load late.
