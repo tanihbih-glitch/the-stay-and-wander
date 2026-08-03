@@ -116,6 +116,10 @@ export function ssrMiddleware(req: Request, res: Response, next: NextFunction) {
     metadata = pageMetadataConfig.lisbonHotelGuide;
   } else if (path === "/blog/things-to-do-in-bali-2026") {
     metadata = pageMetadataConfig.baliExperiencesGuide;
+  } else if (path === "/blog/bali-hotel-prices-2026") {
+    metadata = pageMetadataConfig.baliHotelPricesGuide;
+  } else if (path === "/blog/best-4-star-hotels-bali-2026") {
+    metadata = pageMetadataConfig.baliFourStarHotelsGuide;
   } else if (path.startsWith("/blog/")) {
     // Blog article - metadata would be dynamically generated
     metadata = pageMetadataConfig.blog;

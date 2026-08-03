@@ -21,6 +21,12 @@ export const articleMetadata = {
   publishDate: "2026-07-27",
 };
 
+export const searchMetadata = {
+  title: "Bali Hotel Prices 2026: Real Costs by Region (Seminyak, Ubud, Uluwatu)",
+  description:
+    "See exactly what you'll pay for hotels in Bali in 2026 — broken down by region, from budget to luxury. Real price ranges, no guessing.",
+};
+
 export const priceSnapshot = [
   ["Seminyak", "$40–70/night", "$80–150/night", "$200+/night"],
   ["Ubud", "$30–60/night", "$75–130/night", "$180+/night"],
@@ -58,8 +64,8 @@ export default function BlogBaliHotelPrices() {
   return (
     <div className="min-h-screen bg-white pb-20 md:pb-0">
       <Head
-        title={articleMetadata.title}
-        description={articleMetadata.description}
+        title={searchMetadata.title}
+        description={searchMetadata.description}
         canonical={canonicalUrl}
         ogTitle={articleMetadata.title}
         ogDescription={articleMetadata.description}

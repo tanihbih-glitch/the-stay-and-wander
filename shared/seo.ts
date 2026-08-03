@@ -194,6 +194,32 @@ export const pageMetadataConfig: Record<string, PageMetadata> = {
       "things to do in Bali 2026, Bali experiences, Bali temples, Bali beaches, Ubud guide, Nusa Penida, Bali itinerary, Bali travel guide",
   },
 
+  baliHotelPricesGuide: {
+    title: "Bali Hotel Prices 2026: Real Costs by Region (Seminyak, Ubud, Uluwatu)",
+    description:
+      "See exactly what you'll pay for hotels in Bali in 2026 — broken down by region, from budget to luxury. Real price ranges, no guessing.",
+    image: `${SITE_URL}/manus-storage/blog-bali_5a40f78c.png`,
+    url: "/blog/bali-hotel-prices-2026",
+    type: "article",
+    author: "The Stay & Wander",
+    publishedDate: "2026-07-27",
+    keywords:
+      "Bali hotel prices 2026, Bali accommodation costs, Seminyak hotel prices, Ubud hotel prices, Uluwatu hotel prices, Canggu hotel prices",
+  },
+
+  baliFourStarHotelsGuide: {
+    title: "Best 4-Star Hotels in Bali Under $100/Night (2026 Picks)",
+    description:
+      "Handpicked 4-star hotels across Bali that don't break the bank — real picks under $100/night, from Seminyak to Ubud.",
+    image: `${SITE_URL}/manus-storage/blog-bali_5a40f78c.png`,
+    url: "/blog/best-4-star-hotels-bali-2026",
+    type: "article",
+    author: "The Stay & Wander",
+    publishedDate: "2026-07-20",
+    keywords:
+      "best 4 star hotels Bali 2026, Bali four star hotels, Bali hotel deals, Seminyak hotels, Ubud hotels, Uluwatu hotels",
+  },
+
 };
 
 /**

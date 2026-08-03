@@ -160,3 +160,7 @@
 - [x] Generate and integrate the requested Tegallalang rice-terrace golden-hour hero image in approved external project storage.
 - [x] Place four GetYourGuide partner widgets after the introduction, after Culture and Temples, after Beaches and Water, and before the final CTA; ensure visible partner-linked fallbacks remain usable if embeds load late.
 - [x] Add the requested Where to Stay and Bali Budget Guide comparison tables, three-action final CTA, four related articles, top-and-bottom social sharing, and exact affiliate disclosure.
+- [x] Update only the search-display title and meta description for `/blog/bali-hotel-prices-2026` to the exact user-provided copy, without changing the route or article content.
+- [x] Update only the search-display title and meta description for `/blog/best-4-star-hotels-bali-2026` to the exact user-provided copy, without changing the route or article content.
+- [x] Validate both crawler-visible SSR metadata entries and confirm the affected routes and article page bodies remain unchanged before publishing. Focused SSR/article tests, the type-check, and the complete 81-test suite pass; local SSR responses expose the approved titles, descriptions, and unchanged canonicals.
+- [ ] Save a checkpoint and confirm the live metadata update after deployment propagation.

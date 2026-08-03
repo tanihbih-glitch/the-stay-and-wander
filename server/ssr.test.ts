@@ -26,4 +26,15 @@ describe("server-rendered page metadata", () => {
 
     expect(injectSSRHead(template)).toBe(template);
   });
+
+  it("renders the approved Bali search metadata for crawlers without changing page content", () => {
+    const template = "<html><head><title>Default site title</title></head><body></body></html>";
+    const prices = injectSSRHead(template, pageMetadataConfig.baliHotelPricesGuide);
+    const fourStar = injectSSRHead(template, pageMetadataConfig.baliFourStarHotelsGuide);
+
+    expect(prices).toContain("<title>Bali Hotel Prices 2026: Real Costs by Region (Seminyak, Ubud, Uluwatu)</title>");
+    expect(prices).toContain('name="description" content="See exactly what you&#039;ll pay for hotels in Bali in 2026 — broken down by region, from budget to luxury. Real price ranges, no guessing."');
+    expect(fourStar).toContain("<title>Best 4-Star Hotels in Bali Under $100/Night (2026 Picks)</title>");
+    expect(fourStar).toContain('name="description" content="Handpicked 4-star hotels across Bali that don&#039;t break the bank — real picks under $100/night, from Seminyak to Ubud."');
+  });
 });

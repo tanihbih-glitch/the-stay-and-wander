@@ -24,6 +24,11 @@ export const articleMetadata = {
   publishDate: '2026-07-20',
 };
 
+export const searchMetadata = {
+  title: 'Best 4-Star Hotels in Bali Under $100/Night (2026 Picks)',
+  description: "Handpicked 4-star hotels across Bali that don't break the bank — real picks under $100/night, from Seminyak to Ubud.",
+};
+
 type Hotel = {
   name: string;
   price: string;
@@ -211,8 +216,8 @@ export default function BlogBaliFourStarHotels() {
   return (
     <div className="min-h-screen bg-white pb-20 md:pb-0">
       <Head
-        title={articleMetadata.title}
-        description={articleMetadata.description}
+        title={searchMetadata.title}
+        description={searchMetadata.description}
         canonical={canonicalUrl}
         ogTitle={articleMetadata.title}
         ogDescription={articleMetadata.description}
