@@ -163,4 +163,5 @@
 - [x] Update only the search-display title and meta description for `/blog/bali-hotel-prices-2026` to the exact user-provided copy, without changing the route or article content.
 - [x] Update only the search-display title and meta description for `/blog/best-4-star-hotels-bali-2026` to the exact user-provided copy, without changing the route or article content.
 - [x] Validate both crawler-visible SSR metadata entries and confirm the affected routes and article page bodies remain unchanged before publishing. Focused SSR/article tests, the type-check, and the complete 81-test suite pass; local SSR responses expose the approved titles, descriptions, and unchanged canonicals.
-- [ ] Save a checkpoint and confirm the live metadata update after deployment propagation.
+- [x] Save a checkpoint and confirm the live metadata update after deployment propagation. The custom domain now returns both exact approved title tags, meta descriptions, and unchanged canonical URLs.
+- [x] Diagnose and correct the live custom-domain metadata mismatch: both published Bali article URLs initially returned the generic blog head, but the published checkpoint propagated and now serves the verified route-specific metadata.
