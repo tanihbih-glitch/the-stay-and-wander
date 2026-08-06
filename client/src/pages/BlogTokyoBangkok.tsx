@@ -478,6 +478,7 @@ export default function BlogTokyoBangkok() {
           <section className="mb-12 pb-12 border-t pt-8">
             <h3 className="font-playfair text-2xl font-bold text-gray-900 mb-6">You Might Also Like</h3>
             <ul className="space-y-3">
+              <li><a href="/blog/bangkok-hotel-prices-2026" className="text-blue-600 hover:underline">Bangkok Hotel Prices in 2026: What You&apos;ll Actually Pay by Area</a></li>
               <li><a href="/itineraries/tokyo-seoul" className="text-blue-600 hover:underline">10 Days in Tokyo & Seoul — Complete Day-by-Day Itinerary</a></li>
               <li><a href="/blog/best-cities-europe-summer-2026" className="text-blue-600 hover:underline">7 Best Cities to Visit in Europe This Summer (2026)</a></li>
               <li><a href="/blog/best-hotels-bali-2026" className="text-blue-600 hover:underline">Best Hotels in Bali for Every Budget (2026)</a></li>

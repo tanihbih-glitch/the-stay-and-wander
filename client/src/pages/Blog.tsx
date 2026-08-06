@@ -14,6 +14,17 @@ export default function Blog() {
 
   const articles = [
     {
+      id: 11,
+      slug: "bangkok-hotel-prices-2026",
+      title: "Bangkok Hotel Prices in 2026: What You'll Actually Pay by Area",
+      category: "Hotel Reviews · Asia Travel",
+      image: "/manus-storage/bangkok-hotel-prices-hero_fb209c1a.jpg",
+      excerpt: "Compare Bangkok hotel prices by area for 2026, from budget stays to luxury hotels in Sukhumvit, Silom, Riverside, Khao San Road, and Sathorn.",
+      author: "The Stay & Wander",
+      date: "August 3, 2026",
+      readTime: "6 min read",
+    },
+    {
       id: 10,
       slug: "things-to-do-in-bali-2026",
       title: "Things to Do in Bali: 50 Best Experiences for 2026",

@@ -37,4 +37,13 @@ describe("server-rendered page metadata", () => {
     expect(fourStar).toContain("<title>Best 4-Star Hotels in Bali Under $100/Night (2026 Picks)</title>");
     expect(fourStar).toContain('name="description" content="Handpicked 4-star hotels across Bali that don&#039;t break the bank — real picks under $100/night, from Seminyak to Ubud."');
   });
+
+  it("renders the Bangkok hotel-prices metadata for crawlers", () => {
+    const template = "<html><head><title>Default site title</title></head><body></body></html>";
+    const bangkok = injectSSRHead(template, pageMetadataConfig.bangkokHotelPricesGuide);
+
+    expect(bangkok).toContain("<title>Bangkok Hotel Prices 2026: Real Costs by Area (Sukhumvit, Silom, Riverside)</title>");
+    expect(bangkok).toContain('name="description" content="See exactly what you&#039;ll pay for hotels in Bangkok in 2026 — broken down by area, from budget to luxury. Real price ranges, no guessing."');
+    expect(bangkok).toContain('href="https://thestayandwander.com/blog/bangkok-hotel-prices-2026"');
+  });
 });

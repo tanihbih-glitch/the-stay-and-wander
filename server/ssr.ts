@@ -118,6 +118,8 @@ export function ssrMiddleware(req: Request, res: Response, next: NextFunction) {
     metadata = pageMetadataConfig.baliExperiencesGuide;
   } else if (path === "/blog/bali-hotel-prices-2026") {
     metadata = pageMetadataConfig.baliHotelPricesGuide;
+  } else if (path === "/blog/bangkok-hotel-prices-2026") {
+    metadata = pageMetadataConfig.bangkokHotelPricesGuide;
   } else if (path === "/blog/best-4-star-hotels-bali-2026") {
     metadata = pageMetadataConfig.baliFourStarHotelsGuide;
   } else if (path.startsWith("/blog/")) {

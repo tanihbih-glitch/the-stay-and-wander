@@ -207,6 +207,19 @@ export const pageMetadataConfig: Record<string, PageMetadata> = {
       "Bali hotel prices 2026, Bali accommodation costs, Seminyak hotel prices, Ubud hotel prices, Uluwatu hotel prices, Canggu hotel prices",
   },
 
+  bangkokHotelPricesGuide: {
+    title: "Bangkok Hotel Prices 2026: Real Costs by Area (Sukhumvit, Silom, Riverside)",
+    description:
+      "See exactly what you'll pay for hotels in Bangkok in 2026 — broken down by area, from budget to luxury. Real price ranges, no guessing.",
+    image: `${SITE_URL}/manus-storage/bangkok-hotel-prices-hero_fb209c1a.jpg`,
+    url: "/blog/bangkok-hotel-prices-2026",
+    type: "article",
+    author: "The Stay & Wander",
+    publishedDate: "2026-08-03",
+    keywords:
+      "Bangkok hotel prices 2026, Bangkok accommodation costs, Sukhumvit hotel prices, Silom hotel prices, Bangkok riverside hotels, Khao San Road hotels, Sathorn hotels",
+  },
+
   baliFourStarHotelsGuide: {
     title: "Best 4-Star Hotels in Bali Under $100/Night (2026 Picks)",
     description:

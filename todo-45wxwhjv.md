@@ -165,3 +165,9 @@
 - [x] Validate both crawler-visible SSR metadata entries and confirm the affected routes and article page bodies remain unchanged before publishing. Focused SSR/article tests, the type-check, and the complete 81-test suite pass; local SSR responses expose the approved titles, descriptions, and unchanged canonicals.
 - [x] Save a checkpoint and confirm the live metadata update after deployment propagation. The custom domain now returns both exact approved title tags, meta descriptions, and unchanged canonical URLs.
 - [x] Diagnose and correct the live custom-domain metadata mismatch: both published Bali article URLs initially returned the generic blog head, but the published checkpoint propagated and now serves the verified route-specific metadata.
+- [x] Create the supplied Bangkok hotel-prices guide with its five-area price table, five area sections, accommodation-saving tips, CTA, and closing price disclaimer in the established blog design.
+- [x] Integrate the existing live Trip.com hotel-search iframe after the Bangkok article CTA, matching its existing blog-page treatment.
+- [x] Apply the exact Bangkok SEO title and meta description, and register the article in routing, SSR metadata, structured data, the Blog listing, and XML sitemap.
+- [x] Add reciprocal internal links between the new Bangkok hotel-prices post and the existing Tokyo vs Bangkok post without changing either article’s other content.
+- [x] Add regression coverage and validate desktop/mobile rendering and crawler-visible metadata. Focused article/SSR tests, the type-check, and the complete 84-test suite pass; desktop and 390px mobile captures confirm the responsive article structure.
+- [ ] Complete final publication and custom-domain verification. The Trip.com iframe uses the requested live external widget and may not populate in automated captures.
