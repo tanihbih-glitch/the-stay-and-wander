@@ -170,4 +170,4 @@
 - [x] Apply the exact Bangkok SEO title and meta description, and register the article in routing, SSR metadata, structured data, the Blog listing, and XML sitemap.
 - [x] Add reciprocal internal links between the new Bangkok hotel-prices post and the existing Tokyo vs Bangkok post without changing either article’s other content.
 - [x] Add regression coverage and validate desktop/mobile rendering and crawler-visible metadata. Focused article/SSR tests, the type-check, and the complete 84-test suite pass; desktop and 390px mobile captures confirm the responsive article structure.
-- [ ] Complete final publication and custom-domain verification. The Trip.com iframe uses the requested live external widget and may not populate in automated captures.
+- [x] Complete final publication and custom-domain verification. The initial 404 resolved after deployment propagation; both managed and custom domains return HTTP 200, and the custom-domain article serves the exact SEO title, meta description, canonical URL, and sitemap entry. The Trip.com iframe uses the requested live external widget and may not populate in automated captures.
