@@ -37,6 +37,12 @@ describe("public route and sitemap cleanup", () => {
     expect(sitemap).toContain("/privacy-policy");
     expect(sitemap).not.toContain("/exploring-the-best-travel-destinations-for-modern-wanderlust");
     expect(sitemap).not.toContain("/itineraries/1");
+    expect(sitemap).not.toContain("/blog/tokyo-bangkok");
+    expect(sitemap).not.toContain("/blog/europe-cities");
+    expect(sitemap).not.toContain("/europe");
+    expect(sitemap).not.toContain("/asia");
+    expect(sitemap).not.toContain("/flights");
+    expect(sitemap).not.toContain("/guides");
   });
 
   it("keeps the deployed static sitemap aligned with the canonical route registry", () => {
