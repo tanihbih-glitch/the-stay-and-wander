@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { pageMetadataConfig } from "../shared/seo";
+import { articleFaqsByPath } from "../shared/articleFaqs";
 import { injectSSRHead } from "./ssr";
 
 describe("server-rendered page metadata", () => {
@@ -45,5 +46,18 @@ describe("server-rendered page metadata", () => {
     expect(bangkok).toContain("<title>Bangkok Hotel Prices 2026: Real Costs by Area (Sukhumvit, Silom, Riverside)</title>");
     expect(bangkok).toContain('name="description" content="See exactly what you&#039;ll pay for hotels in Bangkok in 2026 — broken down by area, from budget to luxury. Real price ranges, no guessing."');
     expect(bangkok).toContain('href="https://thestayandwander.com/blog/bangkok-hotel-prices-2026"');
+  });
+
+  it("injects a valid FAQPage JSON-LD payload for each specified FAQ article", () => {
+    const template = "<html><head><title>Default site title</title></head><body></body></html>";
+
+    for (const [path, faqs] of Object.entries(articleFaqsByPath)) {
+      const rendered = injectSSRHead(template, undefined, faqs);
+      expect(rendered).toContain('"@type":"FAQPage"');
+      expect(rendered).toContain(`"name":"${faqs[0].question}"`);
+      expect(rendered).toContain(`"text":"${faqs[0].answer}"`);
+      expect(rendered).toContain("<title>Default site title</title>");
+      expect(path).toMatch(/^\/blog\//);
+    }
   });
 });

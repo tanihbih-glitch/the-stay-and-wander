@@ -6,6 +6,8 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import PopularRoutesWidgetBlogSidebar from '@/components/PopularRoutesWidgetBlogSidebar';
 import { Facebook, Twitter } from 'lucide-react';
+import ArticleFAQ from '@/components/ArticleFAQ';
+import { asiaFlightDealsFaqs } from '@shared/articleFaqs';
 
 const articleMetadata = {
   title: 'Best Flight Deals to Asia in 2026 — Cheapest Routes From the UAE, UK & US',
@@ -259,6 +261,8 @@ export default function BlogFlightDeals() {
                 </div>
               </div>
             </section>
+
+            <ArticleFAQ faqs={asiaFlightDealsFaqs} />
 
             {/* GetYourGuide Widget */}
             <div className="my-8 py-6 border-t border-b">

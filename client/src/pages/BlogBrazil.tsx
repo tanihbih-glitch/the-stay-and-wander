@@ -6,6 +6,8 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import PopularRoutesWidgetBlogSidebar from '@/components/PopularRoutesWidgetBlogSidebar';
 import { Share2, Facebook, Twitter } from 'lucide-react';
+import ArticleFAQ from '@/components/ArticleFAQ';
+import { brazilTravelGuideFaqs } from '@shared/articleFaqs';
 
 const articleMetadata = {
   title: 'Brazil Travel Guide 2026 — Everything You Need to Know',
@@ -448,6 +450,8 @@ export default function BlogBrazil() {
                 </a>
               </div>
             </section>
+
+            <ArticleFAQ faqs={brazilTravelGuideFaqs} />
 
             {/* Related Articles */}
             <section className="mb-12 pb-12 border-t pt-8">

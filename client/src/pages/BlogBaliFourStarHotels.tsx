@@ -7,6 +7,8 @@ import BlogArticleSchema, { BreadcrumbSchema } from '@/components/BlogArticleSch
 import PopularRoutesWidgetBlogSidebar from '@/components/PopularRoutesWidgetBlogSidebar';
 import { AffiliateLink } from '@/components/AffiliateLink';
 import { DISCOVERCARS_AFFILIATE_URL } from '@/lib/affiliateLinks';
+import ArticleFAQ from '@/components/ArticleFAQ';
+import { baliFourStarHotelsFaqs } from '@shared/articleFaqs';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 
@@ -339,6 +341,8 @@ export default function BlogBaliFourStarHotels() {
               <Button className="bg-blue-600 px-6 font-semibold text-white hover:bg-blue-700">Search All 4 Star Hotels in Bali</Button>
             </AffiliateLink>
           </section>
+
+          <ArticleFAQ faqs={baliFourStarHotelsFaqs} />
 
           <section className="mb-10 border-t border-gray-200 pt-8">
             <h2 className="font-playfair text-2xl font-bold text-gray-900">Related articles:</h2>

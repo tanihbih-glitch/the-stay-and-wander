@@ -41,7 +41,11 @@ export async function setupVite(app: Express, server: Server) {
         `src="/src/main.tsx?v=${nanoid()}"`
       );
       const transformedPage = await vite.transformIndexHtml(url, template);
-      const page = injectSSRHead(transformedPage, (req as any).ssrMetadata);
+      const page = injectSSRHead(
+        transformedPage,
+        (req as any).ssrMetadata,
+        (req as any).ssrFaqs
+      );
       const statusCode = isApplicationRoute(req.originalUrl) ? 200 : 404;
       res.status(statusCode).set({ "Content-Type": "text/html" }).end(page);
     } catch (e) {
@@ -74,7 +78,11 @@ export function serveStatic(app: Express) {
         path.resolve(distPath, "index.html"),
         "utf-8"
       );
-      const page = injectSSRHead(template, (req as any).ssrMetadata);
+      const page = injectSSRHead(
+        template,
+        (req as any).ssrMetadata,
+        (req as any).ssrFaqs
+      );
       const statusCode = isApplicationRoute(req.originalUrl) ? 200 : 404;
       res.status(statusCode).set({ "Content-Type": "text/html" }).end(page);
     } catch (error) {

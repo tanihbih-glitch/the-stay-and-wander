@@ -5,6 +5,8 @@ import MobileBottomNav from "@/components/MobileBottomNav";
 import BlogArticleSchema, { BreadcrumbSchema } from "@/components/BlogArticleSchema";
 import PopularRoutesWidgetBlogSidebar from "@/components/PopularRoutesWidgetBlogSidebar";
 import TripComHotelWidget from "@/components/TripComHotelWidget";
+import ArticleFAQ from "@/components/ArticleFAQ";
+import { bangkokHotelPricesFaqs } from "@shared/articleFaqs";
 import { ArrowLeft } from "lucide-react";
 
 export const articleMetadata = {
@@ -185,6 +187,8 @@ export default function BlogBangkokHotelPrices() {
             <p className="mt-4 text-lg leading-relaxed text-gray-700">Planning a broader Asia trip? Our city-by-city comparison helps you weigh hotels, food, transport, and trip style before you choose.</p>
             <a href="/blog/tokyo-vs-bangkok-2026" className="mt-5 inline-flex font-semibold text-[#0077B6] hover:text-[#005c91] hover:underline">Read Tokyo vs Bangkok: Which Should You Visit First? →</a>
           </section>
+
+          <ArticleFAQ faqs={bangkokHotelPricesFaqs} />
 
           <section className="mt-12 border-t border-gray-200 pt-12">
             <h2 className="font-playfair text-3xl font-bold text-gray-900">Ready to Find Your Bangkok Stay?</h2>

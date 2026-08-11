@@ -6,6 +6,7 @@
 
 import { Request, Response, NextFunction } from "express";
 import { generateMetaTags, pageMetadataConfig, type PageMetadata } from "../shared/seo";
+import { getArticleFaqs, type ArticleFaq } from "../shared/articleFaqs";
 
 /**
  * SSR Context - passed to rendering functions
@@ -67,17 +68,46 @@ export function generateSSRHead(metadata: PageMetadata): string {
  * The client template already supplies its charset, viewport, font, and script
  * tags; replace only its generic title and append the route-specific SEO tags.
  */
-export function injectSSRHead(template: string, metadata?: PageMetadata): string {
-  if (!metadata) return template;
+export function generateFAQPageSchema(faqs: readonly ArticleFaq[]): string {
+  if (faqs.length === 0) return "";
 
-  const withoutDefaultTitle = template.replace(
-    /<title\b[^>]*>[\s\S]*?<\/title>\s*/i,
-    ""
-  );
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer,
+      },
+    })),
+  };
+
+  return `<script type="application/ld+json">${JSON.stringify(schema)}</script>`;
+}
+
+export function injectSSRHead(
+  template: string,
+  metadata?: PageMetadata,
+  faqs: readonly ArticleFaq[] = []
+): string {
+  if (!metadata && faqs.length === 0) return template;
+
+  const withoutDefaultTitle = metadata
+    ? template.replace(/<title\b[^>]*>[\s\S]*?<\/title>\s*/i, "")
+    : template;
+
+  const headContent = [
+    metadata ? generateSSRHead(metadata) : "",
+    generateFAQPageSchema(faqs),
+  ]
+    .filter(Boolean)
+    .join("\n");
 
   return withoutDefaultTitle.replace(
     /<\/head>/i,
-    `${generateSSRHead(metadata)}\n  </head>`
+    `${headContent}\n  </head>`
   );
 }
 
@@ -144,6 +174,7 @@ export function ssrMiddleware(req: Request, res: Response, next: NextFunction) {
 
   // Attach to request for use in route handlers
   (req as any).ssrMetadata = metadata;
+  (req as any).ssrFaqs = getArticleFaqs(path);
 
   next();
 }

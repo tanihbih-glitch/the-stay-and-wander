@@ -9,6 +9,8 @@ import { pageMetadataConfig } from '@shared/seo';
 import PopularRoutesWidgetBlogSidebar from '@/components/PopularRoutesWidgetBlogSidebar';
 import { AffiliateLink } from '@/components/AffiliateLink';
 import { DISCOVERCARS_AFFILIATE_URL } from '@/lib/affiliateLinks';
+import ArticleFAQ from '@/components/ArticleFAQ';
+import { baliHotelsFaqs } from '@shared/articleFaqs';
 
 const articleMetadata = {
   title: 'Best Hotels in Bali for Every Budget (2026) — From $30 to $500/Night',
@@ -386,6 +388,8 @@ export default function BlogBaliHotels() {
               Whatever your budget, book with free cancellation and book early for summer travel — Bali's best hotels sell out fast.
             </p>
           </section>
+
+          <ArticleFAQ faqs={baliHotelsFaqs} />
 
           {/* GetYourGuide Widget - After Final Hotel */}
           <section className="mb-12 py-8 border-t border-b">

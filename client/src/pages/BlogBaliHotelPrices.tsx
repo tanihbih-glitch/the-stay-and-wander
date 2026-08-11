@@ -5,6 +5,8 @@ import MobileBottomNav from "@/components/MobileBottomNav";
 import BlogArticleSchema, { BreadcrumbSchema } from "@/components/BlogArticleSchema";
 import PopularRoutesWidgetBlogSidebar from "@/components/PopularRoutesWidgetBlogSidebar";
 import TripComHotelWidget from "@/components/TripComHotelWidget";
+import ArticleFAQ from "@/components/ArticleFAQ";
+import { baliHotelPricesFaqs } from "@shared/articleFaqs";
 import { ArrowLeft } from "lucide-react";
 
 export const articleMetadata = {
@@ -201,6 +203,8 @@ export default function BlogBaliHotelPrices() {
               ))}
             </ul>
           </section>
+
+          <ArticleFAQ faqs={baliHotelPricesFaqs} />
 
           <section className="mt-12 border-t border-gray-200 pt-12">
             <h2 className="font-playfair text-3xl font-bold text-gray-900">Ready to Find Your Bali Stay?</h2>
