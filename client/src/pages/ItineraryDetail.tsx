@@ -2,7 +2,7 @@ import Head from "@/components/Head";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ChevronDown, MapPin, DollarSign, Users, Calendar } from "lucide-react";
-import { generateMetaTags } from "@shared/seo";
+import { generateMetaTags, pageMetadataConfig } from "@shared/seo";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MobileBottomNav from "@/components/MobileBottomNav";
@@ -24,6 +24,14 @@ const getHotelLink = (hotelName: string, itineraryId: string): string => {
     if (name.includes('tokyo')) return 'https://booking.stay22.com/thestayandwander/r-lvU3PLVF';
     if (name.includes('seoul')) return 'https://booking.stay22.com/thestayandwander/TFtgmasXPl';
     return 'https://booking.stay22.com/thestayandwander/r-lvU3PLVF';
+  }
+
+  if (itineraryId === 'tokyo') {
+    return 'https://booking.stay22.com/thestayandwander/r-lvU3PLVF';
+  }
+
+  if (itineraryId === 'seoul') {
+    return 'https://booking.stay22.com/thestayandwander/TFtgmasXPl';
   }
   
   // Mediterranean hotels
@@ -155,6 +163,47 @@ const itineraries: Record<string, ItineraryData> = {
         description: "Transfer to airport for departure flight.",
         activities: ["Hotel checkout", "Airport transfer", "Departure"],
       },
+    ],
+  },
+  tokyo: {
+    id: "tokyo",
+    title: "4 Days in Tokyo: First-Timer Itinerary",
+    headline: "Flights to Tokyo",
+    region: "ASIA",
+    duration: "4 Days",
+    description: "A first-timer route through Asakusa, Shibuya, modern Tokyo, and a Mount Fuji day trip.",
+    image: "/manus-storage/tokyo-where-to-stay-hero_78be225b.jpg",
+    destinations: 1,
+    hotels: 1,
+    activities: 10,
+    price: "Flexible",
+    flightHeadline: "Flights to Tokyo",
+    days: [
+      { day: 1, title: "Arrival in Tokyo", description: "Arrive at Narita or Haneda Airport, transfer to your hotel, and take an evening stroll in Shibuya.", activities: ["Airport transfer", "Hotel check-in", "Evening stroll in Shibuya"], hotel: "Tokyo city base" },
+      { day: 2, title: "Tokyo Exploration", description: "Explore Senso-ji Temple, the Asakusa district, and Tsukiji market.", activities: ["Senso-ji Temple", "Asakusa district", "Tsukiji market tour"], hotel: "Tokyo city base" },
+      { day: 3, title: "Modern Tokyo", description: "Pair teamLab Borderless with Shibuya Crossing and Harajuku shopping.", activities: ["teamLab Borderless", "Shibuya Crossing", "Harajuku shopping"], hotel: "Tokyo city base" },
+      { day: 4, title: "Mount Fuji Day Trip", description: "Take a full-day excursion to Mount Fuji and Lake Kawaguchi before returning to Tokyo.", activities: ["Mount Fuji views", "Lake Kawaguchi", "Traditional onsen"] },
+    ],
+  },
+  seoul: {
+    id: "seoul",
+    title: "5 Days in Seoul: First-Timer Itinerary",
+    headline: "Flights to Seoul",
+    region: "ASIA",
+    duration: "5 Days",
+    description: "A first-timer route through Myeongdong, palace culture, Gangnam, Nami Island, and Itaewon.",
+    image: "/manus-storage/seoul-where-to-stay-hero_050ef7b1.jpg",
+    destinations: 1,
+    hotels: 1,
+    activities: 12,
+    price: "Flexible",
+    flightHeadline: "Flights to Seoul",
+    days: [
+      { day: 1, title: "Arrival and Myeongdong", description: "Arrive in Seoul, settle into your hotel, and explore Myeongdong in the evening.", activities: ["Airport transfer", "Hotel check-in", "Myeongdong exploration"], hotel: "Seoul city base" },
+      { day: 2, title: "Seoul Culture", description: "Visit Gyeongbokgung Palace, Bukchon Hanok Village, and Insadong.", activities: ["Gyeongbokgung Palace", "Bukchon Hanok Village", "Insadong art"], hotel: "Seoul city base" },
+      { day: 3, title: "K-Pop and Modern Seoul", description: "Explore Myeongdong shopping, Lotte World, and a Korean BBQ dinner.", activities: ["Myeongdong shopping", "Lotte World", "Korean BBQ"], hotel: "Seoul city base" },
+      { day: 4, title: "Nami Island Day Trip", description: "Take a scenic day trip to Nami Island and the Korean folk village.", activities: ["Nami Island", "Korean folk village", "Garden walks"], hotel: "Seoul city base" },
+      { day: 5, title: "Itaewon and Departure", description: "Spend your final hours in Itaewon before transferring to the airport.", activities: ["Itaewon shopping", "Street food tour", "Airport transfer"] },
     ],
   },
   mediterranean: {
@@ -395,13 +444,19 @@ export default function ItineraryDetail() {
   const [showDownloadPopup, setShowDownloadPopup] = useState(false);
 
   // Generate unique meta tags for each itinerary
-  const itineraryMetadata = itinerary ? {
-    title: `${itinerary.title} - Custom Itinerary | The Stay & Wander`,
-    description: `${itinerary.description} ${itinerary.duration} itinerary with ${itinerary.hotels} hotels and ${itinerary.activities} activities. Starting from ${itinerary.price}.`,
-    image: itinerary.image,
-    url: `/itinerary/${itinerary.id}`,
-    keywords: `${itinerary.title}, ${itinerary.region}, travel itinerary, vacation planning`,
-  } : null;
+  const itineraryMetadata = itinerary
+    ? itinerary.id === "tokyo"
+      ? pageMetadataConfig.tokyoItinerary
+      : itinerary.id === "seoul"
+        ? pageMetadataConfig.seoulItinerary
+        : {
+            title: `${itinerary.title} - Custom Itinerary | The Stay & Wander`,
+            description: `${itinerary.description} ${itinerary.duration} itinerary with ${itinerary.hotels} hotels and ${itinerary.activities} activities. Starting from ${itinerary.price}.`,
+            image: itinerary.image,
+            url: `/itinerary/${itinerary.id}`,
+            keywords: `${itinerary.title}, ${itinerary.region}, travel itinerary, vacation planning`,
+          }
+    : null;
   const itineraryTags = itineraryMetadata ? generateMetaTags(itineraryMetadata) : null;
 
   if (!itinerary) {
@@ -597,14 +652,26 @@ export default function ItineraryDetail() {
 
       {/* GetYourGuide Tours & Activities */}
       <GetYourGuideTours 
-        label={itinerary.id === 'tokyo-seoul' ? 'Book Your Tokyo & Seoul Tours Here' : itinerary.id === 'mediterranean' ? 'Book Your Mediterranean Tours Here' : 'Book Your Brazil Tours Here'}
+        label={itinerary.id === 'tokyo-seoul' ? 'Book Your Tokyo & Seoul Tours Here' : itinerary.id === 'tokyo' ? 'Book Your Tokyo Tours Here' : itinerary.id === 'seoul' ? 'Book Your Seoul Tours Here' : itinerary.id === 'mediterranean' ? 'Book Your Mediterranean Tours Here' : 'Book Your Brazil Tours Here'}
         cardStyle={true}
         showHeadline={true}
         showButton={false}
       />
 
       {/* Trip.com Hotel Widget for Tokyo & Seoul itinerary */}
-      {itinerary.id === 'tokyo-seoul' && <TripComHotelWidget />}
+      {['tokyo-seoul', 'tokyo', 'seoul'].includes(itinerary.id) && <TripComHotelWidget />}
+
+      {(itinerary.id === 'tokyo' || itinerary.id === 'seoul') && (
+        <section className="px-4 py-12 bg-blue-50">
+          <div className="container text-center">
+            <h2 className="font-display text-3xl font-bold text-gray-900">Choose the Right Base First</h2>
+            <p className="mt-3 text-gray-700">Use the matching neighborhood guide to choose the area that fits this itinerary.</p>
+            <a href={itinerary.id === 'tokyo' ? '/blog/where-to-stay-in-tokyo-2026' : '/blog/where-to-stay-in-seoul-2026'} className="mt-5 inline-block font-semibold text-[#0077B6] hover:underline">
+              Read the {itinerary.id === 'tokyo' ? 'Tokyo' : 'Seoul'} Where to Stay Guide →
+            </a>
+          </div>
+        </section>
+      )}
 
       {/* CTA Section */}
       <section className="py-16 px-4 bg-blue-600">
@@ -622,6 +689,14 @@ export default function ItineraryDetail() {
                 Book This Itinerary
               </Button>
             </a>
+            {itinerary.id === 'tokyo' || itinerary.id === 'seoul' ? (
+              <a
+                href={itinerary.id === 'tokyo' ? '/blog/where-to-stay-in-tokyo-2026' : '/blog/where-to-stay-in-seoul-2026'}
+                className="block text-center px-5 py-3 bg-white text-[#0077B6] border border-[#0077B6] rounded-md font-semibold hover:bg-blue-50"
+              >
+                Choose Your {itinerary.id === 'tokyo' ? 'Tokyo' : 'Seoul'} Neighborhood
+              </a>
+            ) : (
             <a
               href={(() => {
                 const id = (itinerary.id || '').toLowerCase();
@@ -653,6 +728,7 @@ export default function ItineraryDetail() {
             >
               Download This Itinerary (PDF)
             </a>
+            )}
           </div>
         </div>
       </section>

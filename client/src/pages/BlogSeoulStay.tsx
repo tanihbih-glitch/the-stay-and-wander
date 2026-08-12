@@ -7,6 +7,8 @@ import PopularRoutesWidgetBlogSidebar from "@/components/PopularRoutesWidgetBlog
 import TripComHotelWidget from "@/components/TripComHotelWidget";
 import CityActivitiesWidget from "@/components/CityActivitiesWidget";
 import RelatedAsiaStayGuides from "@/components/RelatedAsiaStayGuides";
+import ArticleFAQ from "@/components/ArticleFAQ";
+import { seoulStayFaqs } from "@shared/articleFaqs";
 import { ArrowLeft } from "lucide-react";
 
 export const articleMetadata = {
@@ -55,6 +57,8 @@ export default function BlogSeoulStay() {
       {districts.map((area) => <section key={area.title} className="mt-12"><h2 className="font-playfair text-3xl font-bold text-gray-900">{area.title}</h2><p className="mt-6 text-lg leading-relaxed text-gray-700">{area.copy}</p><p className="mt-5 rounded-xl border-l-4 border-yellow-400 bg-yellow-50 p-5 text-gray-800"><strong>Stay here if:</strong> {area.stay}<br /><strong>Nearby:</strong> {area.nearby}</p></section>)}
       <section className="mt-12"><h2 className="font-playfair text-3xl font-bold text-gray-900">Tips for Choosing Where to Stay in Seoul</h2><ul className="mt-6 space-y-4 pl-6 text-lg leading-relaxed text-gray-700 marker:text-[#D4AF37]"><li><strong>First time in Seoul?</strong> Myeongdong is the easiest, lowest-risk choice — central, walkable, and close to major sights.</li><li><strong>Traveling with family?</strong> Myeongdong or Insadong offer a calmer base than Gangnam or Hongdae&apos;s nightlife-heavy streets.</li><li><strong>Stay near a subway line, not just a named district</strong> — Seoul&apos;s extensive subway makes even slightly outer neighborhoods very convenient.</li><li><strong>Avoid peak cherry blossom weeks in April</strong> — prices and demand spike sharply, especially near palace and park areas.</li></ul></section>
       <RelatedAsiaStayGuides current="seoul" />
+      <section className="mt-10 rounded-2xl border border-blue-100 bg-blue-50 p-6 sm:p-8"><h2 className="font-playfair text-2xl font-bold text-gray-900">Plan Your Days in Seoul</h2><p className="mt-3 text-gray-700">Once you have chosen a base, use our five-day first-timer itinerary to connect Myeongdong, palaces, Gangnam, Nami Island, and Itaewon.</p><a href="/itinerary/seoul" className="mt-5 inline-flex font-semibold text-[#0077B6] hover:text-[#005c91] hover:underline">Explore the 5-Day Seoul Itinerary →</a></section>
+      <ArticleFAQ faqs={seoulStayFaqs} title="Seoul Neighborhood Questions, Answered" />
       <section className="mt-12 border-t border-gray-200 pt-12"><h2 className="font-playfair text-3xl font-bold text-gray-900">Ready to Find Your Seoul Stay?</h2><p className="mt-6 text-lg leading-relaxed text-gray-700">Compare live rates across hundreds of properties and book directly through our search tool below.</p><TripComHotelWidget className="my-8" title="Search Seoul hotels on Trip.com" /><CityActivitiesWidget city="Seoul" /><p className="mt-8 text-center text-sm italic text-gray-500">Prices are approximate and based on typical 2026 rates; always confirm current pricing directly when booking.</p></section>
     </article><aside className="lg:col-span-1"><PopularRoutesWidgetBlogSidebar /></aside></main><Footer /><MobileBottomNav />
   </div>;

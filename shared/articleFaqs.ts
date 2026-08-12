@@ -49,6 +49,52 @@ export const bangkokHotelPricesFaqs: readonly ArticleFaq[] = [
   },
 ];
 
+export const tokyoStayFaqs: readonly ArticleFaq[] = [
+  {
+    question: "Where should first-timers stay in Tokyo?",
+    answer: "The guide identifies Shinjuku as the easiest, lowest-risk choice for a first Tokyo trip because it is built around a major train hub and gives flexible access across the city. It is a practical base when you want to minimise transit planning and stay close to nightlife, gardens, and entertainment.",
+  },
+  {
+    question: "What is the best area to stay in Tokyo for shopping?",
+    answer: "Shibuya is the guide's pick for trendy shopping and youthful energy, with the scramble crossing, Center Gai, and easy access to Harajuku. Ginza is the alternative for luxury shopping and fine dining, but the article notes that it is consistently the most expensive area in the comparison.",
+  },
+  {
+    question: "Which Tokyo neighborhood is best for a budget-conscious stay?",
+    answer: "Asakusa and Ikebukuro are the guide's more value-focused options. Asakusa combines traditional atmosphere with typical prices from $35–150 per night, while Ikebukuro offers major transit access with typical prices from $40–160 per night.",
+  },
+  {
+    question: "Is Shinjuku or Shibuya better for a first Tokyo visit?",
+    answer: "Choose Shinjuku if you value broad train connections and maximum flexibility. Choose Shibuya if you want to stay in the middle of Tokyo's most photographed, trend-led shopping and nightlife area.",
+  },
+  {
+    question: "When are Tokyo hotel prices highest?",
+    answer: "The article flags late March to early April for cherry blossoms and October to November for autumn foliage as higher-demand periods. Typical shoulder-season prices can run 30–50% higher in those windows, so availability should be checked well ahead of travel.",
+  },
+];
+
+export const seoulStayFaqs: readonly ArticleFaq[] = [
+  {
+    question: "Where should first-timers stay in Seoul?",
+    answer: "The guide identifies Myeongdong as the easiest first-timer base because it is central, walkable, and close to shopping, street food, and subway access. It also places visitors within reach of Namsan Tower and Myeongdong Cathedral.",
+  },
+  {
+    question: "What is the best area to stay in Seoul for K-pop and nightlife?",
+    answer: "Gangnam is the guide's upscale K-culture and nightlife choice, with luxury shopping, trendy cafés, and landmarks such as COEX Mall. Hongdae is the more value-conscious alternative for youthful energy, street performances, indie cafés, and live music.",
+  },
+  {
+    question: "Which Seoul neighborhood offers the best value for hotels?",
+    answer: "Hongdae and Insadong begin at the lower end of the guide's typical price ranges, from $30 per night. Hongdae is positioned around youth culture and nightlife, while Insadong is the quieter, traditional choice near palaces and galleries.",
+  },
+  {
+    question: "Is Myeongdong or Gangnam better for a first Seoul trip?",
+    answer: "Choose Myeongdong for the simplest central base, especially if convenience, shopping, and first-visit sightseeing are your priorities. Choose Gangnam when you want a trendier, more upscale stay and are comfortable with the guide's higher typical price range.",
+  },
+  {
+    question: "When are Seoul hotel prices highest?",
+    answer: "The guide notes that April cherry blossoms and October autumn foliage can raise typical shoulder-season rates by 25–40%. If those seasonal experiences are not the focus of your trip, comparing dates outside those peaks can provide more choice.",
+  },
+];
+
 export const baliHotelsFaqs: readonly ArticleFaq[] = [
   {
     question: "What are the best budget hotels in Bali in this guide?",
@@ -149,6 +195,8 @@ export const brazilTravelGuideFaqs: readonly ArticleFaq[] = [
 export const articleFaqsByPath: Readonly<Record<string, readonly ArticleFaq[]>> = {
   "/blog/bali-hotel-prices-2026": baliHotelPricesFaqs,
   "/blog/bangkok-hotel-prices-2026": bangkokHotelPricesFaqs,
+  "/blog/where-to-stay-in-tokyo-2026": tokyoStayFaqs,
+  "/blog/where-to-stay-in-seoul-2026": seoulStayFaqs,
   "/blog/best-hotels-bali-2026": baliHotelsFaqs,
   "/blog/best-4-star-hotels-bali-2026": baliFourStarHotelsFaqs,
   "/blog/best-flight-deals-asia-2026": asiaFlightDealsFaqs,

@@ -242,6 +242,28 @@ export const pageMetadataConfig: Record<string, PageMetadata> = {
     keywords: "where to stay in Seoul 2026, Seoul districts, Myeongdong hotels, Gangnam hotels, Hongdae hotels, Itaewon hotels, Insadong hotels",
   },
 
+  tokyoItinerary: {
+    title: "4 Days in Tokyo: First-Timer Itinerary (2026) | The Stay & Wander",
+    description: "Plan four practical days in Tokyo with Asakusa, Shibuya, modern Tokyo, and a Mount Fuji day trip — plus stay and activity planning links.",
+    image: `${SITE_URL}/manus-storage/tokyo-where-to-stay-hero_78be225b.jpg`,
+    url: "/itinerary/tokyo",
+    type: "article",
+    author: "The Stay & Wander",
+    publishedDate: "2026-08-12",
+    keywords: "4 day Tokyo itinerary 2026, Tokyo first timer itinerary, Tokyo Asakusa Shibuya itinerary, Mount Fuji day trip",
+  },
+
+  seoulItinerary: {
+    title: "5 Days in Seoul: First-Timer Itinerary (2026) | The Stay & Wander",
+    description: "Plan five practical days in Seoul with Myeongdong, palaces, Gangnam, Nami Island, and Itaewon — plus stay and activity planning links.",
+    image: `${SITE_URL}/manus-storage/seoul-where-to-stay-hero_050ef7b1.jpg`,
+    url: "/itinerary/seoul",
+    type: "article",
+    author: "The Stay & Wander",
+    publishedDate: "2026-08-12",
+    keywords: "5 day Seoul itinerary 2026, Seoul first timer itinerary, Myeongdong itinerary, Nami Island day trip, Gangnam itinerary",
+  },
+
   baliFourStarHotelsGuide: {
     title: "Best 4-Star Hotels in Bali Under $100/Night (2026 Picks)",
     description:

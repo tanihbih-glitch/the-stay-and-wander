@@ -5,6 +5,8 @@ describe("published article FAQ data", () => {
   const expectedPaths = [
     "/blog/bali-hotel-prices-2026",
     "/blog/bangkok-hotel-prices-2026",
+    "/blog/where-to-stay-in-tokyo-2026",
+    "/blog/where-to-stay-in-seoul-2026",
     "/blog/best-hotels-bali-2026",
     "/blog/best-4-star-hotels-bali-2026",
     "/blog/best-flight-deals-asia-2026",
