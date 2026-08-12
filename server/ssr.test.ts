@@ -28,23 +28,23 @@ describe("server-rendered page metadata", () => {
     expect(injectSSRHead(template)).toBe(template);
   });
 
-  it("renders the approved Bali search metadata for crawlers without changing page content", () => {
+  it("renders the supplied Bali where-to-stay metadata for crawlers without changing page content", () => {
     const template = "<html><head><title>Default site title</title></head><body></body></html>";
     const prices = injectSSRHead(template, pageMetadataConfig.baliHotelPricesGuide);
     const fourStar = injectSSRHead(template, pageMetadataConfig.baliFourStarHotelsGuide);
 
-    expect(prices).toContain("<title>Bali Hotel Prices 2026: Real Costs by Region (Seminyak, Ubud, Uluwatu)</title>");
-    expect(prices).toContain('name="description" content="See exactly what you&#039;ll pay for hotels in Bali in 2026 — broken down by region, from budget to luxury. Real price ranges, no guessing."');
+    expect(prices).toContain("<title>Where to Stay in Bali: Best Areas for First-Timers (2026 Guide)</title>");
+    expect(prices).toContain('name="description" content="Not sure where to stay in Bali? Compare Seminyak, Ubud, Uluwatu, and Canggu — what each is best for, and what you&#039;ll pay in 2026."');
     expect(fourStar).toContain("<title>Best 4-Star Hotels in Bali Under $100/Night (2026 Picks)</title>");
     expect(fourStar).toContain('name="description" content="Handpicked 4-star hotels across Bali that don&#039;t break the bank — real picks under $100/night, from Seminyak to Ubud."');
   });
 
-  it("renders the Bangkok hotel-prices metadata for crawlers", () => {
+  it("renders the supplied Bangkok where-to-stay metadata for crawlers", () => {
     const template = "<html><head><title>Default site title</title></head><body></body></html>";
     const bangkok = injectSSRHead(template, pageMetadataConfig.bangkokHotelPricesGuide);
 
-    expect(bangkok).toContain("<title>Bangkok Hotel Prices 2026: Real Costs by Area (Sukhumvit, Silom, Riverside)</title>");
-    expect(bangkok).toContain('name="description" content="See exactly what you&#039;ll pay for hotels in Bangkok in 2026 — broken down by area, from budget to luxury. Real price ranges, no guessing."');
+    expect(bangkok).toContain("<title>Where to Stay in Bangkok: Best Areas for First-Timers (2026 Guide)</title>");
+    expect(bangkok).toContain('name="description" content="Not sure where to stay in Bangkok? Compare Sukhumvit, Silom, Riverside, Khao San Road, and Sathorn — what each is best for, and what you&#039;ll pay in 2026."');
     expect(bangkok).toContain('href="https://thestayandwander.com/blog/bangkok-hotel-prices-2026"');
   });
 

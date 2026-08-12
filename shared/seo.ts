@@ -195,29 +195,29 @@ export const pageMetadataConfig: Record<string, PageMetadata> = {
   },
 
   baliHotelPricesGuide: {
-    title: "Bali Hotel Prices 2026: Real Costs by Region (Seminyak, Ubud, Uluwatu)",
+    title: "Where to Stay in Bali: Best Areas for First-Timers (2026 Guide)",
     description:
-      "See exactly what you'll pay for hotels in Bali in 2026 — broken down by region, from budget to luxury. Real price ranges, no guessing.",
+      "Not sure where to stay in Bali? Compare Seminyak, Ubud, Uluwatu, and Canggu — what each is best for, and what you'll pay in 2026.",
     image: `${SITE_URL}/manus-storage/blog-bali_5a40f78c.png`,
     url: "/blog/bali-hotel-prices-2026",
     type: "article",
     author: "The Stay & Wander",
     publishedDate: "2026-07-27",
     keywords:
-      "Bali hotel prices 2026, Bali accommodation costs, Seminyak hotel prices, Ubud hotel prices, Uluwatu hotel prices, Canggu hotel prices",
+      "where to stay in Bali 2026, best areas in Bali for first timers, Seminyak hotels, Ubud hotels, Uluwatu hotels, Canggu hotels, Bali hotel prices",
   },
 
   bangkokHotelPricesGuide: {
-    title: "Bangkok Hotel Prices 2026: Real Costs by Area (Sukhumvit, Silom, Riverside)",
+    title: "Where to Stay in Bangkok: Best Areas for First-Timers (2026 Guide)",
     description:
-      "See exactly what you'll pay for hotels in Bangkok in 2026 — broken down by area, from budget to luxury. Real price ranges, no guessing.",
+      "Not sure where to stay in Bangkok? Compare Sukhumvit, Silom, Riverside, Khao San Road, and Sathorn — what each is best for, and what you'll pay in 2026.",
     image: `${SITE_URL}/manus-storage/bangkok-hotel-prices-hero_fb209c1a.jpg`,
     url: "/blog/bangkok-hotel-prices-2026",
     type: "article",
     author: "The Stay & Wander",
     publishedDate: "2026-08-03",
     keywords:
-      "Bangkok hotel prices 2026, Bangkok accommodation costs, Sukhumvit hotel prices, Silom hotel prices, Bangkok riverside hotels, Khao San Road hotels, Sathorn hotels",
+      "where to stay in Bangkok 2026, best areas in Bangkok for first timers, Sukhumvit hotels, Silom hotels, Bangkok riverside hotels, Khao San Road hotels, Sathorn hotels",
   },
 
   baliFourStarHotelsGuide: {

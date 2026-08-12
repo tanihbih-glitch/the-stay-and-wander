@@ -3,11 +3,11 @@ import { articleMetadata, priceSnapshot, searchMetadata } from "../client/src/pa
 import { TRIP_COM_HOTEL_WIDGET_URL } from "../client/src/components/TripComHotelWidget";
 
 describe("Bali hotel prices article", () => {
-  it("keeps the supplied title, canonical route, and 2026 pricing snapshot", () => {
-    expect(articleMetadata.title).toBe("Bali Hotel Prices in 2026: What You'll Actually Pay by Region");
+  it("uses the supplied where-to-stay title while preserving the canonical route and 2026 pricing snapshot", () => {
+    expect(articleMetadata.title).toBe("Where to Stay in Bali: Best Areas for First-Timers (2026 Guide)");
     expect(articleMetadata.url).toBe("/blog/bali-hotel-prices-2026");
-    expect(searchMetadata.title).toBe("Bali Hotel Prices 2026: Real Costs by Region (Seminyak, Ubud, Uluwatu)");
-    expect(searchMetadata.description).toBe("See exactly what you'll pay for hotels in Bali in 2026 — broken down by region, from budget to luxury. Real price ranges, no guessing.");
+    expect(searchMetadata.title).toBe("Where to Stay in Bali: Best Areas for First-Timers (2026 Guide)");
+    expect(searchMetadata.description).toBe("Not sure where to stay in Bali? Compare Seminyak, Ubud, Uluwatu, and Canggu — what each is best for, and what you'll pay in 2026.");
     expect(priceSnapshot).toEqual([
       ["Seminyak", "$40–70/night", "$80–150/night", "$200+/night"],
       ["Ubud", "$30–60/night", "$75–130/night", "$180+/night"],

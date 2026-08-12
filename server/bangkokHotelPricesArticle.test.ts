@@ -4,11 +4,11 @@ import { TRIP_COM_HOTEL_WIDGET_URL } from "../client/src/components/TripComHotel
 import { pageMetadataConfig } from "../shared/seo";
 
 describe("Bangkok hotel prices article", () => {
-  it("keeps the supplied content title, search metadata, canonical route, and pricing table", () => {
-    expect(articleMetadata.title).toBe("Bangkok Hotel Prices in 2026: What You'll Actually Pay by Area");
+  it("uses the supplied where-to-stay title while preserving the canonical route and pricing table", () => {
+    expect(articleMetadata.title).toBe("Where to Stay in Bangkok: Best Areas for First-Timers (2026 Guide)");
     expect(articleMetadata.url).toBe("/blog/bangkok-hotel-prices-2026");
-    expect(searchMetadata.title).toBe("Bangkok Hotel Prices 2026: Real Costs by Area (Sukhumvit, Silom, Riverside)");
-    expect(searchMetadata.description).toBe("See exactly what you'll pay for hotels in Bangkok in 2026 — broken down by area, from budget to luxury. Real price ranges, no guessing.");
+    expect(searchMetadata.title).toBe("Where to Stay in Bangkok: Best Areas for First-Timers (2026 Guide)");
+    expect(searchMetadata.description).toBe("Not sure where to stay in Bangkok? Compare Sukhumvit, Silom, Riverside, Khao San Road, and Sathorn — what each is best for, and what you'll pay in 2026.");
     expect(priceSnapshot).toHaveLength(5);
     expect(priceSnapshot[0]).toEqual(["Sukhumvit", "$25–45/night", "$60–120/night", "$180+/night"]);
     expect(pageMetadataConfig.bangkokHotelPricesGuide.url).toBe(articleMetadata.url);
