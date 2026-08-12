@@ -48,6 +48,17 @@ describe("server-rendered page metadata", () => {
     expect(bangkok).toContain('href="https://thestayandwander.com/blog/bangkok-hotel-prices-2026"');
   });
 
+  it("renders the Tokyo and Seoul where-to-stay metadata for crawlers", () => {
+    const template = "<html><head><title>Default site title</title></head><body></body></html>";
+    const tokyo = injectSSRHead(template, pageMetadataConfig.tokyoStayGuide);
+    const seoul = injectSSRHead(template, pageMetadataConfig.seoulStayGuide);
+
+    expect(tokyo).toContain("<title>Where to Stay in Tokyo: Best Neighborhoods for First-Timers (2026 Guide)</title>");
+    expect(tokyo).toContain('href="https://thestayandwander.com/blog/where-to-stay-in-tokyo-2026"');
+    expect(seoul).toContain("<title>Where to Stay in Seoul: Best Areas for First-Timers (2026 Guide)</title>");
+    expect(seoul).toContain('href="https://thestayandwander.com/blog/where-to-stay-in-seoul-2026"');
+  });
+
   it("injects a valid FAQPage JSON-LD payload for each specified FAQ article", () => {
     const template = "<html><head><title>Default site title</title></head><body></body></html>";
 

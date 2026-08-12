@@ -150,6 +150,10 @@ export function ssrMiddleware(req: Request, res: Response, next: NextFunction) {
     metadata = pageMetadataConfig.baliHotelPricesGuide;
   } else if (path === "/blog/bangkok-hotel-prices-2026") {
     metadata = pageMetadataConfig.bangkokHotelPricesGuide;
+  } else if (path === "/blog/where-to-stay-in-tokyo-2026") {
+    metadata = pageMetadataConfig.tokyoStayGuide;
+  } else if (path === "/blog/where-to-stay-in-seoul-2026") {
+    metadata = pageMetadataConfig.seoulStayGuide;
   } else if (path === "/blog/best-4-star-hotels-bali-2026") {
     metadata = pageMetadataConfig.baliFourStarHotelsGuide;
   } else if (path.startsWith("/blog/")) {

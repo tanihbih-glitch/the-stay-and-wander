@@ -220,6 +220,28 @@ export const pageMetadataConfig: Record<string, PageMetadata> = {
       "where to stay in Bangkok 2026, best areas in Bangkok for first timers, Sukhumvit hotels, Silom hotels, Bangkok riverside hotels, Khao San Road hotels, Sathorn hotels",
   },
 
+  tokyoStayGuide: {
+    title: "Where to Stay in Tokyo: Best Neighborhoods for First-Timers (2026 Guide)",
+    description: "Not sure where to stay in Tokyo? Compare Shinjuku, Shibuya, Asakusa, Ginza, and Ikebukuro — what each is best for and typical 2026 hotel prices.",
+    image: `${SITE_URL}/manus-storage/tokyo-where-to-stay-hero_78be225b.jpg`,
+    url: "/blog/where-to-stay-in-tokyo-2026",
+    type: "article",
+    author: "The Stay & Wander",
+    publishedDate: "2026-08-12",
+    keywords: "where to stay in Tokyo 2026, Tokyo neighborhoods, Shinjuku hotels, Shibuya hotels, Asakusa hotels, Ginza hotels, Ikebukuro hotels",
+  },
+
+  seoulStayGuide: {
+    title: "Where to Stay in Seoul: Best Areas for First-Timers (2026 Guide)",
+    description: "Not sure where to stay in Seoul? Compare Myeongdong, Gangnam, Hongdae, Itaewon, and Insadong — what each is best for and typical 2026 hotel prices.",
+    image: `${SITE_URL}/manus-storage/seoul-where-to-stay-hero_050ef7b1.jpg`,
+    url: "/blog/where-to-stay-in-seoul-2026",
+    type: "article",
+    author: "The Stay & Wander",
+    publishedDate: "2026-08-12",
+    keywords: "where to stay in Seoul 2026, Seoul districts, Myeongdong hotels, Gangnam hotels, Hongdae hotels, Itaewon hotels, Insadong hotels",
+  },
+
   baliFourStarHotelsGuide: {
     title: "Best 4-Star Hotels in Bali Under $100/Night (2026 Picks)",
     description:

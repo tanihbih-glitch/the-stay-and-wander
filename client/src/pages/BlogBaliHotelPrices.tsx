@@ -6,6 +6,7 @@ import BlogArticleSchema, { BreadcrumbSchema } from "@/components/BlogArticleSch
 import PopularRoutesWidgetBlogSidebar from "@/components/PopularRoutesWidgetBlogSidebar";
 import TripComHotelWidget from "@/components/TripComHotelWidget";
 import ArticleFAQ from "@/components/ArticleFAQ";
+import RelatedAsiaStayGuides from "@/components/RelatedAsiaStayGuides";
 import { baliHotelPricesFaqs } from "@shared/articleFaqs";
 import { ArrowLeft } from "lucide-react";
 
@@ -203,6 +204,8 @@ export default function BlogBaliHotelPrices() {
               ))}
             </ul>
           </section>
+
+          <RelatedAsiaStayGuides current="bali" />
 
           <ArticleFAQ faqs={baliHotelPricesFaqs} />
 
