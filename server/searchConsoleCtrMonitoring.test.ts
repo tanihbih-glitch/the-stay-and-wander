@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { MONITORED_WHERE_TO_STAY_PATHS, previousCompleteCalendarMonth } from "./searchConsoleCtrMonitoring";
+import { isFirstBusinessDayOfMonth, MONITORED_WHERE_TO_STAY_PATHS, previousCompleteCalendarMonth } from "./searchConsoleCtrMonitoring";
 
 describe("Search Console CTR monitoring", () => {
   it("tracks exactly the four published where-to-stay guides", () => {
@@ -16,5 +16,11 @@ describe("Search Console CTR monitoring", () => {
       startDate: "2026-07-01",
       endDate: "2026-07-31",
     });
+  });
+
+  it("runs only on the first weekday of each month", () => {
+    expect(isFirstBusinessDayOfMonth(new Date("2026-08-03T09:00:00.000Z"))).toBe(true);
+    expect(isFirstBusinessDayOfMonth(new Date("2026-08-01T09:00:00.000Z"))).toBe(false);
+    expect(isFirstBusinessDayOfMonth(new Date("2026-09-01T09:00:00.000Z"))).toBe(true);
   });
 });

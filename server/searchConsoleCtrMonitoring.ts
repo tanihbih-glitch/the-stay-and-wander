@@ -41,6 +41,16 @@ async function getAccessToken(refreshToken: string) {
   return payload.access_token;
 }
 
+export function isFirstBusinessDayOfMonth(now = new Date()): boolean {
+  const firstDay = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), 1));
+  while (firstDay.getUTCDay() === 0 || firstDay.getUTCDay() === 6) {
+    firstDay.setUTCDate(firstDay.getUTCDate() + 1);
+  }
+  return now.getUTCFullYear() === firstDay.getUTCFullYear()
+    && now.getUTCMonth() === firstDay.getUTCMonth()
+    && now.getUTCDate() === firstDay.getUTCDate();
+}
+
 export async function collectSearchConsoleCtrReport(now = new Date()) {
   const connection = await getSearchConsoleConnectionForProperties(GOOGLE_SEARCH_CONSOLE_PROPERTIES);
   if (!connection) throw new Error("Search Console monitoring has not been authorized.");
