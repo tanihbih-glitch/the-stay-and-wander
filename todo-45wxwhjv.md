@@ -215,3 +215,4 @@
 - [ ] Add sanitized server-side OAuth callback failure diagnostics so the unresolved authorization persistence failure can be corrected without logging codes, tokens, or secrets.
 - [ ] Replace the cross-instance signed OAuth state check with a short-lived, database-backed state record so callback verification remains stable across deployed instances.
 - [ ] Publish the database-backed OAuth state verification and complete one final authorization retry before collecting the baseline or activating the schedule.
+- [ ] Support the verified URL-prefix Search Console property as a safe fallback when the domain property is unavailable to the authorized account, then retry the read-only connection. The fallback now prefers the domain property, accepts the exact `https://thestayandwander.com/` URL-prefix property, and passes focused OAuth/monitoring tests; publish before authorization retry.

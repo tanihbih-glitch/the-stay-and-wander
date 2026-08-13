@@ -9,7 +9,7 @@ import {
   GOOGLE_SEARCH_CONSOLE_SCOPE,
   GOOGLE_SEARCH_CONSOLE_STATE_TTL_MS,
   hashGoogleSearchConsoleState,
-  verifySearchConsolePropertyAccess,
+  findAuthorizedSearchConsoleProperty,
 } from "./googleSearchConsoleOAuth";
 
 function getStringQuery(req: Request, key: string): string | undefined {
@@ -65,18 +65,19 @@ export function registerGoogleSearchConsoleOAuthRoutes(app: Express) {
         sendResult(res, 400, "Google did not return a refresh token", "Revoke the app's prior access in your Google Account, then start the authorization again.");
         return;
       }
-      const hasProperty = await verifySearchConsolePropertyAccess(accessToken);
-      if (!hasProperty) {
+      const authorizedProperty = await findAuthorizedSearchConsoleProperty(accessToken);
+      if (!authorizedProperty) {
         logOAuthFailure("property_access_denied");
         sendResult(res, 403, "The authorized account does not have this Search Console property", "Use a Google account that has access to thestayandwander.com in Search Console.");
         return;
       }
       await upsertSearchConsoleConnection({
-        property: GOOGLE_SEARCH_CONSOLE_PROPERTY,
+        property: authorizedProperty,
         refreshTokenEncrypted: encryptSearchConsoleRefreshToken(refreshToken),
         scope: tokens.scope || GOOGLE_SEARCH_CONSOLE_SCOPE,
       });
-      sendResult(res, 200, "Search Console monitoring is connected", "Read-only access was verified for thestayandwander.com. You may close this window.");
+      const label = authorizedProperty === GOOGLE_SEARCH_CONSOLE_PROPERTY ? "domain" : "URL-prefix";
+      sendResult(res, 200, "Search Console monitoring is connected", `Read-only ${label} property access was verified for thestayandwander.com. You may close this window.`);
     } catch (error) {
       logOAuthFailure("callback_exchange_or_persistence", error);
       sendResult(res, 500, "Search Console authorization failed", "No token was saved. Please confirm the registered redirect URI and try again.");

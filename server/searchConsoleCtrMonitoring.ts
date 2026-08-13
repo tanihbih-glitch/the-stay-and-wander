@@ -1,5 +1,5 @@
-import { decryptSearchConsoleRefreshToken, GOOGLE_SEARCH_CONSOLE_PROPERTY } from "./googleSearchConsoleOAuth";
-import { getSearchConsoleConnection, saveSearchConsoleCtrReport } from "./db";
+import { decryptSearchConsoleRefreshToken, GOOGLE_SEARCH_CONSOLE_PROPERTIES } from "./googleSearchConsoleOAuth";
+import { getSearchConsoleConnectionForProperties, saveSearchConsoleCtrReport } from "./db";
 
 export const MONITORED_WHERE_TO_STAY_PATHS = [
   "/blog/bali-hotel-prices-2026",
@@ -42,13 +42,13 @@ async function getAccessToken(refreshToken: string) {
 }
 
 export async function collectSearchConsoleCtrReport(now = new Date()) {
-  const connection = await getSearchConsoleConnection(GOOGLE_SEARCH_CONSOLE_PROPERTY);
+  const connection = await getSearchConsoleConnectionForProperties(GOOGLE_SEARCH_CONSOLE_PROPERTIES);
   if (!connection) throw new Error("Search Console monitoring has not been authorized.");
 
   const accessToken = await getAccessToken(decryptSearchConsoleRefreshToken(connection.refreshTokenEncrypted));
   const { startDate, endDate } = previousCompleteCalendarMonth(now);
   const response = await fetch(
-    `https://www.googleapis.com/webmasters/v3/sites/${encodeURIComponent(GOOGLE_SEARCH_CONSOLE_PROPERTY)}/searchAnalytics/query`,
+    `https://www.googleapis.com/webmasters/v3/sites/${encodeURIComponent(connection.property)}/searchAnalytics/query`,
     {
       method: "POST",
       headers: { Authorization: `Bearer ${accessToken}`, "Content-Type": "application/json" },
@@ -74,10 +74,10 @@ export async function collectSearchConsoleCtrReport(now = new Date()) {
   }
 
   await saveSearchConsoleCtrReport({
-    property: GOOGLE_SEARCH_CONSOLE_PROPERTY,
+    property: connection.property,
     periodStart: startDate,
     periodEnd: endDate,
     metrics,
   });
-  return { property: GOOGLE_SEARCH_CONSOLE_PROPERTY, periodStart: startDate, periodEnd: endDate, metrics };
+  return { property: connection.property, periodStart: startDate, periodEnd: endDate, metrics };
 }

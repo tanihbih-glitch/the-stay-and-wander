@@ -4,8 +4,11 @@ import {
   createGoogleSearchConsoleState,
   decryptSearchConsoleRefreshToken,
   encryptSearchConsoleRefreshToken,
+  findAuthorizedSearchConsoleProperty,
+  GOOGLE_SEARCH_CONSOLE_PROPERTY,
   GOOGLE_SEARCH_CONSOLE_REDIRECT_URI,
   GOOGLE_SEARCH_CONSOLE_SCOPE,
+  GOOGLE_SEARCH_CONSOLE_URL_PREFIX_PROPERTY,
   hashGoogleSearchConsoleState,
   validateGoogleSearchConsoleOAuthClient,
 } from "./googleSearchConsoleOAuth";
@@ -28,6 +31,16 @@ describe("Google Search Console OAuth client", () => {
     expect(hashGoogleSearchConsoleState(state)).toHaveLength(64);
     expect(hashGoogleSearchConsoleState(state)).not.toContain(state);
     expect(hashGoogleSearchConsoleState(`${state}tampered`)).not.toBe(hashGoogleSearchConsoleState(state));
+  });
+
+  it("accepts the exact URL-prefix property when the domain property is unavailable", async () => {
+    const originalFetch = globalThis.fetch;
+    globalThis.fetch = (async () => new Response(JSON.stringify({
+      siteEntry: [{ siteUrl: GOOGLE_SEARCH_CONSOLE_URL_PREFIX_PROPERTY }],
+    }), { status: 200 })) as typeof fetch;
+    await expect(findAuthorizedSearchConsoleProperty("read-only-token")).resolves.toBe(GOOGLE_SEARCH_CONSOLE_URL_PREFIX_PROPERTY);
+    globalThis.fetch = originalFetch;
+    expect(GOOGLE_SEARCH_CONSOLE_PROPERTY).toBe("sc-domain:thestayandwander.com");
   });
 
   it("encrypts refresh tokens before persistence", () => {

@@ -3,6 +3,11 @@ import crypto from "crypto";
 const GOOGLE_TOKEN_ENDPOINT = "https://oauth2.googleapis.com/token";
 const GOOGLE_AUTHORIZE_ENDPOINT = "https://accounts.google.com/o/oauth2/v2/auth";
 export const GOOGLE_SEARCH_CONSOLE_PROPERTY = "sc-domain:thestayandwander.com";
+export const GOOGLE_SEARCH_CONSOLE_URL_PREFIX_PROPERTY = "https://thestayandwander.com/";
+export const GOOGLE_SEARCH_CONSOLE_PROPERTIES = [
+  GOOGLE_SEARCH_CONSOLE_PROPERTY,
+  GOOGLE_SEARCH_CONSOLE_URL_PREFIX_PROPERTY,
+] as const;
 export const GOOGLE_SEARCH_CONSOLE_SCOPE = "https://www.googleapis.com/auth/webmasters.readonly";
 export const GOOGLE_SEARCH_CONSOLE_STATE_TTL_MS = 10 * 60 * 1000;
 
@@ -88,13 +93,14 @@ export async function exchangeGoogleSearchConsoleCode(code: string) {
   return payload;
 }
 
-export async function verifySearchConsolePropertyAccess(accessToken: string): Promise<boolean> {
+export async function findAuthorizedSearchConsoleProperty(accessToken: string): Promise<string | undefined> {
   const response = await fetch("https://www.googleapis.com/webmasters/v3/sites", {
     headers: { Authorization: `Bearer ${accessToken}` },
   });
-  if (!response.ok) return false;
+  if (!response.ok) return undefined;
   const payload = (await response.json()) as { siteEntry?: Array<{ siteUrl?: string }> };
-  return payload.siteEntry?.some(site => site.siteUrl === GOOGLE_SEARCH_CONSOLE_PROPERTY) ?? false;
+  const authorized = new Set(payload.siteEntry?.map(site => site.siteUrl).filter((value): value is string => Boolean(value)) ?? []);
+  return GOOGLE_SEARCH_CONSOLE_PROPERTIES.find(property => authorized.has(property));
 }
 
 function getEncryptionKey(): Buffer {

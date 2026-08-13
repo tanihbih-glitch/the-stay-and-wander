@@ -117,6 +117,14 @@ export async function getSearchConsoleConnection(property: string) {
   return result[0];
 }
 
+export async function getSearchConsoleConnectionForProperties(properties: readonly string[]) {
+  for (const property of properties) {
+    const connection = await getSearchConsoleConnection(property);
+    if (connection) return connection;
+  }
+  return undefined;
+}
+
 export async function getSearchConsoleConnectionByTaskUid(taskUid: string) {
   const db = await getDb();
   if (!db) return undefined;
