@@ -93,14 +93,34 @@ export async function exchangeGoogleSearchConsoleCode(code: string) {
   return payload;
 }
 
-export async function findAuthorizedSearchConsoleProperty(accessToken: string): Promise<string | undefined> {
+export type SearchConsolePropertyInventory = {
+  authorizedProperty?: string;
+  returnedProperties: string[];
+  apiStatus: number;
+};
+
+function normalizeSearchConsoleProperty(property: string): string {
+  if (property.startsWith("sc-domain:")) return property.toLowerCase();
+  try {
+    const url = new URL(property);
+    return `${url.protocol}//${url.host.toLowerCase()}/`;
+  } catch {
+    return property.trim();
+  }
+}
+
+export async function inspectAuthorizedSearchConsoleProperties(accessToken: string): Promise<SearchConsolePropertyInventory> {
   const response = await fetch("https://www.googleapis.com/webmasters/v3/sites", {
     headers: { Authorization: `Bearer ${accessToken}` },
   });
-  if (!response.ok) return undefined;
-  const payload = (await response.json()) as { siteEntry?: Array<{ siteUrl?: string }> };
-  const authorized = new Set(payload.siteEntry?.map(site => site.siteUrl).filter((value): value is string => Boolean(value)) ?? []);
-  return GOOGLE_SEARCH_CONSOLE_PROPERTIES.find(property => authorized.has(property));
+  const payload = (await response.json()) as { siteEntry?: Array<{ siteUrl?: string }>; error?: { message?: string } };
+  if (!response.ok) throw new Error(`Search Console sites.list failed (${response.status}): ${payload.error?.message ?? "unknown error"}`);
+  const returnedProperties = payload.siteEntry?.map(site => site.siteUrl).filter((value): value is string => Boolean(value)) ?? [];
+  const normalizedReturned = new Map(returnedProperties.map(property => [normalizeSearchConsoleProperty(property), property]));
+  const authorizedProperty = GOOGLE_SEARCH_CONSOLE_PROPERTIES
+    .map(property => normalizedReturned.get(normalizeSearchConsoleProperty(property)))
+    .find((property): property is string => Boolean(property));
+  return { authorizedProperty, returnedProperties, apiStatus: response.status };
 }
 
 function getEncryptionKey(): Buffer {

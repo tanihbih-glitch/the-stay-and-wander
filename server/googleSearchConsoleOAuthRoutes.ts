@@ -9,7 +9,7 @@ import {
   GOOGLE_SEARCH_CONSOLE_SCOPE,
   GOOGLE_SEARCH_CONSOLE_STATE_TTL_MS,
   hashGoogleSearchConsoleState,
-  findAuthorizedSearchConsoleProperty,
+  inspectAuthorizedSearchConsoleProperties,
 } from "./googleSearchConsoleOAuth";
 
 function getStringQuery(req: Request, key: string): string | undefined {
@@ -65,7 +65,13 @@ export function registerGoogleSearchConsoleOAuthRoutes(app: Express) {
         sendResult(res, 400, "Google did not return a refresh token", "Revoke the app's prior access in your Google Account, then start the authorization again.");
         return;
       }
-      const authorizedProperty = await findAuthorizedSearchConsoleProperty(accessToken);
+      const propertyInventory = await inspectAuthorizedSearchConsoleProperties(accessToken);
+      const relevantProperties = propertyInventory.returnedProperties.filter(property => property.includes("thestayandwander.com"));
+      console.info("[Search Console OAuth] property inventory", {
+        apiStatus: propertyInventory.apiStatus,
+        relevantProperties,
+      });
+      const authorizedProperty = propertyInventory.authorizedProperty;
       if (!authorizedProperty) {
         logOAuthFailure("property_access_denied");
         sendResult(res, 403, "The authorized account does not have this Search Console property", "Use a Google account that has access to thestayandwander.com in Search Console.");
