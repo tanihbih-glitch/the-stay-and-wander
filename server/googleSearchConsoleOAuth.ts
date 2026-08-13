@@ -4,7 +4,7 @@ const GOOGLE_TOKEN_ENDPOINT = "https://oauth2.googleapis.com/token";
 const GOOGLE_AUTHORIZE_ENDPOINT = "https://accounts.google.com/o/oauth2/v2/auth";
 export const GOOGLE_SEARCH_CONSOLE_PROPERTY = "sc-domain:thestayandwander.com";
 export const GOOGLE_SEARCH_CONSOLE_SCOPE = "https://www.googleapis.com/auth/webmasters.readonly";
-const GOOGLE_SEARCH_CONSOLE_STATE_TTL_MS = 10 * 60 * 1000;
+export const GOOGLE_SEARCH_CONSOLE_STATE_TTL_MS = 10 * 60 * 1000;
 
 export const GOOGLE_SEARCH_CONSOLE_REDIRECT_URI =
   "https://thestayandwander.com/api/oauth/google-search-console/callback";
@@ -42,34 +42,11 @@ export async function validateGoogleSearchConsoleOAuthClient(): Promise<boolean>
 }
 
 export function createGoogleSearchConsoleState(): string {
-  const payload = Buffer.from(JSON.stringify({
-    issuedAt: Date.now(),
-    nonce: crypto.randomBytes(24).toString("base64url"),
-  })).toString("base64url");
-  const signature = crypto.createHmac("sha256", getOAuthStateKey()).update(payload).digest("base64url");
-  return `${payload}.${signature}`;
+  return crypto.randomBytes(32).toString("base64url");
 }
 
-export function isValidGoogleSearchConsoleState(state: string, now = Date.now()): boolean {
-  const [payload, signature] = state.split(".");
-  if (!payload || !signature) return false;
-
-  const expectedSignature = crypto.createHmac("sha256", getOAuthStateKey()).update(payload).digest("base64url");
-  const signatureBuffer = Buffer.from(signature);
-  const expectedBuffer = Buffer.from(expectedSignature);
-  if (signatureBuffer.length !== expectedBuffer.length || !crypto.timingSafeEqual(signatureBuffer, expectedBuffer)) {
-    return false;
-  }
-
-  try {
-    const parsed = JSON.parse(Buffer.from(payload, "base64url").toString("utf8")) as { issuedAt?: unknown; nonce?: unknown };
-    return typeof parsed.issuedAt === "number"
-      && typeof parsed.nonce === "string"
-      && now - parsed.issuedAt >= 0
-      && now - parsed.issuedAt <= GOOGLE_SEARCH_CONSOLE_STATE_TTL_MS;
-  } catch {
-    return false;
-  }
+export function hashGoogleSearchConsoleState(state: string): string {
+  return crypto.createHash("sha256").update(state).digest("hex");
 }
 
 export function buildGoogleSearchConsoleAuthorizationUrl(state: string): string {
@@ -126,11 +103,6 @@ function getEncryptionKey(): Buffer {
   return crypto.createHash("sha256").update(secret).digest();
 }
 
-function getOAuthStateKey(): string {
-  const secret = process.env.JWT_SECRET;
-  if (!secret) throw new Error("JWT_SECRET is required to sign the Search Console OAuth state.");
-  return secret;
-}
 
 export function encryptSearchConsoleRefreshToken(refreshToken: string): string {
   const iv = crypto.randomBytes(12);

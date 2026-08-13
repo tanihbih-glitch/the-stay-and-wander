@@ -6,7 +6,7 @@ import {
   encryptSearchConsoleRefreshToken,
   GOOGLE_SEARCH_CONSOLE_REDIRECT_URI,
   GOOGLE_SEARCH_CONSOLE_SCOPE,
-  isValidGoogleSearchConsoleState,
+  hashGoogleSearchConsoleState,
   validateGoogleSearchConsoleOAuthClient,
 } from "./googleSearchConsoleOAuth";
 
@@ -22,13 +22,12 @@ describe("Google Search Console OAuth client", () => {
     expect(url.searchParams.get("access_type")).toBe("offline");
   });
 
-  it("uses a signed, time-limited state for cross-site OAuth callback verification", () => {
-    const originalSecret = process.env.JWT_SECRET;
-    process.env.JWT_SECRET = "test-jwt-secret";
+  it("creates opaque state values with stable, non-reversible persistence hashes", () => {
     const state = createGoogleSearchConsoleState();
-    expect(isValidGoogleSearchConsoleState(state)).toBe(true);
-    expect(isValidGoogleSearchConsoleState(`${state}tampered`)).toBe(false);
-    process.env.JWT_SECRET = originalSecret;
+    expect(state).not.toContain(".");
+    expect(hashGoogleSearchConsoleState(state)).toHaveLength(64);
+    expect(hashGoogleSearchConsoleState(state)).not.toContain(state);
+    expect(hashGoogleSearchConsoleState(`${state}tampered`)).not.toBe(hashGoogleSearchConsoleState(state));
   });
 
   it("encrypts refresh tokens before persistence", () => {

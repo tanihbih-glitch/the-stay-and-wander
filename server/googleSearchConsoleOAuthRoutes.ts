@@ -1,5 +1,5 @@
 import type { Express, Request, Response } from "express";
-import { getSearchConsoleConnection, upsertSearchConsoleConnection } from "./db";
+import { consumeSearchConsoleOAuthState, createSearchConsoleOAuthState, getSearchConsoleConnection, upsertSearchConsoleConnection } from "./db";
 import {
   buildGoogleSearchConsoleAuthorizationUrl,
   createGoogleSearchConsoleState,
@@ -7,7 +7,8 @@ import {
   exchangeGoogleSearchConsoleCode,
   GOOGLE_SEARCH_CONSOLE_PROPERTY,
   GOOGLE_SEARCH_CONSOLE_SCOPE,
-  isValidGoogleSearchConsoleState,
+  GOOGLE_SEARCH_CONSOLE_STATE_TTL_MS,
+  hashGoogleSearchConsoleState,
   verifySearchConsolePropertyAccess,
 } from "./googleSearchConsoleOAuth";
 
@@ -34,6 +35,10 @@ export function registerGoogleSearchConsoleOAuthRoutes(app: Express) {
         return;
       }
       const state = createGoogleSearchConsoleState();
+      await createSearchConsoleOAuthState(
+        hashGoogleSearchConsoleState(state),
+        new Date(Date.now() + GOOGLE_SEARCH_CONSOLE_STATE_TTL_MS)
+      );
       res.redirect(302, buildGoogleSearchConsoleAuthorizationUrl(state));
     } catch (error) {
       logOAuthFailure("authorization_start", error);
@@ -45,7 +50,7 @@ export function registerGoogleSearchConsoleOAuthRoutes(app: Express) {
     const code = getStringQuery(req, "code");
     const state = getStringQuery(req, "state");
 
-    if (!code || !state || !isValidGoogleSearchConsoleState(state)) {
+    if (!code || !state || !(await consumeSearchConsoleOAuthState(hashGoogleSearchConsoleState(state)))) {
       logOAuthFailure("state_validation");
       sendResult(res, 400, "Search Console authorization could not be verified", "Please return to the secure authorization link and try again.");
       return;

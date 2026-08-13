@@ -75,6 +75,14 @@ export const searchConsoleConnections = mysqlTable("searchConsoleConnections", {
 
 export type SearchConsoleConnection = typeof searchConsoleConnections.$inferSelect;
 
+/** One-time OAuth state hashes, retained only until callback validation or expiry. */
+export const searchConsoleOAuthStates = mysqlTable("searchConsoleOAuthStates", {
+  id: int("id").autoincrement().primaryKey(),
+  stateHash: varchar("stateHash", { length: 64 }).notNull().unique(),
+  expiresAt: timestamp("expiresAt").notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
 /** Immutable API-sourced monthly performance snapshots for monitored canonical pages. */
 export const searchConsoleCtrReports = mysqlTable(
   "searchConsoleCtrReports",

@@ -213,3 +213,5 @@
 - [ ] Resolve the absent persisted Search Console connection after the reported authorization; do not collect or schedule monitoring until a live callback writes the encrypted token and property record.
 - [ ] Verify the fresh user-confirmed connection record and proceed with the baseline collection only after confirming encrypted token persistence and property access.
 - [ ] Add sanitized server-side OAuth callback failure diagnostics so the unresolved authorization persistence failure can be corrected without logging codes, tokens, or secrets.
+- [ ] Replace the cross-instance signed OAuth state check with a short-lived, database-backed state record so callback verification remains stable across deployed instances.
+- [ ] Publish the database-backed OAuth state verification and complete one final authorization retry before collecting the baseline or activating the schedule.

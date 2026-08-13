@@ -1,6 +1,6 @@
 import { eq } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
-import { InsertUser, searchConsoleConnections, searchConsoleCtrReports, users } from "../drizzle/schema";
+import { InsertUser, searchConsoleConnections, searchConsoleCtrReports, searchConsoleOAuthStates, users } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
 let _db: ReturnType<typeof drizzle> | null = null;
@@ -153,6 +153,26 @@ export async function saveSearchConsoleCtrReport(input: {
     .update(searchConsoleConnections)
     .set({ lastReportAt: new Date() })
     .where(eq(searchConsoleConnections.property, input.property));
+}
+
+export async function createSearchConsoleOAuthState(stateHash: string, expiresAt: Date) {
+  const db = await getDb();
+  if (!db) throw new Error("Database is required for Search Console authorization.");
+  await db.insert(searchConsoleOAuthStates).values({ stateHash, expiresAt });
+}
+
+export async function consumeSearchConsoleOAuthState(stateHash: string, now = new Date()): Promise<boolean> {
+  const db = await getDb();
+  if (!db) return false;
+  const result = await db
+    .select()
+    .from(searchConsoleOAuthStates)
+    .where(eq(searchConsoleOAuthStates.stateHash, stateHash))
+    .limit(1);
+  const record = result[0];
+  if (!record) return false;
+  await db.delete(searchConsoleOAuthStates).where(eq(searchConsoleOAuthStates.id, record.id));
+  return record.expiresAt.getTime() >= now.getTime();
 }
 
 // TODO: add feature queries here as your schema grows.
