@@ -12,6 +12,7 @@ import { registerStripeWebhook } from "../stripeWebhook";
 import { ssrMiddleware } from "../ssr";
 import { legacyRedirectMiddleware } from "../legacyRedirects";
 import { registerGoogleSearchConsoleOAuthRoutes } from "../googleSearchConsoleOAuthRoutes";
+import { registerSearchConsoleCtrMonitoringRoutes } from "../searchConsoleCtrMonitoringRoutes";
 
 function isPortAvailable(port: number): Promise<boolean> {
   return new Promise(resolve => {
@@ -44,6 +45,7 @@ async function startServer() {
   registerStorageProxy(app);
   registerOAuthRoutes(app);
   registerGoogleSearchConsoleOAuthRoutes(app);
+  registerSearchConsoleCtrMonitoringRoutes(app);
   // tRPC API
   app.use(
     "/api/trpc",

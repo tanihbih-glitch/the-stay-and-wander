@@ -20,6 +20,11 @@ function sendResult(res: Response, status: number, title: string, body: string) 
   res.status(status).type("html").send(`<!doctype html><html><head><title>${title}</title></head><body style="font-family:system-ui;max-width:42rem;margin:4rem auto;padding:0 1.5rem"><h1>${title}</h1><p>${body}</p></body></html>`);
 }
 
+function logOAuthFailure(stage: string, error?: unknown) {
+  const detail = error instanceof Error ? error.message : undefined;
+  console.error("[Search Console OAuth] authorization failure", { stage, detail });
+}
+
 export function registerGoogleSearchConsoleOAuthRoutes(app: Express) {
   app.get("/api/oauth/google-search-console/start", async (req: Request, res: Response) => {
     try {
@@ -30,7 +35,8 @@ export function registerGoogleSearchConsoleOAuthRoutes(app: Express) {
       }
       const state = createGoogleSearchConsoleState();
       res.redirect(302, buildGoogleSearchConsoleAuthorizationUrl(state));
-    } catch {
+    } catch (error) {
+      logOAuthFailure("authorization_start", error);
       sendResult(res, 500, "Search Console authorization could not start", "Confirm the OAuth client credentials and try again.");
     }
   });
@@ -40,6 +46,7 @@ export function registerGoogleSearchConsoleOAuthRoutes(app: Express) {
     const state = getStringQuery(req, "state");
 
     if (!code || !state || !isValidGoogleSearchConsoleState(state)) {
+      logOAuthFailure("state_validation");
       sendResult(res, 400, "Search Console authorization could not be verified", "Please return to the secure authorization link and try again.");
       return;
     }
@@ -49,11 +56,13 @@ export function registerGoogleSearchConsoleOAuthRoutes(app: Express) {
       const refreshToken = tokens.refresh_token;
       const accessToken = tokens.access_token;
       if (!refreshToken || !accessToken) {
+        logOAuthFailure("missing_refresh_token");
         sendResult(res, 400, "Google did not return a refresh token", "Revoke the app's prior access in your Google Account, then start the authorization again.");
         return;
       }
       const hasProperty = await verifySearchConsolePropertyAccess(accessToken);
       if (!hasProperty) {
+        logOAuthFailure("property_access_denied");
         sendResult(res, 403, "The authorized account does not have this Search Console property", "Use a Google account that has access to thestayandwander.com in Search Console.");
         return;
       }
@@ -63,7 +72,8 @@ export function registerGoogleSearchConsoleOAuthRoutes(app: Express) {
         scope: tokens.scope || GOOGLE_SEARCH_CONSOLE_SCOPE,
       });
       sendResult(res, 200, "Search Console monitoring is connected", "Read-only access was verified for thestayandwander.com. You may close this window.");
-    } catch {
+    } catch (error) {
+      logOAuthFailure("callback_exchange_or_persistence", error);
       sendResult(res, 500, "Search Console authorization failed", "No token was saved. Please confirm the registered redirect URI and try again.");
     }
   });

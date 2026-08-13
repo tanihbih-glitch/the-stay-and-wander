@@ -208,3 +208,8 @@
 - [ ] Re-run the selected-account OAuth consent flow after the user-confirmed test-user approval, then inspect the read-only permission screen before requesting final authorization confirmation.
 - [ ] Diagnose and correct the OAuth callback verification failure observed after the user-approved read-only consent, then restart authorization safely. The callback now verifies a tamper-resistant, ten-minute signed state token instead of a browser cookie; focused OAuth tests and TypeScript validation pass. Publish and retry the approved consent flow.
 - [ ] Complete the user-confirmed consent click after the connected browser recovers; the initial approved click did not advance and the subsequent browser-state check timed out.
+- [ ] Complete the final signed-state authorization in the user’s regular Google browser because the sandbox retry now requires an interactive Google CAPTCHA that cannot be completed programmatically.
+- [ ] Verify the user-confirmed OAuth callback persisted the encrypted read-only Search Console connection and validate access to the monitored property before collecting the first baseline.
+- [ ] Resolve the absent persisted Search Console connection after the reported authorization; do not collect or schedule monitoring until a live callback writes the encrypted token and property record.
+- [ ] Verify the fresh user-confirmed connection record and proceed with the baseline collection only after confirming encrypted token persistence and property access.
+- [ ] Add sanitized server-side OAuth callback failure diagnostics so the unresolved authorization persistence failure can be corrected without logging codes, tokens, or secrets.

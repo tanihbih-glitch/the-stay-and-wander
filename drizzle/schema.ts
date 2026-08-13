@@ -67,11 +67,29 @@ export const searchConsoleConnections = mysqlTable("searchConsoleConnections", {
   property: varchar("property", { length: 255 }).notNull().unique(),
   refreshTokenEncrypted: text("refreshTokenEncrypted").notNull(),
   scope: varchar("scope", { length: 512 }).notNull(),
+  scheduleCronTaskUid: varchar("scheduleCronTaskUid", { length: 65 }),
+  lastReportAt: timestamp("lastReportAt"),
   authorizedAt: timestamp("authorizedAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
 });
 
 export type SearchConsoleConnection = typeof searchConsoleConnections.$inferSelect;
+
+/** Immutable API-sourced monthly performance snapshots for monitored canonical pages. */
+export const searchConsoleCtrReports = mysqlTable(
+  "searchConsoleCtrReports",
+  {
+    id: int("id").autoincrement().primaryKey(),
+    property: varchar("property", { length: 255 }).notNull(),
+    periodStart: varchar("periodStart", { length: 10 }).notNull(),
+    periodEnd: varchar("periodEnd", { length: 10 }).notNull(),
+    metrics: json("metrics").$type<Record<string, { clicks: number; impressions: number; ctr: number; position: number }>>().notNull(),
+    generatedAt: timestamp("generatedAt").defaultNow().notNull(),
+  },
+  table => [uniqueIndex("searchConsoleCtrReports_property_period_unique").on(table.property, table.periodStart, table.periodEnd)]
+);
+
+export type SearchConsoleCtrReport = typeof searchConsoleCtrReports.$inferSelect;
 
 /**
  * A visitor's trip-planning request and its fulfillment state. Stripe remains the

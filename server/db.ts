@@ -1,6 +1,6 @@
 import { eq } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
-import { InsertUser, searchConsoleConnections, users } from "../drizzle/schema";
+import { InsertUser, searchConsoleConnections, searchConsoleCtrReports, users } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
 let _db: ReturnType<typeof drizzle> | null = null;
@@ -115,6 +115,44 @@ export async function getSearchConsoleConnection(property: string) {
     .where(eq(searchConsoleConnections.property, property))
     .limit(1);
   return result[0];
+}
+
+export async function getSearchConsoleConnectionByTaskUid(taskUid: string) {
+  const db = await getDb();
+  if (!db) return undefined;
+  const result = await db
+    .select()
+    .from(searchConsoleConnections)
+    .where(eq(searchConsoleConnections.scheduleCronTaskUid, taskUid))
+    .limit(1);
+  return result[0];
+}
+
+export async function setSearchConsoleScheduleTaskUid(property: string, taskUid: string) {
+  const db = await getDb();
+  if (!db) throw new Error("Database is required for Search Console monitoring.");
+  await db
+    .update(searchConsoleConnections)
+    .set({ scheduleCronTaskUid: taskUid })
+    .where(eq(searchConsoleConnections.property, property));
+}
+
+export async function saveSearchConsoleCtrReport(input: {
+  property: string;
+  periodStart: string;
+  periodEnd: string;
+  metrics: Record<string, { clicks: number; impressions: number; ctr: number; position: number }>;
+}) {
+  const db = await getDb();
+  if (!db) throw new Error("Database is required for Search Console monitoring.");
+
+  await db.insert(searchConsoleCtrReports).values(input).onDuplicateKeyUpdate({
+    set: { metrics: input.metrics, generatedAt: new Date() },
+  });
+  await db
+    .update(searchConsoleConnections)
+    .set({ lastReportAt: new Date() })
+    .where(eq(searchConsoleConnections.property, input.property));
 }
 
 // TODO: add feature queries here as your schema grows.
