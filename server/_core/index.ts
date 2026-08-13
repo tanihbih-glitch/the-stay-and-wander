@@ -11,6 +11,7 @@ import { serveStatic, setupVite } from "./vite";
 import { registerStripeWebhook } from "../stripeWebhook";
 import { ssrMiddleware } from "../ssr";
 import { legacyRedirectMiddleware } from "../legacyRedirects";
+import { registerGoogleSearchConsoleOAuthRoutes } from "../googleSearchConsoleOAuthRoutes";
 
 function isPortAvailable(port: number): Promise<boolean> {
   return new Promise(resolve => {
@@ -42,6 +43,7 @@ async function startServer() {
   app.use(express.urlencoded({ limit: "50mb", extended: true }));
   registerStorageProxy(app);
   registerOAuthRoutes(app);
+  registerGoogleSearchConsoleOAuthRoutes(app);
   // tRPC API
   app.use(
     "/api/trpc",

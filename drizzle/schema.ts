@@ -61,6 +61,18 @@ export const affiliateConversions = mysqlTable('affiliateConversions', {
 export type AffiliateConversion = typeof affiliateConversions.$inferSelect;
 export type InsertAffiliateConversion = typeof affiliateConversions.$inferInsert;
 
+/** Read-only Google Search Console connection for scheduled CTR monitoring. */
+export const searchConsoleConnections = mysqlTable("searchConsoleConnections", {
+  id: int("id").autoincrement().primaryKey(),
+  property: varchar("property", { length: 255 }).notNull().unique(),
+  refreshTokenEncrypted: text("refreshTokenEncrypted").notNull(),
+  scope: varchar("scope", { length: 512 }).notNull(),
+  authorizedAt: timestamp("authorizedAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type SearchConsoleConnection = typeof searchConsoleConnections.$inferSelect;
+
 /**
  * A visitor's trip-planning request and its fulfillment state. Stripe remains the
  * source of truth for financial data; this table stores only IDs plus the business
