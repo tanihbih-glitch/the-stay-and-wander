@@ -44,10 +44,11 @@ export function registerGoogleSearchConsoleOAuthRoutes(app: Express) {
         return;
       }
       const state = createGoogleSearchConsoleState();
+      const secureRequest = isSecureRequest(req);
       res.cookie(STATE_COOKIE, state, {
         httpOnly: true,
-        secure: isSecureRequest(req),
-        sameSite: "lax",
+        secure: secureRequest,
+        sameSite: secureRequest ? "none" : "lax",
         maxAge: STATE_MAX_AGE_MS,
         path: "/api/oauth/google-search-console",
       });
