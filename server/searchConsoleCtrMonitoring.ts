@@ -2,8 +2,8 @@ import { decryptSearchConsoleRefreshToken, GOOGLE_SEARCH_CONSOLE_PROPERTIES } fr
 import { getSearchConsoleConnectionForProperties, saveSearchConsoleCtrReport } from "./db";
 
 export const MONITORED_WHERE_TO_STAY_PATHS = [
-  "/blog/bali-hotel-prices-2026",
-  "/blog/bangkok-hotel-prices-2026",
+  "/blog/where-to-stay-in-bali-2026",
+  "/blog/where-to-stay-in-bangkok-2026",
   "/blog/where-to-stay-in-tokyo-2026",
   "/blog/where-to-stay-in-seoul-2026",
 ] as const;

@@ -34,7 +34,8 @@ describe("server-rendered page metadata", () => {
     const fourStar = injectSSRHead(template, pageMetadataConfig.baliFourStarHotelsGuide);
 
     expect(prices).toContain("<title>Where to Stay in Bali: Best Areas for First-Timers (2026 Guide)</title>");
-    expect(prices).toContain('name="description" content="Not sure where to stay in Bali? Compare Seminyak, Ubud, Uluwatu, and Canggu — what each is best for, and what you&#039;ll pay in 2026."');
+    expect(prices).toContain('name="description" content="Find the best area to stay in Bali for a first trip — Seminyak for beach clubs, Ubud for culture, Uluwatu for surf, or Canggu for cafés."');
+    expect(prices).toContain('href="https://thestayandwander.com/blog/where-to-stay-in-bali-2026"');
     expect(fourStar).toContain("<title>Best 4-Star Hotels in Bali Under $100/Night (2026 Picks)</title>");
     expect(fourStar).toContain('name="description" content="Handpicked 4-star hotels across Bali that don&#039;t break the bank — real picks under $100/night, from Seminyak to Ubud."');
   });
@@ -44,8 +45,8 @@ describe("server-rendered page metadata", () => {
     const bangkok = injectSSRHead(template, pageMetadataConfig.bangkokHotelPricesGuide);
 
     expect(bangkok).toContain("<title>Where to Stay in Bangkok: Best Areas for First-Timers (2026 Guide)</title>");
-    expect(bangkok).toContain('name="description" content="Not sure where to stay in Bangkok? Compare Sukhumvit, Silom, Riverside, Khao San Road, and Sathorn — what each is best for, and what you&#039;ll pay in 2026."');
-    expect(bangkok).toContain('href="https://thestayandwander.com/blog/bangkok-hotel-prices-2026"');
+    expect(bangkok).toContain('name="description" content="Find the best area to stay in Bangkok for a first trip — Sukhumvit for transit, Riverside for temples, Khao San Road for energy, and Sathorn for quiet."');
+    expect(bangkok).toContain('href="https://thestayandwander.com/blog/where-to-stay-in-bangkok-2026"');
   });
 
   it("renders the Tokyo and Seoul where-to-stay metadata for crawlers", () => {

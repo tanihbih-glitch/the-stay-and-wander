@@ -3,8 +3,8 @@ import { articleFaqsByPath, getArticleFaqs } from "../shared/articleFaqs";
 
 describe("published article FAQ data", () => {
   const expectedPaths = [
-    "/blog/bali-hotel-prices-2026",
-    "/blog/bangkok-hotel-prices-2026",
+    "/blog/where-to-stay-in-bali-2026",
+    "/blog/where-to-stay-in-bangkok-2026",
     "/blog/where-to-stay-in-tokyo-2026",
     "/blog/where-to-stay-in-seoul-2026",
     "/blog/best-hotels-bali-2026",

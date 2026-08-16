@@ -49,8 +49,8 @@ function Router() {
       <Route path={"/blog"} component={Blog} />
       <Route path={"/blog/best-hotels-bali-2026"} component={BlogBaliHotels} />
       <Route path={"/blog/best-4-star-hotels-bali-2026"} component={BlogBaliFourStarHotels} />
-      <Route path={"/blog/bali-hotel-prices-2026"} component={BlogBaliHotelPrices} />
-      <Route path={"/blog/bangkok-hotel-prices-2026"} component={BlogBangkokHotelPrices} />
+      <Route path={"/blog/where-to-stay-in-bali-2026"} component={BlogBaliHotelPrices} />
+      <Route path={"/blog/where-to-stay-in-bangkok-2026"} component={BlogBangkokHotelPrices} />
       <Route path={"/blog/best-cities-europe-summer-2026"} component={BlogEuropeCities} />
       <Route path={"/blog/tokyo-vs-bangkok-2026"} component={BlogTokyoBangkok} />
       <Route path={"/blog/brazil-travel-guide-2026"} component={BlogBrazil} />

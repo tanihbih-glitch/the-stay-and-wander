@@ -5,47 +5,47 @@ export type ArticleFaq = Readonly<{
 
 export const baliHotelPricesFaqs: readonly ArticleFaq[] = [
   {
-    question: "How much does a hotel cost in Bali in 2026?",
+    question: "Where should first-timers stay in Bali?",
     answer:
-      "The guide's shoulder-season snapshot ranges from $30–60 per night for a budget stay in Ubud to $250+ per night for luxury accommodation in Uluwatu. It notes that July, August, and December can run 20–40% higher than these typical double-occupancy rates.",
+      "Choose Seminyak for beach clubs, dining, and a social resort atmosphere; Ubud for culture, rice terraces, and wellness; Uluwatu for cliffs and surf; or Canggu for cafés, surf, and longer stays. The guide recommends selecting the area by trip style before comparing individual hotels.",
   },
   {
-    question: "Which area of Bali offers the best hotel value?",
+    question: "Is Seminyak or Ubud better for a first Bali trip?",
     answer:
-      "The article identifies Ubud as Bali's best value-to-experience choice, with budget stays from $30–60 and mid-range stays from $75–130 per night. It highlights rice-terrace views, private pools, and traditional architecture that can cost less than a basic Seminyak room.",
+      "Choose Seminyak when you want beach clubs, restaurants, boutiques, and easy social evenings. Choose Ubud when your priority is temples, rice terraces, wellness, and a slower inland setting.",
   },
   {
-    question: "Is Ubud or Seminyak more affordable for hotels?",
+    question: "Which Bali area is best for surf and beach time?",
     answer:
-      "The price table places Ubud below Seminyak across both budget and mid-range categories: $30–60 versus $40–70 for budget, and $75–130 versus $80–150 for mid-range. Seminyak's beachfront position, nightlife access, and sunset-view pools are listed as its main price drivers.",
+      "Uluwatu is the guide's choice for dramatic cliffs, surf breaks, and a slower resort-style beach stay. Canggu also suits surf and beach time, with a more social café and remote-work scene.",
   },
   {
-    question: "How can I save on Bali accommodation?",
+    question: "Should I stay in one Bali area or split my trip?",
     answer:
-      "The guide recommends travelling in April–June or September–October, comparing regions rather than just individual properties, and looking for multi-night discounts outside peak season. It also suggests considering a single base with day trips instead of splitting a stay across multiple regions.",
+      "The guide recommends choosing a strong single base and using day trips when you want a lower-friction first visit, especially because Bali traffic can make frequent hotel changes tiring. Split stays make more sense only when you want deliberately different experiences, such as Ubud's inland culture and Uluwatu's coast.",
   },
 ];
 
 export const bangkokHotelPricesFaqs: readonly ArticleFaq[] = [
   {
-    question: "How much does a hotel cost in Bangkok in 2026?",
+    question: "Where should first-timers stay in Bangkok?",
     answer:
-      "The article's shoulder-season table runs from $10–25 per night for a budget stay on Khao San Road to $250+ for luxury accommodation by the Riverside. It notes that the November–February peak can add roughly 15–30% to typical double-occupancy rates.",
+      "Sukhumvit is the guide's easiest all-round pick for first-timers because it combines BTS access, dining, shopping, and nightlife. Riverside is better for scenery and temples, Khao San Road for budget Old City energy, and Sathorn for a quieter central base.",
   },
   {
-    question: "Which part of Bangkok has the cheapest hotels?",
+    question: "Which Bangkok area is best for temples and sightseeing?",
     answer:
-      "Khao San Road is the article's lowest-priced area, with budget rooms listed at $10–25 per night and mid-range rooms at $40–80. The guide describes it as a backpacker and budget-traveller zone within walking distance of Old City temples.",
+      "Choose Riverside for boat access to Wat Arun and the Grand Palace in a scenic hotel setting. Khao San Road is the more sociable, budget-minded alternative within walking distance of the Old City temple zone.",
   },
   {
-    question: "Why are Bangkok riverside hotels more expensive?",
+    question: "Is Sukhumvit or Silom better for a first Bangkok trip?",
     answer:
-      "The Chao Phraya Riverside is described as Bangkok's priciest hotel area, with luxury rooms from $250+ per night. The article attributes the premium to river views, direct boat access to major temples, and a concentration of boutique and luxury hotels.",
+      "Choose Sukhumvit for the widest hotel choice, easy BTS access, malls, dining, and nightlife. Choose Silom when you want a more business-district setting near a BTS/MRT interchange with direct access toward the river and central sights.",
   },
   {
-    question: "How can I get better hotel rates in Bangkok?",
+    question: "What is the easiest way to get around Bangkok from my hotel?",
     answer:
-      "The guide recommends travelling from May to October while avoiding the wettest weeks, comparing weekday and weekend prices, and staying near a BTS or MRT station. It also suggests balancing a short riverside splurge with value nights in Sukhumvit or Sathorn.",
+      "The guide recommends prioritising a hotel near a BTS or MRT station because Bangkok traffic can make a convenient transit connection more useful than a broadly central address. Riverside travellers can also use river boats for key temple and sightseeing stops.",
   },
 ];
 
@@ -193,8 +193,8 @@ export const brazilTravelGuideFaqs: readonly ArticleFaq[] = [
 ];
 
 export const articleFaqsByPath: Readonly<Record<string, readonly ArticleFaq[]>> = {
-  "/blog/bali-hotel-prices-2026": baliHotelPricesFaqs,
-  "/blog/bangkok-hotel-prices-2026": bangkokHotelPricesFaqs,
+  "/blog/where-to-stay-in-bali-2026": baliHotelPricesFaqs,
+  "/blog/where-to-stay-in-bangkok-2026": bangkokHotelPricesFaqs,
   "/blog/where-to-stay-in-tokyo-2026": tokyoStayFaqs,
   "/blog/where-to-stay-in-seoul-2026": seoulStayFaqs,
   "/blog/best-hotels-bali-2026": baliHotelsFaqs,

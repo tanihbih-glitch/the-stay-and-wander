@@ -14,8 +14,11 @@ describe("public route and sitemap cleanup", () => {
   });
 
   it("retains the intended canonical routes, including new company pages", () => {
-    expect(isApplicationRoute("/blog/bali-hotel-prices-2026")).toBe(true);
-    expect(isApplicationRoute("/blog/bali-hotel-prices-2026/")).toBe(true);
+    expect(isApplicationRoute("/blog/where-to-stay-in-bali-2026")).toBe(true);
+    expect(isApplicationRoute("/blog/where-to-stay-in-bali-2026/")).toBe(true);
+    expect(isApplicationRoute("/blog/where-to-stay-in-bangkok-2026")).toBe(true);
+    expect(isApplicationRoute("/blog/bali-hotel-prices-2026")).toBe(false);
+    expect(isApplicationRoute("/blog/bangkok-hotel-prices-2026")).toBe(false);
     expect(isApplicationRoute("/itinerary/tokyo-seoul")).toBe(true);
     expect(isApplicationRoute("/trip-planner")).toBe(true);
     expect(isApplicationRoute("/deals")).toBe(true);
@@ -29,7 +32,10 @@ describe("public route and sitemap cleanup", () => {
   it("lists only canonical URLs in the generated sitemap", () => {
     const sitemap = generateCompleteSitemap();
 
-    expect(sitemap).toContain("/blog/bali-hotel-prices-2026");
+    expect(sitemap).toContain("/blog/where-to-stay-in-bali-2026");
+    expect(sitemap).toContain("/blog/where-to-stay-in-bangkok-2026");
+    expect(sitemap).not.toContain("/blog/bali-hotel-prices-2026");
+    expect(sitemap).not.toContain("/blog/bangkok-hotel-prices-2026");
     expect(sitemap).toContain("/itinerary/tokyo-seoul");
     expect(sitemap).toContain("/deals");
     expect(sitemap).toContain("/blog/best-hotels-dubai-2026");

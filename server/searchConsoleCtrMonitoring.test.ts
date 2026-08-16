@@ -4,8 +4,8 @@ import { isFirstBusinessDayOfMonth, MONITORED_WHERE_TO_STAY_PATHS, previousCompl
 describe("Search Console CTR monitoring", () => {
   it("tracks exactly the four published where-to-stay guides", () => {
     expect(MONITORED_WHERE_TO_STAY_PATHS).toEqual([
-      "/blog/bali-hotel-prices-2026",
-      "/blog/bangkok-hotel-prices-2026",
+      "/blog/where-to-stay-in-bali-2026",
+      "/blog/where-to-stay-in-bangkok-2026",
       "/blog/where-to-stay-in-tokyo-2026",
       "/blog/where-to-stay-in-seoul-2026",
     ]);

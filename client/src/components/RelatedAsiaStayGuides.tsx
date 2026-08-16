@@ -1,6 +1,6 @@
 const stayGuides = [
-  { key: "bali", href: "/blog/bali-hotel-prices-2026", label: "Where to Stay in Bali: Best Areas for First-Timers" },
-  { key: "bangkok", href: "/blog/bangkok-hotel-prices-2026", label: "Where to Stay in Bangkok: Best Areas for First-Timers" },
+  { key: "bali", href: "/blog/where-to-stay-in-bali-2026", label: "Where to Stay in Bali: Best Areas for First-Timers" },
+  { key: "bangkok", href: "/blog/where-to-stay-in-bangkok-2026", label: "Where to Stay in Bangkok: Best Areas for First-Timers" },
   { key: "tokyo", href: "/blog/where-to-stay-in-tokyo-2026", label: "Where to Stay in Tokyo: Best Neighborhoods for First-Timers" },
   { key: "seoul", href: "/blog/where-to-stay-in-seoul-2026", label: "Where to Stay in Seoul: Best Areas for First-Timers" },
 ] as const;

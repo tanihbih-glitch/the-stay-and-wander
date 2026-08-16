@@ -8,8 +8,8 @@ Monitor search performance for the four priority where-to-stay guides after the 
 
 | Guide | Canonical URL |
 |---|---|
-| Bali | `https://thestayandwander.com/blog/bali-hotel-prices-2026` |
-| Bangkok | `https://thestayandwander.com/blog/bangkok-hotel-prices-2026` |
+| Bali | `https://thestayandwander.com/blog/where-to-stay-in-bali-2026` |
+| Bangkok | `https://thestayandwander.com/blog/where-to-stay-in-bangkok-2026` |
 | Tokyo | `https://thestayandwander.com/blog/where-to-stay-in-tokyo-2026` |
 | Seoul | `https://thestayandwander.com/blog/where-to-stay-in-seoul-2026` |
 

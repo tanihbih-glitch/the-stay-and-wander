@@ -197,9 +197,9 @@ export const pageMetadataConfig: Record<string, PageMetadata> = {
   baliHotelPricesGuide: {
     title: "Where to Stay in Bali: Best Areas for First-Timers (2026 Guide)",
     description:
-      "Not sure where to stay in Bali? Compare Seminyak, Ubud, Uluwatu, and Canggu — what each is best for, and what you'll pay in 2026.",
+      "Find the best area to stay in Bali for a first trip — Seminyak for beach clubs, Ubud for culture, Uluwatu for surf, or Canggu for cafés.",
     image: `${SITE_URL}/manus-storage/blog-bali_5a40f78c.png`,
-    url: "/blog/bali-hotel-prices-2026",
+    url: "/blog/where-to-stay-in-bali-2026",
     type: "article",
     author: "The Stay & Wander",
     publishedDate: "2026-07-27",
@@ -210,9 +210,9 @@ export const pageMetadataConfig: Record<string, PageMetadata> = {
   bangkokHotelPricesGuide: {
     title: "Where to Stay in Bangkok: Best Areas for First-Timers (2026 Guide)",
     description:
-      "Not sure where to stay in Bangkok? Compare Sukhumvit, Silom, Riverside, Khao San Road, and Sathorn — what each is best for, and what you'll pay in 2026.",
+      "Find the best area to stay in Bangkok for a first trip — Sukhumvit for transit, Riverside for temples, Khao San Road for energy, and Sathorn for quiet.",
     image: `${SITE_URL}/manus-storage/bangkok-hotel-prices-hero_fb209c1a.jpg`,
-    url: "/blog/bangkok-hotel-prices-2026",
+    url: "/blog/where-to-stay-in-bangkok-2026",
     type: "article",
     author: "The Stay & Wander",
     publishedDate: "2026-08-03",

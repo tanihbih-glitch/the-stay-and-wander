@@ -15,6 +15,8 @@ export const LEGACY_PERMANENT_REDIRECTS: Readonly<Record<string, string>> = {
   "/home": "/",
   "/guides": "/blog",
   "/blog/europe-cities": "/blog/best-cities-europe-summer-2026",
+  "/blog/bali-hotel-prices-2026": "/blog/where-to-stay-in-bali-2026",
+  "/blog/bangkok-hotel-prices-2026": "/blog/where-to-stay-in-bangkok-2026",
 };
 
 function normalizeLegacyPath(pathname: string): string {

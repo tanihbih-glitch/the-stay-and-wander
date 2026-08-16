@@ -37,7 +37,7 @@ export default function Blog() {
     },
     {
       id: 11,
-      slug: "bangkok-hotel-prices-2026",
+      slug: "where-to-stay-in-bangkok-2026",
       title: "Where to Stay in Bangkok: Best Areas for First-Timers (2026 Guide)",
       category: "Hotel Reviews · Asia Travel",
       image: "/manus-storage/bangkok-hotel-prices-hero_fb209c1a.jpg",
@@ -70,7 +70,7 @@ export default function Blog() {
     },
     {
       id: 8,
-      slug: "bali-hotel-prices-2026",
+      slug: "where-to-stay-in-bali-2026",
       title: "Where to Stay in Bali: Best Areas for First-Timers (2026 Guide)",
       category: "Hotel Reviews · Asia Travel",
       image: "/manus-storage/blog-bali_5a40f78c.png",
