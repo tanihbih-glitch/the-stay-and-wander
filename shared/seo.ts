@@ -220,6 +220,19 @@ export const pageMetadataConfig: Record<string, PageMetadata> = {
       "where to stay in Bangkok 2026, best areas in Bangkok for first timers, Sukhumvit hotels, Silom hotels, Bangkok riverside hotels, Khao San Road hotels, Sathorn hotels",
   },
 
+  bangkokHotelBudgetBreakdown: {
+    title: "How Much Does a Hotel in Bangkok Really Cost in 2026? (Budget to Luxury Breakdown)",
+    description:
+      "Bangkok hotel prices in 2026, broken down from hostels to 5-star luxury — real ranges, top picks, and booking tips for every budget.",
+    image: `${SITE_URL}/manus-storage/bangkok-hotel-prices-hero_fb209c1a.jpg`,
+    url: "/blog/bangkok-hotel-budget-breakdown-2026",
+    type: "article",
+    author: "The Stay & Wander",
+    publishedDate: "2026-08-17",
+    keywords:
+      "Bangkok hotel prices 2026, Bangkok hotel cost, Bangkok budget hotels, Bangkok luxury hotels, Bangkok hostel prices, Bangkok hotel booking tips",
+  },
+
   tokyoStayGuide: {
     title: "Where to Stay in Tokyo: Best Neighborhoods for First-Timers (2026 Guide)",
     description: "Not sure where to stay in Tokyo? Compare Shinjuku, Shibuya, Asakusa, Ginza, and Ikebukuro — what each is best for and typical 2026 hotel prices.",

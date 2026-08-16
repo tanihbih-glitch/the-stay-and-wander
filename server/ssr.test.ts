@@ -49,6 +49,15 @@ describe("server-rendered page metadata", () => {
     expect(bangkok).toContain('href="https://thestayandwander.com/blog/where-to-stay-in-bangkok-2026"');
   });
 
+  it("renders the Bangkok hotel-cost breakdown metadata for crawlers", () => {
+    const template = "<html><head><title>Default site title</title></head><body></body></html>";
+    const budget = injectSSRHead(template, pageMetadataConfig.bangkokHotelBudgetBreakdown);
+
+    expect(budget).toContain("<title>How Much Does a Hotel in Bangkok Really Cost in 2026? (Budget to Luxury Breakdown)</title>");
+    expect(budget).toContain('name="description" content="Bangkok hotel prices in 2026, broken down from hostels to 5-star luxury — real ranges, top picks, and booking tips for every budget."');
+    expect(budget).toContain('href="https://thestayandwander.com/blog/bangkok-hotel-budget-breakdown-2026"');
+  });
+
   it("renders the Tokyo and Seoul where-to-stay metadata for crawlers", () => {
     const template = "<html><head><title>Default site title</title></head><body></body></html>";
     const tokyo = injectSSRHead(template, pageMetadataConfig.tokyoStayGuide);

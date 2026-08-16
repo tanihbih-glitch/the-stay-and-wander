@@ -14,6 +14,17 @@ export default function Blog() {
 
   const articles = [
     {
+      id: 14,
+      slug: "bangkok-hotel-budget-breakdown-2026",
+      title: "How Much Does a Hotel in Bangkok Really Cost in 2026? (Budget to Luxury Breakdown)",
+      category: "Bangkok Hotels · Asia Travel",
+      image: "/manus-storage/bangkok-hotel-prices-hero_fb209c1a.jpg",
+      excerpt: "A practical 2026 breakdown of Bangkok accommodation costs, from hostels and boutique stays to five-star riverside hotels.",
+      author: "The Stay & Wander",
+      date: "August 17, 2026",
+      readTime: "8 min read",
+    },
+    {
       id: 13,
       slug: "where-to-stay-in-seoul-2026",
       title: "Where to Stay in Seoul: Best Areas for First-Timers (2026 Guide)",

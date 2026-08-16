@@ -168,6 +168,12 @@ export default function BlogBangkokHotelPrices() {
             <p className="mt-5 text-sm italic leading-relaxed text-slate-200">Use these typical shoulder-season ranges as a planning reference once you have chosen an area. November to February is busier and can run 15–30% higher.</p>
           </section>
 
+          <aside className="mt-8 rounded-2xl border border-[#F4A261]/50 bg-[#fff8f3] p-6 text-gray-800">
+            <h2 className="font-playfair text-2xl font-bold text-gray-900">Need a Bangkok Hotel Budget Breakdown?</h2>
+            <p className="mt-3 leading-relaxed">See typical 2026 costs from hostels through five-star riverside stays, plus booking factors and specific hotel picks for each tier.</p>
+            <a href="/blog/bangkok-hotel-budget-breakdown-2026" className="mt-4 inline-flex font-semibold text-[#0077B6] hover:underline">Read: How Much Does a Hotel in Bangkok Really Cost? →</a>
+          </aside>
+
           {areaGuides.map((area) => (
             <section key={area.title} className="mt-12">
               <h2 className="font-playfair text-3xl font-bold text-gray-900">{area.title}</h2>
