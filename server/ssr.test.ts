@@ -58,6 +58,15 @@ describe("server-rendered page metadata", () => {
     expect(budget).toContain('href="https://thestayandwander.com/blog/bangkok-hotel-budget-breakdown-2026"');
   });
 
+  it("renders the Bangkok Airport layover metadata for crawlers", () => {
+    const template = "<html><head><title>Default site title</title></head><body></body></html>";
+    const airport = injectSSRHead(template, pageMetadataConfig.bangkokAirportHotels);
+
+    expect(airport).toContain("<title>Where to Stay Near Bangkok Airport (Suvarnabhumi) for Quick Layovers</title>");
+    expect(airport).toContain('name="description" content="Where to stay near Bangkok&#039;s Suvarnabhumi Airport for a quick layover — in-terminal options, free-shuttle hotels, and essential timing tips."');
+    expect(airport).toContain('href="https://thestayandwander.com/blog/bangkok-airport-hotels-2026"');
+  });
+
   it("renders the Tokyo and Seoul where-to-stay metadata for crawlers", () => {
     const template = "<html><head><title>Default site title</title></head><body></body></html>";
     const tokyo = injectSSRHead(template, pageMetadataConfig.tokyoStayGuide);

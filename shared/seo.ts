@@ -233,6 +233,19 @@ export const pageMetadataConfig: Record<string, PageMetadata> = {
       "Bangkok hotel prices 2026, Bangkok hotel cost, Bangkok budget hotels, Bangkok luxury hotels, Bangkok hostel prices, Bangkok hotel booking tips",
   },
 
+  bangkokAirportHotels: {
+    title: "Where to Stay Near Bangkok Airport (Suvarnabhumi) for Quick Layovers",
+    description:
+      "Where to stay near Bangkok's Suvarnabhumi Airport for a quick layover — in-terminal options, free-shuttle hotels, and essential timing tips.",
+    image: `${SITE_URL}/manus-storage/bangkok-hotel-prices-hero_fb209c1a.jpg`,
+    url: "/blog/bangkok-airport-hotels-2026",
+    type: "article",
+    author: "The Stay & Wander",
+    publishedDate: "2026-08-17",
+    keywords:
+      "Bangkok airport hotels 2026, Suvarnabhumi airport hotel, BKK layover hotel, Bangkok airport shuttle hotel, Novotel Suvarnabhumi Airport",
+  },
+
   tokyoStayGuide: {
     title: "Where to Stay in Tokyo: Best Neighborhoods for First-Timers (2026 Guide)",
     description: "Not sure where to stay in Tokyo? Compare Shinjuku, Shibuya, Asakusa, Ginza, and Ikebukuro — what each is best for and typical 2026 hotel prices.",

@@ -282,9 +282,10 @@ export default function BlogBangkokHotelBudgetBreakdown() {
 
           <section className="mt-12 border-t border-gray-200 pt-10">
             <h2 className="font-playfair text-2xl font-bold text-gray-900">Related Bangkok planning</h2>
-            <a href={BANGKOK_STAY_GUIDE_URL} className="mt-4 inline-flex font-semibold text-[#0077B6] hover:underline">
-              Where to Stay in Bangkok: Best Areas for First-Timers (2026 Guide) →
-            </a>
+            <div className="mt-4 flex flex-col gap-3">
+              <a href={BANGKOK_STAY_GUIDE_URL} className="font-semibold text-[#0077B6] hover:underline">Where to Stay in Bangkok: Best Areas for First-Timers (2026 Guide) →</a>
+              <a href="/blog/bangkok-airport-hotels-2026" className="font-semibold text-[#0077B6] hover:underline">Where to Stay Near Bangkok Airport (Suvarnabhumi) for Quick Layovers →</a>
+            </div>
           </section>
 
           <aside className="mt-10 rounded-xl bg-gray-50 p-6 text-sm leading-relaxed text-gray-600">

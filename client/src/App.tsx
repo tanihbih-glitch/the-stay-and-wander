@@ -15,6 +15,7 @@ import BlogBaliFourStarHotels from "./pages/BlogBaliFourStarHotels";
 import BlogBaliHotelPrices from "./pages/BlogBaliHotelPrices";
 import BlogBangkokHotelPrices from "./pages/BlogBangkokHotelPrices";
 import BlogBangkokHotelBudgetBreakdown from "./pages/BlogBangkokHotelBudgetBreakdown";
+import BlogBangkokAirportHotels from "./pages/BlogBangkokAirportHotels";
 import BlogEuropeCities from "./pages/BlogEuropeCities";
 import BlogTokyoBangkok from "./pages/BlogTokyoBangkok";
 import BlogBrazil from "./pages/BlogBrazil";
@@ -53,6 +54,7 @@ function Router() {
       <Route path={"/blog/where-to-stay-in-bali-2026"} component={BlogBaliHotelPrices} />
       <Route path={"/blog/where-to-stay-in-bangkok-2026"} component={BlogBangkokHotelPrices} />
       <Route path={"/blog/bangkok-hotel-budget-breakdown-2026"} component={BlogBangkokHotelBudgetBreakdown} />
+      <Route path={"/blog/bangkok-airport-hotels-2026"} component={BlogBangkokAirportHotels} />
       <Route path={"/blog/best-cities-europe-summer-2026"} component={BlogEuropeCities} />
       <Route path={"/blog/tokyo-vs-bangkok-2026"} component={BlogTokyoBangkok} />
       <Route path={"/blog/brazil-travel-guide-2026"} component={BlogBrazil} />

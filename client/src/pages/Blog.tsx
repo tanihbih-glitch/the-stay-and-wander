@@ -14,6 +14,17 @@ export default function Blog() {
 
   const articles = [
     {
+      id: 15,
+      slug: "bangkok-airport-hotels-2026",
+      title: "Where to Stay Near Bangkok Airport (Suvarnabhumi) for Quick Layovers",
+      category: "Bangkok Hotels · Asia Travel",
+      image: "/manus-storage/bangkok-hotel-prices-hero_fb209c1a.jpg",
+      excerpt: "Choose an in-terminal, connected, or free-shuttle hotel near Suvarnabhumi Airport, with layover timing tips for BKK.",
+      author: "The Stay & Wander",
+      date: "August 17, 2026",
+      readTime: "7 min read",
+    },
+    {
       id: 14,
       slug: "bangkok-hotel-budget-breakdown-2026",
       title: "How Much Does a Hotel in Bangkok Really Cost in 2026? (Budget to Luxury Breakdown)",

@@ -172,6 +172,7 @@ export default function BlogBangkokHotelPrices() {
             <h2 className="font-playfair text-2xl font-bold text-gray-900">Need a Bangkok Hotel Budget Breakdown?</h2>
             <p className="mt-3 leading-relaxed">See typical 2026 costs from hostels through five-star riverside stays, plus booking factors and specific hotel picks for each tier.</p>
             <a href="/blog/bangkok-hotel-budget-breakdown-2026" className="mt-4 inline-flex font-semibold text-[#0077B6] hover:underline">Read: How Much Does a Hotel in Bangkok Really Cost? →</a>
+            <a href="/blog/bangkok-airport-hotels-2026" className="mt-3 block font-semibold text-[#0077B6] hover:underline">Flying through BKK? Read: Where to Stay Near Bangkok Airport →</a>
           </aside>
 
           {areaGuides.map((area) => (
