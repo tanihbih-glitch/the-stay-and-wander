@@ -228,3 +228,6 @@
 - [x] Audit the supplied Suvarnabhumi layover-guide source and existing Bangkok article, affiliate-button, widget, route, metadata, sitemap, and reciprocal-link patterns.
 - [x] Publish the Bangkok Airport layover guide with tier-appropriate Stay22 buttons, Trip.com buttons, safe new-tab attributes, live hotel search, and Bangkok activities widgets.
 - [x] Add the airport guide to the Blog listing, canonical SEO/SSR metadata, sitemap, and reciprocal links with the Bangkok where-to-stay and hotel-cost articles; add regression coverage, validate rendering, and publish a checkpoint. The crawler output, sitemap, desktop/mobile rendering, tiered affiliate mapping, and full 109-test suite are validated.
+- [x] Audit the supplied UAE extended-stay sustainability source and reuse the established Middle East article, secure affiliate CTA, widget, route, metadata, sitemap, and test patterns.
+- [x] Publish the UAE extended-stay sustainability comparison with the exact supplied content, secure Trip.com and Stay22 CTAs, gold rounded buttons, and the live Trip.com hotel search widget.
+- [x] Add the article to the Blog listing, canonical SEO/SSR metadata, sitemap, and regression suite; validate responsive rendering and publish a checkpoint. The crawler output, secure CTA configuration, desktop/mobile rendering, sitemap, and full 112-test suite are validated.

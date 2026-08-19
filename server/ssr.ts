@@ -154,6 +154,8 @@ export function ssrMiddleware(req: Request, res: Response, next: NextFunction) {
     metadata = pageMetadataConfig.bangkokHotelBudgetBreakdown;
   } else if (path === "/blog/bangkok-airport-hotels-2026") {
     metadata = pageMetadataConfig.bangkokAirportHotels;
+  } else if (path === "/blog/uae-extended-stay-sustainability-2026") {
+    metadata = pageMetadataConfig.uaeExtendedStaySustainability;
   } else if (path === "/blog/where-to-stay-in-tokyo-2026") {
     metadata = pageMetadataConfig.tokyoStayGuide;
   } else if (path === "/blog/where-to-stay-in-seoul-2026") {

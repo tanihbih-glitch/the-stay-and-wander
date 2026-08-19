@@ -67,6 +67,15 @@ describe("server-rendered page metadata", () => {
     expect(airport).toContain('href="https://thestayandwander.com/blog/bangkok-airport-hotels-2026"');
   });
 
+  it("renders the UAE extended-stay sustainability metadata for crawlers", () => {
+    const template = "<html><head><title>Default site title</title></head><body></body></html>";
+    const uae = injectSSRHead(template, pageMetadataConfig.uaeExtendedStaySustainability);
+
+    expect(uae).toContain("<title>Extended Stays in the UAE: How Sustainable Are Hilton, Marriott, and Accor?</title>");
+    expect(uae).toContain('name="description" content="Compare the sustainability approaches of Hilton, Marriott, Accor, and IHG for longer hotel stays in Dubai and Abu Dhabi, with practical advice for relocators."');
+    expect(uae).toContain('href="https://thestayandwander.com/blog/uae-extended-stay-sustainability-2026"');
+  });
+
   it("renders the Tokyo and Seoul where-to-stay metadata for crawlers", () => {
     const template = "<html><head><title>Default site title</title></head><body></body></html>";
     const tokyo = injectSSRHead(template, pageMetadataConfig.tokyoStayGuide);

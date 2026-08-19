@@ -18,6 +18,7 @@ describe("public route and sitemap cleanup", () => {
     expect(isApplicationRoute("/blog/where-to-stay-in-bali-2026/")).toBe(true);
     expect(isApplicationRoute("/blog/where-to-stay-in-bangkok-2026")).toBe(true);
     expect(isApplicationRoute("/blog/bangkok-hotel-budget-breakdown-2026")).toBe(true);
+    expect(isApplicationRoute("/blog/uae-extended-stay-sustainability-2026")).toBe(true);
     expect(isApplicationRoute("/blog/bali-hotel-prices-2026")).toBe(false);
     expect(isApplicationRoute("/blog/bangkok-hotel-prices-2026")).toBe(false);
     expect(isApplicationRoute("/itinerary/tokyo-seoul")).toBe(true);
@@ -36,6 +37,7 @@ describe("public route and sitemap cleanup", () => {
     expect(sitemap).toContain("/blog/where-to-stay-in-bali-2026");
     expect(sitemap).toContain("/blog/where-to-stay-in-bangkok-2026");
     expect(sitemap).toContain("/blog/bangkok-hotel-budget-breakdown-2026");
+    expect(sitemap).toContain("/blog/uae-extended-stay-sustainability-2026");
     expect(sitemap).not.toContain("/blog/bali-hotel-prices-2026");
     expect(sitemap).not.toContain("/blog/bangkok-hotel-prices-2026");
     expect(sitemap).toContain("/itinerary/tokyo-seoul");

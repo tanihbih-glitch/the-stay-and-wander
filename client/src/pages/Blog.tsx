@@ -14,6 +14,17 @@ export default function Blog() {
 
   const articles = [
     {
+      id: 16,
+      slug: "uae-extended-stay-sustainability-2026",
+      title: "Extended Stays in the UAE: How Sustainable Are Hilton, Marriott, and Accor?",
+      category: "Sustainable Stays · Middle East",
+      image: "/manus-storage/dubai-middle-east-destination_1431ce58.png",
+      excerpt: "A practical comparison of major hotel groups' sustainability approaches for longer stays in Dubai and Abu Dhabi.",
+      author: "The Stay & Wander",
+      date: "August 17, 2026",
+      readTime: "8 min read",
+    },
+    {
       id: 15,
       slug: "bangkok-airport-hotels-2026",
       title: "Where to Stay Near Bangkok Airport (Suvarnabhumi) for Quick Layovers",

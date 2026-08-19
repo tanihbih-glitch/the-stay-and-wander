@@ -246,6 +246,19 @@ export const pageMetadataConfig: Record<string, PageMetadata> = {
       "Bangkok airport hotels 2026, Suvarnabhumi airport hotel, BKK layover hotel, Bangkok airport shuttle hotel, Novotel Suvarnabhumi Airport",
   },
 
+  uaeExtendedStaySustainability: {
+    title: "Extended Stays in the UAE: How Sustainable Are Hilton, Marriott, and Accor?",
+    description:
+      "Compare the sustainability approaches of Hilton, Marriott, Accor, and IHG for longer hotel stays in Dubai and Abu Dhabi, with practical advice for relocators.",
+    image: `${SITE_URL}/manus-storage/dubai-middle-east-destination_1431ce58.png`,
+    url: "/blog/uae-extended-stay-sustainability-2026",
+    type: "article",
+    author: "The Stay & Wander",
+    publishedDate: "2026-08-17",
+    keywords:
+      "UAE extended stay hotels, sustainable hotels Dubai, sustainable hotels Abu Dhabi, Hilton Travel with Purpose, Marriott Serve 360, Accor Planet 21, IHG Green Engage",
+  },
+
   tokyoStayGuide: {
     title: "Where to Stay in Tokyo: Best Neighborhoods for First-Timers (2026 Guide)",
     description: "Not sure where to stay in Tokyo? Compare Shinjuku, Shibuya, Asakusa, Ginza, and Ikebukuro — what each is best for and typical 2026 hotel prices.",
