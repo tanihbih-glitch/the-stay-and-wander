@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { articleMetadata, spaPriceRows } from "../client/src/pages/BlogBaliSpaWellnessPriceIndex";
 import { BALI_WELLNESS_INDEX_AFFILIATE_LINKS } from "../client/src/lib/affiliateLinks";
-import { DEFAULT_IDR_PER_USD, convertIdrToUsd } from "../client/src/components/IdrUsdConverter";
+import { DEFAULT_AUD_PER_USD, DEFAULT_EUR_PER_USD, DEFAULT_GBP_PER_USD, DEFAULT_IDR_PER_USD, buildSpaBudgetSummary, convertIdrToUsd, convertUsdToCurrency } from "../client/src/components/IdrUsdConverter";
 import { pageMetadataConfig } from "../shared/seo";
 import { sitemapRoutes } from "../shared/publicRoutes";
 
@@ -31,5 +31,17 @@ describe("Bali spa and wellness price index", () => {
     expect(convertIdrToUsd(2500000, 15000)).toBeCloseTo(166.6667, 3);
     expect(convertIdrToUsd(100000, 0)).toBeNull();
     expect(convertIdrToUsd(-1, DEFAULT_IDR_PER_USD)).toBeNull();
+  });
+
+  it("calculates EUR, GBP, and AUD estimates and creates a copy-ready budget summary", () => {
+    const usd = convertIdrToUsd(500000, DEFAULT_IDR_PER_USD);
+    expect(convertUsdToCurrency(usd, DEFAULT_EUR_PER_USD)).toBeCloseTo(28.75, 2);
+    expect(convertUsdToCurrency(usd, DEFAULT_GBP_PER_USD)).toBeCloseTo(24.375, 3);
+    expect(convertUsdToCurrency(usd, DEFAULT_AUD_PER_USD)).toBeCloseTo(47.5, 2);
+    const summary = buildSpaBudgetSummary({ amountIdr: 500000, idrPerUsd: DEFAULT_IDR_PER_USD, eurPerUsd: DEFAULT_EUR_PER_USD, gbpPerUsd: DEFAULT_GBP_PER_USD, audPerUsd: DEFAULT_AUD_PER_USD });
+    expect(summary).toContain("IDR 500,000");
+    expect(summary).toContain("EUR");
+    expect(summary).toContain("GBP");
+    expect(summary).toContain("AUD");
   });
 });

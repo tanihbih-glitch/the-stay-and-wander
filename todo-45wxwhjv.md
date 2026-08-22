@@ -253,3 +253,6 @@
 - [x] Define a transparent editable IDR-to-USD conversion model for the Bali Spa index that does not imply live foreign-exchange data.
 - [x] Add an accessible interactive currency helper to the Bali Spa guide, including amount and exchange-rate inputs, instant USD output, and contextual range conversion.
 - [x] Add unit coverage, validate desktop and mobile behavior, and publish the currency-helper enhancement checkpoint. The editable rate, calculator safeguards, responsive controls, and quick benchmark presets are covered; desktop/mobile review and the full 122-test suite plus TypeScript validation pass.
+- [x] Audit the existing IDR-to-USD helper and spa tier data to define consistent editable EUR, GBP, and AUD planning-rate inputs, table price prefills, and share-summary behavior.
+- [x] Add multi-currency estimates, one-click tier price prefills, and an accessible Share My Spa Budget action with native-share and copy-summary fallbacks to the Bali Spa index.
+- [x] Add calculation and sharing regression coverage, validate desktop/mobile behavior, and publish the multi-currency calculator enhancement checkpoint. Multi-currency outputs, labeled copy summary, prefill controls, and responsive behavior are validated; the full 123-test suite and TypeScript validation pass.

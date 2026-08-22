@@ -1,4 +1,5 @@
 import { ArrowLeft, ArrowRight, Check, ChevronRight, HeartHandshake, Sparkles } from "lucide-react";
+import { useState } from "react";
 import Head from "@/components/Head";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -22,22 +23,22 @@ export const articleMetadata = {
 export const spaPriceRows = [
   {
     tier: "Tier 1: Local Parlor / Massage Warung",
-    massage: "IDR 100k–180k (~$6–$11 USD)",
-    specialty: "IDR 200k–300k (~$13–$19 USD)",
+    massage: "IDR 100k–180k (~$6–$11 USD)", massageAmounts: [100000, 180000],
+    specialty: "IDR 200k–300k (~$13–$19 USD)", specialtyAmounts: [200000, 300000],
     setting: "Open-air rooms, fan-cooled, basic oils, walk-in availability.",
     traveler: "Backpacker, long-stay nomad, daily treatment seeker.",
   },
   {
     tier: "Tier 2: Mid-Range Boutique Spa",
-    massage: "IDR 300k–650k (~$19–$42 USD)",
-    specialty: "IDR 600k–1.2M (~$38–$76 USD)",
+    massage: "IDR 300k–650k (~$19–$42 USD)", massageAmounts: [300000, 650000],
+    specialty: "IDR 600k–1.2M (~$38–$76 USD)", specialtyAmounts: [600000, 1200000],
     setting: "Air-conditioned, private suites, organic aromatherapy, herbal tea service.",
     traveler: "Mid-range holidaymakers, wellness travelers, couples.",
   },
   {
     tier: "Tier 3: 5-Star Luxury Resort Spa",
-    massage: "IDR 1.8M–3.5M+ (~$115–$225+ USD)",
-    specialty: "IDR 2.5M–5.0M+ (~$160–$320+ USD)",
+    massage: "IDR 1.8M–3.5M+ (~$115–$225+ USD)", massageAmounts: [1800000, 3500000],
+    specialty: "IDR 2.5M–5.0M+ (~$160–$320+ USD)", specialtyAmounts: [2500000, 5000000],
     setting: "Clifftop or jungle valley private villas, hydrotherapy, premium imported products.",
     traveler: "Luxury travelers, honeymooners, retreat attendees.",
   },
@@ -50,7 +51,10 @@ const decisionBranches = [
   { icon: Check, priority: "you want a polished mid-range day together", recommendation: "Choose a boutique spa", note: "The middle tier balances private treatment rooms and thoughtful inclusions without committing to a full resort stay.", href: BALI_WELLNESS_INDEX_AFFILIATE_LINKS.experiences, cta: "Book a treatment-focused day" },
 ] as const;
 
+function formatIdrButton(value: number): string { return `IDR ${value.toLocaleString("en-US")}`; }
+
 export default function BlogBaliSpaWellnessPriceIndex() {
+  const [prefillAmount, setPrefillAmount] = useState(500000);
   const canonicalUrl = `https://thestayandwander.com${articleMetadata.url}`;
   const breadcrumbItems = [
     { name: "Home", url: "https://thestayandwander.com" },
@@ -97,8 +101,9 @@ export default function BlogBaliSpaWellnessPriceIndex() {
         <section className="mt-14" aria-labelledby="benchmark-title">
           <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#0077B6]">2026 Bali spa price benchmark</p>
           <h2 id="benchmark-title" className="mt-2 font-playfair text-3xl font-bold text-[#0D1B2A]">Compare the massage, treatment, setting, and traveler fit</h2>
-          <div className="mt-6 overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-sm"><table className="min-w-[1050px] w-full text-left text-sm"><caption className="sr-only">Bali spa and wellness benchmark by tier, massage cost, specialty treatment cost, setting, and target traveler.</caption><thead className="bg-[#0D1B2A] text-white"><tr>{["Spa Category", "60-Min Traditional Massage", "Specialty Treatments (Scrub / Bath)", "Typical Setting & Inclusions", "Target Traveler"].map((heading) => <th key={heading} scope="col" className="px-5 py-4 font-semibold">{heading}</th>)}</tr></thead><tbody className="divide-y divide-slate-200 text-slate-700">{spaPriceRows.map((row) => <tr key={row.tier} className="align-top hover:bg-[#fffaf3]"><th scope="row" className="px-5 py-5 font-playfair text-base font-bold text-[#0D1B2A]">{row.tier}</th><td className="px-5 py-5 font-medium text-[#005c91]">{row.massage}</td><td className="px-5 py-5 font-medium text-[#005c91]">{row.specialty}</td><td className="px-5 py-5 leading-relaxed">{row.setting}</td><td className="px-5 py-5 leading-relaxed font-medium text-slate-900">{row.traveler}</td></tr>)}</tbody></table></div>
-          <IdrUsdConverter />
+          <p className="mt-3 text-sm leading-relaxed text-slate-600">Select any IDR amount in the table to prefill the multi-currency calculator below with that exact benchmark.</p>
+          <div className="mt-6 overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-sm"><table className="min-w-[1050px] w-full text-left text-sm"><caption className="sr-only">Bali spa and wellness benchmark by tier, massage cost, specialty treatment cost, setting, and target traveler. Select a displayed IDR amount to prefill the calculator.</caption><thead className="bg-[#0D1B2A] text-white"><tr>{["Spa Category", "60-Min Traditional Massage", "Specialty Treatments (Scrub / Bath)", "Typical Setting & Inclusions", "Target Traveler"].map((heading) => <th key={heading} scope="col" className="px-5 py-4 font-semibold">{heading}</th>)}</tr></thead><tbody className="divide-y divide-slate-200 text-slate-700">{spaPriceRows.map((row) => <tr key={row.tier} className="align-top hover:bg-[#fffaf3]"><th scope="row" className="px-5 py-5 font-playfair text-base font-bold text-[#0D1B2A]">{row.tier}</th><td className="px-5 py-5 font-medium text-[#005c91]"><p>{row.massage}</p><div className="mt-3 flex flex-wrap gap-2">{row.massageAmounts.map((amount) => <button type="button" key={amount} onClick={() => setPrefillAmount(amount)} className="rounded-full border border-[#0077B6]/25 bg-[#e5f4fb] px-2.5 py-1 text-xs font-bold text-[#005c91] hover:bg-white focus:outline-none focus:ring-2 focus:ring-[#0077B6] focus:ring-offset-2" aria-label={`Use ${formatIdrButton(amount)} in the currency calculator`}>{formatIdrButton(amount)}</button>)}</div></td><td className="px-5 py-5 font-medium text-[#005c91]"><p>{row.specialty}</p><div className="mt-3 flex flex-wrap gap-2">{row.specialtyAmounts.map((amount) => <button type="button" key={amount} onClick={() => setPrefillAmount(amount)} className="rounded-full border border-[#0077B6]/25 bg-[#e5f4fb] px-2.5 py-1 text-xs font-bold text-[#005c91] hover:bg-white focus:outline-none focus:ring-2 focus:ring-[#0077B6] focus:ring-offset-2" aria-label={`Use ${formatIdrButton(amount)} in the currency calculator`}>{formatIdrButton(amount)}</button>)}</div></td><td className="px-5 py-5 leading-relaxed">{row.setting}</td><td className="px-5 py-5 leading-relaxed font-medium text-slate-900">{row.traveler}</td></tr>)}</tbody></table></div>
+          <IdrUsdConverter prefillAmount={prefillAmount} />
         </section>
 
         <section className="mt-14 grid gap-6 lg:grid-cols-[1.05fr_0.95fr]" aria-labelledby="region-title">
