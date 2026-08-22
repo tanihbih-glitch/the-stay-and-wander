@@ -105,6 +105,39 @@ const regionPins = [
   { name: "Nusa Islands", position: { lat: -8.72, lng: 115.55 }, detail: "Kelingking, Crystal Bay and Atuh" },
 ] as const;
 
+const regionPhotography = [
+  {
+    region: "Bukit Peninsula",
+    image: "/manus-storage/bali-bukit-peninsula-melasti_79edb6f8.jpg",
+    alt: "Soft white sand and limestone cliffs framing a clear-water cove on Bali's Bukit Peninsula",
+    caption: "Bukit Peninsula · White sand and cliffside coves",
+  },
+  {
+    region: "West Coast",
+    image: "/manus-storage/bali-west-coast-canggu-surf_05a2afae.jpg",
+    alt: "Grey-tan volcanic sand and rolling surf on Bali's West Coast at golden hour",
+    caption: "West Coast · Volcanic sand, surf, and sunsets",
+  },
+  {
+    region: "Southeast Coast",
+    image: "/manus-storage/bali-southeast-coast-nusa-dua_5be95624.jpg",
+    alt: "Calm shallow turquoise water over light golden sand on Bali's Southeast Coast",
+    caption: "Southeast Coast · Calm, reef-protected water",
+  },
+  {
+    region: "East / North Coast",
+    image: "/manus-storage/bali-east-north-coast-amed_121c8b27.jpg",
+    alt: "Black volcanic shoreline and a distant outrigger boat on Bali's quiet East and North Coast",
+    caption: "East / North Coast · Volcanic texture and quiet water",
+  },
+  {
+    region: "Nusa Islands",
+    image: "/manus-storage/bali-nusa-islands-kelingking_67146dfd.jpg",
+    alt: "A dramatic white-sand cove beneath towering limestone cliffs in Bali's Nusa Islands",
+    caption: "Nusa Islands · Dramatic cliffs and viewpoint days",
+  },
+] as const;
+
 function HotelSearchLink({ children }: { children: React.ReactNode }) {
   return (
     <a
@@ -268,6 +301,30 @@ export default function BlogBaliBeachComparison() {
           <div className="mt-5 flex gap-3 rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm leading-relaxed text-amber-950">
             <CircleAlert className="mt-0.5 h-5 w-5 shrink-0 text-amber-700" aria-hidden="true" />
             <p><strong>Sea-safety note:</strong> this planning matrix does not replace lifeguard instructions or local conditions. Do not swim at Kelingking simply because it appears in an itinerary, and reassess west-coast conditions when rip-current warnings are posted.</p>
+          </div>
+        </section>
+
+        <section className="mt-14" aria-labelledby="photography-title">
+          <div className="max-w-3xl">
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#0077B6]">Coastal visual notes</p>
+            <h2 id="photography-title" className="mt-2 font-playfair text-3xl font-bold text-[#0D1B2A]">See the coastline character before you choose a base</h2>
+            <p className="mt-4 text-lg leading-relaxed text-slate-700">These regional scenes make the matrix easier to read at a glance—from Bukit&apos;s pale cliff coves to the textured volcanic shorelines of Amed and the Nusa viewpoint coast.</p>
+          </div>
+          <div className="mt-7 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {regionPhotography.map((photo) => (
+              <figure key={photo.region} className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+                <img
+                  src={photo.image}
+                  alt={photo.alt}
+                  loading="lazy"
+                  className="aspect-[3/2] w-full object-cover transition-transform duration-500 hover:scale-[1.03]"
+                />
+                <figcaption className="p-4">
+                  <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#0077B6]">{photo.region}</p>
+                  <p className="mt-1 font-playfair text-lg font-bold text-[#0D1B2A]">{photo.caption.split(" · ")[1]}</p>
+                </figcaption>
+              </figure>
+            ))}
           </div>
         </section>
 
