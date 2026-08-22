@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import MobileBottomNav from "@/components/MobileBottomNav";
 import BlogArticleSchema, { BreadcrumbSchema } from "@/components/BlogArticleSchema";
 import { BALI_WELLNESS_INDEX_AFFILIATE_LINKS } from "@/lib/affiliateLinks";
+import IdrUsdConverter from "@/components/IdrUsdConverter";
 
 export const articleMetadata = {
   title: "Bali Spa & Wellness Price Index (2026): Local Street Warungs vs. Luxury Resort Treatments",
@@ -97,6 +98,7 @@ export default function BlogBaliSpaWellnessPriceIndex() {
           <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#0077B6]">2026 Bali spa price benchmark</p>
           <h2 id="benchmark-title" className="mt-2 font-playfair text-3xl font-bold text-[#0D1B2A]">Compare the massage, treatment, setting, and traveler fit</h2>
           <div className="mt-6 overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-sm"><table className="min-w-[1050px] w-full text-left text-sm"><caption className="sr-only">Bali spa and wellness benchmark by tier, massage cost, specialty treatment cost, setting, and target traveler.</caption><thead className="bg-[#0D1B2A] text-white"><tr>{["Spa Category", "60-Min Traditional Massage", "Specialty Treatments (Scrub / Bath)", "Typical Setting & Inclusions", "Target Traveler"].map((heading) => <th key={heading} scope="col" className="px-5 py-4 font-semibold">{heading}</th>)}</tr></thead><tbody className="divide-y divide-slate-200 text-slate-700">{spaPriceRows.map((row) => <tr key={row.tier} className="align-top hover:bg-[#fffaf3]"><th scope="row" className="px-5 py-5 font-playfair text-base font-bold text-[#0D1B2A]">{row.tier}</th><td className="px-5 py-5 font-medium text-[#005c91]">{row.massage}</td><td className="px-5 py-5 font-medium text-[#005c91]">{row.specialty}</td><td className="px-5 py-5 leading-relaxed">{row.setting}</td><td className="px-5 py-5 leading-relaxed font-medium text-slate-900">{row.traveler}</td></tr>)}</tbody></table></div>
+          <IdrUsdConverter />
         </section>
 
         <section className="mt-14 grid gap-6 lg:grid-cols-[1.05fr_0.95fr]" aria-labelledby="region-title">

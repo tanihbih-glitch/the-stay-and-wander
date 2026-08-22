@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { articleMetadata, spaPriceRows } from "../client/src/pages/BlogBaliSpaWellnessPriceIndex";
 import { BALI_WELLNESS_INDEX_AFFILIATE_LINKS } from "../client/src/lib/affiliateLinks";
+import { DEFAULT_IDR_PER_USD, convertIdrToUsd } from "../client/src/components/IdrUsdConverter";
 import { pageMetadataConfig } from "../shared/seo";
 import { sitemapRoutes } from "../shared/publicRoutes";
 
@@ -22,5 +23,13 @@ describe("Bali spa and wellness price index", () => {
       experiences: "https://gyg.me/As25WS5K",
       resorts: "https://booking.stay22.com/thestayandwander/r-lvU3PLVF",
     });
+  });
+
+  it("converts IDR with an editable planning rate rather than presenting a live FX quote", () => {
+    expect(DEFAULT_IDR_PER_USD).toBe(16000);
+    expect(convertIdrToUsd(500000, DEFAULT_IDR_PER_USD)).toBe(31.25);
+    expect(convertIdrToUsd(2500000, 15000)).toBeCloseTo(166.6667, 3);
+    expect(convertIdrToUsd(100000, 0)).toBeNull();
+    expect(convertIdrToUsd(-1, DEFAULT_IDR_PER_USD)).toBeNull();
   });
 });

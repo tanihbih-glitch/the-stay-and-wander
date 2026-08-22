@@ -250,3 +250,6 @@
 - [x] Audit the Coastal Field Notes pattern and obtain the missing user-supplied Tier 1–3 Bali spa benchmark values before creating the pricing matrix.
 - [x] Publish the Bali Spa & Wellness Price Index with a transparent methodology note, treatment-versus-resort decision guide, tier benchmark table, Seminyak/Canggu versus Ubud context, and secure booking CTAs.
 - [x] Add canonical SEO/SSR metadata, Blog listing, sitemap, tests, responsive validation, and a checkpoint for the wellness index. Desktop/mobile review confirmed the benchmark table, decision cards, and CTAs; the full 121-test suite plus TypeScript validation pass.
+- [x] Define a transparent editable IDR-to-USD conversion model for the Bali Spa index that does not imply live foreign-exchange data.
+- [x] Add an accessible interactive currency helper to the Bali Spa guide, including amount and exchange-rate inputs, instant USD output, and contextual range conversion.
+- [x] Add unit coverage, validate desktop and mobile behavior, and publish the currency-helper enhancement checkpoint. The editable rate, calculator safeguards, responsive controls, and quick benchmark presets are covered; desktop/mobile review and the full 122-test suite plus TypeScript validation pass.
