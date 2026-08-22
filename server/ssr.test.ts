@@ -76,6 +76,15 @@ describe("server-rendered page metadata", () => {
     expect(uae).toContain('href="https://thestayandwander.com/blog/uae-extended-stay-sustainability-2026"');
   });
 
+  it("renders the Bali beach comparison matrix metadata for crawlers", () => {
+    const template = "<html><head><title>Default site title</title></head><body></body></html>";
+    const coastal = injectSSRHead(template, pageMetadataConfig.baliBeachComparisonMatrix);
+
+    expect(coastal).toContain("<title>Bali Beach Comparison Matrix (2026): Sand Quality, Swim Safety &amp; Entry Fees by Region</title>");
+    expect(coastal).toContain('name="description" content="Compare Bali beach regions for sand quality, swim safety, entry fees, surfing, snorkeling, cliff views, and family-friendly water in 2026."');
+    expect(coastal).toContain('href="https://thestayandwander.com/blog/bali-beach-comparison-matrix-2026"');
+  });
+
   it("renders the Tokyo and Seoul where-to-stay metadata for crawlers", () => {
     const template = "<html><head><title>Default site title</title></head><body></body></html>";
     const tokyo = injectSSRHead(template, pageMetadataConfig.tokyoStayGuide);

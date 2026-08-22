@@ -194,6 +194,19 @@ export const pageMetadataConfig: Record<string, PageMetadata> = {
       "things to do in Bali 2026, Bali experiences, Bali temples, Bali beaches, Ubud guide, Nusa Penida, Bali itinerary, Bali travel guide",
   },
 
+  baliBeachComparisonMatrix: {
+    title: "Bali Beach Comparison Matrix (2026): Sand Quality, Swim Safety & Entry Fees by Region",
+    description:
+      "Compare Bali beach regions for sand quality, swim safety, entry fees, surfing, snorkeling, cliff views, and family-friendly water in 2026.",
+    image: `${SITE_URL}/manus-storage/blog-bali_5a40f78c.png`,
+    url: "/blog/bali-beach-comparison-matrix-2026",
+    type: "article",
+    author: "The Stay & Wander",
+    publishedDate: "2026-08-22",
+    keywords:
+      "Bali beach comparison 2026, Bali beach entry fees, Bali swim safety, Bali beaches for families, Bali surf beaches, Bali snorkeling beaches, Bali beach guide",
+  },
+
   baliHotelPricesGuide: {
     title: "Where to Stay in Bali: Best Areas for First-Timers (2026 Guide)",
     description:

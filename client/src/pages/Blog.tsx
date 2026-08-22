@@ -14,6 +14,17 @@ export default function Blog() {
 
   const articles = [
     {
+      id: 17,
+      slug: "bali-beach-comparison-matrix-2026",
+      title: "Bali Beach Comparison Matrix (2026): Sand Quality, Swim Safety & Entry Fees by Region",
+      category: "Bali Guide · Indonesia Travel",
+      image: "/manus-storage/blog-bali_5a40f78c.png",
+      excerpt: "Compare five Bali coastal regions for sand, sea conditions, practical access costs, surf, snorkeling, family swimming, and viewpoint days.",
+      author: "The Stay & Wander",
+      date: "August 22, 2026",
+      readTime: "9 min read",
+    },
+    {
       id: 16,
       slug: "uae-extended-stay-sustainability-2026",
       title: "Extended Stays in the UAE: How Sustainable Are Hilton, Marriott, and Accor?",

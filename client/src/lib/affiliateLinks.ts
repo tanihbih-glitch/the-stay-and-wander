@@ -106,6 +106,16 @@ export const BALI_EXPERIENCES_AFFILIATE_LINKS = {
 } as const;
 
 /**
+ * Canonical affiliate destinations for the Bali Coastal Field Notes beach
+ * comparison guide. The same hotel search is used by every decision branch.
+ */
+export const BALI_COASTAL_MATRIX_AFFILIATE_LINKS = {
+  hotels: "https://booking.stay22.com/thestayandwander/r-lvU3PLVF",
+  flights: TRAVELPAYOUTS_FLIGHT_LINK,
+  tours: "https://gyg.me/As25WS5K",
+} as const;
+
+/**
  * Helper function to generate Travelpayout search links
  * @param searchKey - The search key from Travelpayout API
  * @param campaign - Campaign name for tracking

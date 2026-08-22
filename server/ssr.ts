@@ -146,6 +146,8 @@ export function ssrMiddleware(req: Request, res: Response, next: NextFunction) {
     metadata = pageMetadataConfig.lisbonHotelGuide;
   } else if (path === "/blog/things-to-do-in-bali-2026") {
     metadata = pageMetadataConfig.baliExperiencesGuide;
+  } else if (path === "/blog/bali-beach-comparison-matrix-2026") {
+    metadata = pageMetadataConfig.baliBeachComparisonMatrix;
   } else if (path === "/blog/where-to-stay-in-bali-2026") {
     metadata = pageMetadataConfig.baliHotelPricesGuide;
   } else if (path === "/blog/where-to-stay-in-bangkok-2026") {
