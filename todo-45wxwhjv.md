@@ -247,3 +247,6 @@
 - [x] Audit the Tokyo and Seoul first-timer guide area profiles, rate snapshots, and existing heading structure for accurate methodology notes and section-linked decision paths.
 - [x] Add source-transparent methodology notes, four priority-based decision-tree options per guide, and destination-section anchors to the Tokyo and Seoul stay guides.
 - [x] Extend regression coverage, validate responsive presentation and decision links, and publish the Tokyo and Seoul guide enhancement checkpoint. Full-page visual review confirmed the methodology and decision cards on both guides, and the full 119-test suite plus TypeScript validation pass.
+- [x] Audit the Coastal Field Notes pattern and obtain the missing user-supplied Tier 1–3 Bali spa benchmark values before creating the pricing matrix.
+- [x] Publish the Bali Spa & Wellness Price Index with a transparent methodology note, treatment-versus-resort decision guide, tier benchmark table, Seminyak/Canggu versus Ubud context, and secure booking CTAs.
+- [x] Add canonical SEO/SSR metadata, Blog listing, sitemap, tests, responsive validation, and a checkpoint for the wellness index. Desktop/mobile review confirmed the benchmark table, decision cards, and CTAs; the full 121-test suite plus TypeScript validation pass.

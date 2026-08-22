@@ -25,6 +25,7 @@ import BlogDubaiHotels from "./pages/BlogDubaiHotels";
 import BlogLisbonHotels from "./pages/BlogLisbonHotels";
 import BlogBaliExperiences from "./pages/BlogBaliExperiences";
 import BlogBaliBeachComparison from "./pages/BlogBaliBeachComparison";
+import BlogBaliSpaWellnessPriceIndex from "./pages/BlogBaliSpaWellnessPriceIndex";
 import BlogTokyoStay from "./pages/BlogTokyoStay";
 import BlogSeoulStay from "./pages/BlogSeoulStay";
 import TripPlanner from "./pages/TripPlanner";
@@ -66,6 +67,7 @@ function Router() {
       <Route path={"/blog/where-to-stay-lisbon-2026"} component={BlogLisbonHotels} />
       <Route path={"/blog/things-to-do-in-bali-2026"} component={BlogBaliExperiences} />
       <Route path={"/blog/bali-beach-comparison-matrix-2026"} component={BlogBaliBeachComparison} />
+      <Route path={"/blog/bali-spa-wellness-price-index-2026"} component={BlogBaliSpaWellnessPriceIndex} />
       <Route path={"/blog/where-to-stay-in-tokyo-2026"} component={BlogTokyoStay} />
       <Route path={"/blog/where-to-stay-in-seoul-2026"} component={BlogSeoulStay} />
       {/* Redirects from old numeric URLs to new semantic slugs */}

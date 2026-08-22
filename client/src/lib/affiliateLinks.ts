@@ -115,6 +115,12 @@ export const BALI_COASTAL_MATRIX_AFFILIATE_LINKS = {
   tours: "https://gyg.me/As25WS5K",
 } as const;
 
+/** Canonical booking destinations for the Bali spa and wellness price index. */
+export const BALI_WELLNESS_INDEX_AFFILIATE_LINKS = {
+  experiences: "https://gyg.me/As25WS5K",
+  resorts: "https://booking.stay22.com/thestayandwander/r-lvU3PLVF",
+} as const;
+
 /**
  * Helper function to generate Travelpayout search links
  * @param searchKey - The search key from Travelpayout API

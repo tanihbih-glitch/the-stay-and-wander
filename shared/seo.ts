@@ -207,6 +207,17 @@ export const pageMetadataConfig: Record<string, PageMetadata> = {
       "Bali beach comparison 2026, Bali beach entry fees, Bali swim safety, Bali beaches for families, Bali surf beaches, Bali snorkeling beaches, Bali beach guide",
   },
 
+  baliSpaWellnessPriceIndex: {
+    title: "Bali Spa & Wellness Price Index (2026): Local Street Warungs vs. Luxury Resort Treatments",
+    description: "Compare Bali spa prices in 2026, from local massage warungs to boutique retreats and five-star resort treatments — with practical tier, setting, and traveler-fit guidance.",
+    image: `${SITE_URL}/manus-storage/blog-bali_5a40f78c.png`,
+    url: "/blog/bali-spa-wellness-price-index-2026",
+    type: "article",
+    author: "The Stay & Wander",
+    publishedDate: "2026-08-23",
+    keywords: "Bali spa prices 2026, Bali massage cost, Ubud wellness retreat, Seminyak spa, Bali luxury resort spa, Bali traditional massage",
+  },
+
   baliHotelPricesGuide: {
     title: "Where to Stay in Bali: Best Areas for First-Timers (2026 Guide)",
     description:

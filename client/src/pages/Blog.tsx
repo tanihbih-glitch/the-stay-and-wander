@@ -14,6 +14,17 @@ export default function Blog() {
 
   const articles = [
     {
+      id: 18,
+      slug: "bali-spa-wellness-price-index-2026",
+      title: "Bali Spa & Wellness Price Index (2026): Local Street Warungs vs. Luxury Resort Treatments",
+      category: "Coastal Field Notes · Bali Wellness",
+      image: "/manus-storage/blog-bali_5a40f78c.png",
+      excerpt: "Compare Bali's local massage warungs, boutique spa rituals, and five-star resort treatments by price, setting, inclusions, and traveler fit.",
+      author: "The Stay & Wander",
+      date: "August 23, 2026",
+      readTime: "8 min read",
+    },
+    {
       id: 17,
       slug: "bali-beach-comparison-matrix-2026",
       title: "Bali Beach Comparison Matrix (2026): Sand Quality, Swim Safety & Entry Fees by Region",
