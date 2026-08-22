@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { articleMetadata as tokyoMetadata, priceSnapshot as tokyoPrices } from "../client/src/pages/BlogTokyoStay";
-import { articleMetadata as seoulMetadata, priceSnapshot as seoulPrices } from "../client/src/pages/BlogSeoulStay";
+import { articleMetadata as tokyoMetadata, priceSnapshot as tokyoPrices, tokyoStayDecisions } from "../client/src/pages/BlogTokyoStay";
+import { articleMetadata as seoulMetadata, priceSnapshot as seoulPrices, seoulStayDecisions } from "../client/src/pages/BlogSeoulStay";
 import { CITY_ACTIVITIES_CAMPAIGN, CITY_ACTIVITIES_WIDGET_SRC } from "../client/src/components/CityActivitiesWidget";
 import { pageMetadataConfig } from "../shared/seo";
 import { sitemapRoutes } from "../shared/publicRoutes";
@@ -22,6 +22,21 @@ describe("Tokyo and Seoul where-to-stay guides", () => {
   it("uses the supplied city activities widget integration", () => {
     expect(CITY_ACTIVITIES_WIDGET_SRC).toBe("https://tpwidg.com/widgets/activities.js");
     expect(CITY_ACTIVITIES_CAMPAIGN).toBe("437150");
+  });
+
+  it("provides transparent planning methods and linked neighborhood decision paths", () => {
+    expect(tokyoStayDecisions).toEqual([
+      expect.objectContaining({ recommendation: "Shinjuku", href: "#shinjuku" }),
+      expect.objectContaining({ recommendation: "Shibuya", href: "#shibuya" }),
+      expect.objectContaining({ recommendation: "Asakusa", href: "#asakusa" }),
+      expect.objectContaining({ recommendation: "Ginza", href: "#ginza" }),
+    ]);
+    expect(seoulStayDecisions).toEqual([
+      expect.objectContaining({ recommendation: "Myeongdong", href: "#myeongdong" }),
+      expect.objectContaining({ recommendation: "Gangnam", href: "#gangnam" }),
+      expect.objectContaining({ recommendation: "Hongdae", href: "#hongdae" }),
+      expect.objectContaining({ recommendation: "Insadong", href: "#insadong" }),
+    ]);
   });
 
   it("matches visible long-tail Tokyo and Seoul FAQs to their schema source", () => {
