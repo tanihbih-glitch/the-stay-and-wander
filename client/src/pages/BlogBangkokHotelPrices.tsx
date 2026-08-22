@@ -7,6 +7,7 @@ import PopularRoutesWidgetBlogSidebar from "@/components/PopularRoutesWidgetBlog
 import TripComHotelWidget from "@/components/TripComHotelWidget";
 import ArticleFAQ from "@/components/ArticleFAQ";
 import RelatedAsiaStayGuides from "@/components/RelatedAsiaStayGuides";
+import GuideMethodologyDecisionTree, { type GuideDecision } from "@/components/GuideMethodologyDecisionTree";
 import { bangkokHotelPricesFaqs } from "@shared/articleFaqs";
 import { ArrowLeft } from "lucide-react";
 
@@ -85,6 +86,13 @@ export const savingsTips = [
   },
 ];
 
+export const bangkokStayDecisions: readonly GuideDecision[] = [
+  { condition: "BTS access, dining, and nightlife are the priority", recommendation: "Sukhumvit", detail: "Use the Skytrain-connected base as the flexible all-round first-timer choice.", href: "#sukhumvit" },
+  { condition: "river views and temple sightseeing set the pace", recommendation: "Riverside", detail: "Choose the river when hotel atmosphere and boat access are part of the itinerary.", href: "#riverside" },
+  { condition: "you are travelling on a tighter budget near Old City temples", recommendation: "Khao San Road", detail: "Choose the sociable backpacker base if quiet evenings and fast BTS access are not the main need.", href: "#khao-san-road" },
+  { condition: "you prefer a quieter base for a longer stay", recommendation: "Sathorn", detail: "Choose a more residential central setting with rail and river-ferry connections nearby.", href: "#sathorn" },
+];
+
 export default function BlogBangkokHotelPrices() {
   const canonicalUrl = `https://thestayandwander.com${articleMetadata.url}`;
   const breadcrumbItems = [
@@ -151,6 +159,12 @@ export default function BlogBangkokHotelPrices() {
             <p>Use this guide to choose the area that suits your trip, then use the area-by-area price table below as supporting detail for what you&apos;ll pay in 2026.</p>
           </div>
 
+          <GuideMethodologyDecisionTree
+            destinationLabel="Bangkok"
+            methodology="This 2026 guide combines the editorial area profiles and typical shoulder-season planning ranges presented below. Prices are directional planning estimates rather than a live rate feed, so confirm availability, transport access, and current pricing for your selected dates."
+            decisions={bangkokStayDecisions}
+          />
+
           <section className="mt-12 rounded-2xl bg-slate-900 p-6 text-white shadow-sm sm:p-8">
             <h2 className="font-playfair text-3xl font-bold">Bangkok Area-at-a-Glance for First-Timers</h2>
             <div className="mt-6 overflow-x-auto rounded-xl bg-white/10 ring-1 ring-white/15">
@@ -176,7 +190,7 @@ export default function BlogBangkokHotelPrices() {
           </aside>
 
           {areaGuides.map((area) => (
-            <section key={area.title} className="mt-12">
+            <section key={area.title} id={area.title.startsWith("Sukhumvit") ? "sukhumvit" : area.title.startsWith("Riverside") ? "riverside" : area.title.startsWith("Khao San") ? "khao-san-road" : area.title.startsWith("Sathorn") ? "sathorn" : "silom"} className="mt-12 scroll-mt-28">
               <h2 className="font-playfair text-3xl font-bold text-gray-900">{area.title}</h2>
               <p className="mt-6 text-lg leading-relaxed text-gray-700">{area.copy}</p>
               <p className="mt-5 rounded-xl border-l-4 border-yellow-400 bg-yellow-50 p-5 text-gray-800"><strong>First-timer fit:</strong> {area.driver}</p>

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { articleMetadata, priceSnapshot, searchMetadata } from "../client/src/pages/BlogBangkokHotelPrices";
+import { articleMetadata, bangkokStayDecisions, priceSnapshot, searchMetadata } from "../client/src/pages/BlogBangkokHotelPrices";
 import { TRIP_COM_HOTEL_WIDGET_URL } from "../client/src/components/TripComHotelWidget";
 import { pageMetadataConfig } from "../shared/seo";
 
@@ -16,5 +16,14 @@ describe("Bangkok hotel prices article", () => {
 
   it("uses the established live Trip.com hotel widget", () => {
     expect(TRIP_COM_HOTEL_WIDGET_URL).toBe("https://www.trip.com/partners/ad/S18723294?Allianceid=9322314&SID=324726991&trip_sub1=");
+  });
+
+  it("provides a transparent planning method and linked area decision tree", () => {
+    expect(bangkokStayDecisions).toEqual([
+      expect.objectContaining({ recommendation: "Sukhumvit", href: "#sukhumvit" }),
+      expect.objectContaining({ recommendation: "Riverside", href: "#riverside" }),
+      expect.objectContaining({ recommendation: "Khao San Road", href: "#khao-san-road" }),
+      expect.objectContaining({ recommendation: "Sathorn", href: "#sathorn" }),
+    ]);
   });
 });

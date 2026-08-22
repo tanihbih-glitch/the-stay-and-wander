@@ -7,6 +7,7 @@ import PopularRoutesWidgetBlogSidebar from "@/components/PopularRoutesWidgetBlog
 import TripComHotelWidget from "@/components/TripComHotelWidget";
 import ArticleFAQ from "@/components/ArticleFAQ";
 import RelatedAsiaStayGuides from "@/components/RelatedAsiaStayGuides";
+import GuideMethodologyDecisionTree, { type GuideDecision } from "@/components/GuideMethodologyDecisionTree";
 import { baliHotelPricesFaqs } from "@shared/articleFaqs";
 import { ArrowLeft } from "lucide-react";
 
@@ -54,6 +55,13 @@ export const savingsTips = [
     emphasis: "Reserve peak dates early",
     copy: " — July, August, and December are the most competitive periods for the most convenient first-timer bases.",
   },
+];
+
+export const baliStayDecisions: readonly GuideDecision[] = [
+  { condition: "you want beach clubs, dining, and a social first base", recommendation: "Seminyak", detail: "Choose the walkable beach-and-dining rhythm before comparing individual hotel rates.", href: "#seminyak" },
+  { condition: "culture, rice terraces, and wellness matter most", recommendation: "Ubud", detail: "Choose an inland base when temples, cafés, and a slower pace outweigh beach access.", href: "#ubud" },
+  { condition: "cliffs, surf, and resort time are the priority", recommendation: "Uluwatu", detail: "Choose the Bukit coast when dramatic views and self-contained beach days are central to the trip.", href: "#uluwatu" },
+  { condition: "you want cafés, surf, and a longer-stay feel", recommendation: "Canggu", detail: "Choose this base for remote-work energy and a broader day-to-day lifestyle rhythm.", href: "#canggu" },
 ];
 
 export default function BlogBaliHotelPrices() {
@@ -127,6 +135,12 @@ export default function BlogBaliHotelPrices() {
             <p>Use this guide to choose the area that fits your trip, then use the regional price table below as supporting detail for what you&apos;ll pay in 2026.</p>
           </div>
 
+          <GuideMethodologyDecisionTree
+            destinationLabel="Bali"
+            methodology="This 2026 guide combines the editorial area profiles and typical shoulder-season planning ranges shown below. These figures are directional planning references, not live hotel quotes; compare availability and current rates for your exact dates before booking."
+            decisions={baliStayDecisions}
+          />
+
           <section className="mt-12 rounded-2xl bg-slate-900 p-6 text-white shadow-sm sm:p-8">
             <h2 className="font-playfair text-3xl font-bold">Bali Area-at-a-Glance for First-Timers</h2>
             <div className="mt-6 overflow-x-auto rounded-xl bg-white/10 ring-1 ring-white/15">
@@ -156,7 +170,7 @@ export default function BlogBaliHotelPrices() {
             </p>
           </section>
 
-          <section className="mt-12">
+          <section id="seminyak" className="mt-12 scroll-mt-28">
             <h2 className="font-playfair text-3xl font-bold text-gray-900">Seminyak: Best for Beach Clubs, Dining, and First-Time Bali Energy</h2>
             <p className="mt-6 text-lg leading-relaxed text-gray-700">
               Choose Seminyak when you want an easy, social first Bali base with beach clubs, restaurants, boutiques, and sunset drinks close by. It is especially convenient for travellers who prefer to walk or take short rides between daytime beach plans and dinner reservations.
@@ -166,7 +180,7 @@ export default function BlogBaliHotelPrices() {
             </p>
           </section>
 
-          <section className="mt-12">
+          <section id="ubud" className="mt-12 scroll-mt-28">
             <h2 className="font-playfair text-3xl font-bold text-gray-900">Ubud: Best for Culture, Rice Terraces, and Wellness</h2>
             <p className="mt-6 text-lg leading-relaxed text-gray-700">
               Choose Ubud if your first Bali trip is centred on temples, rice terraces, cafés, yoga, and a slower inland pace. It makes a strong all-round base for travellers who want culture and nature close to hand rather than a beach-club scene.
@@ -176,7 +190,7 @@ export default function BlogBaliHotelPrices() {
             </p>
           </section>
 
-          <section className="mt-12">
+          <section id="uluwatu" className="mt-12 scroll-mt-28">
             <h2 className="font-playfair text-3xl font-bold text-gray-900">Uluwatu: Best for Cliffs, Surf, and Resort Time</h2>
             <p className="mt-6 text-lg leading-relaxed text-gray-700">
               Choose Uluwatu when dramatic coastlines, surf beaches, and slow resort days matter more than being near Bali&apos;s busiest restaurant districts. It is ideal for a couple&apos;s trip or a relaxed beach-focused stay, but it is less central for sightseeing across the island.
@@ -186,7 +200,7 @@ export default function BlogBaliHotelPrices() {
             </p>
           </section>
 
-          <section className="mt-12">
+          <section id="canggu" className="mt-12 scroll-mt-28">
             <h2 className="font-playfair text-3xl font-bold text-gray-900">Canggu: Best for Cafés, Surf, and Longer Stays</h2>
             <p className="mt-6 text-lg leading-relaxed text-gray-700">
               Choose Canggu if you want surf access, independent cafés, a social remote-work scene, and an energetic but less polished feel than Seminyak. It works particularly well for longer stays, though traffic can make a centrally located hotel especially useful.

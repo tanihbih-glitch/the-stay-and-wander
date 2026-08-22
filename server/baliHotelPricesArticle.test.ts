@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { articleMetadata, priceSnapshot, searchMetadata } from "../client/src/pages/BlogBaliHotelPrices";
+import { articleMetadata, baliStayDecisions, priceSnapshot, searchMetadata } from "../client/src/pages/BlogBaliHotelPrices";
 import { TRIP_COM_HOTEL_WIDGET_URL } from "../client/src/components/TripComHotelWidget";
 
 describe("Bali hotel prices article", () => {
@@ -20,5 +20,14 @@ describe("Bali hotel prices article", () => {
     expect(TRIP_COM_HOTEL_WIDGET_URL).toBe(
       "https://www.trip.com/partners/ad/S18723294?Allianceid=9322314&SID=324726991&trip_sub1="
     );
+  });
+
+  it("provides a transparent planning method and linked area decision tree", () => {
+    expect(baliStayDecisions).toEqual([
+      expect.objectContaining({ recommendation: "Seminyak", href: "#seminyak" }),
+      expect.objectContaining({ recommendation: "Ubud", href: "#ubud" }),
+      expect.objectContaining({ recommendation: "Uluwatu", href: "#uluwatu" }),
+      expect.objectContaining({ recommendation: "Canggu", href: "#canggu" }),
+    ]);
   });
 });
