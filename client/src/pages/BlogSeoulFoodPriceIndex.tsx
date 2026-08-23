@@ -9,6 +9,9 @@ import { SEOUL_DINING_AFFILIATE_LINKS } from "@/lib/affiliateLinks";
 import { SeoulDayExcursionsWidget, SeoulGetYourGuideCityWidget } from "@/components/SeoulDiningWidgets";
 import KrwMealBudgetConverter from "@/components/KrwMealBudgetConverter";
 import SeoulFoodTimeline from "@/components/SeoulFoodTimeline";
+import SeoulFoodPlanChecklist from "@/components/SeoulFoodPlanChecklist";
+import SeoulDistrictDiningMap from "@/components/SeoulDistrictDiningMap";
+import SeoulNightlifeBudget from "@/components/SeoulNightlifeBudget";
 
 export const articleMetadata = {
   title: "Seoul Food & Dining Price Index (2026): Best Districts, Iconic Eats & Area Cost Breakdown",
@@ -73,6 +76,12 @@ export default function BlogSeoulFoodPriceIndex() {
         <section className="mt-14" aria-labelledby="cafe-title"><p className="text-xs font-bold uppercase tracking-[0.2em] text-[#0077B6]">Seoul Café & Bakery Price Index</p><h2 id="cafe-title" className="mt-3 font-playfair text-3xl font-bold text-[#0D1B2A]">Coffee and pastry benchmarks by district</h2><p className="mt-4 max-w-3xl text-lg leading-relaxed text-slate-700">Use these 2026 benchmarks to decide whether your itinerary suits a quick chain takeout, an independent café stop, or a concept-café splurge.</p><div className="table-responsive mt-6 overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-sm"><table className="min-w-[880px] w-full text-left text-sm"><caption className="sr-only">Seoul café and bakery prices by district.</caption><thead className="bg-[#0D1B2A] text-white"><tr>{["District", "Avg. Iced Americano / Latte", "Avg. Signature Pastry / Slice of Cake", "Typical Cafe Vibe & Style"].map((heading) => <th key={heading} scope="col" className="px-5 py-4 font-semibold">{heading}</th>)}</tr></thead><tbody className="divide-y divide-slate-200 text-slate-700">{seoulCafePriceRows.map((row) => <tr key={row.district} className="align-top hover:bg-[#fffaf3]"><th scope="row" className="px-5 py-5 font-playfair text-base font-bold text-[#0D1B2A]">{row.district}</th><td className="px-5 py-5 font-medium text-[#005c91]">{row.coffee}</td><td className="px-5 py-5 font-medium text-[#005c91]">{row.pastry}</td><td className="px-5 py-5 leading-relaxed">{row.vibe}</td></tr>)}</tbody></table></div><KrwMealBudgetConverter /></section>
 
         <SeoulFoodTimeline />
+
+        <SeoulFoodPlanChecklist />
+
+        <SeoulDistrictDiningMap />
+
+        <SeoulNightlifeBudget />
 
         <section className="mt-14" aria-labelledby="budget-title"><p className="text-xs font-bold uppercase tracking-[0.2em] text-[#0077B6]">6. Daily Meal Budget Summary</p><h2 id="budget-title" className="mt-3 font-playfair text-3xl font-bold text-[#0D1B2A]">Set a realistic daily dining budget</h2><div className="mt-6 grid gap-4 md:grid-cols-3"><article className="rounded-2xl border border-slate-200 bg-white p-6"><h3 className="font-playfair text-xl font-bold text-[#0D1B2A]">Budget Traveler</h3><p className="mt-3 font-semibold text-[#0077B6]">₩25,000 – ₩35,000 / day ($18 – $26 USD)</p><p className="mt-3 text-sm leading-relaxed text-slate-700">Focusing on markets, convenience stores, and casual noodle shops.</p></article><article className="rounded-2xl border border-slate-200 bg-white p-6"><h3 className="font-playfair text-xl font-bold text-[#0D1B2A]">Mid-Range Traveler</h3><p className="mt-3 font-semibold text-[#0077B6]">₩60,000 – ₩95,000 / day ($44 – $70 USD)</p><p className="mt-3 text-sm leading-relaxed text-slate-700">Mix of cafe breakfasts, sit-down Korean BBQ dinners, and market lunches.</p></article><article className="rounded-2xl border border-slate-200 bg-white p-6"><h3 className="font-playfair text-xl font-bold text-[#0D1B2A]">Luxury Traveler</h3><p className="mt-3 font-semibold text-[#0077B6]">₩250,000+ / day ($185+ USD)</p><p className="mt-3 text-sm leading-relaxed text-slate-700">Fine-dining tasting menus, premium Hanwoo beef, and artisanal cocktail lounges.</p></article></div></section>
 

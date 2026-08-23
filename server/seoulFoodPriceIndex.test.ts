@@ -5,6 +5,9 @@ import { SEOUL_DINING_AFFILIATE_LINKS } from "../client/src/lib/affiliateLinks";
 import { SEOUL_DAY_EXCURSIONS_WIDGET_URL, SEOUL_GYG_CITY_WIDGET_LOCATION_ID } from "../client/src/components/SeoulDiningWidgets";
 import { DEFAULT_AUD_PER_USD, DEFAULT_EUR_PER_USD, DEFAULT_GBP_PER_USD, DEFAULT_KRW_PER_USD, convertKrwToUsd, convertUsdToCurrency } from "../client/src/components/KrwMealBudgetConverter";
 import { seoulFoodTimelineStops } from "../client/src/components/SeoulFoodTimeline";
+import { seoulFoodPlanItems, SEOUL_FOOD_PLAN_STORAGE_KEY } from "../client/src/components/SeoulFoodPlanChecklist";
+import { seoulDiningDistricts } from "../client/src/components/SeoulDistrictDiningMap";
+import { seoulNightlifePresets, seoulNightlifeRows } from "../client/src/components/SeoulNightlifeBudget";
 import { pageMetadataConfig } from "../shared/seo";
 import { sitemapRoutes } from "../shared/publicRoutes";
 
@@ -53,6 +56,24 @@ describe("Seoul Food & Dining Price Index", () => {
       "Euljiro",
       "Hongdae & Sinchon",
       "Gangnam & Cheongdam",
+    ]);
+  });
+
+  it("defines a locally saveable food-plan model and map tooltip data for every referenced district", () => {
+    expect(SEOUL_FOOD_PLAN_STORAGE_KEY).toBe("stay-wander-seoul-food-plan-v1");
+    expect(seoulFoodPlanItems).toHaveLength(7);
+    expect(seoulDiningDistricts.map((district) => district.name)).toEqual([
+      "Jongno & Euljiro", "Hongdae & Sinchon", "Myeongdong", "Gangnam & Cheongdam", "Seongsu-dong", "Itaewon",
+    ]);
+    expect(seoulDiningDistricts.every((district) => Number.isFinite(district.position.lat) && Number.isFinite(district.position.lng))).toBe(true);
+  });
+
+  it("retains the supplied nightlife pricing and three party-night planning presets", () => {
+    expect(seoulNightlifeRows).toHaveLength(3);
+    expect(seoulNightlifeRows[0]).toEqual(expect.objectContaining({ district: "Hongdae", entry: "Free – ₩15,000 (~$0–$11) (Often includes 1 drink ticket)" }));
+    expect(seoulNightlifeRows[2]).toEqual(expect.objectContaining({ district: "Gangnam", vip: "₩650,000 – ₩1,800,000+ (~$480–$1,330+)" }));
+    expect(seoulNightlifePresets.map((preset) => preset.total)).toEqual([
+      "₩31,000 total (~$23 USD)", "₩55,000 total (~$41 USD)", "₩100,000 total (~$74 USD)",
     ]);
   });
 });
