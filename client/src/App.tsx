@@ -28,6 +28,7 @@ import BlogBaliBeachComparison from "./pages/BlogBaliBeachComparison";
 import BlogBaliSpaWellnessPriceIndex from "./pages/BlogBaliSpaWellnessPriceIndex";
 import BlogTokyoStay from "./pages/BlogTokyoStay";
 import BlogSeoulStay from "./pages/BlogSeoulStay";
+import BlogSeoulFoodPriceIndex from "./pages/BlogSeoulFoodPriceIndex";
 import TripPlanner from "./pages/TripPlanner";
 import TripPlannerSuccess from "./pages/TripPlannerSuccess";
 import About from "./pages/About";
@@ -70,6 +71,7 @@ function Router() {
       <Route path={"/blog/bali-spa-wellness-price-index-2026"} component={BlogBaliSpaWellnessPriceIndex} />
       <Route path={"/blog/where-to-stay-in-tokyo-2026"} component={BlogTokyoStay} />
       <Route path={"/blog/where-to-stay-in-seoul-2026"} component={BlogSeoulStay} />
+      <Route path={"/blog/seoul-food-price-index-2026"} component={BlogSeoulFoodPriceIndex} />
       {/* Redirects from old numeric URLs to new semantic slugs */}
       <Route path={"/blog/1"} component={() => { window.location.href = '/blog/best-hotels-bali-2026'; return null; }} />
       <Route path={"/blog/2"} component={() => { window.location.href = '/blog/best-cities-europe-summer-2026'; return null; }} />

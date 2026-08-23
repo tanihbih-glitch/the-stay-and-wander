@@ -14,6 +14,17 @@ export default function Blog() {
 
   const articles = [
     {
+      id: 19,
+      slug: "seoul-food-price-index-2026",
+      title: "Seoul Food & Dining Price Index (2026): Best Districts, Iconic Eats & Area Cost Breakdown",
+      category: "Seoul Guide · Korea Travel",
+      image: "/manus-storage/seoul-where-to-stay-hero_050ef7b1.jpg",
+      excerpt: "Compare Seoul dining costs by district, from market snacks and BBQ to premium tasting menus, with practical daily food budgets for 2026.",
+      author: "The Stay & Wander",
+      date: "August 23, 2026",
+      readTime: "9 min read",
+    },
+    {
       id: 18,
       slug: "bali-spa-wellness-price-index-2026",
       title: "Bali Spa & Wellness Price Index (2026): Local Street Warungs vs. Luxury Resort Treatments",

@@ -164,6 +164,8 @@ export function ssrMiddleware(req: Request, res: Response, next: NextFunction) {
     metadata = pageMetadataConfig.tokyoStayGuide;
   } else if (path === "/blog/where-to-stay-in-seoul-2026") {
     metadata = pageMetadataConfig.seoulStayGuide;
+  } else if (path === "/blog/seoul-food-price-index-2026") {
+    metadata = pageMetadataConfig.seoulFoodPriceIndex;
   } else if (path === "/itinerary/tokyo") {
     metadata = pageMetadataConfig.tokyoItinerary;
   } else if (path === "/itinerary/seoul") {

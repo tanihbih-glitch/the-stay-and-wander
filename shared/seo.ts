@@ -305,6 +305,17 @@ export const pageMetadataConfig: Record<string, PageMetadata> = {
     keywords: "where to stay in Seoul 2026, Seoul districts, Myeongdong hotels, Gangnam hotels, Hongdae hotels, Itaewon hotels, Insadong hotels",
   },
 
+  seoulFoodPriceIndex: {
+    title: "Seoul Food & Dining Price Index (2026): Best Districts, Iconic Eats & Area Cost Breakdown",
+    description: "Seoul dining costs by district in 2026—from street-market bites to BBQ and premium meals—plus daily budgets, money-saving rules, food tours, and transit tips.",
+    image: `${SITE_URL}/manus-storage/seoul-where-to-stay-hero_050ef7b1.jpg`,
+    url: "/blog/seoul-food-price-index-2026",
+    type: "article",
+    author: "The Stay & Wander",
+    publishedDate: "2026-08-23",
+    keywords: "Seoul food prices 2026, Seoul dining costs, Gwangjang Market food, Seoul street food budget, Korean BBQ prices, Seoul daily food budget",
+  },
+
   tokyoItinerary: {
     title: "4 Days in Tokyo: First-Timer Itinerary (2026) | The Stay & Wander",
     description: "Plan four practical days in Tokyo with Asakusa, Shibuya, modern Tokyo, and a Mount Fuji day trip — plus stay and activity planning links.",
