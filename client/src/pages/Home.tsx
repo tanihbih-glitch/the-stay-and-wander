@@ -17,6 +17,8 @@ import PopularRoutesWidget from "@/components/PopularRoutesWidget";
 import GetYourGuideTours from "@/components/GetYourGuideTours";
 import TripComHotelWidget from "@/components/TripComHotelWidget";
 import { DISCOVERCARS_AFFILIATE_URL } from "@/lib/affiliateLinks";
+import { Link } from "wouter";
+import { featuredGuideDiscovery } from "@shared/featuredGuideDiscovery";
 
 const CRUISEDIRECT_SEARCH_URL = "https://www.cruisedirect.com/?utm_source=thestayandwander&utm_medium=affiliate";
 const CRUISEDIRECT_EXPLORE_URL = "https://www.cruisedirect.com/?utm_source=thestayandwander";
@@ -527,6 +529,25 @@ export default function Home() {
                   </a>
                 </CardContent>
               </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Latest Guides Section — registry-backed so each newly promoted guide has a crawlable homepage path. */}
+      <section className="bg-[#F8EFE0] px-4 py-20">
+        <div className="container">
+          <div className="mx-auto mb-12 max-w-2xl text-center">
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#0077B6]">New research guides</p>
+            <h2 className="mt-3 font-display text-4xl font-bold text-gray-900">Latest Guides</h2>
+            <p className="mt-4 text-lg text-gray-600">Fresh field notes, price indexes, and planning tools from the latest Stay &amp; Wander research.</p>
+          </div>
+          <div className="grid grid-cols-1 gap-7 md:grid-cols-3">
+            {featuredGuideDiscovery.map((guide) => (
+              <Link key={guide.path} href={guide.path} className="group overflow-hidden rounded-2xl bg-white shadow-sm transition-shadow hover:shadow-lg">
+                <img src={guide.image} alt="" className="h-48 w-full object-cover transition-transform duration-300 group-hover:scale-105" />
+                <div className="p-6"><p className="text-xs font-bold uppercase tracking-[0.16em] text-[#0077B6]">{guide.category}</p><h3 className="mt-3 font-display text-xl font-bold text-gray-900">{guide.title}</h3><p className="mt-3 line-clamp-3 text-sm leading-relaxed text-gray-600">{guide.excerpt}</p><p className="mt-5 text-sm font-semibold text-[#c96725]">Read the guide →</p></div>
+              </Link>
             ))}
           </div>
         </div>

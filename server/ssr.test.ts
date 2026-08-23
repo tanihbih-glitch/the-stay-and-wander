@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import { pageMetadataConfig } from "../shared/seo";
 import { articleFaqsByPath } from "../shared/articleFaqs";
 import { injectSSRHead } from "./ssr";
+import { featuredGuideDiscovery } from "../shared/featuredGuideDiscovery";
 
 describe("server-rendered page metadata", () => {
   it("replaces the generic title with Corporate Travel crawler metadata", () => {
@@ -83,6 +84,21 @@ describe("server-rendered page metadata", () => {
     expect(coastal).toContain("<title>Bali Beach Comparison Matrix (2026): Sand Quality, Swim Safety &amp; Entry Fees by Region</title>");
     expect(coastal).toContain('name="description" content="Compare Bali beach regions for sand quality, swim safety, entry fees, surfing, snorkeling, cliff views, and family-friendly water in 2026."');
     expect(coastal).toContain('href="https://thestayandwander.com/blog/bali-beach-comparison-matrix-2026"');
+  });
+
+  it("renders indexable canonical metadata for every guide in the shared discovery registry", () => {
+    const template = "<html><head><title>Default site title</title></head><body></body></html>";
+    const metadataByPath = {
+      "/blog/seoul-food-price-index-2026": pageMetadataConfig.seoulFoodPriceIndex,
+      "/blog/bali-spa-wellness-price-index-2026": pageMetadataConfig.baliSpaWellnessPriceIndex,
+      "/blog/bali-beach-comparison-matrix-2026": pageMetadataConfig.baliBeachComparisonMatrix,
+    } as const;
+
+    featuredGuideDiscovery.forEach((guide) => {
+      const rendered = injectSSRHead(template, metadataByPath[guide.path]);
+      expect(rendered).toContain(`href="https://thestayandwander.com${guide.path}"`);
+      expect(rendered).not.toContain("noindex");
+    });
   });
 
   it("renders the Tokyo and Seoul where-to-stay metadata for crawlers", () => {

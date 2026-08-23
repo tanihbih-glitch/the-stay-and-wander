@@ -4,6 +4,7 @@ import { describe, expect, it } from "vitest";
 import { generateCompleteSitemap } from "./generateSitemap";
 import { generateSitemap as generateSsgSitemap } from "./ssg";
 import { isApplicationRoute, sitemapRoutes } from "../shared/publicRoutes";
+import { featuredGuideDiscovery } from "../shared/featuredGuideDiscovery";
 
 describe("public route and sitemap cleanup", () => {
   it("treats the reported legacy slug and unimplemented template paths as unknown", () => {
@@ -74,5 +75,19 @@ describe("public route and sitemap cleanup", () => {
 
   it("keeps the legacy SSG sitemap generator aligned with the same route registry", () => {
     expect(generateSsgSitemap()).toBe(generateCompleteSitemap());
+  });
+
+  it("requires every newly promoted guide to have route, sitemap, Blog, and homepage discovery registration", () => {
+    const blogSource = fs.readFileSync(path.resolve(process.cwd(), "client/src/pages/Blog.tsx"), "utf8");
+    const homeSource = fs.readFileSync(path.resolve(process.cwd(), "client/src/pages/Home.tsx"), "utf8");
+    const staticSitemap = fs.readFileSync(path.resolve(process.cwd(), "client/public/sitemap.xml"), "utf8");
+
+    expect(blogSource).toContain("featuredGuideDiscovery.map");
+    expect(homeSource).toContain("featuredGuideDiscovery.map");
+    featuredGuideDiscovery.forEach((guide) => {
+      expect(isApplicationRoute(guide.path)).toBe(true);
+      expect(sitemapRoutes.map((route) => route.path)).toContain(guide.path);
+      expect(staticSitemap).toContain(`https://thestayandwander.com${guide.path}`);
+    });
   });
 });

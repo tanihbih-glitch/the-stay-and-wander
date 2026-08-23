@@ -8,44 +8,13 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MobileBottomNav from "@/components/MobileBottomNav";
 import { OrganizationSchema, BreadcrumbSchema } from "@/components/BlogArticleSchema";
+import { featuredGuideDiscovery } from "@shared/featuredGuideDiscovery";
 
 export default function Blog() {
   const [activeCategory, setActiveCategory] = useState("all");
 
   const articles = [
-    {
-      id: 19,
-      slug: "seoul-food-price-index-2026",
-      title: "Seoul Food & Dining Price Index (2026): Best Districts, Iconic Eats & Area Cost Breakdown",
-      category: "Seoul Guide · Korea Travel",
-      image: "/manus-storage/seoul-where-to-stay-hero_050ef7b1.jpg",
-      excerpt: "Compare Seoul dining costs by district, from market snacks and BBQ to premium tasting menus, with practical daily food budgets for 2026.",
-      author: "The Stay & Wander",
-      date: "August 23, 2026",
-      readTime: "9 min read",
-    },
-    {
-      id: 18,
-      slug: "bali-spa-wellness-price-index-2026",
-      title: "Bali Spa & Wellness Price Index (2026): Local Street Warungs vs. Luxury Resort Treatments",
-      category: "Coastal Field Notes · Bali Wellness",
-      image: "/manus-storage/blog-bali_5a40f78c.png",
-      excerpt: "Compare Bali's local massage warungs, boutique spa rituals, and five-star resort treatments by price, setting, inclusions, and traveler fit.",
-      author: "The Stay & Wander",
-      date: "August 23, 2026",
-      readTime: "8 min read",
-    },
-    {
-      id: 17,
-      slug: "bali-beach-comparison-matrix-2026",
-      title: "Bali Beach Comparison Matrix (2026): Sand Quality, Swim Safety & Entry Fees by Region",
-      category: "Bali Guide · Indonesia Travel",
-      image: "/manus-storage/blog-bali_5a40f78c.png",
-      excerpt: "Compare five Bali coastal regions for sand, sea conditions, practical access costs, surf, snorkeling, family swimming, and viewpoint days.",
-      author: "The Stay & Wander",
-      date: "August 22, 2026",
-      readTime: "9 min read",
-    },
+    ...featuredGuideDiscovery.map((guide) => ({ ...guide, author: "The Stay & Wander" })),
     {
       id: 16,
       slug: "uae-extended-stay-sustainability-2026",

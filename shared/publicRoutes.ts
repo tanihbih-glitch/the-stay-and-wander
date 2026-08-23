@@ -1,3 +1,5 @@
+import { featuredGuidePaths } from "./featuredGuideDiscovery";
+
 export type SitemapChangeFrequency =
   | "always"
   | "hourly"
@@ -39,13 +41,11 @@ const BASE_APPLICATION_PATHS = [
   "/blog/uae-extended-stay-sustainability-2026",
   "/blog/where-to-stay-in-tokyo-2026",
   "/blog/where-to-stay-in-seoul-2026",
-  "/blog/seoul-food-price-index-2026",
   "/blog/best-cities-europe-summer-2026",
   "/blog/tokyo-vs-bangkok-2026",
   "/blog/where-to-stay-lisbon-2026",
   "/blog/things-to-do-in-bali-2026",
-  "/blog/bali-beach-comparison-matrix-2026",
-  "/blog/bali-spa-wellness-price-index-2026",
+  ...featuredGuidePaths,
   "/blog/brazil-travel-guide-2026",
   "/blog/best-flight-deals-asia-2026",
   "/blog/best-hotels-dubai-2026",
