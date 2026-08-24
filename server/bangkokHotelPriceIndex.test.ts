@@ -99,10 +99,10 @@ describe("Bangkok Hotel Price Index", () => {
     expect(taxCalculatorSource).toContain("View transfer allowance in:");
     expect(taxCalculatorSource).toContain("EUR: 0.92");
     expect(taxCalculatorSource).toContain("GBP: 0.79");
-    expect(arrivalChecklistSource).toContain("Download Arrival-Day Checklist");
+    expect(arrivalChecklistSource).toContain("Download Checklist");
     expect(arrivalChecklistSource).toContain("URL.createObjectURL");
     expect(arrivalChecklistSource).toContain("bangkok-arrival-day-checklist.txt");
-    expect(arrivalChecklistSource).toContain("Email Checklist to My Group");
+    expect(arrivalChecklistSource).toContain("Email My Group");
     expect(arrivalChecklistSource).toContain("mailto:?subject=");
     expect(arrivalChecklistSource).toContain("encodeURIComponent(checklistText)");
     expect(arrivalChecklistSource).toContain("Share Checklist Link");
@@ -122,6 +122,13 @@ describe("Bangkok Hotel Price Index", () => {
     expect(arrivalChecklistSource).toContain("outlook.office.com/calendar/0/deeplink/compose");
     expect(arrivalChecklistSource).toContain("Attendee emails (optional)");
     expect(arrivalChecklistSource).toContain("cleanAttendees");
+    expect(arrivalChecklistSource).toContain("Reminder time zone");
+    expect(arrivalChecklistSource).toContain("Asia/Bangkok");
+    expect(arrivalChecklistSource).toContain("X-WR-TIMEZONE:${timeZone}");
+    expect(arrivalChecklistSource).toContain("Hotel confirmation number (browser only)");
+    expect(arrivalChecklistSource).toContain("tsw-bangkok-hotel-confirmation");
+    expect(arrivalChecklistSource).toContain("Print Arrival Card");
+    expect(arrivalChecklistSource).toContain("bangkok-arrival-card");
     expect(arrivalChecklistSource).toContain('target="_blank"');
     expect(arrivalChecklistSource).toContain('rel="noopener noreferrer"');
     expect(articleSource).toContain("<BangkokArrivalChecklist />");
