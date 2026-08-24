@@ -305,3 +305,6 @@
 - [x] Audit the Bangkok arrival reminder controls to define optional trip-title state and calendar-link encoding compatible with both ICS downloads and Google Calendar.
 - [x] Add optional trip-title personalization to pickup and hotel check-in reminders and one-click Google Calendar links that open securely in a new tab.
 - [x] Add regression coverage, validate titles and Google Calendar URL parameters, accessibility, and desktop/mobile layout, then publish the personalized reminder enhancement checkpoint. Trip-title encoding, secure Google Calendar handoff, ICS downloads, desktop/mobile layouts, and the full 143-test suite plus TypeScript validation pass.
+- [x] Audit the current Bangkok arrival reminder state and define countdown, event-copy, Outlook Calendar, and attendee-email encoding behavior.
+- [x] Add a selected-check-in countdown, copy-to-clipboard event details, secure Outlook Calendar links, and attendee-email fields to the Bangkok arrival checklist.
+- [x] Add regression coverage, validate live countdown and calendar URL behavior, accessibility, and desktop/mobile layout, then publish the Bangkok arrival collaboration enhancement checkpoint. The minute-refreshing check-in countdown, copy fallback, secure Google/Outlook links, attendee encoding, desktop/mobile layouts, and the full 143-test suite plus TypeScript validation pass.
