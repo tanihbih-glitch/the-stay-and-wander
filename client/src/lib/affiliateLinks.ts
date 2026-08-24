@@ -126,6 +126,40 @@ export const BALI_HOTEL_PRICE_INDEX_AFFILIATE_LINKS = {
   hotels: "https://booking.stay22.com/thestayandwander/bEUkQtNQBH",
 } as const;
 
+function toIsoDate(date: Date): string {
+  return date.toISOString().slice(0, 10);
+}
+
+/**
+ * Returns a three-night, mid-month travel window in the next occurrence of a
+ * selected seasonal month. A future date is always used, even after the
+ * article's 2026 benchmark period has passed.
+ */
+export function getNextBaliSeasonalSearchDates(monthIndex: number, now = new Date()) {
+  const safeMonthIndex = Math.min(11, Math.max(0, monthIndex));
+  const reference = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()));
+  let year = reference.getUTCFullYear();
+  let checkIn = new Date(Date.UTC(year, safeMonthIndex, 15));
+
+  if (checkIn <= reference) {
+    year += 1;
+    checkIn = new Date(Date.UTC(year, safeMonthIndex, 15));
+  }
+
+  const checkOut = new Date(Date.UTC(year, safeMonthIndex, 18));
+  return { checkIn: toIsoDate(checkIn), checkOut: toIsoDate(checkOut) };
+}
+
+export function buildBaliSeasonalAvailabilityUrl(monthIndex: number, now = new Date()) {
+  const { checkIn, checkOut } = getNextBaliSeasonalSearchDates(monthIndex, now);
+  const url = new URL(BALI_HOTEL_PRICE_INDEX_AFFILIATE_LINKS.hotels);
+  url.searchParams.set("checkin", checkIn);
+  url.searchParams.set("checkout", checkOut);
+  url.searchParams.set("group_adults", "2");
+  url.searchParams.set("no_rooms", "1");
+  return url.toString();
+}
+
 /** Canonical affiliate destinations used in the Seoul Food & Dining Price Index. */
 export const SEOUL_DINING_AFFILIATE_LINKS = {
   tripCom: "https://trip.com?Allianceid=9322314&SID=324726991&trip_sub1=&trip_sub3=D19425499",

@@ -275,3 +275,6 @@
 - [x] Audit the Bali Hotel Price Index and obtain verified month-by-month seasonal-rate benchmarks before publishing an interactive pricing chart.
 - [x] Add an accessible villa-versus-hotel group-cost calculator and regional MapView tooltips with contextual nightly-rate ranges from the supplied matrix.
 - [x] Add the verified seasonal-rate chart, regression coverage, desktop/mobile validation, and a publication checkpoint for the Bali price-planning enhancement. The calculator uses all 12 supplied monthly benchmarks, chart controls and map rate tooltips are validated, and the full 137-test suite plus TypeScript validation pass.
+- [x] Define safe calendar presets for each selected 2026 Bali seasonal-chart month and centralize the approved Stay22 availability-search handoff.
+- [x] Add accessible selected-month search controls to the Bali seasonal chart, including visible date assumptions and secure new-tab affiliate behavior.
+- [x] Add date/URL regression coverage, validate desktop/mobile behavior, and publish the seasonal availability-search enhancement checkpoint. The next-occurrence three-night windows, selected-month Stay22 URL, planning disclaimer, desktop/mobile display, and full 138-test suite plus TypeScript validation pass.
