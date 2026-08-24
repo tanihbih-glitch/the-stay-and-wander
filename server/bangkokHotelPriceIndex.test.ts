@@ -127,8 +127,14 @@ describe("Bangkok Hotel Price Index", () => {
     expect(arrivalChecklistSource).toContain("X-WR-TIMEZONE:${timeZone}");
     expect(arrivalChecklistSource).toContain("Hotel confirmation number (browser only)");
     expect(arrivalChecklistSource).toContain("tsw-bangkok-hotel-confirmation");
+    expect(arrivalChecklistSource).toContain("Transfer booking reference (browser only)");
+    expect(arrivalChecklistSource).toContain("tsw-bangkok-transfer-reference");
+    expect(arrivalChecklistSource).toContain("Clear Local Details");
+    expect(arrivalChecklistSource).toContain("clearLocalDetails");
     expect(arrivalChecklistSource).toContain("Print Arrival Card");
     expect(arrivalChecklistSource).toContain("bangkok-arrival-card");
+    expect(arrivalChecklistSource).toContain("api.qrserver.com/v1/create-qr-code");
+    expect(arrivalChecklistSource).toContain("QR code that opens the digital Bangkok arrival checklist");
     expect(arrivalChecklistSource).toContain('target="_blank"');
     expect(arrivalChecklistSource).toContain('rel="noopener noreferrer"');
     expect(articleSource).toContain("<BangkokArrivalChecklist />");
