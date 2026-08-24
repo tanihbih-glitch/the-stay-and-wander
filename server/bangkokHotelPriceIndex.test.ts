@@ -4,10 +4,13 @@ import { describe, expect, it } from "vitest";
 import { getLegacyRedirectTarget } from "./legacyRedirects";
 import { sitemapRoutes } from "../shared/publicRoutes";
 import { calculateBangkokHotelSurcharge } from "../client/src/components/BangkokHotelTaxCalculator";
+import { buildBangkokStay22SearchUrl } from "../client/src/components/BangkokLiveHotelSearch";
 
 const articleSource = fs.readFileSync(path.resolve(process.cwd(), "client/src/pages/BlogBangkokHotelPriceIndex.tsx"), "utf8");
 const mapSource = fs.readFileSync(path.resolve(process.cwd(), "client/src/components/BangkokDistrictHotelMap.tsx"), "utf8");
 const taxCalculatorSource = fs.readFileSync(path.resolve(process.cwd(), "client/src/components/BangkokHotelTaxCalculator.tsx"), "utf8");
+const liveSearchSource = fs.readFileSync(path.resolve(process.cwd(), "client/src/components/BangkokLiveHotelSearch.tsx"), "utf8");
+const transferSource = fs.readFileSync(path.resolve(process.cwd(), "client/src/components/BangkokAirportTransferBudget.tsx"), "utf8");
 
 describe("Bangkok Hotel Price Index", () => {
   it("preserves every supplied district benchmark and pricing factor", () => {
@@ -52,5 +55,21 @@ describe("Bangkok Hotel Price Index", () => {
     expect(articleSource).toContain("Riverside temples and ferries plan");
     expect(articleSource).toContain("href={`/blog/where-to-stay-in-bangkok-2026${link.hash}`}");
     expect(articleSource).toContain('hash: "#sukhumvit"');
+  });
+
+  it("provides a compliant live hotel date handoff, a shareable calculated stay cost, and transfer-budget guidance", () => {
+    const liveSearchUrl = buildBangkokStay22SearchUrl("2026-10-10", "2026-10-13");
+    expect(liveSearchUrl).toContain("checkin=2026-10-10");
+    expect(liveSearchUrl).toContain("checkout=2026-10-13");
+    expect(liveSearchUrl).toContain("group_adults=2");
+    expect(liveSearchSource).toContain('target="_blank"');
+    expect(liveSearchSource).toContain('rel="sponsored nofollow"');
+    expect(liveSearchSource).toContain("Check Live Bangkok Rates");
+    expect(taxCalculatorSource).toContain("Share My Bangkok Stay Cost");
+    expect(taxCalculatorSource).toContain("navigator.share");
+    expect(taxCalculatorSource).toContain("navigator.clipboard");
+    expect(transferSource).toContain("15–45 THB one-way");
+    expect(transferSource).toContain("50 THB airport surcharge");
+    expect(transferSource).toContain("official Suvarnabhumi Airport public taxi guidance");
   });
 });
