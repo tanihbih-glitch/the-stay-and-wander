@@ -13,6 +13,7 @@ const taxCalculatorSource = fs.readFileSync(path.resolve(process.cwd(), "client/
 const liveSearchSource = fs.readFileSync(path.resolve(process.cwd(), "client/src/components/BangkokLiveHotelSearch.tsx"), "utf8");
 const transferSource = fs.readFileSync(path.resolve(process.cwd(), "client/src/components/BangkokAirportTransferBudget.tsx"), "utf8");
 const transferDataSource = fs.readFileSync(path.resolve(process.cwd(), "client/src/components/BangkokTransferBenchmarkData.ts"), "utf8");
+const arrivalChecklistSource = fs.readFileSync(path.resolve(process.cwd(), "client/src/components/BangkokArrivalChecklist.tsx"), "utf8");
 
 describe("Bangkok Hotel Price Index", () => {
   it("preserves every supplied district benchmark and pricing factor", () => {
@@ -80,5 +81,19 @@ describe("Bangkok Hotel Price Index", () => {
     expect(transferDataSource).toContain("₩22,000 – ₩35,000 (~$16.50 – $26.00 USD / ฿550–฿880)");
     expect(transferSource).toContain("Pre-book Private BKK/DMK Airport Transfer on Trip.com");
     expect(transferSource).toContain('rel="sponsored nofollow"');
+  });
+
+  it("supports party-size vehicle choices, planning-currency transfer views, and a downloadable arrival checklist", () => {
+    expect(taxCalculatorSource).toContain("Group transfer vehicle");
+    expect(taxCalculatorSource).toContain('label: "Sedan"');
+    expect(taxCalculatorSource).toContain('label: "Minivan"');
+    expect(taxCalculatorSource).toContain('label: "Minibus / Bus"');
+    expect(taxCalculatorSource).toContain("View transfer allowance in:");
+    expect(taxCalculatorSource).toContain("EUR: 0.92");
+    expect(taxCalculatorSource).toContain("GBP: 0.79");
+    expect(arrivalChecklistSource).toContain("Download Arrival-Day Checklist");
+    expect(arrivalChecklistSource).toContain("URL.createObjectURL");
+    expect(arrivalChecklistSource).toContain("bangkok-arrival-day-checklist.txt");
+    expect(articleSource).toContain("<BangkokArrivalChecklist />");
   });
 });

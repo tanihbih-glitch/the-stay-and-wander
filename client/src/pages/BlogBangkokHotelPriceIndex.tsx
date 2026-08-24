@@ -9,6 +9,7 @@ import BangkokDistrictHotelMap from "@/components/BangkokDistrictHotelMap";
 import BangkokHotelTaxCalculator from "@/components/BangkokHotelTaxCalculator";
 import BangkokLiveHotelSearch from "@/components/BangkokLiveHotelSearch";
 import BangkokAirportTransferBudget from "@/components/BangkokAirportTransferBudget";
+import BangkokArrivalChecklist from "@/components/BangkokArrivalChecklist";
 
 export const articleMetadata = {
   title: "Bangkok Hotel Price Index (2026): Nightly Rates by District & Tier",
@@ -56,6 +57,7 @@ export default function BlogBangkokHotelPriceIndex() {
         <BangkokHotelTaxCalculator />
         <BangkokLiveHotelSearch />
         <BangkokAirportTransferBudget />
+        <BangkokArrivalChecklist />
         <section className="mt-14 rounded-3xl bg-[#0D1B2A] px-6 py-10 text-white md:px-10"><div className="max-w-3xl"><p className="text-xs font-bold uppercase tracking-[0.2em] text-[#F4A261]">Search live options</p><h2 className="mt-3 font-playfair text-3xl font-bold md:text-4xl">Compare Bangkok hotel and excursion deals</h2><p className="mt-4 leading-relaxed text-slate-200">Use the district matrix to shortlist the right base, then check current accommodation and excursion availability for your dates.</p><a href={TRIP_COM_HOTEL_WIDGET_URL} target="_blank" rel="sponsored nofollow" className="mt-7 inline-flex items-center gap-2 rounded-full bg-[#F4A261] px-7 py-3.5 font-semibold text-[#0D1B2A] hover:bg-[#f7b879]">Search Bangkok Hotel &amp; Excursion Deals on Trip.com<ArrowRight className="h-4 w-4" aria-hidden="true" /></a></div></section>
         <section className="mt-12 rounded-2xl border border-[#cfe4ee] bg-[#eef8fb] p-6"><div className="flex items-start gap-3"><MapPinned className="mt-1 h-5 w-5 shrink-0 text-[#0077B6]" aria-hidden="true" /><div><h2 className="font-playfair text-2xl font-bold text-[#0D1B2A]">Plan your Bangkok base by district</h2><p className="mt-2 leading-relaxed text-slate-700">Choose a district from the index, then use a focused first-timer planning route to match its transport and sightseeing rhythm.</p><div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">{[{ label: "Sukhumvit transit and dining plan", hash: "#sukhumvit" }, { label: "Silom and Sathorn business-nightlife plan", hash: "#silom-sathorn" }, { label: "Siam shopping-base plan", hash: "#siam" }, { label: "Riverside temples and ferries plan", hash: "#riverside" }, { label: "Khao San and Old City plan", hash: "#khao-san" }].map((link) => <a key={link.label} href={`/blog/where-to-stay-in-bangkok-2026${link.hash}`} className="rounded-xl border border-[#b9dce9] bg-white px-4 py-3 text-sm font-semibold text-[#0077B6] hover:bg-[#e5f4fb]">{link.label}<span className="ml-2" aria-hidden="true">→</span></a>)}</div><p className="mt-5 leading-relaxed text-slate-700">For hotel picks by budget, see the <a href="/blog/bangkok-hotel-budget-breakdown-2026" className="font-semibold text-[#0077B6] hover:underline">Bangkok hotel cost breakdown</a>.</p></div></div></section>
       </main><Footer /><MobileBottomNav /></div>
