@@ -299,3 +299,6 @@
 - [x] Audit the Bangkok vehicle selector and arrival-checklist output to define clearly labeled luggage guidance and safe email handoff content.
 - [x] Add luggage-capacity guidance for sedan, minivan, and minibus choices and an email-sharing action that pre-fills the current arrival checklist for travel companions.
 - [x] Add regression coverage, validate mailto behavior, accessibility, and desktop/mobile layout, then publish the Bangkok arrival-sharing enhancement checkpoint. Luggage guidance, URL-encoded prefilled mailto output, desktop/mobile layouts, and the full 143-test suite plus TypeScript validation pass.
+- [x] Audit current Bangkok vehicle and checklist state to define luggage-count recommendations, URL-based checklist collaboration, and downloadable calendar reminder formats.
+- [x] Add luggage-count inputs with recommended transfer vehicles, a shareable checklist state link, and downloadable calendar reminders for airport pickup and hotel check-in.
+- [x] Add regression coverage, validate encoding, calendar files, accessibility, and desktop/mobile behavior, then publish the Bangkok collaboration and reminder enhancement checkpoint. Luggage-count recommendations, URL state encoding, ICS calendar downloads, desktop/mobile layouts, and the full 143-test suite plus TypeScript validation pass.

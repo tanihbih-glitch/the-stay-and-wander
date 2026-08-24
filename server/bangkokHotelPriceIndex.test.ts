@@ -89,9 +89,13 @@ describe("Bangkok Hotel Price Index", () => {
     expect(taxCalculatorSource).toContain('label: "Minivan"');
     expect(taxCalculatorSource).toContain('label: "Minibus / Bus"');
     expect(taxCalculatorSource).toContain("Up to 2 medium suitcases or 3 cabin bags");
-    expect(taxCalculatorSource).toContain("About 4 medium suitcases plus cabin bags");
-    expect(taxCalculatorSource).toContain("About 8 medium suitcases plus cabin bags");
+    expect(taxCalculatorSource).toContain("About 4 medium suitcases plus 6 cabin bags");
+    expect(taxCalculatorSource).toContain("About 8 medium suitcases plus 12 cabin bags");
     expect(taxCalculatorSource).toContain("Luggage guide:");
+    expect(taxCalculatorSource).toContain("Checked suitcases");
+    expect(taxCalculatorSource).toContain("Cabin bags");
+    expect(taxCalculatorSource).toContain("Auto — recommended");
+    expect(taxCalculatorSource).toContain("Recommended:");
     expect(taxCalculatorSource).toContain("View transfer allowance in:");
     expect(taxCalculatorSource).toContain("EUR: 0.92");
     expect(taxCalculatorSource).toContain("GBP: 0.79");
@@ -101,6 +105,12 @@ describe("Bangkok Hotel Price Index", () => {
     expect(arrivalChecklistSource).toContain("Email Checklist to My Group");
     expect(arrivalChecklistSource).toContain("mailto:?subject=");
     expect(arrivalChecklistSource).toContain("encodeURIComponent(checklistText)");
+    expect(arrivalChecklistSource).toContain("Share Checklist Link");
+    expect(arrivalChecklistSource).toContain("arrivalChecklist");
+    expect(arrivalChecklistSource).toContain("Add Pickup Reminder");
+    expect(arrivalChecklistSource).toContain("Add Check-in Reminder");
+    expect(arrivalChecklistSource).toContain("text/calendar;charset=utf-8");
+    expect(arrivalChecklistSource).toContain("bangkok-${kind}-reminder.ics");
     expect(articleSource).toContain("<BangkokArrivalChecklist />");
   });
 });
