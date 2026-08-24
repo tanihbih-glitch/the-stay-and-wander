@@ -268,6 +268,17 @@ export const pageMetadataConfig: Record<string, PageMetadata> = {
       "Bangkok hotel prices 2026, Bangkok hotel cost, Bangkok budget hotels, Bangkok luxury hotels, Bangkok hostel prices, Bangkok hotel booking tips",
   },
 
+  bangkokHotelPriceIndex: {
+    title: "Bangkok Hotel Price Index 2026: Nightly Rates by District & Tier",
+    description: "Compare average 2026 Bangkok hotel prices across Sukhumvit, Silom, Riverside, and Siam. Includes transport proximity analysis and tax guides.",
+    image: `${SITE_URL}/manus-storage/bangkok-hotel-prices-hero_fb209c1a.jpg`,
+    url: "/blog/bangkok-hotel-price-index-2026",
+    type: "article",
+    author: "The Stay & Wander",
+    publishedDate: "2026-08-24",
+    keywords: "Bangkok hotel prices 2026, Sukhumvit hotel rates, Silom hotel prices, Bangkok riverside hotel rates, Siam accommodation cost, Bangkok hotel taxes",
+  },
+
   bangkokAirportHotels: {
     title: "Where to Stay Near Bangkok Airport (Suvarnabhumi) for Quick Layovers",
     description:

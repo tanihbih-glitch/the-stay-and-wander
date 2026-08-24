@@ -158,6 +158,8 @@ export function ssrMiddleware(req: Request, res: Response, next: NextFunction) {
     metadata = pageMetadataConfig.bangkokHotelPricesGuide;
   } else if (path === "/blog/bangkok-hotel-budget-breakdown-2026") {
     metadata = pageMetadataConfig.bangkokHotelBudgetBreakdown;
+  } else if (path === "/blog/bangkok-hotel-price-index-2026") {
+    metadata = pageMetadataConfig.bangkokHotelPriceIndex;
   } else if (path === "/blog/bangkok-airport-hotels-2026") {
     metadata = pageMetadataConfig.bangkokAirportHotels;
   } else if (path === "/blog/uae-extended-stay-sustainability-2026") {

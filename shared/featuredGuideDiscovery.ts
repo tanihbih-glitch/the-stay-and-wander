@@ -19,6 +19,17 @@ export interface FeaturedGuideDiscovery {
 
 export const featuredGuideDiscovery: readonly FeaturedGuideDiscovery[] = [
   {
+    id: 21,
+    path: "/blog/bangkok-hotel-price-index-2026",
+    slug: "bangkok-hotel-price-index-2026",
+    title: "Bangkok Hotel Price Index (2026): Nightly Rates by District & Tier",
+    category: "City Cost Index · Bangkok Travel",
+    image: "/manus-storage/bangkok-hotel-prices-hero_fb209c1a.jpg",
+    excerpt: "Compare 2026 Bangkok nightly hotel rates across five districts, with transit access, taxes, and seasonal planning factors.",
+    date: "August 24, 2026",
+    readTime: "7 min read",
+  },
+  {
     id: 20,
     path: "/blog/bali-hotel-price-index-2026",
     slug: "bali-hotel-price-index-2026",

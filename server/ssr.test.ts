@@ -89,6 +89,7 @@ describe("server-rendered page metadata", () => {
   it("renders indexable canonical metadata for every guide in the shared discovery registry", () => {
     const template = "<html><head><title>Default site title</title></head><body></body></html>";
     const metadataByPath = {
+      "/blog/bangkok-hotel-price-index-2026": pageMetadataConfig.bangkokHotelPriceIndex,
       "/blog/seoul-food-price-index-2026": pageMetadataConfig.seoulFoodPriceIndex,
       "/blog/bali-spa-wellness-price-index-2026": pageMetadataConfig.baliSpaWellnessPriceIndex,
       "/blog/bali-beach-comparison-matrix-2026": pageMetadataConfig.baliBeachComparisonMatrix,
