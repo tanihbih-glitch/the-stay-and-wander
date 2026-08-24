@@ -5,12 +5,14 @@ import { getLegacyRedirectTarget } from "./legacyRedirects";
 import { sitemapRoutes } from "../shared/publicRoutes";
 import { calculateBangkokHotelSurcharge } from "../client/src/components/BangkokHotelTaxCalculator";
 import { buildBangkokStay22SearchUrl } from "../client/src/components/BangkokLiveHotelSearch";
+import { getRoundtripTransferAllowance } from "../client/src/components/BangkokTransferBenchmarkData";
 
 const articleSource = fs.readFileSync(path.resolve(process.cwd(), "client/src/pages/BlogBangkokHotelPriceIndex.tsx"), "utf8");
 const mapSource = fs.readFileSync(path.resolve(process.cwd(), "client/src/components/BangkokDistrictHotelMap.tsx"), "utf8");
 const taxCalculatorSource = fs.readFileSync(path.resolve(process.cwd(), "client/src/components/BangkokHotelTaxCalculator.tsx"), "utf8");
 const liveSearchSource = fs.readFileSync(path.resolve(process.cwd(), "client/src/components/BangkokLiveHotelSearch.tsx"), "utf8");
 const transferSource = fs.readFileSync(path.resolve(process.cwd(), "client/src/components/BangkokAirportTransferBudget.tsx"), "utf8");
+const transferDataSource = fs.readFileSync(path.resolve(process.cwd(), "client/src/components/BangkokTransferBenchmarkData.ts"), "utf8");
 
 describe("Bangkok Hotel Price Index", () => {
   it("preserves every supplied district benchmark and pricing factor", () => {
@@ -48,7 +50,7 @@ describe("Bangkok Hotel Price Index", () => {
     expect(mapSource).toContain("Khao San / Old City");
     expect(mapSource).toContain("AdvancedMarkerElement");
     expect(mapSource).toContain("InfoWindow");
-    expect(calculateBangkokHotelSurcharge(90, 3, 17.7)).toEqual({ subtotal: 270, surcharge: 47.79, total: 317.79 });
+    expect(calculateBangkokHotelSurcharge(90, 3, 17.7)).toEqual({ subtotal: 270, surcharge: 47.79, transfer: 0, total: 317.79, perPerson: 317.79 });
     expect(articleSource).toContain("<BangkokHotelTaxCalculator />");
     expect(taxCalculatorSource).toContain("Bangkok hotel tax calculator");
     expect(articleSource).toContain("Sukhumvit transit and dining plan");
@@ -57,7 +59,7 @@ describe("Bangkok Hotel Price Index", () => {
     expect(articleSource).toContain('hash: "#sukhumvit"');
   });
 
-  it("provides a compliant live hotel date handoff, a shareable calculated stay cost, and transfer-budget guidance", () => {
+  it("provides a compliant live hotel date handoff, the supplied BKK/DMK transfer matrix, and a group-aware share export", () => {
     const liveSearchUrl = buildBangkokStay22SearchUrl("2026-10-10", "2026-10-13");
     expect(liveSearchUrl).toContain("checkin=2026-10-10");
     expect(liveSearchUrl).toContain("checkout=2026-10-13");
@@ -65,11 +67,18 @@ describe("Bangkok Hotel Price Index", () => {
     expect(liveSearchSource).toContain('target="_blank"');
     expect(liveSearchSource).toContain('rel="sponsored nofollow"');
     expect(liveSearchSource).toContain("Check Live Bangkok Rates");
-    expect(taxCalculatorSource).toContain("Share My Bangkok Stay Cost");
+    expect(getRoundtripTransferAllowance("BKK", "taxi")).toBe(22.5);
+    expect(calculateBangkokHotelSurcharge(90, 3, 17.7, 22.5, 2)).toEqual({ subtotal: 270, surcharge: 47.79, transfer: 22.5, total: 340.29, perPerson: 170.145 });
+    expect(taxCalculatorSource).toContain("Export / Share Cost Breakdown");
+    expect(taxCalculatorSource).toContain("Selected District");
+    expect(taxCalculatorSource).toContain("Airport Transfer Allowance (Roundtrip)");
+    expect(taxCalculatorSource).toContain("ESTIMATED TOTAL STAY COST");
     expect(taxCalculatorSource).toContain("navigator.share");
     expect(taxCalculatorSource).toContain("navigator.clipboard");
-    expect(transferSource).toContain("15–45 THB one-way");
-    expect(transferSource).toContain("50 THB airport surcharge");
-    expect(transferSource).toContain("official Suvarnabhumi Airport public taxi guidance");
+    expect(transferSource).toContain("Bangkok Airport-to-Hotel Transfer Cost Benchmarks (2026)");
+    expect(transferDataSource).toContain("₩1,800 – ₩3,200 (~$1.35 – $2.40 USD / ฿45)");
+    expect(transferDataSource).toContain("₩22,000 – ₩35,000 (~$16.50 – $26.00 USD / ฿550–฿880)");
+    expect(transferSource).toContain("Pre-book Private BKK/DMK Airport Transfer on Trip.com");
+    expect(transferSource).toContain('rel="sponsored nofollow"');
   });
 });
