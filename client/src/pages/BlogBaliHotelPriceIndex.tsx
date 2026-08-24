@@ -6,6 +6,8 @@ import MobileBottomNav from "@/components/MobileBottomNav";
 import BlogArticleSchema, { BreadcrumbSchema } from "@/components/BlogArticleSchema";
 import { MapView } from "@/components/Map";
 import { BALI_HOTEL_PRICE_INDEX_AFFILIATE_LINKS } from "@/lib/affiliateLinks";
+import BaliGroupCostCalculator from "@/components/BaliGroupCostCalculator";
+import BaliSeasonalRateChart from "@/components/BaliSeasonalRateChart";
 
 export const articleMetadata = {
   title: "Bali Hotel Price Index (2026): Average Rates Across 5 Regions",
@@ -28,11 +30,11 @@ export const hotelRateRows = [
 ] as const;
 
 const regionPins = [
-  { name: "Canggu & Seminyak", position: { lat: -8.65, lng: 115.14 }, detail: "Beach clubs, surf, and modern cafés" },
-  { name: "Ubud & Central", position: { lat: -8.5069, lng: 115.2625 }, detail: "Jungles, wellness, and rice terraces" },
-  { name: "Bukit (Uluwatu)", position: { lat: -8.829, lng: 115.084 }, detail: "Cliffside views and white-sand beaches" },
-  { name: "Sanur & Nusa Dua", position: { lat: -8.74, lng: 115.25 }, detail: "Calm water and family-oriented stays" },
-  { name: "Amed & Lovina", position: { lat: -8.35, lng: 115.52 }, detail: "Snorkeling, black sand, and a quiet pace" },
+  { name: "Canggu & Seminyak", position: { lat: -8.65, lng: 115.14 }, detail: "Beach clubs, surf, and modern cafés", rates: "$12–$25 budget · $65–$140 boutique · $180–$320 villa · $400–$750 resort" },
+  { name: "Ubud & Central", position: { lat: -8.5069, lng: 115.2625 }, detail: "Jungles, wellness, and rice terraces", rates: "$8–$18 budget · $50–$110 boutique · $140–$260 villa · $350–$800 resort" },
+  { name: "Bukit (Uluwatu)", position: { lat: -8.829, lng: 115.084 }, detail: "Cliffside views and white-sand beaches", rates: "$15–$30 budget · $80–$160 boutique · $220–$400 villa · $500–$1,200+ resort" },
+  { name: "Sanur & Nusa Dua", position: { lat: -8.74, lng: 115.25 }, detail: "Calm water and family-oriented stays", rates: "$14–$22 budget · $55–$120 boutique · $150–$280 villa · $250–$600 resort" },
+  { name: "Amed & Lovina", position: { lat: -8.35, lng: 115.52 }, detail: "Snorkeling, black sand, and a quiet pace", rates: "$7–$15 budget · $30–$70 boutique · $90–$170 villa · $180–$350 resort" },
 ] as const;
 
 const pricingFactors = [
@@ -93,9 +95,12 @@ export default function BlogBaliHotelPriceIndex() {
           <p className="mt-7 rounded-xl border-l-4 border-[#F4A261] bg-[#fff8f1] p-5 text-slate-700"><span className="font-bold text-[#0D1B2A]">Research Tip:</span> Map regional trade-offs to a stay you would actually enjoy, then compare the final tax-inclusive price before booking.</p>
         </section>
 
+        <BaliGroupCostCalculator />
+        <BaliSeasonalRateChart />
+
         <section className="mt-14" aria-labelledby="map-title">
           <div className="flex flex-col justify-between gap-4 md:flex-row md:items-end"><div><p className="text-xs font-bold uppercase tracking-[0.2em] text-[#0077B6]">Regional map</p><h2 id="map-title" className="mt-2 font-playfair text-3xl font-bold text-[#0D1B2A]">Where the five rate zones sit</h2></div><p className="max-w-md text-sm leading-relaxed text-slate-600">Select a marker for the local focus used in the matrix. This is an orientation tool, not a live availability map.</p></div>
-          <div className="mt-6 overflow-hidden rounded-2xl border border-slate-200 bg-[#e5f4fb] p-2 shadow-sm"><MapView initialCenter={{ lat: -8.4095, lng: 115.1889 }} initialZoom={9} className="h-[24rem] rounded-xl bg-[radial-gradient(circle_at_22%_20%,rgba(244,162,97,0.45),transparent_18%),linear-gradient(135deg,#d9f0f7_0%,#b8dce8_48%,#d7ecf1_100%)] md:h-[32rem]" onMapReady={(map) => { const bounds = new google.maps.LatLngBounds(); regionPins.forEach((region) => { const marker = new google.maps.marker.AdvancedMarkerElement({ map, position: region.position, title: region.name }); const infoWindow = new google.maps.InfoWindow({ content: `<div style="max-width:220px;padding:4px 2px"><strong>${region.name}</strong><br/><span>${region.detail}</span></div>` }); marker.addListener("click", () => infoWindow.open({ map, anchor: marker })); bounds.extend(region.position); }); map.fitBounds(bounds, { top: 48, bottom: 48, left: 48, right: 48 }); }} /></div>
+          <div className="mt-6 overflow-hidden rounded-2xl border border-slate-200 bg-[#e5f4fb] p-2 shadow-sm"><MapView initialCenter={{ lat: -8.4095, lng: 115.1889 }} initialZoom={9} className="h-[24rem] rounded-xl bg-[radial-gradient(circle_at_22%_20%,rgba(244,162,97,0.45),transparent_18%),linear-gradient(135deg,#d9f0f7_0%,#b8dce8_48%,#d7ecf1_100%)] md:h-[32rem]" onMapReady={(map) => { const bounds = new google.maps.LatLngBounds(); regionPins.forEach((region) => { const marker = new google.maps.marker.AdvancedMarkerElement({ map, position: region.position, title: region.name }); const infoWindow = new google.maps.InfoWindow({ content: `<div style="max-width:260px;padding:4px 2px"><strong>${region.name}</strong><br/><span>${region.detail}</span><hr style="margin:6px 0;border:0;border-top:1px solid #ddd"/><span style="font-size:12px">Average nightly range: ${region.rates}</span></div>` }); marker.addListener("click", () => infoWindow.open({ map, anchor: marker })); bounds.extend(region.position); }); map.fitBounds(bounds, { top: 48, bottom: 48, left: 48, right: 48 }); }} /></div>
           <ul className="mt-5 grid gap-2 text-sm text-slate-600 sm:grid-cols-2 lg:grid-cols-5">{regionPins.map((region) => <li key={region.name} className="flex items-center gap-2"><MapPin className="h-4 w-4 text-[#0077B6]" aria-hidden="true" />{region.name}</li>)}</ul>
         </section>
 
