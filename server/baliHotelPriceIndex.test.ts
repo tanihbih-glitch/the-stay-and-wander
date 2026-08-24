@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 import { describe, expect, it } from "vitest";
-import { BALI_HOTEL_PRICE_INDEX_AFFILIATE_LINKS, buildBaliSeasonalAvailabilityUrl, getNextBaliSeasonalSearchDates } from "../client/src/lib/affiliateLinks";
+import { BALI_HOTEL_PRICE_INDEX_AFFILIATE_LINKS, BALI_SEASONAL_STAY22_DATE_PRESETS, buildBaliSeasonalAvailabilityUrl, getBaliSeasonalPresetDates } from "../client/src/lib/affiliateLinks";
 import { BALI_SEASONAL_BENCHMARKS, calculateBaliGroupCosts } from "../client/src/components/BaliGroupCostCalculator";
 import { getLegacyRedirectTarget } from "./legacyRedirects";
 import { sitemapRoutes } from "../shared/publicRoutes";
@@ -64,15 +64,22 @@ describe("Bali Hotel Price Index", () => {
     expect(articleSource).toContain("$30–$70 boutique");
   });
 
-  it("uses future, three-night date presets in the selected-month Stay22 handoff", () => {
-    const reference = new Date("2026-08-24T00:00:00.000Z");
-    expect(getNextBaliSeasonalSearchDates(7, reference)).toEqual({ checkIn: "2027-08-15", checkOut: "2027-08-18" });
-    expect(getNextBaliSeasonalSearchDates(11, reference)).toEqual({ checkIn: "2026-12-15", checkOut: "2026-12-18" });
-    const septemberSearch = buildBaliSeasonalAvailabilityUrl(8, reference);
-    expect(septemberSearch).toContain("checkin=2026-09-15");
-    expect(septemberSearch).toContain("checkout=2026-09-18");
+  it("uses the exact fixed 2026 seven-night presets in the selected-month Stay22 handoff", () => {
+    expect(BALI_SEASONAL_STAY22_DATE_PRESETS).toEqual([
+      { checkIn: "2026-01-10", checkOut: "2026-01-17" }, { checkIn: "2026-02-10", checkOut: "2026-02-17" },
+      { checkIn: "2026-03-10", checkOut: "2026-03-17" }, { checkIn: "2026-04-10", checkOut: "2026-04-17" },
+      { checkIn: "2026-05-10", checkOut: "2026-05-17" }, { checkIn: "2026-06-10", checkOut: "2026-06-17" },
+      { checkIn: "2026-07-10", checkOut: "2026-07-17" }, { checkIn: "2026-08-10", checkOut: "2026-08-17" },
+      { checkIn: "2026-09-10", checkOut: "2026-09-17" }, { checkIn: "2026-10-10", checkOut: "2026-10-17" },
+      { checkIn: "2026-11-10", checkOut: "2026-11-17" }, { checkIn: "2026-12-20", checkOut: "2026-12-27" },
+    ]);
+    expect(getBaliSeasonalPresetDates(7)).toEqual({ checkIn: "2026-08-10", checkOut: "2026-08-17" });
+    const septemberSearch = buildBaliSeasonalAvailabilityUrl(8);
+    expect(septemberSearch).toContain("checkin=2026-09-10");
+    expect(septemberSearch).toContain("checkout=2026-09-17");
     expect(septemberSearch).toContain("group_adults=2");
-    expect(seasonalChartSource).toContain("Check {selected.month} availability");
+    expect(seasonalChartSource).toContain("Check Live {selected.month} Rates on Map");
     expect(seasonalChartSource).toContain('rel="sponsored nofollow"');
+    expect(seasonalChartSource).toContain('target="_blank"');
   });
 });

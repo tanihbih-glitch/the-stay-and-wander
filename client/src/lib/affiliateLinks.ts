@@ -126,32 +126,28 @@ export const BALI_HOTEL_PRICE_INDEX_AFFILIATE_LINKS = {
   hotels: "https://booking.stay22.com/thestayandwander/bEUkQtNQBH",
 } as const;
 
-function toIsoDate(date: Date): string {
-  return date.toISOString().slice(0, 10);
-}
+export const BALI_SEASONAL_STAY22_DATE_PRESETS = [
+  { checkIn: "2026-01-10", checkOut: "2026-01-17" },
+  { checkIn: "2026-02-10", checkOut: "2026-02-17" },
+  { checkIn: "2026-03-10", checkOut: "2026-03-17" },
+  { checkIn: "2026-04-10", checkOut: "2026-04-17" },
+  { checkIn: "2026-05-10", checkOut: "2026-05-17" },
+  { checkIn: "2026-06-10", checkOut: "2026-06-17" },
+  { checkIn: "2026-07-10", checkOut: "2026-07-17" },
+  { checkIn: "2026-08-10", checkOut: "2026-08-17" },
+  { checkIn: "2026-09-10", checkOut: "2026-09-17" },
+  { checkIn: "2026-10-10", checkOut: "2026-10-17" },
+  { checkIn: "2026-11-10", checkOut: "2026-11-17" },
+  { checkIn: "2026-12-20", checkOut: "2026-12-27" },
+] as const;
 
-/**
- * Returns a three-night, mid-month travel window in the next occurrence of a
- * selected seasonal month. A future date is always used, even after the
- * article's 2026 benchmark period has passed.
- */
-export function getNextBaliSeasonalSearchDates(monthIndex: number, now = new Date()) {
+export function getBaliSeasonalPresetDates(monthIndex: number) {
   const safeMonthIndex = Math.min(11, Math.max(0, monthIndex));
-  const reference = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()));
-  let year = reference.getUTCFullYear();
-  let checkIn = new Date(Date.UTC(year, safeMonthIndex, 15));
-
-  if (checkIn <= reference) {
-    year += 1;
-    checkIn = new Date(Date.UTC(year, safeMonthIndex, 15));
-  }
-
-  const checkOut = new Date(Date.UTC(year, safeMonthIndex, 18));
-  return { checkIn: toIsoDate(checkIn), checkOut: toIsoDate(checkOut) };
+  return BALI_SEASONAL_STAY22_DATE_PRESETS[safeMonthIndex];
 }
 
-export function buildBaliSeasonalAvailabilityUrl(monthIndex: number, now = new Date()) {
-  const { checkIn, checkOut } = getNextBaliSeasonalSearchDates(monthIndex, now);
+export function buildBaliSeasonalAvailabilityUrl(monthIndex: number) {
+  const { checkIn, checkOut } = getBaliSeasonalPresetDates(monthIndex);
   const url = new URL(BALI_HOTEL_PRICE_INDEX_AFFILIATE_LINKS.hotels);
   url.searchParams.set("checkin", checkIn);
   url.searchParams.set("checkout", checkOut);

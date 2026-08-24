@@ -278,3 +278,6 @@
 - [x] Define safe calendar presets for each selected 2026 Bali seasonal-chart month and centralize the approved Stay22 availability-search handoff.
 - [x] Add accessible selected-month search controls to the Bali seasonal chart, including visible date assumptions and secure new-tab affiliate behavior.
 - [x] Add date/URL regression coverage, validate desktop/mobile behavior, and publish the seasonal availability-search enhancement checkpoint. The next-occurrence three-night windows, selected-month Stay22 URL, planning disclaimer, desktop/mobile display, and full 138-test suite plus TypeScript validation pass.
+- [x] Audit the existing dynamic future-date helper and replace it with the user-specified fixed January–December 2026 seven-night Stay22 date map.
+- [x] Apply the exact 2026 monthly deep links, `target="_blank"`, `rel="sponsored nofollow"`, and the “Check Live [Month] Rates on Map” CTA to the seasonal chart.
+- [x] Add exact URL and attribute regression coverage, validate desktop/mobile rendering, and publish the fixed-preset seasonal search checkpoint. All twelve requested date ranges, the compliant CTA attributes, desktop/mobile display, and the full 138-test suite plus TypeScript validation pass.
