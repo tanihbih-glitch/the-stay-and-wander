@@ -296,3 +296,6 @@
 - [x] Audit the Bangkok transfer calculator and define party-size vehicle assumptions plus clearly editable USD/EUR/GBP planning-rate behavior.
 - [x] Add a party-size-aware sedan, minivan, and bus selector; multi-currency transfer totals; and a browser-downloadable arrival-day checklist covering transfer and hotel check-in steps.
 - [x] Add regression coverage, validate calculations, download behavior, accessibility, and desktop/mobile layout, then publish the Bangkok arrival-planner enhancement checkpoint. Vehicle capacities, USD/EUR/GBP planning references, downloadable text checklist, desktop/mobile layouts, and the full 143-test suite plus TypeScript validation pass.
+- [x] Audit the Bangkok vehicle selector and arrival-checklist output to define clearly labeled luggage guidance and safe email handoff content.
+- [x] Add luggage-capacity guidance for sedan, minivan, and minibus choices and an email-sharing action that pre-fills the current arrival checklist for travel companions.
+- [x] Add regression coverage, validate mailto behavior, accessibility, and desktop/mobile layout, then publish the Bangkok arrival-sharing enhancement checkpoint. Luggage guidance, URL-encoded prefilled mailto output, desktop/mobile layouts, and the full 143-test suite plus TypeScript validation pass.
