@@ -107,10 +107,15 @@ describe("Bangkok Hotel Price Index", () => {
     expect(arrivalChecklistSource).toContain("encodeURIComponent(checklistText)");
     expect(arrivalChecklistSource).toContain("Share Checklist Link");
     expect(arrivalChecklistSource).toContain("arrivalChecklist");
-    expect(arrivalChecklistSource).toContain("Add Pickup Reminder");
-    expect(arrivalChecklistSource).toContain("Add Check-in Reminder");
+    expect(arrivalChecklistSource).toContain("Download Reminder");
     expect(arrivalChecklistSource).toContain("text/calendar;charset=utf-8");
     expect(arrivalChecklistSource).toContain("bangkok-${kind}-reminder.ics");
+    expect(arrivalChecklistSource).toContain("Optional trip title");
+    expect(arrivalChecklistSource).toContain("tripTitle.trim()");
+    expect(arrivalChecklistSource).toContain("calendar.google.com/calendar/render?action=TEMPLATE");
+    expect(arrivalChecklistSource).toContain("Open Google Calendar");
+    expect(arrivalChecklistSource).toContain('target="_blank"');
+    expect(arrivalChecklistSource).toContain('rel="noopener noreferrer"');
     expect(articleSource).toContain("<BangkokArrivalChecklist />");
   });
 });

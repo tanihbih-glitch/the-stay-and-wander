@@ -302,3 +302,6 @@
 - [x] Audit current Bangkok vehicle and checklist state to define luggage-count recommendations, URL-based checklist collaboration, and downloadable calendar reminder formats.
 - [x] Add luggage-count inputs with recommended transfer vehicles, a shareable checklist state link, and downloadable calendar reminders for airport pickup and hotel check-in.
 - [x] Add regression coverage, validate encoding, calendar files, accessibility, and desktop/mobile behavior, then publish the Bangkok collaboration and reminder enhancement checkpoint. Luggage-count recommendations, URL state encoding, ICS calendar downloads, desktop/mobile layouts, and the full 143-test suite plus TypeScript validation pass.
+- [x] Audit the Bangkok arrival reminder controls to define optional trip-title state and calendar-link encoding compatible with both ICS downloads and Google Calendar.
+- [x] Add optional trip-title personalization to pickup and hotel check-in reminders and one-click Google Calendar links that open securely in a new tab.
+- [x] Add regression coverage, validate titles and Google Calendar URL parameters, accessibility, and desktop/mobile layout, then publish the personalized reminder enhancement checkpoint. Trip-title encoding, secure Google Calendar handoff, ICS downloads, desktop/mobile layouts, and the full 143-test suite plus TypeScript validation pass.
