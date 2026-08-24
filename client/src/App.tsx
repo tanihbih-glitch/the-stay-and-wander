@@ -26,6 +26,7 @@ import BlogLisbonHotels from "./pages/BlogLisbonHotels";
 import BlogBaliExperiences from "./pages/BlogBaliExperiences";
 import BlogBaliBeachComparison from "./pages/BlogBaliBeachComparison";
 import BlogBaliSpaWellnessPriceIndex from "./pages/BlogBaliSpaWellnessPriceIndex";
+import BlogBaliHotelPriceIndex from "./pages/BlogBaliHotelPriceIndex";
 import BlogTokyoStay from "./pages/BlogTokyoStay";
 import BlogSeoulStay from "./pages/BlogSeoulStay";
 import BlogSeoulFoodPriceIndex from "./pages/BlogSeoulFoodPriceIndex";
@@ -69,6 +70,7 @@ function Router() {
       <Route path={"/blog/things-to-do-in-bali-2026"} component={BlogBaliExperiences} />
       <Route path={"/blog/bali-beach-comparison-matrix-2026"} component={BlogBaliBeachComparison} />
       <Route path={"/blog/bali-spa-wellness-price-index-2026"} component={BlogBaliSpaWellnessPriceIndex} />
+      <Route path={"/blog/bali-hotel-price-index-2026"} component={BlogBaliHotelPriceIndex} />
       <Route path={"/blog/where-to-stay-in-tokyo-2026"} component={BlogTokyoStay} />
       <Route path={"/blog/where-to-stay-in-seoul-2026"} component={BlogSeoulStay} />
       <Route path={"/blog/seoul-food-price-index-2026"} component={BlogSeoulFoodPriceIndex} />

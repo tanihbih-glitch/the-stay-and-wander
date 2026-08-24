@@ -121,6 +121,11 @@ export const BALI_WELLNESS_INDEX_AFFILIATE_LINKS = {
   resorts: "https://booking.stay22.com/thestayandwander/r-lvU3PLVF",
 } as const;
 
+/** Canonical Stay22 destination used in the Bali Hotel Price Index. */
+export const BALI_HOTEL_PRICE_INDEX_AFFILIATE_LINKS = {
+  hotels: "https://booking.stay22.com/thestayandwander/bEUkQtNQBH",
+} as const;
+
 /** Canonical affiliate destinations used in the Seoul Food & Dining Price Index. */
 export const SEOUL_DINING_AFFILIATE_LINKS = {
   tripCom: "https://trip.com?Allianceid=9322314&SID=324726991&trip_sub1=&trip_sub3=D19425499",

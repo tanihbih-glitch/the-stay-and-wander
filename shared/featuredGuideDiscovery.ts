@@ -19,6 +19,17 @@ export interface FeaturedGuideDiscovery {
 
 export const featuredGuideDiscovery: readonly FeaturedGuideDiscovery[] = [
   {
+    id: 20,
+    path: "/blog/bali-hotel-price-index-2026",
+    slug: "bali-hotel-price-index-2026",
+    title: "Bali Hotel Price Index (2026): Average Rates Across 5 Regions",
+    category: "Coastal Field Notes · Bali Travel",
+    image: "/manus-storage/blog-bali_5a40f78c.png",
+    excerpt: "Compare 2026 nightly hotel, boutique, villa, and resort benchmarks across five Bali regions, with regional trade-offs and tax planning notes.",
+    date: "August 23, 2026",
+    readTime: "8 min read",
+  },
+  {
     id: 19,
     path: "/blog/seoul-food-price-index-2026",
     slug: "seoul-food-price-index-2026",

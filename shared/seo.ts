@@ -218,6 +218,17 @@ export const pageMetadataConfig: Record<string, PageMetadata> = {
     keywords: "Bali spa prices 2026, Bali massage cost, Ubud wellness retreat, Seminyak spa, Bali luxury resort spa, Bali traditional massage",
   },
 
+  baliHotelPriceIndex: {
+    title: "Bali Hotel Price Index (2026): Average Rates Across 5 Regions",
+    description: "Real 2026 price benchmarks for Bali hotels and villas. Detailed nightly breakdowns for Canggu, Ubud, Sanur, Uluwatu, and Amed across all budget tiers.",
+    image: `${SITE_URL}/manus-storage/blog-bali_5a40f78c.png`,
+    url: "/blog/bali-hotel-price-index-2026",
+    type: "article",
+    author: "The Stay & Wander",
+    publishedDate: "2026-08-23",
+    keywords: "Bali hotel prices 2026, Bali villa prices, Canggu hotel cost, Ubud hotel cost, Uluwatu resort price, Sanur accommodation, Amed hotels",
+  },
+
   baliHotelPricesGuide: {
     title: "Where to Stay in Bali: Best Areas for First-Timers (2026 Guide)",
     description:

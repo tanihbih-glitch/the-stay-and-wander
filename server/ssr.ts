@@ -150,6 +150,8 @@ export function ssrMiddleware(req: Request, res: Response, next: NextFunction) {
     metadata = pageMetadataConfig.baliBeachComparisonMatrix;
   } else if (path === "/blog/bali-spa-wellness-price-index-2026") {
     metadata = pageMetadataConfig.baliSpaWellnessPriceIndex;
+  } else if (path === "/blog/bali-hotel-price-index-2026") {
+    metadata = pageMetadataConfig.baliHotelPriceIndex;
   } else if (path === "/blog/where-to-stay-in-bali-2026") {
     metadata = pageMetadataConfig.baliHotelPricesGuide;
   } else if (path === "/blog/where-to-stay-in-bangkok-2026") {

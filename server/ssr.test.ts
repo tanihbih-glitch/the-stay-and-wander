@@ -92,6 +92,7 @@ describe("server-rendered page metadata", () => {
       "/blog/seoul-food-price-index-2026": pageMetadataConfig.seoulFoodPriceIndex,
       "/blog/bali-spa-wellness-price-index-2026": pageMetadataConfig.baliSpaWellnessPriceIndex,
       "/blog/bali-beach-comparison-matrix-2026": pageMetadataConfig.baliBeachComparisonMatrix,
+      "/blog/bali-hotel-price-index-2026": pageMetadataConfig.baliHotelPriceIndex,
     } as const;
 
     featuredGuideDiscovery.forEach((guide) => {
