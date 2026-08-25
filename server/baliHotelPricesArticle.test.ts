@@ -5,6 +5,7 @@ import {
   BALI_BASE_MATCHER_STAY22_URL,
   BALI_MATCHER_SHORTLIST_KEY,
   BALI_MATCHER_SHORTLIST_LIMIT,
+  buildBaliMatcherShareSummary,
   getBaliBaseRecommendation,
   matcherQuestions,
   sanitizeBaliBaseShortlist,
@@ -73,5 +74,24 @@ describe("Bali hotel prices article", () => {
     expect(componentSource).not.toContain("matchScore");
     expect(componentSource).not.toContain("The Lawn Beach Villa");
     expect(componentSource).not.toContain("Six Senses Uluwatu");
+  });
+
+  it("provides a copy-ready result summary and accessible restart and location controls", () => {
+    const recommendation = getBaliBaseRecommendation({ vibe: "culture", budget: "budget", duration: "medium" });
+    expect(recommendation).not.toBeNull();
+    const shareSummary = buildBaliMatcherShareSummary(recommendation!);
+    expect(shareSummary).toContain("Primary area: Ubud");
+    expect(shareSummary).toContain("Alternative area: Canggu");
+    expect(shareSummary).toContain("#bali-base-matcher");
+
+    const componentSource = readFileSync(resolve(process.cwd(), "client/src/components/BaliBaseMatcher.tsx"), "utf8");
+    expect(componentSource).toContain("Start Over");
+    expect(componentSource).toContain("Share Results");
+    expect(componentSource).toContain("navigator.clipboard?.writeText");
+    expect(componentSource).toContain("transition-opacity duration-200");
+    expect(componentSource).toContain("motion-safe:animate-in");
+    expect(componentSource).toContain("bali_matcher_location_opened");
+    expect(componentSource).toContain("Bali · not to scale");
+    expect(componentSource).not.toContain("google.com/maps");
   });
 });

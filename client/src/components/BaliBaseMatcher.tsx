@@ -1,6 +1,7 @@
-import { Compass, ExternalLink, MapPin, Plus, RotateCcw, Trash2 } from "lucide-react";
+import { Compass, ExternalLink, MapPinned, MapPin, Plus, RotateCcw, Share2, Trash2 } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { DEALS_AFFILIATE_LINKS } from "@/lib/affiliateLinks";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 
 export const BALI_MATCHER_SHORTLIST_KEY = "tsw-bali-base-shortlist";
 export const BALI_MATCHER_SHORTLIST_LIMIT = 3;
@@ -25,6 +26,9 @@ export type BaliBaseArea = {
   dynamics: string;
   directionalPrice: string;
   shortlistLabel: string;
+  baliLocation: string;
+  locationContext: string;
+  markerClassName: string;
 };
 
 export type BaliMatcherRecommendation = {
@@ -38,7 +42,9 @@ export type BaliMatcherEventName =
   | "bali_matcher_completed"
   | "bali_matcher_area_saved"
   | "bali_matcher_area_notes_clicked"
-  | "bali_matcher_availability_clicked";
+  | "bali_matcher_availability_clicked"
+  | "bali_matcher_results_shared"
+  | "bali_matcher_location_opened";
 
 type BaliMatcherEventProperties = Record<string, string | number | boolean>;
 
@@ -63,6 +69,9 @@ export const baliBaseAreas: Record<AreaKey, BaliBaseArea> = {
     dynamics: "A walkable beach-and-dining rhythm for travellers who want restaurants, boutiques, sunset plans, and a lively resort atmosphere close together.",
     directionalPrice: "Typical guide range: $40–70 budget · $80–150 mid-range · $200+ luxury per night.",
     shortlistLabel: "Seminyak — beach clubs and dining",
+    baliLocation: "South-west Bali coast",
+    locationContext: "Seminyak sits on Bali’s south-west coast, south of Canggu and close to the island’s restaurant, beach-club, and shopping corridor.",
+    markerClassName: "left-[42%] top-[57%]",
   },
   ubud: {
     key: "ubud",
@@ -72,6 +81,9 @@ export const baliBaseAreas: Record<AreaKey, BaliBaseArea> = {
     dynamics: "A strong base for temples, cafés, wellness, and lush surroundings when cultural experiences and a calmer pace matter more than beach access.",
     directionalPrice: "Typical guide range: $30–60 budget · $75–130 mid-range · $180+ luxury per night.",
     shortlistLabel: "Ubud — culture and wellness",
+    baliLocation: "Central inland Bali",
+    locationContext: "Ubud is inland in central Bali, making it a culture, rice-terrace, and wellness base rather than a beach base.",
+    markerClassName: "left-[52%] top-[38%]",
   },
   uluwatu: {
     key: "uluwatu",
@@ -81,6 +93,9 @@ export const baliBaseAreas: Record<AreaKey, BaliBaseArea> = {
     dynamics: "A Bukit coast base for clifftop sunsets, surf beaches, and slower resort days; build in more transport time for island-wide sightseeing.",
     directionalPrice: "Typical guide range: $50–90 budget · $100–180 mid-range · $250+ luxury per night.",
     shortlistLabel: "Uluwatu — cliffs and surf",
+    baliLocation: "Bukit Peninsula, south Bali",
+    locationContext: "Uluwatu is on Bali’s southern Bukit Peninsula, known for its clifftop coast, surf breaks, and more self-contained resort setting.",
+    markerClassName: "left-[45%] top-[79%]",
   },
   canggu: {
     key: "canggu",
@@ -90,6 +105,9 @@ export const baliBaseAreas: Record<AreaKey, BaliBaseArea> = {
     dynamics: "A social remote-work and café rhythm with surf access and an energetic, less polished feel; a central location can help with traffic on longer stays.",
     directionalPrice: "Typical guide range: $35–65 budget · $70–140 mid-range · $190+ luxury per night.",
     shortlistLabel: "Canggu — cafés and longer stays",
+    baliLocation: "South-west Bali coast",
+    locationContext: "Canggu is on Bali’s south-west coast, north of Seminyak, with surf beaches and a café-led longer-stay rhythm.",
+    markerClassName: "left-[37%] top-[45%]",
   },
 };
 
@@ -174,6 +192,15 @@ export function trackBaliMatcherEvent(eventName: BaliMatcherEventName, propertie
   window.dispatchEvent(new CustomEvent("tsw:bali-matcher", { detail: { eventName, properties } }));
 }
 
+export function buildBaliMatcherShareSummary(recommendation: BaliMatcherRecommendation) {
+  return [
+    "My Bali base ideas from The Stay & Wander",
+    `Primary area: ${recommendation.primary.name} — ${recommendation.primary.heading}.`,
+    `Alternative area: ${recommendation.alternative.name} — ${recommendation.alternative.heading}.`,
+    "Compare the full area notes and current availability: https://thestayandwander.com/blog/where-to-stay-in-bali-2026#bali-base-matcher",
+  ].join("\n");
+}
+
 export function sanitizeBaliBaseShortlist(value: unknown): AreaKey[] {
   if (!Array.isArray(value)) return [];
 
@@ -200,6 +227,9 @@ export default function BaliBaseMatcher() {
   const [shortlist, setShortlist] = useState<AreaKey[]>([]);
   const [shortlistReady, setShortlistReady] = useState(false);
   const [shortlistMessage, setShortlistMessage] = useState("");
+  const [isRestarting, setIsRestarting] = useState(false);
+  const [shareMessage, setShareMessage] = useState("");
+  const [locationArea, setLocationArea] = useState<BaliBaseArea | null>(null);
 
   const recommendation = useMemo(() => getBaliBaseRecommendation(answers), [answers]);
   const activeQuestion = matcherQuestions[step - 1];
@@ -220,6 +250,7 @@ export default function BaliBaseMatcher() {
     const isFirstSelection = !answers.vibe && field === "vibe";
     setAnswers(updatedAnswers);
     setShortlistMessage("");
+    setShareMessage("");
 
     if (isFirstSelection) trackBaliMatcherEvent("bali_matcher_started");
     trackBaliMatcherEvent("bali_matcher_option_selected", { step, option: value });
@@ -253,15 +284,39 @@ export default function BaliBaseMatcher() {
     trackBaliMatcherEvent("bali_matcher_area_saved", { area });
   };
 
-  const resetMatcher = () => {
-    setAnswers({ vibe: "", budget: "", duration: "" });
-    setStep(1);
-    setShortlistMessage("");
+  const startOver = () => {
+    setIsRestarting(true);
+    window.setTimeout(() => {
+      setAnswers({ vibe: "", budget: "", duration: "" });
+      setStep(1);
+      setShortlistMessage("");
+      setShareMessage("");
+      setIsRestarting(false);
+    }, 180);
   };
 
   const clearShortlist = () => {
     setShortlist([]);
     setShortlistMessage("Saved areas cleared from this browser.");
+  };
+
+  const shareResults = async () => {
+    if (!recommendation) return;
+    const summary = buildBaliMatcherShareSummary(recommendation);
+
+    try {
+      if (!navigator.clipboard?.writeText) throw new Error("Clipboard access is unavailable");
+      await navigator.clipboard.writeText(summary);
+      setShareMessage("Result summary copied. You can paste it into your group chat or notes.");
+      trackBaliMatcherEvent("bali_matcher_results_shared", { area: recommendation.primary.key });
+    } catch {
+      setShareMessage(`Copy this summary:\n${summary}`);
+    }
+  };
+
+  const openAreaLocation = (area: BaliBaseArea) => {
+    setLocationArea(area);
+    trackBaliMatcherEvent("bali_matcher_location_opened", { area: area.key });
   };
 
   return (
@@ -279,7 +334,7 @@ export default function BaliBaseMatcher() {
       </div>
 
       {step <= 3 && activeQuestion && (
-        <div className="mt-6">
+        <div className="mt-6 motion-safe:animate-in motion-safe:fade-in-0 motion-safe:duration-200">
           <div className="h-1.5 overflow-hidden rounded-full bg-white" aria-hidden="true"><div className="h-full rounded-full bg-[#0077B6]" style={{ width: `${getStepProgress(step)}%` }} /></div>
           <p className="mt-5 font-playfair text-2xl font-bold text-[#0D1B2A]">{activeQuestion.label}</p>
           <div className={`mt-5 grid gap-3 ${activeQuestion.field === "vibe" ? "sm:grid-cols-2" : activeQuestion.field === "duration" ? "sm:grid-cols-3" : "sm:grid-cols-3"}`}>
@@ -294,12 +349,15 @@ export default function BaliBaseMatcher() {
       )}
 
       {step === 4 && recommendation && (
-        <div className="mt-6 space-y-5">
+        <div className={`mt-6 space-y-5 transition-opacity duration-200 motion-reduce:transition-none ${isRestarting ? "opacity-0" : "opacity-100"}`}>
           <div className="rounded-2xl border border-[#9ed1e7] bg-white p-5 sm:p-6">
             <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
               <div>
                 <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#0077B6]">Your suggested base</p>
-                <h3 className="mt-2 flex items-center gap-2 font-playfair text-3xl font-bold text-[#0D1B2A]"><MapPin className="h-6 w-6 text-[#0077B6]" aria-hidden="true" />{recommendation.primary.name}</h3>
+                <div className="mt-2 flex flex-wrap items-center gap-2">
+                  <h3 className="flex items-center gap-2 font-playfair text-3xl font-bold text-[#0D1B2A]"><MapPin className="h-6 w-6 text-[#0077B6]" aria-hidden="true" />{recommendation.primary.name}</h3>
+                  <button type="button" onClick={() => openAreaLocation(recommendation.primary)} className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-[#9ed1e7] bg-[#eef8fb] text-[#0077B6] hover:bg-white focus:outline-none focus:ring-2 focus:ring-[#0077B6] focus:ring-offset-2" aria-label={`Show ${recommendation.primary.name} on the Bali location guide`}><MapPinned className="h-4 w-4" aria-hidden="true" /></button>
+                </div>
                 <p className="mt-3 max-w-2xl text-lg font-semibold text-slate-800">{recommendation.primary.heading}</p>
               </div>
               <span className="rounded-full bg-[#F8EFE0] px-3 py-1 text-xs font-bold uppercase tracking-[0.14em] text-[#9a5b20]">Area-led guidance</span>
@@ -314,8 +372,11 @@ export default function BaliBaseMatcher() {
           </div>
           <div className="flex flex-wrap items-center gap-3">
             <button type="button" onClick={savePrimaryArea} className="inline-flex items-center gap-2 rounded-full border border-[#9a5b20] bg-white px-4 py-2.5 text-sm font-semibold text-[#9a5b20] hover:bg-[#F8EFE0] focus:outline-none focus:ring-2 focus:ring-[#9a5b20] focus:ring-offset-2"><Plus className="h-4 w-4" aria-hidden="true" />Save {recommendation.primary.name}</button>
-            <button type="button" onClick={resetMatcher} className="inline-flex items-center gap-2 rounded-full px-3 py-2 text-sm font-semibold text-slate-600 hover:text-[#0D1B2A] focus:outline-none focus:ring-2 focus:ring-[#0077B6] focus:ring-offset-2"><RotateCcw className="h-4 w-4" aria-hidden="true" />Retake matcher</button>
+            <button type="button" onClick={shareResults} className="inline-flex items-center gap-2 rounded-full border border-[#0077B6] bg-white px-4 py-2.5 text-sm font-semibold text-[#0077B6] hover:bg-[#eef8fb] focus:outline-none focus:ring-2 focus:ring-[#0077B6] focus:ring-offset-2"><Share2 className="h-4 w-4" aria-hidden="true" />Share Results</button>
+            <button type="button" onClick={() => openAreaLocation(recommendation.alternative)} className="inline-flex items-center gap-2 rounded-full border border-[#9ed1e7] bg-white px-4 py-2.5 text-sm font-semibold text-[#0077B6] hover:bg-[#eef8fb] focus:outline-none focus:ring-2 focus:ring-[#0077B6] focus:ring-offset-2"><MapPinned className="h-4 w-4" aria-hidden="true" />Locate {recommendation.alternative.name}</button>
+            <button type="button" onClick={startOver} className="inline-flex items-center gap-2 rounded-full px-3 py-2 text-sm font-semibold text-slate-600 hover:text-[#0D1B2A] focus:outline-none focus:ring-2 focus:ring-[#0077B6] focus:ring-offset-2"><RotateCcw className="h-4 w-4" aria-hidden="true" />Start Over</button>
           </div>
+          {shareMessage && <p className="whitespace-pre-line text-sm leading-relaxed text-slate-700" aria-live="polite">{shareMessage}</p>}
         </div>
       )}
 
@@ -330,6 +391,25 @@ export default function BaliBaseMatcher() {
         {shortlist.length > 0 ? <ul className="mt-4 flex flex-wrap gap-2" aria-label="Saved Bali areas">{shortlist.map((key) => <li key={key}><a href={baliBaseAreas[key].anchor} className="inline-flex rounded-full bg-white px-3 py-2 text-sm font-semibold text-[#0D1B2A] ring-1 ring-[#cfe4ee] hover:text-[#0077B6] focus:outline-none focus:ring-2 focus:ring-[#0077B6] focus:ring-offset-2">{baliBaseAreas[key].shortlistLabel}</a></li>)}</ul> : <p className="mt-4 text-sm text-slate-600">No areas saved yet.</p>}
         {shortlistMessage && <p className="mt-3 text-sm font-medium text-slate-700">{shortlistMessage}</p>}
       </aside>
+
+      <Dialog open={Boolean(locationArea)} onOpenChange={(open) => { if (!open) setLocationArea(null); }}>
+        {locationArea && <DialogContent className="border-[#9ed1e7] bg-white p-6 text-[#0D1B2A] sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle className="font-playfair text-2xl font-bold text-[#0D1B2A]">{locationArea.name} in Bali</DialogTitle>
+            <DialogDescription className="pt-1 leading-relaxed text-slate-600">{locationArea.locationContext}</DialogDescription>
+          </DialogHeader>
+          <div className="relative mt-2 h-48 overflow-hidden rounded-2xl border border-[#cfe4ee] bg-[#eef8fb]" aria-label={`Stylized Bali location guide showing ${locationArea.name}`}>
+            <div className="absolute left-[12%] top-[14%] h-28 w-44 -rotate-[24deg] rounded-[48%_52%_44%_56%] border border-[#9ed1e7] bg-white/80" aria-hidden="true" />
+            <span className="absolute right-5 top-4 text-[10px] font-bold uppercase tracking-[0.16em] text-[#0077B6]">Bali · not to scale</span>
+            <span className="absolute bottom-4 left-5 text-[10px] font-bold uppercase tracking-[0.16em] text-[#4a778e]">Indian Ocean</span>
+            <div className={`absolute z-10 flex -translate-x-1/2 -translate-y-1/2 items-center gap-1 rounded-full bg-[#0077B6] px-2.5 py-1.5 text-xs font-bold text-white shadow-sm ${locationArea.markerClassName}`}><MapPin className="h-3.5 w-3.5" aria-hidden="true" />{locationArea.name}</div>
+          </div>
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <p className="text-sm font-semibold text-slate-700">{locationArea.baliLocation}</p>
+            <span className="inline-flex items-center gap-2 rounded-full border border-[#cfe4ee] bg-[#eef8fb] px-4 py-2 text-sm font-semibold text-[#0077B6]"><MapPinned className="h-4 w-4" aria-hidden="true" />Location guide</span>
+          </div>
+        </DialogContent>}
+      </Dialog>
     </section>
   );
 }

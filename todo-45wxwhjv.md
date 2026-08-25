@@ -1,12 +1,20 @@
 # Project TODO
 
+- [x] Inspect existing matcher, dialog, motion, and clipboard patterns for the requested UX refinements.
+- [x] Add an accessible Start Over control with a brief reduced-motion-aware fade between matcher result and first question.
+- [x] Add a privacy-safe Share Results action that copies a matched-area text summary with a visible fallback message.
+- [x] Keep the stylized matched-area map icon and accessible location modal fully self-contained, with no external map-provider handoff or personal-data collection.
+- [x] Extend tests and validate the refined matcher at desktop and mobile widths. Focused coverage, TypeScript, and the 147-test full suite pass.
+- [ ] Save and publish the refined Bali matcher checkpoint, then confirm the test-ready URL.
+
 - [x] Inspect the current Bali stay guide, affiliate-link registry, analytics conventions, and focused test coverage for the approved matcher integration.
 - [x] Build the adapted three-step Bali Base Matcher with deterministic area recommendations, approved Stay22 handoff, and no percentage scores or named-hotel endorsements.
 - [x] Add an SSR-safe browser-local saved-area shortlist with a maximum of three areas, clear controls, and no server persistence.
 - [x] Integrate a lightweight anonymous matcher-event abstraction without a GTM `dataLayer` dependency, then add focused regression coverage.
 - [x] Integrate the matcher below the existing Bali methodology decision tree, validate desktop/mobile and SEO safeguards, then publish a test-ready checkpoint.
-- [ ] Save the validated Bali Base Matcher integration as a published checkpoint.
-- [ ] Confirm the resulting deployed preview is test-ready at the Bali guide URL and record the staging access details.
+- [x] Save the validated Bali Base Matcher integration as a published checkpoint.
+- [x] Open the published preview for checkpoint `f88100bd` and verify `/blog/where-to-stay-in-bali-2026` shows the Bali Base Matcher beneath the methodology decision tree.
+- [x] Record the full test-ready preview URL for version `f88100bd`: `https://3000-icq0ylq4uc8aumla2b03h-0e231381.sg1.manus.computer/blog/where-to-stay-in-bali-2026`. The custom domain propagated successfully and now also shows the matcher at `https://thestayandwander.com/blog/where-to-stay-in-bali-2026`.
 
 - [x] Reconcile the request to create a game with the attached brief, which specifies a new Bali hotel blog article.
 - [x] Inspect the existing project structure and matching blog article patterns.
