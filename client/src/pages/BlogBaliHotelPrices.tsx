@@ -8,6 +8,7 @@ import TripComHotelWidget from "@/components/TripComHotelWidget";
 import ArticleFAQ from "@/components/ArticleFAQ";
 import RelatedAsiaStayGuides from "@/components/RelatedAsiaStayGuides";
 import GuideMethodologyDecisionTree, { type GuideDecision } from "@/components/GuideMethodologyDecisionTree";
+import BaliBaseMatcher from "@/components/BaliBaseMatcher";
 import { baliHotelPricesFaqs } from "@shared/articleFaqs";
 import { ArrowLeft } from "lucide-react";
 
@@ -140,6 +141,8 @@ export default function BlogBaliHotelPrices() {
             methodology="This 2026 guide combines the editorial area profiles and typical shoulder-season planning ranges shown below. These figures are directional planning references, not live hotel quotes; compare availability and current rates for your exact dates before booking."
             decisions={baliStayDecisions}
           />
+
+          <BaliBaseMatcher />
 
           <section className="mt-12 rounded-2xl bg-slate-900 p-6 text-white shadow-sm sm:p-8">
             <h2 className="font-playfair text-3xl font-bold">Bali Area-at-a-Glance for First-Timers</h2>

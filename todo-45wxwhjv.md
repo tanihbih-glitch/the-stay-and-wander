@@ -1,5 +1,13 @@
 # Project TODO
 
+- [x] Inspect the current Bali stay guide, affiliate-link registry, analytics conventions, and focused test coverage for the approved matcher integration.
+- [x] Build the adapted three-step Bali Base Matcher with deterministic area recommendations, approved Stay22 handoff, and no percentage scores or named-hotel endorsements.
+- [x] Add an SSR-safe browser-local saved-area shortlist with a maximum of three areas, clear controls, and no server persistence.
+- [x] Integrate a lightweight anonymous matcher-event abstraction without a GTM `dataLayer` dependency, then add focused regression coverage.
+- [x] Integrate the matcher below the existing Bali methodology decision tree, validate desktop/mobile and SEO safeguards, then publish a test-ready checkpoint.
+- [ ] Save the validated Bali Base Matcher integration as a published checkpoint.
+- [ ] Confirm the resulting deployed preview is test-ready at the Bali guide URL and record the staging access details.
+
 - [x] Reconcile the request to create a game with the attached brief, which specifies a new Bali hotel blog article.
 - [x] Inspect the existing project structure and matching blog article patterns.
 - [x] Implement the confirmed deliverable while preserving the established site design and routing.
@@ -314,3 +322,7 @@
 - [x] Audit the current Bangkok local-detail storage and printable arrival card to define clear-data behavior, transfer booking-reference handling, and a QR code target.
 - [x] Add browser-only transfer booking-reference storage, a clear-local-details control, and a printable QR code that opens the digital Bangkok arrival checklist.
 - [x] Add regression coverage, validate storage clearing, QR content, printing, accessibility, and desktop/mobile layout, then publish the Bangkok arrival-detail enhancement checkpoint. The browser-only hotel and transfer keys, clear-data behavior, printable digital-checklist QR target, desktop/mobile layout, and the full 143-test suite plus TypeScript validation pass.
+- [x] Audit the Bali first-timer stay guide’s current interactive elements, decision links, affiliate handoffs, page hierarchy, and mobile conversion paths; then deliver prioritized conversion-focused feature recommendations without changing the guide until approved.
+- [x] Define the Bali Base Matcher question flow, deterministic recommendation logic, selected-area result contract, and browser-local shortlist state model.
+- [x] Prepare production-ready React/TypeScript component code and UI layout guidance for the matcher and local-storage shortlist, including accessibility and SSR-safe behavior.
+- [x] Write and generate a concise presentation explaining the Bali Base Matcher and saved-area-shortlist implementation plan, analytics, and phased rollout.
