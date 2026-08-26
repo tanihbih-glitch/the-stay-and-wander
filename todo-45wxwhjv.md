@@ -5,7 +5,7 @@
 - [x] Add browser-local favorites sorting by vibe and directional cost, retaining the current remove and clear controls.
 - [x] Add a responsive side-by-side comparison view for saved favorite areas using the current guide-supported area data.
 - [x] Extend regression coverage and validate the enhanced matcher. Focused coverage, TypeScript, desktop/mobile review, and the 150-test full suite pass; the preview flow confirms summaries, cost sorting, comparison cards, local favorites restoration, removal, modal, sharing, and restart.
-- [ ] Save and publish the enhanced Bali matcher comparison checkpoint, then verify its test-ready route.
+- [x] Save and publish the enhanced Bali matcher comparison checkpoint `a9f833e2`, then verify its test-ready route. The managed published domain completed the full flow, including area summaries, favorites sorting, comparison cards, persisted favorites, removal, sharing, modal, and restart controls.
 
 - [x] Inspect current matcher sharing, animation, and browser-storage patterns for the requested result-experience enhancements.
 - [x] Add direct WhatsApp and X share actions alongside the existing clipboard summary, with encoded text only and secure external-link behavior.
