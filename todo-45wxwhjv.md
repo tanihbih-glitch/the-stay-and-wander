@@ -5,7 +5,8 @@
 - [x] Add a brief reduced-motion-aware compass-loading reveal between the final quiz answer and the recommendation result.
 - [x] Verify both favorites-reload scenarios in production: Ubud and Canggu restore immediately after saving, and the updated Canggu-only state restores after Ubud is removed. A clean profile restored both favorite chips after the first reload and Canggu alone after the post-removal reload.
 - [x] Extend tests and validate the enhanced matcher. Focused coverage, TypeScript, production build, desktop/mobile review, and the 149-test full suite pass.
-- [ ] Save and publish the enhanced Bali matcher checkpoint, then verify its test-ready result path.
+- [x] Save and publish the enhanced Bali matcher checkpoint `3fa2a3fe`.
+- [x] Verify the deployed custom-domain compass-loading reveal appears after the third answer before the enhanced result controls are shown. The live browser session asserted “Finding your Bali rhythm” and “Matching your answers” before confirming the enhanced result, sharing, favorites, modal, and restart flows.
 
 - [x] Inspect existing matcher, dialog, motion, and clipboard patterns for the requested UX refinements.
 - [x] Add an accessible Start Over control with a brief reduced-motion-aware fade between matcher result and first question.
