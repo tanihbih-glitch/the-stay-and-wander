@@ -10,10 +10,12 @@ import {
   BALI_MATCHER_SHORTLIST_LIMIT,
   buildBaliMatcherSocialShareUrl,
   buildBaliMatcherShareSummary,
+  baliBaseAreas,
   getBaliBaseRecommendation,
   matcherQuestions,
   sanitizeBaliBaseFavorites,
   sanitizeBaliBaseShortlist,
+  sortBaliFavoriteAreas,
   trackBaliMatcherEvent,
 } from "../client/src/components/BaliBaseMatcher";
 import { DEALS_AFFILIATE_LINKS } from "../client/src/lib/affiliateLinks";
@@ -124,5 +126,20 @@ describe("Bali hotel prices article", () => {
     expect(componentSource).toContain('rel="noopener noreferrer"');
     expect(componentSource).toContain("bali_matcher_social_share_opened");
     expect(componentSource).toContain("bali_matcher_favorite_saved");
+  });
+
+  it("provides guide-grounded summaries and sortable side-by-side favorite comparisons without an external AI service", () => {
+    expect(baliBaseAreas.ubud.quickSummary).toContain("temple visits");
+    expect(baliBaseAreas.uluwatu.localHighlights).toContain("Clifftop sunsets");
+    expect(sortBaliFavoriteAreas(["uluwatu", "seminyak", "ubud", "canggu"], "cost")).toEqual(["ubud", "canggu", "seminyak", "uluwatu"]);
+    expect(sortBaliFavoriteAreas(["canggu", "ubud"], "saved")).toEqual(["canggu", "ubud"]);
+
+    const componentSource = readFileSync(resolve(process.cwd(), "client/src/components/BaliBaseMatcher.tsx"), "utf8");
+    expect(componentSource).toContain("match summary");
+    expect(componentSource).toContain("Sort saved favorites");
+    expect(componentSource).toContain("Lower directional cost");
+    expect(componentSource).toContain("Compare saved areas");
+    expect(componentSource).toContain("Directional prices only");
+    expect(componentSource).not.toContain("invokeLLM");
   });
 });

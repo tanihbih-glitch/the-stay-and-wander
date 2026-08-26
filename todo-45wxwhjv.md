@@ -1,5 +1,12 @@
 # Project TODO
 
+- [x] Inspect current Bali matcher area data, saved-favorites controls, and focused tests for the requested comparison enhancement.
+- [x] Add concise deterministic area summaries covering each area’s main vibe and guide-supported local highlights, without an external AI service or personal-data processing.
+- [x] Add browser-local favorites sorting by vibe and directional cost, retaining the current remove and clear controls.
+- [x] Add a responsive side-by-side comparison view for saved favorite areas using the current guide-supported area data.
+- [x] Extend regression coverage and validate the enhanced matcher. Focused coverage, TypeScript, desktop/mobile review, and the 150-test full suite pass; the preview flow confirms summaries, cost sorting, comparison cards, local favorites restoration, removal, modal, sharing, and restart.
+- [ ] Save and publish the enhanced Bali matcher comparison checkpoint, then verify its test-ready route.
+
 - [x] Inspect current matcher sharing, animation, and browser-storage patterns for the requested result-experience enhancements.
 - [x] Add direct WhatsApp and X share actions alongside the existing clipboard summary, with encoded text only and secure external-link behavior.
 - [x] Add a brief reduced-motion-aware compass-loading reveal between the final quiz answer and the recommendation result.

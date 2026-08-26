@@ -1,4 +1,4 @@
-import { AtSign, Compass, ExternalLink, Heart, MapPinned, MapPin, MessageCircle, Plus, RotateCcw, Share2, Trash2 } from "lucide-react";
+import { ArrowUpDown, AtSign, Compass, ExternalLink, Heart, MapPinned, MapPin, MessageCircle, Plus, RotateCcw, Share2, Sparkles, Trash2 } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { DEALS_AFFILIATE_LINKS } from "@/lib/affiliateLinks";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
@@ -27,7 +27,10 @@ export type BaliBaseArea = {
   anchor: string;
   heading: string;
   dynamics: string;
+  quickSummary: string;
+  localHighlights: readonly string[];
   directionalPrice: string;
+  costRank: number;
   shortlistLabel: string;
   baliLocation: string;
   locationContext: string;
@@ -38,6 +41,8 @@ export type BaliMatcherRecommendation = {
   primary: BaliBaseArea;
   alternative: BaliBaseArea;
 };
+
+export type BaliFavoriteSort = "saved" | "vibe" | "cost";
 
 export type BaliMatcherEventName =
   | "bali_matcher_started"
@@ -72,7 +77,10 @@ export const baliBaseAreas: Record<AreaKey, BaliBaseArea> = {
     anchor: "#seminyak",
     heading: "Beach clubs, dining, and a social first base",
     dynamics: "A walkable beach-and-dining rhythm for travellers who want restaurants, boutiques, sunset plans, and a lively resort atmosphere close together.",
+    quickSummary: "A sociable south-west base for a first trip that revolves around beach days, dining plans, boutiques, and sunset energy in one compact rhythm.",
+    localHighlights: ["Beach clubs and sunset plans", "Restaurant and boutique walks", "Lively first-timer base"],
     directionalPrice: "Typical guide range: $40–70 budget · $80–150 mid-range · $200+ luxury per night.",
+    costRank: 3,
     shortlistLabel: "Seminyak — beach clubs and dining",
     baliLocation: "South-west Bali coast",
     locationContext: "Seminyak sits on Bali’s south-west coast, south of Canggu and close to the island’s restaurant, beach-club, and shopping corridor.",
@@ -84,7 +92,10 @@ export const baliBaseAreas: Record<AreaKey, BaliBaseArea> = {
     anchor: "#ubud",
     heading: "Culture, rice terraces, and a slower inland rhythm",
     dynamics: "A strong base for temples, cafés, wellness, and lush surroundings when cultural experiences and a calmer pace matter more than beach access.",
+    quickSummary: "An inland, culture-led base for temple visits, rice-terrace scenery, cafés, and wellness-focused days at a more relaxed pace.",
+    localHighlights: ["Temple and cultural days", "Rice-terrace surroundings", "Cafés and wellness time"],
     directionalPrice: "Typical guide range: $30–60 budget · $75–130 mid-range · $180+ luxury per night.",
+    costRank: 1,
     shortlistLabel: "Ubud — culture and wellness",
     baliLocation: "Central inland Bali",
     locationContext: "Ubud is inland in central Bali, making it a culture, rice-terrace, and wellness base rather than a beach base.",
@@ -96,7 +107,10 @@ export const baliBaseAreas: Record<AreaKey, BaliBaseArea> = {
     anchor: "#uluwatu",
     heading: "Cliffs, surf, and self-contained resort time",
     dynamics: "A Bukit coast base for clifftop sunsets, surf beaches, and slower resort days; build in more transport time for island-wide sightseeing.",
+    quickSummary: "A scenic southern-coast match for clifftop views, surf beaches, and slower resort time when a self-contained stay matters most.",
+    localHighlights: ["Clifftop sunsets", "Surf beaches", "Slower resort days"],
     directionalPrice: "Typical guide range: $50–90 budget · $100–180 mid-range · $250+ luxury per night.",
+    costRank: 4,
     shortlistLabel: "Uluwatu — cliffs and surf",
     baliLocation: "Bukit Peninsula, south Bali",
     locationContext: "Uluwatu is on Bali’s southern Bukit Peninsula, known for its clifftop coast, surf breaks, and more self-contained resort setting.",
@@ -108,7 +122,10 @@ export const baliBaseAreas: Record<AreaKey, BaliBaseArea> = {
     anchor: "#canggu",
     heading: "Cafés, surf, and a longer-stay feel",
     dynamics: "A social remote-work and café rhythm with surf access and an energetic, less polished feel; a central location can help with traffic on longer stays.",
+    quickSummary: "A flexible south-west base for surf, independent cafés, and a social longer-stay rhythm, especially when day-to-day lifestyle matters.",
+    localHighlights: ["Independent café culture", "Surf access", "Longer-stay social rhythm"],
     directionalPrice: "Typical guide range: $35–65 budget · $70–140 mid-range · $190+ luxury per night.",
+    costRank: 2,
     shortlistLabel: "Canggu — cafés and longer stays",
     baliLocation: "South-west Bali coast",
     locationContext: "Canggu is on Bali’s south-west coast, north of Seminyak, with surf beaches and a café-led longer-stay rhythm.",
@@ -225,6 +242,16 @@ export function sanitizeBaliBaseFavorites(value: unknown): AreaKey[] {
   return value.filter((key): key is AreaKey => typeof key === "string" && key in baliBaseAreas).slice(0, BALI_MATCHER_FAVORITES_LIMIT);
 }
 
+export function sortBaliFavoriteAreas(areaKeys: AreaKey[], sort: BaliFavoriteSort): AreaKey[] {
+  const uniqueKeys = Array.from(new Set(sanitizeBaliBaseFavorites(areaKeys)));
+  if (sort === "saved") return uniqueKeys;
+
+  return [...uniqueKeys].sort((left, right) => {
+    if (sort === "cost") return baliBaseAreas[left].costRank - baliBaseAreas[right].costRank || baliBaseAreas[left].name.localeCompare(baliBaseAreas[right].name);
+    return baliBaseAreas[left].heading.localeCompare(baliBaseAreas[right].heading) || baliBaseAreas[left].name.localeCompare(baliBaseAreas[right].name);
+  });
+}
+
 function parseShortlist(value: string | null): AreaKey[] {
   if (!value) return [];
 
@@ -258,11 +285,13 @@ export default function BaliBaseMatcher() {
   const [favorites, setFavorites] = useState<AreaKey[]>([]);
   const [favoritesReady, setFavoritesReady] = useState(false);
   const [favoritesMessage, setFavoritesMessage] = useState("");
+  const [favoriteSort, setFavoriteSort] = useState<BaliFavoriteSort>("saved");
   const [isRestarting, setIsRestarting] = useState(false);
   const [shareMessage, setShareMessage] = useState("");
   const [locationArea, setLocationArea] = useState<BaliBaseArea | null>(null);
 
   const recommendation = useMemo(() => getBaliBaseRecommendation(answers), [answers]);
+  const sortedFavorites = useMemo(() => sortBaliFavoriteAreas(favorites, favoriteSort), [favoriteSort, favorites]);
   const activeQuestion = matcherQuestions[step - 1];
 
   useEffect(() => {
@@ -447,7 +476,18 @@ export default function BaliBaseMatcher() {
             </div>
             <p className="mt-4 leading-relaxed text-slate-700">{recommendation.primary.dynamics}</p>
             <p className="mt-4 text-sm font-semibold text-slate-700">{recommendation.primary.directionalPrice}</p>
-            <p className="mt-4 text-sm leading-relaxed text-slate-600">For a different trip rhythm, compare <strong>{recommendation.alternative.name}</strong> too: {recommendation.alternative.heading.toLowerCase()}.</p>
+            <div className="mt-5 grid gap-3 sm:grid-cols-2">
+              {[recommendation.primary, recommendation.alternative].map((area) => (
+                <article key={area.key} className="rounded-xl border border-[#d5e9f1] bg-[#f8fcfe] p-4">
+                  <p className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.14em] text-[#0077B6]"><Sparkles className="h-3.5 w-3.5" aria-hidden="true" />{area.name} match summary</p>
+                  <p className="mt-2 text-sm leading-relaxed text-slate-700">{area.quickSummary}</p>
+                  <p className="mt-3 text-xs font-bold uppercase tracking-[0.12em] text-slate-500">Guide highlights</p>
+                  <ul className="mt-2 space-y-1 text-sm text-slate-600">
+                    {area.localHighlights.map((highlight) => <li key={highlight} className="flex gap-2"><span className="text-[#F4A261]" aria-hidden="true">•</span>{highlight}</li>)}
+                  </ul>
+                </article>
+              ))}
+            </div>
             <div className="mt-5 flex flex-wrap gap-3">
               <a href={recommendation.primary.anchor} onClick={() => trackBaliMatcherEvent("bali_matcher_area_notes_clicked", { area: recommendation.primary.key })} className="inline-flex items-center gap-2 rounded-full border border-[#0077B6] bg-white px-4 py-2.5 text-sm font-semibold text-[#0077B6] hover:bg-[#eef8fb] focus:outline-none focus:ring-2 focus:ring-[#0077B6] focus:ring-offset-2">Read {recommendation.primary.name} notes</a>
               <a href={BALI_BASE_MATCHER_STAY22_URL} target="_blank" rel="sponsored nofollow" onClick={() => trackBaliMatcherEvent("bali_matcher_availability_clicked", { area: recommendation.primary.key })} className="inline-flex items-center gap-2 rounded-full bg-[#0077B6] px-4 py-2.5 text-sm font-semibold text-white hover:bg-[#005c91] focus:outline-none focus:ring-2 focus:ring-[#0077B6] focus:ring-offset-2">Compare Bali availability <ExternalLink className="h-4 w-4" aria-hidden="true" /></a>
@@ -471,7 +511,38 @@ export default function BaliBaseMatcher() {
               </div>
               {favorites.length > 0 && <button type="button" onClick={clearFavorites} className="inline-flex shrink-0 items-center gap-2 self-start text-sm font-semibold text-slate-600 underline-offset-4 hover:text-[#0D1B2A] hover:underline focus:outline-none focus:ring-2 focus:ring-[#9a5b20] focus:ring-offset-2"><Trash2 className="h-4 w-4" aria-hidden="true" />Clear Favorites</button>}
             </div>
-            {favorites.length > 0 ? <ul className="mt-4 flex flex-wrap gap-2" aria-label="Saved Bali area favorites">{favorites.map((key) => <li key={key} className="inline-flex overflow-hidden rounded-full border border-[#f0d3af] bg-white"><a href={baliBaseAreas[key].anchor} className="px-3 py-2 text-sm font-semibold text-[#0D1B2A] hover:text-[#0077B6] focus:outline-none focus:ring-2 focus:ring-[#0077B6] focus:ring-inset">{baliBaseAreas[key].name}</a><button type="button" onClick={() => removeFavorite(key)} className="border-l border-[#f0d3af] px-2 text-[#9a5b20] hover:bg-[#F8EFE0] focus:outline-none focus:ring-2 focus:ring-[#9a5b20] focus:ring-inset" aria-label={`Remove ${baliBaseAreas[key].name} from Favorites`}><Trash2 className="h-3.5 w-3.5" aria-hidden="true" /></button></li>)}</ul> : <p className="mt-4 text-sm text-slate-600">No favorites saved yet. Use “Save to Favorites” to keep both matched areas here.</p>}
+            {favorites.length > 0 ? <>
+              <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
+                <label className="inline-flex items-center gap-2 text-sm font-semibold text-slate-700" htmlFor="bali-favorite-sort"><ArrowUpDown className="h-4 w-4 text-[#9a5b20]" aria-hidden="true" />Sort saved favorites</label>
+                <select id="bali-favorite-sort" value={favoriteSort} onChange={(event) => setFavoriteSort(event.target.value as BaliFavoriteSort)} className="rounded-full border border-[#f0d3af] bg-white px-3 py-2 text-sm font-semibold text-[#0D1B2A] focus:outline-none focus:ring-2 focus:ring-[#9a5b20] focus:ring-offset-2">
+                  <option value="saved">Saved order</option>
+                  <option value="vibe">Vibe</option>
+                  <option value="cost">Lower directional cost</option>
+                </select>
+              </div>
+              <ul className="mt-4 flex flex-wrap gap-2" aria-label="Saved Bali area favorites">{sortedFavorites.map((key) => <li key={key} className="inline-flex overflow-hidden rounded-full border border-[#f0d3af] bg-white"><a href={baliBaseAreas[key].anchor} className="px-3 py-2 text-sm font-semibold text-[#0D1B2A] hover:text-[#0077B6] focus:outline-none focus:ring-2 focus:ring-[#0077B6] focus:ring-inset">{baliBaseAreas[key].name}</a><button type="button" onClick={() => removeFavorite(key)} className="border-l border-[#f0d3af] px-2 text-[#9a5b20] hover:bg-[#F8EFE0] focus:outline-none focus:ring-2 focus:ring-[#9a5b20] focus:ring-inset" aria-label={`Remove ${baliBaseAreas[key].name} from Favorites`}><Trash2 className="h-3.5 w-3.5" aria-hidden="true" /></button></li>)}</ul>
+              {sortedFavorites.length >= 2 && <section className="mt-5 border-t border-[#f0d3af] pt-5" aria-labelledby="bali-favorites-comparison-heading">
+                <div className="flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between">
+                  <div><p id="bali-favorites-comparison-heading" className="text-xs font-bold uppercase tracking-[0.18em] text-[#9a5b20]">Compare saved areas</p><p className="mt-1 text-sm text-slate-600">Use the same guide-supported signals to weigh your top choices side by side.</p></div>
+                  <span className="text-xs font-semibold text-slate-500">Directional prices only</span>
+                </div>
+                <div className="mt-4 grid gap-3 sm:grid-cols-2">
+                  {sortedFavorites.map((key) => {
+                    const area = baliBaseAreas[key];
+                    return <article key={area.key} className="rounded-xl border border-[#f0d3af] bg-white p-4">
+                      <h4 className="font-playfair text-xl font-bold text-[#0D1B2A]">{area.name}</h4>
+                      <p className="mt-1 text-sm font-semibold text-[#9a5b20]">{area.heading}</p>
+                      <dl className="mt-4 space-y-3 text-sm">
+                        <div><dt className="font-bold uppercase tracking-[0.1em] text-[11px] text-slate-500">Vibe</dt><dd className="mt-1 text-slate-700">{area.quickSummary}</dd></div>
+                        <div><dt className="font-bold uppercase tracking-[0.1em] text-[11px] text-slate-500">Guide range</dt><dd className="mt-1 text-slate-700">{area.directionalPrice.replace("Typical guide range: ", "")}</dd></div>
+                        <div><dt className="font-bold uppercase tracking-[0.1em] text-[11px] text-slate-500">Highlights</dt><dd className="mt-1 text-slate-700">{area.localHighlights.join(" · ")}</dd></div>
+                        <div><dt className="font-bold uppercase tracking-[0.1em] text-[11px] text-slate-500">Location</dt><dd className="mt-1 text-slate-700">{area.baliLocation}</dd></div>
+                      </dl>
+                    </article>;
+                  })}
+                </div>
+              </section>}
+            </> : <p className="mt-4 text-sm text-slate-600">No favorites saved yet. Use “Save to Favorites” to keep both matched areas here.</p>}
             {favoritesMessage && <p className="mt-3 text-sm font-medium text-slate-700">{favoritesMessage}</p>}
           </aside>
         </div>
