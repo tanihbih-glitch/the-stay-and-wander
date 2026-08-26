@@ -1,10 +1,13 @@
-import { Compass, ExternalLink, MapPinned, MapPin, Plus, RotateCcw, Share2, Trash2 } from "lucide-react";
+import { AtSign, Compass, ExternalLink, Heart, MapPinned, MapPin, MessageCircle, Plus, RotateCcw, Share2, Trash2 } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { DEALS_AFFILIATE_LINKS } from "@/lib/affiliateLinks";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 
 export const BALI_MATCHER_SHORTLIST_KEY = "tsw-bali-base-shortlist";
 export const BALI_MATCHER_SHORTLIST_LIMIT = 3;
+export const BALI_MATCHER_FAVORITES_KEY = "tsw-bali-base-favorites";
+export const BALI_MATCHER_FAVORITES_LIMIT = 4;
+export const BALI_MATCHER_RESULT_REVEAL_MS = 1800;
 export const BALI_BASE_MATCHER_STAY22_URL = DEALS_AFFILIATE_LINKS.hotels.bali;
 
 type AreaKey = "seminyak" | "ubud" | "uluwatu" | "canggu";
@@ -44,7 +47,9 @@ export type BaliMatcherEventName =
   | "bali_matcher_area_notes_clicked"
   | "bali_matcher_availability_clicked"
   | "bali_matcher_results_shared"
-  | "bali_matcher_location_opened";
+  | "bali_matcher_social_share_opened"
+  | "bali_matcher_location_opened"
+  | "bali_matcher_favorite_saved";
 
 type BaliMatcherEventProperties = Record<string, string | number | boolean>;
 
@@ -201,10 +206,23 @@ export function buildBaliMatcherShareSummary(recommendation: BaliMatcherRecommen
   ].join("\n");
 }
 
+export function buildBaliMatcherSocialShareUrl(platform: "whatsapp" | "x", recommendation: BaliMatcherRecommendation) {
+  const encodedSummary = encodeURIComponent(buildBaliMatcherShareSummary(recommendation));
+  return platform === "whatsapp"
+    ? `https://wa.me/?text=${encodedSummary}`
+    : `https://twitter.com/intent/tweet?text=${encodedSummary}`;
+}
+
 export function sanitizeBaliBaseShortlist(value: unknown): AreaKey[] {
   if (!Array.isArray(value)) return [];
 
   return value.filter((key): key is AreaKey => typeof key === "string" && key in baliBaseAreas).slice(0, BALI_MATCHER_SHORTLIST_LIMIT);
+}
+
+export function sanitizeBaliBaseFavorites(value: unknown): AreaKey[] {
+  if (!Array.isArray(value)) return [];
+
+  return value.filter((key): key is AreaKey => typeof key === "string" && key in baliBaseAreas).slice(0, BALI_MATCHER_FAVORITES_LIMIT);
 }
 
 function parseShortlist(value: string | null): AreaKey[] {
@@ -212,6 +230,16 @@ function parseShortlist(value: string | null): AreaKey[] {
 
   try {
     return sanitizeBaliBaseShortlist(JSON.parse(value));
+  } catch {
+    return [];
+  }
+}
+
+function parseFavorites(value: string | null): AreaKey[] {
+  if (!value) return [];
+
+  try {
+    return sanitizeBaliBaseFavorites(JSON.parse(value));
   } catch {
     return [];
   }
@@ -227,6 +255,9 @@ export default function BaliBaseMatcher() {
   const [shortlist, setShortlist] = useState<AreaKey[]>([]);
   const [shortlistReady, setShortlistReady] = useState(false);
   const [shortlistMessage, setShortlistMessage] = useState("");
+  const [favorites, setFavorites] = useState<AreaKey[]>([]);
+  const [favoritesReady, setFavoritesReady] = useState(false);
+  const [favoritesMessage, setFavoritesMessage] = useState("");
   const [isRestarting, setIsRestarting] = useState(false);
   const [shareMessage, setShareMessage] = useState("");
   const [locationArea, setLocationArea] = useState<BaliBaseArea | null>(null);
@@ -237,6 +268,8 @@ export default function BaliBaseMatcher() {
   useEffect(() => {
     setShortlist(parseShortlist(window.localStorage.getItem(BALI_MATCHER_SHORTLIST_KEY)));
     setShortlistReady(true);
+    setFavorites(parseFavorites(window.localStorage.getItem(BALI_MATCHER_FAVORITES_KEY)));
+    setFavoritesReady(true);
   }, []);
 
   useEffect(() => {
@@ -244,6 +277,24 @@ export default function BaliBaseMatcher() {
     if (shortlist.length) window.localStorage.setItem(BALI_MATCHER_SHORTLIST_KEY, JSON.stringify(shortlist));
     else window.localStorage.removeItem(BALI_MATCHER_SHORTLIST_KEY);
   }, [shortlist, shortlistReady]);
+
+  useEffect(() => {
+    if (!favoritesReady) return;
+    if (favorites.length) window.localStorage.setItem(BALI_MATCHER_FAVORITES_KEY, JSON.stringify(favorites));
+    else window.localStorage.removeItem(BALI_MATCHER_FAVORITES_KEY);
+  }, [favorites, favoritesReady]);
+
+  useEffect(() => {
+    if (step !== 4 || !recommendation) return;
+
+    const prefersReducedMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+    const revealTimer = window.setTimeout(() => {
+      setStep(5);
+      trackBaliMatcherEvent("bali_matcher_completed", { area: recommendation.primary.key });
+    }, prefersReducedMotion ? 180 : BALI_MATCHER_RESULT_REVEAL_MS);
+
+    return () => window.clearTimeout(revealTimer);
+  }, [recommendation, step]);
 
   const selectAnswer = (field: keyof BaliMatcherAnswers, value: string) => {
     const updatedAnswers = { ...answers, [field]: value } as BaliMatcherAnswers;
@@ -260,8 +311,6 @@ export default function BaliBaseMatcher() {
       return;
     }
 
-    const result = getBaliBaseRecommendation(updatedAnswers);
-    if (result) trackBaliMatcherEvent("bali_matcher_completed", { area: result.primary.key });
     setStep(4);
   };
 
@@ -291,6 +340,7 @@ export default function BaliBaseMatcher() {
       setStep(1);
       setShortlistMessage("");
       setShareMessage("");
+      setFavoritesMessage("");
       setIsRestarting(false);
     }, 180);
   };
@@ -298,6 +348,31 @@ export default function BaliBaseMatcher() {
   const clearShortlist = () => {
     setShortlist([]);
     setShortlistMessage("Saved areas cleared from this browser.");
+  };
+
+  const saveMatchedAreasToFavorites = () => {
+    if (!recommendation) return;
+    const matchedAreas = [recommendation.primary.key, recommendation.alternative.key];
+    const additions = matchedAreas.filter((key) => !favorites.includes(key));
+
+    if (!additions.length) {
+      setFavoritesMessage("These matched areas are already in Favorites on this device.");
+      return;
+    }
+
+    setFavorites((currentFavorites) => [...currentFavorites, ...additions].slice(0, BALI_MATCHER_FAVORITES_LIMIT));
+    setFavoritesMessage(`${additions.map((key) => baliBaseAreas[key].name).join(" and ")} added to Favorites on this device.`);
+    trackBaliMatcherEvent("bali_matcher_favorite_saved", { primary: recommendation.primary.key, alternative: recommendation.alternative.key });
+  };
+
+  const removeFavorite = (area: AreaKey) => {
+    setFavorites((items) => items.filter((item) => item !== area));
+    setFavoritesMessage(`${baliBaseAreas[area].name} removed from Favorites.`);
+  };
+
+  const clearFavorites = () => {
+    setFavorites([]);
+    setFavoritesMessage("Favorites cleared from this browser.");
   };
 
   const shareResults = async () => {
@@ -330,7 +405,7 @@ export default function BaliBaseMatcher() {
             <p className="mt-2 max-w-2xl text-sm leading-relaxed text-slate-700">Answer three quick questions for an explainable area recommendation based on the guide below. It is a planning tool, not a live-rate or availability prediction.</p>
           </div>
         </div>
-        <span className="self-start rounded-full bg-white px-3 py-1 text-xs font-bold uppercase tracking-[0.14em] text-[#0077B6]">{step <= 3 ? `Step ${step} of 3` : "Your result"}</span>
+        <span className="self-start rounded-full bg-white px-3 py-1 text-xs font-bold uppercase tracking-[0.14em] text-[#0077B6]">{step <= 3 ? `Step ${step} of 3` : step === 4 ? "Matching your answers" : "Your result"}</span>
       </div>
 
       {step <= 3 && activeQuestion && (
@@ -348,7 +423,15 @@ export default function BaliBaseMatcher() {
         </div>
       )}
 
-      {step === 4 && recommendation && (
+      {step === 4 && (
+        <div className="mt-6 flex min-h-64 flex-col items-center justify-center rounded-2xl border border-[#9ed1e7] bg-white px-6 text-center" role="status" aria-live="polite">
+          <div className="rounded-full bg-[#eef8fb] p-5 text-[#0077B6]"><Compass className="h-10 w-10 motion-safe:animate-spin motion-reduce:animate-none" aria-hidden="true" /></div>
+          <p className="mt-5 font-playfair text-2xl font-bold text-[#0D1B2A]">Finding your Bali rhythm</p>
+          <p className="mt-2 max-w-md text-sm leading-relaxed text-slate-600">Matching your answers with the guide’s area profiles and planning ranges.</p>
+        </div>
+      )}
+
+      {step === 5 && recommendation && (
         <div className={`mt-6 space-y-5 transition-opacity duration-200 motion-reduce:transition-none ${isRestarting ? "opacity-0" : "opacity-100"}`}>
           <div className="rounded-2xl border border-[#9ed1e7] bg-white p-5 sm:p-6">
             <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
@@ -372,11 +455,25 @@ export default function BaliBaseMatcher() {
           </div>
           <div className="flex flex-wrap items-center gap-3">
             <button type="button" onClick={savePrimaryArea} className="inline-flex items-center gap-2 rounded-full border border-[#9a5b20] bg-white px-4 py-2.5 text-sm font-semibold text-[#9a5b20] hover:bg-[#F8EFE0] focus:outline-none focus:ring-2 focus:ring-[#9a5b20] focus:ring-offset-2"><Plus className="h-4 w-4" aria-hidden="true" />Save {recommendation.primary.name}</button>
+            <button type="button" onClick={saveMatchedAreasToFavorites} className="inline-flex items-center gap-2 rounded-full border border-[#d59650] bg-[#F8EFE0] px-4 py-2.5 text-sm font-semibold text-[#9a5b20] hover:bg-white focus:outline-none focus:ring-2 focus:ring-[#9a5b20] focus:ring-offset-2"><Heart className="h-4 w-4" aria-hidden="true" />Save to Favorites</button>
             <button type="button" onClick={shareResults} className="inline-flex items-center gap-2 rounded-full border border-[#0077B6] bg-white px-4 py-2.5 text-sm font-semibold text-[#0077B6] hover:bg-[#eef8fb] focus:outline-none focus:ring-2 focus:ring-[#0077B6] focus:ring-offset-2"><Share2 className="h-4 w-4" aria-hidden="true" />Share Results</button>
+            <a href={buildBaliMatcherSocialShareUrl("whatsapp", recommendation)} target="_blank" rel="noopener noreferrer" onClick={() => trackBaliMatcherEvent("bali_matcher_social_share_opened", { area: recommendation.primary.key, platform: "whatsapp" })} className="inline-flex items-center gap-2 rounded-full border border-[#42a46d] bg-white px-4 py-2.5 text-sm font-semibold text-[#26754a] hover:bg-[#effaf3] focus:outline-none focus:ring-2 focus:ring-[#26754a] focus:ring-offset-2"><MessageCircle className="h-4 w-4" aria-hidden="true" />WhatsApp</a>
+            <a href={buildBaliMatcherSocialShareUrl("x", recommendation)} target="_blank" rel="noopener noreferrer" onClick={() => trackBaliMatcherEvent("bali_matcher_social_share_opened", { area: recommendation.primary.key, platform: "x" })} className="inline-flex items-center gap-2 rounded-full border border-slate-700 bg-white px-4 py-2.5 text-sm font-semibold text-slate-800 hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-700 focus:ring-offset-2"><AtSign className="h-4 w-4" aria-hidden="true" />Share on X</a>
             <button type="button" onClick={() => openAreaLocation(recommendation.alternative)} className="inline-flex items-center gap-2 rounded-full border border-[#9ed1e7] bg-white px-4 py-2.5 text-sm font-semibold text-[#0077B6] hover:bg-[#eef8fb] focus:outline-none focus:ring-2 focus:ring-[#0077B6] focus:ring-offset-2"><MapPinned className="h-4 w-4" aria-hidden="true" />Locate {recommendation.alternative.name}</button>
             <button type="button" onClick={startOver} className="inline-flex items-center gap-2 rounded-full px-3 py-2 text-sm font-semibold text-slate-600 hover:text-[#0D1B2A] focus:outline-none focus:ring-2 focus:ring-[#0077B6] focus:ring-offset-2"><RotateCcw className="h-4 w-4" aria-hidden="true" />Start Over</button>
           </div>
           {shareMessage && <p className="whitespace-pre-line text-sm leading-relaxed text-slate-700" aria-live="polite">{shareMessage}</p>}
+          <aside className="rounded-2xl border border-[#f0d3af] bg-[#fffaf4] p-4" aria-live="polite">
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+              <div>
+                <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#9a5b20]">Saved favorites</p>
+                <p className="mt-1 text-sm text-slate-600">Keep matched-area ideas in this browser for your next planning pass.</p>
+              </div>
+              {favorites.length > 0 && <button type="button" onClick={clearFavorites} className="inline-flex shrink-0 items-center gap-2 self-start text-sm font-semibold text-slate-600 underline-offset-4 hover:text-[#0D1B2A] hover:underline focus:outline-none focus:ring-2 focus:ring-[#9a5b20] focus:ring-offset-2"><Trash2 className="h-4 w-4" aria-hidden="true" />Clear Favorites</button>}
+            </div>
+            {favorites.length > 0 ? <ul className="mt-4 flex flex-wrap gap-2" aria-label="Saved Bali area favorites">{favorites.map((key) => <li key={key} className="inline-flex overflow-hidden rounded-full border border-[#f0d3af] bg-white"><a href={baliBaseAreas[key].anchor} className="px-3 py-2 text-sm font-semibold text-[#0D1B2A] hover:text-[#0077B6] focus:outline-none focus:ring-2 focus:ring-[#0077B6] focus:ring-inset">{baliBaseAreas[key].name}</a><button type="button" onClick={() => removeFavorite(key)} className="border-l border-[#f0d3af] px-2 text-[#9a5b20] hover:bg-[#F8EFE0] focus:outline-none focus:ring-2 focus:ring-[#9a5b20] focus:ring-inset" aria-label={`Remove ${baliBaseAreas[key].name} from Favorites`}><Trash2 className="h-3.5 w-3.5" aria-hidden="true" /></button></li>)}</ul> : <p className="mt-4 text-sm text-slate-600">No favorites saved yet. Use “Save to Favorites” to keep both matched areas here.</p>}
+            {favoritesMessage && <p className="mt-3 text-sm font-medium text-slate-700">{favoritesMessage}</p>}
+          </aside>
         </div>
       )}
 

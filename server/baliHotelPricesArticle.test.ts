@@ -3,11 +3,16 @@ import { articleMetadata, baliStayDecisions, priceSnapshot, searchMetadata } fro
 import { TRIP_COM_HOTEL_WIDGET_URL } from "../client/src/components/TripComHotelWidget";
 import {
   BALI_BASE_MATCHER_STAY22_URL,
+  BALI_MATCHER_FAVORITES_KEY,
+  BALI_MATCHER_FAVORITES_LIMIT,
+  BALI_MATCHER_RESULT_REVEAL_MS,
   BALI_MATCHER_SHORTLIST_KEY,
   BALI_MATCHER_SHORTLIST_LIMIT,
+  buildBaliMatcherSocialShareUrl,
   buildBaliMatcherShareSummary,
   getBaliBaseRecommendation,
   matcherQuestions,
+  sanitizeBaliBaseFavorites,
   sanitizeBaliBaseShortlist,
   trackBaliMatcherEvent,
 } from "../client/src/components/BaliBaseMatcher";
@@ -61,6 +66,13 @@ describe("Bali hotel prices article", () => {
     expect(sanitizeBaliBaseShortlist("not-an-array")).toEqual([]);
   });
 
+  it("keeps matched-area favorites browser-local, valid, and bounded to Bali area keys", () => {
+    expect(BALI_MATCHER_FAVORITES_KEY).toBe("tsw-bali-base-favorites");
+    expect(BALI_MATCHER_FAVORITES_LIMIT).toBe(4);
+    expect(sanitizeBaliBaseFavorites(["ubud", "not-an-area", "canggu", "seminyak", "uluwatu", "extra"])).toEqual(["ubud", "canggu", "seminyak", "uluwatu"]);
+    expect(sanitizeBaliBaseFavorites({ areas: ["ubud"] })).toEqual([]);
+  });
+
   it("uses the approved Bali Stay22 registry destination and stays outside global GTM dataLayer tracking", () => {
     expect(BALI_BASE_MATCHER_STAY22_URL).toBe(DEALS_AFFILIATE_LINKS.hotels.bali);
     expect(BALI_BASE_MATCHER_STAY22_URL).toBe("https://booking.stay22.com/thestayandwander/r-lvU3PLVF");
@@ -93,5 +105,24 @@ describe("Bali hotel prices article", () => {
     expect(componentSource).toContain("bali_matcher_location_opened");
     expect(componentSource).toContain("Bali · not to scale");
     expect(componentSource).not.toContain("google.com/maps");
+  });
+
+  it("adds direct social sharing and a short compass-loading reveal before results", () => {
+    const recommendation = getBaliBaseRecommendation({ vibe: "culture", budget: "budget", duration: "medium" });
+    expect(recommendation).not.toBeNull();
+    expect(BALI_MATCHER_RESULT_REVEAL_MS).toBe(1800);
+    expect(buildBaliMatcherSocialShareUrl("whatsapp", recommendation!)).toContain("https://wa.me/?text=");
+    expect(buildBaliMatcherSocialShareUrl("whatsapp", recommendation!)).toContain("Ubud");
+    expect(buildBaliMatcherSocialShareUrl("x", recommendation!)).toContain("https://twitter.com/intent/tweet?text=");
+
+    const componentSource = readFileSync(resolve(process.cwd(), "client/src/components/BaliBaseMatcher.tsx"), "utf8");
+    expect(componentSource).toContain("Finding your Bali rhythm");
+    expect(componentSource).toContain("motion-safe:animate-spin");
+    expect(componentSource).toContain("Save to Favorites");
+    expect(componentSource).toContain("WhatsApp");
+    expect(componentSource).toContain("Share on X");
+    expect(componentSource).toContain('rel="noopener noreferrer"');
+    expect(componentSource).toContain("bali_matcher_social_share_opened");
+    expect(componentSource).toContain("bali_matcher_favorite_saved");
   });
 });

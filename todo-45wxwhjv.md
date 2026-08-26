@@ -1,11 +1,20 @@
 # Project TODO
 
+- [x] Inspect current matcher sharing, animation, and browser-storage patterns for the requested result-experience enhancements.
+- [x] Add direct WhatsApp and X share actions alongside the existing clipboard summary, with encoded text only and secure external-link behavior.
+- [x] Add a brief reduced-motion-aware compass-loading reveal between the final quiz answer and the recommendation result.
+- [x] Verify both favorites-reload scenarios in production: Ubud and Canggu restore immediately after saving, and the updated Canggu-only state restores after Ubud is removed. A clean profile restored both favorite chips after the first reload and Canggu alone after the post-removal reload.
+- [x] Extend tests and validate the enhanced matcher. Focused coverage, TypeScript, production build, desktop/mobile review, and the 149-test full suite pass.
+- [ ] Save and publish the enhanced Bali matcher checkpoint, then verify its test-ready result path.
+
 - [x] Inspect existing matcher, dialog, motion, and clipboard patterns for the requested UX refinements.
 - [x] Add an accessible Start Over control with a brief reduced-motion-aware fade between matcher result and first question.
 - [x] Add a privacy-safe Share Results action that copies a matched-area text summary with a visible fallback message.
 - [x] Keep the stylized matched-area map icon and accessible location modal fully self-contained, with no external map-provider handoff or personal-data collection.
 - [x] Extend tests and validate the refined matcher at desktop and mobile widths. Focused coverage, TypeScript, and the 147-test full suite pass.
-- [ ] Save and publish the refined Bali matcher checkpoint, then confirm the test-ready URL.
+- [x] Save and publish the refined Bali matcher checkpoint `fd25a38f`.
+- [x] Complete the published preview matcher for checkpoint `fd25a38f` to a result state and directly verify Start Over, Share Results, and the self-contained location modal there. A direct headless Chromium session completed the culture + budget-led + 5–10-day path and confirmed all four result, share, modal, and restart states.
+- [x] Record the full test-ready preview URL for checkpoint `fd25a38f`: `https://3000-icq0ylq4uc8aumla2b03h-0e231381.sg1.manus.computer/blog/where-to-stay-in-bali-2026#bali-base-matcher`.
 
 - [x] Inspect the current Bali stay guide, affiliate-link registry, analytics conventions, and focused test coverage for the approved matcher integration.
 - [x] Build the adapted three-step Bali Base Matcher with deterministic area recommendations, approved Stay22 handoff, and no percentage scores or named-hotel endorsements.
