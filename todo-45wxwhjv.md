@@ -1,5 +1,12 @@
 # Project TODO
 
+- [x] Inspect the current Bali comparison model, price bands, PDF content, and local-storage conventions for the requested planning refinements.
+- [x] Add per-area room-type preferences using the existing guide-supported budget, mid-range, and villa/luxury cost bands.
+- [x] Add a clear price-assumption legend to the downloadable Bali comparison PDF.
+- [x] Add browser-local named comparison lists with explicit save, switch, and delete controls, without server persistence or personal-data collection.
+- [x] Extend regression coverage and validate browser-local state and exports. Focused coverage, TypeScript, direct browser checks, the 155-test suite, and production build pass.
+- [ ] Save and publish the enhanced Bali matcher checkpoint, then verify its test-ready route.
+
 - [x] Inspect the approved Bali booking registry, comparison calculations, and existing client-side PDF-generation dependencies.
 - [x] Add compliant per-area availability handoffs using the centralized approved booking registry and required sponsored new-tab attributes.
 - [x] Add an explicit room-count override that supersedes the default two-travelers-per-room total-stay assumption.

@@ -7,6 +7,8 @@ export const BALI_MATCHER_SHORTLIST_KEY = "tsw-bali-base-shortlist";
 export const BALI_MATCHER_SHORTLIST_LIMIT = 3;
 export const BALI_MATCHER_FAVORITES_KEY = "tsw-bali-base-favorites";
 export const BALI_MATCHER_FAVORITES_LIMIT = 4;
+export const BALI_MATCHER_COMPARISON_LISTS_KEY = "tsw-bali-base-comparison-lists";
+export const BALI_MATCHER_COMPARISON_LISTS_LIMIT = 6;
 export const BALI_MATCHER_RESULT_REVEAL_MS = 1800;
 export const BALI_BASE_MATCHER_STAY22_URL = DEALS_AFFILIATE_LINKS.hotels.bali;
 
@@ -50,6 +52,18 @@ export type BaliMatcherRecommendation = {
 
 export type BaliFavoriteSort = "saved" | "vibe" | "cost";
 export type BaliTravelerFit = "solo" | "couples" | "families";
+export type BaliRoomType = "hostel" | "hotel" | "villa";
+
+export type BaliNamedComparisonList = {
+  id: string;
+  name: string;
+  areaKeys: AreaKey[];
+  tripDate: string;
+  travelers: number;
+  nights: number;
+  roomOverride: number;
+  roomTypes: Partial<Record<AreaKey, BaliRoomType>>;
+};
 
 export type BaliSeasonalEstimate = {
   multiplier: number;
@@ -78,6 +92,12 @@ export const BALI_TRAVELER_FIT_LABELS: Record<BaliTravelerFit, string> = {
   families: "Families",
 };
 
+export const BALI_ROOM_TYPE_OPTIONS: Record<BaliRoomType, { label: string; assumption: string }> = {
+  hostel: { label: "Hostel / simple room", assumption: "Uses the guide’s budget range" },
+  hotel: { label: "Mid-range hotel", assumption: "Uses the guide’s mid-range range" },
+  villa: { label: "Villa / resort", assumption: "Uses the guide’s luxury-from reference" },
+};
+
 export type BaliMatcherEventName =
   | "bali_matcher_started"
   | "bali_matcher_option_selected"
@@ -90,7 +110,10 @@ export type BaliMatcherEventName =
   | "bali_matcher_location_opened"
   | "bali_matcher_favorite_saved"
   | "bali_matcher_comparison_exported"
-  | "bali_matcher_comparison_pdf_exported";
+  | "bali_matcher_comparison_pdf_exported"
+  | "bali_matcher_comparison_list_saved"
+  | "bali_matcher_comparison_list_loaded"
+  | "bali_matcher_comparison_list_deleted";
 
 type BaliMatcherEventProperties = Record<string, string | number | boolean>;
 
@@ -340,7 +363,24 @@ export function calculateBaliAreaTotalStayEstimate(area: BaliBaseArea, tripDate:
   };
 }
 
-export function buildBaliFavoritesComparisonText(areaKeys: AreaKey[], tripDate: string, travelers = 2, nights = 7, roomOverride = 0) {
+export function getBaliRoomTypeEstimate(area: BaliBaseArea, tripDate: string, travelers: number, nights: number, roomOverride: number, roomType: BaliRoomType) {
+  const seasonal = getBaliMatcherSeasonalEstimate(tripDate);
+  const automaticRooms = Math.max(1, Math.ceil(Math.max(1, travelers) / 2));
+  const rooms = Math.max(1, Math.floor(roomOverride) || automaticRooms);
+  const safeNights = Math.max(1, nights);
+  const formatRange = (range: readonly [number, number], suffix: string) => `$${Math.round(range[0] * seasonal.multiplier * rooms * safeNights).toLocaleString()}–${Math.round(range[1] * seasonal.multiplier * rooms * safeNights).toLocaleString()} ${suffix}`;
+  const formatFrom = (amount: number, suffix: string) => `$${Math.round(amount * seasonal.multiplier * rooms * safeNights).toLocaleString()}+ ${suffix}`;
+
+  if (roomType === "hostel") {
+    return { roomType, label: BALI_ROOM_TYPE_OPTIONS.hostel.label, assumption: BALI_ROOM_TYPE_OPTIONS.hostel.assumption, rooms, total: formatRange(area.baselinePriceBands.budget, "total") };
+  }
+  if (roomType === "villa") {
+    return { roomType, label: BALI_ROOM_TYPE_OPTIONS.villa.label, assumption: BALI_ROOM_TYPE_OPTIONS.villa.assumption, rooms, total: formatFrom(area.baselinePriceBands.luxuryFrom, "total") };
+  }
+  return { roomType, label: BALI_ROOM_TYPE_OPTIONS.hotel.label, assumption: BALI_ROOM_TYPE_OPTIONS.hotel.assumption, rooms, total: formatRange(area.baselinePriceBands.midRange, "total") };
+}
+
+export function buildBaliFavoritesComparisonText(areaKeys: AreaKey[], tripDate: string, travelers = 2, nights = 7, roomOverride = 0, roomTypes: Partial<Record<AreaKey, BaliRoomType>> = {}) {
   const selectedAreas = sanitizeBaliBaseFavorites(areaKeys).map((key) => baliBaseAreas[key]);
   const seasonal = getBaliMatcherSeasonalEstimate(tripDate);
   const formattedDate = /^\d{4}-\d{2}-\d{2}$/.test(tripDate) ? tripDate : "2026-07-15";
@@ -354,7 +394,9 @@ export function buildBaliFavoritesComparisonText(areaKeys: AreaKey[], tripDate: 
     ...selectedAreas.map((area) => {
       const estimate = buildBaliAreaSeasonalEstimate(area, tripDate);
       const total = calculateBaliAreaTotalStayEstimate(area, tripDate, travelers, nights, roomOverride);
-      return `${area.name}\nVibe: ${area.heading}.\nEstimated planning range: Budget ${estimate.budget} · Mid-range ${estimate.midRange} · Luxury from ${estimate.luxuryFrom}.\nTotal stay estimate: Budget ${total.budget} · Mid-range ${total.midRange} · Luxury from ${total.luxuryFrom}.\nHighlights: ${area.localHighlights.join("; ")}.`;
+      const roomType = roomTypes[area.key] ?? "hotel";
+      const roomTypeEstimate = getBaliRoomTypeEstimate(area, tripDate, travelers, nights, roomOverride, roomType);
+      return `${area.name}\nVibe: ${area.heading}.\nPreferred stay type: ${roomTypeEstimate.label} (${roomTypeEstimate.assumption}).\nPreferred stay estimate: ${roomTypeEstimate.total}.\nEstimated planning range: Budget ${estimate.budget} · Mid-range ${estimate.midRange} · Luxury from ${estimate.luxuryFrom}.\nTotal stay estimate: Budget ${total.budget} · Mid-range ${total.midRange} · Luxury from ${total.luxuryFrom}.\nHighlights: ${area.localHighlights.join("; ")}.`;
     }),
     "",
     "Planning estimates only; confirm live availability and final prices before booking.",
@@ -382,6 +424,34 @@ function parseFavorites(value: string | null): AreaKey[] {
   }
 }
 
+export function sanitizeBaliNamedComparisonLists(value: unknown): BaliNamedComparisonList[] {
+  if (!Array.isArray(value)) return [];
+
+  return value.flatMap((item) => {
+    if (!item || typeof item !== "object") return [];
+    const candidate = item as Partial<BaliNamedComparisonList>;
+    const name = typeof candidate.name === "string" ? candidate.name.trim().slice(0, 40) : "";
+    if (!name || typeof candidate.id !== "string" || !candidate.id) return [];
+    const areaKeys = sanitizeBaliBaseFavorites(candidate.areaKeys);
+    if (!areaKeys.length) return [];
+    const tripDate = typeof candidate.tripDate === "string" && /^2026-\d{2}-\d{2}$/.test(candidate.tripDate) ? candidate.tripDate : "2026-07-15";
+    const travelers = typeof candidate.travelers === "number" ? Math.min(20, Math.max(1, Math.floor(candidate.travelers))) : 2;
+    const nights = typeof candidate.nights === "number" ? Math.min(30, Math.max(1, Math.floor(candidate.nights))) : 7;
+    const roomOverride = typeof candidate.roomOverride === "number" ? Math.min(10, Math.max(0, Math.floor(candidate.roomOverride))) : 0;
+    const roomTypes = Object.fromEntries(Object.entries(candidate.roomTypes ?? {}).filter(([key, roomType]) => key in baliBaseAreas && ["hostel", "hotel", "villa"].includes(roomType as string))) as Partial<Record<AreaKey, BaliRoomType>>;
+    return [{ id: candidate.id, name, areaKeys, tripDate, travelers, nights, roomOverride, roomTypes }];
+  }).slice(0, BALI_MATCHER_COMPARISON_LISTS_LIMIT);
+}
+
+function parseComparisonLists(value: string | null): BaliNamedComparisonList[] {
+  if (!value) return [];
+  try {
+    return sanitizeBaliNamedComparisonLists(JSON.parse(value));
+  } catch {
+    return [];
+  }
+}
+
 function getStepProgress(step: number) {
   return Math.min(100, Math.max(0, (step / 3) * 100));
 }
@@ -401,6 +471,11 @@ export default function BaliBaseMatcher() {
   const [comparisonTravelers, setComparisonTravelers] = useState(2);
   const [comparisonNights, setComparisonNights] = useState(7);
   const [comparisonRoomOverride, setComparisonRoomOverride] = useState(0);
+  const [roomTypes, setRoomTypes] = useState<Partial<Record<AreaKey, BaliRoomType>>>({});
+  const [comparisonLists, setComparisonLists] = useState<BaliNamedComparisonList[]>([]);
+  const [comparisonListsReady, setComparisonListsReady] = useState(false);
+  const [comparisonListName, setComparisonListName] = useState("");
+  const [activeComparisonListId, setActiveComparisonListId] = useState("");
   const [isRestarting, setIsRestarting] = useState(false);
   const [shareMessage, setShareMessage] = useState("");
   const [locationArea, setLocationArea] = useState<BaliBaseArea | null>(null);
@@ -416,6 +491,8 @@ export default function BaliBaseMatcher() {
     setShortlistReady(true);
     setFavorites(parseFavorites(window.localStorage.getItem(BALI_MATCHER_FAVORITES_KEY)));
     setFavoritesReady(true);
+    setComparisonLists(parseComparisonLists(window.localStorage.getItem(BALI_MATCHER_COMPARISON_LISTS_KEY)));
+    setComparisonListsReady(true);
   }, []);
 
   useEffect(() => {
@@ -429,6 +506,12 @@ export default function BaliBaseMatcher() {
     if (favorites.length) window.localStorage.setItem(BALI_MATCHER_FAVORITES_KEY, JSON.stringify(favorites));
     else window.localStorage.removeItem(BALI_MATCHER_FAVORITES_KEY);
   }, [favorites, favoritesReady]);
+
+  useEffect(() => {
+    if (!comparisonListsReady) return;
+    if (comparisonLists.length) window.localStorage.setItem(BALI_MATCHER_COMPARISON_LISTS_KEY, JSON.stringify(comparisonLists));
+    else window.localStorage.removeItem(BALI_MATCHER_COMPARISON_LISTS_KEY);
+  }, [comparisonLists, comparisonListsReady]);
 
   useEffect(() => {
     if (step !== 4 || !recommendation) return;
@@ -521,9 +604,65 @@ export default function BaliBaseMatcher() {
     setFavoritesMessage("Favorites cleared from this browser.");
   };
 
+  const saveComparisonList = () => {
+    const name = comparisonListName.trim().slice(0, 40);
+    if (!name || !favorites.length) {
+      setFavoritesMessage("Give this saved-area list a name after adding at least one favorite.");
+      return;
+    }
+
+    const existing = comparisonLists.find((list) => list.name.toLocaleLowerCase() === name.toLocaleLowerCase());
+    const nextList: BaliNamedComparisonList = {
+      id: existing?.id ?? `bali-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+      name,
+      areaKeys: sanitizeBaliBaseFavorites(favorites),
+      tripDate,
+      travelers: comparisonTravelers,
+      nights: comparisonNights,
+      roomOverride: comparisonRoomOverride,
+      roomTypes,
+    };
+
+    if (!existing && comparisonLists.length >= BALI_MATCHER_COMPARISON_LISTS_LIMIT) {
+      setFavoritesMessage(`You can keep up to ${BALI_MATCHER_COMPARISON_LISTS_LIMIT} named lists on this device. Delete one before saving another.`);
+      return;
+    }
+
+    setComparisonLists((lists) => existing ? lists.map((list) => list.id === existing.id ? nextList : list) : [...lists, nextList]);
+    setActiveComparisonListId(nextList.id);
+    setComparisonListName(nextList.name);
+    setFavoritesMessage(`${nextList.name} saved only in this browser.`);
+    trackBaliMatcherEvent("bali_matcher_comparison_list_saved", { areas: nextList.areaKeys.length, updated: Boolean(existing) });
+  };
+
+  const loadComparisonList = (listId: string) => {
+    const list = comparisonLists.find((item) => item.id === listId);
+    if (!list) return;
+    setFavorites(list.areaKeys);
+    setTripDate(list.tripDate);
+    setComparisonTravelers(list.travelers);
+    setComparisonNights(list.nights);
+    setComparisonRoomOverride(list.roomOverride);
+    setRoomTypes(list.roomTypes);
+    setActiveComparisonListId(list.id);
+    setComparisonListName(list.name);
+    setFavoritesMessage(`${list.name} loaded from this browser.`);
+    trackBaliMatcherEvent("bali_matcher_comparison_list_loaded", { areas: list.areaKeys.length });
+  };
+
+  const deleteComparisonList = () => {
+    const list = comparisonLists.find((item) => item.id === activeComparisonListId);
+    if (!list) return;
+    setComparisonLists((lists) => lists.filter((item) => item.id !== list.id));
+    setActiveComparisonListId("");
+    setComparisonListName("");
+    setFavoritesMessage(`${list.name} deleted from this browser.`);
+    trackBaliMatcherEvent("bali_matcher_comparison_list_deleted", { areas: list.areaKeys.length });
+  };
+
   const downloadFavoritesComparison = () => {
     if (sortedFavorites.length < 2) return;
-    const text = buildBaliFavoritesComparisonText(sortedFavorites, tripDate, comparisonTravelers, comparisonNights, comparisonRoomOverride);
+    const text = buildBaliFavoritesComparisonText(sortedFavorites, tripDate, comparisonTravelers, comparisonNights, comparisonRoomOverride, roomTypes);
     const file = new Blob([text], { type: "text/plain;charset=utf-8" });
     const url = window.URL.createObjectURL(file);
     const link = document.createElement("a");
@@ -582,8 +721,12 @@ export default function BaliBaseMatcher() {
 
       page.drawText("THE STAY & WANDER", { x: margin, y, size: 9, font: bold, color: ocean });
       y -= 26;
-      writeHeading("Saved Bali base comparison", 22);
+      writeHeading(comparisonListName.trim() || "Saved Bali base comparison", 22);
       writeWrapped(`${tripDate} · ${seasonalEstimate.label} · ${comparisonTravelers} traveler${comparisonTravelers === 1 ? "" : "s"} · ${comparisonNights} night${comparisonNights === 1 ? "" : "s"} · ${comparisonRoomOverride > 0 ? `${comparisonRoomOverride} specified room${comparisonRoomOverride === 1 ? "" : "s"}` : "one mid-range room per two travelers"}.`, regular, 10);
+      writeHeading("Price assumptions", 13);
+      writeWrapped(`Seasonal reference: ${seasonalEstimate.label} (${seasonalEstimate.multiplier.toFixed(2)}×) is applied to the guide’s directional bands.`);
+      writeWrapped("Room-type mapping: Hostel / simple room uses the budget range; Mid-range hotel uses the mid-range range; Villa / resort uses the luxury-from reference.");
+      writeWrapped(`Total formula: selected seasonal band × ${comparisonRoomOverride > 0 ? `${comparisonRoomOverride} specified room${comparisonRoomOverride === 1 ? "" : "s"}` : "one room per two travelers"} × ${comparisonNights} night${comparisonNights === 1 ? "" : "s"}.`);
       writeWrapped("Planning estimates only. Taxes, service, room configuration, and live availability can change final prices.", regular, 9);
       y -= 8;
 
@@ -591,9 +734,12 @@ export default function BaliBaseMatcher() {
         const area = baliBaseAreas[key];
         const estimate = buildBaliAreaSeasonalEstimate(area, tripDate);
         const total = calculateBaliAreaTotalStayEstimate(area, tripDate, comparisonTravelers, comparisonNights, comparisonRoomOverride);
+        const roomType = roomTypes[key] ?? "hotel";
+        const roomTypeEstimate = getBaliRoomTypeEstimate(area, tripDate, comparisonTravelers, comparisonNights, comparisonRoomOverride, roomType);
         writeHeading(area.name, 16);
         writeWrapped(area.heading, bold, 10, ocean);
         writeWrapped(`Vibe: ${area.quickSummary}`);
+        writeWrapped(`Preferred stay: ${roomTypeEstimate.label}. ${roomTypeEstimate.assumption}. Estimated total: ${roomTypeEstimate.total}.`);
         writeWrapped(`Seasonal planning range: Budget ${estimate.budget} · Mid-range ${estimate.midRange} · Luxury from ${estimate.luxuryFrom}.`);
         writeWrapped(`Total-stay estimate: Budget ${total.budget} · Mid-range ${total.midRange} · Luxury from ${total.luxuryFrom}.`);
         writeWrapped(`Highlights: ${area.localHighlights.join(" · ")}.`);
@@ -729,6 +875,16 @@ export default function BaliBaseMatcher() {
               </div>
               {favorites.length > 0 && <button type="button" onClick={clearFavorites} className="inline-flex shrink-0 items-center gap-2 self-start text-sm font-semibold text-slate-600 underline-offset-4 hover:text-[#0D1B2A] hover:underline focus:outline-none focus:ring-2 focus:ring-[#9a5b20] focus:ring-offset-2"><Trash2 className="h-4 w-4" aria-hidden="true" />Clear Favorites</button>}
             </div>
+            {favorites.length > 0 && <div className="mt-4 border-y border-[#f0d3af] py-4">
+              <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#9a5b20]">Named comparison lists</p>
+              <p className="mt-1 text-sm leading-relaxed text-slate-600">Save up to {BALI_MATCHER_COMPARISON_LISTS_LIMIT} named scenarios on this device. List names and planning inputs stay in this browser.</p>
+              <div className="mt-3 grid gap-3 lg:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)_auto] lg:items-end">
+                <label className="grid gap-1 text-sm font-semibold text-slate-700" htmlFor="bali-comparison-list-name"><span>List name</span><input id="bali-comparison-list-name" type="text" maxLength={40} value={comparisonListName} onChange={(event) => setComparisonListName(event.target.value)} placeholder="e.g. Bali anniversary trip" className="rounded-full border border-[#f0d3af] bg-white px-3 py-2 text-sm font-semibold text-[#0D1B2A] placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#9a5b20] focus:ring-offset-2" /></label>
+                <button type="button" onClick={saveComparisonList} className="inline-flex min-h-10 items-center justify-center rounded-full border border-[#9a5b20] bg-white px-4 py-2 text-sm font-semibold text-[#9a5b20] hover:bg-[#F8EFE0] focus:outline-none focus:ring-2 focus:ring-[#9a5b20] focus:ring-offset-2">Save list</button>
+                {comparisonLists.length > 0 && <label className="grid gap-1 text-sm font-semibold text-slate-700" htmlFor="bali-comparison-list-picker"><span>Saved lists</span><select id="bali-comparison-list-picker" value={activeComparisonListId} onChange={(event) => loadComparisonList(event.target.value)} className="rounded-full border border-[#f0d3af] bg-white px-3 py-2 text-sm font-semibold text-[#0D1B2A] focus:outline-none focus:ring-2 focus:ring-[#9a5b20] focus:ring-offset-2"><option value="">Open a saved list</option>{comparisonLists.map((list) => <option key={list.id} value={list.id}>{list.name} · {list.areaKeys.length} area{list.areaKeys.length === 1 ? "" : "s"}</option>)}</select></label>}
+                {activeComparisonListId && <button type="button" onClick={deleteComparisonList} className="inline-flex min-h-10 items-center justify-center rounded-full px-3 py-2 text-sm font-semibold text-slate-600 underline-offset-4 hover:text-[#0D1B2A] hover:underline focus:outline-none focus:ring-2 focus:ring-[#9a5b20] focus:ring-offset-2">Delete list</button>}
+              </div>
+            </div>}
             {favorites.length > 0 ? <>
               <div className="mt-4 grid gap-3 md:grid-cols-6">
                 <label className="grid gap-1 text-sm font-semibold text-slate-700" htmlFor="bali-favorite-fit"><span className="inline-flex items-center gap-2"><UsersRound className="h-4 w-4 text-[#9a5b20]" aria-hidden="true" />Best for</span><select id="bali-favorite-fit" value={favoriteTravelerFit} onChange={(event) => setFavoriteTravelerFit(event.target.value as BaliTravelerFit | "all")} className="rounded-full border border-[#f0d3af] bg-white px-3 py-2 text-sm font-semibold text-[#0D1B2A] focus:outline-none focus:ring-2 focus:ring-[#9a5b20] focus:ring-offset-2"><option value="all">All saved areas</option>{Object.entries(BALI_TRAVELER_FIT_LABELS).map(([key, label]) => <option key={key} value={key}>{label}</option>)}</select></label>
@@ -743,24 +899,29 @@ export default function BaliBaseMatcher() {
               <ul className="mt-4 flex flex-wrap gap-2" aria-label="Saved Bali area favorites">{sortedFavorites.map((key) => <li key={key} className="inline-flex overflow-hidden rounded-full border border-[#f0d3af] bg-white"><a href={baliBaseAreas[key].anchor} className="px-3 py-2 text-sm font-semibold text-[#0D1B2A] hover:text-[#0077B6] focus:outline-none focus:ring-2 focus:ring-[#0077B6] focus:ring-inset">{baliBaseAreas[key].name}</a><button type="button" onClick={() => removeFavorite(key)} className="border-l border-[#f0d3af] px-2 text-[#9a5b20] hover:bg-[#F8EFE0] focus:outline-none focus:ring-2 focus:ring-[#9a5b20] focus:ring-inset" aria-label={`Remove ${baliBaseAreas[key].name} from Favorites`}><Trash2 className="h-3.5 w-3.5" aria-hidden="true" /></button></li>)}</ul>
               {sortedFavorites.length === 0 && <p className="mt-4 text-sm text-slate-600">No saved areas match the selected traveller filter. Choose “All saved areas” to see your full list.</p>}
               {sortedFavorites.length >= 2 && <section id="bali-favorites-print-card" className="mt-5 border-t border-[#f0d3af] pt-5" aria-labelledby="bali-favorites-comparison-heading">
-                <style>{`@media screen { .bali-comparison-print-only { display: none; } } @media print { body * { visibility: hidden !important; } #bali-favorites-print-card, #bali-favorites-print-card * { visibility: visible !important; } #bali-favorites-print-card { position: absolute; inset: 0; width: 100%; padding: 24px; border: 0; background: #fff; color: #0D1B2A; } #bali-favorites-print-card .bali-comparison-screen-actions, #bali-favorites-print-card .bali-comparison-screen-actions *, #bali-favorites-print-card .bali-comparison-availability, #bali-favorites-print-card .bali-comparison-availability * { display: none !important; } #bali-favorites-print-card .bali-comparison-print-only { display: block !important; } #bali-favorites-print-card .bali-comparison-card { break-inside: avoid; border-color: #cbd5e1; box-shadow: none; } }`}</style>
+                <style>{`@media screen { .bali-comparison-print-only { display: none; } } @media print { body * { visibility: hidden !important; } #bali-favorites-print-card, #bali-favorites-print-card * { visibility: visible !important; } #bali-favorites-print-card { position: absolute; inset: 0; width: 100%; padding: 24px; border: 0; background: #fff; color: #0D1B2A; } #bali-favorites-print-card .bali-comparison-screen-actions, #bali-favorites-print-card .bali-comparison-screen-actions *, #bali-favorites-print-card .bali-comparison-availability, #bali-favorites-print-card .bali-comparison-availability *, #bali-favorites-print-card .bali-room-type-control, #bali-favorites-print-card .bali-room-type-control * { display: none !important; } #bali-favorites-print-card .bali-comparison-print-only { display: block !important; } #bali-favorites-print-card .bali-comparison-card { break-inside: avoid; border-color: #cbd5e1; box-shadow: none; } }`}</style>
                 <div className="bali-comparison-screen-actions flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
                   <div><p id="bali-favorites-comparison-heading" className="text-xs font-bold uppercase tracking-[0.18em] text-[#9a5b20]">Compare saved areas</p><p className="mt-1 text-sm text-slate-600">Use the same guide-supported signals to weigh your top choices side by side.</p></div>
                   <div className="flex flex-wrap gap-2"><button type="button" onClick={downloadFavoritesComparison} className="inline-flex shrink-0 items-center justify-center gap-2 rounded-full border border-[#9a5b20] bg-white px-4 py-2 text-sm font-semibold text-[#9a5b20] hover:bg-[#F8EFE0] focus:outline-none focus:ring-2 focus:ring-[#9a5b20] focus:ring-offset-2"><Download className="h-4 w-4" aria-hidden="true" />Download text card</button><button type="button" onClick={downloadFavoritesComparisonPdf} className="inline-flex shrink-0 items-center justify-center gap-2 rounded-full border border-[#0077B6] bg-white px-4 py-2 text-sm font-semibold text-[#0077B6] hover:bg-[#eef8fb] focus:outline-none focus:ring-2 focus:ring-[#0077B6] focus:ring-offset-2"><Download className="h-4 w-4" aria-hidden="true" />Download PDF</button><button type="button" onClick={printFavoritesComparison} className="inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-[#0D1B2A] px-4 py-2 text-sm font-semibold text-white hover:bg-[#243a52] focus:outline-none focus:ring-2 focus:ring-[#0D1B2A] focus:ring-offset-2"><Printer className="h-4 w-4" aria-hidden="true" />Print comparison</button></div>
                 </div>
-                <div className="bali-comparison-print-only"><p className="text-xs font-bold uppercase tracking-[0.18em] text-[#0077B6]">The Stay & Wander · Bali planning card</p><h3 className="mt-2 font-playfair text-3xl font-bold text-[#0D1B2A]">Saved Bali base comparison</h3><p className="mt-2 text-sm text-slate-700">{tripDate} · {seasonalEstimate.label} · {comparisonTravelers} traveler{comparisonTravelers === 1 ? "" : "s"} · {comparisonNights} night{comparisonNights === 1 ? "" : "s"} · {comparisonRoomOverride > 0 ? `${comparisonRoomOverride} specified room${comparisonRoomOverride === 1 ? "" : "s"}` : "one room per two travelers"}</p></div>
+                <div className="bali-comparison-print-only"><p className="text-xs font-bold uppercase tracking-[0.18em] text-[#0077B6]">The Stay & Wander · Bali planning card</p><h3 className="mt-2 font-playfair text-3xl font-bold text-[#0D1B2A]">{comparisonListName.trim() || "Saved Bali base comparison"}</h3><p className="mt-2 text-sm text-slate-700">{tripDate} · {seasonalEstimate.label} · {comparisonTravelers} traveler{comparisonTravelers === 1 ? "" : "s"} · {comparisonNights} night{comparisonNights === 1 ? "" : "s"} · {comparisonRoomOverride > 0 ? `${comparisonRoomOverride} specified room${comparisonRoomOverride === 1 ? "" : "s"}` : "one room per two travelers"}</p></div>
                 <div className="mt-4 grid gap-3 sm:grid-cols-2">
                   {sortedFavorites.map((key) => {
                     const area = baliBaseAreas[key];
                     const estimate = buildBaliAreaSeasonalEstimate(area, tripDate);
                     const total = calculateBaliAreaTotalStayEstimate(area, tripDate, comparisonTravelers, comparisonNights, comparisonRoomOverride);
+                    const roomType = roomTypes[area.key] ?? "hotel";
+                    const roomTypeEstimate = getBaliRoomTypeEstimate(area, tripDate, comparisonTravelers, comparisonNights, comparisonRoomOverride, roomType);
                     return <article key={area.key} className="bali-comparison-card rounded-xl border border-[#f0d3af] bg-white p-4">
                       <h4 className="font-playfair text-xl font-bold text-[#0D1B2A]">{area.name}</h4>
                       <p className="mt-1 text-sm font-semibold text-[#9a5b20]">{area.heading}</p>
+                      <label className="bali-room-type-control mt-4 grid gap-1 text-sm font-semibold text-slate-700" htmlFor={`bali-room-type-${area.key}`}><span>Preferred stay type</span><select id={`bali-room-type-${area.key}`} value={roomType} onChange={(event) => setRoomTypes((current) => ({ ...current, [area.key]: event.target.value as BaliRoomType }))} className="rounded-full border border-[#f0d3af] bg-white px-3 py-2 text-sm font-semibold text-[#0D1B2A] focus:outline-none focus:ring-2 focus:ring-[#9a5b20] focus:ring-offset-2">{Object.entries(BALI_ROOM_TYPE_OPTIONS).map(([key, option]) => <option key={key} value={key}>{option.label}</option>)}</select></label>
+                      <p className="bali-comparison-print-only mt-3 text-sm text-slate-700"><span className="font-semibold">Preferred stay:</span> {roomTypeEstimate.label} — {roomTypeEstimate.assumption}.</p>
                       <dl className="mt-4 space-y-3 text-sm">
                         <div><dt className="font-bold uppercase tracking-[0.1em] text-[11px] text-slate-500">Vibe</dt><dd className="mt-1 text-slate-700">{area.quickSummary}</dd></div>
                         <div><dt className="font-bold uppercase tracking-[0.1em] text-[11px] text-slate-500">Estimated seasonal range</dt><dd className="mt-1 text-slate-700">Budget {estimate.budget} · Mid-range {estimate.midRange} · Luxury from {estimate.luxuryFrom}</dd></div>
                         <div><dt className="font-bold uppercase tracking-[0.1em] text-[11px] text-slate-500">Total-stay estimate</dt><dd className="mt-1 text-slate-700">Budget {total.budget} · Mid-range {total.midRange} · Luxury from {total.luxuryFrom}<span className="mt-1 block text-xs text-slate-500">{total.rooms} {total.usingRoomOverride ? "specified" : "mid-range"} hotel room{total.rooms === 1 ? "" : "s"} × {total.nights} night{total.nights === 1 ? "" : "s"}</span></dd></div>
+                        <div><dt className="font-bold uppercase tracking-[0.1em] text-[11px] text-slate-500">Preferred stay estimate</dt><dd className="mt-1 text-slate-700">{roomTypeEstimate.total}<span className="mt-1 block text-xs text-slate-500">{roomTypeEstimate.label} · {roomTypeEstimate.assumption}</span></dd></div>
                         <div><dt className="font-bold uppercase tracking-[0.1em] text-[11px] text-slate-500">Highlights</dt><dd className="mt-1 text-slate-700">{area.localHighlights.join(" · ")}</dd></div>
                         <div><dt className="font-bold uppercase tracking-[0.1em] text-[11px] text-slate-500">Location</dt><dd className="mt-1 text-slate-700">{area.baliLocation}</dd></div>
                       </dl>

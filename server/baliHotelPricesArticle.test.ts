@@ -5,11 +5,15 @@ import {
   BALI_BASE_MATCHER_STAY22_URL,
   BALI_MATCHER_FAVORITES_KEY,
   BALI_MATCHER_FAVORITES_LIMIT,
+  BALI_MATCHER_COMPARISON_LISTS_KEY,
+  BALI_MATCHER_COMPARISON_LISTS_LIMIT,
+  BALI_ROOM_TYPE_OPTIONS,
   BALI_MATCHER_RESULT_REVEAL_MS,
   BALI_TRAVELER_FIT_LABELS,
   buildBaliAreaSeasonalEstimate,
   buildBaliFavoritesComparisonText,
   calculateBaliAreaTotalStayEstimate,
+  getBaliRoomTypeEstimate,
   BALI_MATCHER_SHORTLIST_KEY,
   BALI_MATCHER_SHORTLIST_LIMIT,
   buildBaliMatcherSocialShareUrl,
@@ -20,6 +24,7 @@ import {
   getBaliMatcherSeasonalEstimate,
   matcherQuestions,
   sanitizeBaliBaseFavorites,
+  sanitizeBaliNamedComparisonLists,
   sanitizeBaliBaseShortlist,
   sortBaliFavoriteAreas,
   trackBaliMatcherEvent,
@@ -212,5 +217,24 @@ describe("Bali hotel prices article", () => {
     expect(componentSource).toContain('href={BALI_BASE_MATCHER_STAY22_URL}');
     expect(componentSource).toContain('rel="sponsored nofollow"');
     expect(componentSource).toContain('target="_blank"');
+  });
+
+  it("supports per-area room types and only browser-local named comparison lists", () => {
+    expect(BALI_ROOM_TYPE_OPTIONS.hostel.label).toBe("Hostel / simple room");
+    expect(getBaliRoomTypeEstimate(baliBaseAreas.ubud, "2026-08-15", 3, 5, 3, "hostel").total).toBe("$675–1,350 total");
+    expect(getBaliRoomTypeEstimate(baliBaseAreas.ubud, "2026-08-15", 3, 5, 3, "villa").total).toBe("$4,050+ total");
+    expect(sanitizeBaliNamedComparisonLists([{ id: "anniversary", name: " Anniversary trip ", areaKeys: ["ubud", "canggu"], tripDate: "2026-08-15", travelers: 2, nights: 5, roomOverride: 1, roomTypes: { ubud: "villa", canggu: "hostel" } }, { id: "bad", name: "", areaKeys: ["ubud"] }])).toEqual([expect.objectContaining({ name: "Anniversary trip", areaKeys: ["ubud", "canggu"], roomTypes: { ubud: "villa", canggu: "hostel" } })]);
+    expect(BALI_MATCHER_COMPARISON_LISTS_KEY).toBe("tsw-bali-base-comparison-lists");
+    expect(BALI_MATCHER_COMPARISON_LISTS_LIMIT).toBe(6);
+
+    const componentSource = readFileSync(resolve(process.cwd(), "client/src/components/BaliBaseMatcher.tsx"), "utf8");
+    expect(componentSource).toContain("Preferred stay type");
+    expect(componentSource).toContain("bali-room-type-${area.key}");
+    expect(componentSource).toContain("Named comparison lists");
+    expect(componentSource).toContain("Save list");
+    expect(componentSource).toContain("Delete list");
+    expect(componentSource).toContain("Price assumptions");
+    expect(componentSource).toContain("Room-type mapping");
+    expect(componentSource).toContain("BALI_MATCHER_COMPARISON_LISTS_KEY");
   });
 });
