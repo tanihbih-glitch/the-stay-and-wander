@@ -5,7 +5,7 @@
 - [x] Add optional local note templates for family vacations and solo trips, usable within named comparison-list notes.
 - [x] Add a visible copied-link confirmation state with a safe clipboard fallback for named comparison share links.
 - [x] Add regression coverage and validate browser-local interactions. Focused coverage, fresh browser flows across Bangkok, Seoul, and Tokyo, the 162-test suite, TypeScript, and production build pass.
-- [ ] Save and publish the enhanced city matcher controls, then verify the test-ready routes.
+- [x] Save and publish the enhanced city matcher controls in checkpoint `5585d23e`, then verify the test-ready routes. The propagated Bangkok, Seoul, and Tokyo flows passed clear-all favorites, both note templates, visible Link copied feedback, sharing boundaries, and all prior planner controls.
 
 - [x] Add the exact “City-Tier Benchmarks (Eligibility Restricted by District)” label to Seoul and Tokyo comparison estimates.
 - [x] Add the approved localized-benchmark update notice to Seoul and Tokyo comparison views and exports.
