@@ -5,7 +5,8 @@
 - [x] Add a downloadable comparison export that creates a privacy-safe text card from the current saved-area comparison.
 - [x] Add a trip-date selector that applies the existing Bali high-, shoulder-, and low-season planning guidance to displayed directional cost ranges.
 - [x] Add regression coverage and validate desktop/mobile and browser-local behavior. Focused coverage, TypeScript, direct browser verification, the 152-test suite, and the production build pass.
-- [ ] Save and publish the enhanced Bali matcher checkpoint, then verify its test-ready route.
+- [x] Save and publish the enhanced Bali matcher checkpoint `5d320315`.
+- [x] Directly verify the published matcher’s family, couples, and solo filters, the selected-date seasonal cost updates, and the downloadable comparison text-card contents before final delivery. The published route verified all three filters, the August 1.50× reference, Ubud’s adjusted $45–90 budget range, and a downloaded card containing both saved areas and planning limitations.
 
 - [x] Inspect current Bali matcher area data, saved-favorites controls, and focused tests for the requested comparison enhancement.
 - [x] Add concise deterministic area summaries covering each area’s main vibe and guide-supported local highlights, without an external AI service or personal-data processing.
