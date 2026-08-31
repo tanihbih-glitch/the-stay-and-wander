@@ -1,5 +1,19 @@
 # Project TODO
 
+- [x] Add the exact “City-Tier Benchmarks (Eligibility Restricted by District)” label to Seoul and Tokyo comparison estimates.
+- [x] Add the approved localized-benchmark update notice to Seoul and Tokyo comparison views and exports.
+- [x] Re-run full cross-city stability validation for sharing, filters, shortlist/favorites, local notes, named lists, exports, and print/PDF behavior. Focused and full tests, TypeScript, production build, and fresh browser flows passed across Bangkok, Seoul, and Tokyo.
+- [ ] Publish the approved eligibility-based update and provide test-ready links.
+
+- [x] Audit the Seoul and Tokyo comparison model and research credible neighborhood-level accommodation rate surveys by tier.
+- [x] Define a transparent neighborhood-rate methodology and a privacy-safe encoded share-link format for named comparison lists.
+- [x] Restrict Seoul and Tokyo tier estimates to source-backed neighborhood eligibility groups and disclose that the dated published rates are city-level bands, not neighborhood-specific measurements.
+- [x] Add browser-local free-text notes for individual saved areas within named comparison lists.
+- [x] Add one-click share links that encode a named comparison list in the URL without creating server-side storage.
+- [x] Add regression coverage and validate local notes, shared links, neighborhood estimates, exports, and print behavior. Focused coverage, TypeScript, the full 162-test suite, production build, desktop review, and fresh cross-city browser sessions pass.
+- [ ] Publish the enhanced Seoul and Tokyo comparison tools and provide test-ready links.
+- [ ] Add distinct Seoul and Tokyo neighborhood-level numerical rate ranges only when a credible source or user-supplied survey provides those figures.
+
 - [x] Audit current city comparison state, map integration points, browser-local list storage, and credible Seoul/Tokyo accommodation benchmark sources.
 - [x] Define a transparent source and calculation methodology for Seoul and Tokyo tier-level benchmark estimates.
 - [x] Add interactive maps to Bangkok, Seoul, and Tokyo saved favorites comparisons, using area-level map markers and no location data collection.

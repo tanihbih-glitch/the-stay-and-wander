@@ -20,17 +20,27 @@ describe("shared city stay matcher", () => {
     expect(CITY_STAY_MATCHER_AFFILIATE_LINKS).toEqual(expect.objectContaining({ bangkok: expect.stringContaining("stay22"), seoul: expect.stringContaining("stay22"), tokyo: expect.stringContaining("stay22") }));
   });
 
-  it("uses transparent dated tier benchmarks for Bangkok, Seoul, and Tokyo cost estimates", () => {
+  it("uses transparent dated tier benchmarks with neighborhood eligibility for Seoul and Tokyo estimates", () => {
     expect(bangkokStayMatcherConfig.supportsTierEstimates).toBe(true);
     expect(bangkokStayMatcherConfig.areas.every((area) => Boolean(area.tierRanges))).toBe(true);
     expect(seoulStayMatcherConfig.supportsTierEstimates).toBe(true);
     expect(tokyoStayMatcherConfig.supportsTierEstimates).toBe(true);
-    expect(seoulStayMatcherConfig.areas.every((area) => Boolean(area.tierRanges))).toBe(true);
-    expect(tokyoStayMatcherConfig.areas.every((area) => Boolean(area.tierRanges))).toBe(true);
+    expect(seoulStayMatcherConfig.areas.find((area) => area.key === "hongdae")?.verifiedRoomTypes).toEqual(["hostel", "hotel"]);
+    expect(seoulStayMatcherConfig.areas.find((area) => area.key === "gangnam")?.verifiedRoomTypes).toEqual(["hotel", "villa"]);
+    expect(seoulStayMatcherConfig.areas.find((area) => area.key === "itaewon")?.tierRanges).toBeUndefined();
+    expect(tokyoStayMatcherConfig.areas.find((area) => area.key === "asakusa")?.verifiedRoomTypes).toEqual(["hostel", "hotel"]);
+    expect(tokyoStayMatcherConfig.areas.find((area) => area.key === "ginza")?.verifiedRoomTypes).toEqual(["villa"]);
+    expect(tokyoStayMatcherConfig.areas.find((area) => area.key === "ikebukuro")?.verifiedRoomTypes).toEqual(["hotel"]);
     expect(seoulStayMatcherConfig.benchmark?.asOf).toBe("2026-08-13");
     expect(tokyoStayMatcherConfig.benchmark?.asOf).toBe("2026-08-13");
     expect(seoulStayMatcherConfig.benchmark?.sourceUrl).toContain("discover.shopback.com");
     expect(tokyoStayMatcherConfig.benchmark?.sourceUrl).toContain("discover.shopback.com");
+    expect(seoulStayMatcherConfig.benchmark?.scope).toContain("named neighborhood groups");
+    expect(tokyoStayMatcherConfig.benchmark?.scope).toContain("named neighborhood groups");
+    expect(seoulStayMatcherConfig.benchmark?.label).toBe("City-Tier Benchmarks (Eligibility Restricted by District)");
+    expect(tokyoStayMatcherConfig.benchmark?.label).toBe("City-Tier Benchmarks (Eligibility Restricted by District)");
+    expect(seoulStayMatcherConfig.benchmark?.updateNotice).toBe("District-level pricing surveys will update automatically as localized rate benchmarks are finalized.");
+    expect(tokyoStayMatcherConfig.benchmark?.updateNotice).toBe("District-level pricing surveys will update automatically as localized rate benchmarks are finalized.");
   });
 
   it("uses only the explicitly published seasonal uplift guidance for Seoul and Tokyo", () => {
@@ -52,9 +62,14 @@ describe("shared city stay matcher", () => {
     expect(source).toContain("Share on X");
     expect(source).toContain("Saved-area map");
     expect(source).toContain("Personal planning note");
+    expect(source).toContain("Personal note for");
+    expect(source).toContain("Share link");
+    expect(source).toContain("encodeSharedList");
+    expect(source).toContain("areaNotes");
+    expect(source).toContain("Private notes are not shared");
     expect(source).toContain("data-area-map");
     expect(source).toContain("schematic city orientation map");
-    expect(source).toContain("Benchmark source:");
+    expect(source).toContain("config.benchmark.label");
     expect(source).toContain("rel=\"sponsored nofollow\"");
     expect(source).toContain("target=\"_blank\"");
     expect(source).toContain("Localized");

@@ -23,6 +23,7 @@ export type CityMatcherArea = {
   costRank: number;
   bestFor: readonly TravelerFit[];
   tierRanges?: { hostel: Range; hotel: Range; villaFrom: number };
+  verifiedRoomTypes?: readonly RoomType[];
   mapPoint?: { lat: number; lng: number };
 };
 
@@ -45,7 +46,7 @@ export type CityMatcherConfig = {
   tierNotice?: string;
   mapCenter: google.maps.LatLngLiteral;
   mapZoom: number;
-  benchmark?: { sourceName: string; sourceUrl: string; asOf: string; scope: string };
+  benchmark?: { sourceName: string; sourceUrl: string; asOf: string; scope: string; label?: string; updateNotice?: string };
 };
 
 type SavedList = {
@@ -58,11 +59,12 @@ type SavedList = {
   roomOverride: number;
   roomTypes: Record<string, RoomType>;
   note: string;
+  areaNotes: Record<string, string>;
 };
 
 const ROOM_TYPES: Record<RoomType, { label: string; assumption: string }> = {
   hostel: { label: "Hostel / simple room", assumption: "Uses the guide's budget range" },
-  hotel: { label: "Mid-range hotel", assumption: "Uses the guide's mid-range range" },
+  hotel: { label: "Hotel room", assumption: "Uses this area's verified hotel range" },
   villa: { label: "Villa / resort", assumption: "Uses the guide's luxury-from reference" },
 };
 const FIT_LABELS: Record<TravelerFit, string> = { solo: "Solo travelers", couples: "Couples", families: "Families" };
@@ -98,7 +100,8 @@ function sanitizeLists(config: CityMatcherConfig, value: unknown): SavedList[] {
     if (!name || !areaKeys.length || typeof list.id !== "string" || !list.id) return [];
     const roomTypes = Object.fromEntries(Object.entries(list.roomTypes ?? {}).filter(([key, type]) => Boolean(getArea(config, key)) && ["hostel", "hotel", "villa"].includes(type as string))) as Record<string, RoomType>;
     const note = typeof list.note === "string" ? list.note.trim().slice(0, 600) : "";
-    return [{ id: list.id, name, areaKeys, tripDate: /^2026-\d{2}-\d{2}$/.test(list.tripDate ?? "") ? list.tripDate! : "2026-07-15", travelers: Math.min(20, Math.max(1, Math.floor(list.travelers ?? 2))), nights: Math.min(30, Math.max(1, Math.floor(list.nights ?? 7))), roomOverride: Math.min(10, Math.max(0, Math.floor(list.roomOverride ?? 0))), roomTypes, note }];
+    const areaNotes = Object.fromEntries(Object.entries(list.areaNotes ?? {}).flatMap(([key, areaNote]) => Boolean(getArea(config, key)) && typeof areaNote === "string" && areaNote.trim() ? [[key, areaNote.trim().slice(0, 400)]] : [])) as Record<string, string>;
+    return [{ id: list.id, name, areaKeys, tripDate: /^2026-\d{2}-\d{2}$/.test(list.tripDate ?? "") ? list.tripDate! : "2026-07-15", travelers: Math.min(20, Math.max(1, Math.floor(list.travelers ?? 2))), nights: Math.min(30, Math.max(1, Math.floor(list.nights ?? 7))), roomOverride: Math.min(10, Math.max(0, Math.floor(list.roomOverride ?? 0))), roomTypes, note, areaNotes }];
   }).slice(0, LIST_LIMIT);
 }
 
@@ -114,6 +117,15 @@ function formatRange(range: Range, multiplier: readonly [number, number], suffix
 
 function roomsFor(travelers: number, override: number) {
   return Math.max(1, Math.floor(override) || Math.ceil(Math.max(1, travelers) / 2));
+}
+
+function availableRoomTypes(area: CityMatcherArea): RoomType[] {
+  return [...(area.verifiedRoomTypes ?? (area.tierRanges ? ["hostel", "hotel", "villa"] : []))];
+}
+
+function resolvedRoomType(area: CityMatcherArea, requested: RoomType): RoomType | null {
+  const available = availableRoomTypes(area);
+  return available.includes(requested) ? requested : available[0] ?? null;
 }
 
 function totalRange(range: Range, multiplier: readonly [number, number], travelers: number, nights: number, roomOverride: number) {
@@ -145,19 +157,39 @@ function shareSummary(config: CityMatcherConfig, primary: CityMatcherArea, alter
   return [`My ${config.city} base ideas from The Stay & Wander`, `Primary area: ${primary.name} — ${primary.heading}.`, `Alternative area: ${alternative.name} — ${alternative.heading}.`, `Compare the full guide: https://thestayandwander.com${config.articleUrl}#${config.id}-base-matcher`].join("\n");
 }
 
-function buildComparisonText(config: CityMatcherConfig, areaKeys: string[], tripDate: string, travelers: number, nights: number, roomOverride: number, roomTypes: Record<string, RoomType>, note = "") {
+function buildComparisonText(config: CityMatcherConfig, areaKeys: string[], tripDate: string, travelers: number, nights: number, roomOverride: number, roomTypes: Record<string, RoomType>, note = "", areaNotes: Record<string, string> = {}) {
   const seasonal = config.seasonal(tripDate);
   const areas = sanitizeAreaKeys(config, areaKeys, FAVORITE_LIMIT).map((key) => getArea(config, key)!).filter(Boolean);
-  const lines = [`${config.city} base comparison — The Stay & Wander`, `Trip date planning reference: ${tripDate} · ${seasonal.label}.`, seasonal.note, config.supportsTierEstimates ? `Stay estimate: ${travelers} traveler${travelers === 1 ? "" : "s"} · ${nights} night${nights === 1 ? "" : "s"} · ${roomOverride ? `${roomOverride} specified room${roomOverride === 1 ? "" : "s"}` : "one hotel room per two travelers"}.` : `Room preferences are saved for comparison. ${config.tierNotice ?? "Localized room-tier benchmarks are pending."}`, config.benchmark ? `Benchmark source: ${config.benchmark.sourceName}, ${config.benchmark.asOf}. ${config.benchmark.scope} ${config.benchmark.sourceUrl}` : "", note ? `Personal planning note: ${note}` : "", ""];
+  const lines = [`${config.city} base comparison — The Stay & Wander`, `Trip date planning reference: ${tripDate} · ${seasonal.label}.`, seasonal.note, config.supportsTierEstimates ? `Stay estimate: ${travelers} traveler${travelers === 1 ? "" : "s"} · ${nights} night${nights === 1 ? "" : "s"} · ${roomOverride ? `${roomOverride} specified room${roomOverride === 1 ? "" : "s"}` : "one hotel room per two travelers"}.` : `Room preferences are saved for comparison. ${config.tierNotice ?? "Localized room-tier benchmarks are pending."}`, config.benchmark ? `${config.benchmark.label ?? "Benchmark source"}: ${config.benchmark.sourceName}, ${config.benchmark.asOf}. ${config.benchmark.scope} ${config.benchmark.sourceUrl}` : "", config.benchmark?.updateNotice ?? "", note ? `Personal planning note: ${note}` : "", ""];
   areas.forEach((area) => {
-    const preferred = roomTypes[area.key] ?? "hotel";
-    lines.push(`${area.name}`, `Vibe: ${area.heading}.`, `Estimated guide range: ${formatRange(area.baseRange, seasonal.multiplier)}.`, `Preferred stay type: ${ROOM_TYPES[preferred].label}.`);
-    if (config.supportsTierEstimates && area.tierRanges) lines.push(`Preferred stay estimate: ${preferred === "villa" ? totalFrom(area.tierRanges.villaFrom, seasonal.multiplier, travelers, nights, roomOverride) : totalRange(area.tierRanges[preferred], seasonal.multiplier, travelers, nights, roomOverride)}.`, `Total stay estimate: Budget ${totalRange(area.tierRanges.hostel, seasonal.multiplier, travelers, nights, roomOverride)} · Mid-range ${totalRange(area.tierRanges.hotel, seasonal.multiplier, travelers, nights, roomOverride)} · Luxury from ${totalFrom(area.tierRanges.villaFrom, seasonal.multiplier, travelers, nights, roomOverride)}.`);
-    else lines.push(config.tierNotice ?? "Localized room-tier rate breakdowns will update once verified benchmarks are finalized.");
-    lines.push(`Highlights: ${area.highlights.join("; ")}.`, "");
+    const preferred = resolvedRoomType(area, roomTypes[area.key] ?? "hotel");
+    lines.push(`${area.name}`, `Vibe: ${area.heading}.`, `Estimated guide range: ${formatRange(area.baseRange, seasonal.multiplier)}.`, `Preferred stay type: ${preferred ? ROOM_TYPES[preferred].label : "No verified tier for this area"}.`);
+    if (config.supportsTierEstimates && area.tierRanges && preferred) {
+      const estimate = preferred === "villa" ? totalFrom(area.tierRanges.villaFrom, seasonal.multiplier, travelers, nights, roomOverride) : totalRange(area.tierRanges[preferred], seasonal.multiplier, travelers, nights, roomOverride);
+      const publishedTiers = availableRoomTypes(area).map((type) => `${ROOM_TYPES[type].label}: ${type === "villa" ? totalFrom(area.tierRanges!.villaFrom, seasonal.multiplier, travelers, nights, roomOverride) : totalRange(area.tierRanges![type], seasonal.multiplier, travelers, nights, roomOverride)}`).join(" · ");
+      lines.push(`Preferred stay estimate: ${estimate}.`, `Verified tiers for this area: ${publishedTiers}.`);
+    } else lines.push("No verified tier-specific rate has been published for this area; use the guide range and check live availability.");
+    lines.push(`Highlights: ${area.highlights.join("; ")}.`, areaNotes[area.key] ? `Area note: ${areaNotes[area.key]}` : "", "");
   });
   lines.push("Planning estimates only; confirm live availability and final prices before booking.", `https://thestayandwander.com${config.articleUrl}#${config.id}-base-matcher`);
   return lines.join("\n");
+}
+
+function encodeSharedList(config: CityMatcherConfig, list: SavedList) {
+  const payload = JSON.stringify({ version: 1, city: config.id, name: list.name, areaKeys: list.areaKeys, tripDate: list.tripDate, travelers: list.travelers, nights: list.nights, roomOverride: list.roomOverride, roomTypes: list.roomTypes });
+  const bytes = new TextEncoder().encode(payload);
+  let binary = "";
+  bytes.forEach((byte) => { binary += String.fromCharCode(byte); });
+  return btoa(binary);
+}
+
+function decodeSharedList(config: CityMatcherConfig, encoded: string): SavedList | null {
+  try {
+    const binary = atob(encoded);
+    const payload = JSON.parse(new TextDecoder().decode(Uint8Array.from(binary, (char) => char.charCodeAt(0)))) as Partial<SavedList> & { version?: number; city?: string };
+    if (payload.version !== 1 || payload.city !== config.id) return null;
+    return sanitizeLists(config, [{ ...payload, id: `shared-${Date.now()}`, note: "", areaNotes: {} }])[0] ?? null;
+  } catch { return null; }
 }
 
 export default function CityStayMatcher({ config }: { config: CityMatcherConfig }) {
@@ -177,6 +209,7 @@ export default function CityStayMatcher({ config }: { config: CityMatcherConfig 
   const [lists, setLists] = useState<SavedList[]>([]);
   const [listName, setListName] = useState("");
   const [listNote, setListNote] = useState("");
+  const [areaNotes, setAreaNotes] = useState<Record<string, string>>({});
   const [message, setMessage] = useState("");
   const [locationArea, setLocationArea] = useState<CityMatcherArea | null>(null);
   const recommendation = useMemo(() => getCityMatcherRecommendation(config, answers), [answers, config]);
@@ -187,7 +220,15 @@ export default function CityStayMatcher({ config }: { config: CityMatcherConfig 
     setShortlist(parseAreaKeys(config, window.localStorage.getItem(storageKey(config, "shortlist")), SHORTLIST_LIMIT));
     setFavorites(parseAreaKeys(config, window.localStorage.getItem(storageKey(config, "favorites")), FAVORITE_LIMIT));
     setLists(parseLists(config, window.localStorage.getItem(storageKey(config, "comparison-lists"))));
+    const loadSharedHash = () => {
+      const encoded = new URLSearchParams(window.location.hash.split("?")[1] ?? "").get("list");
+      const shared = encoded ? decodeSharedList(config, encoded) : null;
+      if (shared) { setFavorites(shared.areaKeys); setTripDate(shared.tripDate); setTravelers(shared.travelers); setNights(shared.nights); setRoomOverride(shared.roomOverride); setRoomTypes(shared.roomTypes); setListName(shared.name); setAreaNotes({}); setMessage(`Shared list “${shared.name}” loaded. Personal notes are not included in share links.`); document.getElementById(`${config.id}-base-matcher`)?.scrollIntoView({ block: "start" }); }
+    };
+    loadSharedHash();
+    window.addEventListener("hashchange", loadSharedHash);
     setStorageReady(true);
+    return () => window.removeEventListener("hashchange", loadSharedHash);
   }, [config]);
   useEffect(() => { if (storageReady) window.localStorage.setItem(storageKey(config, "shortlist"), JSON.stringify(shortlist)); }, [config, shortlist, storageReady]);
   useEffect(() => { if (storageReady) window.localStorage.setItem(storageKey(config, "favorites"), JSON.stringify(favorites)); }, [config, favorites, storageReady]);
@@ -211,18 +252,25 @@ export default function CityStayMatcher({ config }: { config: CityMatcherConfig 
   const saveList = () => {
     const name = listName.trim().slice(0, 40);
     if (!name || !favorites.length) { setMessage("Save at least one favorite and enter a list name first."); return; }
-    const list: SavedList = { id: `${Date.now()}-${name}`, name, areaKeys: favorites, tripDate, travelers, nights, roomOverride, roomTypes, note: listNote.trim().slice(0, 600) };
+    const list: SavedList = { id: `${Date.now()}-${name}`, name, areaKeys: favorites, tripDate, travelers, nights, roomOverride, roomTypes, note: listNote.trim().slice(0, 600), areaNotes };
     setLists((current) => [...current.filter((item) => item.name.toLowerCase() !== name.toLowerCase()), list].slice(-LIST_LIMIT));
     setListName(""); setListNote(""); setMessage(`“${name}” saved on this device.`); track(config, "comparison_list_saved");
   };
-  const loadList = (list: SavedList) => { setFavorites(list.areaKeys); setTripDate(list.tripDate); setTravelers(list.travelers); setNights(list.nights); setRoomOverride(list.roomOverride); setRoomTypes(list.roomTypes); setListName(list.name); setListNote(list.note); setMessage(`“${list.name}” loaded.`); };
+  const loadList = (list: SavedList) => { setFavorites(list.areaKeys); setTripDate(list.tripDate); setTravelers(list.travelers); setNights(list.nights); setRoomOverride(list.roomOverride); setRoomTypes(list.roomTypes); setListName(list.name); setListNote(list.note); setAreaNotes(list.areaNotes); setMessage(`“${list.name}” loaded.`); };
+  const shareList = async (list: SavedList) => {
+    const url = `${window.location.origin}${config.articleUrl}#${config.id}-base-matcher?list=${encodeURIComponent(encodeSharedList(config, list))}`;
+    const data = { title: `${config.city} stay comparison`, text: `Compare my ${config.city} stay ideas from The Stay & Wander. Private notes are not shared.`, url };
+    try { if (navigator.share) { await navigator.share(data); setMessage("Share link ready to send to your travel companions."); } else { await navigator.clipboard?.writeText(url); setMessage("Share link copied to your clipboard."); } }
+    catch { setMessage("Share link is ready—copy it from your browser address bar if the share sheet was closed."); }
+    track(config, "comparison_list_shared");
+  };
   const downloadText = () => {
-    const blob = new Blob([buildComparisonText(config, visibleFavorites, tripDate, travelers, nights, roomOverride, roomTypes, listNote)], { type: "text/plain;charset=utf-8" });
+    const blob = new Blob([buildComparisonText(config, visibleFavorites, tripDate, travelers, nights, roomOverride, roomTypes, listNote, areaNotes)], { type: "text/plain;charset=utf-8" });
     const link = document.createElement("a"); link.href = URL.createObjectURL(blob); link.download = `${config.id}-stay-comparison.txt`; link.click(); URL.revokeObjectURL(link.href); track(config, "comparison_exported");
   };
   const downloadPdf = async () => {
     const { jsPDF } = await import("jspdf"); const doc = new jsPDF({ unit: "pt", format: "a4" });
-    const text = buildComparisonText(config, visibleFavorites, tripDate, travelers, nights, roomOverride, roomTypes, listNote);
+    const text = buildComparisonText(config, visibleFavorites, tripDate, travelers, nights, roomOverride, roomTypes, listNote, areaNotes);
     doc.setFontSize(11); doc.text(doc.splitTextToSize(text, 500), 48, 56); doc.save(`${config.id}-stay-comparison.pdf`); setMessage("Your printable comparison PDF has downloaded."); track(config, "comparison_pdf_exported");
   };
   const restart = () => { setStep(1); setAnswers({ vibe: "", budget: "", duration: "" }); setMessage(""); };
@@ -242,14 +290,14 @@ export default function CityStayMatcher({ config }: { config: CityMatcherConfig 
       {shortlist.length > 0 && <div className="mt-4 flex flex-wrap items-center gap-2 rounded-xl border border-[#0077B6]/15 bg-white/70 p-3 print:hidden"><span className="mr-1 text-xs font-bold uppercase tracking-[0.12em] text-[#0077B6]">Saved area shortlist</span>{shortlist.map((key) => <span key={key} className="rounded-full bg-[#F8EFE0] px-3 py-1 text-sm font-semibold text-[#0D1B2A]">{getArea(config, key)?.name}</span>)}<button type="button" onClick={() => setShortlist([])} className="ml-auto text-sm font-semibold text-[#0077B6]">Clear shortlist</button></div>}
       <div className="mt-4 grid gap-3 md:grid-cols-3 print:hidden"><label className="text-sm font-semibold text-slate-700">Best for<select value={fit} onChange={(event) => setFit(event.target.value as TravelerFit | "all")} className="mt-1 block w-full rounded-lg border border-slate-300 bg-white p-2.5"><option value="all">All traveler types</option>{(Object.keys(FIT_LABELS) as TravelerFit[]).map((key) => <option key={key} value={key}>{FIT_LABELS[key]}</option>)}</select></label><label className="text-sm font-semibold text-slate-700">Sort favorites<select value={favoriteSort} onChange={(event) => setFavoriteSort(event.target.value as FavoriteSort)} className="mt-1 block w-full rounded-lg border border-slate-300 bg-white p-2.5"><option value="saved">Saved order</option><option value="vibe">Vibe</option><option value="cost">Lower directional cost</option></select></label><label className="text-sm font-semibold text-slate-700">Trip date<select value={tripDate} onChange={(event) => setTripDate(event.target.value)} className="mt-1 block w-full rounded-lg border border-slate-300 bg-white p-2.5">{[...Array(12)].map((_, month) => { const value = `2026-${String(month + 1).padStart(2, "0")}-15`; return <option key={value} value={value}>{new Date(`${value}T12:00:00Z`).toLocaleDateString("en-US", { month: "long", year: "numeric", timeZone: "UTC" })}</option>; })}</select></label></div>
       {config.supportsTierEstimates ? <div className="mt-3 grid gap-3 sm:grid-cols-3"><NumberInput label="Travelers" value={travelers} onChange={setTravelers} min={1} max={20} /><NumberInput label="Nights" value={nights} onChange={setNights} min={1} max={30} /><NumberInput label="Room override (optional)" value={roomOverride} onChange={setRoomOverride} min={0} max={10} /></div> : <p className="mt-4 rounded-lg bg-white/80 p-4 text-sm leading-relaxed text-slate-700"><strong>Room-type note:</strong> {config.tierNotice}</p>}
-      {config.benchmark && <aside className="mt-4 rounded-lg border border-[#0077B6]/20 bg-white/75 p-4 text-sm leading-relaxed text-slate-700"><strong className="text-[#0D1B2A]">Tier-estimate basis:</strong> {config.benchmark.scope} Rates were published as of {config.benchmark.asOf}; they are planning inputs, not live quotes. <a href={config.benchmark.sourceUrl} target="_blank" rel="noopener noreferrer" className="font-semibold text-[#0077B6] underline underline-offset-2">Read the benchmark source</a>.</aside>}
+      {config.benchmark && <aside className="mt-4 rounded-lg border border-[#0077B6]/20 bg-white/75 p-4 text-sm leading-relaxed text-slate-700"><strong className="text-[#0D1B2A]">{config.benchmark.label ?? "Tier-estimate basis"}:</strong> {config.benchmark.scope} Rates were published as of {config.benchmark.asOf}; they are planning inputs, not live quotes. <a href={config.benchmark.sourceUrl} target="_blank" rel="noopener noreferrer" className="font-semibold text-[#0077B6] underline underline-offset-2">Read the benchmark source</a>.{config.benchmark.updateNotice && <span className="mt-2 block font-medium text-[#0D1B2A]">{config.benchmark.updateNotice}</span>}</aside>}
       <p className="mt-4 text-sm italic text-slate-600"><strong>{seasonal.label}:</strong> {seasonal.note} {config.supportsTierEstimates ? `Total-stay estimates use ${roomOverride ? `${roomOverride} specified room${roomOverride === 1 ? "" : "s"}` : "one hotel room per two travelers"} × ${nights} night${nights === 1 ? "" : "s"}.` : "The selected date updates the general guide range only."}</p>
       {favorites.length === 0 ? <p className="mt-5 rounded-xl bg-white p-5 text-sm text-slate-600">Complete a match, then use “Save to Favorites” to compare up to four area ideas.</p> : <><div className="mt-5 flex flex-wrap gap-2">{visibleFavorites.map((key) => { const area = getArea(config, key)!; return <span key={key} className="inline-flex items-center gap-2 rounded-full bg-white px-3 py-2 text-sm font-semibold text-[#0D1B2A]">{area.name}<button type="button" aria-label={`Remove ${area.name}`} onClick={() => setFavorites((current) => current.filter((item) => item !== key))}><X className="h-4 w-4" /></button></span>; })}</div>
-      <div className="mt-6 grid gap-4 md:grid-cols-2" data-screen-comparison>{displayAreas.map((area) => <ComparisonCard key={area.key} area={area} config={config} seasonal={seasonal} travelers={travelers} nights={nights} roomOverride={roomOverride} roomType={roomTypes[area.key] ?? "hotel"} onRoomType={(value) => setRoomTypes((current) => ({ ...current, [area.key]: value }))} />)}</div>
+      <div className="mt-6 grid gap-4 md:grid-cols-2" data-screen-comparison>{displayAreas.map((area) => <ComparisonCard key={area.key} area={area} config={config} seasonal={seasonal} travelers={travelers} nights={nights} roomOverride={roomOverride} roomType={roomTypes[area.key] ?? "hotel"} areaNote={areaNotes[area.key] ?? ""} onRoomType={(value) => setRoomTypes((current) => ({ ...current, [area.key]: value }))} onAreaNote={(value) => setAreaNotes((current) => ({ ...current, [area.key]: value.slice(0, 400) }))} />)}</div>
       <SavedAreasMap config={config} areas={displayAreas} />
-      {displayAreas.length > 1 && <div className="mt-6 rounded-xl bg-white p-5"><h4 className="font-playfair text-xl font-bold text-[#0D1B2A]">Named comparison lists</h4><div className="mt-3 grid gap-3"><input value={listName} onChange={(event) => setListName(event.target.value)} maxLength={40} placeholder="e.g., Family city break" className="min-w-0 rounded-lg border border-slate-300 px-3 py-2.5" /><textarea value={listNote} onChange={(event) => setListNote(event.target.value.slice(0, 600))} maxLength={600} rows={3} aria-label="Personal planning note" placeholder="Optional private note for this comparison list" className="min-w-0 resize-y rounded-lg border border-slate-300 px-3 py-2.5 text-sm" /><div className="flex flex-wrap items-center justify-between gap-3"><p className="text-xs text-slate-500">{listNote.length}/600 characters · stored only in this browser.</p><button type="button" onClick={saveList} className="inline-flex items-center justify-center gap-2 rounded-lg bg-[#0D1B2A] px-4 py-2.5 text-sm font-bold text-white"><ListPlus className="h-4 w-4" />Save list</button></div></div>{lists.length > 0 && <div className="mt-4 space-y-2">{lists.map((list) => <div key={list.id} className="flex flex-wrap items-center gap-2 rounded-lg border border-slate-200 px-3 py-2 text-sm"><button type="button" onClick={() => loadList(list)} className="font-semibold text-[#0077B6]">{list.name}</button>{list.note && <span className="min-w-0 flex-1 truncate text-slate-600">{list.note}</span>}<button type="button" aria-label={`Delete ${list.name}`} onClick={() => setLists((current) => current.filter((item) => item.id !== list.id))}><X className="h-3.5 w-3.5" /></button></div>)}</div>}</div>}
+      {displayAreas.length > 1 && <div className="mt-6 rounded-xl bg-white p-5"><h4 className="font-playfair text-xl font-bold text-[#0D1B2A]">Named comparison lists</h4><div className="mt-3 grid gap-3"><input value={listName} onChange={(event) => setListName(event.target.value)} maxLength={40} placeholder="e.g., Family city break" className="min-w-0 rounded-lg border border-slate-300 px-3 py-2.5" /><textarea value={listNote} onChange={(event) => setListNote(event.target.value.slice(0, 600))} maxLength={600} rows={3} aria-label="Personal planning note" placeholder="Optional private note for this comparison list" className="min-w-0 resize-y rounded-lg border border-slate-300 px-3 py-2.5 text-sm" /><div className="flex flex-wrap items-center justify-between gap-3"><p className="text-xs text-slate-500">{listNote.length}/600 characters · stored only in this browser.</p><button type="button" onClick={saveList} className="inline-flex items-center justify-center gap-2 rounded-lg bg-[#0D1B2A] px-4 py-2.5 text-sm font-bold text-white"><ListPlus className="h-4 w-4" />Save list</button></div></div>{lists.length > 0 && <div className="mt-4 space-y-2">{lists.map((list) => <div key={list.id} className="flex flex-wrap items-center gap-2 rounded-lg border border-slate-200 px-3 py-2 text-sm"><button type="button" onClick={() => loadList(list)} className="font-semibold text-[#0077B6]">{list.name}</button>{list.note && <span className="min-w-0 flex-1 truncate text-slate-600">{list.note}</span>}<button type="button" aria-label={`Share ${list.name}`} onClick={() => shareList(list)} className="inline-flex items-center gap-1 font-semibold text-[#0077B6]"><Share2 className="h-3.5 w-3.5" />Share link</button><button type="button" aria-label={`Delete ${list.name}`} onClick={() => setLists((current) => current.filter((item) => item.id !== list.id))}><X className="h-3.5 w-3.5" /></button></div>)}</div>}<p className="mt-3 text-xs text-slate-500">Share links carry city, selected areas, dates, rooms, and room preferences in the browser URL fragment. List and area notes stay on your device.</p></div>}
       {displayAreas.length > 0 && <div className="mt-5 flex flex-wrap gap-3"><button type="button" onClick={downloadText} className="inline-flex items-center gap-2 rounded-lg border border-[#0077B6] bg-white px-4 py-2.5 text-sm font-bold text-[#0077B6]"><Download className="h-4 w-4" />Download text card</button><button type="button" onClick={downloadPdf} className="inline-flex items-center gap-2 rounded-lg border border-[#0077B6] bg-white px-4 py-2.5 text-sm font-bold text-[#0077B6]">Download PDF</button><button type="button" onClick={() => window.print()} className="inline-flex items-center gap-2 rounded-lg border border-[#0077B6] bg-white px-4 py-2.5 text-sm font-bold text-[#0077B6]"><Printer className="h-4 w-4" />Print comparison</button></div>}</>}</div>
-    {displayAreas.length > 0 && <div className="hidden print:block" data-print-comparison><h2 className="font-playfair text-3xl font-bold text-[#0D1B2A]">{config.city} saved-area comparison</h2><p className="mt-2 text-sm text-slate-700"><strong>{seasonal.label}:</strong> {seasonal.note}</p><p className="mt-2 text-sm text-slate-700">Planning estimates only. {config.supportsTierEstimates ? `${roomsFor(travelers, roomOverride)} room${roomsFor(travelers, roomOverride) === 1 ? "" : "s"} × ${nights} night${nights === 1 ? "" : "s"}.` : "Room type is a saved preference; localized tier benchmarks are pending."}</p><div className="mt-5 grid gap-4 grid-cols-2">{displayAreas.map((area) => <ComparisonCard key={`print-${area.key}`} area={area} config={config} seasonal={seasonal} travelers={travelers} nights={nights} roomOverride={roomOverride} roomType={roomTypes[area.key] ?? "hotel"} onRoomType={() => undefined} />)}</div></div>}
+    {displayAreas.length > 0 && <div className="hidden print:block" data-print-comparison><h2 className="font-playfair text-3xl font-bold text-[#0D1B2A]">{config.city} saved-area comparison</h2><p className="mt-2 text-sm text-slate-700"><strong>{seasonal.label}:</strong> {seasonal.note}</p><p className="mt-2 text-sm text-slate-700">Planning estimates only. {config.supportsTierEstimates ? `${roomsFor(travelers, roomOverride)} room${roomsFor(travelers, roomOverride) === 1 ? "" : "s"} × ${nights} night${nights === 1 ? "" : "s"}.` : "Room type is a saved preference; localized tier benchmarks are pending."}</p><div className="mt-5 grid gap-4 grid-cols-2">{displayAreas.map((area) => <ComparisonCard key={`print-${area.key}`} area={area} config={config} seasonal={seasonal} travelers={travelers} nights={nights} roomOverride={roomOverride} roomType={roomTypes[area.key] ?? "hotel"} areaNote={areaNotes[area.key] ?? ""} onRoomType={() => undefined} onAreaNote={() => undefined} />)}</div></div>}
     <Dialog open={Boolean(locationArea)} onOpenChange={(open) => !open && setLocationArea(null)}><DialogContent className="max-w-lg"><DialogHeader><DialogTitle className="font-playfair text-2xl text-[#0D1B2A]">{locationArea?.name} in {config.city}</DialogTitle><DialogDescription>{locationArea?.location}</DialogDescription></DialogHeader>{locationArea && <div className="mt-4 rounded-xl bg-[#F8EFE0] p-6"><div className="flex h-36 items-center justify-center rounded-lg border border-dashed border-[#0077B6]/40 bg-white"><MapPin className="h-10 w-10 text-[#F4A261]" /><span className="ml-3 text-sm font-bold text-[#0D1B2A]">{locationArea.location}</span></div><p className="mt-4 leading-relaxed text-slate-700">{locationArea.locationContext}</p></div>}</DialogContent></Dialog>
   </section>;
 }
@@ -271,9 +319,37 @@ function ResultArea({ area, label, config, onFavorite, onShortlist, onLocate }: 
   return <div className="rounded-xl bg-white p-6"><p className="text-xs font-bold uppercase tracking-[0.15em] text-[#0077B6]">{label}</p><div className="mt-2 flex items-start justify-between gap-4"><div><h3 className="font-playfair text-3xl font-bold text-[#0D1B2A]">{area.name}</h3><p className="mt-2 font-semibold text-[#0D1B2A]">{area.heading}</p></div><button type="button" onClick={() => onLocate(area)} className="rounded-full bg-[#F8EFE0] p-2.5 text-[#0077B6]" aria-label={`Locate ${area.name}`}><MapPin className="h-5 w-5" /></button></div><p className="mt-4 text-sm leading-relaxed text-slate-700">{area.summary}</p><p className="mt-4 text-sm font-medium text-slate-600">{area.directionalPrice}</p><ul className="mt-4 space-y-1.5 text-sm text-slate-700">{area.highlights.map((highlight) => <li key={highlight}>• {highlight}</li>)}</ul><div className="mt-5 flex flex-wrap gap-3"><a href={area.anchor} className="font-semibold text-[#0077B6] underline underline-offset-2">Read {area.name} notes</a><button type="button" onClick={() => onShortlist(area.key)} className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#0077B6]"><Heart className="h-4 w-4" />Save {area.name}</button><button type="button" onClick={() => onFavorite(area.key)} className="text-sm font-semibold text-[#0077B6]">Save to Favorites</button></div><a href={config.availabilityUrl} target="_blank" rel="sponsored nofollow" onClick={() => track(config, "availability_clicked", { area: area.key })} className="mt-5 inline-flex rounded-lg bg-[#F4A261] px-4 py-2.5 text-sm font-bold text-[#0D1B2A]">Check {area.name} availability</a></div>;
 }
 
-function ComparisonCard({ area, config, seasonal, travelers, nights, roomOverride, roomType, onRoomType }: { area: CityMatcherArea; config: CityMatcherConfig; seasonal: CityMatcherSeasonalReference; travelers: number; nights: number; roomOverride: number; roomType: RoomType; onRoomType: (value: RoomType) => void }) {
-  const tier = area.tierRanges; const rooms = roomsFor(travelers, roomOverride);
-  return <article className="rounded-xl bg-white p-5 print:border print:border-slate-300"><h4 className="font-playfair text-2xl font-bold text-[#0D1B2A]">{area.name}</h4><p className="mt-1 font-semibold text-slate-700">{area.heading}</p><label className="mt-4 block text-sm font-semibold text-slate-700">Preferred stay type<select value={roomType} onChange={(event) => onRoomType(event.target.value as RoomType)} className="mt-1 block w-full rounded-lg border border-slate-300 bg-white p-2.5 print:hidden"><option value="hostel">Hostel / simple room</option><option value="hotel">Mid-range hotel</option><option value="villa">Villa / resort</option></select><span className="hidden print:inline">{ROOM_TYPES[roomType].label}</span></label><p className="mt-4 text-sm leading-relaxed text-slate-700"><strong>Vibe:</strong> {area.summary}</p><p className="mt-3 text-sm text-slate-700"><strong>Estimated seasonal range:</strong> {formatRange(area.baseRange, seasonal.multiplier)}</p>{config.supportsTierEstimates && tier ? <><p className="mt-3 text-sm text-slate-700"><strong>Total-stay estimate:</strong> Budget {totalRange(tier.hostel, seasonal.multiplier, travelers, nights, roomOverride)} · Mid-range {totalRange(tier.hotel, seasonal.multiplier, travelers, nights, roomOverride)} · Luxury from {totalFrom(tier.villaFrom, seasonal.multiplier, travelers, nights, roomOverride)}.</p><p className="mt-3 rounded-lg bg-[#F8EFE0] p-3 text-sm text-[#0D1B2A]"><strong>Preferred stay estimate:</strong> {roomType === "villa" ? totalFrom(tier.villaFrom, seasonal.multiplier, travelers, nights, roomOverride) : totalRange(tier[roomType], seasonal.multiplier, travelers, nights, roomOverride)}<br /><span className="text-xs">{ROOM_TYPES[roomType].assumption} · {rooms} room{rooms === 1 ? "" : "s"} × {nights} night{nights === 1 ? "" : "s"}.</span></p></> : <p className="mt-3 rounded-lg bg-[#F8EFE0] p-3 text-sm text-[#0D1B2A]"><strong>Room preference saved:</strong> {ROOM_TYPES[roomType].label}. {config.tierNotice}</p>}<p className="mt-3 text-sm text-slate-700"><strong>Highlights:</strong> {area.highlights.join(" · ")}</p><p className="mt-3 text-sm text-slate-700"><strong>Location:</strong> {area.location}</p><a href={config.availabilityUrl} target="_blank" rel="sponsored nofollow" onClick={() => track(config, "availability_clicked", { area: area.key, source: "comparison" })} className="mt-4 inline-flex rounded-lg border border-[#0077B6] px-3 py-2 text-sm font-bold text-[#0077B6] print:hidden">Check {area.name} availability</a></article>;
+function ComparisonCard({ area, config, seasonal, travelers, nights, roomOverride, roomType, areaNote, onRoomType, onAreaNote }: { area: CityMatcherArea; config: CityMatcherConfig; seasonal: CityMatcherSeasonalReference; travelers: number; nights: number; roomOverride: number; roomType: RoomType; areaNote: string; onRoomType: (value: RoomType) => void; onAreaNote: (value: string) => void }) {
+  const tier = area.tierRanges;
+  const roomTypes = area.verifiedRoomTypes ?? (tier ? ["hostel", "hotel", "villa"] as RoomType[] : []);
+  const selectedType = roomTypes.includes(roomType) ? roomType : roomTypes[0] ?? "hotel";
+  const rooms = roomsFor(travelers, roomOverride);
+  const estimateFor = (type: RoomType) => {
+    if (!tier || !roomTypes.includes(type)) return "No verified range published for this area and stay type.";
+    return type === "villa" ? totalFrom(tier.villaFrom, seasonal.multiplier, travelers, nights, roomOverride) : totalRange(tier[type], seasonal.multiplier, travelers, nights, roomOverride);
+  };
+  return <article className="rounded-xl bg-white p-5 print:border print:border-slate-300">
+    <h4 className="font-playfair text-2xl font-bold text-[#0D1B2A]">{area.name}</h4>
+    <p className="mt-1 font-semibold text-slate-700">{area.heading}</p>
+    <label className="mt-4 block text-sm font-semibold text-slate-700">Preferred stay type
+      <select value={selectedType} onChange={(event) => onRoomType(event.target.value as RoomType)} className="mt-1 block w-full rounded-lg border border-slate-300 bg-white p-2.5 print:hidden">
+        {roomTypes.map((type) => <option key={type} value={type}>{ROOM_TYPES[type].label}</option>)}
+      </select>
+      <span className="hidden print:inline">{ROOM_TYPES[selectedType].label}</span>
+    </label>
+    {area.verifiedRoomTypes && <p className="mt-2 text-xs text-slate-500">Verified source coverage for this area: {roomTypes.map((type) => ROOM_TYPES[type].label).join(" · ")}.</p>}
+    <p className="mt-4 text-sm leading-relaxed text-slate-700"><strong>Vibe:</strong> {area.summary}</p>
+    <p className="mt-3 text-sm text-slate-700"><strong>Estimated seasonal range:</strong> {formatRange(area.baseRange, seasonal.multiplier)}</p>
+    {config.supportsTierEstimates && tier ? <p className="mt-3 rounded-lg bg-[#F8EFE0] p-3 text-sm text-[#0D1B2A]"><strong>Preferred stay estimate:</strong> {estimateFor(selectedType)}<br /><span className="text-xs">{ROOM_TYPES[selectedType].assumption} · {rooms} room{rooms === 1 ? "" : "s"} × {nights} night{nights === 1 ? "" : "s"}. Unlisted tiers are intentionally not estimated for this area.</span></p> : <p className="mt-3 rounded-lg bg-[#F8EFE0] p-3 text-sm text-[#0D1B2A]"><strong>Room preference saved:</strong> {ROOM_TYPES[selectedType].label}. {config.tierNotice}</p>}
+    <label className="mt-4 block text-sm font-semibold text-slate-700 print:hidden">Personal note for {area.name}
+      <textarea value={areaNote} onChange={(event) => onAreaNote(event.target.value)} maxLength={400} rows={3} aria-label={`Personal note for ${area.name}`} placeholder="e.g., Quiet side street; close to our museum day" className="mt-1 block w-full resize-y rounded-lg border border-slate-300 px-3 py-2 text-sm font-normal" />
+      <span className="mt-1 block text-xs font-normal text-slate-500">{areaNote.length}/400 characters · saved only with this browser list.</span>
+    </label>
+    {areaNote && <p className="mt-3 hidden text-sm text-slate-700 print:block"><strong>Personal note:</strong> {areaNote}</p>}
+    <p className="mt-3 text-sm text-slate-700"><strong>Highlights:</strong> {area.highlights.join(" · ")}</p>
+    <p className="mt-3 text-sm text-slate-700"><strong>Location:</strong> {area.location}</p>
+    <a href={config.availabilityUrl} target="_blank" rel="sponsored nofollow" onClick={() => track(config, "availability_clicked", { area: area.key, source: "comparison" })} className="mt-4 inline-flex rounded-lg border border-[#0077B6] px-3 py-2 text-sm font-bold text-[#0077B6] print:hidden">Check {area.name} availability</a>
+  </article>;
 }
 
 function NumberInput({ label, value, onChange, min, max }: { label: string; value: number; onChange: (value: number) => void; min: number; max: number }) {
