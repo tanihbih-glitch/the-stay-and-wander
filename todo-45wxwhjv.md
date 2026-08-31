@@ -6,7 +6,8 @@
 - [x] Add browser-local free-text notes to named city comparison lists, with save, load, update, and delete behavior.
 - [x] Enable Seoul and Tokyo room-type and total-stay numerical estimates using verified dated city-level tier benchmarks, with clear source limitations and no claim that the same tier bands are neighborhood-specific.
 - [x] Add cross-guide regression coverage and validate maps, notes, cost calculations, storage, exports, and print behavior. Focused coverage, fresh browser sessions, the 162-test suite, TypeScript, and production build pass.
-- [ ] Publish the three enhanced city comparison tools and provide test-ready links.
+- [x] Publish the three enhanced city comparison tools in checkpoint `dd2b7b68` and verify the propagated managed-domain release.
+- [x] Deliver the verified updated Bangkok, Seoul, and Tokyo test links and summarize the schematic maps, local notes, and dated city-level tier estimate boundary.
 
 - [x] Implement the shared conservative interactive planning framework for the Bangkok, Seoul, and Tokyo where-to-stay guides using city-specific guide data.
 - [x] Add Bangkok tier-level cost calculations, seasonal guidance, and compliant centralized availability handoffs.
