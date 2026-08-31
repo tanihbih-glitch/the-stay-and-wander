@@ -6,12 +6,17 @@ import {
   BALI_MATCHER_FAVORITES_KEY,
   BALI_MATCHER_FAVORITES_LIMIT,
   BALI_MATCHER_RESULT_REVEAL_MS,
+  BALI_TRAVELER_FIT_LABELS,
+  buildBaliAreaSeasonalEstimate,
+  buildBaliFavoritesComparisonText,
   BALI_MATCHER_SHORTLIST_KEY,
   BALI_MATCHER_SHORTLIST_LIMIT,
   buildBaliMatcherSocialShareUrl,
   buildBaliMatcherShareSummary,
   baliBaseAreas,
+  filterBaliFavoriteAreas,
   getBaliBaseRecommendation,
+  getBaliMatcherSeasonalEstimate,
   matcherQuestions,
   sanitizeBaliBaseFavorites,
   sanitizeBaliBaseShortlist,
@@ -139,7 +144,34 @@ describe("Bali hotel prices article", () => {
     expect(componentSource).toContain("Sort saved favorites");
     expect(componentSource).toContain("Lower directional cost");
     expect(componentSource).toContain("Compare saved areas");
-    expect(componentSource).toContain("Directional prices only");
+    expect(componentSource).toContain("Estimated seasonal range");
     expect(componentSource).not.toContain("invokeLLM");
+  });
+
+  it("filters favorites by traveler fit and applies supplied 2026 seasonal planning references", () => {
+    expect(BALI_TRAVELER_FIT_LABELS).toEqual({ solo: "Solo travelers", couples: "Couples", families: "Families" });
+    expect(filterBaliFavoriteAreas(["canggu", "ubud", "uluwatu"], "families")).toEqual(["ubud"]);
+    expect(filterBaliFavoriteAreas(["ubud", "uluwatu"], "couples")).toEqual(["ubud", "uluwatu"]);
+    expect(getBaliMatcherSeasonalEstimate("2026-01-03")).toMatchObject({ multiplier: 1.25, label: "New Year peak reference" });
+    expect(getBaliMatcherSeasonalEstimate("2026-08-15")).toMatchObject({ multiplier: 1.5, label: "August peak-season reference" });
+    expect(buildBaliAreaSeasonalEstimate(baliBaseAreas.ubud, "2026-02-15").budget).toBe("$24–48/night");
+    expect(buildBaliAreaSeasonalEstimate(baliBaseAreas.ubud, "2026-08-15").midRange).toBe("$113–195/night");
+  });
+
+  it("creates a downloadable text-card comparison without sending saved favorites to a server", () => {
+    const comparisonText = buildBaliFavoritesComparisonText(["ubud", "canggu"], "2026-08-15");
+    expect(comparisonText).toContain("Bali base comparison — The Stay & Wander");
+    expect(comparisonText).toContain("August peak-season reference (1.50×)");
+    expect(comparisonText).toContain("Ubud");
+    expect(comparisonText).toContain("Canggu");
+    expect(comparisonText).toContain("Planning estimates only");
+
+    const componentSource = readFileSync(resolve(process.cwd(), "client/src/components/BaliBaseMatcher.tsx"), "utf8");
+    expect(componentSource).toContain("Best for");
+    expect(componentSource).toContain("Trip date");
+    expect(componentSource).toContain("Download text card");
+    expect(componentSource).toContain("Estimated seasonal range");
+    expect(componentSource).toContain("window.URL.createObjectURL");
+    expect(componentSource).toContain("bali_matcher_comparison_exported");
   });
 });

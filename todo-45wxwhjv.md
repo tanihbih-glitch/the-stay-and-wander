@@ -1,5 +1,12 @@
 # Project TODO
 
+- [x] Inspect the current Bali matcher, existing traveler-fit data, seasonal benchmark source, and focused tests for the requested comparison enhancement.
+- [x] Add a best-for filter for solo travelers, couples, and families to the browser-local saved favorites list.
+- [x] Add a downloadable comparison export that creates a privacy-safe text card from the current saved-area comparison.
+- [x] Add a trip-date selector that applies the existing Bali high-, shoulder-, and low-season planning guidance to displayed directional cost ranges.
+- [x] Add regression coverage and validate desktop/mobile and browser-local behavior. Focused coverage, TypeScript, direct browser verification, the 152-test suite, and the production build pass.
+- [ ] Save and publish the enhanced Bali matcher checkpoint, then verify its test-ready route.
+
 - [x] Inspect current Bali matcher area data, saved-favorites controls, and focused tests for the requested comparison enhancement.
 - [x] Add concise deterministic area summaries covering each area’s main vibe and guide-supported local highlights, without an external AI service or personal-data processing.
 - [x] Add browser-local favorites sorting by vibe and directional cost, retaining the current remove and clear controls.

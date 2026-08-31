@@ -1,4 +1,4 @@
-import { ArrowUpDown, AtSign, Compass, ExternalLink, Heart, MapPinned, MapPin, MessageCircle, Plus, RotateCcw, Share2, Sparkles, Trash2 } from "lucide-react";
+import { ArrowUpDown, AtSign, CalendarDays, Compass, Download, ExternalLink, Heart, MapPinned, MapPin, MessageCircle, Plus, RotateCcw, Share2, Sparkles, Trash2, UsersRound } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { DEALS_AFFILIATE_LINKS } from "@/lib/affiliateLinks";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
@@ -30,7 +30,13 @@ export type BaliBaseArea = {
   quickSummary: string;
   localHighlights: readonly string[];
   directionalPrice: string;
+  baselinePriceBands: {
+    budget: readonly [number, number];
+    midRange: readonly [number, number];
+    luxuryFrom: number;
+  };
   costRank: number;
+  bestFor: readonly BaliTravelerFit[];
   shortlistLabel: string;
   baliLocation: string;
   locationContext: string;
@@ -43,6 +49,34 @@ export type BaliMatcherRecommendation = {
 };
 
 export type BaliFavoriteSort = "saved" | "vibe" | "cost";
+export type BaliTravelerFit = "solo" | "couples" | "families";
+
+export type BaliSeasonalEstimate = {
+  multiplier: number;
+  label: string;
+  note: string;
+};
+
+export const BALI_MATCHER_SEASONAL_ESTIMATES: Record<number, BaliSeasonalEstimate> = {
+  0: { multiplier: 0.85, label: "January low-season reference", note: "The late-January benchmark is 0.85×; New Year dates from January 1–5 can reach 1.25×." },
+  1: { multiplier: 0.8, label: "February low-season reference", note: "The supplied monsoon-season benchmark is 0.80×." },
+  2: { multiplier: 0.8, label: "March low-season reference", note: "The supplied Nyepi-period benchmark is 0.80×." },
+  3: { multiplier: 1, label: "April shoulder-season reference", note: "The supplied April benchmark is the 1.00× baseline." },
+  4: { multiplier: 0.95, label: "May shoulder-season reference", note: "The supplied May benchmark is 0.95×." },
+  5: { multiplier: 1.2, label: "June high-season reference", note: "The supplied June benchmark is 1.20×." },
+  6: { multiplier: 1.45, label: "July peak-season reference", note: "The supplied July benchmark is 1.45×." },
+  7: { multiplier: 1.5, label: "August peak-season reference", note: "The supplied August benchmark is 1.50×." },
+  8: { multiplier: 1.05, label: "September shoulder-season reference", note: "The supplied September benchmark is 1.05×." },
+  9: { multiplier: 0.9, label: "October transition-season reference", note: "The supplied October benchmark is 0.90×." },
+  10: { multiplier: 0.8, label: "November low-season reference", note: "The supplied rainy-start benchmark is 0.80×." },
+  11: { multiplier: 1.6, label: "December festive-season reference", note: "The supplied 1.60× benchmark reflects the December 20–31 festive period." },
+};
+
+export const BALI_TRAVELER_FIT_LABELS: Record<BaliTravelerFit, string> = {
+  solo: "Solo travelers",
+  couples: "Couples",
+  families: "Families",
+};
 
 export type BaliMatcherEventName =
   | "bali_matcher_started"
@@ -54,7 +88,8 @@ export type BaliMatcherEventName =
   | "bali_matcher_results_shared"
   | "bali_matcher_social_share_opened"
   | "bali_matcher_location_opened"
-  | "bali_matcher_favorite_saved";
+  | "bali_matcher_favorite_saved"
+  | "bali_matcher_comparison_exported";
 
 type BaliMatcherEventProperties = Record<string, string | number | boolean>;
 
@@ -80,7 +115,9 @@ export const baliBaseAreas: Record<AreaKey, BaliBaseArea> = {
     quickSummary: "A sociable south-west base for a first trip that revolves around beach days, dining plans, boutiques, and sunset energy in one compact rhythm.",
     localHighlights: ["Beach clubs and sunset plans", "Restaurant and boutique walks", "Lively first-timer base"],
     directionalPrice: "Typical guide range: $40–70 budget · $80–150 mid-range · $200+ luxury per night.",
+    baselinePriceBands: { budget: [40, 70], midRange: [80, 150], luxuryFrom: 200 },
     costRank: 3,
+    bestFor: ["solo", "couples"],
     shortlistLabel: "Seminyak — beach clubs and dining",
     baliLocation: "South-west Bali coast",
     locationContext: "Seminyak sits on Bali’s south-west coast, south of Canggu and close to the island’s restaurant, beach-club, and shopping corridor.",
@@ -95,7 +132,9 @@ export const baliBaseAreas: Record<AreaKey, BaliBaseArea> = {
     quickSummary: "An inland, culture-led base for temple visits, rice-terrace scenery, cafés, and wellness-focused days at a more relaxed pace.",
     localHighlights: ["Temple and cultural days", "Rice-terrace surroundings", "Cafés and wellness time"],
     directionalPrice: "Typical guide range: $30–60 budget · $75–130 mid-range · $180+ luxury per night.",
+    baselinePriceBands: { budget: [30, 60], midRange: [75, 130], luxuryFrom: 180 },
     costRank: 1,
+    bestFor: ["solo", "couples", "families"],
     shortlistLabel: "Ubud — culture and wellness",
     baliLocation: "Central inland Bali",
     locationContext: "Ubud is inland in central Bali, making it a culture, rice-terrace, and wellness base rather than a beach base.",
@@ -110,7 +149,9 @@ export const baliBaseAreas: Record<AreaKey, BaliBaseArea> = {
     quickSummary: "A scenic southern-coast match for clifftop views, surf beaches, and slower resort time when a self-contained stay matters most.",
     localHighlights: ["Clifftop sunsets", "Surf beaches", "Slower resort days"],
     directionalPrice: "Typical guide range: $50–90 budget · $100–180 mid-range · $250+ luxury per night.",
+    baselinePriceBands: { budget: [50, 90], midRange: [100, 180], luxuryFrom: 250 },
     costRank: 4,
+    bestFor: ["couples"],
     shortlistLabel: "Uluwatu — cliffs and surf",
     baliLocation: "Bukit Peninsula, south Bali",
     locationContext: "Uluwatu is on Bali’s southern Bukit Peninsula, known for its clifftop coast, surf breaks, and more self-contained resort setting.",
@@ -125,7 +166,9 @@ export const baliBaseAreas: Record<AreaKey, BaliBaseArea> = {
     quickSummary: "A flexible south-west base for surf, independent cafés, and a social longer-stay rhythm, especially when day-to-day lifestyle matters.",
     localHighlights: ["Independent café culture", "Surf access", "Longer-stay social rhythm"],
     directionalPrice: "Typical guide range: $35–65 budget · $70–140 mid-range · $190+ luxury per night.",
+    baselinePriceBands: { budget: [35, 65], midRange: [70, 140], luxuryFrom: 190 },
     costRank: 2,
+    bestFor: ["solo", "couples"],
     shortlistLabel: "Canggu — cafés and longer stays",
     baliLocation: "South-west Bali coast",
     locationContext: "Canggu is on Bali’s south-west coast, north of Seminyak, with surf beaches and a café-led longer-stay rhythm.",
@@ -252,6 +295,54 @@ export function sortBaliFavoriteAreas(areaKeys: AreaKey[], sort: BaliFavoriteSor
   });
 }
 
+export function filterBaliFavoriteAreas(areaKeys: AreaKey[], travelerFit: BaliTravelerFit | "all"): AreaKey[] {
+  const validKeys = sanitizeBaliBaseFavorites(areaKeys);
+  return travelerFit === "all" ? validKeys : validKeys.filter((key) => baliBaseAreas[key].bestFor.includes(travelerFit));
+}
+
+export function getBaliMatcherSeasonalEstimate(tripDate: string): BaliSeasonalEstimate {
+  const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(tripDate);
+  const monthIndex = match ? Number(match[2]) - 1 : 6;
+  const day = match ? Number(match[3]) : 15;
+
+  if (monthIndex === 0 && day >= 1 && day <= 5) {
+    return { multiplier: 1.25, label: "New Year peak reference", note: "The supplied January 1–5 benchmark is 1.25×." };
+  }
+
+  return BALI_MATCHER_SEASONAL_ESTIMATES[monthIndex] ?? BALI_MATCHER_SEASONAL_ESTIMATES[6];
+}
+
+export function buildBaliAreaSeasonalEstimate(area: BaliBaseArea, tripDate: string) {
+  const seasonal = getBaliMatcherSeasonalEstimate(tripDate);
+  const adjusted = (amount: number) => Math.round(amount * seasonal.multiplier);
+  return {
+    seasonal,
+    budget: `$${adjusted(area.baselinePriceBands.budget[0])}–${adjusted(area.baselinePriceBands.budget[1])}/night`,
+    midRange: `$${adjusted(area.baselinePriceBands.midRange[0])}–${adjusted(area.baselinePriceBands.midRange[1])}/night`,
+    luxuryFrom: `$${adjusted(area.baselinePriceBands.luxuryFrom)}+/night`,
+  };
+}
+
+export function buildBaliFavoritesComparisonText(areaKeys: AreaKey[], tripDate: string) {
+  const selectedAreas = sanitizeBaliBaseFavorites(areaKeys).map((key) => baliBaseAreas[key]);
+  const seasonal = getBaliMatcherSeasonalEstimate(tripDate);
+  const formattedDate = /^\d{4}-\d{2}-\d{2}$/.test(tripDate) ? tripDate : "2026-07-15";
+
+  return [
+    "Bali base comparison — The Stay & Wander",
+    `Trip date planning reference: ${formattedDate} · ${seasonal.label} (${seasonal.multiplier.toFixed(2)}×).`,
+    seasonal.note,
+    "",
+    ...selectedAreas.map((area) => {
+      const estimate = buildBaliAreaSeasonalEstimate(area, tripDate);
+      return `${area.name}\nVibe: ${area.heading}.\nEstimated planning range: Budget ${estimate.budget} · Mid-range ${estimate.midRange} · Luxury from ${estimate.luxuryFrom}.\nHighlights: ${area.localHighlights.join("; ")}.`;
+    }),
+    "",
+    "Planning estimates only; confirm live availability and final prices before booking.",
+    "https://thestayandwander.com/blog/where-to-stay-in-bali-2026#bali-base-matcher",
+  ].join("\n");
+}
+
 function parseShortlist(value: string | null): AreaKey[] {
   if (!value) return [];
 
@@ -286,12 +377,16 @@ export default function BaliBaseMatcher() {
   const [favoritesReady, setFavoritesReady] = useState(false);
   const [favoritesMessage, setFavoritesMessage] = useState("");
   const [favoriteSort, setFavoriteSort] = useState<BaliFavoriteSort>("saved");
+  const [favoriteTravelerFit, setFavoriteTravelerFit] = useState<BaliTravelerFit | "all">("all");
+  const [tripDate, setTripDate] = useState("2026-07-15");
   const [isRestarting, setIsRestarting] = useState(false);
   const [shareMessage, setShareMessage] = useState("");
   const [locationArea, setLocationArea] = useState<BaliBaseArea | null>(null);
 
   const recommendation = useMemo(() => getBaliBaseRecommendation(answers), [answers]);
-  const sortedFavorites = useMemo(() => sortBaliFavoriteAreas(favorites, favoriteSort), [favoriteSort, favorites]);
+  const filteredFavorites = useMemo(() => filterBaliFavoriteAreas(favorites, favoriteTravelerFit), [favoriteTravelerFit, favorites]);
+  const sortedFavorites = useMemo(() => sortBaliFavoriteAreas(filteredFavorites, favoriteSort), [favoriteSort, filteredFavorites]);
+  const seasonalEstimate = useMemo(() => getBaliMatcherSeasonalEstimate(tripDate), [tripDate]);
   const activeQuestion = matcherQuestions[step - 1];
 
   useEffect(() => {
@@ -404,6 +499,22 @@ export default function BaliBaseMatcher() {
     setFavoritesMessage("Favorites cleared from this browser.");
   };
 
+  const downloadFavoritesComparison = () => {
+    if (sortedFavorites.length < 2) return;
+    const text = buildBaliFavoritesComparisonText(sortedFavorites, tripDate);
+    const file = new Blob([text], { type: "text/plain;charset=utf-8" });
+    const url = window.URL.createObjectURL(file);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "bali-base-comparison.txt";
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    window.URL.revokeObjectURL(url);
+    setFavoritesMessage("Your shareable Bali comparison text card has downloaded.");
+    trackBaliMatcherEvent("bali_matcher_comparison_exported", { areas: sortedFavorites.length, seasonal_reference: seasonalEstimate.label });
+  };
+
   const shareResults = async () => {
     if (!recommendation) return;
     const summary = buildBaliMatcherShareSummary(recommendation);
@@ -512,29 +623,29 @@ export default function BaliBaseMatcher() {
               {favorites.length > 0 && <button type="button" onClick={clearFavorites} className="inline-flex shrink-0 items-center gap-2 self-start text-sm font-semibold text-slate-600 underline-offset-4 hover:text-[#0D1B2A] hover:underline focus:outline-none focus:ring-2 focus:ring-[#9a5b20] focus:ring-offset-2"><Trash2 className="h-4 w-4" aria-hidden="true" />Clear Favorites</button>}
             </div>
             {favorites.length > 0 ? <>
-              <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
-                <label className="inline-flex items-center gap-2 text-sm font-semibold text-slate-700" htmlFor="bali-favorite-sort"><ArrowUpDown className="h-4 w-4 text-[#9a5b20]" aria-hidden="true" />Sort saved favorites</label>
-                <select id="bali-favorite-sort" value={favoriteSort} onChange={(event) => setFavoriteSort(event.target.value as BaliFavoriteSort)} className="rounded-full border border-[#f0d3af] bg-white px-3 py-2 text-sm font-semibold text-[#0D1B2A] focus:outline-none focus:ring-2 focus:ring-[#9a5b20] focus:ring-offset-2">
-                  <option value="saved">Saved order</option>
-                  <option value="vibe">Vibe</option>
-                  <option value="cost">Lower directional cost</option>
-                </select>
+              <div className="mt-4 grid gap-3 md:grid-cols-3">
+                <label className="grid gap-1 text-sm font-semibold text-slate-700" htmlFor="bali-favorite-fit"><span className="inline-flex items-center gap-2"><UsersRound className="h-4 w-4 text-[#9a5b20]" aria-hidden="true" />Best for</span><select id="bali-favorite-fit" value={favoriteTravelerFit} onChange={(event) => setFavoriteTravelerFit(event.target.value as BaliTravelerFit | "all")} className="rounded-full border border-[#f0d3af] bg-white px-3 py-2 text-sm font-semibold text-[#0D1B2A] focus:outline-none focus:ring-2 focus:ring-[#9a5b20] focus:ring-offset-2"><option value="all">All saved areas</option>{Object.entries(BALI_TRAVELER_FIT_LABELS).map(([key, label]) => <option key={key} value={key}>{label}</option>)}</select></label>
+                <label className="grid gap-1 text-sm font-semibold text-slate-700" htmlFor="bali-favorite-sort"><span className="inline-flex items-center gap-2"><ArrowUpDown className="h-4 w-4 text-[#9a5b20]" aria-hidden="true" />Sort saved favorites</span><select id="bali-favorite-sort" value={favoriteSort} onChange={(event) => setFavoriteSort(event.target.value as BaliFavoriteSort)} className="rounded-full border border-[#f0d3af] bg-white px-3 py-2 text-sm font-semibold text-[#0D1B2A] focus:outline-none focus:ring-2 focus:ring-[#9a5b20] focus:ring-offset-2"><option value="saved">Saved order</option><option value="vibe">Vibe</option><option value="cost">Lower directional cost</option></select></label>
+                <label className="grid gap-1 text-sm font-semibold text-slate-700" htmlFor="bali-comparison-date"><span className="inline-flex items-center gap-2"><CalendarDays className="h-4 w-4 text-[#9a5b20]" aria-hidden="true" />Trip date</span><input id="bali-comparison-date" type="date" min="2026-01-01" max="2026-12-31" value={tripDate} onChange={(event) => setTripDate(event.target.value)} aria-describedby="bali-seasonal-estimate-note" className="rounded-full border border-[#f0d3af] bg-white px-3 py-2 text-sm font-semibold text-[#0D1B2A] focus:outline-none focus:ring-2 focus:ring-[#9a5b20] focus:ring-offset-2" /></label>
               </div>
+              <p id="bali-seasonal-estimate-note" className="mt-3 text-sm leading-relaxed text-slate-600"><span className="font-semibold text-[#0D1B2A]">{seasonalEstimate.label}:</span> {seasonalEstimate.note} Estimated ranges below apply this supplied 2026 seasonal reference to the guide’s directional ranges; they are not live rates.</p>
               <ul className="mt-4 flex flex-wrap gap-2" aria-label="Saved Bali area favorites">{sortedFavorites.map((key) => <li key={key} className="inline-flex overflow-hidden rounded-full border border-[#f0d3af] bg-white"><a href={baliBaseAreas[key].anchor} className="px-3 py-2 text-sm font-semibold text-[#0D1B2A] hover:text-[#0077B6] focus:outline-none focus:ring-2 focus:ring-[#0077B6] focus:ring-inset">{baliBaseAreas[key].name}</a><button type="button" onClick={() => removeFavorite(key)} className="border-l border-[#f0d3af] px-2 text-[#9a5b20] hover:bg-[#F8EFE0] focus:outline-none focus:ring-2 focus:ring-[#9a5b20] focus:ring-inset" aria-label={`Remove ${baliBaseAreas[key].name} from Favorites`}><Trash2 className="h-3.5 w-3.5" aria-hidden="true" /></button></li>)}</ul>
+              {sortedFavorites.length === 0 && <p className="mt-4 text-sm text-slate-600">No saved areas match the selected traveller filter. Choose “All saved areas” to see your full list.</p>}
               {sortedFavorites.length >= 2 && <section className="mt-5 border-t border-[#f0d3af] pt-5" aria-labelledby="bali-favorites-comparison-heading">
                 <div className="flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between">
                   <div><p id="bali-favorites-comparison-heading" className="text-xs font-bold uppercase tracking-[0.18em] text-[#9a5b20]">Compare saved areas</p><p className="mt-1 text-sm text-slate-600">Use the same guide-supported signals to weigh your top choices side by side.</p></div>
-                  <span className="text-xs font-semibold text-slate-500">Directional prices only</span>
+                  <button type="button" onClick={downloadFavoritesComparison} className="inline-flex shrink-0 items-center justify-center gap-2 rounded-full border border-[#9a5b20] bg-white px-4 py-2 text-sm font-semibold text-[#9a5b20] hover:bg-[#F8EFE0] focus:outline-none focus:ring-2 focus:ring-[#9a5b20] focus:ring-offset-2"><Download className="h-4 w-4" aria-hidden="true" />Download text card</button>
                 </div>
                 <div className="mt-4 grid gap-3 sm:grid-cols-2">
                   {sortedFavorites.map((key) => {
                     const area = baliBaseAreas[key];
+                    const estimate = buildBaliAreaSeasonalEstimate(area, tripDate);
                     return <article key={area.key} className="rounded-xl border border-[#f0d3af] bg-white p-4">
                       <h4 className="font-playfair text-xl font-bold text-[#0D1B2A]">{area.name}</h4>
                       <p className="mt-1 text-sm font-semibold text-[#9a5b20]">{area.heading}</p>
                       <dl className="mt-4 space-y-3 text-sm">
                         <div><dt className="font-bold uppercase tracking-[0.1em] text-[11px] text-slate-500">Vibe</dt><dd className="mt-1 text-slate-700">{area.quickSummary}</dd></div>
-                        <div><dt className="font-bold uppercase tracking-[0.1em] text-[11px] text-slate-500">Guide range</dt><dd className="mt-1 text-slate-700">{area.directionalPrice.replace("Typical guide range: ", "")}</dd></div>
+                        <div><dt className="font-bold uppercase tracking-[0.1em] text-[11px] text-slate-500">Estimated seasonal range</dt><dd className="mt-1 text-slate-700">Budget {estimate.budget} · Mid-range {estimate.midRange} · Luxury from {estimate.luxuryFrom}</dd></div>
                         <div><dt className="font-bold uppercase tracking-[0.1em] text-[11px] text-slate-500">Highlights</dt><dd className="mt-1 text-slate-700">{area.localHighlights.join(" · ")}</dd></div>
                         <div><dt className="font-bold uppercase tracking-[0.1em] text-[11px] text-slate-500">Location</dt><dd className="mt-1 text-slate-700">{area.baliLocation}</dd></div>
                       </dl>
