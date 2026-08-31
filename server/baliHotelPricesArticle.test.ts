@@ -9,6 +9,7 @@ import {
   BALI_TRAVELER_FIT_LABELS,
   buildBaliAreaSeasonalEstimate,
   buildBaliFavoritesComparisonText,
+  calculateBaliAreaTotalStayEstimate,
   BALI_MATCHER_SHORTLIST_KEY,
   BALI_MATCHER_SHORTLIST_LIMIT,
   buildBaliMatcherSocialShareUrl,
@@ -173,5 +174,27 @@ describe("Bali hotel prices article", () => {
     expect(componentSource).toContain("Estimated seasonal range");
     expect(componentSource).toContain("window.URL.createObjectURL");
     expect(componentSource).toContain("bali_matcher_comparison_exported");
+  });
+
+  it("calculates transparent traveler-count total-stay ranges and provides a printable comparison card", () => {
+    expect(calculateBaliAreaTotalStayEstimate(baliBaseAreas.ubud, "2026-08-15", 3, 5)).toEqual({
+      rooms: 2,
+      nights: 5,
+      budget: "$450–900 total",
+      midRange: "$1,125–1,950 total",
+      luxuryFrom: "$2,700+ total",
+    });
+
+    const comparisonText = buildBaliFavoritesComparisonText(["ubud", "canggu"], "2026-08-15", 3, 5);
+    expect(comparisonText).toContain("3 travelers · 5 nights · one mid-range room per two travelers.");
+    expect(comparisonText).toContain("Total stay estimate: Budget $450–900 total");
+
+    const componentSource = readFileSync(resolve(process.cwd(), "client/src/components/BaliBaseMatcher.tsx"), "utf8");
+    expect(componentSource).toContain("bali-comparison-travelers");
+    expect(componentSource).toContain("Total-stay estimate");
+    expect(componentSource).toContain("Print comparison");
+    expect(componentSource).toContain("bali-favorites-print-card");
+    expect(componentSource).toContain("@media print");
+    expect(componentSource).toContain("window.print()");
   });
 });

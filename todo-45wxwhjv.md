@@ -1,5 +1,11 @@
 # Project TODO
 
+- [x] Inspect the current Bali matcher comparison model, seasonal estimate logic, and any existing print/export conventions.
+- [x] Add an optional traveler-count input and night-count estimate so saved-area comparisons can show total-stay cost ranges using the selected trip date.
+- [x] Verify the Bali favorites comparison in print media and confirm only the intended comparison card renders with its headings, totals, seasonal reference, and saved-area details. Print-media emulation showed the focused card, print title, August seasonal reference, three-traveler/five-night context, and Ubud total-stay range while hiding screen-only controls.
+- [x] Add and record focused verification for the print layout, then complete the broader browser-local, responsive, and print/export validation. Direct browser checks validated date changes, traveler and night inputs, total ranges, printable card styles, text-card export, filters, favorites, and result controls alongside the 153-test suite and production build.
+- [ ] Save and publish the enhanced Bali matcher checkpoint, then verify the test-ready route.
+
 - [x] Inspect the current Bali matcher, existing traveler-fit data, seasonal benchmark source, and focused tests for the requested comparison enhancement.
 - [x] Add a best-for filter for solo travelers, couples, and families to the browser-local saved favorites list.
 - [x] Add a downloadable comparison export that creates a privacy-safe text card from the current saved-area comparison.
