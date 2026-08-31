@@ -5,7 +5,7 @@
 - [x] Add a clear price-assumption legend to the downloadable Bali comparison PDF.
 - [x] Add browser-local named comparison lists with explicit save, switch, and delete controls, without server persistence or personal-data collection.
 - [x] Extend regression coverage and validate browser-local state and exports. Focused coverage, TypeScript, direct browser checks, the 155-test suite, and production build pass.
-- [ ] Save and publish the enhanced Bali matcher checkpoint, then verify its test-ready route.
+- [x] Save and publish the enhanced Bali matcher checkpoint `9db8565b`, then verify its test-ready route. The propagated published route verified room-type preferences, named-list save/load/switch/delete, text-card export, and the generated PDF’s Price assumptions legend.
 
 - [x] Inspect the approved Bali booking registry, comparison calculations, and existing client-side PDF-generation dependencies.
 - [x] Add compliant per-area availability handoffs using the centralized approved booking registry and required sponsored new-tab attributes.
