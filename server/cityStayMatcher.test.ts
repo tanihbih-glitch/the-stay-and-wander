@@ -20,21 +20,23 @@ describe("shared city stay matcher", () => {
     expect(CITY_STAY_MATCHER_AFFILIATE_LINKS).toEqual(expect.objectContaining({ bangkok: expect.stringContaining("stay22"), seoul: expect.stringContaining("stay22"), tokyo: expect.stringContaining("stay22") }));
   });
 
-  it("keeps tier-level total estimates limited to Bangkok's published three-tier guide data", () => {
+  it("uses transparent dated tier benchmarks for Bangkok, Seoul, and Tokyo cost estimates", () => {
     expect(bangkokStayMatcherConfig.supportsTierEstimates).toBe(true);
     expect(bangkokStayMatcherConfig.areas.every((area) => Boolean(area.tierRanges))).toBe(true);
-    expect(seoulStayMatcherConfig.supportsTierEstimates).toBe(false);
-    expect(tokyoStayMatcherConfig.supportsTierEstimates).toBe(false);
-    expect(seoulStayMatcherConfig.tierNotice).toContain("not shown yet");
-    expect(tokyoStayMatcherConfig.tierNotice).toContain("not shown yet");
-    expect(seoulStayMatcherConfig.areas.every((area) => !area.tierRanges)).toBe(true);
-    expect(tokyoStayMatcherConfig.areas.every((area) => !area.tierRanges)).toBe(true);
+    expect(seoulStayMatcherConfig.supportsTierEstimates).toBe(true);
+    expect(tokyoStayMatcherConfig.supportsTierEstimates).toBe(true);
+    expect(seoulStayMatcherConfig.areas.every((area) => Boolean(area.tierRanges))).toBe(true);
+    expect(tokyoStayMatcherConfig.areas.every((area) => Boolean(area.tierRanges))).toBe(true);
+    expect(seoulStayMatcherConfig.benchmark?.asOf).toBe("2026-08-13");
+    expect(tokyoStayMatcherConfig.benchmark?.asOf).toBe("2026-08-13");
+    expect(seoulStayMatcherConfig.benchmark?.sourceUrl).toContain("discover.shopback.com");
+    expect(tokyoStayMatcherConfig.benchmark?.sourceUrl).toContain("discover.shopback.com");
   });
 
   it("uses only the explicitly published seasonal uplift guidance for Seoul and Tokyo", () => {
-    expect(seoulStayMatcherConfig.seasonal("2026-04-15").multiplier).toEqual([1.25, 1.4]);
+    expect(seoulStayMatcherConfig.seasonal("2026-04-15").multiplier).toEqual([1.3, 1.5]);
     expect(seoulStayMatcherConfig.seasonal("2026-07-15").multiplier).toEqual([1, 1]);
-    expect(tokyoStayMatcherConfig.seasonal("2026-03-15").multiplier).toEqual([1.3, 1.5]);
+    expect(tokyoStayMatcherConfig.seasonal("2026-03-15").multiplier).toEqual([1.4, 1.8]);
     expect(tokyoStayMatcherConfig.seasonal("2026-07-15").multiplier).toEqual([1, 1]);
   });
 
@@ -48,6 +50,11 @@ describe("shared city stay matcher", () => {
     expect(source).toContain("Download PDF");
     expect(source).toContain("Print comparison");
     expect(source).toContain("Share on X");
+    expect(source).toContain("Saved-area map");
+    expect(source).toContain("Personal planning note");
+    expect(source).toContain("data-area-map");
+    expect(source).toContain("schematic city orientation map");
+    expect(source).toContain("Benchmark source:");
     expect(source).toContain("rel=\"sponsored nofollow\"");
     expect(source).toContain("target=\"_blank\"");
     expect(source).toContain("Localized");

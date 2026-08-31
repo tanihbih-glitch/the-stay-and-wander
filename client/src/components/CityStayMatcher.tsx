@@ -1,12 +1,13 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Compass, Copy, Download, Heart, ListPlus, MapPin, Printer, RotateCcw, Share2, X } from "lucide-react";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { MapView } from "@/components/Map";
 
 type TravelerFit = "solo" | "couples" | "families";
 type FavoriteSort = "saved" | "vibe" | "cost";
 type RoomType = "hostel" | "hotel" | "villa";
 type Answers = { vibe: string; budget: string; duration: string };
-type Range = readonly [number, number];
+type Range = readonly number[];
 
 export type CityMatcherArea = {
   key: string;
@@ -22,6 +23,7 @@ export type CityMatcherArea = {
   costRank: number;
   bestFor: readonly TravelerFit[];
   tierRanges?: { hostel: Range; hotel: Range; villaFrom: number };
+  mapPoint?: { lat: number; lng: number };
 };
 
 export type CityMatcherSeasonalReference = {
@@ -41,6 +43,9 @@ export type CityMatcherConfig = {
   seasonal: (tripDate: string) => CityMatcherSeasonalReference;
   supportsTierEstimates: boolean;
   tierNotice?: string;
+  mapCenter: google.maps.LatLngLiteral;
+  mapZoom: number;
+  benchmark?: { sourceName: string; sourceUrl: string; asOf: string; scope: string };
 };
 
 type SavedList = {
@@ -52,6 +57,7 @@ type SavedList = {
   nights: number;
   roomOverride: number;
   roomTypes: Record<string, RoomType>;
+  note: string;
 };
 
 const ROOM_TYPES: Record<RoomType, { label: string; assumption: string }> = {
@@ -91,7 +97,8 @@ function sanitizeLists(config: CityMatcherConfig, value: unknown): SavedList[] {
     const areaKeys = sanitizeAreaKeys(config, list.areaKeys, FAVORITE_LIMIT);
     if (!name || !areaKeys.length || typeof list.id !== "string" || !list.id) return [];
     const roomTypes = Object.fromEntries(Object.entries(list.roomTypes ?? {}).filter(([key, type]) => Boolean(getArea(config, key)) && ["hostel", "hotel", "villa"].includes(type as string))) as Record<string, RoomType>;
-    return [{ id: list.id, name, areaKeys, tripDate: /^2026-\d{2}-\d{2}$/.test(list.tripDate ?? "") ? list.tripDate! : "2026-07-15", travelers: Math.min(20, Math.max(1, Math.floor(list.travelers ?? 2))), nights: Math.min(30, Math.max(1, Math.floor(list.nights ?? 7))), roomOverride: Math.min(10, Math.max(0, Math.floor(list.roomOverride ?? 0))), roomTypes }];
+    const note = typeof list.note === "string" ? list.note.trim().slice(0, 600) : "";
+    return [{ id: list.id, name, areaKeys, tripDate: /^2026-\d{2}-\d{2}$/.test(list.tripDate ?? "") ? list.tripDate! : "2026-07-15", travelers: Math.min(20, Math.max(1, Math.floor(list.travelers ?? 2))), nights: Math.min(30, Math.max(1, Math.floor(list.nights ?? 7))), roomOverride: Math.min(10, Math.max(0, Math.floor(list.roomOverride ?? 0))), roomTypes, note }];
   }).slice(0, LIST_LIMIT);
 }
 
@@ -138,10 +145,10 @@ function shareSummary(config: CityMatcherConfig, primary: CityMatcherArea, alter
   return [`My ${config.city} base ideas from The Stay & Wander`, `Primary area: ${primary.name} — ${primary.heading}.`, `Alternative area: ${alternative.name} — ${alternative.heading}.`, `Compare the full guide: https://thestayandwander.com${config.articleUrl}#${config.id}-base-matcher`].join("\n");
 }
 
-function buildComparisonText(config: CityMatcherConfig, areaKeys: string[], tripDate: string, travelers: number, nights: number, roomOverride: number, roomTypes: Record<string, RoomType>) {
+function buildComparisonText(config: CityMatcherConfig, areaKeys: string[], tripDate: string, travelers: number, nights: number, roomOverride: number, roomTypes: Record<string, RoomType>, note = "") {
   const seasonal = config.seasonal(tripDate);
   const areas = sanitizeAreaKeys(config, areaKeys, FAVORITE_LIMIT).map((key) => getArea(config, key)!).filter(Boolean);
-  const lines = [`${config.city} base comparison — The Stay & Wander`, `Trip date planning reference: ${tripDate} · ${seasonal.label}.`, seasonal.note, config.supportsTierEstimates ? `Stay estimate: ${travelers} traveler${travelers === 1 ? "" : "s"} · ${nights} night${nights === 1 ? "" : "s"} · ${roomOverride ? `${roomOverride} specified room${roomOverride === 1 ? "" : "s"}` : "one hotel room per two travelers"}.` : `Room preferences are saved for comparison. ${config.tierNotice ?? "Localized room-tier benchmarks are pending."}`, ""];
+  const lines = [`${config.city} base comparison — The Stay & Wander`, `Trip date planning reference: ${tripDate} · ${seasonal.label}.`, seasonal.note, config.supportsTierEstimates ? `Stay estimate: ${travelers} traveler${travelers === 1 ? "" : "s"} · ${nights} night${nights === 1 ? "" : "s"} · ${roomOverride ? `${roomOverride} specified room${roomOverride === 1 ? "" : "s"}` : "one hotel room per two travelers"}.` : `Room preferences are saved for comparison. ${config.tierNotice ?? "Localized room-tier benchmarks are pending."}`, config.benchmark ? `Benchmark source: ${config.benchmark.sourceName}, ${config.benchmark.asOf}. ${config.benchmark.scope} ${config.benchmark.sourceUrl}` : "", note ? `Personal planning note: ${note}` : "", ""];
   areas.forEach((area) => {
     const preferred = roomTypes[area.key] ?? "hotel";
     lines.push(`${area.name}`, `Vibe: ${area.heading}.`, `Estimated guide range: ${formatRange(area.baseRange, seasonal.multiplier)}.`, `Preferred stay type: ${ROOM_TYPES[preferred].label}.`);
@@ -169,6 +176,7 @@ export default function CityStayMatcher({ config }: { config: CityMatcherConfig 
   const [roomTypes, setRoomTypes] = useState<Record<string, RoomType>>({});
   const [lists, setLists] = useState<SavedList[]>([]);
   const [listName, setListName] = useState("");
+  const [listNote, setListNote] = useState("");
   const [message, setMessage] = useState("");
   const [locationArea, setLocationArea] = useState<CityMatcherArea | null>(null);
   const recommendation = useMemo(() => getCityMatcherRecommendation(config, answers), [answers, config]);
@@ -203,18 +211,18 @@ export default function CityStayMatcher({ config }: { config: CityMatcherConfig 
   const saveList = () => {
     const name = listName.trim().slice(0, 40);
     if (!name || !favorites.length) { setMessage("Save at least one favorite and enter a list name first."); return; }
-    const list: SavedList = { id: `${Date.now()}-${name}`, name, areaKeys: favorites, tripDate, travelers, nights, roomOverride, roomTypes };
+    const list: SavedList = { id: `${Date.now()}-${name}`, name, areaKeys: favorites, tripDate, travelers, nights, roomOverride, roomTypes, note: listNote.trim().slice(0, 600) };
     setLists((current) => [...current.filter((item) => item.name.toLowerCase() !== name.toLowerCase()), list].slice(-LIST_LIMIT));
-    setListName(""); setMessage(`“${name}” saved on this device.`); track(config, "comparison_list_saved");
+    setListName(""); setListNote(""); setMessage(`“${name}” saved on this device.`); track(config, "comparison_list_saved");
   };
-  const loadList = (list: SavedList) => { setFavorites(list.areaKeys); setTripDate(list.tripDate); setTravelers(list.travelers); setNights(list.nights); setRoomOverride(list.roomOverride); setRoomTypes(list.roomTypes); setMessage(`“${list.name}” loaded.`); };
+  const loadList = (list: SavedList) => { setFavorites(list.areaKeys); setTripDate(list.tripDate); setTravelers(list.travelers); setNights(list.nights); setRoomOverride(list.roomOverride); setRoomTypes(list.roomTypes); setListName(list.name); setListNote(list.note); setMessage(`“${list.name}” loaded.`); };
   const downloadText = () => {
-    const blob = new Blob([buildComparisonText(config, visibleFavorites, tripDate, travelers, nights, roomOverride, roomTypes)], { type: "text/plain;charset=utf-8" });
+    const blob = new Blob([buildComparisonText(config, visibleFavorites, tripDate, travelers, nights, roomOverride, roomTypes, listNote)], { type: "text/plain;charset=utf-8" });
     const link = document.createElement("a"); link.href = URL.createObjectURL(blob); link.download = `${config.id}-stay-comparison.txt`; link.click(); URL.revokeObjectURL(link.href); track(config, "comparison_exported");
   };
   const downloadPdf = async () => {
     const { jsPDF } = await import("jspdf"); const doc = new jsPDF({ unit: "pt", format: "a4" });
-    const text = buildComparisonText(config, visibleFavorites, tripDate, travelers, nights, roomOverride, roomTypes);
+    const text = buildComparisonText(config, visibleFavorites, tripDate, travelers, nights, roomOverride, roomTypes, listNote);
     doc.setFontSize(11); doc.text(doc.splitTextToSize(text, 500), 48, 56); doc.save(`${config.id}-stay-comparison.pdf`); setMessage("Your printable comparison PDF has downloaded."); track(config, "comparison_pdf_exported");
   };
   const restart = () => { setStep(1); setAnswers({ vibe: "", budget: "", duration: "" }); setMessage(""); };
@@ -234,14 +242,29 @@ export default function CityStayMatcher({ config }: { config: CityMatcherConfig 
       {shortlist.length > 0 && <div className="mt-4 flex flex-wrap items-center gap-2 rounded-xl border border-[#0077B6]/15 bg-white/70 p-3 print:hidden"><span className="mr-1 text-xs font-bold uppercase tracking-[0.12em] text-[#0077B6]">Saved area shortlist</span>{shortlist.map((key) => <span key={key} className="rounded-full bg-[#F8EFE0] px-3 py-1 text-sm font-semibold text-[#0D1B2A]">{getArea(config, key)?.name}</span>)}<button type="button" onClick={() => setShortlist([])} className="ml-auto text-sm font-semibold text-[#0077B6]">Clear shortlist</button></div>}
       <div className="mt-4 grid gap-3 md:grid-cols-3 print:hidden"><label className="text-sm font-semibold text-slate-700">Best for<select value={fit} onChange={(event) => setFit(event.target.value as TravelerFit | "all")} className="mt-1 block w-full rounded-lg border border-slate-300 bg-white p-2.5"><option value="all">All traveler types</option>{(Object.keys(FIT_LABELS) as TravelerFit[]).map((key) => <option key={key} value={key}>{FIT_LABELS[key]}</option>)}</select></label><label className="text-sm font-semibold text-slate-700">Sort favorites<select value={favoriteSort} onChange={(event) => setFavoriteSort(event.target.value as FavoriteSort)} className="mt-1 block w-full rounded-lg border border-slate-300 bg-white p-2.5"><option value="saved">Saved order</option><option value="vibe">Vibe</option><option value="cost">Lower directional cost</option></select></label><label className="text-sm font-semibold text-slate-700">Trip date<select value={tripDate} onChange={(event) => setTripDate(event.target.value)} className="mt-1 block w-full rounded-lg border border-slate-300 bg-white p-2.5">{[...Array(12)].map((_, month) => { const value = `2026-${String(month + 1).padStart(2, "0")}-15`; return <option key={value} value={value}>{new Date(`${value}T12:00:00Z`).toLocaleDateString("en-US", { month: "long", year: "numeric", timeZone: "UTC" })}</option>; })}</select></label></div>
       {config.supportsTierEstimates ? <div className="mt-3 grid gap-3 sm:grid-cols-3"><NumberInput label="Travelers" value={travelers} onChange={setTravelers} min={1} max={20} /><NumberInput label="Nights" value={nights} onChange={setNights} min={1} max={30} /><NumberInput label="Room override (optional)" value={roomOverride} onChange={setRoomOverride} min={0} max={10} /></div> : <p className="mt-4 rounded-lg bg-white/80 p-4 text-sm leading-relaxed text-slate-700"><strong>Room-type note:</strong> {config.tierNotice}</p>}
+      {config.benchmark && <aside className="mt-4 rounded-lg border border-[#0077B6]/20 bg-white/75 p-4 text-sm leading-relaxed text-slate-700"><strong className="text-[#0D1B2A]">Tier-estimate basis:</strong> {config.benchmark.scope} Rates were published as of {config.benchmark.asOf}; they are planning inputs, not live quotes. <a href={config.benchmark.sourceUrl} target="_blank" rel="noopener noreferrer" className="font-semibold text-[#0077B6] underline underline-offset-2">Read the benchmark source</a>.</aside>}
       <p className="mt-4 text-sm italic text-slate-600"><strong>{seasonal.label}:</strong> {seasonal.note} {config.supportsTierEstimates ? `Total-stay estimates use ${roomOverride ? `${roomOverride} specified room${roomOverride === 1 ? "" : "s"}` : "one hotel room per two travelers"} × ${nights} night${nights === 1 ? "" : "s"}.` : "The selected date updates the general guide range only."}</p>
       {favorites.length === 0 ? <p className="mt-5 rounded-xl bg-white p-5 text-sm text-slate-600">Complete a match, then use “Save to Favorites” to compare up to four area ideas.</p> : <><div className="mt-5 flex flex-wrap gap-2">{visibleFavorites.map((key) => { const area = getArea(config, key)!; return <span key={key} className="inline-flex items-center gap-2 rounded-full bg-white px-3 py-2 text-sm font-semibold text-[#0D1B2A]">{area.name}<button type="button" aria-label={`Remove ${area.name}`} onClick={() => setFavorites((current) => current.filter((item) => item !== key))}><X className="h-4 w-4" /></button></span>; })}</div>
       <div className="mt-6 grid gap-4 md:grid-cols-2" data-screen-comparison>{displayAreas.map((area) => <ComparisonCard key={area.key} area={area} config={config} seasonal={seasonal} travelers={travelers} nights={nights} roomOverride={roomOverride} roomType={roomTypes[area.key] ?? "hotel"} onRoomType={(value) => setRoomTypes((current) => ({ ...current, [area.key]: value }))} />)}</div>
-      {displayAreas.length > 1 && <div className="mt-6 rounded-xl bg-white p-5"><h4 className="font-playfair text-xl font-bold text-[#0D1B2A]">Named comparison lists</h4><div className="mt-3 flex flex-col gap-3 sm:flex-row"><input value={listName} onChange={(event) => setListName(event.target.value)} maxLength={40} placeholder="e.g., Family city break" className="min-w-0 flex-1 rounded-lg border border-slate-300 px-3 py-2.5" /><button type="button" onClick={saveList} className="inline-flex items-center justify-center gap-2 rounded-lg bg-[#0D1B2A] px-4 py-2.5 text-sm font-bold text-white"><ListPlus className="h-4 w-4" />Save list</button></div>{lists.length > 0 && <div className="mt-4 flex flex-wrap gap-2">{lists.map((list) => <span key={list.id} className="inline-flex items-center gap-2 rounded-full border border-slate-300 px-3 py-2 text-sm"><button type="button" onClick={() => loadList(list)} className="font-semibold text-[#0077B6]">{list.name}</button><button type="button" aria-label={`Delete ${list.name}`} onClick={() => setLists((current) => current.filter((item) => item.id !== list.id))}><X className="h-3.5 w-3.5" /></button></span>)}</div>}</div>}
+      <SavedAreasMap config={config} areas={displayAreas} />
+      {displayAreas.length > 1 && <div className="mt-6 rounded-xl bg-white p-5"><h4 className="font-playfair text-xl font-bold text-[#0D1B2A]">Named comparison lists</h4><div className="mt-3 grid gap-3"><input value={listName} onChange={(event) => setListName(event.target.value)} maxLength={40} placeholder="e.g., Family city break" className="min-w-0 rounded-lg border border-slate-300 px-3 py-2.5" /><textarea value={listNote} onChange={(event) => setListNote(event.target.value.slice(0, 600))} maxLength={600} rows={3} aria-label="Personal planning note" placeholder="Optional private note for this comparison list" className="min-w-0 resize-y rounded-lg border border-slate-300 px-3 py-2.5 text-sm" /><div className="flex flex-wrap items-center justify-between gap-3"><p className="text-xs text-slate-500">{listNote.length}/600 characters · stored only in this browser.</p><button type="button" onClick={saveList} className="inline-flex items-center justify-center gap-2 rounded-lg bg-[#0D1B2A] px-4 py-2.5 text-sm font-bold text-white"><ListPlus className="h-4 w-4" />Save list</button></div></div>{lists.length > 0 && <div className="mt-4 space-y-2">{lists.map((list) => <div key={list.id} className="flex flex-wrap items-center gap-2 rounded-lg border border-slate-200 px-3 py-2 text-sm"><button type="button" onClick={() => loadList(list)} className="font-semibold text-[#0077B6]">{list.name}</button>{list.note && <span className="min-w-0 flex-1 truncate text-slate-600">{list.note}</span>}<button type="button" aria-label={`Delete ${list.name}`} onClick={() => setLists((current) => current.filter((item) => item.id !== list.id))}><X className="h-3.5 w-3.5" /></button></div>)}</div>}</div>}
       {displayAreas.length > 0 && <div className="mt-5 flex flex-wrap gap-3"><button type="button" onClick={downloadText} className="inline-flex items-center gap-2 rounded-lg border border-[#0077B6] bg-white px-4 py-2.5 text-sm font-bold text-[#0077B6]"><Download className="h-4 w-4" />Download text card</button><button type="button" onClick={downloadPdf} className="inline-flex items-center gap-2 rounded-lg border border-[#0077B6] bg-white px-4 py-2.5 text-sm font-bold text-[#0077B6]">Download PDF</button><button type="button" onClick={() => window.print()} className="inline-flex items-center gap-2 rounded-lg border border-[#0077B6] bg-white px-4 py-2.5 text-sm font-bold text-[#0077B6]"><Printer className="h-4 w-4" />Print comparison</button></div>}</>}</div>
     {displayAreas.length > 0 && <div className="hidden print:block" data-print-comparison><h2 className="font-playfair text-3xl font-bold text-[#0D1B2A]">{config.city} saved-area comparison</h2><p className="mt-2 text-sm text-slate-700"><strong>{seasonal.label}:</strong> {seasonal.note}</p><p className="mt-2 text-sm text-slate-700">Planning estimates only. {config.supportsTierEstimates ? `${roomsFor(travelers, roomOverride)} room${roomsFor(travelers, roomOverride) === 1 ? "" : "s"} × ${nights} night${nights === 1 ? "" : "s"}.` : "Room type is a saved preference; localized tier benchmarks are pending."}</p><div className="mt-5 grid gap-4 grid-cols-2">{displayAreas.map((area) => <ComparisonCard key={`print-${area.key}`} area={area} config={config} seasonal={seasonal} travelers={travelers} nights={nights} roomOverride={roomOverride} roomType={roomTypes[area.key] ?? "hotel"} onRoomType={() => undefined} />)}</div></div>}
     <Dialog open={Boolean(locationArea)} onOpenChange={(open) => !open && setLocationArea(null)}><DialogContent className="max-w-lg"><DialogHeader><DialogTitle className="font-playfair text-2xl text-[#0D1B2A]">{locationArea?.name} in {config.city}</DialogTitle><DialogDescription>{locationArea?.location}</DialogDescription></DialogHeader>{locationArea && <div className="mt-4 rounded-xl bg-[#F8EFE0] p-6"><div className="flex h-36 items-center justify-center rounded-lg border border-dashed border-[#0077B6]/40 bg-white"><MapPin className="h-10 w-10 text-[#F4A261]" /><span className="ml-3 text-sm font-bold text-[#0D1B2A]">{locationArea.location}</span></div><p className="mt-4 leading-relaxed text-slate-700">{locationArea.locationContext}</p></div>}</DialogContent></Dialog>
   </section>;
+}
+
+function SavedAreasMap({ config, areas }: { config: CityMatcherConfig; areas: CityMatcherArea[] }) {
+  const points = areas.map((area) => area.mapPoint ? { area, point: area.mapPoint } : null).filter((entry): entry is { area: CityMatcherArea; point: { lat: number; lng: number } } => Boolean(entry));
+  const [selectedKey, setSelectedKey] = useState(points[0]?.area.key ?? "");
+  useEffect(() => { if (!points.some(({ area }) => area.key === selectedKey)) setSelectedKey(points[0]?.area.key ?? ""); }, [points, selectedKey]);
+  if (!points.length) return null;
+  const latitudes = points.map(({ point }) => point.lat); const longitudes = points.map(({ point }) => point.lng);
+  const north = Math.max(...latitudes); const south = Math.min(...latitudes); const west = Math.min(...longitudes); const east = Math.max(...longitudes);
+  const selected = points.find(({ area }) => area.key === selectedKey)?.area ?? points[0].area;
+  const positionFor = (point: { lat: number; lng: number }) => ({ left: `${16 + ((point.lng - west) / Math.max(0.0001, east - west)) * 68}%`, top: `${15 + ((north - point.lat) / Math.max(0.0001, north - south)) * 56}%` });
+
+  return <div className="mt-6 overflow-hidden rounded-xl border border-[#0077B6]/20 bg-white print:hidden" data-area-map><div className="border-b border-[#0077B6]/15 px-5 py-4"><h4 className="font-playfair text-xl font-bold text-[#0D1B2A]">Saved-area map</h4><p className="mt-1 text-sm text-slate-600">A schematic city orientation map for comparing your saved areas. It does not use your location or send personal data anywhere.</p></div><div className="grid gap-0 md:grid-cols-[minmax(0,1fr)_220px]"><div className="relative min-h-[280px] bg-[linear-gradient(135deg,#e0f2fe_0%,#f8efe0_100%)]" role="group" aria-label={`${config.city} saved area map`}><div className="absolute inset-5 rounded-[45%] border border-dashed border-[#0077B6]/25" aria-hidden="true" /><p className="absolute left-5 top-5 text-xs font-bold uppercase tracking-[0.16em] text-[#0077B6]/70">{config.city} orientation</p>{points.map(({ area, point }) => <button key={area.key} type="button" onClick={() => setSelectedKey(area.key)} aria-pressed={selected.key === area.key} className="absolute inline-flex -translate-x-1/2 -translate-y-1/2 items-center gap-1 rounded-full border border-white bg-[#0077B6] px-2.5 py-1.5 text-xs font-bold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0D1B2A]" style={positionFor(point)}><MapPin className="h-3.5 w-3.5" />{area.name}</button>)}</div><div className="border-t border-[#0077B6]/15 p-5 md:border-l md:border-t-0"><p className="text-xs font-bold uppercase tracking-[0.14em] text-[#0077B6]">Selected area</p><h5 className="mt-2 font-playfair text-2xl font-bold text-[#0D1B2A]">{selected.name}</h5><p className="mt-2 text-sm font-semibold text-slate-700">{selected.location}</p><p className="mt-3 text-sm leading-relaxed text-slate-600">{selected.locationContext}</p></div></div></div>;
 }
 
 function ResultArea({ area, label, config, onFavorite, onShortlist, onLocate }: { area: CityMatcherArea; label: string; config: CityMatcherConfig; onFavorite: (key: string) => void; onShortlist: (key: string) => void; onLocate: (area: CityMatcherArea) => void }) {

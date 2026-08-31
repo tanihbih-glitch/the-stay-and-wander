@@ -1,5 +1,13 @@
 # Project TODO
 
+- [x] Audit current city comparison state, map integration points, browser-local list storage, and credible Seoul/Tokyo accommodation benchmark sources.
+- [x] Define a transparent source and calculation methodology for Seoul and Tokyo tier-level benchmark estimates.
+- [x] Add interactive maps to Bangkok, Seoul, and Tokyo saved favorites comparisons, using area-level map markers and no location data collection.
+- [x] Add browser-local free-text notes to named city comparison lists, with save, load, update, and delete behavior.
+- [x] Enable Seoul and Tokyo room-type and total-stay numerical estimates using verified dated city-level tier benchmarks, with clear source limitations and no claim that the same tier bands are neighborhood-specific.
+- [x] Add cross-guide regression coverage and validate maps, notes, cost calculations, storage, exports, and print behavior. Focused coverage, fresh browser sessions, the 162-test suite, TypeScript, and production build pass.
+- [ ] Publish the three enhanced city comparison tools and provide test-ready links.
+
 - [x] Implement the shared conservative interactive planning framework for the Bangkok, Seoul, and Tokyo where-to-stay guides using city-specific guide data.
 - [x] Add Bangkok tier-level cost calculations, seasonal guidance, and compliant centralized availability handoffs.
 - [x] Add Seoul preference-only room types, published seasonal guidance, and a transparent localized-benchmarks-pending notice.
