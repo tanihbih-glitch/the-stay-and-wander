@@ -6,7 +6,8 @@
 - [x] Add Tokyo preference-only room types, published seasonal guidance, and a transparent localized-benchmarks-pending notice.
 - [x] Include the full interaction suite on all three guides: matcher, loading reveal, shortlist/favorites, filtering, named lists, social sharing, text/PDF/print comparison, and location modal.
 - [x] Explicitly switch between two differently configured named comparison lists in Bangkok, Seoul, and Tokyo and confirm the displayed comparison state changes before publication. Fresh browser sessions saved July and August lists, restored each selected state, removed the second list, and also confirmed shortlist save/clear and dedicated print comparison behavior.
-- [ ] Publish the three city-guide enhancements and provide test-ready links.
+- [x] Publish the three city-guide enhancements in checkpoint `0ef80042`.
+- [x] Deliver the three verified managed-domain test links and summarize the completed interaction coverage for Bangkok, Seoul, and Tokyo.
 
 - [x] Inspect the current Bali comparison model, price bands, PDF content, and local-storage conventions for the requested planning refinements.
 - [x] Add per-area room-type preferences using the existing guide-supported budget, mid-range, and villa/luxury cost bands.
