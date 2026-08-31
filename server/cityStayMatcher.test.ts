@@ -64,6 +64,14 @@ describe("shared city stay matcher", () => {
     expect(source).toContain("Personal planning note");
     expect(source).toContain("Personal note for");
     expect(source).toContain("Share link");
+    expect(source).toContain("Clear all favorites");
+    expect(source).toContain("favorites_cleared");
+    expect(source).toContain("Note templates");
+    expect(source).toContain("Family vacation");
+    expect(source).toContain("Solo trip");
+    expect(source).toContain("Copy share link for");
+    expect(source).toContain("Link copied");
+    expect(source).toContain("comparison_list_link_copied");
     expect(source).toContain("encodeSharedList");
     expect(source).toContain("areaNotes");
     expect(source).toContain("Private notes are not shared");

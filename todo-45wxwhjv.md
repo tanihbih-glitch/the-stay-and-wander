@@ -1,5 +1,12 @@
 # Project TODO
 
+- [x] Inspect the shared city matcher favorites, note, sharing, and test implementations for the requested planning controls.
+- [x] Add a browser-local Clear all favorites control with clear user feedback and no server persistence.
+- [x] Add optional local note templates for family vacations and solo trips, usable within named comparison-list notes.
+- [x] Add a visible copied-link confirmation state with a safe clipboard fallback for named comparison share links.
+- [x] Add regression coverage and validate browser-local interactions. Focused coverage, fresh browser flows across Bangkok, Seoul, and Tokyo, the 162-test suite, TypeScript, and production build pass.
+- [ ] Save and publish the enhanced city matcher controls, then verify the test-ready routes.
+
 - [x] Add the exact “City-Tier Benchmarks (Eligibility Restricted by District)” label to Seoul and Tokyo comparison estimates.
 - [x] Add the approved localized-benchmark update notice to Seoul and Tokyo comparison views and exports.
 - [x] Re-run full cross-city stability validation for sharing, filters, shortlist/favorites, local notes, named lists, exports, and print/PDF behavior. Focused and full tests, TypeScript, production build, and fresh browser flows passed across Bangkok, Seoul, and Tokyo.
