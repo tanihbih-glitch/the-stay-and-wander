@@ -5,7 +5,8 @@
 - [x] Add an explicit room-count override that supersedes the default two-travelers-per-room total-stay assumption.
 - [x] Add a browser-only PDF download for the printable saved-area comparison without sending saved areas or trip inputs to a server.
 - [x] Re-run and record a successful desktop visual validation of the updated Bali matcher comparison before publication. The matcher anchor route renders cleanly at desktop width; direct interaction and print-media checks cover the result-specific controls.
-- [ ] Save and publish the enhanced Bali matcher checkpoint, then verify its test-ready route.
+- [x] Save and publish the enhanced Bali matcher checkpoint `32d90e0a`.
+- [x] Re-verify the existing Share Results, Start Over, location modal, and saved-area shortlist behavior on the published `32d90e0a` route after the room-override, PDF, and availability update. The propagated route passed copy/share fallback, Canggu location modal open/close, restart to Step 1 and rebuilt results, Ubud shortlist save, and shortlist clearing, alongside the new availability, PDF, room override, and print controls.
 
 - [x] Inspect the current Bali matcher comparison model, seasonal estimate logic, and any existing print/export conventions.
 - [x] Add an optional traveler-count input and night-count estimate so saved-area comparisons can show total-stay cost ranges using the selected trip date.
