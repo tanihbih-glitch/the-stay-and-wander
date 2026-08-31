@@ -5,6 +5,8 @@ import { CITY_ACTIVITIES_CAMPAIGN, CITY_ACTIVITIES_WIDGET_SRC } from "../client/
 import { pageMetadataConfig } from "../shared/seo";
 import { sitemapRoutes } from "../shared/publicRoutes";
 import { getArticleFaqs, seoulStayFaqs, tokyoStayFaqs } from "../shared/articleFaqs";
+import { readFileSync } from "node:fs";
+import path from "node:path";
 
 describe("Tokyo and Seoul where-to-stay guides", () => {
   it("uses the supplied canonical titles, paths, five-area price tables, and crawler metadata", () => {
@@ -52,5 +54,14 @@ describe("Tokyo and Seoul where-to-stay guides", () => {
     expect(pageMetadataConfig.tokyoItinerary.url).toBe("/itinerary/tokyo");
     expect(pageMetadataConfig.seoulItinerary.url).toBe("/itinerary/seoul");
     expect(sitemapRoutes.map((route) => route.path)).toEqual(expect.arrayContaining(["/itinerary/tokyo", "/itinerary/seoul"]));
+  });
+
+  it("embeds the shared privacy-safe matcher in both guides", () => {
+    const seoulPage = readFileSync(path.resolve(process.cwd(), "client/src/pages/BlogSeoulStay.tsx"), "utf8");
+    const tokyoPage = readFileSync(path.resolve(process.cwd(), "client/src/pages/BlogTokyoStay.tsx"), "utf8");
+    for (const source of [seoulPage, tokyoPage]) {
+      expect(source).toContain("<CityStayMatcher");
+      expect(source).toContain("CityStayMatcher");
+    }
   });
 });

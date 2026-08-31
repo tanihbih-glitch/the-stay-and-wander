@@ -163,6 +163,13 @@ export const SEOUL_DINING_AFFILIATE_LINKS = {
   klook: "https://klook.tpo.lu/5DVt59mh",
 } as const;
 
+/** Approved Stay22 handoffs for first-timer city stay-guide matchers. */
+export const CITY_STAY_MATCHER_AFFILIATE_LINKS = {
+  bangkok: "https://booking.stay22.com/thestayandwander/bEUkQtNQBH",
+  seoul: SEOUL_DINING_AFFILIATE_LINKS.stay22,
+  tokyo: DEALS_AFFILIATE_LINKS.hotels.tokyo,
+} as const;
+
 /**
  * Helper function to generate Travelpayout search links
  * @param searchKey - The search key from Travelpayout API

@@ -1,5 +1,13 @@
 # Project TODO
 
+- [x] Implement the shared conservative interactive planning framework for the Bangkok, Seoul, and Tokyo where-to-stay guides using city-specific guide data.
+- [x] Add Bangkok tier-level cost calculations, seasonal guidance, and compliant centralized availability handoffs.
+- [x] Add Seoul preference-only room types, published seasonal guidance, and a transparent localized-benchmarks-pending notice.
+- [x] Add Tokyo preference-only room types, published seasonal guidance, and a transparent localized-benchmarks-pending notice.
+- [x] Include the full interaction suite on all three guides: matcher, loading reveal, shortlist/favorites, filtering, named lists, social sharing, text/PDF/print comparison, and location modal.
+- [x] Explicitly switch between two differently configured named comparison lists in Bangkok, Seoul, and Tokyo and confirm the displayed comparison state changes before publication. Fresh browser sessions saved July and August lists, restored each selected state, removed the second list, and also confirmed shortlist save/clear and dedicated print comparison behavior.
+- [ ] Publish the three city-guide enhancements and provide test-ready links.
+
 - [x] Inspect the current Bali comparison model, price bands, PDF content, and local-storage conventions for the requested planning refinements.
 - [x] Add per-area room-type preferences using the existing guide-supported budget, mid-range, and villa/luxury cost bands.
 - [x] Add a clear price-assumption legend to the downloadable Bali comparison PDF.

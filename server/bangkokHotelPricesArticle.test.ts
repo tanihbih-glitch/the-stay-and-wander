@@ -2,6 +2,8 @@ import { describe, expect, it } from "vitest";
 import { articleMetadata, bangkokStayDecisions, priceSnapshot, searchMetadata } from "../client/src/pages/BlogBangkokHotelPrices";
 import { TRIP_COM_HOTEL_WIDGET_URL } from "../client/src/components/TripComHotelWidget";
 import { pageMetadataConfig } from "../shared/seo";
+import { readFileSync } from "node:fs";
+import path from "node:path";
 
 describe("Bangkok hotel prices article", () => {
   it("uses the supplied first-timer guide title, canonical route, and neighborhood-focused search description", () => {
@@ -25,5 +27,10 @@ describe("Bangkok hotel prices article", () => {
       expect.objectContaining({ recommendation: "Khao San Road", href: "#khao-san-road" }),
       expect.objectContaining({ recommendation: "Sathorn", href: "#sathorn" }),
     ]);
+  });
+
+  it("embeds the shared matcher directly after the Bangkok decision tree", () => {
+    const source = readFileSync(path.resolve(process.cwd(), "client/src/pages/BlogBangkokHotelPrices.tsx"), "utf8");
+    expect(source).toContain("<CityStayMatcher config={bangkokStayMatcherConfig} />");
   });
 });

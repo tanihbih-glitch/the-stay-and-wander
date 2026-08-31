@@ -8,6 +8,8 @@ import TripComHotelWidget from "@/components/TripComHotelWidget";
 import ArticleFAQ from "@/components/ArticleFAQ";
 import RelatedAsiaStayGuides from "@/components/RelatedAsiaStayGuides";
 import GuideMethodologyDecisionTree, { type GuideDecision } from "@/components/GuideMethodologyDecisionTree";
+import CityStayMatcher from "@/components/CityStayMatcher";
+import { bangkokStayMatcherConfig } from "@/lib/cityStayMatcherConfigs";
 import { bangkokHotelPricesFaqs } from "@shared/articleFaqs";
 import { ArrowLeft } from "lucide-react";
 
@@ -164,6 +166,8 @@ export default function BlogBangkokHotelPrices() {
             methodology="This 2026 guide combines the editorial area profiles and typical shoulder-season planning ranges presented below. Prices are directional planning estimates rather than a live rate feed, so confirm availability, transport access, and current pricing for your selected dates."
             decisions={bangkokStayDecisions}
           />
+
+          <CityStayMatcher config={bangkokStayMatcherConfig} />
 
           <section className="mt-12 rounded-2xl bg-slate-900 p-6 text-white shadow-sm sm:p-8">
             <h2 className="font-playfair text-3xl font-bold">Bangkok Area-at-a-Glance for First-Timers</h2>
