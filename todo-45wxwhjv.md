@@ -1,5 +1,12 @@
 # Project TODO
 
+- [x] Inspect the approved Bali booking registry, comparison calculations, and existing client-side PDF-generation dependencies.
+- [x] Add compliant per-area availability handoffs using the centralized approved booking registry and required sponsored new-tab attributes.
+- [x] Add an explicit room-count override that supersedes the default two-travelers-per-room total-stay assumption.
+- [x] Add a browser-only PDF download for the printable saved-area comparison without sending saved areas or trip inputs to a server.
+- [x] Re-run and record a successful desktop visual validation of the updated Bali matcher comparison before publication. The matcher anchor route renders cleanly at desktop width; direct interaction and print-media checks cover the result-specific controls.
+- [ ] Save and publish the enhanced Bali matcher checkpoint, then verify its test-ready route.
+
 - [x] Inspect the current Bali matcher comparison model, seasonal estimate logic, and any existing print/export conventions.
 - [x] Add an optional traveler-count input and night-count estimate so saved-area comparisons can show total-stay cost ranges using the selected trip date.
 - [x] Verify the Bali favorites comparison in print media and confirm only the intended comparison card renders with its headings, totals, seasonal reference, and saved-area details. Print-media emulation showed the focused card, print title, August seasonal reference, three-traveler/five-night context, and Ubud total-stay range while hiding screen-only controls.

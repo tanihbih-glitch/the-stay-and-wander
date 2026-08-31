@@ -89,7 +89,8 @@ export type BaliMatcherEventName =
   | "bali_matcher_social_share_opened"
   | "bali_matcher_location_opened"
   | "bali_matcher_favorite_saved"
-  | "bali_matcher_comparison_exported";
+  | "bali_matcher_comparison_exported"
+  | "bali_matcher_comparison_pdf_exported";
 
 type BaliMatcherEventProperties = Record<string, string | number | boolean>;
 
@@ -323,13 +324,15 @@ export function buildBaliAreaSeasonalEstimate(area: BaliBaseArea, tripDate: stri
   };
 }
 
-export function calculateBaliAreaTotalStayEstimate(area: BaliBaseArea, tripDate: string, travelers: number, nights: number) {
+export function calculateBaliAreaTotalStayEstimate(area: BaliBaseArea, tripDate: string, travelers: number, nights: number, roomOverride = 0) {
   const seasonal = getBaliMatcherSeasonalEstimate(tripDate);
-  const rooms = Math.max(1, Math.ceil(Math.max(1, travelers) / 2));
+  const automaticRooms = Math.max(1, Math.ceil(Math.max(1, travelers) / 2));
+  const rooms = Math.max(1, Math.floor(roomOverride) || automaticRooms);
   const safeNights = Math.max(1, nights);
   const total = (amount: number) => Math.round(amount * seasonal.multiplier * rooms * safeNights);
   return {
     rooms,
+    usingRoomOverride: Math.floor(roomOverride) > 0,
     nights: safeNights,
     budget: `$${total(area.baselinePriceBands.budget[0]).toLocaleString()}–${total(area.baselinePriceBands.budget[1]).toLocaleString()} total`,
     midRange: `$${total(area.baselinePriceBands.midRange[0]).toLocaleString()}–${total(area.baselinePriceBands.midRange[1]).toLocaleString()} total`,
@@ -337,7 +340,7 @@ export function calculateBaliAreaTotalStayEstimate(area: BaliBaseArea, tripDate:
   };
 }
 
-export function buildBaliFavoritesComparisonText(areaKeys: AreaKey[], tripDate: string, travelers = 2, nights = 7) {
+export function buildBaliFavoritesComparisonText(areaKeys: AreaKey[], tripDate: string, travelers = 2, nights = 7, roomOverride = 0) {
   const selectedAreas = sanitizeBaliBaseFavorites(areaKeys).map((key) => baliBaseAreas[key]);
   const seasonal = getBaliMatcherSeasonalEstimate(tripDate);
   const formattedDate = /^\d{4}-\d{2}-\d{2}$/.test(tripDate) ? tripDate : "2026-07-15";
@@ -345,12 +348,12 @@ export function buildBaliFavoritesComparisonText(areaKeys: AreaKey[], tripDate: 
   return [
     "Bali base comparison — The Stay & Wander",
     `Trip date planning reference: ${formattedDate} · ${seasonal.label} (${seasonal.multiplier.toFixed(2)}×).`,
-    `Stay estimate: ${Math.max(1, travelers)} traveler${Math.max(1, travelers) === 1 ? "" : "s"} · ${Math.max(1, nights)} night${Math.max(1, nights) === 1 ? "" : "s"} · one mid-range room per two travelers.`,
+    `Stay estimate: ${Math.max(1, travelers)} traveler${Math.max(1, travelers) === 1 ? "" : "s"} · ${Math.max(1, nights)} night${Math.max(1, nights) === 1 ? "" : "s"} · ${Math.floor(roomOverride) > 0 ? `${Math.floor(roomOverride)} specified hotel room${Math.floor(roomOverride) === 1 ? "" : "s"}` : "one mid-range room per two travelers"}.`,
     seasonal.note,
     "",
     ...selectedAreas.map((area) => {
       const estimate = buildBaliAreaSeasonalEstimate(area, tripDate);
-      const total = calculateBaliAreaTotalStayEstimate(area, tripDate, travelers, nights);
+      const total = calculateBaliAreaTotalStayEstimate(area, tripDate, travelers, nights, roomOverride);
       return `${area.name}\nVibe: ${area.heading}.\nEstimated planning range: Budget ${estimate.budget} · Mid-range ${estimate.midRange} · Luxury from ${estimate.luxuryFrom}.\nTotal stay estimate: Budget ${total.budget} · Mid-range ${total.midRange} · Luxury from ${total.luxuryFrom}.\nHighlights: ${area.localHighlights.join("; ")}.`;
     }),
     "",
@@ -397,6 +400,7 @@ export default function BaliBaseMatcher() {
   const [tripDate, setTripDate] = useState("2026-07-15");
   const [comparisonTravelers, setComparisonTravelers] = useState(2);
   const [comparisonNights, setComparisonNights] = useState(7);
+  const [comparisonRoomOverride, setComparisonRoomOverride] = useState(0);
   const [isRestarting, setIsRestarting] = useState(false);
   const [shareMessage, setShareMessage] = useState("");
   const [locationArea, setLocationArea] = useState<BaliBaseArea | null>(null);
@@ -519,7 +523,7 @@ export default function BaliBaseMatcher() {
 
   const downloadFavoritesComparison = () => {
     if (sortedFavorites.length < 2) return;
-    const text = buildBaliFavoritesComparisonText(sortedFavorites, tripDate, comparisonTravelers, comparisonNights);
+    const text = buildBaliFavoritesComparisonText(sortedFavorites, tripDate, comparisonTravelers, comparisonNights, comparisonRoomOverride);
     const file = new Blob([text], { type: "text/plain;charset=utf-8" });
     const url = window.URL.createObjectURL(file);
     const link = document.createElement("a");
@@ -531,6 +535,89 @@ export default function BaliBaseMatcher() {
     window.URL.revokeObjectURL(url);
     setFavoritesMessage("Your shareable Bali comparison text card has downloaded.");
     trackBaliMatcherEvent("bali_matcher_comparison_exported", { areas: sortedFavorites.length, seasonal_reference: seasonalEstimate.label });
+  };
+
+  const downloadFavoritesComparisonPdf = async () => {
+    if (sortedFavorites.length < 2) return;
+
+    try {
+      const { PDFDocument, StandardFonts, rgb } = await import("pdf-lib");
+      const pdf = await PDFDocument.create();
+      const regular = await pdf.embedFont(StandardFonts.Helvetica);
+      const bold = await pdf.embedFont(StandardFonts.HelveticaBold);
+      const navy = rgb(13 / 255, 27 / 255, 42 / 255);
+      const ocean = rgb(0 / 255, 119 / 255, 182 / 255);
+      const slate = rgb(51 / 255, 65 / 255, 85 / 255);
+      let page = pdf.addPage([595, 842]);
+      let y = 796;
+      const margin = 46;
+      const ensureSpace = (required: number) => {
+        if (y - required >= 48) return;
+        page = pdf.addPage([595, 842]);
+        y = 796;
+      };
+      const writeWrapped = (text: string, font = regular, size = 9, color = slate, gap = 13) => {
+        const words = text.split(/\s+/);
+        let line = "";
+        for (const word of words) {
+          const candidate = line ? `${line} ${word}` : word;
+          if (font.widthOfTextAtSize(candidate, size) > 503 && line) {
+            ensureSpace(gap);
+            page.drawText(line, { x: margin, y, size, font, color });
+            y -= gap;
+            line = word;
+          } else line = candidate;
+        }
+        if (line) {
+          ensureSpace(gap);
+          page.drawText(line, { x: margin, y, size, font, color });
+          y -= gap;
+        }
+      };
+      const writeHeading = (text: string, size = 16) => {
+        ensureSpace(size + 16);
+        page.drawText(text, { x: margin, y, size, font: bold, color: navy });
+        y -= size + 10;
+      };
+
+      page.drawText("THE STAY & WANDER", { x: margin, y, size: 9, font: bold, color: ocean });
+      y -= 26;
+      writeHeading("Saved Bali base comparison", 22);
+      writeWrapped(`${tripDate} · ${seasonalEstimate.label} · ${comparisonTravelers} traveler${comparisonTravelers === 1 ? "" : "s"} · ${comparisonNights} night${comparisonNights === 1 ? "" : "s"} · ${comparisonRoomOverride > 0 ? `${comparisonRoomOverride} specified room${comparisonRoomOverride === 1 ? "" : "s"}` : "one mid-range room per two travelers"}.`, regular, 10);
+      writeWrapped("Planning estimates only. Taxes, service, room configuration, and live availability can change final prices.", regular, 9);
+      y -= 8;
+
+      for (const key of sortedFavorites) {
+        const area = baliBaseAreas[key];
+        const estimate = buildBaliAreaSeasonalEstimate(area, tripDate);
+        const total = calculateBaliAreaTotalStayEstimate(area, tripDate, comparisonTravelers, comparisonNights, comparisonRoomOverride);
+        writeHeading(area.name, 16);
+        writeWrapped(area.heading, bold, 10, ocean);
+        writeWrapped(`Vibe: ${area.quickSummary}`);
+        writeWrapped(`Seasonal planning range: Budget ${estimate.budget} · Mid-range ${estimate.midRange} · Luxury from ${estimate.luxuryFrom}.`);
+        writeWrapped(`Total-stay estimate: Budget ${total.budget} · Mid-range ${total.midRange} · Luxury from ${total.luxuryFrom}.`);
+        writeWrapped(`Highlights: ${area.localHighlights.join(" · ")}.`);
+        writeWrapped(`Location: ${area.baliLocation}.`);
+        y -= 8;
+      }
+
+      const generatedBytes = await pdf.save();
+      const pdfBytes = new Uint8Array(generatedBytes.length);
+      pdfBytes.set(generatedBytes);
+      const file = new Blob([pdfBytes.buffer], { type: "application/pdf" });
+      const url = window.URL.createObjectURL(file);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "bali-base-comparison.pdf";
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      window.URL.revokeObjectURL(url);
+      setFavoritesMessage("Your printable Bali comparison PDF has downloaded.");
+      trackBaliMatcherEvent("bali_matcher_comparison_pdf_exported", { areas: sortedFavorites.length, seasonal_reference: seasonalEstimate.label });
+    } catch {
+      setFavoritesMessage("Your browser could not create the PDF. Use Print comparison to save a PDF instead.");
+    }
   };
 
   const printFavoritesComparison = () => window.print();
@@ -643,39 +730,41 @@ export default function BaliBaseMatcher() {
               {favorites.length > 0 && <button type="button" onClick={clearFavorites} className="inline-flex shrink-0 items-center gap-2 self-start text-sm font-semibold text-slate-600 underline-offset-4 hover:text-[#0D1B2A] hover:underline focus:outline-none focus:ring-2 focus:ring-[#9a5b20] focus:ring-offset-2"><Trash2 className="h-4 w-4" aria-hidden="true" />Clear Favorites</button>}
             </div>
             {favorites.length > 0 ? <>
-              <div className="mt-4 grid gap-3 md:grid-cols-5">
+              <div className="mt-4 grid gap-3 md:grid-cols-6">
                 <label className="grid gap-1 text-sm font-semibold text-slate-700" htmlFor="bali-favorite-fit"><span className="inline-flex items-center gap-2"><UsersRound className="h-4 w-4 text-[#9a5b20]" aria-hidden="true" />Best for</span><select id="bali-favorite-fit" value={favoriteTravelerFit} onChange={(event) => setFavoriteTravelerFit(event.target.value as BaliTravelerFit | "all")} className="rounded-full border border-[#f0d3af] bg-white px-3 py-2 text-sm font-semibold text-[#0D1B2A] focus:outline-none focus:ring-2 focus:ring-[#9a5b20] focus:ring-offset-2"><option value="all">All saved areas</option>{Object.entries(BALI_TRAVELER_FIT_LABELS).map(([key, label]) => <option key={key} value={key}>{label}</option>)}</select></label>
                 <label className="grid gap-1 text-sm font-semibold text-slate-700" htmlFor="bali-favorite-sort"><span className="inline-flex items-center gap-2"><ArrowUpDown className="h-4 w-4 text-[#9a5b20]" aria-hidden="true" />Sort saved favorites</span><select id="bali-favorite-sort" value={favoriteSort} onChange={(event) => setFavoriteSort(event.target.value as BaliFavoriteSort)} className="rounded-full border border-[#f0d3af] bg-white px-3 py-2 text-sm font-semibold text-[#0D1B2A] focus:outline-none focus:ring-2 focus:ring-[#9a5b20] focus:ring-offset-2"><option value="saved">Saved order</option><option value="vibe">Vibe</option><option value="cost">Lower directional cost</option></select></label>
                 <label className="grid gap-1 text-sm font-semibold text-slate-700" htmlFor="bali-comparison-date"><span className="inline-flex items-center gap-2"><CalendarDays className="h-4 w-4 text-[#9a5b20]" aria-hidden="true" />Trip date</span><input id="bali-comparison-date" type="date" min="2026-01-01" max="2026-12-31" value={tripDate} onChange={(event) => setTripDate(event.target.value)} aria-describedby="bali-seasonal-estimate-note" className="rounded-full border border-[#f0d3af] bg-white px-3 py-2 text-sm font-semibold text-[#0D1B2A] focus:outline-none focus:ring-2 focus:ring-[#9a5b20] focus:ring-offset-2" /></label>
                 <label className="grid gap-1 text-sm font-semibold text-slate-700" htmlFor="bali-comparison-travelers"><span className="inline-flex items-center gap-2"><UsersRound className="h-4 w-4 text-[#9a5b20]" aria-hidden="true" />Travelers <span className="font-normal text-slate-500">(optional)</span></span><input id="bali-comparison-travelers" type="number" min="1" max="20" value={comparisonTravelers} onChange={(event) => setComparisonTravelers(Math.max(1, Number(event.target.value) || 1))} aria-describedby="bali-total-estimate-note" className="rounded-full border border-[#f0d3af] bg-white px-3 py-2 text-sm font-semibold text-[#0D1B2A] focus:outline-none focus:ring-2 focus:ring-[#9a5b20] focus:ring-offset-2" /></label>
                 <label className="grid gap-1 text-sm font-semibold text-slate-700" htmlFor="bali-comparison-nights"><span className="inline-flex items-center gap-2"><CalendarDays className="h-4 w-4 text-[#9a5b20]" aria-hidden="true" />Nights</span><input id="bali-comparison-nights" type="number" min="1" max="30" value={comparisonNights} onChange={(event) => setComparisonNights(Math.max(1, Number(event.target.value) || 1))} aria-describedby="bali-total-estimate-note" className="rounded-full border border-[#f0d3af] bg-white px-3 py-2 text-sm font-semibold text-[#0D1B2A] focus:outline-none focus:ring-2 focus:ring-[#9a5b20] focus:ring-offset-2" /></label>
+                <label className="grid gap-1 text-sm font-semibold text-slate-700" htmlFor="bali-comparison-rooms"><span className="inline-flex items-center gap-2"><UsersRound className="h-4 w-4 text-[#9a5b20]" aria-hidden="true" />Room override <span className="font-normal text-slate-500">(optional)</span></span><input id="bali-comparison-rooms" type="number" min="0" max="10" value={comparisonRoomOverride || ""} placeholder="Auto" onChange={(event) => setComparisonRoomOverride(Math.min(10, Math.max(0, Number(event.target.value) || 0)))} aria-describedby="bali-total-estimate-note" className="rounded-full border border-[#f0d3af] bg-white px-3 py-2 text-sm font-semibold text-[#0D1B2A] placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#9a5b20] focus:ring-offset-2" /></label>
               </div>
               <p id="bali-seasonal-estimate-note" className="mt-3 text-sm leading-relaxed text-slate-600"><span className="font-semibold text-[#0D1B2A]">{seasonalEstimate.label}:</span> {seasonalEstimate.note} Estimated ranges below apply this supplied 2026 seasonal reference to the guide’s directional ranges; they are not live rates.</p>
-              <p id="bali-total-estimate-note" className="mt-2 text-sm leading-relaxed text-slate-600">Total-stay estimates assume one room per two travelers, {comparisonTravelers} traveler{comparisonTravelers === 1 ? "" : "s"}, and {comparisonNights} night{comparisonNights === 1 ? "" : "s"}. Taxes, service, room configuration, and live availability can change final prices.</p>
+              <p id="bali-total-estimate-note" className="mt-2 text-sm leading-relaxed text-slate-600">Total-stay estimates use {comparisonRoomOverride > 0 ? `${comparisonRoomOverride} specified hotel room${comparisonRoomOverride === 1 ? "" : "s"}` : "one room per two travelers"}, {comparisonTravelers} traveler{comparisonTravelers === 1 ? "" : "s"}, and {comparisonNights} night{comparisonNights === 1 ? "" : "s"}. Taxes, service, room configuration, and live availability can change final prices.</p>
               <ul className="mt-4 flex flex-wrap gap-2" aria-label="Saved Bali area favorites">{sortedFavorites.map((key) => <li key={key} className="inline-flex overflow-hidden rounded-full border border-[#f0d3af] bg-white"><a href={baliBaseAreas[key].anchor} className="px-3 py-2 text-sm font-semibold text-[#0D1B2A] hover:text-[#0077B6] focus:outline-none focus:ring-2 focus:ring-[#0077B6] focus:ring-inset">{baliBaseAreas[key].name}</a><button type="button" onClick={() => removeFavorite(key)} className="border-l border-[#f0d3af] px-2 text-[#9a5b20] hover:bg-[#F8EFE0] focus:outline-none focus:ring-2 focus:ring-[#9a5b20] focus:ring-inset" aria-label={`Remove ${baliBaseAreas[key].name} from Favorites`}><Trash2 className="h-3.5 w-3.5" aria-hidden="true" /></button></li>)}</ul>
               {sortedFavorites.length === 0 && <p className="mt-4 text-sm text-slate-600">No saved areas match the selected traveller filter. Choose “All saved areas” to see your full list.</p>}
               {sortedFavorites.length >= 2 && <section id="bali-favorites-print-card" className="mt-5 border-t border-[#f0d3af] pt-5" aria-labelledby="bali-favorites-comparison-heading">
-                <style>{`@media screen { .bali-comparison-print-only { display: none; } } @media print { body * { visibility: hidden !important; } #bali-favorites-print-card, #bali-favorites-print-card * { visibility: visible !important; } #bali-favorites-print-card { position: absolute; inset: 0; width: 100%; padding: 24px; border: 0; background: #fff; color: #0D1B2A; } #bali-favorites-print-card .bali-comparison-screen-actions, #bali-favorites-print-card .bali-comparison-screen-actions * { display: none !important; } #bali-favorites-print-card .bali-comparison-print-only { display: block !important; } #bali-favorites-print-card .bali-comparison-card { break-inside: avoid; border-color: #cbd5e1; box-shadow: none; } }`}</style>
+                <style>{`@media screen { .bali-comparison-print-only { display: none; } } @media print { body * { visibility: hidden !important; } #bali-favorites-print-card, #bali-favorites-print-card * { visibility: visible !important; } #bali-favorites-print-card { position: absolute; inset: 0; width: 100%; padding: 24px; border: 0; background: #fff; color: #0D1B2A; } #bali-favorites-print-card .bali-comparison-screen-actions, #bali-favorites-print-card .bali-comparison-screen-actions *, #bali-favorites-print-card .bali-comparison-availability, #bali-favorites-print-card .bali-comparison-availability * { display: none !important; } #bali-favorites-print-card .bali-comparison-print-only { display: block !important; } #bali-favorites-print-card .bali-comparison-card { break-inside: avoid; border-color: #cbd5e1; box-shadow: none; } }`}</style>
                 <div className="bali-comparison-screen-actions flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
                   <div><p id="bali-favorites-comparison-heading" className="text-xs font-bold uppercase tracking-[0.18em] text-[#9a5b20]">Compare saved areas</p><p className="mt-1 text-sm text-slate-600">Use the same guide-supported signals to weigh your top choices side by side.</p></div>
-                  <div className="flex flex-wrap gap-2"><button type="button" onClick={downloadFavoritesComparison} className="inline-flex shrink-0 items-center justify-center gap-2 rounded-full border border-[#9a5b20] bg-white px-4 py-2 text-sm font-semibold text-[#9a5b20] hover:bg-[#F8EFE0] focus:outline-none focus:ring-2 focus:ring-[#9a5b20] focus:ring-offset-2"><Download className="h-4 w-4" aria-hidden="true" />Download text card</button><button type="button" onClick={printFavoritesComparison} className="inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-[#0D1B2A] px-4 py-2 text-sm font-semibold text-white hover:bg-[#243a52] focus:outline-none focus:ring-2 focus:ring-[#0D1B2A] focus:ring-offset-2"><Printer className="h-4 w-4" aria-hidden="true" />Print comparison</button></div>
+                  <div className="flex flex-wrap gap-2"><button type="button" onClick={downloadFavoritesComparison} className="inline-flex shrink-0 items-center justify-center gap-2 rounded-full border border-[#9a5b20] bg-white px-4 py-2 text-sm font-semibold text-[#9a5b20] hover:bg-[#F8EFE0] focus:outline-none focus:ring-2 focus:ring-[#9a5b20] focus:ring-offset-2"><Download className="h-4 w-4" aria-hidden="true" />Download text card</button><button type="button" onClick={downloadFavoritesComparisonPdf} className="inline-flex shrink-0 items-center justify-center gap-2 rounded-full border border-[#0077B6] bg-white px-4 py-2 text-sm font-semibold text-[#0077B6] hover:bg-[#eef8fb] focus:outline-none focus:ring-2 focus:ring-[#0077B6] focus:ring-offset-2"><Download className="h-4 w-4" aria-hidden="true" />Download PDF</button><button type="button" onClick={printFavoritesComparison} className="inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-[#0D1B2A] px-4 py-2 text-sm font-semibold text-white hover:bg-[#243a52] focus:outline-none focus:ring-2 focus:ring-[#0D1B2A] focus:ring-offset-2"><Printer className="h-4 w-4" aria-hidden="true" />Print comparison</button></div>
                 </div>
-                <div className="bali-comparison-print-only"><p className="text-xs font-bold uppercase tracking-[0.18em] text-[#0077B6]">The Stay & Wander · Bali planning card</p><h3 className="mt-2 font-playfair text-3xl font-bold text-[#0D1B2A]">Saved Bali base comparison</h3><p className="mt-2 text-sm text-slate-700">{tripDate} · {seasonalEstimate.label} · {comparisonTravelers} traveler{comparisonTravelers === 1 ? "" : "s"} · {comparisonNights} night{comparisonNights === 1 ? "" : "s"}</p></div>
+                <div className="bali-comparison-print-only"><p className="text-xs font-bold uppercase tracking-[0.18em] text-[#0077B6]">The Stay & Wander · Bali planning card</p><h3 className="mt-2 font-playfair text-3xl font-bold text-[#0D1B2A]">Saved Bali base comparison</h3><p className="mt-2 text-sm text-slate-700">{tripDate} · {seasonalEstimate.label} · {comparisonTravelers} traveler{comparisonTravelers === 1 ? "" : "s"} · {comparisonNights} night{comparisonNights === 1 ? "" : "s"} · {comparisonRoomOverride > 0 ? `${comparisonRoomOverride} specified room${comparisonRoomOverride === 1 ? "" : "s"}` : "one room per two travelers"}</p></div>
                 <div className="mt-4 grid gap-3 sm:grid-cols-2">
                   {sortedFavorites.map((key) => {
                     const area = baliBaseAreas[key];
                     const estimate = buildBaliAreaSeasonalEstimate(area, tripDate);
-                    const total = calculateBaliAreaTotalStayEstimate(area, tripDate, comparisonTravelers, comparisonNights);
+                    const total = calculateBaliAreaTotalStayEstimate(area, tripDate, comparisonTravelers, comparisonNights, comparisonRoomOverride);
                     return <article key={area.key} className="bali-comparison-card rounded-xl border border-[#f0d3af] bg-white p-4">
                       <h4 className="font-playfair text-xl font-bold text-[#0D1B2A]">{area.name}</h4>
                       <p className="mt-1 text-sm font-semibold text-[#9a5b20]">{area.heading}</p>
                       <dl className="mt-4 space-y-3 text-sm">
                         <div><dt className="font-bold uppercase tracking-[0.1em] text-[11px] text-slate-500">Vibe</dt><dd className="mt-1 text-slate-700">{area.quickSummary}</dd></div>
                         <div><dt className="font-bold uppercase tracking-[0.1em] text-[11px] text-slate-500">Estimated seasonal range</dt><dd className="mt-1 text-slate-700">Budget {estimate.budget} · Mid-range {estimate.midRange} · Luxury from {estimate.luxuryFrom}</dd></div>
-                        <div><dt className="font-bold uppercase tracking-[0.1em] text-[11px] text-slate-500">Total-stay estimate</dt><dd className="mt-1 text-slate-700">Budget {total.budget} · Mid-range {total.midRange} · Luxury from {total.luxuryFrom}<span className="mt-1 block text-xs text-slate-500">{total.rooms} mid-range hotel room{total.rooms === 1 ? "" : "s"} × {total.nights} night{total.nights === 1 ? "" : "s"}</span></dd></div>
+                        <div><dt className="font-bold uppercase tracking-[0.1em] text-[11px] text-slate-500">Total-stay estimate</dt><dd className="mt-1 text-slate-700">Budget {total.budget} · Mid-range {total.midRange} · Luxury from {total.luxuryFrom}<span className="mt-1 block text-xs text-slate-500">{total.rooms} {total.usingRoomOverride ? "specified" : "mid-range"} hotel room{total.rooms === 1 ? "" : "s"} × {total.nights} night{total.nights === 1 ? "" : "s"}</span></dd></div>
                         <div><dt className="font-bold uppercase tracking-[0.1em] text-[11px] text-slate-500">Highlights</dt><dd className="mt-1 text-slate-700">{area.localHighlights.join(" · ")}</dd></div>
                         <div><dt className="font-bold uppercase tracking-[0.1em] text-[11px] text-slate-500">Location</dt><dd className="mt-1 text-slate-700">{area.baliLocation}</dd></div>
                       </dl>
+                      <a href={BALI_BASE_MATCHER_STAY22_URL} target="_blank" rel="sponsored nofollow" onClick={() => trackBaliMatcherEvent("bali_matcher_availability_clicked", { area: area.key, source: "favorite_comparison" })} className="bali-comparison-availability mt-4 inline-flex items-center gap-2 rounded-full bg-[#0077B6] px-4 py-2 text-sm font-semibold text-white hover:bg-[#005c91] focus:outline-none focus:ring-2 focus:ring-[#0077B6] focus:ring-offset-2">Check {area.name} availability <ExternalLink className="h-4 w-4" aria-hidden="true" /></a>
                     </article>;
                   })}
                 </div>

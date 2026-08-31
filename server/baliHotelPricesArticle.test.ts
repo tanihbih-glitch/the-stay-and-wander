@@ -180,10 +180,12 @@ describe("Bali hotel prices article", () => {
     expect(calculateBaliAreaTotalStayEstimate(baliBaseAreas.ubud, "2026-08-15", 3, 5)).toEqual({
       rooms: 2,
       nights: 5,
+      usingRoomOverride: false,
       budget: "$450–900 total",
       midRange: "$1,125–1,950 total",
       luxuryFrom: "$2,700+ total",
     });
+    expect(calculateBaliAreaTotalStayEstimate(baliBaseAreas.ubud, "2026-08-15", 3, 5, 3)).toMatchObject({ rooms: 3, usingRoomOverride: true, budget: "$675–1,350 total" });
 
     const comparisonText = buildBaliFavoritesComparisonText(["ubud", "canggu"], "2026-08-15", 3, 5);
     expect(comparisonText).toContain("3 travelers · 5 nights · one mid-range room per two travelers.");
@@ -196,5 +198,19 @@ describe("Bali hotel prices article", () => {
     expect(componentSource).toContain("bali-favorites-print-card");
     expect(componentSource).toContain("@media print");
     expect(componentSource).toContain("window.print()");
+  });
+
+  it("uses the approved Stay22 destination for each saved area and provides a browser-only PDF download", () => {
+    const componentSource = readFileSync(resolve(process.cwd(), "client/src/components/BaliBaseMatcher.tsx"), "utf8");
+    expect(componentSource).toContain("bali-comparison-rooms");
+    expect(componentSource).toContain("Room override");
+    expect(componentSource).toContain("Download PDF");
+    expect(componentSource).toContain('await import("pdf-lib")');
+    expect(componentSource).toContain("bali_matcher_comparison_pdf_exported");
+    expect(componentSource).toContain("bali-comparison-availability");
+    expect(componentSource).toContain("Check {area.name} availability");
+    expect(componentSource).toContain('href={BALI_BASE_MATCHER_STAY22_URL}');
+    expect(componentSource).toContain('rel="sponsored nofollow"');
+    expect(componentSource).toContain('target="_blank"');
   });
 });
