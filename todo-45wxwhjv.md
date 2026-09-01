@@ -5,8 +5,8 @@
 - [x] Add a QR code for the fragment-only comparison share link without embedding private notes.
 - [x] Add an accessible confirmation dialog before clearing all browser-local favorites.
 - [x] Add regression coverage and validate browser-local template, QR, and dialog flows. Focused tests, fresh browser sessions across Bangkok, Seoul, and Tokyo, the 162-test suite, TypeScript, and production build pass.
-- [ ] Save and publish a checkpoint for the custom templates, QR share code, and clear-favorites confirmation controls.
-- [ ] Verify the propagated Bangkok, Seoul, and Tokyo routes for the new template, QR, and confirmation controls before final delivery.
+- [x] Save and publish a checkpoint for the custom templates, QR share code, and clear-favorites confirmation controls in `2265a0b9`.
+- [x] Verify the propagated Bangkok, Seoul, and Tokyo routes for the new template, QR, and confirmation controls before final delivery. Cache-busted fresh browser sessions confirmed each city’s custom-template save/apply flow, QR code modal, clear-confirmation cancel/confirm paths, and existing planner controls.
 
 - [x] Inspect the shared city matcher favorites, note, sharing, and test implementations for the requested planning controls.
 - [x] Add a browser-local Clear all favorites control with clear user feedback and no server persistence.
