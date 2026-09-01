@@ -1,5 +1,13 @@
 # Project TODO
 
+- [x] Inspect shared city matcher named-list deletion, QR modal, template storage, and focused tests for the requested planner refinements.
+- [x] Add an accessible confirmation dialog before deleting a browser-local named comparison list.
+- [x] Add a browser-only download action that saves the generated comparison QR code as a PNG image.
+- [x] Add category-aware filtering and reusable application controls for both built-in and custom browser-local note templates.
+- [x] Re-run the full suite, TypeScript, and production build after the final built-in template category-filter update. All 162 tests, TypeScript validation, and production build pass.
+- [ ] Save and publish the enhanced city planner controls, then verify the test-ready routes.
+- [x] Extend tests and browser verification to confirm built-in and custom templates both respond to the selected category filter.
+
 - [x] Inspect shared city matcher template storage, share-link controls, confirmation dialog patterns, and QR generation options.
 - [x] Add browser-local user-created note templates with bounded safe storage, reusable application, and deletion controls.
 - [x] Add a QR code for the fragment-only comparison share link without embedding private notes.

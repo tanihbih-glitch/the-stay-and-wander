@@ -73,6 +73,12 @@ describe("shared city stay matcher", () => {
     expect(source).toContain("Solo trip");
     expect(source).toContain("Custom template name");
     expect(source).toContain("Custom template text");
+    expect(source).toContain("Template category");
+    expect(source).toContain("Template category filter");
+    expect(source).toContain("Trip type");
+    expect(source).toContain("Destination");
+    expect(source).toContain("visibleBuiltInTemplates");
+    expect(source).toContain("No built-in templates in this category.");
     expect(source).toContain("Save template");
     expect(source).toContain("note-templates");
     expect(source).toContain("TEMPLATE_LIMIT");
@@ -81,8 +87,13 @@ describe("shared city stay matcher", () => {
     expect(source).toContain("comparison_list_link_copied");
     expect(source).toContain("Show QR code for");
     expect(source).toContain("Scan comparison link");
+    expect(source).toContain("Download QR image");
+    expect(source).toContain("comparison_list_qr_downloaded");
     expect(source).toContain('await import("qrcode")');
     expect(source).toContain("comparison_list_qr_opened");
+    expect(source).toContain("Delete comparison list?");
+    expect(source).toContain("Delete list");
+    expect(source).toContain("comparison_list_deleted");
     expect(source).toContain("encodeSharedList");
     expect(source).toContain("areaNotes");
     expect(source).toContain("Private notes are not shared");
