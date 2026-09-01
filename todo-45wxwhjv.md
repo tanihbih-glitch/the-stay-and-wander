@@ -1,5 +1,13 @@
 # Project TODO
 
+- [x] Inspect shared city matcher template storage, share-link controls, confirmation dialog patterns, and QR generation options.
+- [x] Add browser-local user-created note templates with bounded safe storage, reusable application, and deletion controls.
+- [x] Add a QR code for the fragment-only comparison share link without embedding private notes.
+- [x] Add an accessible confirmation dialog before clearing all browser-local favorites.
+- [x] Add regression coverage and validate browser-local template, QR, and dialog flows. Focused tests, fresh browser sessions across Bangkok, Seoul, and Tokyo, the 162-test suite, TypeScript, and production build pass.
+- [ ] Save and publish a checkpoint for the custom templates, QR share code, and clear-favorites confirmation controls.
+- [ ] Verify the propagated Bangkok, Seoul, and Tokyo routes for the new template, QR, and confirmation controls before final delivery.
+
 - [x] Inspect the shared city matcher favorites, note, sharing, and test implementations for the requested planning controls.
 - [x] Add a browser-local Clear all favorites control with clear user feedback and no server persistence.
 - [x] Add optional local note templates for family vacations and solo trips, usable within named comparison-list notes.

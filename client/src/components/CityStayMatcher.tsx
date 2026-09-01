@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { Compass, Copy, Download, Heart, ListPlus, MapPin, Printer, RotateCcw, Share2, X } from "lucide-react";
+import { Compass, Copy, Download, Heart, ListPlus, MapPin, Printer, QrCode, RotateCcw, Share2, X } from "lucide-react";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { MapView } from "@/components/Map";
 
@@ -62,6 +62,17 @@ type SavedList = {
   areaNotes: Record<string, string>;
 };
 
+type NoteTemplate = {
+  id: string;
+  name: string;
+  text: string;
+};
+
+type ShareQr = {
+  listName: string;
+  dataUrl: string;
+};
+
 const ROOM_TYPES: Record<RoomType, { label: string; assumption: string }> = {
   hostel: { label: "Hostel / simple room", assumption: "Uses the guide's budget range" },
   hotel: { label: "Hotel room", assumption: "Uses this area's verified hotel range" },
@@ -71,6 +82,7 @@ const FIT_LABELS: Record<TravelerFit, string> = { solo: "Solo travelers", couple
 const FAVORITE_LIMIT = 4;
 const SHORTLIST_LIMIT = 3;
 const LIST_LIMIT = 6;
+const TEMPLATE_LIMIT = 8;
 const REVEAL_MS = 1800;
 const NOTE_TEMPLATES = [
   { id: "family", label: "Family vacation", text: "Family plan: confirm bedding, child-friendly transport, and quiet evening logistics." },
@@ -111,6 +123,21 @@ function sanitizeLists(config: CityMatcherConfig, value: unknown): SavedList[] {
 
 function parseLists(config: CityMatcherConfig, value: string | null) {
   try { return sanitizeLists(config, value ? JSON.parse(value) : []); } catch { return []; }
+}
+
+function sanitizeTemplates(value: unknown): NoteTemplate[] {
+  if (!Array.isArray(value)) return [];
+  return value.flatMap((item) => {
+    if (!item || typeof item !== "object") return [];
+    const template = item as Partial<NoteTemplate>;
+    const name = typeof template.name === "string" ? template.name.trim().slice(0, 32) : "";
+    const text = typeof template.text === "string" ? template.text.trim().slice(0, 300) : "";
+    return name && text && typeof template.id === "string" && template.id ? [{ id: template.id, name, text }] : [];
+  }).slice(0, TEMPLATE_LIMIT);
+}
+
+function parseTemplates(value: string | null) {
+  try { return sanitizeTemplates(value ? JSON.parse(value) : []); } catch { return []; }
 }
 
 function formatRange(range: Range, multiplier: readonly [number, number], suffix = "/night") {
@@ -214,9 +241,14 @@ export default function CityStayMatcher({ config }: { config: CityMatcherConfig 
   const [listName, setListName] = useState("");
   const [listNote, setListNote] = useState("");
   const [areaNotes, setAreaNotes] = useState<Record<string, string>>({});
+  const [customTemplates, setCustomTemplates] = useState<NoteTemplate[]>([]);
+  const [templateName, setTemplateName] = useState("");
+  const [templateText, setTemplateText] = useState("");
   const [message, setMessage] = useState("");
   const [copiedListId, setCopiedListId] = useState<string | null>(null);
   const [locationArea, setLocationArea] = useState<CityMatcherArea | null>(null);
+  const [clearConfirmOpen, setClearConfirmOpen] = useState(false);
+  const [shareQr, setShareQr] = useState<ShareQr | null>(null);
   const recommendation = useMemo(() => getCityMatcherRecommendation(config, answers), [answers, config]);
   const seasonal = useMemo(() => config.seasonal(tripDate), [config, tripDate]);
   const visibleFavorites = useMemo(() => favorites.filter((key) => fit === "all" || getArea(config, key)?.bestFor.includes(fit)).sort((left, right) => favoriteSort === "saved" ? favorites.indexOf(left) - favorites.indexOf(right) : favoriteSort === "cost" ? (getArea(config, left)?.costRank ?? 0) - (getArea(config, right)?.costRank ?? 0) : (getArea(config, left)?.heading ?? "").localeCompare(getArea(config, right)?.heading ?? "")), [config, favoriteSort, favorites, fit]);
@@ -225,6 +257,7 @@ export default function CityStayMatcher({ config }: { config: CityMatcherConfig 
     setShortlist(parseAreaKeys(config, window.localStorage.getItem(storageKey(config, "shortlist")), SHORTLIST_LIMIT));
     setFavorites(parseAreaKeys(config, window.localStorage.getItem(storageKey(config, "favorites")), FAVORITE_LIMIT));
     setLists(parseLists(config, window.localStorage.getItem(storageKey(config, "comparison-lists"))));
+    setCustomTemplates(parseTemplates(window.localStorage.getItem(storageKey(config, "note-templates"))));
     const loadSharedHash = () => {
       const encoded = new URLSearchParams(window.location.hash.split("?")[1] ?? "").get("list");
       const shared = encoded ? decodeSharedList(config, encoded) : null;
@@ -238,6 +271,7 @@ export default function CityStayMatcher({ config }: { config: CityMatcherConfig 
   useEffect(() => { if (storageReady) window.localStorage.setItem(storageKey(config, "shortlist"), JSON.stringify(shortlist)); }, [config, shortlist, storageReady]);
   useEffect(() => { if (storageReady) window.localStorage.setItem(storageKey(config, "favorites"), JSON.stringify(favorites)); }, [config, favorites, storageReady]);
   useEffect(() => { if (storageReady) window.localStorage.setItem(storageKey(config, "comparison-lists"), JSON.stringify(lists)); }, [config, lists, storageReady]);
+  useEffect(() => { if (storageReady) window.localStorage.setItem(storageKey(config, "note-templates"), JSON.stringify(customTemplates)); }, [config, customTemplates, storageReady]);
 
   const choose = (field: keyof Answers, value: string) => {
     const next = { ...answers, [field]: value };
@@ -252,6 +286,7 @@ export default function CityStayMatcher({ config }: { config: CityMatcherConfig 
     setFavorites([]);
     setRoomTypes({});
     setAreaNotes({});
+    setClearConfirmOpen(false);
     setMessage("Saved favorites cleared. Your named comparison lists remain available on this device.");
     track(config, "favorites_cleared");
   };
@@ -269,15 +304,24 @@ export default function CityStayMatcher({ config }: { config: CityMatcherConfig 
     setListName(""); setListNote(""); setMessage(`“${name}” saved on this device.`); track(config, "comparison_list_saved");
   };
   const loadList = (list: SavedList) => { setFavorites(list.areaKeys); setTripDate(list.tripDate); setTravelers(list.travelers); setNights(list.nights); setRoomOverride(list.roomOverride); setRoomTypes(list.roomTypes); setListName(list.name); setListNote(list.note); setAreaNotes(list.areaNotes); setMessage(`“${list.name}” loaded.`); };
+  const saveTemplate = () => {
+    const name = templateName.trim().slice(0, 32);
+    const text = templateText.trim().slice(0, 300);
+    if (!name || !text) { setMessage("Enter both a template name and note text first."); return; }
+    const template = { id: `${Date.now()}-${name}`, name, text };
+    setCustomTemplates((current) => [...current.filter((item) => item.name.toLowerCase() !== name.toLowerCase()), template].slice(-TEMPLATE_LIMIT));
+    setTemplateName(""); setTemplateText(""); setMessage(`“${name}” saved as a private note template on this device.`); track(config, "note_template_saved");
+  };
+  const buildShareUrl = (list: SavedList) => `${window.location.origin}${config.articleUrl}#${config.id}-base-matcher?list=${encodeURIComponent(encodeSharedList(config, list))}`;
   const shareList = async (list: SavedList) => {
-    const url = `${window.location.origin}${config.articleUrl}#${config.id}-base-matcher?list=${encodeURIComponent(encodeSharedList(config, list))}`;
+    const url = buildShareUrl(list);
     const data = { title: `${config.city} stay comparison`, text: `Compare my ${config.city} stay ideas from The Stay & Wander. Private notes are not shared.`, url };
     try { if (navigator.share) { await navigator.share(data); setMessage("Share link ready to send to your travel companions."); } else { await navigator.clipboard?.writeText(url); setMessage("Share link copied to your clipboard."); } }
     catch { setMessage("Share link is ready—copy it from your browser address bar if the share sheet was closed."); }
     track(config, "comparison_list_shared");
   };
   const copyListLink = async (list: SavedList) => {
-    const url = `${window.location.origin}${config.articleUrl}#${config.id}-base-matcher?list=${encodeURIComponent(encodeSharedList(config, list))}`;
+    const url = buildShareUrl(list);
     try {
       await navigator.clipboard?.writeText(url);
       setCopiedListId(list.id);
@@ -287,6 +331,13 @@ export default function CityStayMatcher({ config }: { config: CityMatcherConfig 
       setMessage("Copy the share link from your browser address bar if clipboard access is unavailable.");
     }
     track(config, "comparison_list_link_copied");
+  };
+  const showShareQr = async (list: SavedList) => {
+    try {
+      const { toDataURL } = await import("qrcode");
+      const dataUrl = await toDataURL(buildShareUrl(list), { width: 256, margin: 1, errorCorrectionLevel: "M", color: { dark: "#0D1B2A", light: "#FFFFFFFF" } });
+      setShareQr({ listName: list.name, dataUrl }); track(config, "comparison_list_qr_opened");
+    } catch { setMessage("The QR code could not be created. Use Copy link to share this comparison instead."); }
   };
   const downloadText = () => {
     const blob = new Blob([buildComparisonText(config, visibleFavorites, tripDate, travelers, nights, roomOverride, roomTypes, listNote, areaNotes)], { type: "text/plain;charset=utf-8" });
@@ -310,7 +361,7 @@ export default function CityStayMatcher({ config }: { config: CityMatcherConfig 
       <div className="mt-5 flex flex-wrap gap-3 print:hidden"><button type="button" onClick={copy} className="inline-flex items-center gap-2 rounded-lg bg-[#0077B6] px-4 py-2.5 text-sm font-bold text-white"><Copy className="h-4 w-4" />Share Results</button><a href={`https://wa.me/?text=${encodeURIComponent(shareSummary(config, recommendation.primary, recommendation.alternative))}`} target="_blank" rel="noopener noreferrer" onClick={() => track(config, "social_share_opened", { platform: "whatsapp" })} className="inline-flex items-center gap-2 rounded-lg border border-[#0077B6] bg-white px-4 py-2.5 text-sm font-bold text-[#0077B6]">WhatsApp</a><a href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(shareSummary(config, recommendation.primary, recommendation.alternative))}`} target="_blank" rel="noopener noreferrer" onClick={() => track(config, "social_share_opened", { platform: "x" })} className="inline-flex items-center gap-2 rounded-lg border border-[#0077B6] bg-white px-4 py-2.5 text-sm font-bold text-[#0077B6]">Share on X</a><button type="button" onClick={restart} className="inline-flex items-center gap-2 rounded-lg px-4 py-2.5 text-sm font-bold text-[#0D1B2A]"><RotateCcw className="h-4 w-4" />Start Over</button></div>{message && <p className="mt-3 text-sm font-medium text-[#0077B6]" aria-live="polite">{message}</p>}
     </div> : null}
 
-    <div className="mt-8 border-t border-[#0D1B2A]/15 pt-7" data-screen-controls><div className="flex items-center justify-between gap-4 print:hidden"><div><h3 className="font-playfair text-2xl font-bold text-[#0D1B2A]">Saved favorites</h3><p className="mt-1 text-sm text-slate-600">Saved only in this browser. Nothing is sent to an account.</p></div>{favorites.length > 0 && <button type="button" onClick={clearFavorites} className="text-sm font-semibold text-[#0077B6]">Clear all favorites</button>}</div>
+    <div className="mt-8 border-t border-[#0D1B2A]/15 pt-7" data-screen-controls><div className="flex items-center justify-between gap-4 print:hidden"><div><h3 className="font-playfair text-2xl font-bold text-[#0D1B2A]">Saved favorites</h3><p className="mt-1 text-sm text-slate-600">Saved only in this browser. Nothing is sent to an account.</p></div>{favorites.length > 0 && <button type="button" onClick={() => setClearConfirmOpen(true)} className="text-sm font-semibold text-[#0077B6]">Clear all favorites</button>}</div>
       {shortlist.length > 0 && <div className="mt-4 flex flex-wrap items-center gap-2 rounded-xl border border-[#0077B6]/15 bg-white/70 p-3 print:hidden"><span className="mr-1 text-xs font-bold uppercase tracking-[0.12em] text-[#0077B6]">Saved area shortlist</span>{shortlist.map((key) => <span key={key} className="rounded-full bg-[#F8EFE0] px-3 py-1 text-sm font-semibold text-[#0D1B2A]">{getArea(config, key)?.name}</span>)}<button type="button" onClick={() => setShortlist([])} className="ml-auto text-sm font-semibold text-[#0077B6]">Clear shortlist</button></div>}
       <div className="mt-4 grid gap-3 md:grid-cols-3 print:hidden"><label className="text-sm font-semibold text-slate-700">Best for<select value={fit} onChange={(event) => setFit(event.target.value as TravelerFit | "all")} className="mt-1 block w-full rounded-lg border border-slate-300 bg-white p-2.5"><option value="all">All traveler types</option>{(Object.keys(FIT_LABELS) as TravelerFit[]).map((key) => <option key={key} value={key}>{FIT_LABELS[key]}</option>)}</select></label><label className="text-sm font-semibold text-slate-700">Sort favorites<select value={favoriteSort} onChange={(event) => setFavoriteSort(event.target.value as FavoriteSort)} className="mt-1 block w-full rounded-lg border border-slate-300 bg-white p-2.5"><option value="saved">Saved order</option><option value="vibe">Vibe</option><option value="cost">Lower directional cost</option></select></label><label className="text-sm font-semibold text-slate-700">Trip date<select value={tripDate} onChange={(event) => setTripDate(event.target.value)} className="mt-1 block w-full rounded-lg border border-slate-300 bg-white p-2.5">{[...Array(12)].map((_, month) => { const value = `2026-${String(month + 1).padStart(2, "0")}-15`; return <option key={value} value={value}>{new Date(`${value}T12:00:00Z`).toLocaleDateString("en-US", { month: "long", year: "numeric", timeZone: "UTC" })}</option>; })}</select></label></div>
       {config.supportsTierEstimates ? <div className="mt-3 grid gap-3 sm:grid-cols-3"><NumberInput label="Travelers" value={travelers} onChange={setTravelers} min={1} max={20} /><NumberInput label="Nights" value={nights} onChange={setNights} min={1} max={30} /><NumberInput label="Room override (optional)" value={roomOverride} onChange={setRoomOverride} min={0} max={10} /></div> : <p className="mt-4 rounded-lg bg-white/80 p-4 text-sm leading-relaxed text-slate-700"><strong>Room-type note:</strong> {config.tierNotice}</p>}
@@ -320,9 +371,13 @@ export default function CityStayMatcher({ config }: { config: CityMatcherConfig 
       <div className="mt-6 grid gap-4 md:grid-cols-2" data-screen-comparison>{displayAreas.map((area) => <ComparisonCard key={area.key} area={area} config={config} seasonal={seasonal} travelers={travelers} nights={nights} roomOverride={roomOverride} roomType={roomTypes[area.key] ?? "hotel"} areaNote={areaNotes[area.key] ?? ""} onRoomType={(value) => setRoomTypes((current) => ({ ...current, [area.key]: value }))} onAreaNote={(value) => setAreaNotes((current) => ({ ...current, [area.key]: value.slice(0, 400) }))} />)}</div>
       <SavedAreasMap config={config} areas={displayAreas} />
       {displayAreas.length > 1 && <div className="mt-6 rounded-xl bg-white p-5"><h4 className="font-playfair text-xl font-bold text-[#0D1B2A]">Named comparison lists</h4><div className="mt-3 grid gap-3"><input value={listName} onChange={(event) => setListName(event.target.value)} maxLength={40} placeholder="e.g., Family city break" className="min-w-0 rounded-lg border border-slate-300 px-3 py-2.5" /><div className="flex flex-wrap items-center gap-2"><span className="text-xs font-bold uppercase tracking-[0.12em] text-[#0077B6]">Note templates</span>{NOTE_TEMPLATES.map((template) => <button type="button" key={template.id} onClick={() => setListNote(template.text)} className="rounded-full border border-[#0077B6]/25 bg-[#F8EFE0] px-3 py-1.5 text-xs font-semibold text-[#0D1B2A]">{template.label}</button>)}</div><textarea value={listNote} onChange={(event) => setListNote(event.target.value.slice(0, 600))} maxLength={600} rows={3} aria-label="Personal planning note" placeholder="Optional private note for this comparison list" className="min-w-0 resize-y rounded-lg border border-slate-300 px-3 py-2.5 text-sm" /><div className="flex flex-wrap items-center justify-between gap-3"><p className="text-xs text-slate-500">{listNote.length}/600 characters · stored only in this browser.</p><button type="button" onClick={saveList} className="inline-flex items-center justify-center gap-2 rounded-lg bg-[#0D1B2A] px-4 py-2.5 text-sm font-bold text-white"><ListPlus className="h-4 w-4" />Save list</button></div></div>{lists.length > 0 && <div className="mt-4 space-y-2">{lists.map((list) => <div key={list.id} className="flex flex-wrap items-center gap-2 rounded-lg border border-slate-200 px-3 py-2 text-sm"><button type="button" onClick={() => loadList(list)} className="font-semibold text-[#0077B6]">{list.name}</button>{list.note && <span className="min-w-0 flex-1 truncate text-slate-600">{list.note}</span>}<button type="button" aria-label={`Share ${list.name}`} onClick={() => shareList(list)} className="inline-flex items-center gap-1 font-semibold text-[#0077B6]"><Share2 className="h-3.5 w-3.5" />Share</button><button type="button" aria-label={`Copy share link for ${list.name}`} onClick={() => copyListLink(list)} className="inline-flex items-center gap-1 font-semibold text-[#0077B6]"><Copy className="h-3.5 w-3.5" />{copiedListId === list.id ? "Link copied" : "Copy link"}</button><button type="button" aria-label={`Delete ${list.name}`} onClick={() => setLists((current) => current.filter((item) => item.id !== list.id))}><X className="h-3.5 w-3.5" /></button></div>)}</div>}<p className="mt-3 text-xs text-slate-500">Share links carry city, selected areas, dates, rooms, and room preferences in the browser URL fragment. List and area notes stay on your device.</p></div>}
+      {displayAreas.length > 1 && <div className="mt-4 grid gap-4 rounded-xl border border-[#0077B6]/15 bg-[#F8EFE0]/60 p-4 print:hidden"><div><p className="text-xs font-bold uppercase tracking-[0.12em] text-[#0077B6]">Your private templates</p><p className="mt-1 text-sm text-slate-600">Create reusable note prompts for future lists. They stay in this browser.</p></div><div className="flex flex-wrap gap-2">{customTemplates.map((template) => <span key={template.id} className="inline-flex items-center rounded-full border border-[#0077B6]/25 bg-white"><button type="button" onClick={() => setListNote(template.text)} className="px-3 py-1.5 text-xs font-semibold text-[#0D1B2A]">{template.name}</button><button type="button" aria-label={`Delete template ${template.name}`} onClick={() => setCustomTemplates((current) => current.filter((item) => item.id !== template.id))} className="border-l border-[#0077B6]/20 px-2 py-1.5 text-[#0077B6]"><X className="h-3 w-3" /></button></span>)}</div><div className="grid gap-2 sm:grid-cols-[minmax(0,1fr)_minmax(0,2fr)_auto]"><input value={templateName} onChange={(event) => setTemplateName(event.target.value.slice(0, 32))} maxLength={32} placeholder="Template name" aria-label="Custom template name" className="min-w-0 rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm" /><input value={templateText} onChange={(event) => setTemplateText(event.target.value.slice(0, 300))} maxLength={300} placeholder="Reusable private note" aria-label="Custom template text" className="min-w-0 rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm" /><button type="button" onClick={saveTemplate} className="rounded-lg border border-[#0077B6] bg-white px-3 py-2 text-sm font-bold text-[#0077B6]">Save template</button></div></div>}
+      {lists.length > 0 && <div className="mt-4 flex flex-wrap items-center gap-2 print:hidden"><span className="text-xs font-bold uppercase tracking-[0.12em] text-[#0077B6]">Scan a saved list</span>{lists.map((list) => <button type="button" key={`qr-${list.id}`} aria-label={`Show QR code for ${list.name}`} onClick={() => showShareQr(list)} className="inline-flex items-center gap-1.5 rounded-full border border-[#0077B6]/25 bg-white px-3 py-1.5 text-xs font-semibold text-[#0077B6]"><QrCode className="h-3.5 w-3.5" />{list.name}</button>)}</div>}
       {displayAreas.length > 0 && <div className="mt-5 flex flex-wrap gap-3"><button type="button" onClick={downloadText} className="inline-flex items-center gap-2 rounded-lg border border-[#0077B6] bg-white px-4 py-2.5 text-sm font-bold text-[#0077B6]"><Download className="h-4 w-4" />Download text card</button><button type="button" onClick={downloadPdf} className="inline-flex items-center gap-2 rounded-lg border border-[#0077B6] bg-white px-4 py-2.5 text-sm font-bold text-[#0077B6]">Download PDF</button><button type="button" onClick={() => window.print()} className="inline-flex items-center gap-2 rounded-lg border border-[#0077B6] bg-white px-4 py-2.5 text-sm font-bold text-[#0077B6]"><Printer className="h-4 w-4" />Print comparison</button></div>}</>}</div>
     {displayAreas.length > 0 && <div className="hidden print:block" data-print-comparison><h2 className="font-playfair text-3xl font-bold text-[#0D1B2A]">{config.city} saved-area comparison</h2><p className="mt-2 text-sm text-slate-700"><strong>{seasonal.label}:</strong> {seasonal.note}</p><p className="mt-2 text-sm text-slate-700">Planning estimates only. {config.supportsTierEstimates ? `${roomsFor(travelers, roomOverride)} room${roomsFor(travelers, roomOverride) === 1 ? "" : "s"} × ${nights} night${nights === 1 ? "" : "s"}.` : "Room type is a saved preference; localized tier benchmarks are pending."}</p><div className="mt-5 grid gap-4 grid-cols-2">{displayAreas.map((area) => <ComparisonCard key={`print-${area.key}`} area={area} config={config} seasonal={seasonal} travelers={travelers} nights={nights} roomOverride={roomOverride} roomType={roomTypes[area.key] ?? "hotel"} areaNote={areaNotes[area.key] ?? ""} onRoomType={() => undefined} onAreaNote={() => undefined} />)}</div></div>}
     <Dialog open={Boolean(locationArea)} onOpenChange={(open) => !open && setLocationArea(null)}><DialogContent className="max-w-lg"><DialogHeader><DialogTitle className="font-playfair text-2xl text-[#0D1B2A]">{locationArea?.name} in {config.city}</DialogTitle><DialogDescription>{locationArea?.location}</DialogDescription></DialogHeader>{locationArea && <div className="mt-4 rounded-xl bg-[#F8EFE0] p-6"><div className="flex h-36 items-center justify-center rounded-lg border border-dashed border-[#0077B6]/40 bg-white"><MapPin className="h-10 w-10 text-[#F4A261]" /><span className="ml-3 text-sm font-bold text-[#0D1B2A]">{locationArea.location}</span></div><p className="mt-4 leading-relaxed text-slate-700">{locationArea.locationContext}</p></div>}</DialogContent></Dialog>
+    <Dialog open={clearConfirmOpen} onOpenChange={setClearConfirmOpen}><DialogContent className="max-w-md"><DialogHeader><DialogTitle className="font-playfair text-2xl text-[#0D1B2A]">Clear saved favorites?</DialogTitle><DialogDescription>This removes your current favorite areas and unsaved area notes from this browser. Named comparison lists remain available.</DialogDescription></DialogHeader><div className="mt-5 flex justify-end gap-3"><button type="button" onClick={() => setClearConfirmOpen(false)} className="rounded-lg border border-slate-300 px-4 py-2.5 text-sm font-bold text-[#0D1B2A]">Cancel</button><button type="button" onClick={clearFavorites} className="rounded-lg bg-[#0D1B2A] px-4 py-2.5 text-sm font-bold text-white">Clear favorites</button></div></DialogContent></Dialog>
+    <Dialog open={Boolean(shareQr)} onOpenChange={(open) => !open && setShareQr(null)}><DialogContent className="max-w-md"><DialogHeader><DialogTitle className="font-playfair text-2xl text-[#0D1B2A]">Scan comparison link</DialogTitle><DialogDescription>Open “{shareQr?.listName}” on another device. Private list and area notes are not included.</DialogDescription></DialogHeader>{shareQr && <div className="mt-5 flex justify-center rounded-xl bg-[#F8EFE0] p-5"><img src={shareQr.dataUrl} alt={`QR code for ${shareQr.listName} comparison link`} width={256} height={256} className="h-64 w-64 max-w-full rounded-lg bg-white p-2" /></div>}</DialogContent></Dialog>
   </section>;
 }
 
