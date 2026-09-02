@@ -5,7 +5,7 @@
 - [x] Add a preview dialog before a built-in or custom note template is applied to a comparison-list note.
 - [x] Add selected color tags to custom note templates, persisted and displayed in browser-local storage.
 - [x] Add regression coverage and validate archive, preview, and template-color interactions. Fresh browser flows passed across Bangkok, Seoul, and Tokyo; the full 162-test suite and production build pass.
-- [ ] Save and publish the enhanced city planner controls, then verify the test-ready routes.
+- [x] Save and publish the enhanced city planner controls in checkpoint `d71f8ff1`, then verify the test-ready routes. After propagation, cache-busted custom-domain browser flows passed across Bangkok, Seoul, and Tokyo for built-in/custom template previews and application, persisted Violet template tags, archive/show archive/restore/delete lifecycle, and all previously covered matcher controls.
 
 - [x] Inspect shared city matcher named-list deletion, QR modal, template storage, and focused tests for the requested planner refinements.
 - [x] Add an accessible confirmation dialog before deleting a browser-local named comparison list.
