@@ -94,6 +94,16 @@ describe("shared city stay matcher", () => {
     expect(source).toContain("Delete comparison list?");
     expect(source).toContain("Delete list");
     expect(source).toContain("comparison_list_deleted");
+    expect(source).toContain("Archived comparison lists");
+    expect(source).toContain("comparison_list_archived");
+    expect(source).toContain("comparison_list_restored");
+    expect(source).toContain("Restore");
+    expect(source).toContain("Preview note template");
+    expect(source).toContain("Preview template");
+    expect(source).toContain("Apply template");
+    expect(source).toContain("Template color");
+    expect(source).toContain("TEMPLATE_COLORS");
+    expect(source).toContain("template.color");
     expect(source).toContain("encodeSharedList");
     expect(source).toContain("areaNotes");
     expect(source).toContain("Private notes are not shared");
