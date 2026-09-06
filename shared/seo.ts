@@ -219,8 +219,8 @@ export const pageMetadataConfig: Record<string, PageMetadata> = {
   },
 
   baliHotelPriceIndex: {
-    title: "Bali Hotel Price Index (2026): Average Rates Across 5 Regions",
-    description: "Real 2026 price benchmarks for Bali hotels and villas. Detailed nightly breakdowns for Canggu, Ubud, Sanur, Uluwatu, and Amed across all budget tiers.",
+    title: "Bali Hotel Prices in 2026: Average Rates by Neighborhood & Budget",
+    description: "Planning a trip to Bali? View 2026 average nightly hotel rates across Seminyak, Canggu, Ubud & Uluwatu. Features interactive budget calculator & district benchmarks.",
     image: `${SITE_URL}/manus-storage/blog-bali_5a40f78c.png`,
     url: "/blog/bali-hotel-price-index-2026",
     type: "article",
@@ -269,8 +269,8 @@ export const pageMetadataConfig: Record<string, PageMetadata> = {
   },
 
   bangkokHotelPriceIndex: {
-    title: "Bangkok Hotel Price Index 2026: Nightly Rates by District & Tier",
-    description: "Compare average 2026 Bangkok hotel prices across Sukhumvit, Silom, Riverside, and Siam. Includes transport proximity analysis and tax guides.",
+    title: "Bangkok Hotel Price Index (2026): Nightly Cost Breakdown & Interactive Tool",
+    description: "Compare average hotel prices per night in Bangkok for 2026 across Sukhumvit, Silom, Riverside & Old Town. Interactive district matcher & tier breakdown.",
     image: `${SITE_URL}/manus-storage/bangkok-hotel-prices-hero_fb209c1a.jpg`,
     url: "/blog/bangkok-hotel-price-index-2026",
     type: "article",

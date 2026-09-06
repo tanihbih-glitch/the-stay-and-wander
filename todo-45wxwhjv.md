@@ -443,3 +443,9 @@
 - [x] Define the Bali Base Matcher question flow, deterministic recommendation logic, selected-area result contract, and browser-local shortlist state model.
 - [x] Prepare production-ready React/TypeScript component code and UI layout guidance for the matcher and local-storage shortlist, including accessibility and SSR-safe behavior.
 - [x] Write and generate a concise presentation explaining the Bali Base Matcher and saved-area-shortlist implementation plan, analytics, and phased rollout.
+
+- [x] Audit the Bali and Bangkok hotel price-index pages, their crawler metadata, structured-data implementation, and existing FAQ conventions.
+- [x] Apply the supplied title tags and meta descriptions to both price-index routes without changing their canonical URLs.
+- [x] Add visible, article-grounded FAQ sections and matching valid FAQPage JSON-LD for average nightly prices, budget neighborhoods, and high-season uplift in Bali and Bangkok.
+- [x] Add regression coverage and validate server-rendered metadata, FAQ/schema parity, routes, and responsive rendering. Focused and full tests pass (33 files / 165 tests), production build passes, raw local SSR confirms both title/description/FAQPage outputs, and desktop/mobile reviews show the visible sections cleanly.
+- [ ] Publish and verify both updated price-index guides on the custom domain.

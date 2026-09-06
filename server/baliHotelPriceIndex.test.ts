@@ -39,6 +39,13 @@ describe("Bali Hotel Price Index", () => {
     expect(articleSource).toContain("Amed & Lovina");
   });
 
+  it("uses the shared visible FAQ source for high-intent Bali price questions", () => {
+    expect(articleSource).toContain('import ArticleFAQ from "@/components/ArticleFAQ"');
+    expect(articleSource).toContain('import { baliHotelPriceIndexFaqs } from "@shared/articleFaqs"');
+    expect(articleSource).toContain('<ArticleFAQ faqs={baliHotelPriceIndexFaqs} title="Bali Hotel Price Questions, Answered" />');
+    expect(articleSource).toContain("Bali Hotel Prices in 2026: Average Rates by Neighborhood & Budget");
+  });
+
   it("registers only the new canonical price-index route while retaining the old URL's permanent redirect", () => {
     expect(sitemapRoutes.map((route) => route.path)).toContain("/blog/bali-hotel-price-index-2026");
     expect(sitemapRoutes.map((route) => route.path)).not.toContain("/blog/bali-hotel-prices-2026");

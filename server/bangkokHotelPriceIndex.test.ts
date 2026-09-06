@@ -42,6 +42,13 @@ describe("Bangkok Hotel Price Index", () => {
     expect(getLegacyRedirectTarget("/blog/bangkok-hotel-prices-2026")).toBe("/blog/where-to-stay-in-bangkok-2026");
   });
 
+  it("uses the shared visible FAQ source for high-intent Bangkok price questions", () => {
+    expect(articleSource).toContain('import ArticleFAQ from "@/components/ArticleFAQ"');
+    expect(articleSource).toContain('import { bangkokHotelPriceIndexFaqs } from "@shared/articleFaqs"');
+    expect(articleSource).toContain('<ArticleFAQ faqs={bangkokHotelPriceIndexFaqs} title="Bangkok Hotel Price Questions, Answered" />');
+    expect(articleSource).toContain("Bangkok Hotel Price Index (2026): Nightly Cost Breakdown & Interactive Tool");
+  });
+
   it("adds district nightly-rate tooltips, a transparent 17.7 percent surcharge calculation, and focused planning links", () => {
     expect(mapSource).toContain("Sukhumvit (Asok / Nana)");
     expect(mapSource).toContain('midRange: "$55–$110"');

@@ -103,6 +103,17 @@ describe("server-rendered page metadata", () => {
     });
   });
 
+  it("renders the requested CTR-focused price-index metadata for crawlers", () => {
+    const template = "<html><head><title>Default site title</title></head><body></body></html>";
+    const bali = injectSSRHead(template, pageMetadataConfig.baliHotelPriceIndex);
+    const bangkok = injectSSRHead(template, pageMetadataConfig.bangkokHotelPriceIndex);
+
+    expect(bali).toContain("<title>Bali Hotel Prices in 2026: Average Rates by Neighborhood &amp; Budget</title>");
+    expect(bali).toContain('name="description" content="Planning a trip to Bali? View 2026 average nightly hotel rates across Seminyak, Canggu, Ubud &amp; Uluwatu. Features interactive budget calculator &amp; district benchmarks."');
+    expect(bangkok).toContain("<title>Bangkok Hotel Price Index (2026): Nightly Cost Breakdown &amp; Interactive Tool</title>");
+    expect(bangkok).toContain('name="description" content="Compare average hotel prices per night in Bangkok for 2026 across Sukhumvit, Silom, Riverside &amp; Old Town. Interactive district matcher &amp; tier breakdown."');
+  });
+
   it("renders the Tokyo and Seoul where-to-stay metadata for crawlers", () => {
     const template = "<html><head><title>Default site title</title></head><body></body></html>";
     const tokyo = injectSSRHead(template, pageMetadataConfig.tokyoStayGuide);

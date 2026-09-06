@@ -49,6 +49,52 @@ export const bangkokHotelPricesFaqs: readonly ArticleFaq[] = [
   },
 ];
 
+export const baliHotelPriceIndexFaqs: readonly ArticleFaq[] = [
+  {
+    question: "What is the average hotel price in Bali per night in 2026?",
+    answer:
+      "The guide uses regional ranges rather than a single island-wide average: budget stays run from $7–$30 per night, boutique options from $30–$160, private pool villas from $90–$400, and five-star resorts from $180–$1,200+ depending on the Bali zone.",
+  },
+  {
+    question: "Which neighborhood is best to stay in Bali on a budget?",
+    answer:
+      "Amed and Lovina have the lowest budget range in the index, from $7–$15 per night, and suit travellers prioritising snorkeling, black-sand beaches, and a quieter pace. Ubud is another value-focused option, with budget stays from $8–$18 per night and an inland culture-and-wellness setting.",
+  },
+  {
+    question: "How much do high season rates increase in Bali?",
+    answer:
+      "The guide states that rates rise 35–60% during July and August and from mid-December through January. Comparing the full tax-inclusive price before booking is particularly important in those higher-demand windows.",
+  },
+  {
+    question: "Are Bali hotel taxes included in the nightly rate?",
+    answer:
+      "Not always. The guide notes that many listing cards exclude the 10% government tax and 11% service charge, so travellers should allow for an additional 21% surcharge when comparing final accommodation costs.",
+  },
+];
+
+export const bangkokHotelPriceIndexFaqs: readonly ArticleFaq[] = [
+  {
+    question: "What is the average hotel price in Bangkok per night in 2026?",
+    answer:
+      "The guide uses district and tier ranges instead of one citywide average: budget stays run from $8–$35 per night, mid-range options from $35–$150, and five-star properties from $120–$850+ depending on the Bangkok district.",
+  },
+  {
+    question: "Which neighborhood is best to stay in Bangkok on a budget?",
+    answer:
+      "Khao San and the Old City have the lowest budget range in the index, from $8–$16 per night, and place travellers close to backpacker energy and temples. Silom and Sathorn are another comparatively economical central choice, with budget stays from $12–$22 per night and strong BTS/MRT access.",
+  },
+  {
+    question: "How much do high season rates increase in Bangkok?",
+    answer:
+      "The guide does not claim a fixed high-season percentage increase. It does document that travelling between May and October can lower mid-range and five-star nightly rates by up to 40%, so dates outside that lower-rate period should be compared carefully using current availability.",
+  },
+  {
+    question: "Are Bangkok hotel taxes included in the nightly rate?",
+    answer:
+      "Not necessarily. The index advises allowing for a mandatory 17.7% surcharge made up of 7% VAT, 10% service charge, and 0.7% local provincial tax when comparing the final stay cost.",
+  },
+];
+
 export const tokyoStayFaqs: readonly ArticleFaq[] = [
   {
     question: "Where should first-timers stay in Tokyo?",
@@ -201,6 +247,8 @@ export const articleFaqsByPath: Readonly<Record<string, readonly ArticleFaq[]>> 
   "/blog/best-4-star-hotels-bali-2026": baliFourStarHotelsFaqs,
   "/blog/best-flight-deals-asia-2026": asiaFlightDealsFaqs,
   "/blog/brazil-travel-guide-2026": brazilTravelGuideFaqs,
+  "/blog/bali-hotel-price-index-2026": baliHotelPriceIndexFaqs,
+  "/blog/bangkok-hotel-price-index-2026": bangkokHotelPriceIndexFaqs,
 };
 
 export function getArticleFaqs(pathname: string): readonly ArticleFaq[] {

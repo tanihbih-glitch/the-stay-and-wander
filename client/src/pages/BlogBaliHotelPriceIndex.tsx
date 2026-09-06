@@ -8,10 +8,12 @@ import { MapView } from "@/components/Map";
 import { BALI_HOTEL_PRICE_INDEX_AFFILIATE_LINKS } from "@/lib/affiliateLinks";
 import BaliGroupCostCalculator from "@/components/BaliGroupCostCalculator";
 import BaliSeasonalRateChart from "@/components/BaliSeasonalRateChart";
+import ArticleFAQ from "@/components/ArticleFAQ";
+import { baliHotelPriceIndexFaqs } from "@shared/articleFaqs";
 
 export const articleMetadata = {
-  title: "Bali Hotel Price Index (2026): Average Rates Across 5 Regions",
-  description: "Real 2026 price benchmarks for Bali hotels and villas. Detailed nightly breakdowns for Canggu, Ubud, Sanur, Uluwatu, and Amed across all budget tiers.",
+  title: "Bali Hotel Prices in 2026: Average Rates by Neighborhood & Budget",
+  description: "Planning a trip to Bali? View 2026 average nightly hotel rates across Seminyak, Canggu, Ubud & Uluwatu. Features interactive budget calculator & district benchmarks.",
   url: "/blog/bali-hotel-price-index-2026",
   image: "/manus-storage/blog-bali_5a40f78c.png",
   keywords: "Bali hotel prices 2026, Bali villa prices, Canggu hotel cost, Ubud hotel cost, Uluwatu resort price, Sanur accommodation, Amed hotels",
@@ -103,6 +105,8 @@ export default function BlogBaliHotelPriceIndex() {
           <div className="mt-6 overflow-hidden rounded-2xl border border-slate-200 bg-[#e5f4fb] p-2 shadow-sm"><MapView initialCenter={{ lat: -8.4095, lng: 115.1889 }} initialZoom={9} className="h-[24rem] rounded-xl bg-[radial-gradient(circle_at_22%_20%,rgba(244,162,97,0.45),transparent_18%),linear-gradient(135deg,#d9f0f7_0%,#b8dce8_48%,#d7ecf1_100%)] md:h-[32rem]" onMapReady={(map) => { const bounds = new google.maps.LatLngBounds(); regionPins.forEach((region) => { const marker = new google.maps.marker.AdvancedMarkerElement({ map, position: region.position, title: region.name }); const infoWindow = new google.maps.InfoWindow({ content: `<div style="max-width:260px;padding:4px 2px"><strong>${region.name}</strong><br/><span>${region.detail}</span><hr style="margin:6px 0;border:0;border-top:1px solid #ddd"/><span style="font-size:12px">Average nightly range: ${region.rates}</span></div>` }); marker.addListener("click", () => infoWindow.open({ map, anchor: marker })); bounds.extend(region.position); }); map.fitBounds(bounds, { top: 48, bottom: 48, left: 48, right: 48 }); }} /></div>
           <ul className="mt-5 grid gap-2 text-sm text-slate-600 sm:grid-cols-2 lg:grid-cols-5">{regionPins.map((region) => <li key={region.name} className="flex items-center gap-2"><MapPin className="h-4 w-4 text-[#0077B6]" aria-hidden="true" />{region.name}</li>)}</ul>
         </section>
+
+        <ArticleFAQ faqs={baliHotelPriceIndexFaqs} title="Bali Hotel Price Questions, Answered" />
 
         <section className="mt-16 rounded-3xl bg-[#0D1B2A] px-6 py-10 text-white md:px-10" aria-labelledby="booking-title"><div className="max-w-3xl"><p className="text-xs font-bold uppercase tracking-[0.2em] text-[#F4A261]">Compare your stay</p><h2 id="booking-title" className="mt-3 font-playfair text-3xl font-bold md:text-4xl">Ready to compare Bali accommodation rates?</h2><p className="mt-4 leading-relaxed text-slate-200">Use the matrix to shortlist a region, then check current tax-inclusive options for your travel dates.</p><a href={BALI_HOTEL_PRICE_INDEX_AFFILIATE_LINKS.hotels} target="_blank" rel="sponsored nofollow" className="mt-7 inline-flex items-center gap-2 rounded-full bg-[#F4A261] px-7 py-3.5 font-semibold text-[#0D1B2A] transition-colors hover:bg-[#f7b879]">Compare Bali Accommodation Rates on Stay22<ArrowRight className="h-4 w-4" aria-hidden="true" /></a></div></section>
       </main>
