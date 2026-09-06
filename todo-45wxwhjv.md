@@ -461,3 +461,10 @@
 - [x] Apply data-driven Last Updated crawler metadata and BreadcrumbList schema to every remaining centrally registered blog destination guide without changing content, URLs, or evidence boundaries.
 - [x] Add regression coverage and validate crawler HTML, sharing behavior, page anchors, and desktop/mobile layouts. Focused tests, full tests (33 files / 171 tests), TypeScript, and production build pass; desktop/mobile reviews show clear in-flow mobile and sticky desktop navigation.
 - [x] Publish and verify the enhanced blog guides on the custom domain in checkpoint `d80d71c4`. Cache-busted public HTML confirms `article:modified_time` and BreadcrumbList JSON-LD for all 21 destination guides; direct published Bali and Bangkok inspections confirm their Last Updated text, Share this guide control, and responsive table of contents.
+
+- [x] Audit the 21 destination guides and identify long-form non-price guides with stable section anchors for table-of-contents navigation.
+- [x] Add a browser-local Was this guide helpful? thumbs-up/down widget to the bottom of every destination guide without collecting visitor identity or personal data.
+- [x] Extend accessible, sticky-desktop and in-flow-mobile Table of Contents navigation to eligible long-form non-price destination guides.
+- [x] Add an accessible smooth-scrolling Back to Top control across all destination guides, honoring reduced-motion preferences.
+- [x] Add regression coverage and validate feedback state, navigation anchors, privacy behavior, and desktop/mobile layouts. Direct browser inspection confirms automatic TOC links, thumbs feedback, acknowledgement, and Back to Top controls; full validation passes 34 files / 176 tests, TypeScript, and production build.
+- [ ] Publish and verify the complete feedback and navigation rollout on the custom domain.

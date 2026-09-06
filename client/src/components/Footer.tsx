@@ -3,9 +3,12 @@ import { Instagram, Heart, Music } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { DISCOVERCARS_AFFILIATE_URL } from "@/lib/affiliateLinks";
+import GuideFeedbackAndBackToTop from "@/components/GuideFeedbackAndBackToTop";
 
 export default function Footer() {
   return (
+    <>
+    <GuideFeedbackAndBackToTop />
     <footer className="bg-gray-50 border-t border-gray-200 mt-20">
       <div className="container py-16">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
@@ -187,5 +190,6 @@ export default function Footer() {
         </div>
       </div>
     </footer>
+    </>
   );
 }

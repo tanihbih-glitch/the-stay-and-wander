@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
+import GuideTableOfContents from "@/components/GuideTableOfContents";
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -78,6 +79,7 @@ export default function Header() {
           </nav>
         </div>
       )}
+      <GuideTableOfContents />
     </header>
   );
 }
