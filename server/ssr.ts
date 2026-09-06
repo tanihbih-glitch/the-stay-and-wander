@@ -183,6 +183,16 @@ export function ssrMiddleware(req: Request, res: Response, next: NextFunction) {
     metadata = pageMetadataConfig.home;
   } else if (path === "/blog") {
     metadata = pageMetadataConfig.blog;
+  } else if (path === "/blog/best-hotels-bali-2026") {
+    metadata = pageMetadataConfig.baliHotelsGuide;
+  } else if (path === "/blog/best-cities-europe-summer-2026") {
+    metadata = pageMetadataConfig.europeSummerCitiesGuide;
+  } else if (path === "/blog/tokyo-vs-bangkok-2026") {
+    metadata = pageMetadataConfig.tokyoBangkokGuide;
+  } else if (path === "/blog/brazil-travel-guide-2026") {
+    metadata = pageMetadataConfig.brazilTravelGuide;
+  } else if (path === "/blog/best-flight-deals-asia-2026") {
+    metadata = pageMetadataConfig.asiaFlightDealsGuide;
   } else if (path === "/blog/best-hotels-dubai-2026") {
     metadata = pageMetadataConfig.dubaiHotelGuide;
   } else if (path === "/blog/where-to-stay-lisbon-2026") {

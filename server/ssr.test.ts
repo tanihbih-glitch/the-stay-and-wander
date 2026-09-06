@@ -152,7 +152,7 @@ describe("server-rendered page metadata", () => {
     const template = "<html><head><title>Default site title</title></head><body></body></html>";
     const blogGuides = Object.values(pageMetadataConfig).filter((metadata) => metadata.type === "article" && metadata.url.startsWith("/blog/"));
 
-    expect(blogGuides).toHaveLength(16);
+    expect(blogGuides).toHaveLength(21);
     for (const metadata of blogGuides) {
       const rendered = injectSSRHead(template, metadata, articleFaqsByPath[metadata.url] ?? []);
       expect(metadata.updatedDate).toBe("2026-09-06");

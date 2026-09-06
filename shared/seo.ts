@@ -156,6 +156,66 @@ export const pageMetadataConfig: Record<string, PageMetadata> = {
       "The Stay & Wander privacy policy, travel blog cookies, Google Analytics, Mailchimp, affiliate disclosure",
   },
 
+  baliHotelsGuide: {
+    title: "Best Hotels in Bali for Every Budget (2026) — From $30 to $500/Night",
+    description: "Looking for the best hotels in Bali in 2026? Explore hand-picked stays for every budget, from value guesthouses to luxury villas, across Bali's best areas.",
+    image: `${SITE_URL}/manus-storage/blog-bali.png`,
+    url: "/blog/best-hotels-bali-2026",
+    type: "article",
+    author: "The Stay & Wander",
+    publishedDate: "2026-07-15",
+    updatedDate: "2026-09-06",
+    keywords: "best hotels in Bali, Bali hotels budget, luxury hotels Bali, Ubud hotels, Seminyak hotels, Bali travel guide",
+  },
+
+  europeSummerCitiesGuide: {
+    title: "7 Best Cities to Visit in Europe This Summer (2026) — And Exactly Where to Stay",
+    description: "Planning a European summer trip in 2026? Explore seven city breaks with practical accommodation guidance for every budget.",
+    image: `${SITE_URL}/manus-storage/blog-europe-cities.png`,
+    url: "/blog/best-cities-europe-summer-2026",
+    type: "article",
+    author: "The Stay & Wander",
+    publishedDate: "2026-07-15",
+    updatedDate: "2026-09-06",
+    keywords: "best cities Europe summer, Europe travel guide, European cities to visit, summer travel Europe, Lisbon, Dubrovnik, Budapest, Porto, Athens",
+  },
+
+  tokyoBangkokGuide: {
+    title: "Tokyo vs Bangkok: Which Should You Visit First? (2026 Honest Guide)",
+    description: "Compare Tokyo and Bangkok for cost, food, hotels, nightlife, transport, and culture to choose the right first Asia city for your trip.",
+    image: `${SITE_URL}/manus-storage/blog-tokyo-bangkok.png`,
+    url: "/blog/tokyo-vs-bangkok-2026",
+    type: "article",
+    author: "The Stay & Wander",
+    publishedDate: "2026-07-15",
+    updatedDate: "2026-09-06",
+    keywords: "Tokyo vs Bangkok, first time Asia, Tokyo travel guide, Bangkok travel guide, Asia destination comparison",
+  },
+
+  brazilTravelGuide: {
+    title: "Brazil Travel Guide 2026 — Everything You Need to Know",
+    description: "Plan a Brazil trip with practical guidance for Rio de Janeiro, the Amazon, São Paulo, and Florianópolis, including stays, tours, and budget tips.",
+    image: `${SITE_URL}/manus-storage/blog-brazil.png`,
+    url: "/blog/brazil-travel-guide-2026",
+    type: "article",
+    author: "The Stay & Wander",
+    publishedDate: "2026-07-17",
+    updatedDate: "2026-09-06",
+    keywords: "Brazil travel guide, Rio de Janeiro, Amazon, São Paulo, Florianópolis, Brazil hotels, Brazil tours",
+  },
+
+  asiaFlightDealsGuide: {
+    title: "Best Flight Deals to Asia in 2026 — Cheapest Routes From the UAE, UK & US",
+    description: "Compare practical flight-planning guidance for Tokyo, Bangkok, Bali, and Seoul from the UAE, UK, and US.",
+    image: `${SITE_URL}/manus-storage/blog-flights.png`,
+    url: "/blog/best-flight-deals-asia-2026",
+    type: "article",
+    author: "The Stay & Wander",
+    publishedDate: "2026-07-17",
+    updatedDate: "2026-09-06",
+    keywords: "cheap flights to Asia, flight deals, Tokyo flights, Bangkok flights, Bali flights, Seoul flights",
+  },
+
   dubaiHotelGuide: {
     title: "Best Hotels in Dubai & Abu Dhabi | The Stay & Wander",
     description:
