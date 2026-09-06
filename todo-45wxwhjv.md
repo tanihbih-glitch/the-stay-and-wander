@@ -455,3 +455,9 @@
 - [x] Apply refreshed search metadata and visible article-grounded FAQPage content to the Seoul and Tokyo hotel price guides without changing canonical URLs or evidence boundaries.
 - [x] Add regression coverage and validate server-rendered metadata, Article/Breadcrumb/FAQ schema payloads, date signals, and responsive layouts for all four guides. Focused and full tests pass (33 files / 168 tests), production build passes, raw local SSR confirms all four payload types, and desktop/mobile reviews are clean.
 - [x] Publish and verify the four updated SEO guide routes on the custom domain in checkpoint `7183e0ec`. After server propagation, cache-busted raw HTML confirms `article:modified_time`, BlogPosting, BreadcrumbList, and FAQPage payloads on Bali, Bangkok, Seoul, and Tokyo.
+
+- [x] Audit all remaining blog destination guides, their existing article sections, crawler metadata, structured data, and share/navigation patterns.
+- [x] Add reusable Share this guide controls and accessible sticky Table of Contents navigation to the Bali and Bangkok hotel price-index guides.
+- [x] Apply data-driven Last Updated crawler metadata and BreadcrumbList schema to every remaining centrally registered blog destination guide without changing content, URLs, or evidence boundaries.
+- [x] Add regression coverage and validate crawler HTML, sharing behavior, page anchors, and desktop/mobile layouts. Focused tests, full tests (33 files / 171 tests), TypeScript, and production build pass; desktop/mobile reviews show clear in-flow mobile and sticky desktop navigation.
+- [ ] Publish and verify the enhanced blog guides on the custom domain.

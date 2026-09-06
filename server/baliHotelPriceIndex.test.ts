@@ -53,6 +53,16 @@ describe("Bali Hotel Price Index", () => {
     expect(articleSource).toContain('updatedDate={articleMetadata.lastUpdated}');
   });
 
+  it("adds a shareable public guide control and sticky table of contents linked to real sections", () => {
+    expect(articleSource).toContain('import GuideShare from "@/components/GuideShare"');
+    expect(articleSource).toContain('import StickyTableOfContents from "@/components/StickyTableOfContents"');
+    expect(articleSource).toContain('<GuideShare title={articleMetadata.title} url={canonicalUrl}');
+    expect(articleSource).toContain('<StickyTableOfContents items={tableOfContents} />');
+    expect(articleSource).toContain('id="planning-tools"');
+    expect(articleSource).toContain('id="bali-price-faq"');
+    expect(articleSource).toContain('lg:sticky lg:top-24');
+  });
+
   it("registers only the new canonical price-index route while retaining the old URL's permanent redirect", () => {
     expect(sitemapRoutes.map((route) => route.path)).toContain("/blog/bali-hotel-price-index-2026");
     expect(sitemapRoutes.map((route) => route.path)).not.toContain("/blog/bali-hotel-prices-2026");

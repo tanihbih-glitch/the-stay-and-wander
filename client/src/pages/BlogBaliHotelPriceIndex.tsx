@@ -10,6 +10,8 @@ import BaliSeasonalRateChart from "@/components/BaliSeasonalRateChart";
 import ArticleFAQ from "@/components/ArticleFAQ";
 import { baliHotelPriceIndexFaqs } from "@shared/articleFaqs";
 import LastUpdated from "@/components/LastUpdated";
+import GuideShare from "@/components/GuideShare";
+import StickyTableOfContents from "@/components/StickyTableOfContents";
 
 export const articleMetadata = {
   title: "Bali Hotel Prices in 2026: Average Rates by Neighborhood & Budget",
@@ -46,6 +48,16 @@ const pricingFactors = [
   { icon: Users, title: "Villa vs. Hotel Value", text: "For groups of 4+, a private 2–3 bedroom pool villa often costs less per person than multiple mid-range hotel rooms." },
 ] as const;
 
+const tableOfContents = [
+  { id: "introduction-title", label: "Why headline rates mislead" },
+  { id: "summary-title", label: "Nightly rate benchmark" },
+  { id: "factors-title", label: "Key pricing factors" },
+  { id: "planning-tools", label: "Group calculator and seasonal rates" },
+  { id: "map-title", label: "Regional rate map" },
+  { id: "bali-price-faq", label: "Price questions" },
+  { id: "booking-title", label: "Compare live rates" },
+] as const;
+
 export default function BlogBaliHotelPriceIndex() {
   const canonicalUrl = `https://thestayandwander.com${articleMetadata.url}`;
 
@@ -67,6 +79,10 @@ export default function BlogBaliHotelPriceIndex() {
       <main className="container max-w-6xl px-4 py-12 md:py-16">
         <a href="/blog" className="mb-8 inline-flex items-center gap-2 text-sm font-semibold text-[#0077B6] transition-colors hover:text-[#005c91]"><ArrowLeft className="h-4 w-4" aria-hidden="true" />Back to Blog</a>
 
+        <div className="lg:grid lg:grid-cols-[15rem,minmax(0,1fr)] lg:items-start lg:gap-10">
+          <aside className="lg:sticky lg:top-24"><StickyTableOfContents items={tableOfContents} /></aside>
+          <div>
+        <GuideShare title={articleMetadata.title} url={canonicalUrl} className="mb-6" />
         <aside className="rounded-2xl border border-[#ecd9b9] bg-[#F8EFE0] p-6 text-slate-700 md:p-8" aria-label="Affiliate disclosure">
           <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#9a5b20]">Affiliate disclosure</p>
           <p className="mt-3 leading-relaxed">The Stay &amp; Wander is a reader-supported travel research portal. When you book accommodation through links on our site, we may earn an affiliate commission at no extra cost to you.</p>
@@ -91,8 +107,7 @@ export default function BlogBaliHotelPriceIndex() {
           <p className="mt-7 rounded-xl border-l-4 border-[#F4A261] bg-[#fff8f1] p-5 text-slate-700"><span className="font-bold text-[#0D1B2A]">Research Tip:</span> Map regional trade-offs to a stay you would actually enjoy, then compare the final tax-inclusive price before booking.</p>
         </section>
 
-        <BaliGroupCostCalculator />
-        <BaliSeasonalRateChart />
+        <section id="planning-tools" className="scroll-mt-28"><BaliGroupCostCalculator /><BaliSeasonalRateChart /></section>
 
         <section className="mt-14" aria-labelledby="map-title">
           <div className="flex flex-col justify-between gap-4 md:flex-row md:items-end"><div><p className="text-xs font-bold uppercase tracking-[0.2em] text-[#0077B6]">Regional map</p><h2 id="map-title" className="mt-2 font-playfair text-3xl font-bold text-[#0D1B2A]">Where the five rate zones sit</h2></div><p className="max-w-md text-sm leading-relaxed text-slate-600">Select a marker for the local focus used in the matrix. This is an orientation tool, not a live availability map.</p></div>
@@ -100,9 +115,11 @@ export default function BlogBaliHotelPriceIndex() {
           <ul className="mt-5 grid gap-2 text-sm text-slate-600 sm:grid-cols-2 lg:grid-cols-5">{regionPins.map((region) => <li key={region.name} className="flex items-center gap-2"><MapPin className="h-4 w-4 text-[#0077B6]" aria-hidden="true" />{region.name}</li>)}</ul>
         </section>
 
-        <ArticleFAQ faqs={baliHotelPriceIndexFaqs} title="Bali Hotel Price Questions, Answered" />
+        <section id="bali-price-faq" className="scroll-mt-28"><ArticleFAQ faqs={baliHotelPriceIndexFaqs} title="Bali Hotel Price Questions, Answered" /></section>
 
         <section className="mt-16 rounded-3xl bg-[#0D1B2A] px-6 py-10 text-white md:px-10" aria-labelledby="booking-title"><div className="max-w-3xl"><p className="text-xs font-bold uppercase tracking-[0.2em] text-[#F4A261]">Compare your stay</p><h2 id="booking-title" className="mt-3 font-playfair text-3xl font-bold md:text-4xl">Ready to compare Bali accommodation rates?</h2><p className="mt-4 leading-relaxed text-slate-200">Use the matrix to shortlist a region, then check current tax-inclusive options for your travel dates.</p><a href={BALI_HOTEL_PRICE_INDEX_AFFILIATE_LINKS.hotels} target="_blank" rel="sponsored nofollow" className="mt-7 inline-flex items-center gap-2 rounded-full bg-[#F4A261] px-7 py-3.5 font-semibold text-[#0D1B2A] transition-colors hover:bg-[#f7b879]">Compare Bali Accommodation Rates on Stay22<ArrowRight className="h-4 w-4" aria-hidden="true" /></a></div></section>
+          </div>
+        </div>
       </main>
       <Footer />
       <MobileBottomNav />

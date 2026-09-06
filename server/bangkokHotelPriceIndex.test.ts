@@ -56,6 +56,16 @@ describe("Bangkok Hotel Price Index", () => {
     expect(articleSource).toContain('updatedDate={articleMetadata.lastUpdated}');
   });
 
+  it("adds a shareable public guide control and sticky table of contents linked to real sections", () => {
+    expect(articleSource).toContain('import GuideShare from "@/components/GuideShare"');
+    expect(articleSource).toContain('import StickyTableOfContents from "@/components/StickyTableOfContents"');
+    expect(articleSource).toContain('<GuideShare title={articleMetadata.title} url={canonicalUrl}');
+    expect(articleSource).toContain('<StickyTableOfContents items={tableOfContents} />');
+    expect(articleSource).toContain('id="bangkok-planning-tools"');
+    expect(articleSource).toContain('id="bangkok-price-faq"');
+    expect(articleSource).toContain('lg:sticky lg:top-24');
+  });
+
   it("adds district nightly-rate tooltips, a transparent 17.7 percent surcharge calculation, and focused planning links", () => {
     expect(mapSource).toContain("Sukhumvit (Asok / Nana)");
     expect(mapSource).toContain('midRange: "$55–$110"');

@@ -165,6 +165,7 @@ export const pageMetadataConfig: Record<string, PageMetadata> = {
     type: "article",
     author: "The Stay & Wander",
     publishedDate: "2026-07-30",
+    updatedDate: "2026-09-06",
     keywords:
       "Dubai hotels, Abu Dhabi hotels, UAE travel guide, Dubai travel, Middle East hotels, Burj Khalifa views",
   },
@@ -178,6 +179,7 @@ export const pageMetadataConfig: Record<string, PageMetadata> = {
     type: "article",
     author: "The Stay & Wander",
     publishedDate: "2026-07-30",
+    updatedDate: "2026-09-06",
     keywords:
       "where to stay in Lisbon 2026, Lisbon hotels, Alfama hotels, Chiado hotels, Bairro Alto hotels, Belém hotels, Lisbon neighbourhood guide",
   },
@@ -191,6 +193,7 @@ export const pageMetadataConfig: Record<string, PageMetadata> = {
     type: "article",
     author: "The Stay & Wander",
     publishedDate: "2026-07-30",
+    updatedDate: "2026-09-06",
     keywords:
       "things to do in Bali 2026, Bali experiences, Bali temples, Bali beaches, Ubud guide, Nusa Penida, Bali itinerary, Bali travel guide",
   },
@@ -204,6 +207,7 @@ export const pageMetadataConfig: Record<string, PageMetadata> = {
     type: "article",
     author: "The Stay & Wander",
     publishedDate: "2026-08-22",
+    updatedDate: "2026-09-06",
     keywords:
       "Bali beach comparison 2026, Bali beach entry fees, Bali swim safety, Bali beaches for families, Bali surf beaches, Bali snorkeling beaches, Bali beach guide",
   },
@@ -216,6 +220,7 @@ export const pageMetadataConfig: Record<string, PageMetadata> = {
     type: "article",
     author: "The Stay & Wander",
     publishedDate: "2026-08-23",
+    updatedDate: "2026-09-06",
     keywords: "Bali spa prices 2026, Bali massage cost, Ubud wellness retreat, Seminyak spa, Bali luxury resort spa, Bali traditional massage",
   },
 
@@ -241,6 +246,7 @@ export const pageMetadataConfig: Record<string, PageMetadata> = {
     type: "article",
     author: "The Stay & Wander",
     publishedDate: "2026-07-27",
+    updatedDate: "2026-09-06",
     keywords:
       "where to stay in Bali 2026, best areas in Bali for first timers, Seminyak hotels, Ubud hotels, Uluwatu hotels, Canggu hotels, Bali hotel prices",
   },
@@ -254,6 +260,7 @@ export const pageMetadataConfig: Record<string, PageMetadata> = {
     type: "article",
     author: "The Stay & Wander",
     publishedDate: "2026-08-03",
+    updatedDate: "2026-09-06",
     keywords:
       "where to stay in Bangkok 2026, best areas in Bangkok for first timers, Sukhumvit hotels, Silom hotels, Bangkok riverside hotels, Khao San Road hotels, Sathorn hotels",
   },
@@ -267,6 +274,7 @@ export const pageMetadataConfig: Record<string, PageMetadata> = {
     type: "article",
     author: "The Stay & Wander",
     publishedDate: "2026-08-17",
+    updatedDate: "2026-09-06",
     keywords:
       "Bangkok hotel prices 2026, Bangkok hotel cost, Bangkok budget hotels, Bangkok luxury hotels, Bangkok hostel prices, Bangkok hotel booking tips",
   },
@@ -293,6 +301,7 @@ export const pageMetadataConfig: Record<string, PageMetadata> = {
     type: "article",
     author: "The Stay & Wander",
     publishedDate: "2026-08-17",
+    updatedDate: "2026-09-06",
     keywords:
       "Bangkok airport hotels 2026, Suvarnabhumi airport hotel, BKK layover hotel, Bangkok airport shuttle hotel, Novotel Suvarnabhumi Airport",
   },
@@ -306,6 +315,7 @@ export const pageMetadataConfig: Record<string, PageMetadata> = {
     type: "article",
     author: "The Stay & Wander",
     publishedDate: "2026-08-17",
+    updatedDate: "2026-09-06",
     keywords:
       "UAE extended stay hotels, sustainable hotels Dubai, sustainable hotels Abu Dhabi, Hilton Travel with Purpose, Marriott Serve 360, Accor Planet 21, IHG Green Engage",
   },
@@ -344,6 +354,7 @@ export const pageMetadataConfig: Record<string, PageMetadata> = {
     type: "article",
     author: "The Stay & Wander",
     publishedDate: "2026-08-23",
+    updatedDate: "2026-09-06",
     keywords: "Seoul food prices 2026, Seoul dining costs, Gwangjang Market food, Seoul street food budget, Korean BBQ prices, Seoul daily food budget",
   },
 
@@ -378,6 +389,7 @@ export const pageMetadataConfig: Record<string, PageMetadata> = {
     type: "article",
     author: "The Stay & Wander",
     publishedDate: "2026-07-20",
+    updatedDate: "2026-09-06",
     keywords:
       "best 4 star hotels Bali 2026, Bali four star hotels, Bali hotel deals, Seminyak hotels, Ubud hotels, Uluwatu hotels",
   },

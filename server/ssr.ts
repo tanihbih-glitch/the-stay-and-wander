@@ -93,7 +93,7 @@ export function generateFAQPageSchema(faqs: readonly ArticleFaq[]): string {
  * modified dates, keeping the structured data aligned with the public page.
  */
 export function generateArticleAndBreadcrumbSchemas(metadata?: PageMetadata): string {
-  if (!metadata?.includeRichSnippetSchemas || metadata.type !== "article") return "";
+  if (!metadata || metadata.type !== "article" || !metadata.url.startsWith("/blog/")) return "";
 
   const tags = generateMetaTags(metadata);
   const articleSchema = {

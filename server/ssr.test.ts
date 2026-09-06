@@ -148,6 +148,20 @@ describe("server-rendered page metadata", () => {
     }
   });
 
+  it("emits current timestamps and BreadcrumbList schemas for every configured blog destination guide", () => {
+    const template = "<html><head><title>Default site title</title></head><body></body></html>";
+    const blogGuides = Object.values(pageMetadataConfig).filter((metadata) => metadata.type === "article" && metadata.url.startsWith("/blog/"));
+
+    expect(blogGuides).toHaveLength(16);
+    for (const metadata of blogGuides) {
+      const rendered = injectSSRHead(template, metadata, articleFaqsByPath[metadata.url] ?? []);
+      expect(metadata.updatedDate).toBe("2026-09-06");
+      expect(rendered).toContain('property="article:modified_time" content="2026-09-06"');
+      expect(rendered).toContain('"@type":"BreadcrumbList"');
+      expect(rendered).toContain(`"@id":"https://thestayandwander.com${metadata.url}"`);
+    }
+  });
+
   it("injects a valid FAQPage JSON-LD payload for each specified FAQ article", () => {
     const template = "<html><head><title>Default site title</title></head><body></body></html>";
 
