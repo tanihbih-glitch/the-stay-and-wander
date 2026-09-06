@@ -448,4 +448,4 @@
 - [x] Apply the supplied title tags and meta descriptions to both price-index routes without changing their canonical URLs.
 - [x] Add visible, article-grounded FAQ sections and matching valid FAQPage JSON-LD for average nightly prices, budget neighborhoods, and high-season uplift in Bali and Bangkok.
 - [x] Add regression coverage and validate server-rendered metadata, FAQ/schema parity, routes, and responsive rendering. Focused and full tests pass (33 files / 165 tests), production build passes, raw local SSR confirms both title/description/FAQPage outputs, and desktop/mobile reviews show the visible sections cleanly.
-- [ ] Publish and verify both updated price-index guides on the custom domain.
+- [x] Publish and verify both updated price-index guides on the custom domain in checkpoint `ae4d5f2b`. Cache-busted raw HTML checks confirm each route exposes the exact requested title, meta description, and valid FAQPage JSON-LD after propagation.
