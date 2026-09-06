@@ -454,4 +454,4 @@
 - [x] Add a crawler-visible data-driven Last Updated signal to the Bali and Bangkok hotel price-index pages and ensure their Article and Breadcrumb schema use updated dates.
 - [x] Apply refreshed search metadata and visible article-grounded FAQPage content to the Seoul and Tokyo hotel price guides without changing canonical URLs or evidence boundaries.
 - [x] Add regression coverage and validate server-rendered metadata, Article/Breadcrumb/FAQ schema payloads, date signals, and responsive layouts for all four guides. Focused and full tests pass (33 files / 168 tests), production build passes, raw local SSR confirms all four payload types, and desktop/mobile reviews are clean.
-- [ ] Publish and verify the four updated SEO guide routes on the custom domain.
+- [x] Publish and verify the four updated SEO guide routes on the custom domain in checkpoint `7183e0ec`. After server propagation, cache-busted raw HTML confirms `article:modified_time`, BlogPosting, BreadcrumbList, and FAQPage payloads on Bali, Bangkok, Seoul, and Tokyo.
