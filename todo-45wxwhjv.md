@@ -449,3 +449,9 @@
 - [x] Add visible, article-grounded FAQ sections and matching valid FAQPage JSON-LD for average nightly prices, budget neighborhoods, and high-season uplift in Bali and Bangkok.
 - [x] Add regression coverage and validate server-rendered metadata, FAQ/schema parity, routes, and responsive rendering. Focused and full tests pass (33 files / 165 tests), production build passes, raw local SSR confirms both title/description/FAQPage outputs, and desktop/mobile reviews show the visible sections cleanly.
 - [x] Publish and verify both updated price-index guides on the custom domain in checkpoint `ae4d5f2b`. Cache-busted raw HTML checks confirm each route exposes the exact requested title, meta description, and valid FAQPage JSON-LD after propagation.
+
+- [x] Audit current Last Updated displays, Article/Breadcrumb/FAQ schema injection, and Seoul/Tokyo guide metadata plus content-supported FAQ candidates.
+- [x] Add a crawler-visible data-driven Last Updated signal to the Bali and Bangkok hotel price-index pages and ensure their Article and Breadcrumb schema use updated dates.
+- [x] Apply refreshed search metadata and visible article-grounded FAQPage content to the Seoul and Tokyo hotel price guides without changing canonical URLs or evidence boundaries.
+- [x] Add regression coverage and validate server-rendered metadata, Article/Breadcrumb/FAQ schema payloads, date signals, and responsive layouts for all four guides. Focused and full tests pass (33 files / 168 tests), production build passes, raw local SSR confirms all four payload types, and desktop/mobile reviews are clean.
+- [ ] Publish and verify the four updated SEO guide routes on the custom domain.

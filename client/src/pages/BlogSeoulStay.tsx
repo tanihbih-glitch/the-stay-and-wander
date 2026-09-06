@@ -2,7 +2,6 @@ import Head from "@/components/Head";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MobileBottomNav from "@/components/MobileBottomNav";
-import BlogArticleSchema, { BreadcrumbSchema } from "@/components/BlogArticleSchema";
 import PopularRoutesWidgetBlogSidebar from "@/components/PopularRoutesWidgetBlogSidebar";
 import TripComHotelWidget from "@/components/TripComHotelWidget";
 import CityActivitiesWidget from "@/components/CityActivitiesWidget";
@@ -13,10 +12,11 @@ import CityStayMatcher from "@/components/CityStayMatcher";
 import { seoulStayMatcherConfig } from "@/lib/cityStayMatcherConfigs";
 import { seoulStayFaqs } from "@shared/articleFaqs";
 import { ArrowLeft } from "lucide-react";
+import LastUpdated from "@/components/LastUpdated";
 
 export const articleMetadata = {
-  title: "Where to Stay in Seoul: Best Areas for First-Timers (2026 Guide)",
-  description: "Not sure where to stay in Seoul? Compare Myeongdong, Gangnam, Hongdae, Itaewon, and Insadong — what each is best for and typical 2026 hotel prices.",
+  title: "Where to Stay in Seoul (2026): Best Areas & Hotel Price Guide",
+  description: "Compare Seoul's best areas for first-time visitors in 2026—Myeongdong, Hongdae, Gangnam, Itaewon & Insadong—with hotel price ranges, subway-access tips and an interactive area matcher.",
   url: "/blog/where-to-stay-in-seoul-2026",
   image: "/manus-storage/seoul-where-to-stay-hero_050ef7b1.jpg",
   keywords: "where to stay in Seoul 2026, Seoul districts, Myeongdong hotels, Gangnam hotels, Hongdae hotels, Itaewon hotels, Insadong hotels",
@@ -24,6 +24,7 @@ export const articleMetadata = {
   category: "Hotel Reviews · Asia Travel",
   readTime: "7 minutes",
   publishDate: "2026-08-12",
+  lastUpdated: "2026-09-06",
 };
 
 export const priceSnapshot = [
@@ -51,17 +52,14 @@ export const seoulStayDecisions: readonly GuideDecision[] = [
 
 export default function BlogSeoulStay() {
   const canonicalUrl = `https://thestayandwander.com${articleMetadata.url}`;
-  const breadcrumbItems = [{ name: "Home", url: "https://thestayandwander.com" }, { name: "Blog", url: "https://thestayandwander.com/blog" }, { name: articleMetadata.title, url: canonicalUrl }];
 
   return <div className="min-h-screen bg-white pb-20 md:pb-0">
-    <Head title={articleMetadata.title} description={articleMetadata.description} canonical={canonicalUrl} ogTitle={articleMetadata.title} ogDescription={articleMetadata.description} ogImage={articleMetadata.image} ogUrl={canonicalUrl} keywords={articleMetadata.keywords} />
-    <BlogArticleSchema title={articleMetadata.title} description={articleMetadata.description} image={`https://thestayandwander.com${articleMetadata.image}`} author={articleMetadata.author} datePublished={articleMetadata.publishDate} url={canonicalUrl} />
-    {BreadcrumbSchema(breadcrumbItems)}
+    <Head title={articleMetadata.title} description={articleMetadata.description} canonical={canonicalUrl} ogTitle={articleMetadata.title} ogDescription={articleMetadata.description} ogImage={articleMetadata.image} ogUrl={canonicalUrl} keywords={articleMetadata.keywords} publishedDate={articleMetadata.publishDate} updatedDate={articleMetadata.lastUpdated} />
     <Header />
     <section className="relative flex min-h-[28rem] items-end overflow-hidden bg-slate-900"><img src={articleMetadata.image} alt="Seoul skyline with Namsan Seoul Tower at dusk" className="absolute inset-0 h-full w-full object-cover" /><div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/45 to-black/10" /><div className="container relative z-10 px-4 pb-12 pt-36 md:pb-16"><p className="mb-4 text-sm font-semibold uppercase tracking-[0.18em] text-yellow-300">{articleMetadata.category}</p><h1 className="max-w-4xl font-playfair text-4xl font-bold leading-tight text-white md:text-6xl">{articleMetadata.title}</h1></div></section>
     <main className="container grid gap-10 px-4 py-12 lg:grid-cols-3 lg:py-16"><article className="min-w-0 lg:col-span-2">
       <a href="/blog" className="mb-8 inline-flex items-center gap-2 text-sm font-medium text-[#0077B6] transition-colors hover:text-[#005c91]"><ArrowLeft className="h-4 w-4" />Back to Blog</a>
-      <div className="mb-10 flex flex-wrap gap-x-5 gap-y-2 border-b border-gray-200 pb-7 text-sm text-gray-600"><span>Published by: {articleMetadata.author}</span><span>Category: {articleMetadata.category}</span><span>Read time: {articleMetadata.readTime}</span></div>
+      <div className="mb-10 flex flex-wrap gap-x-5 gap-y-2 border-b border-gray-200 pb-7 text-sm text-gray-600"><span>Published by: {articleMetadata.author}</span><span>Category: {articleMetadata.category}</span><span>Read time: {articleMetadata.readTime}</span><LastUpdated date={articleMetadata.lastUpdated} /></div>
       <div className="space-y-6 text-lg leading-relaxed text-gray-700"><p>Seoul offers strong value, but picking the right area still shapes your trip — a stay near Myeongdong feels very different from one in Hongdae or Gangnam. Here&apos;s where to actually stay, based on what each area is known for.</p></div>
       <GuideMethodologyDecisionTree destinationLabel="Seoul" methodology="This 2026 guide combines the editorial district profiles and typical shoulder-season planning ranges presented below. The price bands are directional planning estimates rather than live hotel quotes, so confirm current pricing, subway access, and availability for your dates." decisions={seoulStayDecisions} />
       <CityStayMatcher config={seoulStayMatcherConfig} />

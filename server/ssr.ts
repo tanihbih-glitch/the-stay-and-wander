@@ -87,6 +87,48 @@ export function generateFAQPageSchema(faqs: readonly ArticleFaq[]): string {
   return `<script type="application/ld+json">${JSON.stringify(schema)}</script>`;
 }
 
+/**
+ * Emits crawler-visible Article and BreadcrumbList schemas for opt-in guides.
+ * The page components use the same metadata fields for visible titles and
+ * modified dates, keeping the structured data aligned with the public page.
+ */
+export function generateArticleAndBreadcrumbSchemas(metadata?: PageMetadata): string {
+  if (!metadata?.includeRichSnippetSchemas || metadata.type !== "article") return "";
+
+  const tags = generateMetaTags(metadata);
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: metadata.title,
+    description: metadata.description,
+    image: tags.ogImage,
+    author: { "@type": "Organization", name: metadata.author ?? "The Stay & Wander" },
+    datePublished: metadata.publishedDate,
+    dateModified: metadata.updatedDate ?? metadata.publishedDate,
+    mainEntityOfPage: { "@type": "WebPage", "@id": tags.canonical },
+    publisher: {
+      "@type": "Organization",
+      name: "The Stay & Wander",
+      logo: { "@type": "ImageObject", url: "https://thestayandwander.com/logo.png" },
+    },
+  };
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://thestayandwander.com" },
+      { "@type": "ListItem", position: 2, name: "Blog", item: "https://thestayandwander.com/blog" },
+      { "@type": "ListItem", position: 3, name: metadata.title, item: tags.canonical },
+    ],
+  };
+  const stringifyJsonLd = (schema: Record<string, unknown>) => JSON.stringify(schema).replace(/</g, "\\u003c");
+
+  return [
+    `<script type="application/ld+json">${stringifyJsonLd(articleSchema)}</script>`,
+    `<script type="application/ld+json">${stringifyJsonLd(breadcrumbSchema)}</script>`,
+  ].join("\n");
+}
+
 export function injectSSRHead(
   template: string,
   metadata?: PageMetadata,
@@ -100,6 +142,7 @@ export function injectSSRHead(
 
   const headContent = [
     metadata ? generateSSRHead(metadata) : "",
+    generateArticleAndBreadcrumbSchemas(metadata),
     generateFAQPageSchema(faqs),
   ]
     .filter(Boolean)

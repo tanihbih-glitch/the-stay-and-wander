@@ -12,6 +12,7 @@ export interface PageMetadata {
   author?: string;
   publishedDate?: string;
   updatedDate?: string;
+  includeRichSnippetSchemas?: boolean;
   keywords?: string;
 }
 
@@ -226,6 +227,8 @@ export const pageMetadataConfig: Record<string, PageMetadata> = {
     type: "article",
     author: "The Stay & Wander",
     publishedDate: "2026-08-23",
+    updatedDate: "2026-09-06",
+    includeRichSnippetSchemas: true,
     keywords: "Bali hotel prices 2026, Bali villa prices, Canggu hotel cost, Ubud hotel cost, Uluwatu resort price, Sanur accommodation, Amed hotels",
   },
 
@@ -276,6 +279,8 @@ export const pageMetadataConfig: Record<string, PageMetadata> = {
     type: "article",
     author: "The Stay & Wander",
     publishedDate: "2026-08-24",
+    updatedDate: "2026-09-06",
+    includeRichSnippetSchemas: true,
     keywords: "Bangkok hotel prices 2026, Sukhumvit hotel rates, Silom hotel prices, Bangkok riverside hotel rates, Siam accommodation cost, Bangkok hotel taxes",
   },
 
@@ -306,24 +311,28 @@ export const pageMetadataConfig: Record<string, PageMetadata> = {
   },
 
   tokyoStayGuide: {
-    title: "Where to Stay in Tokyo: Best Neighborhoods for First-Timers (2026 Guide)",
-    description: "Not sure where to stay in Tokyo? Compare Shinjuku, Shibuya, Asakusa, Ginza, and Ikebukuro — what each is best for and typical 2026 hotel prices.",
+    title: "Where to Stay in Tokyo (2026): Best Neighborhoods & Hotel Price Guide",
+    description: "Compare Tokyo's best neighborhoods for first-time visitors in 2026—Shinjuku, Shibuya, Asakusa, Ginza & Ikebukuro—with hotel price ranges, rail-access tips and an interactive area matcher.",
     image: `${SITE_URL}/manus-storage/tokyo-where-to-stay-hero_78be225b.jpg`,
     url: "/blog/where-to-stay-in-tokyo-2026",
     type: "article",
     author: "The Stay & Wander",
     publishedDate: "2026-08-12",
+    updatedDate: "2026-09-06",
+    includeRichSnippetSchemas: true,
     keywords: "where to stay in Tokyo 2026, Tokyo neighborhoods, Shinjuku hotels, Shibuya hotels, Asakusa hotels, Ginza hotels, Ikebukuro hotels",
   },
 
   seoulStayGuide: {
-    title: "Where to Stay in Seoul: Best Areas for First-Timers (2026 Guide)",
-    description: "Not sure where to stay in Seoul? Compare Myeongdong, Gangnam, Hongdae, Itaewon, and Insadong — what each is best for and typical 2026 hotel prices.",
+    title: "Where to Stay in Seoul (2026): Best Areas & Hotel Price Guide",
+    description: "Compare Seoul's best areas for first-time visitors in 2026—Myeongdong, Hongdae, Gangnam, Itaewon & Insadong—with hotel price ranges, subway-access tips and an interactive area matcher.",
     image: `${SITE_URL}/manus-storage/seoul-where-to-stay-hero_050ef7b1.jpg`,
     url: "/blog/where-to-stay-in-seoul-2026",
     type: "article",
     author: "The Stay & Wander",
     publishedDate: "2026-08-12",
+    updatedDate: "2026-09-06",
+    includeRichSnippetSchemas: true,
     keywords: "where to stay in Seoul 2026, Seoul districts, Myeongdong hotels, Gangnam hotels, Hongdae hotels, Itaewon hotels, Insadong hotels",
   },
 

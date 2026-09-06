@@ -2,7 +2,6 @@ import Head from "@/components/Head";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MobileBottomNav from "@/components/MobileBottomNav";
-import BlogArticleSchema, { BreadcrumbSchema } from "@/components/BlogArticleSchema";
 import PopularRoutesWidgetBlogSidebar from "@/components/PopularRoutesWidgetBlogSidebar";
 import TripComHotelWidget from "@/components/TripComHotelWidget";
 import CityActivitiesWidget from "@/components/CityActivitiesWidget";
@@ -13,10 +12,11 @@ import CityStayMatcher from "@/components/CityStayMatcher";
 import { tokyoStayMatcherConfig } from "@/lib/cityStayMatcherConfigs";
 import { tokyoStayFaqs } from "@shared/articleFaqs";
 import { ArrowLeft } from "lucide-react";
+import LastUpdated from "@/components/LastUpdated";
 
 export const articleMetadata = {
-  title: "Where to Stay in Tokyo: Best Neighborhoods for First-Timers (2026 Guide)",
-  description: "Not sure where to stay in Tokyo? Compare Shinjuku, Shibuya, Asakusa, Ginza, and Ikebukuro — what each is best for and typical 2026 hotel prices.",
+  title: "Where to Stay in Tokyo (2026): Best Neighborhoods & Hotel Price Guide",
+  description: "Compare Tokyo's best neighborhoods for first-time visitors in 2026—Shinjuku, Shibuya, Asakusa, Ginza & Ikebukuro—with hotel price ranges, rail-access tips and an interactive area matcher.",
   url: "/blog/where-to-stay-in-tokyo-2026",
   image: "/manus-storage/tokyo-where-to-stay-hero_78be225b.jpg",
   keywords: "where to stay in Tokyo 2026, Tokyo neighborhoods, Shinjuku hotels, Shibuya hotels, Asakusa hotels, Ginza hotels, Ikebukuro hotels",
@@ -24,6 +24,7 @@ export const articleMetadata = {
   category: "Hotel Reviews · Asia Travel",
   readTime: "7 minutes",
   publishDate: "2026-08-12",
+  lastUpdated: "2026-09-06",
 };
 
 export const priceSnapshot = [
@@ -51,17 +52,14 @@ export const tokyoStayDecisions: readonly GuideDecision[] = [
 
 export default function BlogTokyoStay() {
   const canonicalUrl = `https://thestayandwander.com${articleMetadata.url}`;
-  const breadcrumbItems = [{ name: "Home", url: "https://thestayandwander.com" }, { name: "Blog", url: "https://thestayandwander.com/blog" }, { name: articleMetadata.title, url: canonicalUrl }];
 
   return <div className="min-h-screen bg-white pb-20 md:pb-0">
-    <Head title={articleMetadata.title} description={articleMetadata.description} canonical={canonicalUrl} ogTitle={articleMetadata.title} ogDescription={articleMetadata.description} ogImage={articleMetadata.image} ogUrl={canonicalUrl} keywords={articleMetadata.keywords} />
-    <BlogArticleSchema title={articleMetadata.title} description={articleMetadata.description} image={`https://thestayandwander.com${articleMetadata.image}`} author={articleMetadata.author} datePublished={articleMetadata.publishDate} url={canonicalUrl} />
-    {BreadcrumbSchema(breadcrumbItems)}
+    <Head title={articleMetadata.title} description={articleMetadata.description} canonical={canonicalUrl} ogTitle={articleMetadata.title} ogDescription={articleMetadata.description} ogImage={articleMetadata.image} ogUrl={canonicalUrl} keywords={articleMetadata.keywords} publishedDate={articleMetadata.publishDate} updatedDate={articleMetadata.lastUpdated} />
     <Header />
     <section className="relative flex min-h-[28rem] items-end overflow-hidden bg-slate-900"><img src={articleMetadata.image} alt="Tokyo skyline at blue hour" className="absolute inset-0 h-full w-full object-cover" /><div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/45 to-black/10" /><div className="container relative z-10 px-4 pb-12 pt-36 md:pb-16"><p className="mb-4 text-sm font-semibold uppercase tracking-[0.18em] text-yellow-300">{articleMetadata.category}</p><h1 className="max-w-4xl font-playfair text-4xl font-bold leading-tight text-white md:text-6xl">{articleMetadata.title}</h1></div></section>
     <main className="container grid gap-10 px-4 py-12 lg:grid-cols-3 lg:py-16"><article className="min-w-0 lg:col-span-2">
       <a href="/blog" className="mb-8 inline-flex items-center gap-2 text-sm font-medium text-[#0077B6] transition-colors hover:text-[#005c91]"><ArrowLeft className="h-4 w-4" />Back to Blog</a>
-      <div className="mb-10 flex flex-wrap gap-x-5 gap-y-2 border-b border-gray-200 pb-7 text-sm text-gray-600"><span>Published by: {articleMetadata.author}</span><span>Category: {articleMetadata.category}</span><span>Read time: {articleMetadata.readTime}</span></div>
+      <div className="mb-10 flex flex-wrap gap-x-5 gap-y-2 border-b border-gray-200 pb-7 text-sm text-gray-600"><span>Published by: {articleMetadata.author}</span><span>Category: {articleMetadata.category}</span><span>Read time: {articleMetadata.readTime}</span><LastUpdated date={articleMetadata.lastUpdated} /></div>
       <div className="space-y-6 text-lg leading-relaxed text-gray-700"><p>Tokyo is huge, and picking the wrong neighborhood can mean long transit times eating into your trip. Here&apos;s where to actually stay, broken down by what each area is best for — so you can pick based on your trip, not just guesswork.</p></div>
       <GuideMethodologyDecisionTree destinationLabel="Tokyo" methodology="This 2026 guide combines the editorial neighborhood profiles and typical shoulder-season planning ranges shown below. The price bands are directional, not a live rate feed; check exact availability, station access, and current pricing for your dates before booking." decisions={tokyoStayDecisions} />
       <CityStayMatcher config={tokyoStayMatcherConfig} />

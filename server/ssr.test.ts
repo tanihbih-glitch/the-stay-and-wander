@@ -114,15 +114,38 @@ describe("server-rendered page metadata", () => {
     expect(bangkok).toContain('name="description" content="Compare average hotel prices per night in Bangkok for 2026 across Sukhumvit, Silom, Riverside &amp; Old Town. Interactive district matcher &amp; tier breakdown."');
   });
 
-  it("renders the Tokyo and Seoul where-to-stay metadata for crawlers", () => {
+  it("renders the refreshed Tokyo and Seoul where-to-stay metadata for crawlers", () => {
     const template = "<html><head><title>Default site title</title></head><body></body></html>";
     const tokyo = injectSSRHead(template, pageMetadataConfig.tokyoStayGuide);
     const seoul = injectSSRHead(template, pageMetadataConfig.seoulStayGuide);
 
-    expect(tokyo).toContain("<title>Where to Stay in Tokyo: Best Neighborhoods for First-Timers (2026 Guide)</title>");
+    expect(tokyo).toContain("<title>Where to Stay in Tokyo (2026): Best Neighborhoods &amp; Hotel Price Guide</title>");
+    expect(tokyo).toContain('name="description" content="Compare Tokyo&#039;s best neighborhoods for first-time visitors in 2026—Shinjuku, Shibuya, Asakusa, Ginza &amp; Ikebukuro—with hotel price ranges, rail-access tips and an interactive area matcher."');
     expect(tokyo).toContain('href="https://thestayandwander.com/blog/where-to-stay-in-tokyo-2026"');
-    expect(seoul).toContain("<title>Where to Stay in Seoul: Best Areas for First-Timers (2026 Guide)</title>");
+    expect(seoul).toContain("<title>Where to Stay in Seoul (2026): Best Areas &amp; Hotel Price Guide</title>");
+    expect(seoul).toContain('name="description" content="Compare Seoul&#039;s best areas for first-time visitors in 2026—Myeongdong, Hongdae, Gangnam, Itaewon &amp; Insadong—with hotel price ranges, subway-access tips and an interactive area matcher."');
     expect(seoul).toContain('href="https://thestayandwander.com/blog/where-to-stay-in-seoul-2026"');
+  });
+
+  it("emits current Article, BreadcrumbList, FAQPage, and modified-time signals for the four refreshed guides", () => {
+    const template = "<html><head><title>Default site title</title></head><body></body></html>";
+    const guideMetadata = [
+      pageMetadataConfig.baliHotelPriceIndex,
+      pageMetadataConfig.bangkokHotelPriceIndex,
+      pageMetadataConfig.tokyoStayGuide,
+      pageMetadataConfig.seoulStayGuide,
+    ];
+
+    for (const metadata of guideMetadata) {
+      const faqs = articleFaqsByPath[metadata.url] ?? [];
+      const rendered = injectSSRHead(template, metadata, faqs);
+      expect(metadata.updatedDate).toBe("2026-09-06");
+      expect(rendered).toContain('property="article:modified_time" content="2026-09-06"');
+      expect(rendered).toContain('"@type":"BlogPosting"');
+      expect(rendered).toContain('"@type":"BreadcrumbList"');
+      expect(rendered).toContain('"@type":"FAQPage"');
+      expect(rendered).toContain(`"@id":"https://thestayandwander.com${metadata.url}"`);
+    }
   });
 
   it("injects a valid FAQPage JSON-LD payload for each specified FAQ article", () => {

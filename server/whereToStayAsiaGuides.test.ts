@@ -9,15 +9,17 @@ import { readFileSync } from "node:fs";
 import path from "node:path";
 
 describe("Tokyo and Seoul where-to-stay guides", () => {
-  it("uses the supplied canonical titles, paths, five-area price tables, and crawler metadata", () => {
-    expect(tokyoMetadata.title).toBe("Where to Stay in Tokyo: Best Neighborhoods for First-Timers (2026 Guide)");
+  it("uses updated CTR-focused titles, paths, five-area price tables, and crawler metadata", () => {
+    expect(tokyoMetadata.title).toBe("Where to Stay in Tokyo (2026): Best Neighborhoods & Hotel Price Guide");
     expect(tokyoMetadata.url).toBe("/blog/where-to-stay-in-tokyo-2026");
     expect(tokyoPrices).toHaveLength(5);
-    expect(seoulMetadata.title).toBe("Where to Stay in Seoul: Best Areas for First-Timers (2026 Guide)");
+    expect(seoulMetadata.title).toBe("Where to Stay in Seoul (2026): Best Areas & Hotel Price Guide");
     expect(seoulMetadata.url).toBe("/blog/where-to-stay-in-seoul-2026");
     expect(seoulPrices).toHaveLength(5);
     expect(pageMetadataConfig.tokyoStayGuide.url).toBe(tokyoMetadata.url);
     expect(pageMetadataConfig.seoulStayGuide.url).toBe(seoulMetadata.url);
+    expect(pageMetadataConfig.tokyoStayGuide.title).toBe(tokyoMetadata.title);
+    expect(pageMetadataConfig.seoulStayGuide.title).toBe(seoulMetadata.title);
     expect(sitemapRoutes.map((route) => route.path)).toEqual(expect.arrayContaining([tokyoMetadata.url, seoulMetadata.url]));
   });
 
@@ -42,10 +44,12 @@ describe("Tokyo and Seoul where-to-stay guides", () => {
   });
 
   it("matches visible long-tail Tokyo and Seoul FAQs to their schema source", () => {
-    expect(tokyoStayFaqs).toHaveLength(5);
-    expect(seoulStayFaqs).toHaveLength(5);
-    expect(tokyoStayFaqs[0].question).toBe("Where should first-timers stay in Tokyo?");
-    expect(seoulStayFaqs[1].question).toBe("What is the best area to stay in Seoul for K-pop and nightlife?");
+    expect(tokyoStayFaqs).toHaveLength(6);
+    expect(seoulStayFaqs).toHaveLength(6);
+    expect(tokyoStayFaqs[0].question).toBe("What is the average hotel price in Tokyo per night in 2026?");
+    expect(seoulStayFaqs[0].question).toBe("What is the average hotel price in Seoul per night in 2026?");
+    expect(tokyoStayFaqs.some((faq) => faq.question === "When are Tokyo hotel prices highest?")).toBe(true);
+    expect(seoulStayFaqs.some((faq) => faq.question === "When are Seoul hotel prices highest?")).toBe(true);
     expect(getArticleFaqs(tokyoMetadata.url)).toBe(tokyoStayFaqs);
     expect(getArticleFaqs(seoulMetadata.url)).toBe(seoulStayFaqs);
   });

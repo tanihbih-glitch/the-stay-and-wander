@@ -97,6 +97,10 @@ export const bangkokHotelPriceIndexFaqs: readonly ArticleFaq[] = [
 
 export const tokyoStayFaqs: readonly ArticleFaq[] = [
   {
+    question: "What is the average hotel price in Tokyo per night in 2026?",
+    answer: "The guide does not use a single citywide average because rates differ sharply by neighborhood and season. Its typical shoulder-season double-occupancy ranges run from $35–150 per night in Asakusa and $40–160 in Ikebukuro to $70–280 in Ginza, with Shinjuku and Shibuya in between.",
+  },
+  {
     question: "Where should first-timers stay in Tokyo?",
     answer: "The guide identifies Shinjuku as the easiest, lowest-risk choice for a first Tokyo trip because it is built around a major train hub and gives flexible access across the city. It is a practical base when you want to minimise transit planning and stay close to nightlife, gardens, and entertainment.",
   },
@@ -119,6 +123,10 @@ export const tokyoStayFaqs: readonly ArticleFaq[] = [
 ];
 
 export const seoulStayFaqs: readonly ArticleFaq[] = [
+  {
+    question: "What is the average hotel price in Seoul per night in 2026?",
+    answer: "The guide does not present one citywide average because hotel costs vary by district and travel date. Its typical shoulder-season double-occupancy ranges begin at $30 per night in Hongdae and Insadong, rise to $40–160 in Myeongdong, and reach $55–200+ in Gangnam.",
+  },
   {
     question: "Where should first-timers stay in Seoul?",
     answer: "The guide identifies Myeongdong as the easiest first-timer base because it is central, walkable, and close to shopping, street food, and subway access. It also places visitors within reach of Namsan Tower and Myeongdong Cathedral.",

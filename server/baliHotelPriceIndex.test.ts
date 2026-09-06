@@ -46,6 +46,13 @@ describe("Bali Hotel Price Index", () => {
     expect(articleSource).toContain("Bali Hotel Prices in 2026: Average Rates by Neighborhood & Budget");
   });
 
+  it("renders the shared crawler-visible Last Updated signal for the current price-index revision", () => {
+    expect(articleSource).toContain('import LastUpdated from "@/components/LastUpdated"');
+    expect(articleSource).toContain('lastUpdated: "2026-09-06"');
+    expect(articleSource).toContain('<LastUpdated date={articleMetadata.lastUpdated} />');
+    expect(articleSource).toContain('updatedDate={articleMetadata.lastUpdated}');
+  });
+
   it("registers only the new canonical price-index route while retaining the old URL's permanent redirect", () => {
     expect(sitemapRoutes.map((route) => route.path)).toContain("/blog/bali-hotel-price-index-2026");
     expect(sitemapRoutes.map((route) => route.path)).not.toContain("/blog/bali-hotel-prices-2026");

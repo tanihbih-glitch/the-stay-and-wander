@@ -3,7 +3,6 @@ import Head from "@/components/Head";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MobileBottomNav from "@/components/MobileBottomNav";
-import BlogArticleSchema, { BreadcrumbSchema } from "@/components/BlogArticleSchema";
 import { TRIP_COM_HOTEL_WIDGET_URL } from "@/components/TripComHotelWidget";
 import BangkokDistrictHotelMap from "@/components/BangkokDistrictHotelMap";
 import BangkokHotelTaxCalculator from "@/components/BangkokHotelTaxCalculator";
@@ -12,6 +11,7 @@ import BangkokAirportTransferBudget from "@/components/BangkokAirportTransferBud
 import BangkokArrivalChecklist from "@/components/BangkokArrivalChecklist";
 import ArticleFAQ from "@/components/ArticleFAQ";
 import { bangkokHotelPriceIndexFaqs } from "@shared/articleFaqs";
+import LastUpdated from "@/components/LastUpdated";
 
 export const articleMetadata = {
   title: "Bangkok Hotel Price Index (2026): Nightly Cost Breakdown & Interactive Tool",
@@ -23,6 +23,7 @@ export const articleMetadata = {
   category: "City Cost Index · Bangkok Travel",
   readTime: "7 minutes",
   publishDate: "2026-08-24",
+  lastUpdated: "2026-09-06",
 };
 
 export const bangkokHotelPriceRows = [
@@ -41,15 +42,12 @@ const pricingFactors = [
 
 export default function BlogBangkokHotelPriceIndex() {
   const canonicalUrl = `https://thestayandwander.com${articleMetadata.url}`;
-  const breadcrumbs = [{ name: "Home", url: "https://thestayandwander.com" }, { name: "Blog", url: "https://thestayandwander.com/blog" }, { name: articleMetadata.title, url: canonicalUrl }];
 
   return (
     <div className="min-h-screen bg-[#FBF8F1] pb-20 md:pb-0">
-      <Head title={articleMetadata.title} description={articleMetadata.description} canonical={canonicalUrl} ogTitle={articleMetadata.title} ogDescription={articleMetadata.description} ogImage={articleMetadata.image} ogUrl={canonicalUrl} keywords={articleMetadata.keywords} />
-      <BlogArticleSchema title={articleMetadata.title} description={articleMetadata.description} image={`https://thestayandwander.com${articleMetadata.image}`} author={articleMetadata.author} datePublished={articleMetadata.publishDate} url={canonicalUrl} />
-      {BreadcrumbSchema(breadcrumbs)}
+      <Head title={articleMetadata.title} description={articleMetadata.description} canonical={canonicalUrl} ogTitle={articleMetadata.title} ogDescription={articleMetadata.description} ogImage={articleMetadata.image} ogUrl={canonicalUrl} keywords={articleMetadata.keywords} publishedDate={articleMetadata.publishDate} updatedDate={articleMetadata.lastUpdated} />
       <Header />
-      <section className="relative overflow-hidden bg-[#0D1B2A] px-4 pb-16 pt-32 text-white md:pb-20 md:pt-40"><div className="absolute inset-0 opacity-35" style={{ backgroundImage: "radial-gradient(circle at 12% 18%, #0077B6 0, transparent 30%), radial-gradient(circle at 85% 78%, #F4A261 0, transparent 24%)" }} /><div className="container relative z-10 max-w-5xl"><p className="mb-5 text-xs font-bold uppercase tracking-[0.22em] text-[#F4A261]">City Cost Index · Bangkok Travel</p><h1 className="max-w-5xl font-playfair text-4xl font-bold leading-tight md:text-6xl">{articleMetadata.title}</h1><p className="mt-6 max-w-3xl text-xl leading-relaxed text-slate-200">Nightly rates by district, tier, transit access, and the tax details that alter your final Bangkok accommodation budget.</p><div className="mt-8 flex flex-wrap gap-x-6 gap-y-3 text-sm text-slate-200"><span>By {articleMetadata.author}</span><span>{articleMetadata.readTime}</span><span>Updated for 2026 planning</span></div></div></section>
+      <section className="relative overflow-hidden bg-[#0D1B2A] px-4 pb-16 pt-32 text-white md:pb-20 md:pt-40"><div className="absolute inset-0 opacity-35" style={{ backgroundImage: "radial-gradient(circle at 12% 18%, #0077B6 0, transparent 30%), radial-gradient(circle at 85% 78%, #F4A261 0, transparent 24%)" }} /><div className="container relative z-10 max-w-5xl"><p className="mb-5 text-xs font-bold uppercase tracking-[0.22em] text-[#F4A261]">City Cost Index · Bangkok Travel</p><h1 className="max-w-5xl font-playfair text-4xl font-bold leading-tight md:text-6xl">{articleMetadata.title}</h1><p className="mt-6 max-w-3xl text-xl leading-relaxed text-slate-200">Nightly rates by district, tier, transit access, and the tax details that alter your final Bangkok accommodation budget.</p><div className="mt-8 flex flex-wrap gap-x-6 gap-y-3 text-sm text-slate-200"><span>By {articleMetadata.author}</span><span>{articleMetadata.readTime}</span><LastUpdated date={articleMetadata.lastUpdated} /></div></div></section>
       <main className="container max-w-6xl px-4 py-12 md:py-16"><a href="/blog" className="mb-8 inline-flex items-center gap-2 text-sm font-semibold text-[#0077B6] hover:text-[#005c91]"><ArrowLeft className="h-4 w-4" aria-hidden="true" />Back to Blog</a>
         <aside className="rounded-2xl border border-[#ecd9b9] bg-[#F8EFE0] p-6 text-slate-700 md:p-8"><p className="text-xs font-bold uppercase tracking-[0.18em] text-[#9a5b20]">Affiliate disclosure</p><p className="mt-3 leading-relaxed">The Stay &amp; Wander is a reader-supported travel research portal. When you book accommodation through links on our site, we may earn an affiliate commission at no extra cost to you.</p></aside>
         <section className="mt-12 max-w-4xl"><p className="text-xs font-bold uppercase tracking-[0.2em] text-[#0077B6]">Bangkok accommodation research</p><h2 className="mt-3 font-playfair text-3xl font-bold text-[#0D1B2A] md:text-4xl">Why district choice shapes the real cost of a Bangkok stay</h2><p className="mt-5 text-lg leading-relaxed text-slate-700">Bangkok offers exceptional accommodation value, but location determines overall daily expenditure. Proximity to transit lines often pays for itself by reducing daily taxi and tuk-tuk transport costs.</p></section>

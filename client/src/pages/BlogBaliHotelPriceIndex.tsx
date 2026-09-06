@@ -3,13 +3,13 @@ import Head from "@/components/Head";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MobileBottomNav from "@/components/MobileBottomNav";
-import BlogArticleSchema, { BreadcrumbSchema } from "@/components/BlogArticleSchema";
 import { MapView } from "@/components/Map";
 import { BALI_HOTEL_PRICE_INDEX_AFFILIATE_LINKS } from "@/lib/affiliateLinks";
 import BaliGroupCostCalculator from "@/components/BaliGroupCostCalculator";
 import BaliSeasonalRateChart from "@/components/BaliSeasonalRateChart";
 import ArticleFAQ from "@/components/ArticleFAQ";
 import { baliHotelPriceIndexFaqs } from "@shared/articleFaqs";
+import LastUpdated from "@/components/LastUpdated";
 
 export const articleMetadata = {
   title: "Bali Hotel Prices in 2026: Average Rates by Neighborhood & Budget",
@@ -21,6 +21,7 @@ export const articleMetadata = {
   category: "Coastal Field Notes · Bali Travel",
   readTime: "8 minutes",
   publishDate: "2026-08-23",
+  lastUpdated: "2026-09-06",
 };
 
 export const hotelRateRows = [
@@ -47,17 +48,10 @@ const pricingFactors = [
 
 export default function BlogBaliHotelPriceIndex() {
   const canonicalUrl = `https://thestayandwander.com${articleMetadata.url}`;
-  const breadcrumbItems = [
-    { name: "Home", url: "https://thestayandwander.com" },
-    { name: "Blog", url: "https://thestayandwander.com/blog" },
-    { name: articleMetadata.title, url: canonicalUrl },
-  ];
 
   return (
     <div className="min-h-screen bg-[#FBF8F1] pb-20 md:pb-0">
-      <Head title={articleMetadata.title} description={articleMetadata.description} canonical={canonicalUrl} ogTitle={articleMetadata.title} ogDescription={articleMetadata.description} ogImage={articleMetadata.image} ogUrl={canonicalUrl} keywords={articleMetadata.keywords} />
-      <BlogArticleSchema title={articleMetadata.title} description={articleMetadata.description} image={`https://thestayandwander.com${articleMetadata.image}`} author={articleMetadata.author} datePublished={articleMetadata.publishDate} url={canonicalUrl} />
-      {BreadcrumbSchema(breadcrumbItems)}
+      <Head title={articleMetadata.title} description={articleMetadata.description} canonical={canonicalUrl} ogTitle={articleMetadata.title} ogDescription={articleMetadata.description} ogImage={articleMetadata.image} ogUrl={canonicalUrl} keywords={articleMetadata.keywords} publishedDate={articleMetadata.publishDate} updatedDate={articleMetadata.lastUpdated} />
       <Header />
 
       <section className="relative overflow-hidden bg-[#0D1B2A] px-4 pb-16 pt-32 text-white md:pb-20 md:pt-40">
@@ -66,7 +60,7 @@ export default function BlogBaliHotelPriceIndex() {
           <p className="mb-5 text-xs font-bold uppercase tracking-[0.22em] text-[#F4A261]">Coastal Field Notes · Bali Travel</p>
           <h1 className="max-w-5xl font-playfair text-4xl font-bold leading-tight md:text-6xl">{articleMetadata.title}</h1>
           <p className="mt-7 max-w-3xl text-lg leading-relaxed text-slate-200 md:text-xl">A five-region planning baseline for reading Bali accommodation rates beyond the first promotional price you see.</p>
-          <div className="mt-9 flex flex-wrap gap-x-6 gap-y-3 text-sm text-slate-200"><span>By {articleMetadata.author}</span><span>{articleMetadata.readTime}</span><span>Updated for 2026 planning</span></div>
+          <div className="mt-9 flex flex-wrap gap-x-6 gap-y-3 text-sm text-slate-200"><span>By {articleMetadata.author}</span><span>{articleMetadata.readTime}</span><LastUpdated date={articleMetadata.lastUpdated} /></div>
         </div>
       </section>
 
