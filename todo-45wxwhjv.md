@@ -467,4 +467,5 @@
 - [x] Extend accessible, sticky-desktop and in-flow-mobile Table of Contents navigation to eligible long-form non-price destination guides.
 - [x] Add an accessible smooth-scrolling Back to Top control across all destination guides, honoring reduced-motion preferences.
 - [x] Add regression coverage and validate feedback state, navigation anchors, privacy behavior, and desktop/mobile layouts. Direct browser inspection confirms automatic TOC links, thumbs feedback, acknowledgement, and Back to Top controls; full validation passes 34 files / 176 tests, TypeScript, and production build.
-- [ ] Publish and verify the complete feedback and navigation rollout on the custom domain.
+- [x] Publish and verify the complete feedback and navigation rollout on the custom domain in checkpoint `18dc1308`. A fresh cache-busted published Lisbon session confirms the automatic Table of Contents links, browser-local thumbs-up acknowledgement, and visible Back to Top control.
+- [x] Confirm the Back to Top action completes smoothly on the published browser scroll root; after the smooth-scroll interval, the verified cache-busted Lisbon session returned to page position zero without changing the canonical public URL.
