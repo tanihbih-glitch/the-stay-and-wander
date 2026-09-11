@@ -29,24 +29,26 @@ describe("server-rendered page metadata", () => {
     expect(injectSSRHead(template)).toBe(template);
   });
 
-  it("renders the supplied Bali where-to-stay metadata for crawlers without changing page content", () => {
+  it("renders the CTR-focused Bali snippet while preserving its visible-guide schema title", () => {
     const template = "<html><head><title>Default site title</title></head><body></body></html>";
     const prices = injectSSRHead(template, pageMetadataConfig.baliHotelPricesGuide);
     const fourStar = injectSSRHead(template, pageMetadataConfig.baliFourStarHotelsGuide);
 
-    expect(prices).toContain("<title>Where to Stay in Bali: Best Areas for First-Timers (2026 Guide)</title>");
-    expect(prices).toContain('name="description" content="Find the best area to stay in Bali for a first trip — Seminyak for beach clubs, Ubud for culture, Uluwatu for surf, or Canggu for cafés."');
+    expect(prices).toContain("<title>Bali Hotel Prices 2026: Rates by Area | The Stay &amp; Wander</title>");
+    expect(prices).toContain('name="description" content="See 2026 Bali hotel costs by area, from beach-side Seminyak to cultural Ubud, and choose a base that suits your first trip, budget and pace."');
+    expect(prices).toContain('"headline":"Where to Stay in Bali: Best Areas for First-Timers (2026 Guide)"');
     expect(prices).toContain('href="https://thestayandwander.com/blog/where-to-stay-in-bali-2026"');
     expect(fourStar).toContain("<title>Best 4-Star Hotels in Bali Under $100/Night (2026 Picks)</title>");
     expect(fourStar).toContain('name="description" content="Handpicked 4-star hotels across Bali that don&#039;t break the bank — real picks under $100/night, from Seminyak to Ubud."');
   });
 
-  it("renders the supplied Bangkok where-to-stay metadata for crawlers", () => {
+  it("renders the CTR-focused Bangkok snippet while preserving its visible-guide schema title", () => {
     const template = "<html><head><title>Default site title</title></head><body></body></html>";
     const bangkok = injectSSRHead(template, pageMetadataConfig.bangkokHotelPricesGuide);
 
-    expect(bangkok).toContain("<title>Where to Stay in Bangkok: Best Areas for First-Timers (2026 Guide)</title>");
-    expect(bangkok).toContain('name="description" content="Find the best area to stay in Bangkok for a first trip — Sukhumvit for transit, Riverside for temples, Khao San Road for energy, and Sathorn for quiet."');
+    expect(bangkok).toContain("<title>Bangkok Hotel Costs 2026: Areas | The Stay &amp; Wander</title>");
+    expect(bangkok).toContain('name="description" content="Compare 2026 Bangkok hotel price ranges, transport access and stay styles across Sukhumvit, Riverside, Khao San and Sathorn before you book."');
+    expect(bangkok).toContain('"headline":"Where to Stay in Bangkok: Best Areas for First-Timers (2026 Guide)"');
     expect(bangkok).toContain('href="https://thestayandwander.com/blog/where-to-stay-in-bangkok-2026"');
   });
 
@@ -54,8 +56,8 @@ describe("server-rendered page metadata", () => {
     const template = "<html><head><title>Default site title</title></head><body></body></html>";
     const budget = injectSSRHead(template, pageMetadataConfig.bangkokHotelBudgetBreakdown);
 
-    expect(budget).toContain("<title>How Much Does a Hotel in Bangkok Really Cost in 2026? (Budget to Luxury Breakdown)</title>");
-    expect(budget).toContain('name="description" content="Bangkok hotel prices in 2026, broken down from hostels to 5-star luxury — real ranges, top picks, and booking tips for every budget."');
+    expect(budget).toContain("<title>Bangkok Hotels 2026: Budget to Luxury | The Stay &amp; Wander</title>");
+    expect(budget).toContain('name="description" content="See what a Bangkok hotel costs in 2026, from hostels to five-star stays, with tier-by-tier picks, real price ranges and booking tips before you reserve."');
     expect(budget).toContain('href="https://thestayandwander.com/blog/bangkok-hotel-budget-breakdown-2026"');
   });
 
@@ -72,8 +74,8 @@ describe("server-rendered page metadata", () => {
     const template = "<html><head><title>Default site title</title></head><body></body></html>";
     const uae = injectSSRHead(template, pageMetadataConfig.uaeExtendedStaySustainability);
 
-    expect(uae).toContain("<title>Extended Stays in the UAE: How Sustainable Are Hilton, Marriott, and Accor?</title>");
-    expect(uae).toContain('name="description" content="Compare the sustainability approaches of Hilton, Marriott, Accor, and IHG for longer hotel stays in Dubai and Abu Dhabi, with practical advice for relocators."');
+    expect(uae).toContain("<title>UAE Extended Stays 2026: 4 Brands | The Stay &amp; Wander</title>");
+    expect(uae).toContain('name="description" content="Compare Hilton, Marriott, Accor and IHG for a longer Dubai or Abu Dhabi stay, including kitchens, laundry, sustainability details and practical fit."');
     expect(uae).toContain('href="https://thestayandwander.com/blog/uae-extended-stay-sustainability-2026"');
   });
 
@@ -173,5 +175,22 @@ describe("server-rendered page metadata", () => {
       expect(rendered).toContain("<title>Default site title</title>");
       expect(path).toMatch(/^\/blog\//);
     }
+  });
+
+  it("emits unambiguous Organization and WebSite entities without relying on similarly named sites", () => {
+    const template = "<html><head><title>Default site title</title></head><body></body></html>";
+    const rendered = injectSSRHead(template, pageMetadataConfig.home);
+
+    expect(rendered).toContain('"@type":"Organization"');
+    expect(rendered).toContain('"@id":"https://thestayandwander.com/#organization"');
+    expect(rendered).toContain('"@type":"WebSite"');
+    expect(rendered).toContain('"name":"The Stay & Wander"');
+    expect(rendered).toContain('"url":"https://thestayandwander.com"');
+    expect(rendered).not.toContain('"@id":"https://wander.com/#website"');
+  });
+
+  it("preserves the successful homepage and booking metadata", () => {
+    expect(pageMetadataConfig.home.title).toBe("The Stay & Wander | Curated Stays & Travel Itineraries");
+    expect(pageMetadataConfig.booking.title).toBe("Book Your Trip - Hotels, Flights & More | The Stay & Wander");
   });
 });

@@ -1,14 +1,43 @@
 import { decryptSearchConsoleRefreshToken, GOOGLE_SEARCH_CONSOLE_PROPERTIES } from "./googleSearchConsoleOAuth";
 import { getSearchConsoleConnectionForProperties, saveSearchConsoleCtrReport } from "./db";
 
-export const MONITORED_WHERE_TO_STAY_PATHS = [
+export const MONITORED_SEARCH_CONSOLE_PATHS = [
   "/blog/where-to-stay-in-bali-2026",
   "/blog/where-to-stay-in-bangkok-2026",
   "/blog/where-to-stay-in-tokyo-2026",
   "/blog/where-to-stay-in-seoul-2026",
+  "/blog/bangkok-hotel-budget-breakdown-2026",
+  "/blog/uae-extended-stay-sustainability-2026",
 ] as const;
 
+/** Compatibility export retained for the original four-guide monthly report. */
+export const MONITORED_WHERE_TO_STAY_PATHS = MONITORED_SEARCH_CONSOLE_PATHS.slice(0, 4);
+
+export const PRIORITY_CTR_FOLLOW_UP_BASELINE = {
+  periodStart: "2026-07-13",
+  periodEnd: "2026-09-06",
+  pages: {
+    "/blog/where-to-stay-in-bali-2026": { sourcePath: "/blog/bali-hotel-prices-2026", impressions: 1591, clicks: 0, ctr: 0, position: 8.06 },
+    "/blog/where-to-stay-in-bangkok-2026": { sourcePath: "/blog/bangkok-hotel-prices-2026", impressions: 1263, clicks: 1, ctr: 1 / 1263, position: 9.44 },
+    "/blog/bangkok-hotel-budget-breakdown-2026": { sourcePath: "/blog/bangkok-hotel-budget-breakdown-2026", impressions: 853, clicks: 0, ctr: 0, position: 8.99 },
+    "/blog/uae-extended-stay-sustainability-2026": { sourcePath: "/blog/uae-extended-stay-sustainability-2026", impressions: 691, clicks: 0, ctr: 0, position: 25.88 },
+  },
+} as const;
+
 type PageMetric = { clicks: number; impressions: number; ctr: number; position: number };
+
+export function comparePriorityCtrFollowUp(metrics: Record<string, PageMetric>) {
+  return Object.entries(PRIORITY_CTR_FOLLOW_UP_BASELINE.pages).map(([path, baseline]) => {
+    const current = metrics[path] ?? { clicks: 0, impressions: 0, ctr: 0, position: 0 };
+    return {
+      path,
+      baseline,
+      current,
+      ctrChange: Number((current.ctr - baseline.ctr).toFixed(6)),
+      positionChange: Number((current.position - baseline.position).toFixed(2)),
+    };
+  });
+}
 
 function requireGoogleCredential(name: "GOOGLE_SEARCH_CONSOLE_CLIENT_ID" | "GOOGLE_SEARCH_CONSOLE_CLIENT_SECRET") {
   const value = process.env[name];
@@ -73,7 +102,7 @@ export async function collectSearchConsoleCtrReport(now = new Date()) {
 
   const rowsByUrl = new Map((payload.rows ?? []).map(row => [row.keys?.[0], row]));
   const metrics: Record<string, PageMetric> = {};
-  for (const path of MONITORED_WHERE_TO_STAY_PATHS) {
+  for (const path of MONITORED_SEARCH_CONSOLE_PATHS) {
     const row = rowsByUrl.get(`https://thestayandwander.com${path}`);
     metrics[path] = {
       clicks: row?.clicks ?? 0,

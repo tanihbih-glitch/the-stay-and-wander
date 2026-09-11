@@ -1,7 +1,7 @@
 import type { Express, Request, Response } from "express";
 import { sdk } from "./_core/sdk";
 import { getSearchConsoleConnectionByTaskUid } from "./db";
-import { collectSearchConsoleCtrReport, isFirstBusinessDayOfMonth } from "./searchConsoleCtrMonitoring";
+import { collectSearchConsoleCtrReport, comparePriorityCtrFollowUp, isFirstBusinessDayOfMonth } from "./searchConsoleCtrMonitoring";
 
 export function registerSearchConsoleCtrMonitoringRoutes(app: Express) {
   app.post("/api/scheduled/search-console-ctr", async (req: Request, res: Response) => {
@@ -12,7 +12,7 @@ export function registerSearchConsoleCtrMonitoringRoutes(app: Express) {
       if (!connection) return res.json({ ok: true, skipped: "orphan" });
       if (!isFirstBusinessDayOfMonth()) return res.json({ ok: true, skipped: "not-first-business-day" });
       const report = await collectSearchConsoleCtrReport();
-      return res.json({ ok: true, periodStart: report.periodStart, periodEnd: report.periodEnd, pages: Object.keys(report.metrics).length });
+      return res.json({ ok: true, periodStart: report.periodStart, periodEnd: report.periodEnd, pages: Object.keys(report.metrics).length, priorityCtrFollowUp: comparePriorityCtrFollowUp(report.metrics) });
     } catch (error) {
       return res.status(500).json({
         error: error instanceof Error ? error.message : String(error),

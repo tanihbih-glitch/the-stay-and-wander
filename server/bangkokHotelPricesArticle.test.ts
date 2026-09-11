@@ -6,11 +6,11 @@ import { readFileSync } from "node:fs";
 import path from "node:path";
 
 describe("Bangkok hotel prices article", () => {
-  it("uses the supplied first-timer guide title, canonical route, and neighborhood-focused search description", () => {
+  it("preserves the first-timer H1 and canonical route while using the approved Bangkok hotel-cost snippet", () => {
     expect(articleMetadata.title).toBe("Where to Stay in Bangkok: Best Areas for First-Timers (2026 Guide)");
     expect(articleMetadata.url).toBe("/blog/where-to-stay-in-bangkok-2026");
-    expect(searchMetadata.title).toBe("Where to Stay in Bangkok: Best Areas for First-Timers (2026 Guide)");
-    expect(searchMetadata.description).toBe("Find the best area to stay in Bangkok for a first trip — Sukhumvit for transit, Riverside for temples, Khao San Road for energy, and Sathorn for quiet.");
+    expect(searchMetadata.title).toBe("Bangkok Hotel Costs 2026: Areas | The Stay & Wander");
+    expect(searchMetadata.description).toBe("Compare 2026 Bangkok hotel price ranges, transport access and stay styles across Sukhumvit, Riverside, Khao San and Sathorn before you book.");
     expect(priceSnapshot).toHaveLength(5);
     expect(priceSnapshot[0]).toEqual(["Sukhumvit", "$25–45/night", "$60–120/night", "$180+/night"]);
     expect(pageMetadataConfig.bangkokHotelPricesGuide.url).toBe(articleMetadata.url);

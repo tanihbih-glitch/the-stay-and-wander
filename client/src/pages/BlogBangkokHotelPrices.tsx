@@ -28,9 +28,9 @@ export const articleMetadata = {
 };
 
 export const searchMetadata = {
-  title: "Where to Stay in Bangkok: Best Areas for First-Timers (2026 Guide)",
+  title: "Bangkok Hotel Costs 2026: Areas | The Stay & Wander",
   description:
-    "Find the best area to stay in Bangkok for a first trip — Sukhumvit for transit, Riverside for temples, Khao San Road for energy, and Sathorn for quiet.",
+    "Compare 2026 Bangkok hotel price ranges, transport access and stay styles across Sukhumvit, Riverside, Khao San and Sathorn before you book.",
 };
 
 export const priceSnapshot = [

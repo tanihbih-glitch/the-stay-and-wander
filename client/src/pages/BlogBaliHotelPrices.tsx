@@ -27,9 +27,9 @@ export const articleMetadata = {
 };
 
 export const searchMetadata = {
-  title: "Where to Stay in Bali: Best Areas for First-Timers (2026 Guide)",
+  title: "Bali Hotel Prices 2026: Rates by Area | The Stay & Wander",
   description:
-    "Find the best area to stay in Bali for a first trip — Seminyak for beach clubs, Ubud for culture, Uluwatu for surf, or Canggu for cafés.",
+    "See 2026 Bali hotel costs by area, from beach-side Seminyak to cultural Ubud, and choose a base that suits your first trip, budget and pace.",
 };
 
 export const priceSnapshot = [

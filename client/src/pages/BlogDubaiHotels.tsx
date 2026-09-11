@@ -138,6 +138,17 @@ export default function BlogDubaiHotels() {
             </a>
           </section>
 
+          <section className="mt-10 rounded-2xl border border-[#d9cfae] bg-[#f8f4e9] p-7 text-[#17364a]">
+            <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#b3842d]">For longer stays</p>
+            <h2 className="mt-3 font-playfair text-2xl font-bold">Compare UAE extended-stay hotel formats</h2>
+            <p className="mt-3 max-w-3xl leading-relaxed text-slate-700">
+              Planning a Dubai or Abu Dhabi stay of several weeks or more? Compare the practical kitchen, laundry, and sustainability considerations across major hotel groups before choosing a base.
+            </p>
+            <Link href="/blog/uae-extended-stay-sustainability-2026" className="mt-5 inline-flex font-semibold text-[#0077b6] no-underline hover:text-[#005c91] hover:underline">
+              Read the UAE extended-stay comparison →
+            </Link>
+          </section>
+
           <p className="mt-8 text-sm leading-relaxed text-slate-500">
             <strong className="font-semibold text-slate-700">Affiliate disclosure:</strong> The Stay &amp; Wander may earn a commission when you book through selected links, at no additional cost to you. This supports our independent travel guides.
           </p>

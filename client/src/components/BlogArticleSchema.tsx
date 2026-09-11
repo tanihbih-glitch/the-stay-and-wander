@@ -63,19 +63,15 @@ export function OrganizationSchema() {
   const schema = {
     "@context": "https://schema.org",
     "@type": "Organization",
+    "@id": "https://thestayandwander.com/#organization",
     name: "The Stay & Wander",
     url: "https://thestayandwander.com",
     logo: "https://thestayandwander.com/logo.png",
     description: "Discover beautiful places, unique stays & unforgettable journeys",
-    sameAs: [
-      "https://www.facebook.com/thestayandwander",
-      "https://www.instagram.com/thestayandwander",
-      "https://www.twitter.com/thestayandwander",
-    ],
     contact: {
       "@type": "ContactPoint",
       contactType: "Customer Service",
-      email: "hello@thestayandwander.com",
+      email: "thestayandwander@thestayandwander.com",
     },
   };
 

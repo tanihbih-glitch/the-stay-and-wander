@@ -25,8 +25,9 @@ export const articleMetadata = {
 };
 
 export const searchMetadata = {
-  title: articleMetadata.title,
-  description: articleMetadata.description,
+  title: "Bangkok Hotels 2026: Budget to Luxury | The Stay & Wander",
+  description:
+    "See what a Bangkok hotel costs in 2026, from hostels to five-star stays, with tier-by-tier picks, real price ranges and booking tips before you reserve.",
 };
 
 export const nightlyRateRows = [

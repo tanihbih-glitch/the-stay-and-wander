@@ -87,6 +87,33 @@ export function generateFAQPageSchema(faqs: readonly ArticleFaq[]): string {
   return `<script type="application/ld+json">${JSON.stringify(schema)}</script>`;
 }
 
+/** Emits authoritative brand entities for server-rendered public pages. */
+export function generateOrganizationAndWebsiteSchemas(): string {
+  const stringifyJsonLd = (schema: Record<string, unknown>) => JSON.stringify(schema).replace(/</g, "\\u003c");
+  const organization = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": "https://thestayandwander.com/#organization",
+    name: "The Stay & Wander",
+    url: "https://thestayandwander.com",
+    logo: "https://thestayandwander.com/logo.png",
+    email: "thestayandwander@thestayandwander.com",
+  };
+  const website = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": "https://thestayandwander.com/#website",
+    name: "The Stay & Wander",
+    url: "https://thestayandwander.com",
+    publisher: { "@id": "https://thestayandwander.com/#organization" },
+  };
+
+  return [
+    `<script type="application/ld+json">${stringifyJsonLd(organization)}</script>`,
+    `<script type="application/ld+json">${stringifyJsonLd(website)}</script>`,
+  ].join("\n");
+}
+
 /**
  * Emits crawler-visible Article and BreadcrumbList schemas for opt-in guides.
  * The page components use the same metadata fields for visible titles and
@@ -99,7 +126,7 @@ export function generateArticleAndBreadcrumbSchemas(metadata?: PageMetadata): st
   const articleSchema = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
-    headline: metadata.title,
+    headline: metadata.schemaTitle ?? metadata.title,
     description: metadata.description,
     image: tags.ogImage,
     author: { "@type": "Organization", name: metadata.author ?? "The Stay & Wander" },
@@ -118,7 +145,7 @@ export function generateArticleAndBreadcrumbSchemas(metadata?: PageMetadata): st
     itemListElement: [
       { "@type": "ListItem", position: 1, name: "Home", item: "https://thestayandwander.com" },
       { "@type": "ListItem", position: 2, name: "Blog", item: "https://thestayandwander.com/blog" },
-      { "@type": "ListItem", position: 3, name: metadata.title, item: tags.canonical },
+      { "@type": "ListItem", position: 3, name: metadata.schemaTitle ?? metadata.title, item: tags.canonical },
     ],
   };
   const stringifyJsonLd = (schema: Record<string, unknown>) => JSON.stringify(schema).replace(/</g, "\\u003c");
@@ -142,6 +169,7 @@ export function injectSSRHead(
 
   const headContent = [
     metadata ? generateSSRHead(metadata) : "",
+    metadata ? generateOrganizationAndWebsiteSchemas() : "",
     generateArticleAndBreadcrumbSchemas(metadata),
     generateFAQPageSchema(faqs),
   ]

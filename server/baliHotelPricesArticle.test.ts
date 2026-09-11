@@ -34,11 +34,11 @@ import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 
 describe("Bali hotel prices article", () => {
-  it("uses the supplied first-timer guide title, canonical route, and neighborhood-focused search description", () => {
+  it("preserves the first-timer H1 and canonical route while using the approved Bali hotel-price snippet", () => {
     expect(articleMetadata.title).toBe("Where to Stay in Bali: Best Areas for First-Timers (2026 Guide)");
     expect(articleMetadata.url).toBe("/blog/where-to-stay-in-bali-2026");
-    expect(searchMetadata.title).toBe("Where to Stay in Bali: Best Areas for First-Timers (2026 Guide)");
-    expect(searchMetadata.description).toBe("Find the best area to stay in Bali for a first trip — Seminyak for beach clubs, Ubud for culture, Uluwatu for surf, or Canggu for cafés.");
+    expect(searchMetadata.title).toBe("Bali Hotel Prices 2026: Rates by Area | The Stay & Wander");
+    expect(searchMetadata.description).toBe("See 2026 Bali hotel costs by area, from beach-side Seminyak to cultural Ubud, and choose a base that suits your first trip, budget and pace.");
     expect(priceSnapshot).toEqual([
       ["Seminyak", "$40–70/night", "$80–150/night", "$200+/night"],
       ["Ubud", "$30–60/night", "$75–130/night", "$180+/night"],

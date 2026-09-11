@@ -5,6 +5,8 @@
 
 export interface PageMetadata {
   title: string;
+  /** Visible article H1 used by Article and Breadcrumb schema when it differs from the SERP title. */
+  schemaTitle?: string;
   description: string;
   image: string;
   url: string;
@@ -298,9 +300,10 @@ export const pageMetadataConfig: Record<string, PageMetadata> = {
   },
 
   baliHotelPricesGuide: {
-    title: "Where to Stay in Bali: Best Areas for First-Timers (2026 Guide)",
+    title: "Bali Hotel Prices 2026: Rates by Area | The Stay & Wander",
+    schemaTitle: "Where to Stay in Bali: Best Areas for First-Timers (2026 Guide)",
     description:
-      "Find the best area to stay in Bali for a first trip — Seminyak for beach clubs, Ubud for culture, Uluwatu for surf, or Canggu for cafés.",
+      "See 2026 Bali hotel costs by area, from beach-side Seminyak to cultural Ubud, and choose a base that suits your first trip, budget and pace.",
     image: `${SITE_URL}/manus-storage/blog-bali_5a40f78c.png`,
     url: "/blog/where-to-stay-in-bali-2026",
     type: "article",
@@ -312,9 +315,10 @@ export const pageMetadataConfig: Record<string, PageMetadata> = {
   },
 
   bangkokHotelPricesGuide: {
-    title: "Where to Stay in Bangkok: Best Areas for First-Timers (2026 Guide)",
+    title: "Bangkok Hotel Costs 2026: Areas | The Stay & Wander",
+    schemaTitle: "Where to Stay in Bangkok: Best Areas for First-Timers (2026 Guide)",
     description:
-      "Find the best area to stay in Bangkok for a first trip — Sukhumvit for transit, Riverside for temples, Khao San Road for energy, and Sathorn for quiet.",
+      "Compare 2026 Bangkok hotel price ranges, transport access and stay styles across Sukhumvit, Riverside, Khao San and Sathorn before you book.",
     image: `${SITE_URL}/manus-storage/bangkok-hotel-prices-hero_fb209c1a.jpg`,
     url: "/blog/where-to-stay-in-bangkok-2026",
     type: "article",
@@ -326,9 +330,10 @@ export const pageMetadataConfig: Record<string, PageMetadata> = {
   },
 
   bangkokHotelBudgetBreakdown: {
-    title: "How Much Does a Hotel in Bangkok Really Cost in 2026? (Budget to Luxury Breakdown)",
+    title: "Bangkok Hotels 2026: Budget to Luxury | The Stay & Wander",
+    schemaTitle: "How Much Does a Hotel in Bangkok Really Cost in 2026? (Budget to Luxury Breakdown)",
     description:
-      "Bangkok hotel prices in 2026, broken down from hostels to 5-star luxury — real ranges, top picks, and booking tips for every budget.",
+      "See what a Bangkok hotel costs in 2026, from hostels to five-star stays, with tier-by-tier picks, real price ranges and booking tips before you reserve.",
     image: `${SITE_URL}/manus-storage/bangkok-hotel-prices-hero_fb209c1a.jpg`,
     url: "/blog/bangkok-hotel-budget-breakdown-2026",
     type: "article",
@@ -367,9 +372,10 @@ export const pageMetadataConfig: Record<string, PageMetadata> = {
   },
 
   uaeExtendedStaySustainability: {
-    title: "Extended Stays in the UAE: How Sustainable Are Hilton, Marriott, and Accor?",
+    title: "UAE Extended Stays 2026: 4 Brands | The Stay & Wander",
+    schemaTitle: "Extended Stays in the UAE: How Sustainable Are Hilton, Marriott, and Accor?",
     description:
-      "Compare the sustainability approaches of Hilton, Marriott, Accor, and IHG for longer hotel stays in Dubai and Abu Dhabi, with practical advice for relocators.",
+      "Compare Hilton, Marriott, Accor and IHG for a longer Dubai or Abu Dhabi stay, including kitchens, laundry, sustainability details and practical fit.",
     image: `${SITE_URL}/manus-storage/dubai-middle-east-destination_1431ce58.png`,
     url: "/blog/uae-extended-stay-sustainability-2026",
     type: "article",
