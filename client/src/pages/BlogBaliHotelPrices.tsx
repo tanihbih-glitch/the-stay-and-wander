@@ -27,9 +27,9 @@ export const articleMetadata = {
 };
 
 export const searchMetadata = {
-  title: "Bali Hotel Prices 2026: Rates by Area | The Stay & Wander",
+  title: "Bali Hotel Prices 2026: $30–$250+ | The Stay & Wander",
   description:
-    "See 2026 Bali hotel costs by area, from beach-side Seminyak to cultural Ubud, and choose a base that suits your first trip, budget and pace.",
+    "Compare typical 2026 Bali hotel ranges from $30–$90 budget to $250+ luxury in Seminyak, Ubud, Canggu and Uluwatu. Plan before booking.",
 };
 
 export const priceSnapshot = [

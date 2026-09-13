@@ -37,8 +37,8 @@ describe("Bali hotel prices article", () => {
   it("preserves the first-timer H1 and canonical route while using the approved Bali hotel-price snippet", () => {
     expect(articleMetadata.title).toBe("Where to Stay in Bali: Best Areas for First-Timers (2026 Guide)");
     expect(articleMetadata.url).toBe("/blog/where-to-stay-in-bali-2026");
-    expect(searchMetadata.title).toBe("Bali Hotel Prices 2026: Rates by Area | The Stay & Wander");
-    expect(searchMetadata.description).toBe("See 2026 Bali hotel costs by area, from beach-side Seminyak to cultural Ubud, and choose a base that suits your first trip, budget and pace.");
+    expect(searchMetadata.title).toBe("Bali Hotel Prices 2026: $30–$250+ | The Stay & Wander");
+    expect(searchMetadata.description).toBe("Compare typical 2026 Bali hotel ranges from $30–$90 budget to $250+ luxury in Seminyak, Ubud, Canggu and Uluwatu. Plan before booking.");
     expect(priceSnapshot).toEqual([
       ["Seminyak", "$40–70/night", "$80–150/night", "$200+/night"],
       ["Ubud", "$30–60/night", "$75–130/night", "$180+/night"],

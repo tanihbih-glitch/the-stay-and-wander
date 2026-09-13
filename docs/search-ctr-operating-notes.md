@@ -11,7 +11,9 @@ The next comparison uses the supplied Search Console baseline of **July 13–Sep
 | `/blog/bangkok-hotel-budget-breakdown-2026` | same | 853 | 0 | 0.00% | 8.99 |
 | `/blog/uae-extended-stay-sustainability-2026` | same | 691 | 0 | 0.00% | 25.88 |
 
-The existing first-business-day monthly Search Console snapshot now includes these four canonical paths. Its next scheduled run is **October 1, 2026 at 09:00 UTC**, which is 21 days after the current September 10 baseline-review date. The stored report includes CTR and position deltas against this baseline.
+The enabled Search Console snapshot now includes these four canonical paths. Its next scheduled run is **October 8, 2026 at 09:00 UTC**, which is 25 days after the September 13, 2026 review date and therefore falls within the requested three-to-four-week comparison window. The stored report includes CTR and position deltas against this baseline.
+
+The live-page audit recorded the pre-refinement snippets and article-supported ranges in [`ctr-snippet-audit-2026-09-12.md`](./ctr-snippet-audit-2026-09-12.md). The refined copy uses only those published directional planning figures; it does not present them as live rates.
 
 ## Intent exclusions
 

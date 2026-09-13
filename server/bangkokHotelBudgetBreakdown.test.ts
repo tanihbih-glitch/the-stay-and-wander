@@ -13,8 +13,8 @@ describe("Bangkok hotel budget breakdown article", () => {
   it("preserves the visible article title and canonical route while using the approved budget-to-luxury snippet", () => {
     expect(articleMetadata.title).toBe("How Much Does a Hotel in Bangkok Really Cost in 2026? (Budget to Luxury Breakdown)");
     expect(articleMetadata.url).toBe("/blog/bangkok-hotel-budget-breakdown-2026");
-    expect(searchMetadata.title).toBe("Bangkok Hotels 2026: Budget to Luxury | The Stay & Wander");
-    expect(searchMetadata.description).toBe("See what a Bangkok hotel costs in 2026, from hostels to five-star stays, with tier-by-tier picks, real price ranges and booking tips before you reserve.");
+    expect(searchMetadata.title).toBe("Bangkok Hotel Costs 2026: $10–$300+ | The Stay & Wander");
+    expect(searchMetadata.description).toBe("See typical Bangkok hotel rates in 2026: $10–$20 hostels, $30–$80 mid-range rooms and $120–$300+ five-star stays, plus booking factors.");
     expect(pageMetadataConfig.bangkokHotelBudgetBreakdown.url).toBe(articleMetadata.url);
     expect(nightlyRateRows).toHaveLength(3);
   });

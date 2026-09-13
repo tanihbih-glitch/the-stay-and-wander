@@ -34,8 +34,8 @@ describe("server-rendered page metadata", () => {
     const prices = injectSSRHead(template, pageMetadataConfig.baliHotelPricesGuide);
     const fourStar = injectSSRHead(template, pageMetadataConfig.baliFourStarHotelsGuide);
 
-    expect(prices).toContain("<title>Bali Hotel Prices 2026: Rates by Area | The Stay &amp; Wander</title>");
-    expect(prices).toContain('name="description" content="See 2026 Bali hotel costs by area, from beach-side Seminyak to cultural Ubud, and choose a base that suits your first trip, budget and pace."');
+    expect(prices).toContain("<title>Bali Hotel Prices 2026: $30–$250+ | The Stay &amp; Wander</title>");
+    expect(prices).toContain('name="description" content="Compare typical 2026 Bali hotel ranges from $30–$90 budget to $250+ luxury in Seminyak, Ubud, Canggu and Uluwatu. Plan before booking."');
     expect(prices).toContain('"headline":"Where to Stay in Bali: Best Areas for First-Timers (2026 Guide)"');
     expect(prices).toContain('href="https://thestayandwander.com/blog/where-to-stay-in-bali-2026"');
     expect(fourStar).toContain("<title>Best 4-Star Hotels in Bali Under $100/Night (2026 Picks)</title>");
@@ -46,8 +46,8 @@ describe("server-rendered page metadata", () => {
     const template = "<html><head><title>Default site title</title></head><body></body></html>";
     const bangkok = injectSSRHead(template, pageMetadataConfig.bangkokHotelPricesGuide);
 
-    expect(bangkok).toContain("<title>Bangkok Hotel Costs 2026: Areas | The Stay &amp; Wander</title>");
-    expect(bangkok).toContain('name="description" content="Compare 2026 Bangkok hotel price ranges, transport access and stay styles across Sukhumvit, Riverside, Khao San and Sathorn before you book."');
+    expect(bangkok).toContain("<title>Bangkok Hotel Prices 2026: $10–$250+ | The Stay &amp; Wander</title>");
+    expect(bangkok).toContain('name="description" content="Compare typical 2026 Bangkok hotel ranges from $10–$60 budget to $250+ luxury across Sukhumvit, Silom, Riverside, Khao San and Sathorn."');
     expect(bangkok).toContain('"headline":"Where to Stay in Bangkok: Best Areas for First-Timers (2026 Guide)"');
     expect(bangkok).toContain('href="https://thestayandwander.com/blog/where-to-stay-in-bangkok-2026"');
   });
@@ -56,8 +56,8 @@ describe("server-rendered page metadata", () => {
     const template = "<html><head><title>Default site title</title></head><body></body></html>";
     const budget = injectSSRHead(template, pageMetadataConfig.bangkokHotelBudgetBreakdown);
 
-    expect(budget).toContain("<title>Bangkok Hotels 2026: Budget to Luxury | The Stay &amp; Wander</title>");
-    expect(budget).toContain('name="description" content="See what a Bangkok hotel costs in 2026, from hostels to five-star stays, with tier-by-tier picks, real price ranges and booking tips before you reserve."');
+    expect(budget).toContain("<title>Bangkok Hotel Costs 2026: $10–$300+ | The Stay &amp; Wander</title>");
+    expect(budget).toContain('name="description" content="See typical Bangkok hotel rates in 2026: $10–$20 hostels, $30–$80 mid-range rooms and $120–$300+ five-star stays, plus booking factors."');
     expect(budget).toContain('href="https://thestayandwander.com/blog/bangkok-hotel-budget-breakdown-2026"');
   });
 
@@ -74,8 +74,8 @@ describe("server-rendered page metadata", () => {
     const template = "<html><head><title>Default site title</title></head><body></body></html>";
     const uae = injectSSRHead(template, pageMetadataConfig.uaeExtendedStaySustainability);
 
-    expect(uae).toContain("<title>UAE Extended Stays 2026: 4 Brands | The Stay &amp; Wander</title>");
-    expect(uae).toContain('name="description" content="Compare Hilton, Marriott, Accor and IHG for a longer Dubai or Abu Dhabi stay, including kitchens, laundry, sustainability details and practical fit."');
+    expect(uae).toContain("<title>UAE Sustainable Extended Stays 2026 | The Stay &amp; Wander</title>");
+    expect(uae).toContain('name="description" content="Compare Hilton, Marriott, Accor and IHG extended-stay options in the UAE: sustainability frameworks, kitchens, laundry and long-stay booking checks."');
     expect(uae).toContain('href="https://thestayandwander.com/blog/uae-extended-stay-sustainability-2026"');
   });
 
@@ -157,8 +157,8 @@ describe("server-rendered page metadata", () => {
     expect(blogGuides).toHaveLength(21);
     for (const metadata of blogGuides) {
       const rendered = injectSSRHead(template, metadata, articleFaqsByPath[metadata.url] ?? []);
-      expect(metadata.updatedDate).toBe("2026-09-06");
-      expect(rendered).toContain('property="article:modified_time" content="2026-09-06"');
+      expect(metadata.updatedDate).toMatch(/^2026-09-(06|12)$/);
+      expect(rendered).toContain(`property="article:modified_time" content="${metadata.updatedDate}"`);
       expect(rendered).toContain('"@type":"BreadcrumbList"');
       expect(rendered).toContain(`"@id":"https://thestayandwander.com${metadata.url}"`);
     }

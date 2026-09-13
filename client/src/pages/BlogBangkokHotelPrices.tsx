@@ -28,9 +28,9 @@ export const articleMetadata = {
 };
 
 export const searchMetadata = {
-  title: "Bangkok Hotel Costs 2026: Areas | The Stay & Wander",
+  title: "Bangkok Hotel Prices 2026: $10–$250+ | The Stay & Wander",
   description:
-    "Compare 2026 Bangkok hotel price ranges, transport access and stay styles across Sukhumvit, Riverside, Khao San and Sathorn before you book.",
+    "Compare typical 2026 Bangkok hotel ranges from $10–$60 budget to $250+ luxury across Sukhumvit, Silom, Riverside, Khao San and Sathorn.",
 };
 
 export const priceSnapshot = [

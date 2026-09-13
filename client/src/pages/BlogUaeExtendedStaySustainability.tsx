@@ -24,9 +24,9 @@ export const articleMetadata = {
 };
 
 export const searchMetadata = {
-  title: "UAE Extended Stays 2026: 4 Brands | The Stay & Wander",
+  title: "UAE Sustainable Extended Stays 2026 | The Stay & Wander",
   description:
-    "Compare Hilton, Marriott, Accor and IHG for a longer Dubai or Abu Dhabi stay, including kitchens, laundry, sustainability details and practical fit.",
+    "Compare Hilton, Marriott, Accor and IHG extended-stay options in the UAE: sustainability frameworks, kitchens, laundry and long-stay booking checks.",
 };
 
 export const comparisonRows = [
