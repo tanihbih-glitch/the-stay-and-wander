@@ -4,7 +4,9 @@
 
 The canonical monitoring target is `/blog/uae-extended-stay-hotels-2026`. It is reviewed separately from the site’s established CTR-first price-guide workflow because its anticipated query mix includes comparison-shaped and assistant-style prompts where a click is not the only meaningful outcome.
 
-The existing task, `search-console-where-to-stay-monthly-ctr` (`JXTFqNB6NnfvtLrgKHXNgM`), remains unchanged. It retains its October 8, 2026, 09:00 UTC run and does **not** collect the new hub. The independent UAE job will run at 09:00 UTC on the first business day of each month, beginning November 2, 2026, after the hub has one complete published calendar month.
+The existing task, `search-console-where-to-stay-monthly-ctr` (`JXTFqNB6NnfvtLrgKHXNgM`), remains unchanged. It retains its October 8, 2026, 09:00 UTC run and does **not** collect the new hub.
+
+The independent task, `search-console-uae-extended-stay-position` (`PRFVQ9EgjeynvutxFoUVXq`), is enabled with the UTC schedule `0 0 9 1-7 * *`. It invokes the protected handler during the first seven days of every month; the handler itself collects exactly once on the **first business day**, beginning November 2, 2026, after the hub has one complete published calendar month. This split permits weekend-first months without weakening the cron guard.
 
 ## Monthly review
 
