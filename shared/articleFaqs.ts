@@ -95,6 +95,29 @@ export const bangkokHotelPriceIndexFaqs: readonly ArticleFaq[] = [
   },
 ];
 
+export const uaeExtendedStayHotelsFaqs: readonly ArticleFaq[] = [
+  {
+    question: "What should I look for in a UAE extended-stay hotel?",
+    answer: "Compare a documented kitchen, laundry access, workspace, bedroom layout, Wi-Fi terms, location, and long-stay cancellation conditions before comparing a headline nightly price. The guide recommends requesting an itemized long-stay quote for the same dates and party size.",
+  },
+  {
+    question: "Which UAE extended-stay hotel format is best for business travelers?",
+    answer: "The guide highlights Residence Inn Sheikh Zayed Road and Staybridge Suites Dubai Internet City as source-verified options to compare for business use, because their official property pages document kitchens, Wi-Fi, workspace or meeting features, and Metro-oriented business locations. The right choice still depends on the traveler’s office location and live rate terms.",
+  },
+  {
+    question: "Are extended-stay hotel rates cheaper than booking night by night in Dubai?",
+    answer: "The guide does not claim a universal rate advantage because no stable first-party cross-brand price comparison was available. Instead, it recommends comparing an itemized long-stay quote with the standard nightly route for identical dates, occupancy, unit type, inclusions, taxes, deposits, and cancellation terms.",
+  },
+  {
+    question: "Which UAE extended-stay options have kitchens and laundry?",
+    answer: "The guide’s cited Dubai options document apartment or suite layouts with kitchens and laundry access, including Residence Inn Sheikh Zayed Road, Marriott Executive Apartments Sheikh Zayed Road, Adagio Gold District, Adagio Premium The Palm, and Staybridge Suites Dubai Internet City. Confirm the selected unit’s current inclusions before booking.",
+  },
+  {
+    question: "How should I compare hotel sustainability for a UAE extended stay?",
+    answer: "Use group frameworks such as Hilton Travel with Purpose, Marriott Serve 360, Accor’s responsible-hospitality roadmap, and IHG Journey to Tomorrow as a starting point, not a property score. The guide recommends checking the actual property’s current certifications, resource disclosures, refillable amenities, and operating policies before booking.",
+  },
+];
+
 export const tokyoStayFaqs: readonly ArticleFaq[] = [
   {
     question: "What is the average hotel price in Tokyo per night in 2026?",
@@ -257,6 +280,7 @@ export const articleFaqsByPath: Readonly<Record<string, readonly ArticleFaq[]>> 
   "/blog/brazil-travel-guide-2026": brazilTravelGuideFaqs,
   "/blog/bali-hotel-price-index-2026": baliHotelPriceIndexFaqs,
   "/blog/bangkok-hotel-price-index-2026": bangkokHotelPriceIndexFaqs,
+  "/blog/uae-extended-stay-hotels-2026": uaeExtendedStayHotelsFaqs,
 };
 
 export function getArticleFaqs(pathname: string): readonly ArticleFaq[] {

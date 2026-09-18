@@ -10,8 +10,9 @@ const footerSource = fs.readFileSync(path.resolve(process.cwd(), "client/src/com
 
 describe("destination-guide engagement and navigation", () => {
   it("covers the complete public destination-guide set while retaining price-index TOC ownership", () => {
-    expect(DESTINATION_GUIDE_PATHS).toHaveLength(21);
+    expect(DESTINATION_GUIDE_PATHS).toHaveLength(22);
     expect(isDestinationGuidePath("/blog/where-to-stay-in-bali-2026")).toBe(true);
+    expect(isDestinationGuidePath("/blog/uae-extended-stay-hotels-2026")).toBe(true);
     expect(isDestinationGuidePath("/blog")).toBe(false);
     expect(isLongFormNonPriceDestinationGuidePath("/blog/where-to-stay-lisbon-2026")).toBe(true);
     expect(isLongFormNonPriceDestinationGuidePath("/blog/bali-hotel-price-index-2026")).toBe(false);

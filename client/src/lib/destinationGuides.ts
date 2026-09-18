@@ -15,6 +15,7 @@ export const DESTINATION_GUIDE_PATHS = [
   "/blog/bangkok-hotel-budget-breakdown-2026",
   "/blog/bangkok-hotel-price-index-2026",
   "/blog/bangkok-airport-hotels-2026",
+  "/blog/uae-extended-stay-hotels-2026",
   "/blog/uae-extended-stay-sustainability-2026",
   "/blog/where-to-stay-in-tokyo-2026",
   "/blog/where-to-stay-in-seoul-2026",

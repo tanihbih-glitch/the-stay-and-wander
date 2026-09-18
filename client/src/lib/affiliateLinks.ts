@@ -126,6 +126,12 @@ export const BALI_HOTEL_PRICE_INDEX_AFFILIATE_LINKS = {
   hotels: "https://booking.stay22.com/thestayandwander/bEUkQtNQBH",
 } as const;
 
+/** Approved booking handoffs for the source-bounded UAE extended-stay hub. */
+export const UAE_EXTENDED_STAY_AFFILIATE_LINKS = {
+  hotels: "https://booking.stay22.com/thestayandwander/8S9p00Hygg-",
+  tripCom: "https://www.trip.com/partners/ad/S18723294?Allianceid=9322314&SID=324726991&trip_sub1=",
+} as const;
+
 export const BALI_SEASONAL_STAY22_DATE_PRESETS = [
   { checkIn: "2026-01-10", checkOut: "2026-01-17" },
   { checkIn: "2026-02-10", checkOut: "2026-02-17" },

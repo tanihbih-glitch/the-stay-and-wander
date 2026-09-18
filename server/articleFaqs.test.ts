@@ -13,6 +13,7 @@ describe("published article FAQ data", () => {
     "/blog/brazil-travel-guide-2026",
     "/blog/bali-hotel-price-index-2026",
     "/blog/bangkok-hotel-price-index-2026",
+    "/blog/uae-extended-stay-hotels-2026",
   ];
 
   it("provides four to six non-empty FAQ pairs for each requested article", () => {

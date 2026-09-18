@@ -68,6 +68,7 @@ export const searchConsoleConnections = mysqlTable("searchConsoleConnections", {
   refreshTokenEncrypted: text("refreshTokenEncrypted").notNull(),
   scope: varchar("scope", { length: 512 }).notNull(),
   scheduleCronTaskUid: varchar("scheduleCronTaskUid", { length: 65 }),
+  uaeExtendedStayScheduleTaskUid: varchar("uaeExtendedStayScheduleTaskUid", { length: 65 }),
   lastReportAt: timestamp("lastReportAt"),
   authorizedAt: timestamp("authorizedAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
@@ -98,6 +99,22 @@ export const searchConsoleCtrReports = mysqlTable(
 );
 
 export type SearchConsoleCtrReport = typeof searchConsoleCtrReports.$inferSelect;
+
+/** Separate position-led snapshots for the canonical UAE extended-stay hub. */
+export const searchConsoleUaeExtendedStayReports = mysqlTable(
+  "searchConsoleUaeExtendedStayReports",
+  {
+    id: int("id").autoincrement().primaryKey(),
+    property: varchar("property", { length: 255 }).notNull(),
+    periodStart: varchar("periodStart", { length: 10 }).notNull(),
+    periodEnd: varchar("periodEnd", { length: 10 }).notNull(),
+    metrics: json("metrics").$type<Record<string, { clicks: number; impressions: number; ctr: number; position: number }>>().notNull(),
+    generatedAt: timestamp("generatedAt").defaultNow().notNull(),
+  },
+  table => [uniqueIndex("searchConsoleUaeExtendedStayReports_property_period_unique").on(table.property, table.periodStart, table.periodEnd)]
+);
+
+export type SearchConsoleUaeExtendedStayReport = typeof searchConsoleUaeExtendedStayReports.$inferSelect;
 
 /**
  * A visitor's trip-planning request and its fulfillment state. Stripe remains the

@@ -144,7 +144,7 @@ export default function BlogDubaiHotels() {
             <p className="mt-3 max-w-3xl leading-relaxed text-slate-700">
               Planning a Dubai or Abu Dhabi stay of several weeks or more? Compare the practical kitchen, laundry, and sustainability considerations across major hotel groups before choosing a base.
             </p>
-            <Link href="/blog/uae-extended-stay-sustainability-2026" className="mt-5 inline-flex font-semibold text-[#0077b6] no-underline hover:text-[#005c91] hover:underline">
+            <Link href="/blog/uae-extended-stay-hotels-2026" className="mt-5 inline-flex font-semibold text-[#0077b6] no-underline hover:text-[#005c91] hover:underline">
               Read the UAE extended-stay comparison →
             </Link>
           </section>

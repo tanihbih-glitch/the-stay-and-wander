@@ -43,6 +43,13 @@
       "when": 1786617482695,
       "tag": "0005_chief_sunset_bain",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "5",
+      "when": 1789636813442,
+      "tag": "0006_true_puck",
+      "breakpoints": true
     }
   ]
 }

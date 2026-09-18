@@ -386,6 +386,20 @@ export const pageMetadataConfig: Record<string, PageMetadata> = {
       "UAE extended stay hotels, sustainable hotels Dubai, sustainable hotels Abu Dhabi, Hilton Travel with Purpose, Marriott Serve 360, Accor Planet 21, IHG Green Engage",
   },
 
+  uaeExtendedStayHotels: {
+    title: "UAE Extended-Stay Hotels 2026: Find Your Best Fit",
+    schemaTitle: "UAE Extended-Stay Hotels: Find Your Best Fit for 2026",
+    description: "Compare verified UAE extended-stay options by traveler type—kitchens, laundry, workspace, group capacity, loyalty and local fit—with a planning selector.",
+    image: `${SITE_URL}/manus-storage/dubai-middle-east-destination_1431ce58.png`,
+    url: "/blog/uae-extended-stay-hotels-2026",
+    type: "article",
+    author: "The Stay & Wander",
+    publishedDate: "2026-09-16",
+    updatedDate: "2026-09-16",
+    includeRichSnippetSchemas: true,
+    keywords: "UAE extended stay hotels, Dubai serviced apartments, Dubai long stay hotels, UAE aparthotels, Staybridge Dubai, Residence Inn Dubai, Adagio Dubai",
+  },
+
   tokyoStayGuide: {
     title: "Where to Stay in Tokyo (2026): Best Neighborhoods & Hotel Price Guide",
     description: "Compare Tokyo's best neighborhoods for first-time visitors in 2026—Shinjuku, Shibuya, Asakusa, Ginza & Ikebukuro—with hotel price ranges, rail-access tips and an interactive area matcher.",

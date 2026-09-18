@@ -19,6 +19,17 @@ export interface FeaturedGuideDiscovery {
 
 export const featuredGuideDiscovery: readonly FeaturedGuideDiscovery[] = [
   {
+    id: 22,
+    path: "/blog/uae-extended-stay-hotels-2026",
+    slug: "uae-extended-stay-hotels-2026",
+    title: "UAE Extended-Stay Hotels 2026: Find Your Best Fit",
+    category: "Extended Stay Guide · UAE Travel",
+    image: "/manus-storage/dubai-middle-east-destination_1431ce58.png",
+    excerpt: "Compare source-verified UAE extended-stay formats by kitchens, laundry, work setup, capacity, loyalty, neighborhood fit, and your trip priorities.",
+    date: "September 16, 2026",
+    readTime: "11 min read",
+  },
+  {
     id: 21,
     path: "/blog/bangkok-hotel-price-index-2026",
     slug: "bangkok-hotel-price-index-2026",

@@ -5,12 +5,14 @@ export const TRIP_COM_HOTEL_WIDGET_URL = "https://www.trip.com/partners/ad/S1872
 type TripComHotelWidgetProps = {
   className?: string;
   title?: string;
+  url?: string;
 };
 
 /** A compact, responsive Trip.com partner widget for hotel search placements. */
 export default function TripComHotelWidget({
   className = "",
   title = "Search hotels with Trip.com",
+  url = TRIP_COM_HOTEL_WIDGET_URL,
 }: TripComHotelWidgetProps) {
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -27,7 +29,7 @@ export default function TripComHotelWidget({
       </div>
       <iframe
         title={title}
-        src={TRIP_COM_HOTEL_WIDGET_URL}
+        src={url}
         style={{ width: "100%", maxWidth: "320px", height: "320px", border: "none" }}
         frameBorder="0"
         scrolling="no"

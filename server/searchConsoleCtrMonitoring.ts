@@ -1,6 +1,11 @@
 import { decryptSearchConsoleRefreshToken, GOOGLE_SEARCH_CONSOLE_PROPERTIES } from "./googleSearchConsoleOAuth";
-import { getSearchConsoleConnectionForProperties, saveSearchConsoleCtrReport } from "./db";
+import {
+  getSearchConsoleConnectionForProperties,
+  saveSearchConsoleCtrReport,
+  saveSearchConsoleUaeExtendedStayReport,
+} from "./db";
 
+/** Existing CTR-monitor snapshot; do not add the UAE hub to this established workflow. */
 export const MONITORED_SEARCH_CONSOLE_PATHS = [
   "/blog/where-to-stay-in-bali-2026",
   "/blog/where-to-stay-in-bangkok-2026",
@@ -13,6 +18,15 @@ export const MONITORED_SEARCH_CONSOLE_PATHS = [
 /** Compatibility export retained for the original four-guide monthly report. */
 export const MONITORED_WHERE_TO_STAY_PATHS = MONITORED_SEARCH_CONSOLE_PATHS.slice(0, 4);
 
+export const UAE_EXTENDED_STAY_HUB_PATH = "/blog/uae-extended-stay-hotels-2026";
+export const MONITORED_UAE_EXTENDED_STAY_HUB_PATHS = [UAE_EXTENDED_STAY_HUB_PATH] as const;
+/**
+ * The new canonical page needs a complete post-publication month before its
+ * first scheduled position review. The first eligible first business day is
+ * November 2, 2026; later first business days remain eligible.
+ */
+export const UAE_EXTENDED_STAY_MONITORING_START_DATE = "2026-11-02";
+
 export const PRIORITY_CTR_FOLLOW_UP_BASELINE = {
   periodStart: "2026-07-13",
   periodEnd: "2026-09-06",
@@ -24,7 +38,22 @@ export const PRIORITY_CTR_FOLLOW_UP_BASELINE = {
   },
 } as const;
 
-type PageMetric = { clicks: number; impressions: number; ctr: number; position: number };
+/**
+ * The legacy page’s July–September outcome is directional reference only.
+ * The new hub has broader intent and is evaluated on position trend plus a
+ * documented manual citation review rather than CTR.
+ */
+export const UAE_EXTENDED_STAY_HUB_REFERENCE = {
+  sourcePath: "/blog/uae-extended-stay-sustainability-2026",
+  periodStart: "2026-07-13",
+  periodEnd: "2026-09-06",
+  impressions: 691,
+  clicks: 0,
+  position: 25.88,
+  successMetric: "position trend and manually reviewed citation presence",
+} as const;
+
+export type PageMetric = { clicks: number; impressions: number; ctr: number; position: number };
 
 export function comparePriorityCtrFollowUp(metrics: Record<string, PageMetric>) {
   return Object.entries(PRIORITY_CTR_FOLLOW_UP_BASELINE.pages).map(([path, baseline]) => {
@@ -37,6 +66,24 @@ export function comparePriorityCtrFollowUp(metrics: Record<string, PageMetric>) 
       positionChange: Number((current.position - baseline.position).toFixed(2)),
     };
   });
+}
+
+export function compareUaeExtendedStayHubFollowUp(metrics: Record<string, PageMetric>) {
+  const current = metrics[UAE_EXTENDED_STAY_HUB_PATH] ?? { clicks: 0, impressions: 0, ctr: 0, position: 0 };
+  return {
+    path: UAE_EXTENDED_STAY_HUB_PATH,
+    legacyReference: UAE_EXTENDED_STAY_HUB_REFERENCE,
+    current,
+    positionChangeVsLegacy: current.position > 0
+      ? Number((current.position - UAE_EXTENDED_STAY_HUB_REFERENCE.position).toFixed(2))
+      : null,
+    citationReview: {
+      mode: "manual",
+      status: "not-collected-by-search-console-api",
+      cadence: "monthly",
+      prompt: "Record whether the canonical hub appears as a cited source or result for relevant UAE extended-stay comparison queries; do not use CTR as the primary success metric.",
+    },
+  };
 }
 
 function requireGoogleCredential(name: "GOOGLE_SEARCH_CONSOLE_CLIENT_ID" | "GOOGLE_SEARCH_CONSOLE_CLIENT_SECRET") {
@@ -80,7 +127,11 @@ export function isFirstBusinessDayOfMonth(now = new Date()): boolean {
     && now.getUTCDate() === firstDay.getUTCDate();
 }
 
-export async function collectSearchConsoleCtrReport(now = new Date()) {
+export function isUaeExtendedStayReviewEligible(now = new Date()): boolean {
+  return isFirstBusinessDayOfMonth(now) && now.toISOString().slice(0, 10) >= UAE_EXTENDED_STAY_MONITORING_START_DATE;
+}
+
+async function collectSearchConsolePageMetrics(paths: readonly string[], now = new Date()) {
   const connection = await getSearchConsoleConnectionForProperties(GOOGLE_SEARCH_CONSOLE_PROPERTIES);
   if (!connection) throw new Error("Search Console monitoring has not been authorized.");
 
@@ -102,7 +153,7 @@ export async function collectSearchConsoleCtrReport(now = new Date()) {
 
   const rowsByUrl = new Map((payload.rows ?? []).map(row => [row.keys?.[0], row]));
   const metrics: Record<string, PageMetric> = {};
-  for (const path of MONITORED_SEARCH_CONSOLE_PATHS) {
+  for (const path of paths) {
     const row = rowsByUrl.get(`https://thestayandwander.com${path}`);
     metrics[path] = {
       clicks: row?.clicks ?? 0,
@@ -112,11 +163,19 @@ export async function collectSearchConsoleCtrReport(now = new Date()) {
     };
   }
 
-  await saveSearchConsoleCtrReport({
-    property: connection.property,
-    periodStart: startDate,
-    periodEnd: endDate,
-    metrics,
-  });
   return { property: connection.property, periodStart: startDate, periodEnd: endDate, metrics };
+}
+
+/** Collects only the established CTR snapshot paths. */
+export async function collectSearchConsoleCtrReport(now = new Date()) {
+  const report = await collectSearchConsolePageMetrics(MONITORED_SEARCH_CONSOLE_PATHS, now);
+  await saveSearchConsoleCtrReport(report);
+  return report;
+}
+
+/** Collects only the canonical UAE hub position snapshot, apart from CTR reporting. */
+export async function collectUaeExtendedStayHubReport(now = new Date()) {
+  const report = await collectSearchConsolePageMetrics(MONITORED_UAE_EXTENDED_STAY_HUB_PATHS, now);
+  await saveSearchConsoleUaeExtendedStayReport(report);
+  return report;
 }

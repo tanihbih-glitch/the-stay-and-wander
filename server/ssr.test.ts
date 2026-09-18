@@ -79,6 +79,17 @@ describe("server-rendered page metadata", () => {
     expect(uae).toContain('href="https://thestayandwander.com/blog/uae-extended-stay-sustainability-2026"');
   });
 
+  it("renders the canonical UAE extended-stay hub with Article, Breadcrumb, and FAQ schema", () => {
+    const template = "<html><head><title>Default site title</title></head><body></body></html>";
+    const hub = injectSSRHead(template, pageMetadataConfig.uaeExtendedStayHotels, articleFaqsByPath["/blog/uae-extended-stay-hotels-2026"]);
+
+    expect(hub).toContain("<title>UAE Extended-Stay Hotels 2026: Find Your Best Fit</title>");
+    expect(hub).toContain('href="https://thestayandwander.com/blog/uae-extended-stay-hotels-2026"');
+    expect(hub).toContain('"@type":"BlogPosting"');
+    expect(hub).toContain('"@type":"BreadcrumbList"');
+    expect(hub).toContain('"@type":"FAQPage"');
+  });
+
   it("renders the Bali beach comparison matrix metadata for crawlers", () => {
     const template = "<html><head><title>Default site title</title></head><body></body></html>";
     const coastal = injectSSRHead(template, pageMetadataConfig.baliBeachComparisonMatrix);
@@ -96,6 +107,7 @@ describe("server-rendered page metadata", () => {
       "/blog/bali-spa-wellness-price-index-2026": pageMetadataConfig.baliSpaWellnessPriceIndex,
       "/blog/bali-beach-comparison-matrix-2026": pageMetadataConfig.baliBeachComparisonMatrix,
       "/blog/bali-hotel-price-index-2026": pageMetadataConfig.baliHotelPriceIndex,
+      "/blog/uae-extended-stay-hotels-2026": pageMetadataConfig.uaeExtendedStayHotels,
     } as const;
 
     featuredGuideDiscovery.forEach((guide) => {
@@ -154,10 +166,10 @@ describe("server-rendered page metadata", () => {
     const template = "<html><head><title>Default site title</title></head><body></body></html>";
     const blogGuides = Object.values(pageMetadataConfig).filter((metadata) => metadata.type === "article" && metadata.url.startsWith("/blog/"));
 
-    expect(blogGuides).toHaveLength(21);
+    expect(blogGuides).toHaveLength(22);
     for (const metadata of blogGuides) {
       const rendered = injectSSRHead(template, metadata, articleFaqsByPath[metadata.url] ?? []);
-      expect(metadata.updatedDate).toMatch(/^2026-09-(06|12)$/);
+      expect(metadata.updatedDate).toMatch(/^2026-09-(06|12|16)$/);
       expect(rendered).toContain(`property="article:modified_time" content="${metadata.updatedDate}"`);
       expect(rendered).toContain('"@type":"BreadcrumbList"');
       expect(rendered).toContain(`"@id":"https://thestayandwander.com${metadata.url}"`);

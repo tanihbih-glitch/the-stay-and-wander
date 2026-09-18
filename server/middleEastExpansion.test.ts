@@ -44,11 +44,11 @@ describe("Middle East destination expansion", () => {
     expect(itineraries).toContain("Dubai & Abu Dhabi City-to-Desert Escape");
   });
 
-  it("adds a contextual reciprocal discovery link between the UAE stay guides", () => {
+  it("adds contextual discovery for the canonical UAE hub while preserving the legacy guide", () => {
     const dubaiGuide = readProjectFile("client/src/pages/BlogDubaiHotels.tsx");
     const extendedStayGuide = readProjectFile("client/src/pages/BlogUaeExtendedStaySustainability.tsx");
 
-    expect(dubaiGuide).toContain("/blog/uae-extended-stay-sustainability-2026");
+    expect(dubaiGuide).toContain("/blog/uae-extended-stay-hotels-2026");
     expect(extendedStayGuide).toContain("/blog/best-hotels-dubai-2026");
   });
 

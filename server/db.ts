@@ -1,6 +1,6 @@
 import { eq } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
-import { InsertUser, searchConsoleConnections, searchConsoleCtrReports, searchConsoleOAuthStates, users } from "../drizzle/schema";
+import { InsertUser, searchConsoleConnections, searchConsoleCtrReports, searchConsoleOAuthStates, searchConsoleUaeExtendedStayReports, users } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
 let _db: ReturnType<typeof drizzle> | null = null;
@@ -136,12 +136,32 @@ export async function getSearchConsoleConnectionByTaskUid(taskUid: string) {
   return result[0];
 }
 
+export async function getSearchConsoleConnectionByUaeExtendedStayTaskUid(taskUid: string) {
+  const db = await getDb();
+  if (!db) return undefined;
+  const result = await db
+    .select()
+    .from(searchConsoleConnections)
+    .where(eq(searchConsoleConnections.uaeExtendedStayScheduleTaskUid, taskUid))
+    .limit(1);
+  return result[0];
+}
+
 export async function setSearchConsoleScheduleTaskUid(property: string, taskUid: string) {
   const db = await getDb();
   if (!db) throw new Error("Database is required for Search Console monitoring.");
   await db
     .update(searchConsoleConnections)
     .set({ scheduleCronTaskUid: taskUid })
+    .where(eq(searchConsoleConnections.property, property));
+}
+
+export async function setSearchConsoleUaeExtendedStayScheduleTaskUid(property: string, taskUid: string) {
+  const db = await getDb();
+  if (!db) throw new Error("Database is required for Search Console monitoring.");
+  await db
+    .update(searchConsoleConnections)
+    .set({ uaeExtendedStayScheduleTaskUid: taskUid })
     .where(eq(searchConsoleConnections.property, property));
 }
 
@@ -161,6 +181,20 @@ export async function saveSearchConsoleCtrReport(input: {
     .update(searchConsoleConnections)
     .set({ lastReportAt: new Date() })
     .where(eq(searchConsoleConnections.property, input.property));
+}
+
+export async function saveSearchConsoleUaeExtendedStayReport(input: {
+  property: string;
+  periodStart: string;
+  periodEnd: string;
+  metrics: Record<string, { clicks: number; impressions: number; ctr: number; position: number }>;
+}) {
+  const db = await getDb();
+  if (!db) throw new Error("Database is required for Search Console monitoring.");
+
+  await db.insert(searchConsoleUaeExtendedStayReports).values(input).onDuplicateKeyUpdate({
+    set: { metrics: input.metrics, generatedAt: new Date() },
+  });
 }
 
 export async function createSearchConsoleOAuthState(stateHash: string, expiresAt: Date) {
