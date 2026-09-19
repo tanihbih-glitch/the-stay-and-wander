@@ -56,14 +56,25 @@ describe("Bangkok Hotel Price Index", () => {
     expect(articleSource).toContain('updatedDate={articleMetadata.lastUpdated}');
   });
 
-  it("adds a shareable public guide control and sticky table of contents linked to real sections", () => {
+  it("adds visible breadcrumbs, tier anchors, and a shareable sticky table of contents", () => {
     expect(articleSource).toContain('import GuideShare from "@/components/GuideShare"');
     expect(articleSource).toContain('import StickyTableOfContents from "@/components/StickyTableOfContents"');
+    expect(articleSource).toContain('import ArticleBreadcrumbs from "@/components/ArticleBreadcrumbs"');
+    expect(articleSource).toContain('<ArticleBreadcrumbs currentLabel="Bangkok hotel price index" />');
     expect(articleSource).toContain('<GuideShare title={articleMetadata.title} url={canonicalUrl}');
     expect(articleSource).toContain('<StickyTableOfContents items={tableOfContents} />');
+    expect(articleSource).toContain('id: "bangkok-budget-tier"');
+    expect(articleSource).toContain('id: "bangkok-midrange-tier"');
+    expect(articleSource).toContain('id: "bangkok-luxury-tier"');
+    expect(articleSource).toContain('scroll-mt-28');
     expect(articleSource).toContain('id="bangkok-planning-tools"');
     expect(articleSource).toContain('id="bangkok-price-faq"');
     expect(articleSource).toContain('lg:sticky lg:top-24');
+  });
+
+  it("keeps readers moving with three contextual Bangkok related-article cards", () => {
+    expect(articleSource).toContain('import RelatedPriceIndexArticles from "@/components/RelatedPriceIndexArticles"');
+    expect(articleSource).toContain('<RelatedPriceIndexArticles destination="bangkok" />');
   });
 
   it("adds district nightly-rate tooltips, a transparent 17.7 percent surcharge calculation, and focused planning links", () => {

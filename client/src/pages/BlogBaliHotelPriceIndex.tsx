@@ -12,6 +12,8 @@ import { baliHotelPriceIndexFaqs } from "@shared/articleFaqs";
 import LastUpdated from "@/components/LastUpdated";
 import GuideShare from "@/components/GuideShare";
 import StickyTableOfContents from "@/components/StickyTableOfContents";
+import ArticleBreadcrumbs from "@/components/ArticleBreadcrumbs";
+import RelatedPriceIndexArticles from "@/components/RelatedPriceIndexArticles";
 
 export const articleMetadata = {
   title: "Bali Hotel Prices in 2026: Average Rates by Neighborhood & Budget",
@@ -60,9 +62,17 @@ const firstTimerAreaNotes = [
   { area: "Canggu", note: "Use this base for cafés, surf, and a longer-stay rhythm; a central location can matter when traffic is part of the daily trade-off." },
 ] as const;
 
+const priceTiers = [
+  { id: "bali-budget-tier", label: "Budget and dorms", range: "$7–$30/night", description: "The lowest planning range sits in Amed and Lovina ($7–$15) and Ubud ($8–$18), while Canggu, Seminyak, and the Bukit begin higher in the published matrix." },
+  { id: "bali-boutique-tier", label: "Boutique stays", range: "$30–$160/night", description: "Boutique benchmarks run from $30–$70 in Amed and Lovina to $80–$160 in the Bukit, with the other regions falling between those figures." },
+  { id: "bali-villa-tier", label: "Private villas", range: "$90–$400/night", description: "The villa range is most modest in Amed and Lovina ($90–$170) and reaches $220–$400 in the Bukit; use the group calculator to compare the per-person trade-off." },
+  { id: "bali-resort-tier", label: "Five-star resorts", range: "$180–$1,200+/night", description: "Published resort benchmarks span $180–$350 in Amed and Lovina through $500–$1,200+ on the Bukit, with season and final taxes affecting the total." },
+] as const;
+
 const tableOfContents = [
   { id: "introduction-title", label: "Why headline rates mislead" },
   { id: "summary-title", label: "Nightly rate benchmark" },
+  ...priceTiers.map((tier) => ({ id: tier.id, label: `${tier.label}: ${tier.range}` })),
   { id: "first-timer-area-context", label: "First-timer area context" },
   { id: "factors-title", label: "Key pricing factors" },
   { id: "planning-tools", label: "Group calculator and seasonal rates" },
@@ -90,6 +100,7 @@ export default function BlogBaliHotelPriceIndex() {
       </section>
 
       <main className="container max-w-6xl px-4 py-12 md:py-16">
+        <ArticleBreadcrumbs currentLabel="Bali hotel price index" />
         <a href="/blog" className="mb-8 inline-flex items-center gap-2 text-sm font-semibold text-[#0077B6] transition-colors hover:text-[#005c91]"><ArrowLeft className="h-4 w-4" aria-hidden="true" />Back to Blog</a>
 
         <div className="lg:grid lg:grid-cols-[15rem,minmax(0,1fr)] lg:items-start lg:gap-10">
@@ -111,6 +122,20 @@ export default function BlogBaliHotelPriceIndex() {
           <div className="max-w-3xl"><p className="text-xs font-bold uppercase tracking-[0.2em] text-[#0077B6]">2026 benchmark matrix</p><h2 id="summary-title" className="mt-3 font-playfair text-3xl font-bold text-[#0D1B2A] md:text-4xl">Bali accommodation cost summary</h2><p className="mt-4 text-lg leading-relaxed text-slate-700">Nightly benchmarks across five regions and four accommodation tiers.</p></div>
           <div className="table-responsive mt-7 overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-sm">
             <table className="min-w-[940px] w-full border-collapse text-left text-sm"><thead className="bg-[#0D1B2A] text-white"><tr><th className="p-4">Region</th><th className="p-4">Budget/Dorms</th><th className="p-4">Mid-Range Boutique</th><th className="p-4">Private Pool Villa</th><th className="p-4">5-Star Resort</th><th className="p-4">Regional Focus</th></tr></thead><tbody>{hotelRateRows.map((row) => <tr key={row.region} className="border-t border-slate-100 align-top"><th scope="row" className="p-4 font-semibold text-[#0D1B2A]">{row.region}</th><td className="p-4 text-slate-700">{row.budget}</td><td className="p-4 text-slate-700">{row.boutique}</td><td className="p-4 text-slate-700">{row.villa}</td><td className="p-4 text-slate-700">{row.resort}</td><td className="p-4 text-slate-700">{row.focus}</td></tr>)}</tbody></table>
+          </div>
+        </section>
+
+        <section className="mt-14" aria-labelledby="bali-price-tiers-title">
+          <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#0077B6]">Jump by tier</p>
+          <h2 id="bali-price-tiers-title" className="mt-3 font-playfair text-3xl font-bold text-[#0D1B2A] md:text-4xl">Bali price tiers at a glance</h2>
+          <div className="mt-7 grid gap-4 sm:grid-cols-2">
+            {priceTiers.map((tier) => (
+              <article id={tier.id} key={tier.id} className="scroll-mt-28 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+                <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#0077B6]">{tier.label}</p>
+                <h3 className="mt-2 font-playfair text-2xl font-bold text-[#0D1B2A]">{tier.range}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-slate-700">{tier.description}</p>
+              </article>
+            ))}
           </div>
         </section>
 
@@ -141,6 +166,9 @@ export default function BlogBaliHotelPriceIndex() {
           </div>
         </div>
       </main>
+      <section className="container max-w-6xl px-4 pb-16 md:pb-20">
+        <RelatedPriceIndexArticles destination="bali" />
+      </section>
       <Footer />
       <MobileBottomNav />
     </div>
