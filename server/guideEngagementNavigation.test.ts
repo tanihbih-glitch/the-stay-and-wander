@@ -5,6 +5,7 @@ import { DESTINATION_GUIDE_PATHS, isDestinationGuidePath, isLongFormNonPriceDest
 
 const feedbackSource = fs.readFileSync(path.resolve(process.cwd(), "client/src/components/GuideFeedbackAndBackToTop.tsx"), "utf8");
 const contentsSource = fs.readFileSync(path.resolve(process.cwd(), "client/src/components/GuideTableOfContents.tsx"), "utf8");
+const priceIndexContentsSource = fs.readFileSync(path.resolve(process.cwd(), "client/src/components/StickyTableOfContents.tsx"), "utf8");
 const headerSource = fs.readFileSync(path.resolve(process.cwd(), "client/src/components/Header.tsx"), "utf8");
 const footerSource = fs.readFileSync(path.resolve(process.cwd(), "client/src/components/Footer.tsx"), "utf8");
 
@@ -44,6 +45,14 @@ describe("destination-guide engagement and navigation", () => {
     expect(contentsSource).toContain("lg:block");
     expect(contentsSource).toContain("overflow-x-auto");
     expect(contentsSource).toContain('href={`#${item.id}`}');
+  });
+
+  it("preserves direct price-index section links after client hydration", () => {
+    expect(priceIndexContentsSource).toContain('import { useEffect } from "react"');
+    expect(priceIndexContentsSource).toContain("window.location.hash.slice(1)");
+    expect(priceIndexContentsSource).toContain("window.requestAnimationFrame");
+    expect(priceIndexContentsSource).toContain('scrollIntoView({ block: "start" })');
+    expect(priceIndexContentsSource).toContain('href={`#${item.id}`}');
   });
 
   it("mounts contents and feedback controls through shared chrome so every guide receives them", () => {

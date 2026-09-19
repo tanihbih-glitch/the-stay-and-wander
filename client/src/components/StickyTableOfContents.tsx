@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { ListTree } from "lucide-react";
 
 interface TableOfContentsItem {
@@ -12,6 +13,17 @@ interface StickyTableOfContentsProps {
 
 /** A compact in-flow mobile menu that becomes a sticky desktop orientation aid. */
 export default function StickyTableOfContents({ items, title = "In this guide" }: StickyTableOfContentsProps) {
+  useEffect(() => {
+    const targetId = window.location.hash.slice(1);
+    if (!targetId || !items.some((item) => item.id === targetId)) return;
+
+    const frame = window.requestAnimationFrame(() => {
+      document.getElementById(targetId)?.scrollIntoView({ block: "start" });
+    });
+
+    return () => window.cancelAnimationFrame(frame);
+  }, [items]);
+
   return (
     <nav aria-label="Table of contents" className="mb-10 rounded-2xl border border-[#cfe4ee] bg-white p-5 shadow-sm lg:sticky lg:top-24 lg:mb-0">
       <div className="flex items-center gap-2 text-[#0D1B2A]"><ListTree className="h-5 w-5 text-[#0077B6]" aria-hidden="true" /><h2 className="font-playfair text-xl font-bold">{title}</h2></div>
