@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useAuth } from '@/_core/hooks/useAuth';
 import { useLocation } from 'wouter';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -29,6 +29,12 @@ interface TopSource {
   count: number;
 }
 
+interface ContentEngagementStats {
+  totalClicks: number;
+  bySource: Array<{ sourcePath: string; count: number }>;
+  byDestination: Array<{ destinationPath: string; count: number }>;
+}
+
 export function AffiliateAnalytics() {
   const { user } = useAuth();
   const [, navigate] = useLocation();
@@ -39,7 +45,16 @@ export function AffiliateAnalytics() {
   const [conversionStats, setConversionStats] = useState<ConversionStats | null>(null);
   const [conversionRate, setConversionRate] = useState<ConversionRate | null>(null);
   const [topSources, setTopSources] = useState<TopSource[]>([]);
+  const [relatedGuideEngagement, setRelatedGuideEngagement] = useState<ContentEngagementStats | null>(null);
   const [dateRange, setDateRange] = useState<'7d' | '30d' | '90d' | 'all'>('30d');
+
+  const analyticsDateRange = useMemo(() => {
+    if (dateRange === 'all') return { startDate: undefined, endDate: undefined };
+    const endDate = new Date();
+    const startDate = new Date(endDate);
+    startDate.setDate(startDate.getDate() - Number.parseInt(dateRange, 10));
+    return { startDate, endDate };
+  }, [dateRange]);
 
   // Redirect non-admin users
   useEffect(() => {
@@ -50,27 +65,31 @@ export function AffiliateAnalytics() {
 
   // Fetch analytics data using tRPC
   const clicksByPartnerQuery = trpc.analytics.getClicksByPartner.useQuery(
-    { startDate: undefined, endDate: undefined },
+    analyticsDateRange,
     { enabled: user?.role === 'admin' }
   );
   const clicksByCategoryQuery = trpc.analytics.getClicksByCategory.useQuery(
-    { startDate: undefined, endDate: undefined },
+    analyticsDateRange,
     { enabled: user?.role === 'admin' }
   );
   const clicksBySourceQuery = trpc.analytics.getClicksBySource.useQuery(
-    { startDate: undefined, endDate: undefined },
+    analyticsDateRange,
     { enabled: user?.role === 'admin' }
   );
   const conversionStatsQuery = trpc.analytics.getConversionStats.useQuery(
-    { startDate: undefined, endDate: undefined },
+    analyticsDateRange,
     { enabled: user?.role === 'admin' }
   );
   const conversionRateQuery = trpc.analytics.getConversionRate.useQuery(
-    { startDate: undefined, endDate: undefined },
+    analyticsDateRange,
     { enabled: user?.role === 'admin' }
   );
   const topSourcesQuery = trpc.analytics.getTopSources.useQuery(
-    { limit: 10, startDate: undefined, endDate: undefined },
+    { limit: 10, ...analyticsDateRange },
+    { enabled: user?.role === 'admin' }
+  );
+  const relatedGuideEngagementQuery = trpc.analytics.getRelatedGuideEngagement.useQuery(
+    analyticsDateRange,
     { enabled: user?.role === 'admin' }
   );
 
@@ -94,6 +113,9 @@ export function AffiliateAnalytics() {
     if (topSourcesQuery.data) {
       setTopSources(topSourcesQuery.data);
     }
+    if (relatedGuideEngagementQuery.data) {
+      setRelatedGuideEngagement(relatedGuideEngagementQuery.data);
+    }
 
     const isLoading =
       clicksByPartnerQuery.isLoading ||
@@ -101,7 +123,8 @@ export function AffiliateAnalytics() {
       clicksBySourceQuery.isLoading ||
       conversionStatsQuery.isLoading ||
       conversionRateQuery.isLoading ||
-      topSourcesQuery.isLoading;
+      topSourcesQuery.isLoading ||
+      relatedGuideEngagementQuery.isLoading;
 
     setLoading(isLoading);
   }, [
@@ -111,12 +134,14 @@ export function AffiliateAnalytics() {
     conversionStatsQuery.data,
     conversionRateQuery.data,
     topSourcesQuery.data,
+    relatedGuideEngagementQuery.data,
     clicksByPartnerQuery.isLoading,
     clicksByCategoryQuery.isLoading,
     clicksBySourceQuery.isLoading,
     conversionStatsQuery.isLoading,
     conversionRateQuery.isLoading,
     topSourcesQuery.isLoading,
+    relatedGuideEngagementQuery.isLoading,
   ]);
 
   if (!user || user.role !== 'admin') {
@@ -307,6 +332,33 @@ export function AffiliateAnalytics() {
             </CardContent>
           </Card>
         )}
+
+        <Card className="mt-8">
+          <CardHeader>
+            <CardTitle>Related Guide Engagement</CardTitle>
+            <p className="text-sm font-normal text-muted-foreground">Anonymous first-party card selections only. No visitor identifier, session, IP, user agent, or referrer is stored for these events.</p>
+          </CardHeader>
+          <CardContent>
+            <div className="grid gap-6 lg:grid-cols-[11rem,1fr,1fr]">
+              <div className="rounded-xl bg-secondary p-5">
+                <p className="text-sm text-muted-foreground">Related-guide clicks</p>
+                <p className="mt-2 text-3xl font-bold text-foreground">{relatedGuideEngagement?.totalClicks.toLocaleString() ?? 0}</p>
+              </div>
+              <div>
+                <h3 className="font-semibold text-foreground">Clicks from guide</h3>
+                <div className="mt-3 space-y-3">
+                  {relatedGuideEngagement?.bySource.length ? relatedGuideEngagement.bySource.map((item) => <div key={item.sourcePath} className="flex items-center justify-between gap-3 border-b border-border pb-3 text-sm"><span className="break-all text-muted-foreground">{item.sourcePath}</span><span className="font-semibold text-foreground">{item.count}</span></div>) : <p className="text-sm text-muted-foreground">No related-guide selections in this period.</p>}
+                </div>
+              </div>
+              <div>
+                <h3 className="font-semibold text-foreground">Most selected destination</h3>
+                <div className="mt-3 space-y-3">
+                  {relatedGuideEngagement?.byDestination.length ? relatedGuideEngagement.byDestination.map((item) => <div key={item.destinationPath} className="flex items-center justify-between gap-3 border-b border-border pb-3 text-sm"><span className="break-all text-muted-foreground">{item.destinationPath}</span><span className="font-semibold text-foreground">{item.count}</span></div>) : <p className="text-sm text-muted-foreground">No related-guide selections in this period.</p>}
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
       </div>
     </div>
   );

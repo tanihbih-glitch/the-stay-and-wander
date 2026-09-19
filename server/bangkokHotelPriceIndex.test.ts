@@ -75,6 +75,8 @@ describe("Bangkok Hotel Price Index", () => {
   it("keeps readers moving with three contextual Bangkok related-article cards", () => {
     expect(articleSource).toContain('import RelatedPriceIndexArticles from "@/components/RelatedPriceIndexArticles"');
     expect(articleSource).toContain('<RelatedPriceIndexArticles destination="bangkok" />');
+    expect(articleSource).toContain('import CompareDestinations from "@/components/CompareDestinations"');
+    expect(articleSource).toContain('<CompareDestinations current="bangkok" />');
   });
 
   it("adds district nightly-rate tooltips, a transparent 17.7 percent surcharge calculation, and focused planning links", () => {

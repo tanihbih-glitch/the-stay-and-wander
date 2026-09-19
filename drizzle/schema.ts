@@ -1,4 +1,4 @@
-import { boolean, int, json, mysqlEnum, mysqlTable, text, timestamp, uniqueIndex, varchar } from "drizzle-orm/mysql-core";
+import { boolean, index, int, json, mysqlEnum, mysqlTable, text, timestamp, uniqueIndex, varchar } from "drizzle-orm/mysql-core";
 
 /**
  * Core user table backing auth flow.
@@ -60,6 +60,30 @@ export const affiliateConversions = mysqlTable('affiliateConversions', {
 
 export type AffiliateConversion = typeof affiliateConversions.$inferSelect;
 export type InsertAffiliateConversion = typeof affiliateConversions.$inferInsert;
+
+/**
+ * Minimal internal-content interaction records. These are intentionally not
+ * affiliate clicks and never store a user, session, IP address, user agent,
+ * referrer, or other visitor identifier.
+ */
+export const contentEngagementEvents = mysqlTable(
+  "contentEngagementEvents",
+  {
+    id: int("id").autoincrement().primaryKey(),
+    eventType: varchar("eventType", { length: 64 }).notNull(),
+    component: varchar("component", { length: 128 }).notNull(),
+    sourcePath: varchar("sourcePath", { length: 255 }).notNull(),
+    destinationPath: varchar("destinationPath", { length: 255 }).notNull(),
+    createdAt: timestamp("createdAt").defaultNow().notNull(),
+  },
+  table => [
+    index("contentEngagementEvents_type_created_index").on(table.eventType, table.createdAt),
+    index("contentEngagementEvents_source_index").on(table.sourcePath),
+    index("contentEngagementEvents_destination_index").on(table.destinationPath),
+  ]
+);
+
+export type ContentEngagementEvent = typeof contentEngagementEvents.$inferSelect;
 
 /** Read-only Google Search Console connection for scheduled CTR monitoring. */
 export const searchConsoleConnections = mysqlTable("searchConsoleConnections", {

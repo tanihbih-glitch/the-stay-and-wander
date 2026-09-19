@@ -12,8 +12,43 @@ import {
   getRecentClicks,
   getTopSources,
 } from '../affiliateTracking';
+import { getRelatedGuideEngagementStats, trackRelatedGuideClick } from '../contentEngagementTracking';
+
+const relatedGuideSourcePaths = [
+  '/blog/bali-hotel-price-index-2026',
+  '/blog/bangkok-hotel-price-index-2026',
+] as const;
+
+const relatedGuideDestinationPaths = [
+  '/blog/where-to-stay-in-bali-2026',
+  '/blog/bali-spa-wellness-price-index-2026',
+  '/blog/bali-beach-comparison-matrix-2026',
+  '/blog/where-to-stay-in-bangkok-2026',
+  '/blog/bangkok-hotel-budget-breakdown-2026',
+  '/blog/bangkok-airport-hotels-2026',
+] as const;
 
 export const analyticsRouter = router({
+  /**
+   * Public, identity-free in-site content interaction. This deliberately
+   * accepts only the fixed first-party guide paths and records no visitor
+   * metadata, unlike affiliate outbound-click attribution.
+   */
+  trackRelatedGuideClick: publicProcedure
+    .input(z.object({
+      sourcePath: z.enum(relatedGuideSourcePaths),
+      destinationPath: z.enum(relatedGuideDestinationPaths),
+    }))
+    .mutation(async ({ input }) => {
+      try {
+        await trackRelatedGuideClick(input);
+        return { success: true };
+      } catch (error) {
+        console.warn('Failed to record related-guide engagement:', error);
+        return { success: false };
+      }
+    }),
+
   // Track a click (public procedure for unauthenticated visitors)
   trackClick: publicProcedure
     .input(
@@ -258,6 +293,29 @@ export const analyticsRouter = router({
         throw new TRPCError({
           code: 'INTERNAL_SERVER_ERROR',
           message: 'Failed to fetch analytics',
+        });
+      }
+    }),
+
+  getRelatedGuideEngagement: protectedProcedure
+    .input(z.object({
+      startDate: z.date().optional(),
+      endDate: z.date().optional(),
+    }))
+    .query(async ({ input, ctx }) => {
+      if (ctx.user?.role !== 'admin') {
+        throw new TRPCError({
+          code: 'FORBIDDEN',
+          message: 'Only admins can view analytics',
+        });
+      }
+      try {
+        return await getRelatedGuideEngagementStats(input.startDate, input.endDate);
+      } catch (error) {
+        console.error('Error getting related-guide engagement:', error);
+        throw new TRPCError({
+          code: 'INTERNAL_SERVER_ERROR',
+          message: 'Failed to fetch content engagement analytics',
         });
       }
     }),

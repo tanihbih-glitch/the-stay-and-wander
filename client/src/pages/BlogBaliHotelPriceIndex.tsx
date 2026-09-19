@@ -14,6 +14,7 @@ import GuideShare from "@/components/GuideShare";
 import StickyTableOfContents from "@/components/StickyTableOfContents";
 import ArticleBreadcrumbs from "@/components/ArticleBreadcrumbs";
 import RelatedPriceIndexArticles from "@/components/RelatedPriceIndexArticles";
+import CompareDestinations from "@/components/CompareDestinations";
 
 export const articleMetadata = {
   title: "Bali Hotel Prices in 2026: Average Rates by Neighborhood & Budget",
@@ -168,6 +169,7 @@ export default function BlogBaliHotelPriceIndex() {
       </main>
       <section className="container max-w-6xl px-4 pb-16 md:pb-20">
         <RelatedPriceIndexArticles destination="bali" />
+        <CompareDestinations current="bali" />
       </section>
       <Footer />
       <MobileBottomNav />

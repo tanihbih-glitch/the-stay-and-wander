@@ -68,4 +68,32 @@ describe("Tokyo and Seoul where-to-stay guides", () => {
       expect(source).toContain("CityStayMatcher");
     }
   });
+
+  it("adds visible breadcrumbs and tier-specific, anchored table-of-contents navigation", () => {
+    const seoulPage = readFileSync(path.resolve(process.cwd(), "client/src/pages/BlogSeoulStay.tsx"), "utf8");
+    const tokyoPage = readFileSync(path.resolve(process.cwd(), "client/src/pages/BlogTokyoStay.tsx"), "utf8");
+
+    expect(tokyoPage).toContain('import ArticleBreadcrumbs from "@/components/ArticleBreadcrumbs"');
+    expect(tokyoPage).toContain('<ArticleBreadcrumbs currentLabel="Tokyo hotel price guide" />');
+    expect(tokyoPage).toContain('<StickyTableOfContents items={tableOfContents} />');
+    expect(tokyoPage).toContain('id: "tokyo-value-tier"');
+    expect(tokyoPage).toContain('id: "tokyo-central-tier"');
+    expect(tokyoPage).toContain('id: "tokyo-premium-tier"');
+    expect(tokyoPage).toContain('id="tokyo-booking"');
+
+    expect(seoulPage).toContain('import ArticleBreadcrumbs from "@/components/ArticleBreadcrumbs"');
+    expect(seoulPage).toContain('<ArticleBreadcrumbs currentLabel="Seoul hotel price guide" />');
+    expect(seoulPage).toContain('<StickyTableOfContents items={tableOfContents} />');
+    expect(seoulPage).toContain('id: "seoul-value-tier"');
+    expect(seoulPage).toContain('id: "seoul-central-tier"');
+    expect(seoulPage).toContain('id: "seoul-premium-tier"');
+    expect(seoulPage).toContain('id="seoul-booking"');
+  });
+
+  it("keeps published visible and crawler modified dates aligned", () => {
+    expect(tokyoMetadata.lastUpdated).toBe("2026-09-19");
+    expect(seoulMetadata.lastUpdated).toBe("2026-09-19");
+    expect(pageMetadataConfig.tokyoStayGuide.updatedDate).toBe(tokyoMetadata.lastUpdated);
+    expect(pageMetadataConfig.seoulStayGuide.updatedDate).toBe(seoulMetadata.lastUpdated);
+  });
 });

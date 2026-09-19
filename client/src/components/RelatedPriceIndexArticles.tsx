@@ -1,9 +1,24 @@
 import { ArrowUpRight, Compass } from "lucide-react";
+import { Link } from "wouter";
+import { trpc } from "@/lib/trpc";
 
 type PriceIndexDestination = "bali" | "bangkok";
+type RelatedGuideSourcePath = "/blog/bali-hotel-price-index-2026" | "/blog/bangkok-hotel-price-index-2026";
+type RelatedGuideDestinationPath =
+  | "/blog/where-to-stay-in-bali-2026"
+  | "/blog/bali-spa-wellness-price-index-2026"
+  | "/blog/bali-beach-comparison-matrix-2026"
+  | "/blog/where-to-stay-in-bangkok-2026"
+  | "/blog/bangkok-hotel-budget-breakdown-2026"
+  | "/blog/bangkok-airport-hotels-2026";
+
+const sourcePathByDestination: Record<PriceIndexDestination, RelatedGuideSourcePath> = {
+  bali: "/blog/bali-hotel-price-index-2026",
+  bangkok: "/blog/bangkok-hotel-price-index-2026",
+};
 
 type RelatedArticle = {
-  href: string;
+  href: RelatedGuideDestinationPath;
   eyebrow: string;
   title: string;
   description: string;
@@ -59,6 +74,14 @@ interface RelatedPriceIndexArticlesProps {
 /** Retains readers on-site with contextual, non-duplicative planning guides. */
 export default function RelatedPriceIndexArticles({ destination }: RelatedPriceIndexArticlesProps) {
   const articles = relatedArticlesByDestination[destination];
+  const relatedGuideClick = trpc.analytics.trackRelatedGuideClick.useMutation();
+
+  const recordSelection = (destinationPath: RelatedGuideDestinationPath) => {
+    relatedGuideClick.mutate({
+      sourcePath: sourcePathByDestination[destination],
+      destinationPath,
+    });
+  };
 
   return (
     <section className="mt-14 border-t border-slate-200 pt-12" aria-labelledby="related-articles-title">
@@ -75,9 +98,10 @@ export default function RelatedPriceIndexArticles({ destination }: RelatedPriceI
       </div>
       <div className="mt-7 grid gap-5 md:grid-cols-3">
         {articles.map((article) => (
-          <a
+          <Link
             key={article.href}
             href={article.href}
+            onClick={() => recordSelection(article.href)}
             className="group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-[#b9dce9] hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0077B6] focus-visible:ring-offset-2"
           >
             <div className="flex items-start justify-between gap-3">
@@ -91,7 +115,7 @@ export default function RelatedPriceIndexArticles({ destination }: RelatedPriceI
             <span className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-[#0077B6]">
               Read guide <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
             </span>
-          </a>
+          </Link>
         ))}
       </div>
     </section>

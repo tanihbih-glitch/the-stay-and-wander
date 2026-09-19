@@ -73,6 +73,8 @@ describe("Bali Hotel Price Index", () => {
   it("keeps readers moving with three contextual Bali related-article cards", () => {
     expect(articleSource).toContain('import RelatedPriceIndexArticles from "@/components/RelatedPriceIndexArticles"');
     expect(articleSource).toContain('<RelatedPriceIndexArticles destination="bali" />');
+    expect(articleSource).toContain('import CompareDestinations from "@/components/CompareDestinations"');
+    expect(articleSource).toContain('<CompareDestinations current="bali" />');
   });
 
   it("registers only the new canonical price-index route while retaining the old URL's permanent redirect", () => {

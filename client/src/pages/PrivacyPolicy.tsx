@@ -106,6 +106,15 @@ export default function PrivacyPolicy() {
                 </p>
               </PolicySection>
 
+              <PolicySection title="Anonymous guide engagement">
+                <p>
+                  Some related-guide cards record an aggregated, first-party content selection so we can understand which guides help readers continue planning. For this limited measurement, we store only the source guide, the selected guide and the time of the selection.
+                </p>
+                <p>
+                  These records do not store a name, email address, account ID, session ID, IP address, browser or device identifier, user agent, referrer, or external booking destination. They are separate from affiliate-link attribution and are used only to assess on-site content performance.
+                </p>
+              </PolicySection>
+
               <PolicySection title="Mailchimp newsletter sign-ups">
                 <p>
                   If you choose to subscribe to our newsletter, your email address and any other information you submit are collected through Mailchimp. We use this information to send travel tips, updates and offers that you requested, and to understand newsletter engagement such as opens and link clicks.
