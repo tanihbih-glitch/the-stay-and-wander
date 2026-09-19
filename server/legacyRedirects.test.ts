@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { getLegacyRedirectTarget, LEGACY_PERMANENT_REDIRECTS } from "./legacyRedirects";
+import { getLegacyRedirectTarget, getTrailingSlashRedirectTarget, LEGACY_PERMANENT_REDIRECTS } from "./legacyRedirects";
 import { sitemapRoutes } from "../shared/publicRoutes";
 
 describe("legacy Search Console 404 redirects", () => {
@@ -13,8 +13,8 @@ describe("legacy Search Console 404 redirects", () => {
     "/home/": "/",
     "/guides/": "/blog",
     "/blog/europe-cities": "/blog/best-cities-europe-summer-2026",
-    "/blog/bali-hotel-prices-2026": "/blog/where-to-stay-in-bali-2026",
-    "/blog/bangkok-hotel-prices-2026": "/blog/where-to-stay-in-bangkok-2026",
+    "/blog/bali-hotel-prices-2026": "/blog/bali-hotel-price-index-2026",
+    "/blog/bangkok-hotel-prices-2026": "/blog/bangkok-hotel-price-index-2026",
   };
 
   it("maps each of the nine reported retired URLs to its closest live destination", () => {
@@ -28,8 +28,8 @@ describe("legacy Search Console 404 redirects", () => {
       "/home": "/",
       "/guides": "/blog",
       "/blog/europe-cities": "/blog/best-cities-europe-summer-2026",
-      "/blog/bali-hotel-prices-2026": "/blog/where-to-stay-in-bali-2026",
-      "/blog/bangkok-hotel-prices-2026": "/blog/where-to-stay-in-bangkok-2026",
+      "/blog/bali-hotel-prices-2026": "/blog/bali-hotel-price-index-2026",
+      "/blog/bangkok-hotel-prices-2026": "/blog/bangkok-hotel-price-index-2026",
     });
 
     for (const [source, destination] of Object.entries(expectedRedirects)) {
@@ -42,6 +42,21 @@ describe("legacy Search Console 404 redirects", () => {
 
     for (const source of Object.keys(LEGACY_PERMANENT_REDIRECTS)) {
       expect(sitemapPaths).not.toContain(source);
+    }
+  });
+
+  it("normalizes trailing slashes only for known public application routes", () => {
+    expect(getTrailingSlashRedirectTarget("/booking/")).toBe("/booking");
+    expect(getTrailingSlashRedirectTarget("/booking/?source=search")).toBe("/booking");
+    expect(getTrailingSlashRedirectTarget("/blog/bali-hotel-price-index-2026/")).toBe("/blog/bali-hotel-price-index-2026");
+    expect(getTrailingSlashRedirectTarget("/")).toBeUndefined();
+    expect(getTrailingSlashRedirectTarget("/api/trpc/")).toBeUndefined();
+    expect(getTrailingSlashRedirectTarget("/assets/")).toBeUndefined();
+  });
+
+  it("provides one no-trailing-slash destination for every sitemap URL", () => {
+    for (const route of sitemapRoutes.filter((item) => item.path !== "/")) {
+      expect(getTrailingSlashRedirectTarget(`${route.path}/`)).toBe(route.path);
     }
   });
 });

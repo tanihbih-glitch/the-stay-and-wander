@@ -56,7 +56,7 @@ describe("server-rendered page metadata", () => {
     const template = "<html><head><title>Default site title</title></head><body></body></html>";
     const budget = injectSSRHead(template, pageMetadataConfig.bangkokHotelBudgetBreakdown);
 
-    expect(budget).toContain("<title>Bangkok Hotel Costs 2026: $10–$300+ | The Stay &amp; Wander</title>");
+    expect(budget).toContain("<title>Bangkok Budget Hotels 2026: $10–$300+ Cost Breakdown</title>");
     expect(budget).toContain('name="description" content="See typical Bangkok hotel rates in 2026: $10–$20 hostels, $30–$80 mid-range rooms and $120–$300+ five-star stays, plus booking factors."');
     expect(budget).toContain('href="https://thestayandwander.com/blog/bangkok-hotel-budget-breakdown-2026"');
   });
@@ -74,8 +74,8 @@ describe("server-rendered page metadata", () => {
     const template = "<html><head><title>Default site title</title></head><body></body></html>";
     const uae = injectSSRHead(template, pageMetadataConfig.uaeExtendedStaySustainability);
 
-    expect(uae).toContain("<title>UAE Sustainable Extended Stays 2026 | The Stay &amp; Wander</title>");
-    expect(uae).toContain('name="description" content="Compare Hilton, Marriott, Accor and IHG extended-stay options in the UAE: sustainability frameworks, kitchens, laundry and long-stay booking checks."');
+    expect(uae).toContain("<title>UAE Extended Stay Hotels: Sustainability Guide 2026</title>");
+    expect(uae).toContain('name="description" content="Compare Hilton, Marriott, Accor and IHG sustainability frameworks for UAE extended stays, plus source-aware questions to ask before booking."');
     expect(uae).toContain('href="https://thestayandwander.com/blog/uae-extended-stay-sustainability-2026"');
   });
 
@@ -122,10 +122,26 @@ describe("server-rendered page metadata", () => {
     const bali = injectSSRHead(template, pageMetadataConfig.baliHotelPriceIndex);
     const bangkok = injectSSRHead(template, pageMetadataConfig.bangkokHotelPriceIndex);
 
-    expect(bali).toContain("<title>Bali Hotel Prices in 2026: Average Rates by Neighborhood &amp; Budget</title>");
-    expect(bali).toContain('name="description" content="Planning a trip to Bali? View 2026 average nightly hotel rates across Seminyak, Canggu, Ubud &amp; Uluwatu. Features interactive budget calculator &amp; district benchmarks."');
-    expect(bangkok).toContain("<title>Bangkok Hotel Price Index (2026): Nightly Cost Breakdown &amp; Interactive Tool</title>");
-    expect(bangkok).toContain('name="description" content="Compare average hotel prices per night in Bangkok for 2026 across Sukhumvit, Silom, Riverside &amp; Old Town. Interactive district matcher &amp; tier breakdown."');
+    expect(bali).toContain("<title>Bali Hotel Prices 2026: $7–$1,200+ Nightly Rates</title>");
+    expect(bali).toContain('name="description" content="Compare 2026 Bali hotel rates by region: $7–$30 budget, $30–$160 boutique, $90–$400 villas and $180–$1,200+ resorts. Includes seasonal planning tools."');
+    expect(bali).toContain('"headline":"Bali Hotel Prices in 2026: Average Rates by Neighborhood & Budget"');
+    expect(bangkok).toContain("<title>Bangkok Hotel Prices 2026: $8–$850+ Nightly Rates</title>");
+    expect(bangkok).toContain('name="description" content="Compare 2026 Bangkok hotel rates by district: $8–$35 budget, $35–$150 mid-range and $120–$850+ luxury. Includes tax and transfer planning tools."');
+    expect(bangkok).toContain('"headline":"Bangkok Hotel Price Index (2026): Nightly Cost Breakdown & Interactive Tool"');
+  });
+
+  it("keeps the revised price and UAE snippets within practical SERP lengths", () => {
+    const metadata = [
+      pageMetadataConfig.baliHotelPriceIndex,
+      pageMetadataConfig.bangkokHotelPriceIndex,
+      pageMetadataConfig.bangkokHotelBudgetBreakdown,
+      pageMetadataConfig.uaeExtendedStaySustainability,
+    ];
+
+    for (const item of metadata) {
+      expect(item.title.length).toBeLessThanOrEqual(60);
+      expect(item.description.length).toBeLessThanOrEqual(155);
+    }
   });
 
   it("renders the refreshed Tokyo and Seoul where-to-stay metadata for crawlers", () => {
@@ -153,8 +169,8 @@ describe("server-rendered page metadata", () => {
     for (const metadata of guideMetadata) {
       const faqs = articleFaqsByPath[metadata.url] ?? [];
       const rendered = injectSSRHead(template, metadata, faqs);
-      expect(metadata.updatedDate).toBe("2026-09-06");
-      expect(rendered).toContain('property="article:modified_time" content="2026-09-06"');
+      expect(metadata.updatedDate).toMatch(/^2026-09-(06|19)$/);
+      expect(rendered).toContain(`property="article:modified_time" content="${metadata.updatedDate}"`);
       expect(rendered).toContain('"@type":"BlogPosting"');
       expect(rendered).toContain('"@type":"BreadcrumbList"');
       expect(rendered).toContain('"@type":"FAQPage"');
@@ -169,7 +185,7 @@ describe("server-rendered page metadata", () => {
     expect(blogGuides).toHaveLength(22);
     for (const metadata of blogGuides) {
       const rendered = injectSSRHead(template, metadata, articleFaqsByPath[metadata.url] ?? []);
-      expect(metadata.updatedDate).toMatch(/^2026-09-(06|12|16)$/);
+      expect(metadata.updatedDate).toMatch(/^2026-09-(06|12|16|19)$/);
       expect(rendered).toContain(`property="article:modified_time" content="${metadata.updatedDate}"`);
       expect(rendered).toContain('"@type":"BreadcrumbList"');
       expect(rendered).toContain(`"@id":"https://thestayandwander.com${metadata.url}"`);

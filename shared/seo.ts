@@ -287,14 +287,15 @@ export const pageMetadataConfig: Record<string, PageMetadata> = {
   },
 
   baliHotelPriceIndex: {
-    title: "Bali Hotel Prices in 2026: Average Rates by Neighborhood & Budget",
-    description: "Planning a trip to Bali? View 2026 average nightly hotel rates across Seminyak, Canggu, Ubud & Uluwatu. Features interactive budget calculator & district benchmarks.",
+    title: "Bali Hotel Prices 2026: $7–$1,200+ Nightly Rates",
+    schemaTitle: "Bali Hotel Prices in 2026: Average Rates by Neighborhood & Budget",
+    description: "Compare 2026 Bali hotel rates by region: $7–$30 budget, $30–$160 boutique, $90–$400 villas and $180–$1,200+ resorts. Includes seasonal planning tools.",
     image: `${SITE_URL}/manus-storage/blog-bali_5a40f78c.png`,
     url: "/blog/bali-hotel-price-index-2026",
     type: "article",
     author: "The Stay & Wander",
     publishedDate: "2026-08-23",
-    updatedDate: "2026-09-06",
+    updatedDate: "2026-09-19",
     includeRichSnippetSchemas: true,
     keywords: "Bali hotel prices 2026, Bali villa prices, Canggu hotel cost, Ubud hotel cost, Uluwatu resort price, Sanur accommodation, Amed hotels",
   },
@@ -330,7 +331,7 @@ export const pageMetadataConfig: Record<string, PageMetadata> = {
   },
 
   bangkokHotelBudgetBreakdown: {
-    title: "Bangkok Hotel Costs 2026: $10–$300+ | The Stay & Wander",
+    title: "Bangkok Budget Hotels 2026: $10–$300+ Cost Breakdown",
     schemaTitle: "How Much Does a Hotel in Bangkok Really Cost in 2026? (Budget to Luxury Breakdown)",
     description:
       "See typical Bangkok hotel rates in 2026: $10–$20 hostels, $30–$80 mid-range rooms and $120–$300+ five-star stays, plus booking factors.",
@@ -339,20 +340,21 @@ export const pageMetadataConfig: Record<string, PageMetadata> = {
     type: "article",
     author: "The Stay & Wander",
     publishedDate: "2026-08-17",
-    updatedDate: "2026-09-12",
+    updatedDate: "2026-09-19",
     keywords:
       "Bangkok hotel prices 2026, Bangkok hotel cost, Bangkok budget hotels, Bangkok luxury hotels, Bangkok hostel prices, Bangkok hotel booking tips",
   },
 
   bangkokHotelPriceIndex: {
-    title: "Bangkok Hotel Price Index (2026): Nightly Cost Breakdown & Interactive Tool",
-    description: "Compare average hotel prices per night in Bangkok for 2026 across Sukhumvit, Silom, Riverside & Old Town. Interactive district matcher & tier breakdown.",
+    title: "Bangkok Hotel Prices 2026: $8–$850+ Nightly Rates",
+    schemaTitle: "Bangkok Hotel Price Index (2026): Nightly Cost Breakdown & Interactive Tool",
+    description: "Compare 2026 Bangkok hotel rates by district: $8–$35 budget, $35–$150 mid-range and $120–$850+ luxury. Includes tax and transfer planning tools.",
     image: `${SITE_URL}/manus-storage/bangkok-hotel-prices-hero_fb209c1a.jpg`,
     url: "/blog/bangkok-hotel-price-index-2026",
     type: "article",
     author: "The Stay & Wander",
     publishedDate: "2026-08-24",
-    updatedDate: "2026-09-06",
+    updatedDate: "2026-09-19",
     includeRichSnippetSchemas: true,
     keywords: "Bangkok hotel prices 2026, Sukhumvit hotel rates, Silom hotel prices, Bangkok riverside hotel rates, Siam accommodation cost, Bangkok hotel taxes",
   },
@@ -372,16 +374,16 @@ export const pageMetadataConfig: Record<string, PageMetadata> = {
   },
 
   uaeExtendedStaySustainability: {
-    title: "UAE Sustainable Extended Stays 2026 | The Stay & Wander",
+    title: "UAE Extended Stay Hotels: Sustainability Guide 2026",
     schemaTitle: "Extended Stays in the UAE: How Sustainable Are Hilton, Marriott, and Accor?",
     description:
-      "Compare Hilton, Marriott, Accor and IHG extended-stay options in the UAE: sustainability frameworks, kitchens, laundry and long-stay booking checks.",
+      "Compare Hilton, Marriott, Accor and IHG sustainability frameworks for UAE extended stays, plus source-aware questions to ask before booking.",
     image: `${SITE_URL}/manus-storage/dubai-middle-east-destination_1431ce58.png`,
     url: "/blog/uae-extended-stay-sustainability-2026",
     type: "article",
     author: "The Stay & Wander",
     publishedDate: "2026-08-17",
-    updatedDate: "2026-09-12",
+    updatedDate: "2026-09-19",
     keywords:
       "UAE extended stay hotels, sustainable hotels Dubai, sustainable hotels Abu Dhabi, Hilton Travel with Purpose, Marriott Serve 360, Accor Planet 21, IHG Green Engage",
   },

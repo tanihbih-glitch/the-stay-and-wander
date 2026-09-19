@@ -43,12 +43,12 @@ describe("Bali Hotel Price Index", () => {
     expect(articleSource).toContain('import ArticleFAQ from "@/components/ArticleFAQ"');
     expect(articleSource).toContain('import { baliHotelPriceIndexFaqs } from "@shared/articleFaqs"');
     expect(articleSource).toContain('<ArticleFAQ faqs={baliHotelPriceIndexFaqs} title="Bali Hotel Price Questions, Answered" />');
-    expect(articleSource).toContain("Bali Hotel Prices in 2026: Average Rates by Neighborhood & Budget");
+    expect(articleSource).toContain("Bali Hotel Prices 2026: $7–$1,200+ Nightly Rates");
   });
 
   it("renders the shared crawler-visible Last Updated signal for the current price-index revision", () => {
     expect(articleSource).toContain('import LastUpdated from "@/components/LastUpdated"');
-    expect(articleSource).toContain('lastUpdated: "2026-09-06"');
+    expect(articleSource).toContain('lastUpdated: "2026-09-19"');
     expect(articleSource).toContain('<LastUpdated date={articleMetadata.lastUpdated} />');
     expect(articleSource).toContain('updatedDate={articleMetadata.lastUpdated}');
   });
@@ -66,7 +66,16 @@ describe("Bali Hotel Price Index", () => {
   it("registers only the new canonical price-index route while retaining the old URL's permanent redirect", () => {
     expect(sitemapRoutes.map((route) => route.path)).toContain("/blog/bali-hotel-price-index-2026");
     expect(sitemapRoutes.map((route) => route.path)).not.toContain("/blog/bali-hotel-prices-2026");
-    expect(getLegacyRedirectTarget("/blog/bali-hotel-prices-2026")).toBe("/blog/where-to-stay-in-bali-2026");
+    expect(getLegacyRedirectTarget("/blog/bali-hotel-prices-2026")).toBe("/blog/bali-hotel-price-index-2026");
+  });
+
+  it("retains the older first-timer area context inside the canonical price index", () => {
+    expect(articleSource).toContain("firstTimerAreaNotes");
+    expect(articleSource).toContain("Choose the area before comparing a property");
+    expect(articleSource).toContain("Seminyak");
+    expect(articleSource).toContain("Ubud");
+    expect(articleSource).toContain("Uluwatu");
+    expect(articleSource).toContain("Canggu");
   });
 
   it("uses the supplied monthly seasonal values in the group-cost calculator and interactive rate chart", () => {

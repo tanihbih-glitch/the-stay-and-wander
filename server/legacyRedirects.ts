@@ -1,4 +1,5 @@
 import type { NextFunction, Request, Response } from "express";
+import { isApplicationRoute } from "../shared/publicRoutes";
 
 /**
  * Permanent destinations for retired public URLs that Google Search Console
@@ -15,8 +16,8 @@ export const LEGACY_PERMANENT_REDIRECTS: Readonly<Record<string, string>> = {
   "/home": "/",
   "/guides": "/blog",
   "/blog/europe-cities": "/blog/best-cities-europe-summer-2026",
-  "/blog/bali-hotel-prices-2026": "/blog/where-to-stay-in-bali-2026",
-  "/blog/bangkok-hotel-prices-2026": "/blog/where-to-stay-in-bangkok-2026",
+  "/blog/bali-hotel-prices-2026": "/blog/bali-hotel-price-index-2026",
+  "/blog/bangkok-hotel-prices-2026": "/blog/bangkok-hotel-price-index-2026",
 };
 
 function normalizeLegacyPath(pathname: string): string {
@@ -38,6 +39,32 @@ export function legacyRedirectMiddleware(req: Request, res: Response, next: Next
     return;
   }
 
+  const queryIndex = req.originalUrl.indexOf("?");
+  const query = queryIndex >= 0 ? req.originalUrl.slice(queryIndex) : "";
+  res.redirect(301, `${target}${query}`);
+}
+
+/**
+ * Canonical public routes use no trailing slash. Restrict this rule to known
+ * application pages so API and static-file paths remain untouched.
+ */
+export function getTrailingSlashRedirectTarget(pathname: string): string | undefined {
+  const path = pathname.split("?")[0].split("#")[0] || "/";
+  if (path === "/" || !path.endsWith("/") || !isApplicationRoute(path)) return undefined;
+  return path.replace(/\/+$/, "") || "/";
+}
+
+/** Sends a 301 for duplicate trailing-slash public application URLs. */
+export function trailingSlashRedirectMiddleware(req: Request, res: Response, next: NextFunction) {
+  if (req.method !== "GET" && req.method !== "HEAD") {
+    next();
+    return;
+  }
+  const target = getTrailingSlashRedirectTarget(req.originalUrl || req.path);
+  if (!target) {
+    next();
+    return;
+  }
   const queryIndex = req.originalUrl.indexOf("?");
   const query = queryIndex >= 0 ? req.originalUrl.slice(queryIndex) : "";
   res.redirect(301, `${target}${query}`);

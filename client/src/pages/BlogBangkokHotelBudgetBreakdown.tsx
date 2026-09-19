@@ -25,7 +25,7 @@ export const articleMetadata = {
 };
 
 export const searchMetadata = {
-  title: "Bangkok Hotel Costs 2026: $10–$300+ | The Stay & Wander",
+  title: "Bangkok Budget Hotels 2026: $10–$300+ Cost Breakdown",
   description:
     "See typical Bangkok hotel rates in 2026: $10–$20 hostels, $30–$80 mid-range rooms and $120–$300+ five-star stays, plus booking factors.",
 };

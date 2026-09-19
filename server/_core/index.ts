@@ -10,7 +10,7 @@ import { createContext } from "./context";
 import { serveStatic, setupVite } from "./vite";
 import { registerStripeWebhook } from "../stripeWebhook";
 import { ssrMiddleware } from "../ssr";
-import { legacyRedirectMiddleware } from "../legacyRedirects";
+import { legacyRedirectMiddleware, trailingSlashRedirectMiddleware } from "../legacyRedirects";
 import { registerGoogleSearchConsoleOAuthRoutes } from "../googleSearchConsoleOAuthRoutes";
 import { registerSearchConsoleCtrMonitoringRoutes } from "../searchConsoleCtrMonitoringRoutes";
 
@@ -56,6 +56,8 @@ async function startServer() {
   );
   // Redirect retired public URLs before SSR metadata and SPA/static fallback handling.
   app.use(legacyRedirectMiddleware);
+  // Collapse duplicate public trailing-slash URLs before assigning crawler metadata.
+  app.use(trailingSlashRedirectMiddleware);
   // Attach route-aware metadata before either development or production HTML is served.
   app.use(ssrMiddleware);
   // development mode uses Vite, production mode uses static files

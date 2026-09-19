@@ -9,7 +9,6 @@ import {
   collectUaeExtendedStayHubReport,
   comparePriorityCtrFollowUp,
   compareUaeExtendedStayHubFollowUp,
-  isFirstBusinessDayOfMonth,
   isUaeExtendedStayReviewEligible,
 } from "./searchConsoleCtrMonitoring";
 
@@ -22,14 +21,13 @@ function sendUnexpectedError(res: Response, req: Request, error: unknown) {
 }
 
 export function registerSearchConsoleCtrMonitoringRoutes(app: Express) {
-  /** Retains the established CTR follow-up task and its existing metrics. */
+  /** Uses the externally scheduled CTR task timing and its established metrics. */
   app.post("/api/scheduled/search-console-ctr", async (req: Request, res: Response) => {
     try {
       const user = await sdk.authenticateRequest(req);
       if (!user.isCron || !user.taskUid) return res.status(403).json({ error: "cron-only" });
       const connection = await getSearchConsoleConnectionByTaskUid(user.taskUid);
       if (!connection) return res.json({ ok: true, skipped: "orphan" });
-      if (!isFirstBusinessDayOfMonth()) return res.json({ ok: true, skipped: "not-first-business-day" });
       const report = await collectSearchConsoleCtrReport();
       return res.json({
         ok: true,

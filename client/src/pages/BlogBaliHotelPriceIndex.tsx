@@ -23,7 +23,12 @@ export const articleMetadata = {
   category: "Coastal Field Notes · Bali Travel",
   readTime: "8 minutes",
   publishDate: "2026-08-23",
-  lastUpdated: "2026-09-06",
+  lastUpdated: "2026-09-19",
+};
+
+export const searchMetadata = {
+  title: "Bali Hotel Prices 2026: $7–$1,200+ Nightly Rates",
+  description: "Compare 2026 Bali hotel rates by region: $7–$30 budget, $30–$160 boutique, $90–$400 villas and $180–$1,200+ resorts. Includes seasonal planning tools.",
 };
 
 export const hotelRateRows = [
@@ -48,9 +53,17 @@ const pricingFactors = [
   { icon: Users, title: "Villa vs. Hotel Value", text: "For groups of 4+, a private 2–3 bedroom pool villa often costs less per person than multiple mid-range hotel rooms." },
 ] as const;
 
+const firstTimerAreaNotes = [
+  { area: "Seminyak", note: "Choose a social beach-and-dining base, then compare slightly inland options if you want more room in the budget." },
+  { area: "Ubud", note: "Use the inland base for temples, rice terraces, cafés, and wellness; central Ubud favors walkability while outer stays favor quiet." },
+  { area: "Uluwatu", note: "Prioritize the Bukit coast for cliffs, surf, and resort days, while allowing extra transport time for the rest of the island." },
+  { area: "Canggu", note: "Use this base for cafés, surf, and a longer-stay rhythm; a central location can matter when traffic is part of the daily trade-off." },
+] as const;
+
 const tableOfContents = [
   { id: "introduction-title", label: "Why headline rates mislead" },
   { id: "summary-title", label: "Nightly rate benchmark" },
+  { id: "first-timer-area-context", label: "First-timer area context" },
   { id: "factors-title", label: "Key pricing factors" },
   { id: "planning-tools", label: "Group calculator and seasonal rates" },
   { id: "map-title", label: "Regional rate map" },
@@ -63,7 +76,7 @@ export default function BlogBaliHotelPriceIndex() {
 
   return (
     <div className="min-h-screen bg-[#FBF8F1] pb-20 md:pb-0">
-      <Head title={articleMetadata.title} description={articleMetadata.description} canonical={canonicalUrl} ogTitle={articleMetadata.title} ogDescription={articleMetadata.description} ogImage={articleMetadata.image} ogUrl={canonicalUrl} keywords={articleMetadata.keywords} publishedDate={articleMetadata.publishDate} updatedDate={articleMetadata.lastUpdated} />
+      <Head title={searchMetadata.title} description={searchMetadata.description} canonical={canonicalUrl} ogTitle={searchMetadata.title} ogDescription={searchMetadata.description} ogImage={articleMetadata.image} ogUrl={canonicalUrl} keywords={articleMetadata.keywords} publishedDate={articleMetadata.publishDate} updatedDate={articleMetadata.lastUpdated} />
       <Header />
 
       <section className="relative overflow-hidden bg-[#0D1B2A] px-4 pb-16 pt-32 text-white md:pb-20 md:pt-40">
@@ -105,6 +118,13 @@ export default function BlogBaliHotelPriceIndex() {
           <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#0077B6]">Before you compare</p><h2 id="factors-title" className="mt-3 font-playfair text-3xl font-bold text-[#0D1B2A] md:text-4xl">Key pricing factors for 2026</h2>
           <div className="mt-7 grid gap-5 md:grid-cols-3">{pricingFactors.map(({ icon: Icon, title, text }) => <article key={title} className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm"><div className="inline-flex rounded-full bg-[#e5f4fb] p-3 text-[#0077B6]"><Icon className="h-5 w-5" aria-hidden="true" /></div><h3 className="mt-4 font-playfair text-xl font-bold text-[#0D1B2A]">{title}</h3><p className="mt-3 text-sm leading-relaxed text-slate-700">{text}</p></article>)}</div>
           <p className="mt-7 rounded-xl border-l-4 border-[#F4A261] bg-[#fff8f1] p-5 text-slate-700"><span className="font-bold text-[#0D1B2A]">Research Tip:</span> Map regional trade-offs to a stay you would actually enjoy, then compare the final tax-inclusive price before booking.</p>
+        </section>
+
+        <section id="first-timer-area-context" className="mt-14 scroll-mt-28" aria-labelledby="first-timer-area-title">
+          <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#0077B6]">First-timer context</p>
+          <h2 id="first-timer-area-title" className="mt-3 font-playfair text-3xl font-bold text-[#0D1B2A] md:text-4xl">Choose the area before comparing a property</h2>
+          <p className="mt-4 max-w-3xl text-lg leading-relaxed text-slate-700">The regional matrix retains the price research; these notes preserve the practical area-fit guidance that previously lived with the older Bali price URL.</p>
+          <div className="mt-7 grid gap-4 sm:grid-cols-2">{firstTimerAreaNotes.map((item) => <article key={item.area} className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"><h3 className="font-playfair text-xl font-bold text-[#0D1B2A]">{item.area}</h3><p className="mt-2 text-sm leading-relaxed text-slate-700">{item.note}</p></article>)}</div>
         </section>
 
         <section id="planning-tools" className="scroll-mt-28"><BaliGroupCostCalculator /><BaliSeasonalRateChart /></section>

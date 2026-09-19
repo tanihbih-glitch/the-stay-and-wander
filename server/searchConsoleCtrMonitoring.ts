@@ -5,18 +5,23 @@ import {
   saveSearchConsoleUaeExtendedStayReport,
 } from "./db";
 
-/** Existing CTR-monitor snapshot; do not add the UAE hub to this established workflow. */
+/** Established CTR monitor with the two newly selected price-index canonicals. Do not add the UAE hub. */
 export const MONITORED_SEARCH_CONSOLE_PATHS = [
-  "/blog/where-to-stay-in-bali-2026",
-  "/blog/where-to-stay-in-bangkok-2026",
+  "/blog/bali-hotel-price-index-2026",
+  "/blog/bangkok-hotel-price-index-2026",
   "/blog/where-to-stay-in-tokyo-2026",
   "/blog/where-to-stay-in-seoul-2026",
   "/blog/bangkok-hotel-budget-breakdown-2026",
   "/blog/uae-extended-stay-sustainability-2026",
 ] as const;
 
-/** Compatibility export retained for the original four-guide monthly report. */
-export const MONITORED_WHERE_TO_STAY_PATHS = MONITORED_SEARCH_CONSOLE_PATHS.slice(0, 4);
+/** Historical list retained for comparison documentation; it is not the active CTR target list. */
+export const MONITORED_WHERE_TO_STAY_PATHS = [
+  "/blog/where-to-stay-in-bali-2026",
+  "/blog/where-to-stay-in-bangkok-2026",
+  "/blog/where-to-stay-in-tokyo-2026",
+  "/blog/where-to-stay-in-seoul-2026",
+] as const;
 
 export const UAE_EXTENDED_STAY_HUB_PATH = "/blog/uae-extended-stay-hotels-2026";
 export const MONITORED_UAE_EXTENDED_STAY_HUB_PATHS = [UAE_EXTENDED_STAY_HUB_PATH] as const;
@@ -31,8 +36,8 @@ export const PRIORITY_CTR_FOLLOW_UP_BASELINE = {
   periodStart: "2026-07-13",
   periodEnd: "2026-09-06",
   pages: {
-    "/blog/where-to-stay-in-bali-2026": { sourcePath: "/blog/bali-hotel-prices-2026", impressions: 1591, clicks: 0, ctr: 0, position: 8.06 },
-    "/blog/where-to-stay-in-bangkok-2026": { sourcePath: "/blog/bangkok-hotel-prices-2026", impressions: 1263, clicks: 1, ctr: 1 / 1263, position: 9.44 },
+    "/blog/bali-hotel-price-index-2026": { sourcePath: "/blog/bali-hotel-prices-2026", impressions: 1591, clicks: 0, ctr: 0, position: 8.06 },
+    "/blog/bangkok-hotel-price-index-2026": { sourcePath: "/blog/bangkok-hotel-prices-2026", impressions: 1263, clicks: 1, ctr: 1 / 1263, position: 9.44 },
     "/blog/bangkok-hotel-budget-breakdown-2026": { sourcePath: "/blog/bangkok-hotel-budget-breakdown-2026", impressions: 853, clicks: 0, ctr: 0, position: 8.99 },
     "/blog/uae-extended-stay-sustainability-2026": { sourcePath: "/blog/uae-extended-stay-sustainability-2026", impressions: 691, clicks: 0, ctr: 0, position: 25.88 },
   },

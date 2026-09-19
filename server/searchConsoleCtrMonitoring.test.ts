@@ -22,10 +22,10 @@ describe("Search Console CTR monitoring", () => {
     ]);
   });
 
-  it("retains the established CTR snapshot paths without adding the UAE hub", () => {
+  it("targets the selected price-index canonicals without adding the UAE hub", () => {
     expect(MONITORED_SEARCH_CONSOLE_PATHS).toEqual([
-      "/blog/where-to-stay-in-bali-2026",
-      "/blog/where-to-stay-in-bangkok-2026",
+      "/blog/bali-hotel-price-index-2026",
+      "/blog/bangkok-hotel-price-index-2026",
       "/blog/where-to-stay-in-tokyo-2026",
       "/blog/where-to-stay-in-seoul-2026",
       "/blog/bangkok-hotel-budget-breakdown-2026",
@@ -33,15 +33,15 @@ describe("Search Console CTR monitoring", () => {
     ]);
     expect(MONITORED_SEARCH_CONSOLE_PATHS).not.toContain("/blog/uae-extended-stay-hotels-2026");
     expect(PRIORITY_CTR_FOLLOW_UP_BASELINE.periodEnd).toBe("2026-09-06");
-    expect(PRIORITY_CTR_FOLLOW_UP_BASELINE.pages["/blog/where-to-stay-in-bali-2026"].sourcePath).toBe("/blog/bali-hotel-prices-2026");
+    expect(PRIORITY_CTR_FOLLOW_UP_BASELINE.pages["/blog/bali-hotel-price-index-2026"].sourcePath).toBe("/blog/bali-hotel-prices-2026");
   });
 
   it("computes CTR and position deltas against the supplied priority baseline", () => {
     const result = comparePriorityCtrFollowUp({
-      "/blog/where-to-stay-in-bali-2026": { clicks: 3, impressions: 1000, ctr: 0.003, position: 7.5 },
+      "/blog/bali-hotel-price-index-2026": { clicks: 3, impressions: 1000, ctr: 0.003, position: 7.5 },
     });
 
-    expect(result[0]).toMatchObject({ path: "/blog/where-to-stay-in-bali-2026", ctrChange: 0.003, positionChange: -0.56 });
+    expect(result[0]).toMatchObject({ path: "/blog/bali-hotel-price-index-2026", ctrChange: 0.003, positionChange: -0.56 });
   });
 
   it("tracks the UAE hub independently by position trend and a manual citation review rather than CTR", () => {

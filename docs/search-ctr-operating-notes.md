@@ -2,16 +2,16 @@
 
 ## Priority snippet baseline
 
-The next comparison uses the supplied Search Console baseline of **July 13–September 6, 2026**. The first two legacy paths now permanently redirect, so their current canonical destinations are the pages tracked in the scheduled report.
+The next comparison uses the supplied Search Console baseline of **July 13–September 6, 2026**. As of September 19, the first two legacy paths permanently redirect to the price-index guides below; the existing scheduled report retains its timing and task identity while tracking those newly selected canonical destinations.
 
 | Canonical guide | Baseline source path | Impressions | Clicks | CTR | Average position |
 |---|---:|---:|---:|---:|---:|
-| `/blog/where-to-stay-in-bali-2026` | `/blog/bali-hotel-prices-2026` | 1,591 | 0 | 0.00% | 8.06 |
-| `/blog/where-to-stay-in-bangkok-2026` | `/blog/bangkok-hotel-prices-2026` | 1,263 | 1 | 0.08% | 9.44 |
+| `/blog/bali-hotel-price-index-2026` | `/blog/bali-hotel-prices-2026` | 1,591 | 0 | 0.00% | 8.06 |
+| `/blog/bangkok-hotel-price-index-2026` | `/blog/bangkok-hotel-prices-2026` | 1,263 | 1 | 0.08% | 9.44 |
 | `/blog/bangkok-hotel-budget-breakdown-2026` | same | 853 | 0 | 0.00% | 8.99 |
 | `/blog/uae-extended-stay-sustainability-2026` | same | 691 | 0 | 0.00% | 25.88 |
 
-The enabled Search Console snapshot now includes these four canonical paths. Its next scheduled run is **October 8, 2026 at 09:00 UTC**, which is 25 days after the September 13, 2026 review date and therefore falls within the requested three-to-four-week comparison window. The stored report includes CTR and position deltas against this baseline.
+The enabled Search Console snapshot now includes these four canonical paths. Its next scheduled run is **October 8, 2026 at 09:00 UTC**, which is 25 days after the September 13, 2026 review date and therefore falls within the requested three-to-four-week comparison window. The scheduled handler honors that task timing and stores CTR and position deltas against this baseline.
 
 The live-page audit recorded the pre-refinement snippets and article-supported ranges in [`ctr-snippet-audit-2026-09-12.md`](./ctr-snippet-audit-2026-09-12.md). The refined copy uses only those published directional planning figures; it does not present them as live rates.
 

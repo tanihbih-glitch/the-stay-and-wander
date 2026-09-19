@@ -39,19 +39,19 @@ describe("Bangkok Hotel Price Index", () => {
     expect(sitemapPaths).toContain("/blog/bangkok-hotel-price-index-2026");
     expect(sitemapPaths).toContain("/blog/bangkok-hotel-budget-breakdown-2026");
     expect(sitemapPaths).not.toContain("/blog/bangkok-hotel-prices-2026");
-    expect(getLegacyRedirectTarget("/blog/bangkok-hotel-prices-2026")).toBe("/blog/where-to-stay-in-bangkok-2026");
+    expect(getLegacyRedirectTarget("/blog/bangkok-hotel-prices-2026")).toBe("/blog/bangkok-hotel-price-index-2026");
   });
 
   it("uses the shared visible FAQ source for high-intent Bangkok price questions", () => {
     expect(articleSource).toContain('import ArticleFAQ from "@/components/ArticleFAQ"');
     expect(articleSource).toContain('import { bangkokHotelPriceIndexFaqs } from "@shared/articleFaqs"');
     expect(articleSource).toContain('<ArticleFAQ faqs={bangkokHotelPriceIndexFaqs} title="Bangkok Hotel Price Questions, Answered" />');
-    expect(articleSource).toContain("Bangkok Hotel Price Index (2026): Nightly Cost Breakdown & Interactive Tool");
+    expect(articleSource).toContain("Bangkok Hotel Prices 2026: $8–$850+ Nightly Rates");
   });
 
   it("renders the shared crawler-visible Last Updated signal for the current price-index revision", () => {
     expect(articleSource).toContain('import LastUpdated from "@/components/LastUpdated"');
-    expect(articleSource).toContain('lastUpdated: "2026-09-06"');
+    expect(articleSource).toContain('lastUpdated: "2026-09-19"');
     expect(articleSource).toContain('<LastUpdated date={articleMetadata.lastUpdated} />');
     expect(articleSource).toContain('updatedDate={articleMetadata.lastUpdated}');
   });
@@ -82,6 +82,16 @@ describe("Bangkok Hotel Price Index", () => {
     expect(articleSource).toContain("Riverside temples and ferries plan");
     expect(articleSource).toContain("href={`/blog/where-to-stay-in-bangkok-2026${link.hash}`}");
     expect(articleSource).toContain('hash: "#sukhumvit"');
+  });
+
+  it("retains the older first-timer district context inside the canonical price index", () => {
+    expect(articleSource).toContain("firstTimerDistrictNotes");
+    expect(articleSource).toContain("Match the district to your Bangkok rhythm");
+    expect(articleSource).toContain("Sukhumvit");
+    expect(articleSource).toContain("Silom");
+    expect(articleSource).toContain("Riverside");
+    expect(articleSource).toContain("Khao San Road");
+    expect(articleSource).toContain("Sathorn");
   });
 
   it("provides a compliant live hotel date handoff, the supplied BKK/DMK transfer matrix, and a group-aware share export", () => {

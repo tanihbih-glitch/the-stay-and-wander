@@ -25,7 +25,12 @@ export const articleMetadata = {
   category: "City Cost Index · Bangkok Travel",
   readTime: "7 minutes",
   publishDate: "2026-08-24",
-  lastUpdated: "2026-09-06",
+  lastUpdated: "2026-09-19",
+};
+
+export const searchMetadata = {
+  title: "Bangkok Hotel Prices 2026: $8–$850+ Nightly Rates",
+  description: "Compare 2026 Bangkok hotel rates by district: $8–$35 budget, $35–$150 mid-range and $120–$850+ luxury. Includes tax and transfer planning tools.",
 };
 
 export const bangkokHotelPriceRows = [
@@ -42,9 +47,18 @@ const pricingFactors = [
   { icon: Building2, title: "Shoulder Season Savings", text: "Traveling between May and October can lower nightly rates on mid-range and 5-star properties by up to 40%." },
 ] as const;
 
+const firstTimerDistrictNotes = [
+  { district: "Sukhumvit", note: "A flexible BTS-connected base for dining, malls, rooftop bars, and nightlife." },
+  { district: "Silom", note: "A central BTS/MRT choice that balances business-district convenience, markets, and easy river access." },
+  { district: "Riverside", note: "A slower, scenic option for boat access, temples, and hotel-focused stays." },
+  { district: "Khao San Road", note: "A sociable, budget-minded Old City base for travelers who prioritize temples and energy over quiet." },
+  { district: "Sathorn", note: "A calmer central setting suited to longer stays, with rail and river-ferry connections nearby." },
+] as const;
+
 const tableOfContents = [
   { id: "bangkok-introduction", label: "Why district choice matters" },
   { id: "bangkok-benchmark", label: "Nightly price benchmark" },
+  { id: "bangkok-first-timer-context", label: "First-timer district context" },
   { id: "bangkok-pricing-factors", label: "Key pricing factors" },
   { id: "bangkok-planning-tools", label: "Tax, search and transfer tools" },
   { id: "bangkok-price-faq", label: "Price questions" },
@@ -56,7 +70,7 @@ export default function BlogBangkokHotelPriceIndex() {
 
   return (
     <div className="min-h-screen bg-[#FBF8F1] pb-20 md:pb-0">
-      <Head title={articleMetadata.title} description={articleMetadata.description} canonical={canonicalUrl} ogTitle={articleMetadata.title} ogDescription={articleMetadata.description} ogImage={articleMetadata.image} ogUrl={canonicalUrl} keywords={articleMetadata.keywords} publishedDate={articleMetadata.publishDate} updatedDate={articleMetadata.lastUpdated} />
+      <Head title={searchMetadata.title} description={searchMetadata.description} canonical={canonicalUrl} ogTitle={searchMetadata.title} ogDescription={searchMetadata.description} ogImage={articleMetadata.image} ogUrl={canonicalUrl} keywords={articleMetadata.keywords} publishedDate={articleMetadata.publishDate} updatedDate={articleMetadata.lastUpdated} />
       <Header />
       <section className="relative overflow-hidden bg-[#0D1B2A] px-4 pb-16 pt-32 text-white md:pb-20 md:pt-40"><div className="absolute inset-0 opacity-35" style={{ backgroundImage: "radial-gradient(circle at 12% 18%, #0077B6 0, transparent 30%), radial-gradient(circle at 85% 78%, #F4A261 0, transparent 24%)" }} /><div className="container relative z-10 max-w-5xl"><p className="mb-5 text-xs font-bold uppercase tracking-[0.22em] text-[#F4A261]">City Cost Index · Bangkok Travel</p><h1 className="max-w-5xl font-playfair text-4xl font-bold leading-tight md:text-6xl">{articleMetadata.title}</h1><p className="mt-6 max-w-3xl text-xl leading-relaxed text-slate-200">Nightly rates by district, tier, transit access, and the tax details that alter your final Bangkok accommodation budget.</p><div className="mt-8 flex flex-wrap gap-x-6 gap-y-3 text-sm text-slate-200"><span>By {articleMetadata.author}</span><span>{articleMetadata.readTime}</span><LastUpdated date={articleMetadata.lastUpdated} /></div></div></section>
       <main className="container max-w-6xl px-4 py-12 md:py-16"><a href="/blog" className="mb-8 inline-flex items-center gap-2 text-sm font-semibold text-[#0077B6] hover:text-[#005c91]"><ArrowLeft className="h-4 w-4" aria-hidden="true" />Back to Blog</a>
@@ -65,6 +79,7 @@ export default function BlogBangkokHotelPriceIndex() {
         <aside className="rounded-2xl border border-[#ecd9b9] bg-[#F8EFE0] p-6 text-slate-700 md:p-8"><p className="text-xs font-bold uppercase tracking-[0.18em] text-[#9a5b20]">Affiliate disclosure</p><p className="mt-3 leading-relaxed">The Stay &amp; Wander is a reader-supported travel research portal. When you book accommodation through links on our site, we may earn an affiliate commission at no extra cost to you.</p></aside>
         <section id="bangkok-introduction" className="mt-12 max-w-4xl scroll-mt-28"><p className="text-xs font-bold uppercase tracking-[0.2em] text-[#0077B6]">Bangkok accommodation research</p><h2 className="mt-3 font-playfair text-3xl font-bold text-[#0D1B2A] md:text-4xl">Why district choice shapes the real cost of a Bangkok stay</h2><p className="mt-5 text-lg leading-relaxed text-slate-700">Bangkok offers exceptional accommodation value, but location determines overall daily expenditure. Proximity to transit lines often pays for itself by reducing daily taxi and tuk-tuk transport costs.</p></section>
         <section id="bangkok-benchmark" className="mt-14 scroll-mt-28"><div className="max-w-3xl"><p className="text-xs font-bold uppercase tracking-[0.2em] text-[#0077B6]">2026 benchmark matrix</p><h2 className="mt-3 font-playfair text-3xl font-bold text-[#0D1B2A] md:text-4xl">Bangkok hotel price benchmark</h2><p className="mt-4 text-lg leading-relaxed text-slate-700">Typical nightly ranges across Bangkok&apos;s principal accommodation zones.</p></div><div className="table-responsive mt-7 overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-sm"><table className="min-w-[960px] w-full border-collapse text-left text-sm"><thead className="bg-[#0D1B2A] text-white"><tr><th className="p-4">District</th><th className="p-4">Hostels / Budget</th><th className="p-4">3–4 Star Mid-Range</th><th className="p-4">5-Star Luxury</th><th className="p-4">Transit Access &amp; Vibe</th></tr></thead><tbody>{bangkokHotelPriceRows.map((row) => <tr key={row.district} className="border-t border-slate-100 align-top"><th scope="row" className="p-4 font-semibold text-[#0D1B2A]">{row.district}</th><td className="p-4 text-slate-700">{row.budget}</td><td className="p-4 text-slate-700">{row.midRange}</td><td className="p-4 text-slate-700">{row.luxury}</td><td className="p-4 text-slate-700">{row.transit}</td></tr>)}</tbody></table></div></section>
+        <section id="bangkok-first-timer-context" className="mt-14 scroll-mt-28"><p className="text-xs font-bold uppercase tracking-[0.2em] text-[#0077B6]">First-timer context</p><h2 className="mt-3 font-playfair text-3xl font-bold text-[#0D1B2A] md:text-4xl">Match the district to your Bangkok rhythm</h2><p className="mt-4 max-w-3xl text-lg leading-relaxed text-slate-700">The benchmark retains the price research; these notes preserve the district-fit guidance that previously lived with the older Bangkok price URL.</p><div className="mt-7 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{firstTimerDistrictNotes.map((item) => <article key={item.district} className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"><h3 className="font-playfair text-xl font-bold text-[#0D1B2A]">{item.district}</h3><p className="mt-2 text-sm leading-relaxed text-slate-700">{item.note}</p></article>)}</div></section>
         <BangkokDistrictHotelMap />
         <section id="bangkok-pricing-factors" className="mt-14 scroll-mt-28"><p className="text-xs font-bold uppercase tracking-[0.2em] text-[#0077B6]">Before you book</p><h2 className="mt-3 font-playfair text-3xl font-bold text-[#0D1B2A] md:text-4xl">Key pricing factors for 2026</h2><div className="mt-7 grid gap-5 md:grid-cols-3">{pricingFactors.map(({ icon: Icon, title, text }) => <article key={title} className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm"><div className="inline-flex rounded-full bg-[#e5f4fb] p-3 text-[#0077B6]"><Icon className="h-5 w-5" aria-hidden="true" /></div><h3 className="mt-4 font-playfair text-xl font-bold text-[#0D1B2A]">{title}</h3><p className="mt-3 text-sm leading-relaxed text-slate-700">{text}</p></article>)}</div><p className="mt-7 rounded-xl border-l-4 border-[#F4A261] bg-[#fff8f1] p-5 text-slate-700"><span className="font-bold text-[#0D1B2A]">Booking logistics:</span> Secure airport rail transfers alongside hotel reservations to avoid street taxi surcharges upon arrival.</p></section>
         <section id="bangkok-planning-tools" className="scroll-mt-28"><BangkokHotelTaxCalculator /><BangkokLiveHotelSearch /><BangkokAirportTransferBudget /><BangkokArrivalChecklist /></section>

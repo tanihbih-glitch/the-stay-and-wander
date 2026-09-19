@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This working record captures the live title and article-supported planning figures before refining CTR metadata. The legacy `/blog/bali-hotel-prices-2026` and `/blog/bangkok-hotel-prices-2026` requests resolve through permanent redirects to their canonical first-timer guides.
+This working record captures the live title and article-supported planning figures before refining CTR metadata. At the time of this audit, the legacy `/blog/bali-hotel-prices-2026` and `/blog/bangkok-hotel-prices-2026` requests resolved through permanent redirects to first-timer guides. On September 19, 2026, the redirect destinations were superseded by the corresponding canonical price-index guides after their unique area-context guidance was retained there.
 
 | Requested legacy URL | Canonical live guide | Live title before refinement | Article-supported typical shoulder-season figures |
 | --- | --- | --- | --- |
