@@ -26,3 +26,7 @@ The equivalent Seoul `#seoul-premium-tier` navigation was also checked after hyd
 ## Privacy notice review
 
 The browser-rendered Privacy Policy displays the new **Anonymous guide engagement** section. It accurately states that only source guide, selected guide, and time are stored and explicitly excludes names, emails, account IDs, session IDs, IP addresses, browser/device identifiers, user agents, referrers, and external booking destinations.
+
+## Public release verification
+
+After checkpoint `c633a0d1` propagated, cache-busted custom-domain requests returned HTTP 200 for the Bali and Bangkok hotel price indexes, Tokyo and Seoul stay guides, and Privacy Policy. Public crawler HTML confirms each guide's canonical URL, `BlogPosting`, `BreadcrumbList`, and updated `article:modified_time` (`2026-09-19`) payload. A public browser session loaded the released Bali guide with the verified current title and Last Updated signal.
