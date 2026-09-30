@@ -19,6 +19,11 @@ export const LEGACY_PERMANENT_REDIRECTS: Readonly<Record<string, string>> = {
   "/blog/bali-hotel-prices-2026": "/blog/bali-hotel-price-index-2026",
   "/blog/bangkok-hotel-prices-2026": "/blog/bangkok-hotel-price-index-2026",
   "/blog/uae-extended-stay-sustainability-2026": "/blog/uae-extended-stay-hotels-2026",
+  "/brazil": "/blog/brazil-travel-guide-2026",
+  "/privacy-policy-2": "/privacy-policy",
+  "/cruises": "/deals",
+  "/blog/5": "/blog/brazil-travel-guide-2026",
+  "/exploring-the-best-travel-destinations-for-modern-wanderlust": "/blog",
 };
 
 function normalizeLegacyPath(pathname: string): string {

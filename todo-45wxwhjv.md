@@ -491,3 +491,12 @@
 - [x] Preserve the legacy `/blog/uae-extended-stay-sustainability-2026` route, its canonical document, and sitemap entry during the index-wait period. The future 301 migration is explicitly deferred until Search Console confirms the new canonical hub is indexed.
 - [x] Add regression coverage and validate citations, source boundaries, selector behavior, accessibility, responsive layout, crawler HTML, redirects, sitemap/discovery, and tracking configuration. Full validation passed: 36 test files / 190 tests, TypeScript, production build, raw SSR/schema checks, and 1440px/390px full-page review.
 - [x] Publish the UAE extended-stay comparison hub, create the enabled independent first-business-day monitoring job `PRFVQ9EgjeynvutxFoUVXq`, and verify cache-busted custom-domain routes, dual sitemap presence, crawler schemas, and legacy 200/canonical behavior. The legacy route remains unredirected until Search Console confirms indexing.
+
+## Technical traffic-drop audit — 2026-09-30
+- [x] Identified Search Console's three historical 5xx examples: `/brazil/`, `/privacy-policy-2/`, `/cruises/`.
+- [x] Confirmed all three currently returned 404 rather than active 5xx responses.
+- [x] Identified three robots-blocked examples: `/blog/5`, `/exploring-the-best-travel-destinations-for-modern-wanderlust/`, and `/wp-json/hostinger-reach/v1/contact`.
+- [x] Added server-side 301s for the five retired content paths; kept `/wp-json/` intentionally disallowed.
+- [x] Checked exact Pinterest/Dubai URL overlap; no direct match found from the six examples. Full historical Pinterest pin inventory was not available in the connected session.
+- [x] Passed focused tests, TypeScript, production build, diff check, and local status verification.
+- [ ] Publish and verify public propagation.
