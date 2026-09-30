@@ -52,6 +52,22 @@ describe("Middle East destination expansion", () => {
     expect(extendedStayGuide).toContain("/blog/best-hotels-dubai-2026");
   });
 
+  it("adds Pinterest highlights and a compliant Pin this guide module to the Dubai guide", () => {
+    const dubaiGuide = readProjectFile("client/src/pages/BlogDubaiHotels.tsx");
+    const highlights = readProjectFile("client/src/components/PinterestHighlights.tsx");
+    const share = readProjectFile("client/src/components/PinterestShare.tsx");
+
+    expect(dubaiGuide).toContain('import PinterestHighlights from "@/components/PinterestHighlights"');
+    expect(dubaiGuide).toContain("<PinterestHighlights />");
+    expect(dubaiGuide).toContain("<PinterestShare title={metadata.title}");
+    expect(highlights).toContain("Popular on Pinterest");
+    expect(highlights).toContain("/blog/best-hotels-dubai-2026");
+    expect(share).toContain("Pin this guide");
+    expect(share).toContain("pinterest.com/pin/create/button");
+    expect(share).toContain('target=\"_blank\"');
+    expect(share).toContain('rel=\"noopener noreferrer\"');
+  });
+
   it("keeps every shared destination message aligned with the expanded coverage", () => {
     const header = readProjectFile("client/src/components/Header.tsx");
     const footer = readProjectFile("client/src/components/Footer.tsx");

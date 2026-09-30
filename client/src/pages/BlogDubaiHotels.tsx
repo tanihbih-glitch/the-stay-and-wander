@@ -4,6 +4,8 @@ import Head from "@/components/Head";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MobileBottomNav from "@/components/MobileBottomNav";
+import PinterestHighlights from "@/components/PinterestHighlights";
+import PinterestShare from "@/components/PinterestShare";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { generateMetaTags, pageMetadataConfig } from "@shared/seo";
@@ -98,6 +100,7 @@ export default function BlogDubaiHotels() {
               </div>
             </article>
 
+            <div className="space-y-6">
             <aside className="rounded-2xl border border-[#d9cfae] bg-[#f8f4e9] p-7 shadow-[0_18px_45px_rgba(23,54,74,0.08)] sm:p-8">
               <Plane className="h-8 w-8 text-[#b3842d]" aria-hidden="true" />
               <h2 className="mt-5 font-playfair text-2xl font-bold text-[#17364a]">Plan a Dubai–Abu Dhabi escape</h2>
@@ -111,6 +114,8 @@ export default function BlogDubaiHotels() {
                 Explore Middle East itineraries <MapPinned className="h-4 w-4" aria-hidden="true" />
               </Link>
             </aside>
+            <PinterestHighlights />
+            </div>
           </div>
 
           <div className="mt-14 grid gap-5 md:grid-cols-2 lg:mt-18 lg:grid-cols-4">
@@ -137,6 +142,8 @@ export default function BlogDubaiHotels() {
               <Button className="h-auto bg-[#f4a261] px-7 py-4 font-semibold text-white hover:bg-[#df8745]">Search UAE Hotels</Button>
             </a>
           </section>
+
+          <PinterestShare title={metadata.title} url={`https://thestayandwander${metadata.url}`} media={`https://thestayandwander.com${DUBAI_IMAGE}`} className="mt-8 max-w-2xl" />
 
           <section className="mt-10 rounded-2xl border border-[#d9cfae] bg-[#f8f4e9] p-7 text-[#17364a]">
             <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#b3842d]">For longer stays</p>

@@ -15,6 +15,7 @@ import StickyTableOfContents from "@/components/StickyTableOfContents";
 import ArticleBreadcrumbs from "@/components/ArticleBreadcrumbs";
 import RelatedPriceIndexArticles from "@/components/RelatedPriceIndexArticles";
 import CompareDestinations from "@/components/CompareDestinations";
+import PinterestShare from "@/components/PinterestShare";
 
 export const articleMetadata = {
   title: "Bali Hotel Prices in 2026: Average Rates by Neighborhood & Budget",
@@ -96,7 +97,7 @@ export default function BlogBaliHotelPriceIndex() {
           <p className="mb-5 text-xs font-bold uppercase tracking-[0.22em] text-[#F4A261]">Coastal Field Notes · Bali Travel</p>
           <h1 className="max-w-5xl font-playfair text-4xl font-bold leading-tight md:text-6xl">{articleMetadata.title}</h1>
           <p className="mt-7 max-w-3xl text-lg leading-relaxed text-slate-200 md:text-xl">A five-region planning baseline for reading Bali accommodation rates beyond the first promotional price you see.</p>
-          <div className="mt-9 flex flex-wrap gap-x-6 gap-y-3 text-sm text-slate-200"><span>By {articleMetadata.author}</span><span>{articleMetadata.readTime}</span><LastUpdated date={articleMetadata.lastUpdated} /></div>
+          <div className="mt-9 flex flex-wrap gap-x-6 gap-y-3 text-sm text-slate-200"><span>By {articleMetadata.author}</span><span>{articleMetadata.readTime}</span><LastUpdated date={articleMetadata.lastUpdated} badge /></div>
         </div>
       </section>
 
@@ -107,7 +108,8 @@ export default function BlogBaliHotelPriceIndex() {
         <div className="lg:grid lg:grid-cols-[15rem,minmax(0,1fr)] lg:items-start lg:gap-10">
           <aside className="lg:sticky lg:top-24"><StickyTableOfContents items={tableOfContents} /></aside>
           <div>
-        <GuideShare title={articleMetadata.title} url={canonicalUrl} className="mb-6" />
+        <GuideShare title={articleMetadata.title} url={canonicalUrl} className="mb-4" />
+        <PinterestShare title={articleMetadata.title} url={canonicalUrl} media={`https://thestayandwander.com${articleMetadata.image}`} className="mb-6 max-w-2xl" />
         <aside className="rounded-2xl border border-[#ecd9b9] bg-[#F8EFE0] p-6 text-slate-700 md:p-8" aria-label="Affiliate disclosure">
           <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#9a5b20]">Affiliate disclosure</p>
           <p className="mt-3 leading-relaxed">The Stay &amp; Wander is a reader-supported travel research portal. When you book accommodation through links on our site, we may earn an affiliate commission at no extra cost to you.</p>

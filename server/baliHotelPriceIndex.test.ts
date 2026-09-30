@@ -46,10 +46,10 @@ describe("Bali Hotel Price Index", () => {
     expect(articleSource).toContain("Bali Hotel Prices 2026: $7–$1,200+ Nightly Rates");
   });
 
-  it("renders the shared crawler-visible Last Updated signal for the current price-index revision", () => {
+  it("renders the shared crawler-visible Recently Updated signal for the current price-index revision", () => {
     expect(articleSource).toContain('import LastUpdated from "@/components/LastUpdated"');
     expect(articleSource).toContain('lastUpdated: "2026-09-19"');
-    expect(articleSource).toContain('<LastUpdated date={articleMetadata.lastUpdated} />');
+    expect(articleSource).toContain('<LastUpdated date={articleMetadata.lastUpdated} badge />');
     expect(articleSource).toContain('updatedDate={articleMetadata.lastUpdated}');
   });
 
@@ -59,6 +59,8 @@ describe("Bali Hotel Price Index", () => {
     expect(articleSource).toContain('import ArticleBreadcrumbs from "@/components/ArticleBreadcrumbs"');
     expect(articleSource).toContain('<ArticleBreadcrumbs currentLabel="Bali hotel price index" />');
     expect(articleSource).toContain('<GuideShare title={articleMetadata.title} url={canonicalUrl}');
+    expect(articleSource).toContain('import PinterestShare from "@/components/PinterestShare"');
+    expect(articleSource).toContain('<PinterestShare title={articleMetadata.title}');
     expect(articleSource).toContain('<StickyTableOfContents items={tableOfContents} />');
     expect(articleSource).toContain('id: "bali-budget-tier"');
     expect(articleSource).toContain('id: "bali-boutique-tier"');
@@ -68,6 +70,13 @@ describe("Bali Hotel Price Index", () => {
     expect(articleSource).toContain('id="planning-tools"');
     expect(articleSource).toContain('id="bali-price-faq"');
     expect(articleSource).toContain('lg:sticky lg:top-24');
+  });
+
+  it("provides a dedicated Pinterest save module with the article image", () => {
+    expect(articleSource).toContain("media={`https://thestayandwander.com${articleMetadata.image}`}");
+    const pinterestSource = fs.readFileSync(path.resolve(process.cwd(), "client/src/components/PinterestShare.tsx"), "utf8");
+    expect(pinterestSource).toContain("pinterest.com/pin/create/button");
+    expect(pinterestSource).toContain("Pin this guide");
   });
 
   it("keeps readers moving with three contextual Bali related-article cards", () => {
