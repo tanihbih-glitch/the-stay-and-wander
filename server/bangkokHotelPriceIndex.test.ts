@@ -85,6 +85,17 @@ describe("Bangkok Hotel Price Index", () => {
     expect(comparisonSource).toContain("May–October is the guide’s savings window");
   });
 
+  it("supports month selection and best-month planning lenses", () => {
+    const comparisonSource = fs.readFileSync(path.resolve(process.cwd(), "client/src/components/CompareDestinations.tsx"), "utf8");
+    expect(comparisonSource).toContain("Month-by-month comparison");
+    expect(comparisonSource).toContain("Lower-cost guidance");
+    expect(comparisonSource).toContain("Event-led months");
+    expect(comparisonSource).toContain("Songkran");
+    expect(comparisonSource).toContain("Potentially up to 40% lower");
+    expect(comparisonSource).toContain("setSelectedMonth(index)");
+    expect(comparisonSource).toContain("setSeasonFilter(filter)");
+  });
+
   it("adds district nightly-rate tooltips, a transparent 17.7 percent surcharge calculation, and focused planning links", () => {
     expect(mapSource).toContain("Sukhumvit (Asok / Nana)");
     expect(mapSource).toContain('midRange: "$55–$110"');

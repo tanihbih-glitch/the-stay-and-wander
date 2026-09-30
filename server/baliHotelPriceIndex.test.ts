@@ -86,6 +86,20 @@ describe("Bali Hotel Price Index", () => {
     expect(comparisonSource).toContain("April cherry blossoms and October autumn foliage");
   });
 
+  it("provides month-by-month comparison controls, planning filters, and event highlights", () => {
+    const comparisonSource = fs.readFileSync(path.resolve(process.cwd(), "client/src/components/CompareDestinations.tsx"), "utf8");
+    expect(comparisonSource).toContain("Month-by-month comparison");
+    expect(comparisonSource).toContain("Best months filters");
+    expect(comparisonSource).toContain('value: "Lower-cost guidance"');
+    expect(comparisonSource).toContain('events: "Event-led months"');
+    expect(comparisonSource).toContain("Nyepi / Day of Silence");
+    expect(comparisonSource).toContain("Songkran");
+    expect(comparisonSource).toContain("Cherry blossom season");
+    expect(comparisonSource).toContain("Autumn foliage season");
+    expect(comparisonSource).toContain("aria-pressed={selectedMonth === index}");
+    expect(comparisonSource).toContain("visibleDestinations");
+  });
+
   it("registers only the new canonical price-index route while retaining the old URL's permanent redirect", () => {
     expect(sitemapRoutes.map((route) => route.path)).toContain("/blog/bali-hotel-price-index-2026");
     expect(sitemapRoutes.map((route) => route.path)).not.toContain("/blog/bali-hotel-prices-2026");
