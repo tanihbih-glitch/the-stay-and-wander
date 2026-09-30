@@ -15,6 +15,7 @@ describe("legacy Search Console 404 redirects", () => {
     "/blog/europe-cities": "/blog/best-cities-europe-summer-2026",
     "/blog/bali-hotel-prices-2026": "/blog/bali-hotel-price-index-2026",
     "/blog/bangkok-hotel-prices-2026": "/blog/bangkok-hotel-price-index-2026",
+    "/blog/uae-extended-stay-sustainability-2026": "/blog/uae-extended-stay-hotels-2026",
   };
 
   it("maps each of the nine reported retired URLs to its closest live destination", () => {
@@ -30,6 +31,7 @@ describe("legacy Search Console 404 redirects", () => {
       "/blog/europe-cities": "/blog/best-cities-europe-summer-2026",
       "/blog/bali-hotel-prices-2026": "/blog/bali-hotel-price-index-2026",
       "/blog/bangkok-hotel-prices-2026": "/blog/bangkok-hotel-price-index-2026",
+      "/blog/uae-extended-stay-sustainability-2026": "/blog/uae-extended-stay-hotels-2026",
     });
 
     for (const [source, destination] of Object.entries(expectedRedirects)) {

@@ -50,16 +50,16 @@ describe("UAE extended-stay comparison hub", () => {
     expect(selector).not.toMatch(/localStorage|fetch\(|trpc\.|axios|userId/i);
   });
 
-  it("registers the new hub independently while preserving the live legacy article for future migration", () => {
+  it("registers the new hub and retires the cannibalizing legacy article", () => {
     const blog = readProjectFile("client/src/pages/Blog.tsx");
     const redirects = readProjectFile("server/legacyRedirects.ts");
 
     expect(isApplicationRoute(articleMetadata.url)).toBe(true);
-    expect(isApplicationRoute("/blog/uae-extended-stay-sustainability-2026")).toBe(true);
+    expect(isApplicationRoute("/blog/uae-extended-stay-sustainability-2026")).toBe(false);
     expect(sitemapRoutes.map((route) => route.path)).toContain(articleMetadata.url);
-    expect(sitemapRoutes.map((route) => route.path)).toContain("/blog/uae-extended-stay-sustainability-2026");
+    expect(sitemapRoutes.map((route) => route.path)).not.toContain("/blog/uae-extended-stay-sustainability-2026");
     expect(featuredGuideDiscovery.map((guide) => guide.path)).toContain(articleMetadata.url);
     expect(blog).toContain("featuredGuideDiscovery.map");
-    expect(redirects).not.toContain("/blog/uae-extended-stay-sustainability-2026");
+    expect(redirects).toContain("/blog/uae-extended-stay-sustainability-2026");
   });
 });
