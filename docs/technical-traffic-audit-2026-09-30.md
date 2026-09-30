@@ -32,3 +32,16 @@ The first two are retired/legacy content paths. The third is a WordPress API end
 ## Pinterest cross-channel check
 
 The six Search Console examples do not include the canonical Dubai guide (`/blog/best-hotels-dubai-2026`) or another Dubai destination URL. Repository and public-search checks found no evidence that these six paths are canonical Dubai-board landing pages. Therefore this audit found no direct URL match between the six faults and Dubai-board pin destinations. Pinterest Analytics pin-by-pin export was not exposed by the current connected browser session, so the conclusion is limited to exact URL matching rather than a full historical pin inventory.
+
+## Public verification
+
+After checkpoint `42248755` propagated, cache-busted live requests confirmed:
+
+- `/brazil/` → HTTP 301 → `/blog/brazil-travel-guide-2026`
+- `/privacy-policy-2/` → HTTP 301 → `/privacy-policy`
+- `/cruises/` → HTTP 301 → `/deals`
+- `/blog/5` → HTTP 301 → `/blog/brazil-travel-guide-2026`
+- `/exploring-the-best-travel-destinations-for-modern-wanderlust/` → HTTP 301 → `/blog`
+- `/robots.txt` includes `Disallow: /wp-json/`.
+
+Search Console URL Inspection confirms `/blog/brazil-travel-guide-2026` is already indexed and served over HTTPS. The five obsolete aliases are redirected rather than restored content pages, so no separate indexing request was needed for them; Google should recrawl the 301 targets through the redirect chain.

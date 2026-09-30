@@ -499,4 +499,4 @@
 - [x] Added server-side 301s for the five retired content paths; kept `/wp-json/` intentionally disallowed.
 - [x] Checked exact Pinterest/Dubai URL overlap; no direct match found from the six examples. Full historical Pinterest pin inventory was not available in the connected session.
 - [x] Passed focused tests, TypeScript, production build, diff check, and local status verification.
-- [ ] Publish and verify public propagation.
+- [x] Publish and verify public propagation.
