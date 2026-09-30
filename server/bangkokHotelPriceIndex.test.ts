@@ -79,6 +79,12 @@ describe("Bangkok Hotel Price Index", () => {
     expect(articleSource).toContain('<CompareDestinations current="bangkok" />');
   });
 
+  it("retains the seasonal planning note in the shared comparison cards", () => {
+    const comparisonSource = fs.readFileSync(path.resolve(process.cwd(), "client/src/components/CompareDestinations.tsx"), "utf8");
+    expect(comparisonSource).toContain("Seasonal planning");
+    expect(comparisonSource).toContain("May–October is the guide’s savings window");
+  });
+
   it("adds district nightly-rate tooltips, a transparent 17.7 percent surcharge calculation, and focused planning links", () => {
     expect(mapSource).toContain("Sukhumvit (Asok / Nana)");
     expect(mapSource).toContain('midRange: "$55–$110"');

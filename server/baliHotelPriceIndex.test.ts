@@ -77,6 +77,15 @@ describe("Bali Hotel Price Index", () => {
     expect(articleSource).toContain('<CompareDestinations current="bali" />');
   });
 
+  it("adds seasonal planning context to the cross-city comparison cards", () => {
+    const comparisonSource = fs.readFileSync(path.resolve(process.cwd(), "client/src/components/CompareDestinations.tsx"), "utf8");
+    expect(comparisonSource).toContain("Seasonal planning");
+    expect(comparisonSource).toContain("July–August and mid-December through January");
+    expect(comparisonSource).toContain("May–October is the guide’s savings window");
+    expect(comparisonSource).toContain("Late March–early April cherry blossom weeks");
+    expect(comparisonSource).toContain("April cherry blossoms and October autumn foliage");
+  });
+
   it("registers only the new canonical price-index route while retaining the old URL's permanent redirect", () => {
     expect(sitemapRoutes.map((route) => route.path)).toContain("/blog/bali-hotel-price-index-2026");
     expect(sitemapRoutes.map((route) => route.path)).not.toContain("/blog/bali-hotel-prices-2026");

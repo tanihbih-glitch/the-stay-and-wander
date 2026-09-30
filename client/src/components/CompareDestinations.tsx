@@ -1,4 +1,4 @@
-import { ArrowUpRight, CheckCircle2, Compass } from "lucide-react";
+import { ArrowUpRight, CalendarDays, CheckCircle2, Compass } from "lucide-react";
 
 export type ComparableDestination = "bali" | "bangkok" | "tokyo" | "seoul";
 
@@ -9,6 +9,7 @@ type DestinationSummary = {
   rangeContext: string;
   bestFor: string;
   planningLens: string;
+  seasonalNote: string;
 };
 
 const destinations: Record<ComparableDestination, DestinationSummary> = {
@@ -19,6 +20,7 @@ const destinations: Record<ComparableDestination, DestinationSummary> = {
     rangeContext: "Published regional planning range",
     bestFor: "Beach time, villa groups, wellness, and varied regional pacing.",
     planningLens: "Compare coasts and inland bases before choosing a property.",
+    seasonalNote: "Compare dates outside July–August and mid-December through January if you want to avoid the guide’s 35%–60% peak-season premium guidance.",
   },
   bangkok: {
     name: "Bangkok",
@@ -27,6 +29,7 @@ const destinations: Record<ComparableDestination, DestinationSummary> = {
     rangeContext: "Published district planning range",
     bestFor: "City energy, food, transit access, and strong hotel-tier choice.",
     planningLens: "A BTS/MRT-adjacent base can reshape the daily transport budget.",
+    seasonalNote: "May–October is the guide’s savings window, with mid-range and five-star rates potentially up to 40% lower; check weather and final availability.",
   },
   tokyo: {
     name: "Tokyo",
@@ -35,6 +38,7 @@ const destinations: Record<ComparableDestination, DestinationSummary> = {
     rangeContext: "Published neighborhood planning range",
     bestFor: "Rail-connected first trips, shopping, late nights, and distinct neighborhoods.",
     planningLens: "Choose the station area first; the range is directional, not a live quote.",
+    seasonalNote: "Late March–early April cherry blossom weeks and October–November foliage can run 30%–50% higher, so book early or compare shoulder dates.",
   },
   seoul: {
     name: "Seoul",
@@ -43,6 +47,7 @@ const destinations: Record<ComparableDestination, DestinationSummary> = {
     rangeContext: "Published district planning range",
     bestFor: "Subway-connected sightseeing, street food, cafés, and nightlife variety.",
     planningLens: "District personality and subway access matter as much as the nightly rate.",
+    seasonalNote: "April cherry blossoms and October autumn foliage can run 25%–40% higher; shoulder-season dates are the guide’s baseline for comparison.",
   },
 };
 
@@ -94,6 +99,10 @@ export default function CompareDestinations({ current }: CompareDestinationsProp
               <p className="mt-1 text-xs text-slate-500">{destination.rangeContext}</p>
               <p className="mt-5 text-sm leading-relaxed text-slate-700"><strong className="text-[#0D1B2A]">Best for:</strong> {destination.bestFor}</p>
               <p className="mt-3 text-sm leading-relaxed text-slate-600">{destination.planningLens}</p>
+              <div className="mt-5 rounded-xl border border-[#cfe4ee] bg-[#eef8fb] p-4">
+                <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.14em] text-[#0077B6]"><CalendarDays className="h-4 w-4" aria-hidden="true" />Seasonal planning</div>
+                <p className="mt-2 text-sm leading-relaxed text-slate-700">{destination.seasonalNote}</p>
+              </div>
               {isCurrent ? (
                 <span className="mt-6 inline-flex text-sm font-semibold text-[#9a5b20]">You are here</span>
               ) : (
