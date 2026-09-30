@@ -75,7 +75,7 @@ describe("Tokyo and Seoul where-to-stay guides", () => {
 
     expect(tokyoPage).toContain('import ArticleBreadcrumbs from "@/components/ArticleBreadcrumbs"');
     expect(tokyoPage).toContain('<ArticleBreadcrumbs currentLabel="Tokyo hotel price guide" />');
-    expect(tokyoPage).toContain('<StickyTableOfContents items={tableOfContents} />');
+    expect(tokyoPage).not.toContain("StickyTableOfContents");
     expect(tokyoPage).toContain('id: "tokyo-value-tier"');
     expect(tokyoPage).toContain('id: "tokyo-central-tier"');
     expect(tokyoPage).toContain('id: "tokyo-premium-tier"');
@@ -83,7 +83,7 @@ describe("Tokyo and Seoul where-to-stay guides", () => {
 
     expect(seoulPage).toContain('import ArticleBreadcrumbs from "@/components/ArticleBreadcrumbs"');
     expect(seoulPage).toContain('<ArticleBreadcrumbs currentLabel="Seoul hotel price guide" />');
-    expect(seoulPage).toContain('<StickyTableOfContents items={tableOfContents} />');
+    expect(seoulPage).not.toContain("StickyTableOfContents");
     expect(seoulPage).toContain('id: "seoul-value-tier"');
     expect(seoulPage).toContain('id: "seoul-central-tier"');
     expect(seoulPage).toContain('id: "seoul-premium-tier"');

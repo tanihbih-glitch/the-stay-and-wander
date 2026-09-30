@@ -14,7 +14,6 @@ import { tokyoStayFaqs } from "@shared/articleFaqs";
 import { ArrowLeft } from "lucide-react";
 import LastUpdated from "@/components/LastUpdated";
 import ArticleBreadcrumbs from "@/components/ArticleBreadcrumbs";
-import StickyTableOfContents from "@/components/StickyTableOfContents";
 import PinterestShare from "@/components/PinterestShare";
 
 export const articleMetadata = {
@@ -52,19 +51,6 @@ const priceTiers = [
   { id: "tokyo-premium-tier", label: "Premium central stays", range: "$70–$280+/night", description: "Ginza carries the guide's highest published range, reflecting its luxury shopping and fine-dining setting. Confirm current station access and final rates for your dates." },
 ] as const;
 
-const tableOfContents = [
-  { id: "tokyo-introduction", label: "Choose the right Tokyo base" },
-  { id: "tokyo-price-snapshot", label: "Neighborhood price snapshot" },
-  ...priceTiers.map((tier) => ({ id: tier.id, label: `${tier.label}: ${tier.range}` })),
-  { id: "shinjuku", label: "Shinjuku" },
-  { id: "shibuya", label: "Shibuya" },
-  { id: "asakusa", label: "Asakusa" },
-  { id: "ginza", label: "Ginza" },
-  { id: "ikebukuro", label: "Ikebukuro" },
-  { id: "tokyo-stay-tips", label: "Stay-selection tips" },
-  { id: "tokyo-booking", label: "Compare live rates" },
-] as const;
-
 export const tokyoStayDecisions: readonly GuideDecision[] = [
   { condition: "it is your first Tokyo trip and transit flexibility matters most", recommendation: "Shinjuku", detail: "Use the major-station base when you want low-friction access across the city.", href: "#shinjuku" },
   { condition: "trendy shopping and youthful energy are the priority", recommendation: "Shibuya", detail: "Choose the iconic, high-energy district when the neighborhood is part of the experience.", href: "#shibuya" },
@@ -85,7 +71,6 @@ export default function BlogTokyoStay() {
         <a href="/blog" className="mb-8 inline-flex items-center gap-2 text-sm font-medium text-[#0077B6] transition-colors hover:text-[#005c91]"><ArrowLeft className="h-4 w-4" />Back to Blog</a>
         <div className="mb-10 flex flex-wrap gap-x-5 gap-y-2 border-b border-gray-200 pb-7 text-sm text-gray-600"><span>Published by: {articleMetadata.author}</span><span>Category: {articleMetadata.category}</span><span>Read time: {articleMetadata.readTime}</span><LastUpdated date={articleMetadata.lastUpdated} /></div>
         <PinterestShare title={articleMetadata.title} url={canonicalUrl} media={`https://thestayandwander.com${articleMetadata.image}`} className="mb-8" />
-        <div className="lg:hidden"><StickyTableOfContents items={tableOfContents} /></div>
         <div id="tokyo-introduction" className="scroll-mt-28 space-y-6 text-lg leading-relaxed text-gray-700"><p>Tokyo is huge, and picking the wrong neighborhood can mean long transit times eating into your trip. Here&apos;s where to actually stay, broken down by what each area is best for — so you can pick based on your trip, not just guesswork.</p></div>
         <GuideMethodologyDecisionTree destinationLabel="Tokyo" methodology="This 2026 guide combines the editorial neighborhood profiles and typical shoulder-season planning ranges shown below. The price bands are directional, not a live rate feed; check exact availability, station access, and current pricing for your dates before booking." decisions={tokyoStayDecisions} />
         <CityStayMatcher config={tokyoStayMatcherConfig} />
@@ -98,7 +83,7 @@ export default function BlogTokyoStay() {
         <ArticleFAQ faqs={tokyoStayFaqs} title="Tokyo Neighborhood Questions, Answered" />
         <section id="tokyo-booking" className="mt-12 scroll-mt-28 border-t border-gray-200 pt-12"><h2 className="font-playfair text-3xl font-bold text-gray-900">Ready to Find Your Tokyo Stay?</h2><p className="mt-6 text-lg leading-relaxed text-gray-700">Compare live rates across hundreds of properties and book directly through our search tool below.</p><TripComHotelWidget className="my-8" title="Search Tokyo hotels on Trip.com" /><CityActivitiesWidget city="Tokyo" /><p className="mt-8 text-center text-sm italic text-gray-500">Prices are approximate and based on typical 2026 rates; always confirm current pricing directly when booking.</p></section>
       </article>
-      <aside className="lg:col-span-1"><div className="hidden lg:block"><StickyTableOfContents items={tableOfContents} /></div><div className="mt-6"><PopularRoutesWidgetBlogSidebar /></div></aside>
+      <aside className="lg:col-span-1"><div className="mt-6"><PopularRoutesWidgetBlogSidebar /></div></aside>
     </main>
     <Footer /><MobileBottomNav />
   </div>;

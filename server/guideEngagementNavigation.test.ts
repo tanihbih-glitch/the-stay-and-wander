@@ -5,12 +5,18 @@ import { DESTINATION_GUIDE_PATHS, isDestinationGuidePath, isLongFormNonPriceDest
 
 const feedbackSource = fs.readFileSync(path.resolve(process.cwd(), "client/src/components/GuideFeedbackAndBackToTop.tsx"), "utf8");
 const contentsSource = fs.readFileSync(path.resolve(process.cwd(), "client/src/components/GuideTableOfContents.tsx"), "utf8");
-const priceIndexContentsSource = fs.readFileSync(path.resolve(process.cwd(), "client/src/components/StickyTableOfContents.tsx"), "utf8");
 const headerSource = fs.readFileSync(path.resolve(process.cwd(), "client/src/components/Header.tsx"), "utf8");
 const footerSource = fs.readFileSync(path.resolve(process.cwd(), "client/src/components/Footer.tsx"), "utf8");
+const sharedPageSources = [
+  "BlogBaliHotelPriceIndex.tsx",
+  "BlogBangkokHotelPriceIndex.tsx",
+  "BlogSeoulStay.tsx",
+  "BlogTokyoStay.tsx",
+  "BlogUaeExtendedStayHotels.tsx",
+].map((file) => fs.readFileSync(path.resolve(process.cwd(), "client/src/pages", file), "utf8"));
 
 describe("destination-guide engagement and navigation", () => {
-  it("covers the complete public destination-guide set while retaining price-index TOC ownership", () => {
+  it("covers the complete public destination-guide set", () => {
     expect(DESTINATION_GUIDE_PATHS).toHaveLength(22);
     expect(isDestinationGuidePath("/blog/where-to-stay-in-bali-2026")).toBe(true);
     expect(isDestinationGuidePath("/blog/uae-extended-stay-hotels-2026")).toBe(true);
@@ -35,7 +41,7 @@ describe("destination-guide engagement and navigation", () => {
     expect(feedbackSource).toContain("window.scrollY > 420");
   });
 
-  it("derives non-price guide contents from actual headings and renders sticky desktop navigation", () => {
+  it("derives non-price guide contents from actual headings and renders one horizontal/mobile shared TOC", () => {
     expect(contentsSource).toContain('document.querySelectorAll("#root h2")');
     expect(contentsSource).toContain('heading.id !== "guide-feedback-heading"');
     expect(contentsSource).toContain("heading.id = id");
@@ -45,35 +51,18 @@ describe("destination-guide engagement and navigation", () => {
     expect(contentsSource).toContain("lg:block");
     expect(contentsSource).toContain("overflow-x-auto");
     expect(contentsSource).toContain('href={`#${item.id}`}');
-  });
-
-  it("preserves direct price-index section links after client hydration", () => {
-    expect(priceIndexContentsSource).toContain("useEffect");
-    expect(priceIndexContentsSource).toContain("window.location.hash.slice(1)");
-    expect(priceIndexContentsSource).toContain("window.requestAnimationFrame");
-    expect(priceIndexContentsSource).toContain('scrollIntoView({ block: "start" })');
-    expect(priceIndexContentsSource).toContain('href={`#${item.id}`}');
-  });
-
-  it("keeps the price-index TOC collapsible, mobile-collapsed, and bounded inside sticky layouts", () => {
-    expect(priceIndexContentsSource).toContain("aria-expanded={isOpen}");
-    expect(priceIndexContentsSource).toContain("aria-controls={listId}");
-    expect(priceIndexContentsSource).toContain("setIsOpen((open) => !open)");
-    expect(priceIndexContentsSource).toContain('window.matchMedia("(min-width: 1024px)")');
-    expect(priceIndexContentsSource).toContain("max-h-[50vh]");
-    expect(priceIndexContentsSource).toContain("overflow-y-auto");
-    expect(priceIndexContentsSource).toContain("hidden={!isOpen}");
-  });
-
-  it("keeps the back-to-top control separated from the TOC layout", () => {
-    expect(feedbackSource).toContain('aria-label="Back to top"');
-    expect(feedbackSource).toContain("fixed bottom-20 right-4");
-    expect(priceIndexContentsSource).toContain("lg:sticky lg:top-24");
-    expect(priceIndexContentsSource).not.toContain("fixed");
-  });
-
-  it("mounts contents and feedback controls through shared chrome so every guide receives them", () => {
     expect(headerSource).toContain('<GuideTableOfContents />');
+  });
+
+  it("removes legacy page-level vertical TOCs from every shared guide template", () => {
+    for (const source of sharedPageSources) {
+      expect(source).not.toContain("StickyTableOfContents");
+      expect(source).not.toContain("lg:grid-cols-[15rem,minmax(0,1fr)]");
+    }
+  });
+
+  it("keeps the Back to Top control independently positioned", () => {
+    expect(feedbackSource).toContain("fixed bottom-20 right-4");
     expect(footerSource).toContain('<GuideFeedbackAndBackToTop />');
   });
 });

@@ -56,22 +56,21 @@ describe("Bangkok Hotel Price Index", () => {
     expect(articleSource).toContain('updatedDate={articleMetadata.lastUpdated}');
   });
 
-  it("adds visible breadcrumbs, tier anchors, and a shareable sticky table of contents", () => {
+  it("adds visible breadcrumbs and tier anchors while using the shared header TOC", () => {
     expect(articleSource).toContain('import GuideShare from "@/components/GuideShare"');
-    expect(articleSource).toContain('import StickyTableOfContents from "@/components/StickyTableOfContents"');
     expect(articleSource).toContain('import ArticleBreadcrumbs from "@/components/ArticleBreadcrumbs"');
     expect(articleSource).toContain('<ArticleBreadcrumbs currentLabel="Bangkok hotel price index" />');
     expect(articleSource).toContain('<GuideShare title={articleMetadata.title} url={canonicalUrl}');
     expect(articleSource).toContain('import PinterestShare from "@/components/PinterestShare"');
     expect(articleSource).toContain('<PinterestShare title={articleMetadata.title}');
-    expect(articleSource).toContain('<StickyTableOfContents items={tableOfContents} />');
+    expect(articleSource).not.toContain("StickyTableOfContents");
     expect(articleSource).toContain('id: "bangkok-budget-tier"');
     expect(articleSource).toContain('id: "bangkok-midrange-tier"');
     expect(articleSource).toContain('id: "bangkok-luxury-tier"');
     expect(articleSource).toContain('scroll-mt-28');
     expect(articleSource).toContain('id="bangkok-planning-tools"');
     expect(articleSource).toContain('id="bangkok-price-faq"');
-    expect(articleSource).toContain('lg:sticky lg:top-24');
+    expect(articleSource).not.toContain("lg:grid-cols-[15rem,minmax(0,1fr)]");
   });
 
   it("provides a dedicated Pinterest save module with the article image", () => {

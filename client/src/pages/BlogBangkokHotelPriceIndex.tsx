@@ -13,7 +13,6 @@ import ArticleFAQ from "@/components/ArticleFAQ";
 import { bangkokHotelPriceIndexFaqs } from "@shared/articleFaqs";
 import LastUpdated from "@/components/LastUpdated";
 import GuideShare from "@/components/GuideShare";
-import StickyTableOfContents from "@/components/StickyTableOfContents";
 import ArticleBreadcrumbs from "@/components/ArticleBreadcrumbs";
 import RelatedPriceIndexArticles from "@/components/RelatedPriceIndexArticles";
 import CompareDestinations from "@/components/CompareDestinations";
@@ -66,17 +65,6 @@ const priceTiers = [
   { id: "bangkok-luxury-tier", label: "Five-star luxury", range: "$120–$850+/night", description: "Luxury planning ranges start at $120–$220 in Khao San and Old City and reach $300–$850+ on the Riverside before the published 17.7% surcharge." },
 ] as const;
 
-const tableOfContents = [
-  { id: "bangkok-introduction", label: "Why district choice matters" },
-  { id: "bangkok-benchmark", label: "Nightly price benchmark" },
-  ...priceTiers.map((tier) => ({ id: tier.id, label: `${tier.label}: ${tier.range}` })),
-  { id: "bangkok-first-timer-context", label: "First-timer district context" },
-  { id: "bangkok-pricing-factors", label: "Key pricing factors" },
-  { id: "bangkok-planning-tools", label: "Tax, search and transfer tools" },
-  { id: "bangkok-price-faq", label: "Price questions" },
-  { id: "bangkok-live-rates", label: "Compare live rates" },
-] as const;
-
 export default function BlogBangkokHotelPriceIndex() {
   const canonicalUrl = `https://thestayandwander.com${articleMetadata.url}`;
 
@@ -86,7 +74,7 @@ export default function BlogBangkokHotelPriceIndex() {
       <Header />
       <section className="relative overflow-hidden bg-[#0D1B2A] px-4 pb-16 pt-32 text-white md:pb-20 md:pt-40"><div className="absolute inset-0 opacity-35" style={{ backgroundImage: "radial-gradient(circle at 12% 18%, #0077B6 0, transparent 30%), radial-gradient(circle at 85% 78%, #F4A261 0, transparent 24%)" }} /><PinterestImageSaveButton title={articleMetadata.title} url={canonicalUrl} media={`https://thestayandwander.com${articleMetadata.image}`} /><div className="container relative z-10 max-w-5xl"><p className="mb-5 text-xs font-bold uppercase tracking-[0.22em] text-[#F4A261]">City Cost Index · Bangkok Travel</p><h1 className="max-w-5xl font-playfair text-4xl font-bold leading-tight md:text-6xl">{articleMetadata.title}</h1><p className="mt-6 max-w-3xl text-xl leading-relaxed text-slate-200">Nightly rates by district, tier, transit access, and the tax details that alter your final Bangkok accommodation budget.</p><div className="mt-8 flex flex-wrap gap-x-6 gap-y-3 text-sm text-slate-200"><span>By {articleMetadata.author}</span><span>{articleMetadata.readTime}</span><LastUpdated date={articleMetadata.lastUpdated} badge /></div></div></section>
       <main className="container max-w-6xl px-4 py-12 md:py-16"><ArticleBreadcrumbs currentLabel="Bangkok hotel price index" /><a href="/blog" className="mb-8 inline-flex items-center gap-2 text-sm font-semibold text-[#0077B6] hover:text-[#005c91]"><ArrowLeft className="h-4 w-4" aria-hidden="true" />Back to Blog</a>
-        <div className="lg:grid lg:grid-cols-[15rem,minmax(0,1fr)] lg:items-start lg:gap-10"><aside className="lg:sticky lg:top-24"><StickyTableOfContents items={tableOfContents} /></aside><div>
+        <div>
         <GuideShare title={articleMetadata.title} url={canonicalUrl} className="mb-4" />
         <PinterestShare title={articleMetadata.title} url={canonicalUrl} media={`https://thestayandwander.com${articleMetadata.image}`} className="mb-6 max-w-2xl" />
         <aside className="rounded-2xl border border-[#ecd9b9] bg-[#F8EFE0] p-6 text-slate-700 md:p-8"><p className="text-xs font-bold uppercase tracking-[0.18em] text-[#9a5b20]">Affiliate disclosure</p><p className="mt-3 leading-relaxed">The Stay &amp; Wander is a reader-supported travel research portal. When you book accommodation through links on our site, we may earn an affiliate commission at no extra cost to you.</p></aside>
@@ -100,7 +88,7 @@ export default function BlogBangkokHotelPriceIndex() {
         <section id="bangkok-price-faq" className="scroll-mt-28"><ArticleFAQ faqs={bangkokHotelPriceIndexFaqs} title="Bangkok Hotel Price Questions, Answered" /></section>
         <section id="bangkok-live-rates" className="mt-14 scroll-mt-28 rounded-3xl bg-[#0D1B2A] px-6 py-10 text-white md:px-10"><div className="max-w-3xl"><p className="text-xs font-bold uppercase tracking-[0.2em] text-[#F4A261]">Search live options</p><h2 className="mt-3 font-playfair text-3xl font-bold md:text-4xl">Compare Bangkok hotel and excursion deals</h2><p className="mt-4 leading-relaxed text-slate-200">Use the district matrix to shortlist the right base, then check current accommodation and excursion availability for your dates.</p><a href={TRIP_COM_HOTEL_WIDGET_URL} target="_blank" rel="sponsored nofollow" className="mt-7 inline-flex items-center gap-2 rounded-full bg-[#F4A261] px-7 py-3.5 font-semibold text-[#0D1B2A] hover:bg-[#f7b879]">Search Bangkok Hotel &amp; Excursion Deals on Trip.com<ArrowRight className="h-4 w-4" aria-hidden="true" /></a></div></section>
         <section className="mt-12 rounded-2xl border border-[#cfe4ee] bg-[#eef8fb] p-6"><div className="flex items-start gap-3"><MapPinned className="mt-1 h-5 w-5 shrink-0 text-[#0077B6]" aria-hidden="true" /><div><h2 className="font-playfair text-2xl font-bold text-[#0D1B2A]">Plan your Bangkok base by district</h2><p className="mt-2 leading-relaxed text-slate-700">Choose a district from the index, then use a focused first-timer planning route to match its transport and sightseeing rhythm.</p><div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">{[{ label: "Sukhumvit transit and dining plan", hash: "#sukhumvit" }, { label: "Silom and Sathorn business-nightlife plan", hash: "#silom-sathorn" }, { label: "Siam shopping-base plan", hash: "#siam" }, { label: "Riverside temples and ferries plan", hash: "#riverside" }, { label: "Khao San and Old City plan", hash: "#khao-san" }].map((link) => <a key={link.label} href={`/blog/where-to-stay-in-bangkok-2026${link.hash}`} className="rounded-xl border border-[#b9dce9] bg-white px-4 py-3 text-sm font-semibold text-[#0077B6] hover:bg-[#e5f4fb]">{link.label}<span className="ml-2" aria-hidden="true">→</span></a>)}</div><p className="mt-5 leading-relaxed text-slate-700">For hotel picks by budget, see the <a href="/blog/bangkok-hotel-budget-breakdown-2026" className="font-semibold text-[#0077B6] hover:underline">Bangkok hotel cost breakdown</a>.</p></div></div></section>
-        </div></div>
+        </div>
       </main><section className="container max-w-6xl px-4 pb-16 md:pb-20"><RelatedPriceIndexArticles destination="bangkok" /><CompareDestinations current="bangkok" /></section><Footer /><MobileBottomNav /></div>
   );
 }

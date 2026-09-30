@@ -11,7 +11,6 @@ import ArticleFAQ from "@/components/ArticleFAQ";
 import { baliHotelPriceIndexFaqs } from "@shared/articleFaqs";
 import LastUpdated from "@/components/LastUpdated";
 import GuideShare from "@/components/GuideShare";
-import StickyTableOfContents from "@/components/StickyTableOfContents";
 import ArticleBreadcrumbs from "@/components/ArticleBreadcrumbs";
 import RelatedPriceIndexArticles from "@/components/RelatedPriceIndexArticles";
 import CompareDestinations from "@/components/CompareDestinations";
@@ -72,18 +71,6 @@ const priceTiers = [
   { id: "bali-resort-tier", label: "Five-star resorts", range: "$180–$1,200+/night", description: "Published resort benchmarks span $180–$350 in Amed and Lovina through $500–$1,200+ on the Bukit, with season and final taxes affecting the total." },
 ] as const;
 
-const tableOfContents = [
-  { id: "introduction-title", label: "Why headline rates mislead" },
-  { id: "summary-title", label: "Nightly rate benchmark" },
-  ...priceTiers.map((tier) => ({ id: tier.id, label: `${tier.label}: ${tier.range}` })),
-  { id: "first-timer-area-context", label: "First-timer area context" },
-  { id: "factors-title", label: "Key pricing factors" },
-  { id: "planning-tools", label: "Group calculator and seasonal rates" },
-  { id: "map-title", label: "Regional rate map" },
-  { id: "bali-price-faq", label: "Price questions" },
-  { id: "booking-title", label: "Compare live rates" },
-] as const;
-
 export default function BlogBaliHotelPriceIndex() {
   const canonicalUrl = `https://thestayandwander.com${articleMetadata.url}`;
 
@@ -107,9 +94,7 @@ export default function BlogBaliHotelPriceIndex() {
         <ArticleBreadcrumbs currentLabel="Bali hotel price index" />
         <a href="/blog" className="mb-8 inline-flex items-center gap-2 text-sm font-semibold text-[#0077B6] transition-colors hover:text-[#005c91]"><ArrowLeft className="h-4 w-4" aria-hidden="true" />Back to Blog</a>
 
-        <div className="lg:grid lg:grid-cols-[15rem,minmax(0,1fr)] lg:items-start lg:gap-10">
-          <aside className="lg:sticky lg:top-24"><StickyTableOfContents items={tableOfContents} /></aside>
-          <div>
+        <div>
         <GuideShare title={articleMetadata.title} url={canonicalUrl} className="mb-4" />
         <PinterestShare title={articleMetadata.title} url={canonicalUrl} media={`https://thestayandwander.com${articleMetadata.image}`} className="mb-6 max-w-2xl" />
         <aside className="rounded-2xl border border-[#ecd9b9] bg-[#F8EFE0] p-6 text-slate-700 md:p-8" aria-label="Affiliate disclosure">
@@ -169,7 +154,6 @@ export default function BlogBaliHotelPriceIndex() {
 
         <section className="mt-16 rounded-3xl bg-[#0D1B2A] px-6 py-10 text-white md:px-10" aria-labelledby="booking-title"><div className="max-w-3xl"><p className="text-xs font-bold uppercase tracking-[0.2em] text-[#F4A261]">Compare your stay</p><h2 id="booking-title" className="mt-3 font-playfair text-3xl font-bold md:text-4xl">Ready to compare Bali accommodation rates?</h2><p className="mt-4 leading-relaxed text-slate-200">Use the matrix to shortlist a region, then check current tax-inclusive options for your travel dates.</p><a href={BALI_HOTEL_PRICE_INDEX_AFFILIATE_LINKS.hotels} target="_blank" rel="sponsored nofollow" className="mt-7 inline-flex items-center gap-2 rounded-full bg-[#F4A261] px-7 py-3.5 font-semibold text-[#0D1B2A] transition-colors hover:bg-[#f7b879]">Compare Bali Accommodation Rates on Stay22<ArrowRight className="h-4 w-4" aria-hidden="true" /></a></div></section>
           </div>
-        </div>
       </main>
       <section className="container max-w-6xl px-4 pb-16 md:pb-20">
         <RelatedPriceIndexArticles destination="bali" />

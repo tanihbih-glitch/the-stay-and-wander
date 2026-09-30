@@ -12,13 +12,18 @@ function slugify(value: string) {
   return value.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "").slice(0, 64);
 }
 
+const PRICE_INDEX_GUIDE_PATHS = new Set([
+  "/blog/bali-hotel-price-index-2026",
+  "/blog/bangkok-hotel-price-index-2026",
+]);
+
 /** Builds an in-page navigation from the article's actual H2 headings; no guide copy is duplicated. */
 export default function GuideTableOfContents() {
   const [location] = useLocation();
   const [items, setItems] = useState<ContentsItem[]>([]);
 
   useEffect(() => {
-    if (!isLongFormNonPriceDestinationGuidePath(location)) {
+    if (!isLongFormNonPriceDestinationGuidePath(location) && !PRICE_INDEX_GUIDE_PATHS.has(location)) {
       setItems([]);
       return;
     }

@@ -6,7 +6,6 @@ import MobileBottomNav from "@/components/MobileBottomNav";
 import ArticleFAQ from "@/components/ArticleFAQ";
 import GuideShare from "@/components/GuideShare";
 import LastUpdated from "@/components/LastUpdated";
-import StickyTableOfContents from "@/components/StickyTableOfContents";
 import TripComHotelWidget from "@/components/TripComHotelWidget";
 import UaeExtendedStaySelector from "@/components/UaeExtendedStaySelector";
 import { UAE_EXTENDED_STAY_AFFILIATE_LINKS } from "@/lib/affiliateLinks";
@@ -87,7 +86,7 @@ export default function BlogUaeExtendedStayHotels() {
         <div className="container relative z-10 max-w-5xl"><p className="mb-5 text-xs font-bold uppercase tracking-[0.22em] text-[#F4A261]">Extended Stay Guide · UAE Travel</p><h1 className="max-w-5xl font-playfair text-4xl font-bold leading-tight md:text-6xl">UAE Extended-Stay Hotels: Find Your Best Fit for 2026</h1><p className="mt-7 max-w-3xl text-lg leading-relaxed text-slate-200 md:text-xl">A source-backed way to compare apartment-style stays in Dubai by your daily needs—not by unsupported live-rate or sustainability rankings.</p><div className="mt-9 flex flex-wrap gap-x-6 gap-y-3 text-sm text-slate-200"><span>By {articleMetadata.author}</span><span>{articleMetadata.readTime}</span><LastUpdated date={articleMetadata.lastUpdated} /></div></div>
       </section>
 
-      <main className="container max-w-6xl px-4 py-12 md:py-16"><a href="/blog" className="mb-8 inline-flex items-center gap-2 text-sm font-semibold text-[#0077B6] hover:text-[#005c91]"><ArrowLeft className="h-4 w-4" aria-hidden="true" />Back to Blog</a><div className="lg:grid lg:grid-cols-[15rem,minmax(0,1fr)] lg:items-start lg:gap-10"><aside className="lg:sticky lg:top-24"><StickyTableOfContents items={contents} /></aside><div>
+        <main className="container max-w-6xl px-4 py-12 md:py-16"><a href="/blog" className="mb-8 inline-flex items-center gap-2 text-sm font-semibold text-[#0077B6] hover:text-[#005c91]"><ArrowLeft className="h-4 w-4" aria-hidden="true" />Back to Blog</a><div>
         <GuideShare title={articleMetadata.title} url={canonicalUrl} className="mb-6" />
         <aside className="rounded-2xl border border-[#ecd9b9] bg-[#F8EFE0] p-6 text-slate-700" aria-label="Affiliate disclosure"><p className="text-xs font-bold uppercase tracking-[0.18em] text-[#9a5b20]">Affiliate disclosure</p><p className="mt-3 leading-relaxed">The Stay &amp; Wander is reader-supported. When you book through selected links, we may earn an affiliate commission at no additional cost to you. Source links are provided for research and are not property endorsements.</p></aside>
 
@@ -112,7 +111,7 @@ export default function BlogUaeExtendedStayHotels() {
         <section className="mt-16 rounded-3xl bg-[#0D1B2A] px-6 py-10 text-white md:px-10"><div className="max-w-3xl"><p className="text-xs font-bold uppercase tracking-[0.2em] text-[#F4A261]">Compare current availability</p><h2 className="mt-3 font-playfair text-3xl font-bold md:text-4xl">Ready to check UAE long-stay options?</h2><p className="mt-4 leading-relaxed text-slate-200">Use the selector as a shortlisting aid, then compare current unit types, long-stay conditions, and final booking terms for your dates.</p><div className="mt-7 flex flex-wrap gap-3"><a href={UAE_EXTENDED_STAY_AFFILIATE_LINKS.hotels} target="_blank" rel="sponsored nofollow" className="inline-flex items-center gap-2 rounded-full bg-[#F4A261] px-7 py-3.5 font-semibold text-[#0D1B2A] hover:bg-[#f7b879]">Compare UAE stays on Stay22 <ArrowRight className="h-4 w-4" aria-hidden="true" /></a><a href={UAE_EXTENDED_STAY_AFFILIATE_LINKS.tripCom} target="_blank" rel="sponsored nofollow" className="inline-flex items-center gap-2 rounded-full border border-white/50 px-7 py-3.5 font-semibold text-white hover:bg-white/10">Search on Trip.com <ArrowRight className="h-4 w-4" aria-hidden="true" /></a></div></div></section>
         <section className="mt-10 rounded-2xl border border-[#d9cfae] bg-[#f8f4e9] p-6 text-slate-700"><h2 className="font-playfair text-2xl font-bold text-[#17364a]">Continue planning your UAE stay</h2><p className="mt-3 leading-relaxed">For district-level hotel context, skyline, beach, culture, and desert planning, pair this long-stay framework with the wider Dubai and Abu Dhabi guide.</p><a href="/blog/best-hotels-dubai-2026" className="mt-4 inline-flex font-semibold text-[#0077B6] hover:underline">Best Hotels in Dubai &amp; Abu Dhabi for Every Kind of Stay →</a></section>
         <TripComHotelWidget className="my-12" title="Search UAE extended-stay hotels on Trip.com" url={UAE_EXTENDED_STAY_AFFILIATE_LINKS.tripCom} />
-      </div></div></main>
+      </div></main>
       <Footer /><MobileBottomNav />
     </div>
   );

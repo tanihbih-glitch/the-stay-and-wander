@@ -14,7 +14,6 @@ import { seoulStayFaqs } from "@shared/articleFaqs";
 import { ArrowLeft } from "lucide-react";
 import LastUpdated from "@/components/LastUpdated";
 import ArticleBreadcrumbs from "@/components/ArticleBreadcrumbs";
-import StickyTableOfContents from "@/components/StickyTableOfContents";
 import PinterestShare from "@/components/PinterestShare";
 
 export const articleMetadata = {
@@ -52,19 +51,6 @@ const priceTiers = [
   { id: "seoul-premium-tier", label: "Premium lifestyle stays", range: "$55–$200+/night", description: "Gangnam carries the highest published range in this guide, reflecting its premium shopping, café, and nightlife setting. Treat the range as directional planning context." },
 ] as const;
 
-const tableOfContents = [
-  { id: "seoul-introduction", label: "Choose the right Seoul base" },
-  { id: "seoul-price-snapshot", label: "District price snapshot" },
-  ...priceTiers.map((tier) => ({ id: tier.id, label: `${tier.label}: ${tier.range}` })),
-  { id: "myeongdong", label: "Myeongdong" },
-  { id: "gangnam", label: "Gangnam" },
-  { id: "hongdae", label: "Hongdae" },
-  { id: "itaewon", label: "Itaewon" },
-  { id: "insadong", label: "Insadong" },
-  { id: "seoul-stay-tips", label: "Stay-selection tips" },
-  { id: "seoul-booking", label: "Compare live rates" },
-] as const;
-
 export const seoulStayDecisions: readonly GuideDecision[] = [
   { condition: "it is your first Seoul trip and you want maximum convenience", recommendation: "Myeongdong", detail: "Choose the central shopping-and-street-food base for an easy first orientation to the city.", href: "#myeongdong" },
   { condition: "K-culture, luxury shopping, and upscale nightlife are the priority", recommendation: "Gangnam", detail: "Choose the premium south-of-the-river district when the trendier scene is worth the higher range.", href: "#gangnam" },
@@ -85,7 +71,6 @@ export default function BlogSeoulStay() {
         <a href="/blog" className="mb-8 inline-flex items-center gap-2 text-sm font-medium text-[#0077B6] transition-colors hover:text-[#005c91]"><ArrowLeft className="h-4 w-4" />Back to Blog</a>
         <div className="mb-10 flex flex-wrap gap-x-5 gap-y-2 border-b border-gray-200 pb-7 text-sm text-gray-600"><span>Published by: {articleMetadata.author}</span><span>Category: {articleMetadata.category}</span><span>Read time: {articleMetadata.readTime}</span><LastUpdated date={articleMetadata.lastUpdated} /></div>
         <PinterestShare title={articleMetadata.title} url={canonicalUrl} media={`https://thestayandwander.com${articleMetadata.image}`} className="mb-8" />
-        <div className="lg:hidden"><StickyTableOfContents items={tableOfContents} /></div>
         <div id="seoul-introduction" className="scroll-mt-28 space-y-6 text-lg leading-relaxed text-gray-700"><p>Seoul offers strong value, but picking the right area still shapes your trip — a stay near Myeongdong feels very different from one in Hongdae or Gangnam. Here&apos;s where to actually stay, based on what each area is known for.</p></div>
         <GuideMethodologyDecisionTree destinationLabel="Seoul" methodology="This 2026 guide combines the editorial district profiles and typical shoulder-season planning ranges presented below. The price bands are directional planning estimates rather than live hotel quotes, so confirm current pricing, subway access, and availability for your dates." decisions={seoulStayDecisions} />
         <CityStayMatcher config={seoulStayMatcherConfig} />
@@ -98,7 +83,7 @@ export default function BlogSeoulStay() {
         <ArticleFAQ faqs={seoulStayFaqs} title="Seoul Neighborhood Questions, Answered" />
         <section id="seoul-booking" className="mt-12 scroll-mt-28 border-t border-gray-200 pt-12"><h2 className="font-playfair text-3xl font-bold text-gray-900">Ready to Find Your Seoul Stay?</h2><p className="mt-6 text-lg leading-relaxed text-gray-700">Compare live rates across hundreds of properties and book directly through our search tool below.</p><TripComHotelWidget className="my-8" title="Search Seoul hotels on Trip.com" /><CityActivitiesWidget city="Seoul" /><p className="mt-8 text-center text-sm italic text-gray-500">Prices are approximate and based on typical 2026 rates; always confirm current pricing directly when booking.</p></section>
       </article>
-      <aside className="lg:col-span-1"><div className="hidden lg:block"><StickyTableOfContents items={tableOfContents} /></div><div className="mt-6"><PopularRoutesWidgetBlogSidebar /></div></aside>
+      <aside className="lg:col-span-1"><div className="mt-6"><PopularRoutesWidgetBlogSidebar /></div></aside>
     </main>
     <Footer /><MobileBottomNav />
   </div>;
