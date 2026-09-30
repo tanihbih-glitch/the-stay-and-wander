@@ -48,11 +48,28 @@ describe("destination-guide engagement and navigation", () => {
   });
 
   it("preserves direct price-index section links after client hydration", () => {
-    expect(priceIndexContentsSource).toContain('import { useEffect } from "react"');
+    expect(priceIndexContentsSource).toContain("useEffect");
     expect(priceIndexContentsSource).toContain("window.location.hash.slice(1)");
     expect(priceIndexContentsSource).toContain("window.requestAnimationFrame");
     expect(priceIndexContentsSource).toContain('scrollIntoView({ block: "start" })');
     expect(priceIndexContentsSource).toContain('href={`#${item.id}`}');
+  });
+
+  it("keeps the price-index TOC collapsible, mobile-collapsed, and bounded inside sticky layouts", () => {
+    expect(priceIndexContentsSource).toContain("aria-expanded={isOpen}");
+    expect(priceIndexContentsSource).toContain("aria-controls={listId}");
+    expect(priceIndexContentsSource).toContain("setIsOpen((open) => !open)");
+    expect(priceIndexContentsSource).toContain('window.matchMedia("(min-width: 1024px)")');
+    expect(priceIndexContentsSource).toContain("max-h-[50vh]");
+    expect(priceIndexContentsSource).toContain("overflow-y-auto");
+    expect(priceIndexContentsSource).toContain("hidden={!isOpen}");
+  });
+
+  it("keeps the back-to-top control separated from the TOC layout", () => {
+    expect(feedbackSource).toContain('aria-label="Back to top"');
+    expect(feedbackSource).toContain("fixed bottom-20 right-4");
+    expect(priceIndexContentsSource).toContain("lg:sticky lg:top-24");
+    expect(priceIndexContentsSource).not.toContain("fixed");
   });
 
   it("mounts contents and feedback controls through shared chrome so every guide receives them", () => {
