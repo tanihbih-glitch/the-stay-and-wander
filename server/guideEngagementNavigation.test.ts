@@ -51,6 +51,10 @@ describe("destination-guide engagement and navigation", () => {
     expect(contentsSource).toContain("lg:block");
     expect(contentsSource).toContain("overflow-x-auto");
     expect(contentsSource).toContain('href={`#${item.id}`}');
+    expect(contentsSource).toContain('scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth", block: "start" })');
+    expect(contentsSource).toContain("IntersectionObserver");
+    expect(contentsSource).toContain('aria-current={activeId === item.id ? "location" : undefined}');
+    expect(contentsSource).toContain("after:bg-[#F4A261]");
     expect(headerSource).toContain('<GuideTableOfContents />');
   });
 
