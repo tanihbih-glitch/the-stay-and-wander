@@ -65,7 +65,21 @@ describe("Middle East destination expansion", () => {
     expect(share).toContain("Pin this guide");
     expect(share).toContain("pinterest.com/pin/create/button");
     expect(share).toContain('target=\"_blank\"');
-    expect(share).toContain('rel=\"noopener noreferrer\"');
+    expect(share).toContain('rel="noopener noreferrer"');
+  });
+
+  it("supports hover-friendly copy controls and image save buttons", () => {
+    const highlights = readProjectFile("client/src/components/PinterestHighlights.tsx");
+    const imageSave = readProjectFile("client/src/components/PinterestImageSaveButton.tsx");
+    const dubaiGuide = readProjectFile("client/src/pages/BlogDubaiHotels.tsx");
+
+    expect(highlights).toContain("navigator.clipboard.writeText");
+    expect(highlights).toContain("Copy link");
+    expect(highlights).toContain("hover:-translate-y-0.5");
+    expect(imageSave).toContain("Save to Pinterest");
+    expect(imageSave).toContain('target="_blank"');
+    expect(imageSave).toContain('rel="noopener noreferrer"');
+    expect(dubaiGuide).toContain("PinterestImageSaveButton");
   });
 
   it("keeps every shared destination message aligned with the expanded coverage", () => {

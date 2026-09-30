@@ -1,5 +1,6 @@
-import { ArrowUpRight, Pin } from "lucide-react";
+import { ArrowUpRight, Check, Copy, Pin } from "lucide-react";
 import { Link } from "wouter";
+import { useState } from "react";
 
 const highlights = [
   {
@@ -24,6 +25,19 @@ const highlights = [
 
 /** Curated, non-personalized highlights inspired by the public Dubai Pinterest board. */
 export default function PinterestHighlights() {
+  const [copiedHref, setCopiedHref] = useState<string | null>(null);
+
+  const copyGuideLink = async (href: string) => {
+    const url = `https://thestayandwander.com${href}`;
+    try {
+      await navigator.clipboard.writeText(url);
+      setCopiedHref(href);
+      window.setTimeout(() => setCopiedHref((current) => current === href ? null : current), 1800);
+    } catch {
+      setCopiedHref(null);
+    }
+  };
+
   return (
     <aside className="rounded-2xl border border-[#e5c2c8] bg-[#fff7f8] p-6 shadow-[0_14px_34px_rgba(23,54,74,0.06)]" aria-labelledby="pinterest-highlights-title">
       <div className="flex items-start gap-3">
@@ -38,12 +52,18 @@ export default function PinterestHighlights() {
       <p className="mt-4 text-sm leading-relaxed text-slate-700">Explore the hotel, longer-stay, and itinerary topics currently featured on The Stay &amp; Wander&apos;s Dubai travel board.</p>
       <div className="mt-5 space-y-3">
         {highlights.map((highlight) => (
-          <Link key={highlight.href} href={highlight.href} className="group block rounded-xl border border-[#f1dfe2] bg-white p-4 transition-colors hover:border-[#e60023] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E60023] focus-visible:ring-offset-2">
+          <div key={highlight.href} className="group rounded-xl border border-[#f1dfe2] bg-white p-4 transition duration-200 ease-out hover:-translate-y-0.5 hover:border-[#e60023] hover:shadow-[0_10px_24px_rgba(230,0,35,0.1)]">
+            <Link href={highlight.href} className="block rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E60023] focus-visible:ring-offset-2">
             <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-[#b4233c]">{highlight.label}</p>
             <p className="mt-1 font-semibold leading-snug text-[#17364a] group-hover:text-[#b4233c]">{highlight.title}</p>
             <p className="mt-2 text-xs leading-relaxed text-slate-600">{highlight.description}</p>
             <span className="mt-3 inline-flex items-center gap-1 text-xs font-semibold text-[#b4233c]">Read guide <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" /></span>
-          </Link>
+            </Link>
+            <button type="button" onClick={() => copyGuideLink(highlight.href)} className="mt-3 inline-flex items-center gap-1.5 rounded-full border border-[#f1cdd2] px-2.5 py-1.5 text-xs font-semibold text-[#b4233c] transition duration-150 hover:bg-[#fff0f2] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E60023] focus-visible:ring-offset-2" aria-live="polite">
+              {copiedHref === highlight.href ? <Check className="h-3.5 w-3.5" aria-hidden="true" /> : <Copy className="h-3.5 w-3.5" aria-hidden="true" />}
+              {copiedHref === highlight.href ? "Copied" : "Copy link"}
+            </button>
+          </div>
         ))}
       </div>
       <a href="https://www.pinterest.com/thestayandwander/dubai-travel-hotels-tips-itineraries/" target="_blank" rel="noopener noreferrer" className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[#b4233c] hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E60023] focus-visible:ring-offset-2">

@@ -76,6 +76,7 @@ describe("Bangkok Hotel Price Index", () => {
 
   it("provides a dedicated Pinterest save module with the article image", () => {
     expect(articleSource).toContain("media={`https://thestayandwander.com${articleMetadata.image}`}");
+    expect(articleSource).toContain("PinterestImageSaveButton");
     const pinterestSource = fs.readFileSync(path.resolve(process.cwd(), "client/src/components/PinterestShare.tsx"), "utf8");
     expect(pinterestSource).toContain("pinterest.com/pin/create/button");
     expect(pinterestSource).toContain("Pin this guide");

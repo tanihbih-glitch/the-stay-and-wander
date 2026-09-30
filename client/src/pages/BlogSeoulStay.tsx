@@ -15,6 +15,7 @@ import { ArrowLeft } from "lucide-react";
 import LastUpdated from "@/components/LastUpdated";
 import ArticleBreadcrumbs from "@/components/ArticleBreadcrumbs";
 import StickyTableOfContents from "@/components/StickyTableOfContents";
+import PinterestShare from "@/components/PinterestShare";
 
 export const articleMetadata = {
   title: "Where to Stay in Seoul (2026): Best Areas & Hotel Price Guide",
@@ -83,6 +84,7 @@ export default function BlogSeoulStay() {
         <ArticleBreadcrumbs currentLabel="Seoul hotel price guide" />
         <a href="/blog" className="mb-8 inline-flex items-center gap-2 text-sm font-medium text-[#0077B6] transition-colors hover:text-[#005c91]"><ArrowLeft className="h-4 w-4" />Back to Blog</a>
         <div className="mb-10 flex flex-wrap gap-x-5 gap-y-2 border-b border-gray-200 pb-7 text-sm text-gray-600"><span>Published by: {articleMetadata.author}</span><span>Category: {articleMetadata.category}</span><span>Read time: {articleMetadata.readTime}</span><LastUpdated date={articleMetadata.lastUpdated} /></div>
+        <PinterestShare title={articleMetadata.title} url={canonicalUrl} media={`https://thestayandwander.com${articleMetadata.image}`} className="mb-8" />
         <div className="lg:hidden"><StickyTableOfContents items={tableOfContents} /></div>
         <div id="seoul-introduction" className="scroll-mt-28 space-y-6 text-lg leading-relaxed text-gray-700"><p>Seoul offers strong value, but picking the right area still shapes your trip — a stay near Myeongdong feels very different from one in Hongdae or Gangnam. Here&apos;s where to actually stay, based on what each area is known for.</p></div>
         <GuideMethodologyDecisionTree destinationLabel="Seoul" methodology="This 2026 guide combines the editorial district profiles and typical shoulder-season planning ranges presented below. The price bands are directional planning estimates rather than live hotel quotes, so confirm current pricing, subway access, and availability for your dates." decisions={seoulStayDecisions} />

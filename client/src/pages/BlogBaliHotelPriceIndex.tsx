@@ -16,6 +16,7 @@ import ArticleBreadcrumbs from "@/components/ArticleBreadcrumbs";
 import RelatedPriceIndexArticles from "@/components/RelatedPriceIndexArticles";
 import CompareDestinations from "@/components/CompareDestinations";
 import PinterestShare from "@/components/PinterestShare";
+import PinterestImageSaveButton from "@/components/PinterestImageSaveButton";
 
 export const articleMetadata = {
   title: "Bali Hotel Prices in 2026: Average Rates by Neighborhood & Budget",
@@ -93,6 +94,7 @@ export default function BlogBaliHotelPriceIndex() {
 
       <section className="relative overflow-hidden bg-[#0D1B2A] px-4 pb-16 pt-32 text-white md:pb-20 md:pt-40">
         <div className="absolute inset-0 opacity-30" style={{ backgroundImage: "radial-gradient(circle at 12% 12%, #0077B6 0, transparent 28%), radial-gradient(circle at 87% 72%, #F4A261 0, transparent 22%)" }} />
+        <PinterestImageSaveButton title={articleMetadata.title} url={canonicalUrl} media={`https://thestayandwander.com${articleMetadata.image}`} />
         <div className="container relative z-10 max-w-5xl">
           <p className="mb-5 text-xs font-bold uppercase tracking-[0.22em] text-[#F4A261]">Coastal Field Notes · Bali Travel</p>
           <h1 className="max-w-5xl font-playfair text-4xl font-bold leading-tight md:text-6xl">{articleMetadata.title}</h1>

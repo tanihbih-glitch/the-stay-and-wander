@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import MobileBottomNav from "@/components/MobileBottomNav";
 import PinterestHighlights from "@/components/PinterestHighlights";
 import PinterestShare from "@/components/PinterestShare";
+import PinterestImageSaveButton from "@/components/PinterestImageSaveButton";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { generateMetaTags, pageMetadataConfig } from "@shared/seo";
@@ -52,11 +53,14 @@ export default function BlogDubaiHotels() {
 
       <main>
         <section className="relative isolate min-h-[31rem] overflow-hidden bg-[#071d32] text-white sm:min-h-[35rem]">
-          <img
-            src={DUBAI_IMAGE}
-            alt="Dubai skyline at night with the Burj Khalifa illuminated in gold"
-            className="absolute inset-0 -z-20 h-full w-full object-cover"
-          />
+          <div className="absolute inset-0">
+            <img
+              src={DUBAI_IMAGE}
+              alt="Dubai skyline at night with the Burj Khalifa illuminated in gold"
+              className="h-full w-full object-cover"
+            />
+            <PinterestImageSaveButton title={metadata.title} url={`https://thestayandwander${metadata.url}`} media={`https://thestayandwander.com${DUBAI_IMAGE}`} />
+          </div>
           <div className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(4,20,36,0.92),rgba(4,20,36,0.58)_55%,rgba(4,20,36,0.18))]" />
           <div className="container flex min-h-[31rem] items-end px-4 py-14 sm:min-h-[35rem] sm:py-20">
             <div className="max-w-3xl">

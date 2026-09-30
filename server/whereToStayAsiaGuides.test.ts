@@ -90,6 +90,17 @@ describe("Tokyo and Seoul where-to-stay guides", () => {
     expect(seoulPage).toContain('id="seoul-booking"');
   });
 
+  it("adds the shared Pinterest guide module to both Asia price guides", () => {
+    const seoulPage = readFileSync(path.resolve(process.cwd(), "client/src/pages/BlogSeoulStay.tsx"), "utf8");
+    const tokyoPage = readFileSync(path.resolve(process.cwd(), "client/src/pages/BlogTokyoStay.tsx"), "utf8");
+
+    for (const source of [seoulPage, tokyoPage]) {
+      expect(source).toContain('import PinterestShare from "@/components/PinterestShare"');
+      expect(source).toContain("<PinterestShare title={articleMetadata.title}");
+      expect(source).toContain("https://thestayandwander.com${articleMetadata.image}");
+    }
+  });
+
   it("keeps published visible and crawler modified dates aligned", () => {
     expect(tokyoMetadata.lastUpdated).toBe("2026-09-19");
     expect(seoulMetadata.lastUpdated).toBe("2026-09-19");

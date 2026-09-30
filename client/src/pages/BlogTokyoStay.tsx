@@ -15,6 +15,7 @@ import { ArrowLeft } from "lucide-react";
 import LastUpdated from "@/components/LastUpdated";
 import ArticleBreadcrumbs from "@/components/ArticleBreadcrumbs";
 import StickyTableOfContents from "@/components/StickyTableOfContents";
+import PinterestShare from "@/components/PinterestShare";
 
 export const articleMetadata = {
   title: "Where to Stay in Tokyo (2026): Best Neighborhoods & Hotel Price Guide",
@@ -83,6 +84,7 @@ export default function BlogTokyoStay() {
         <ArticleBreadcrumbs currentLabel="Tokyo hotel price guide" />
         <a href="/blog" className="mb-8 inline-flex items-center gap-2 text-sm font-medium text-[#0077B6] transition-colors hover:text-[#005c91]"><ArrowLeft className="h-4 w-4" />Back to Blog</a>
         <div className="mb-10 flex flex-wrap gap-x-5 gap-y-2 border-b border-gray-200 pb-7 text-sm text-gray-600"><span>Published by: {articleMetadata.author}</span><span>Category: {articleMetadata.category}</span><span>Read time: {articleMetadata.readTime}</span><LastUpdated date={articleMetadata.lastUpdated} /></div>
+        <PinterestShare title={articleMetadata.title} url={canonicalUrl} media={`https://thestayandwander.com${articleMetadata.image}`} className="mb-8" />
         <div className="lg:hidden"><StickyTableOfContents items={tableOfContents} /></div>
         <div id="tokyo-introduction" className="scroll-mt-28 space-y-6 text-lg leading-relaxed text-gray-700"><p>Tokyo is huge, and picking the wrong neighborhood can mean long transit times eating into your trip. Here&apos;s where to actually stay, broken down by what each area is best for — so you can pick based on your trip, not just guesswork.</p></div>
         <GuideMethodologyDecisionTree destinationLabel="Tokyo" methodology="This 2026 guide combines the editorial neighborhood profiles and typical shoulder-season planning ranges shown below. The price bands are directional, not a live rate feed; check exact availability, station access, and current pricing for your dates before booking." decisions={tokyoStayDecisions} />
