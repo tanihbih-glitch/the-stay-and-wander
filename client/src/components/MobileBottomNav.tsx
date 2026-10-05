@@ -6,7 +6,7 @@ export default function MobileBottomNav() {
 
   const navItems = [
     { icon: Home, label: "Home", href: "/" },
-    { icon: Search, label: "Search", href: "/booking" },
+    { icon: Search, label: "Search", href: "/booking/" },
     { icon: MapPin, label: "Itineraries", href: "/itineraries" },
     { icon: BookOpen, label: "Blog", href: "/blog" },
   ];

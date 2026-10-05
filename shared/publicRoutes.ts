@@ -71,7 +71,7 @@ export const sitemapRoutes: readonly SitemapRoute[] = [
   { path: "/itinerary/seoul", lastmod: "2026-08-12", changefreq: "monthly", priority: 0.8 },
   { path: "/itinerary/mediterranean", lastmod: "2026-07-19", changefreq: "monthly", priority: 0.8 },
   { path: "/itinerary/brazil", lastmod: "2026-07-19", changefreq: "monthly", priority: 0.8 },
-  { path: "/booking", lastmod: "2026-07-19", changefreq: "weekly", priority: 0.9 },
+  { path: "/booking/", lastmod: "2026-10-05", changefreq: "weekly", priority: 0.9 },
   { path: "/deals", lastmod: "2026-07-28", changefreq: "weekly", priority: 0.9 },
   { path: "/corporate-travel", lastmod: "2026-07-30", changefreq: "weekly", priority: 0.9 },
   { path: "/trip-planner", lastmod: "2026-07-28", changefreq: "weekly", priority: 0.9 },

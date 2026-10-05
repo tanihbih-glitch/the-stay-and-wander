@@ -9,7 +9,7 @@ import { isApplicationRoute } from "../shared/publicRoutes";
 export const LEGACY_PERMANENT_REDIRECTS: Readonly<Record<string, string>> = {
   "/europe": "/blog/best-cities-europe-summer-2026",
   "/asia": "/blog",
-  "/flights": "/booking",
+  "/flights": "/booking/",
   "/blog/tokyo-bangkok": "/blog/tokyo-vs-bangkok-2026",
   "/exploring-unforgettable-destinations-your-guide-to-luxury-travel": "/blog",
   "/lead-magnets": "/",
@@ -56,7 +56,10 @@ export function legacyRedirectMiddleware(req: Request, res: Response, next: Next
  */
 export function getTrailingSlashRedirectTarget(pathname: string): string | undefined {
   const path = pathname.split("?")[0].split("#")[0] || "/";
-  if (path === "/" || !path.endsWith("/") || !isApplicationRoute(path)) return undefined;
+  // Booking is the one public route whose established canonical includes a
+  // trailing slash. Redirect only its bare form; preserve /booking/.
+  if (path === "/booking") return "/booking/";
+  if (path === "/booking/" || path === "/" || !path.endsWith("/") || !isApplicationRoute(path)) return undefined;
   return path.replace(/\/+$/, "") || "/";
 }
 

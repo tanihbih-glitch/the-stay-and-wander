@@ -6,7 +6,7 @@ describe("legacy Search Console 404 redirects", () => {
   const expectedRedirects = {
     "/europe/": "/blog/best-cities-europe-summer-2026",
     "/asia/": "/blog",
-    "/flights/": "/booking",
+    "/flights/": "/booking/",
     "/blog/tokyo-bangkok": "/blog/tokyo-vs-bangkok-2026",
     "/exploring-unforgettable-destinations-your-guide-to-luxury-travel/": "/blog",
     "/lead-magnets/": "/",
@@ -27,7 +27,7 @@ describe("legacy Search Console 404 redirects", () => {
     expect(LEGACY_PERMANENT_REDIRECTS).toEqual({
       "/europe": "/blog/best-cities-europe-summer-2026",
       "/asia": "/blog",
-      "/flights": "/booking",
+      "/flights": "/booking/",
       "/blog/tokyo-bangkok": "/blog/tokyo-vs-bangkok-2026",
       "/exploring-unforgettable-destinations-your-guide-to-luxury-travel": "/blog",
       "/lead-magnets": "/",
@@ -58,17 +58,21 @@ describe("legacy Search Console 404 redirects", () => {
   });
 
   it("normalizes trailing slashes only for known public application routes", () => {
-    expect(getTrailingSlashRedirectTarget("/booking/")).toBe("/booking");
-    expect(getTrailingSlashRedirectTarget("/booking/?source=search")).toBe("/booking");
+    expect(getTrailingSlashRedirectTarget("/booking")).toBe("/booking/");
+    expect(getTrailingSlashRedirectTarget("/booking?source=search")).toBe("/booking/");
+    expect(getTrailingSlashRedirectTarget("/booking/")).toBeUndefined();
     expect(getTrailingSlashRedirectTarget("/blog/bali-hotel-price-index-2026/")).toBe("/blog/bali-hotel-price-index-2026");
     expect(getTrailingSlashRedirectTarget("/")).toBeUndefined();
     expect(getTrailingSlashRedirectTarget("/api/trpc/")).toBeUndefined();
     expect(getTrailingSlashRedirectTarget("/assets/")).toBeUndefined();
   });
 
-  it("provides one no-trailing-slash destination for every sitemap URL", () => {
+  it("provides the registered canonical destination for every sitemap URL", () => {
     for (const route of sitemapRoutes.filter((item) => item.path !== "/")) {
-      expect(getTrailingSlashRedirectTarget(`${route.path}/`)).toBe(route.path);
+      const slashPath = route.path.endsWith("/") ? route.path : `${route.path}/`;
+      expect(getTrailingSlashRedirectTarget(slashPath)).toBe(
+        route.path.endsWith("/") ? undefined : route.path,
+      );
     }
   });
 });

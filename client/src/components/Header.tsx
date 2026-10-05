@@ -11,7 +11,7 @@ export default function Header() {
     { label: "Home", href: "/" },
     { label: "Itineraries", href: "/itineraries" },
     { label: "Trip Planner", href: "/trip-planner" },
-    { label: "Booking", href: "/booking" },
+    { label: "Booking", href: "/booking/" },
     { label: "Deals", href: "/deals" },
     { label: "Corporate Travel", href: "/corporate-travel" },
     { label: "Blog", href: "/blog" },

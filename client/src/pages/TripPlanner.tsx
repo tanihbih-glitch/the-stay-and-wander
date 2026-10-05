@@ -273,7 +273,7 @@ export default function TripPlanner() {
           </section>
         )}
 
-        {!preview && <section className="container px-4 pb-20"><div className="flex flex-col items-start justify-between gap-5 rounded-2xl bg-[#e9e3d8] p-7 sm:flex-row sm:items-center"><div><p className="font-display text-2xl font-bold text-[#17364a]">Already have a stay in mind?</p><p className="mt-1 text-sm text-slate-600">Explore hotels, flights, cars, and activities from one place.</p></div><Button asChild variant="outline" className="border-[#17364a] text-[#17364a]"><Link href="/booking">Explore booking</Link></Button></div></section>}
+        {!preview && <section className="container px-4 pb-20"><div className="flex flex-col items-start justify-between gap-5 rounded-2xl bg-[#e9e3d8] p-7 sm:flex-row sm:items-center"><div><p className="font-display text-2xl font-bold text-[#17364a]">Already have a stay in mind?</p><p className="mt-1 text-sm text-slate-600">Explore hotels, flights, cars, and activities from one place.</p></div><Button asChild variant="outline" className="border-[#17364a] text-[#17364a]"><Link href="/booking/">Explore booking</Link></Button></div></section>}
       </main>
       <Footer />
       <MobileBottomNav />

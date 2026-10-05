@@ -110,7 +110,7 @@ export const pageMetadataConfig: Record<string, PageMetadata> = {
     description:
       "Search and book flights, hotels, cruises, and car rentals for your next adventure. Compare prices and find the best deals.",
     image: DEFAULT_IMAGE,
-    url: "/booking",
+    url: "/booking/",
     type: "website",
   },
 

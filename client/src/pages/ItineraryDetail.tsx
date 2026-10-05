@@ -684,7 +684,7 @@ export default function ItineraryDetail() {
             travel consultants.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="/booking" className="block">
+            <a href="/booking/" className="block">
               <Button className="bg-yellow-500 hover:bg-yellow-600 text-white px-8 py-6 text-lg h-auto">
                 Book This Itinerary
               </Button>

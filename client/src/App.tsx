@@ -48,7 +48,7 @@ function Router() {
       <Route path={"/"} component={Home} />
       <Route path={"/itineraries"} component={Itineraries} />
       <Route path={"/itinerary/:id"} component={ItineraryDetail} />
-      <Route path={"/booking"} component={Booking} />
+      <Route path={"/booking/"} component={Booking} />
       <Route path={"/trip-planner"} component={TripPlanner} />
       <Route path={"/trip-planner/success"} component={TripPlannerSuccess} />
       <Route path={"/about"} component={About} />

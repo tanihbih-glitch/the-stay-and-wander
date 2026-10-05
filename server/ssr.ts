@@ -267,7 +267,7 @@ export function ssrMiddleware(req: Request, res: Response, next: NextFunction) {
   } else if (path.startsWith("/itinerary/")) {
     // Itinerary detail - metadata would be dynamically generated
     metadata = pageMetadataConfig.itineraries;
-  } else if (path === "/booking") {
+  } else if (path === "/booking" || path === "/booking/") {
     metadata = pageMetadataConfig.booking;
   } else if (path === "/deals") {
     metadata = pageMetadataConfig.deals;

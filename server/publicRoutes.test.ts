@@ -27,6 +27,7 @@ describe("public route and sitemap cleanup", () => {
     expect(isApplicationRoute("/itinerary/tokyo-seoul")).toBe(true);
     expect(isApplicationRoute("/trip-planner")).toBe(true);
     expect(isApplicationRoute("/deals")).toBe(true);
+    expect(isApplicationRoute("/booking/")).toBe(true);
     expect(isApplicationRoute("/blog/best-hotels-dubai-2026")).toBe(true);
     expect(isApplicationRoute("/blog/best-hotels-dubai-2026/")).toBe(true);
     expect(isApplicationRoute("/deals/")).toBe(true);
@@ -47,6 +48,8 @@ describe("public route and sitemap cleanup", () => {
     expect(sitemap).not.toContain("/blog/bangkok-hotel-prices-2026");
     expect(sitemap).toContain("/itinerary/tokyo-seoul");
     expect(sitemap).toContain("/deals");
+    expect(sitemap).toContain("https://thestayandwander.com/booking/");
+    expect(sitemap).not.toContain("https://thestayandwander.com/booking\n");
     expect(sitemap).toContain("/blog/best-hotels-dubai-2026");
     expect(sitemap).toContain("/about");
     expect(sitemap).toContain("/privacy-policy");
