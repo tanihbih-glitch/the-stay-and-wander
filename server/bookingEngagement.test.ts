@@ -27,6 +27,7 @@ describe("hotel widget failure handling", () => {
     expect(widget).toContain("onError={markFailed}");
     expect(widget).toContain("Try again");
     expect(widget).toContain("mailto:thestayandwander@thestayandwander.com");
+    expect(widget).toContain("If the booking search does not load");
     expect(widget).toContain('role="alert"');
   });
 });

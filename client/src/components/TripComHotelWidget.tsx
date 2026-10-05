@@ -93,6 +93,24 @@ export default function TripComHotelWidget({
         onLoad={markLoaded}
         onError={markFailed}
       />
+      <div className="mt-3 w-full max-w-[320px] rounded-md border border-gray-200 bg-white px-3 py-2 text-center text-xs text-gray-600">
+        <span>If the booking search does not load, </span>
+        <button
+          type="button"
+          className="font-semibold text-[#0077B6] underline underline-offset-2"
+          onClick={() => setLoadAttempt((attempt) => attempt + 1)}
+        >
+          try again
+        </button>
+        <span> or </span>
+        <a
+          href="mailto:thestayandwander@thestayandwander.com"
+          className="font-semibold text-[#0077B6] underline underline-offset-2"
+        >
+          contact us
+        </a>
+        <span>.</span>
+      </div>
     </div>
   );
 }
