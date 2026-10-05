@@ -1,5 +1,5 @@
-import { useMemo, useState } from "react";
-import { Building2, CheckCircle2, Compass, ExternalLink, SlidersHorizontal } from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
+import { Bookmark, BookmarkCheck, Building2, CheckCircle2, Compass, ExternalLink, SlidersHorizontal } from "lucide-react";
 
 export type UaeTravelerType = "solo" | "business" | "luxury" | "budget" | "group" | "wellness" | "cultural" | "frequent";
 export type UaePriority = "sustainability" | "amenities" | "value" | "capacity" | "loyalty" | "booking";
@@ -119,7 +119,29 @@ export function rankUaeExtendedStayOptions(travelerType: UaeTravelerType, priori
 export default function UaeExtendedStaySelector() {
   const [travelerType, setTravelerType] = useState<UaeTravelerType>("business");
   const [priority, setPriority] = useState<UaePriority>("amenities");
+  const [savedIds, setSavedIds] = useState<string[]>([]);
+  const [storageReady, setStorageReady] = useState(false);
   const shortlist = useMemo(() => rankUaeExtendedStayOptions(travelerType, priority), [travelerType, priority]);
+
+  useEffect(() => {
+    try {
+      const stored = window.localStorage.getItem("tsw-uae-extended-stay-bookmarks");
+      const parsed = stored ? JSON.parse(stored) : [];
+      if (Array.isArray(parsed)) setSavedIds(parsed.filter((id): id is string => typeof id === "string"));
+    } catch {
+      // Local-only enhancement remains usable when storage is unavailable.
+    } finally {
+      setStorageReady(true);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (storageReady) window.localStorage.setItem("tsw-uae-extended-stay-bookmarks", JSON.stringify(savedIds));
+  }, [savedIds, storageReady]);
+
+  const toggleSaved = (id: string) => {
+    setSavedIds((current) => current.includes(id) ? current.filter((savedId) => savedId !== id) : [...current, id]);
+  };
 
   return (
     <section id="uae-stay-selector" className="scroll-mt-28 rounded-3xl border border-[#cfe4ee] bg-[#eef8fb] p-6 md:p-8" aria-labelledby="uae-selector-title">
@@ -135,11 +157,14 @@ export default function UaeExtendedStaySelector() {
       </div>
 
       <div className="mt-7 grid gap-4 lg:grid-cols-3">
-        {shortlist.map(({ option }, index) => <article key={option.id} className="rounded-2xl bg-white p-5 shadow-sm"><p className="text-xs font-bold uppercase tracking-[0.16em] text-[#0077B6]">#{index + 1} documented fit · {option.brand}</p><h3 className="mt-2 font-playfair text-xl font-bold text-[#0D1B2A]">{option.property}</h3><p className="mt-1 text-sm font-medium text-slate-600">{option.neighborhood}</p><p className="mt-4 text-sm leading-relaxed text-slate-700">{option.reasons[priority]}</p><a href={option.sourceUrl} target="_blank" rel="noopener noreferrer" className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-[#0077B6] hover:underline">Check the source <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" /></a></article>)}
+        {shortlist.map(({ option }, index) => {
+          const isSaved = savedIds.includes(option.id);
+          return <article key={option.id} className="rounded-2xl bg-white p-5 shadow-sm"><div className="flex items-start justify-between gap-3"><p className="text-xs font-bold uppercase tracking-[0.16em] text-[#0077B6]">#{index + 1} documented fit · {option.brand}</p><button type="button" onClick={() => toggleSaved(option.id)} aria-pressed={isSaved} aria-label={`${isSaved ? "Remove" : "Save"} ${option.property} ${isSaved ? "from saved stays" : "for later"}`} className="inline-flex shrink-0 items-center gap-1 rounded-full border border-[#cfe4ee] px-2.5 py-1 text-xs font-semibold text-[#0077B6] transition hover:bg-[#eef8fb] focus-visible:outline focus-visible:ring-2 focus-visible:ring-[#0077B6]">{isSaved ? <BookmarkCheck className="h-3.5 w-3.5" aria-hidden="true" /> : <Bookmark className="h-3.5 w-3.5" aria-hidden="true" />}{isSaved ? "Saved" : "Save"}</button></div><h3 className="mt-2 font-playfair text-xl font-bold text-[#0D1B2A]">{option.property}</h3><p className="mt-1 text-sm font-medium text-slate-600">{option.neighborhood}</p><p className="mt-4 text-sm leading-relaxed text-slate-700">{option.reasons[priority]}</p><a href={option.sourceUrl} target="_blank" rel="noopener noreferrer" className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-[#0077B6] hover:underline">Check the source <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" /></a></article>;
+        })}
       </div>
 
       <p className="mt-6 flex items-start gap-2 rounded-xl border-l-4 border-[#F4A261] bg-[#fff8f1] p-4 text-sm leading-relaxed text-slate-700"><CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#c96725]" aria-hidden="true" /><span><strong className="text-[#0D1B2A]">Why Hilton does not appear in this shortlist:</strong> Homewood Suites and Home2 Suites are documented global extended-stay formats, but this guide did not identify a first-party source confirming a UAE property. Confirm local availability directly before treating a global brand format as a UAE option.</span></p>
-      <p className="mt-4 flex items-center gap-2 text-xs leading-relaxed text-slate-600"><Building2 className="h-4 w-4 shrink-0 text-[#0077B6]" aria-hidden="true" />The selector runs entirely in your browser and does not save traveler choices or send them to a server.</p>
+      <p className="mt-4 flex items-center gap-2 text-xs leading-relaxed text-slate-600"><Building2 className="h-4 w-4 shrink-0 text-[#0077B6]" aria-hidden="true" />Traveler choices and saved stays remain in this browser only; no account, server persistence, or tracking is used. {savedIds.length > 0 ? `${savedIds.length} saved stay${savedIds.length === 1 ? "" : "s"}.` : "Save a listing to revisit it later."}</p>
     </section>
   );
 }

@@ -47,7 +47,8 @@ describe("UAE extended-stay comparison hub", () => {
     expect(page).toContain('target="_blank" rel="sponsored nofollow"');
     expect(page).toContain("Affiliate disclosure");
     expect(selector).toContain("useState");
-    expect(selector).not.toMatch(/localStorage|fetch\(|trpc\.|axios|userId/i);
+    expect(selector).toContain("tsw-uae-extended-stay-bookmarks");
+    expect(selector).not.toMatch(/fetch\(|trpc\.|axios|userId/i);
   });
 
   it("registers the new hub and retires the cannibalizing legacy article", () => {

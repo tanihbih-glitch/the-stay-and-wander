@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent } from "@/components/ui/card";
-import { Lock, CheckCircle, XCircle } from "lucide-react";
+import { Lock, CheckCircle, XCircle, Loader2, Search } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MobileBottomNav from "@/components/MobileBottomNav";
@@ -10,11 +10,27 @@ import PopularRoutesWidgetBooking from "@/components/PopularRoutesWidgetBooking"
 import GetYourGuideTours from "@/components/GetYourGuideTours";
 import TripComHotelWidget from "@/components/TripComHotelWidget";
 import AviasalesFlightWidget from "@/components/AviasalesFlightWidget";
+import ArticleFAQ from "@/components/ArticleFAQ";
+import type { ArticleFaq } from "@shared/articleFaqs";
 import { DISCOVERCARS_AFFILIATE_URL } from "@/lib/affiliateLinks";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
+
+const bookingFaqs: readonly ArticleFaq[] = [
+  { question: "How do I search for a hotel?", answer: "Enter your destination and dates, then use the Trip.com hotel search widget in the hotel section to compare current availability and booking terms." },
+  { question: "Are the prices shown final?", answer: "Displayed prices and inclusions can change by date, room type, taxes, cancellation terms, and booking channel. Review the final provider checkout before booking." },
+  { question: "Can I compare flights and hotels separately?", answer: "Yes. Use the tabs above to switch between hotels, flights, cruises, car rentals, and tours without losing the page context." },
+  { question: "Does The Stay & Wander process my booking?", answer: "No. Booking searches hand off to the relevant travel provider. Their checkout, payment, cancellation, and support terms apply to the completed reservation." },
+];
 
 export default function Booking() {
   const [activeTab, setActiveTab] = useState("hotels");
+  const [searchStatus, setSearchStatus] = useState<"idle" | "preparing" | "ready">("idle");
+
+  const handleHotelSearch = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setSearchStatus("preparing");
+    window.setTimeout(() => setSearchStatus("ready"), 650);
+  };
 
   return (
     <div className="min-h-screen bg-white pb-20 md:pb-0">
@@ -82,7 +98,7 @@ export default function Booking() {
               <h2 className="font-display text-2xl font-bold text-gray-900 mb-6">
                 Find Your Perfect Hotel
               </h2>
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+              <form onSubmit={handleHotelSearch} className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6" aria-describedby="hotel-search-status">
                 <div>
                   <label className="text-sm font-semibold text-gray-700 mb-2 block">
                     Destination
@@ -107,7 +123,15 @@ export default function Booking() {
                   </label>
                   <Input placeholder="2 guests" />
                 </div>
-              </div>
+                <div className="md:col-span-4 flex flex-wrap items-center gap-3 pt-1">
+                  <Button type="submit" disabled={searchStatus === "preparing"} className="bg-[#0077B6] text-white hover:bg-[#005c91]">
+                    {searchStatus === "preparing" ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Preparing search…</> : <><Search className="mr-2 h-4 w-4" /> Prepare hotel search</>}
+                  </Button>
+                  <p id="hotel-search-status" role="status" className="text-sm text-gray-600">
+                    {searchStatus === "ready" ? "Your preferences are ready. Use the live search widget below to view availability." : "Choose dates and destination, then prepare your search."}
+                  </p>
+                </div>
+              </form>
               <div className="pt-2">
                 <TripComHotelWidget title="Search hotels with Trip.com" />
               </div>
@@ -312,6 +336,10 @@ export default function Booking() {
             </div>
           </div>
         </div>
+      </section>
+
+      <section className="container px-4 py-12">
+        <ArticleFAQ faqs={bookingFaqs} title="Booking questions, answered" />
       </section>
 
       <Footer />
