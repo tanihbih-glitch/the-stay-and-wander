@@ -13,7 +13,21 @@ describe("canonical booking engagement enhancements", () => {
     expect(page).toContain('role="status"');
     expect(page).toContain("Preparing search");
     expect(page).toContain("Your preferences are ready");
+    expect(page).toContain("Booking temporarily unavailable");
+    expect(page).toContain("onStatusChange");
     expect(page).toContain('type="submit"');
+  });
+});
+
+describe("hotel widget failure handling", () => {
+  it("shows a retry and direct-contact path instead of an indefinite spinner", () => {
+    const widget = read("client/src/components/TripComHotelWidget.tsx");
+    expect(widget).toContain('status === "failed"');
+    expect(widget).toContain("timeoutMs = 12000");
+    expect(widget).toContain("onError={markFailed}");
+    expect(widget).toContain("Try again");
+    expect(widget).toContain("mailto:thestayandwander@thestayandwander.com");
+    expect(widget).toContain('role="alert"');
   });
 });
 

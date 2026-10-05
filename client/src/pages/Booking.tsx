@@ -24,7 +24,7 @@ const bookingFaqs: readonly ArticleFaq[] = [
 
 export default function Booking() {
   const [activeTab, setActiveTab] = useState("hotels");
-  const [searchStatus, setSearchStatus] = useState<"idle" | "preparing" | "ready">("idle");
+  const [searchStatus, setSearchStatus] = useState<"idle" | "preparing" | "ready" | "error">("idle");
 
   const handleHotelSearch = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -128,12 +128,18 @@ export default function Booking() {
                     {searchStatus === "preparing" ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Preparing search…</> : <><Search className="mr-2 h-4 w-4" /> Prepare hotel search</>}
                   </Button>
                   <p id="hotel-search-status" role="status" className="text-sm text-gray-600">
-                    {searchStatus === "ready" ? "Your preferences are ready. Use the live search widget below to view availability." : "Choose dates and destination, then prepare your search."}
+                    {searchStatus === "ready" ? "Your preferences are ready. Use the live search widget below to view availability." : searchStatus === "error" ? "Booking temporarily unavailable — please try again shortly or contact us directly." : "Choose dates and destination, then prepare your search."}
                   </p>
                 </div>
               </form>
               <div className="pt-2">
-                <TripComHotelWidget title="Search hotels with Trip.com" />
+                <TripComHotelWidget
+                  title="Search hotels with Trip.com"
+                  onStatusChange={(status) => {
+                    if (status === "failed") setSearchStatus("error");
+                    if (status === "loaded" && searchStatus === "error") setSearchStatus("ready");
+                  }}
+                />
               </div>
             </div>
 

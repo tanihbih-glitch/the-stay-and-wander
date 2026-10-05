@@ -16,21 +16,24 @@ describe("Trip.com hotel widget placements", () => {
     expect(widgetSource).toContain('width: "100%"');
     expect(widgetSource).toContain('height: "320px"');
     expect(widgetSource).toContain('scrolling="no"');
-    expect(widgetSource).toContain('const [isLoaded, setIsLoaded] = useState(false)');
-    expect(widgetSource).toContain('onLoad={() => setIsLoaded(true)}');
-    expect(widgetSource).toContain('isLoaded ? "opacity-0" : "opacity-100"');
+    expect(widgetSource).toContain('const [status, setStatus] = useState<"loading" | "loaded" | "failed">("loading")');
+    expect(widgetSource).toContain("onLoad={markLoaded}");
+    expect(widgetSource).toContain('status === "loading" ? "opacity-100" : "opacity-0"');
+    expect(widgetSource).toContain('status === "failed"');
   });
 
   it("uses the widget in both requested Hotel locations while retaining the other home tabs", () => {
     expect(homeSource).toContain("<TripComHotelWidget />");
-    expect(bookingSource).toContain('<TripComHotelWidget title="Search hotels with Trip.com" />');
+    expect(bookingSource).toContain('title="Search hotels with Trip.com"');
+    expect(bookingSource).toContain("onStatusChange");
     ["Flights", "Cruises", "Car Rentals", "AviasalesFlightWidget", "Search Cruise Deals →", "Search Car Rentals →", "Compare Prices →"].forEach((control) => {
       expect(homeSource).toContain(control);
     });
   });
 
   it("uses the live homepage widgets inline on the Booking-page Hotels and Flights tabs", () => {
-    expect(bookingSource).toContain('<TripComHotelWidget title="Search hotels with Trip.com" />');
+    expect(bookingSource).toContain('title="Search hotels with Trip.com"');
+    expect(bookingSource).toContain("onStatusChange");
     expect(bookingSource).toContain("<AviasalesFlightWidget />");
     expect(bookingSource).not.toContain("Search Hotels on Booking.com");
     expect(bookingSource).not.toContain("Search Flights on Aviasales");

@@ -500,3 +500,8 @@
 - [x] Checked exact Pinterest/Dubai URL overlap; no direct match found from the six examples. Full historical Pinterest pin inventory was not available in the connected session.
 - [x] Passed focused tests, TypeScript, production build, diff check, and local status verification.
 - [x] Publish and verify public propagation.
+
+## Deferred backlog — 2026-10-05
+- [ ] Revisit a “View saved stays” summary panel on the UAE extended-stay hub after the next Search Console recovery report.
+- [ ] Revisit extending browser-local “Save for later” bookmarks to the Bali, Bangkok, Seoul, and Tokyo guides after the next Search Console recovery report.
+- [x] Prioritize booking-widget timeout and user-facing error handling before these engagement expansions.
