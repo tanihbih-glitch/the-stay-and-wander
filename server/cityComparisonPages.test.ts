@@ -56,4 +56,19 @@ describe("city comparison pages", () => {
     expect(share).toContain("Comparison link copied.");
     expect(share).toContain("twitter.com/intent/tweet");
   });
+
+  it("keeps the Ho Chi Minh City planner source-bounded and browser-local", () => {
+    const page = readFileSync(path.resolve(process.cwd(), "client/src/pages/BlogBangkokVsHoChiMinh.tsx"), "utf8");
+    const planner = readFileSync(path.resolve(process.cwd(), "client/src/components/CityCostPlanningCard.tsx"), "utf8");
+    const neighborhoods = readFileSync(path.resolve(process.cwd(), "client/src/components/HcmcNeighborhoodBreakdown.tsx"), "utf8");
+    expect(page).toContain("neighborhoods:");
+    expect(page).toContain("seasonalSignals:");
+    expect(page).toContain("No month-specific rate is reported");
+    expect(page).toContain("KAYAK's displayed seasonal insight");
+    expect(planner).toContain("downloadPdf");
+    expect(planner).toContain("pdf.save(\"bangkok-ho-chi-minh-city-cost-planning-card.pdf\")");
+    expect(planner).toContain("no trip data is uploaded");
+    expect(neighborhoods).toContain("Which neighborhood matches your selector choice?");
+    expect(neighborhoods).toContain("not a ranking");
+  });
 });
