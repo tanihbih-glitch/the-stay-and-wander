@@ -16,6 +16,8 @@ describe("published article FAQ data", () => {
     "/blog/uae-extended-stay-hotels-2026",
     "/blog/bangkok-vs-seoul-2026",
     "/blog/bali-vs-phuket-2026",
+    "/blog/dubai-vs-abu-dhabi-2026",
+    "/blog/tokyo-vs-osaka-2026",
   ];
 
   it("provides four to six non-empty FAQ pairs for each requested article", () => {

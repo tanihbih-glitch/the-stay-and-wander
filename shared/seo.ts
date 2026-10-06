@@ -222,6 +222,34 @@ export const pageMetadataConfig: Record<string, PageMetadata> = {
     keywords: "Bali vs Phuket 2026, Bali or Phuket cheaper, Phuket hotel prices, Bali hotel prices, beach destination comparison",
   },
 
+  dubaiVsAbuDhabiGuide: {
+    title: "Dubai vs Abu Dhabi 2026: Which City Fits Your Trip?",
+    schemaTitle: "Dubai vs Abu Dhabi 2026: Which City Fits Your Trip?",
+    description: "Compare Dubai and Abu Dhabi hotel tiers, daily costs, city character, and traveler fit in 2026—with source-backed guidance and live rates.",
+    image: `${SITE_URL}/manus-storage/dubai-middle-east-destination_1431ce58.png`,
+    url: "/blog/dubai-vs-abu-dhabi-2026",
+    type: "article",
+    author: "The Stay & Wander",
+    publishedDate: "2026-10-07",
+    updatedDate: "2026-10-07",
+    includeRichSnippetSchemas: true,
+    keywords: "Dubai vs Abu Dhabi 2026, Dubai or Abu Dhabi, Abu Dhabi hotel prices, Dubai hotel prices, UAE city comparison",
+  },
+
+  tokyoVsOsakaGuide: {
+    title: "Tokyo vs Osaka 2026: Which Japan City Fits You?",
+    schemaTitle: "Tokyo vs Osaka 2026: Which Japan City Fits You?",
+    description: "Compare Tokyo and Osaka hotel tiers, food, transport, trip rhythm, and traveler fit in 2026—with a practical split-your-time plan.",
+    image: `${SITE_URL}/manus-storage/tokyo-where-to-stay-hero_78be225b.jpg`,
+    url: "/blog/tokyo-vs-osaka-2026",
+    type: "article",
+    author: "The Stay & Wander",
+    publishedDate: "2026-10-07",
+    updatedDate: "2026-10-07",
+    includeRichSnippetSchemas: true,
+    keywords: "Tokyo vs Osaka 2026, Tokyo or Osaka, Osaka hotel prices, Tokyo hotel prices, Japan city comparison",
+  },
+
   brazilTravelGuide: {
     title: "Brazil Travel Guide 2026 — Everything You Need to Know",
     description: "Plan a Brazil trip with practical guidance for Rio de Janeiro, the Amazon, São Paulo, and Florianópolis, including stays, tours, and budget tips.",

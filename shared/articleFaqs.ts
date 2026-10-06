@@ -287,6 +287,24 @@ export const baliVsPhuketFaqs: readonly ArticleFaq[] = [
   { question: "Are the Phuket rates live hotel prices?", answer: "No. The Phuket bands are source-bounded research notes used for orientation, while Bali's figures come from the published price index. Confirm current availability, taxes, room type, and resort terms through the live search handoff." },
 ];
 
+export const dubaiVsAbuDhabiFaqs: readonly ArticleFaq[] = [
+  { question: "Is Dubai or Abu Dhabi cheaper for hotels in 2026?", answer: "The planning bands in this comparison put simple Dubai bases around $30–$90 and Abu Dhabi bases around $45–$100, while both cities have wide mid-range and luxury spreads. These are directional benchmarks, not live quotes; dates, room type, taxes, and events can change the final price." },
+  { question: "Which UAE city is better for a first-time visitor?", answer: "Dubai is the easier starting point when skyline landmarks, shopping, dining, desert experiences, and a broad choice of recognizable areas lead the trip. Abu Dhabi is a strong alternative when culture, beaches, family attractions, and a more measured itinerary matter more." },
+  { question: "Is Abu Dhabi better for families?", answer: "Abu Dhabi is the stronger starting point in this guide when family attractions, beaches, cultural landmarks, and a less rushed itinerary are the priority. The best choice still depends on the exact attraction mix and hotel location." },
+  { question: "What is Dubai best known for compared with Abu Dhabi?", answer: "The comparison uses Dubai as the high-contrast metropolis of skyline landmarks, major malls, traditional souks, waterfront dining, desert experiences, and nightlife or events. Abu Dhabi is framed around culture, heritage landmarks, museums, beaches, relaxation, and family planning." },
+  { question: "Is Abu Dhabi quieter than Dubai?", answer: "This guide treats Abu Dhabi as a more measured planning rhythm, not as a universal crowd or noise ranking. Hotel location, events, season, and the attractions you choose still determine how busy the trip feels." },
+  { question: "Are these live UAE hotel prices?", answer: "No. The ranges are planning benchmarks carried from the published UAE guides and should not be read as live availability or a property ranking. Use the live search handoff for current rates, taxes, and booking terms." },
+];
+
+export const tokyoVsOsakaFaqs: readonly ArticleFaq[] = [
+  { question: "Is Tokyo or Osaka cheaper for hotels in 2026?", answer: "The directional bands in this comparison put value Tokyo bases around $35–$160+ and Osaka bases around $30–$90, with both cities widening considerably for central and premium stays. Check your dates, district, occupancy, and taxes before treating the difference as a saving." },
+  { question: "Should first-time visitors choose Tokyo or Osaka?", answer: "Tokyo is the stronger single-city starting point when you want maximum landmark variety, district choice, and rail-connected flexibility. Osaka is the better starting point when food, a relaxed city rhythm, and Kansai day trips are the main reason for the trip." },
+  { question: "How many days should I spend in Tokyo and Osaka?", answer: "For a seven-day first Japan trip, the guide uses four nights Tokyo and three nights Osaka as a practical starting split. If food and Kansai history lead the brief, reverse the emphasis to three nights Tokyo and four nights Osaka." },
+  { question: "Is Osaka better for food than Tokyo?", answer: "Osaka is the more immediately food-led and relaxed comparison, with Dotonbori, Minami, Tenma, and Ura Namba making casual eating central to the trip. Tokyo offers greater overall breadth across markets, neighborhood restaurants, food halls, and high-end dining." },
+  { question: "Can I visit Kyoto and Nara from Osaka?", answer: "Yes. The comparison positions Osaka as a useful Kansai base for trips to Kyoto and Nara, alongside Osaka Castle and historic neighborhoods. Allow for the exact rail route and day-trip timing when choosing your hotel area." },
+  { question: "Are the Tokyo and Osaka rates live hotel prices?", answer: "No. They are directional planning bands based on the cited Tokyo guide and Osaka tourism context. Use the live search handoff to confirm current availability, room type, taxes, and final terms." },
+];
+
 export const articleFaqsByPath: Readonly<Record<string, readonly ArticleFaq[]>> = {
   "/blog/where-to-stay-in-bali-2026": baliHotelPricesFaqs,
   "/blog/where-to-stay-in-bangkok-2026": bangkokHotelPricesFaqs,
@@ -301,6 +319,8 @@ export const articleFaqsByPath: Readonly<Record<string, readonly ArticleFaq[]>> 
   "/blog/uae-extended-stay-hotels-2026": uaeExtendedStayHotelsFaqs,
   "/blog/bangkok-vs-seoul-2026": bangkokVsSeoulFaqs,
   "/blog/bali-vs-phuket-2026": baliVsPhuketFaqs,
+  "/blog/dubai-vs-abu-dhabi-2026": dubaiVsAbuDhabiFaqs,
+  "/blog/tokyo-vs-osaka-2026": tokyoVsOsakaFaqs,
 };
 
 export function getArticleFaqs(pathname: string): readonly ArticleFaq[] {

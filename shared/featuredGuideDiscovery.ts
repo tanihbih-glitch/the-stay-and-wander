@@ -106,6 +106,28 @@ export const featuredGuideDiscovery: readonly FeaturedGuideDiscovery[] = [
     date: "October 6, 2026",
     readTime: "8 min read",
   },
+  {
+    id: 14,
+    path: "/blog/dubai-vs-abu-dhabi-2026",
+    slug: "dubai-vs-abu-dhabi-2026",
+    title: "Dubai vs Abu Dhabi 2026: Which City Fits Your Trip?",
+    category: "UAE City Comparison · 2026 Planning",
+    image: "/manus-storage/dubai-middle-east-destination_1431ce58.png",
+    excerpt: "Compare UAE hotel tiers, city character, food, transport, and traveler fit before choosing Dubai, Abu Dhabi, or both.",
+    date: "October 7, 2026",
+    readTime: "8 min read",
+  },
+  {
+    id: 13,
+    path: "/blog/tokyo-vs-osaka-2026",
+    slug: "tokyo-vs-osaka-2026",
+    title: "Tokyo vs Osaka 2026: Which Japan City Fits You?",
+    category: "Japan City Comparison · 2026 Planning",
+    image: "/manus-storage/tokyo-where-to-stay-hero_78be225b.jpg",
+    excerpt: "Compare Tokyo and Osaka hotel bands, food, transport, and a practical split-your-time plan for Japan.",
+    date: "October 7, 2026",
+    readTime: "8 min read",
+  },
 ] as const;
 
 export const featuredGuidePaths = featuredGuideDiscovery.map((guide) => guide.path);

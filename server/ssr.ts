@@ -221,6 +221,10 @@ export function ssrMiddleware(req: Request, res: Response, next: NextFunction) {
     metadata = pageMetadataConfig.bangkokVsSeoulGuide;
   } else if (path === "/blog/bali-vs-phuket-2026") {
     metadata = pageMetadataConfig.baliVsPhuketGuide;
+  } else if (path === "/blog/dubai-vs-abu-dhabi-2026") {
+    metadata = pageMetadataConfig.dubaiVsAbuDhabiGuide;
+  } else if (path === "/blog/tokyo-vs-osaka-2026") {
+    metadata = pageMetadataConfig.tokyoVsOsakaGuide;
   } else if (path === "/blog/brazil-travel-guide-2026") {
     metadata = pageMetadataConfig.brazilTravelGuide;
   } else if (path === "/blog/best-flight-deals-asia-2026") {
