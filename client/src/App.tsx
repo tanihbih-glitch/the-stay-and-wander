@@ -27,6 +27,7 @@ import BlogDubaiVsAbuDhabi from "./pages/BlogDubaiVsAbuDhabi";
 import BlogTokyoVsOsaka from "./pages/BlogTokyoVsOsaka";
 import BlogBangkokVsHoChiMinh from "./pages/BlogBangkokVsHoChiMinh";
 import BlogBarcelonaVsLisbon from "./pages/BlogBarcelonaVsLisbon";
+import BlogTokyoOrBangkokFlightDeals from "./pages/BlogTokyoOrBangkokFlightDeals";
 import BlogBrazil from "./pages/BlogBrazil";
 import BlogFlightDeals from "./pages/BlogFlightDeals";
 import BlogDubaiHotels from "./pages/BlogDubaiHotels";
@@ -79,6 +80,7 @@ function Router() {
       <Route path={"/blog/tokyo-vs-osaka-2026"} component={BlogTokyoVsOsaka} />
       <Route path={"/blog/bangkok-vs-ho-chi-minh-city-2026"} component={BlogBangkokVsHoChiMinh} />
       <Route path={"/blog/barcelona-vs-lisbon-2026"} component={BlogBarcelonaVsLisbon} />
+      <Route path={"/blog/tokyo-or-bangkok-flight-deals-2026"} component={BlogTokyoOrBangkokFlightDeals} />
       <Route path={"/blog/brazil-travel-guide-2026"} component={BlogBrazil} />
       <Route path={"/blog/best-flight-deals-asia-2026"} component={BlogFlightDeals} />
       <Route path={"/blog/best-hotels-dubai-2026"} component={BlogDubaiHotels} />

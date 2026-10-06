@@ -150,6 +150,17 @@ export const featuredGuideDiscovery: readonly FeaturedGuideDiscovery[] = [
     date: "October 7, 2026",
     readTime: "8 min read",
   },
+  {
+    id: 10,
+    path: "/blog/tokyo-or-bangkok-flight-deals-2026",
+    slug: "tokyo-or-bangkok-flight-deals-2026",
+    title: "Tokyo or Bangkok: Which Flight Is Cheaper in 2026?",
+    category: "Flight Deals · Asia Travel",
+    image: "/manus-storage/blog-flights.png",
+    excerpt: "Compare published Tokyo and Bangkok fare snapshots, seasonal booking windows, stopover trade-offs, and live Aviasales deals.",
+    date: "October 7, 2026",
+    readTime: "8 min read",
+  },
 ] as const;
 
 export const featuredGuidePaths = featuredGuideDiscovery.map((guide) => guide.path);

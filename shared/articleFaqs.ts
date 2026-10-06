@@ -322,6 +322,15 @@ export const bangkokVsHoChiMinhFaqs: readonly ArticleFaq[] = [
   { question: "Are the Bangkok and Ho Chi Minh City rates live hotel prices?", answer: "No. The comparison combines published planning bands, dated research, and a dynamic platform snapshot that is shown only as current context. Confirm the exact dates, taxes, room type, occupancy, and final availability through the live search handoff." },
 ];
 
+export const tokyoOrBangkokFlightDealsFaqs: readonly ArticleFaq[] = [
+  { question: "Is Tokyo or Bangkok cheaper to fly to in 2026?", answer: "The published route snapshot used in this guide shows Bangkok from Dubai at $180 and Tokyo from Abu Dhabi at $420, but those are different origins. Compare the exact departure airport, dates, baggage, cabin, and stopover terms in the live widget before deciding which destination is cheaper for your trip." },
+  { question: "When should I book a flight to Tokyo or Bangkok?", answer: "The established Asia flight guide recommends searching by April for summer travel, June–July for autumn, September–October for winter, and December–January for spring. Start earlier for Tokyo's late-March to early-April blossom period and for Christmas or New Year travel." },
+  { question: "Which destination usually has fewer flight stops?", answer: "It depends on the departure airport and schedule. The published snapshot documents multiple daily Los Angeles–Tokyo services and direct-service examples from major hubs, while Bangkok also has direct and one-stop options. Use the live search with a non-stop or maximum-stops filter rather than relying on a citywide rule." },
+  { question: "Are the prices on this page live flight fares?", answer: "No. They are dated planning examples carried from the published Asia flight-deals guide. The embedded Aviasales widget is the live step for current fares, taxes, baggage rules, stopovers, and availability." },
+  { question: "Can I use the same flight search for Tokyo and Bangkok?", answer: "Yes. The page reuses the same Aviasales/Travelpayouts widget and canonical affiliate deep link as the established Asia flight-deals guide. Enter the exact origin, destination, dates, and passenger details to compare both searches." },
+  { question: "Is a one-stop flight worth considering for Asia?", answer: "Often. The existing guide notes that a connection can save money, but the total value depends on the connection length, airport change, baggage, and overnight costs. Compare the complete itinerary rather than the lowest headline fare alone." },
+];
+
 export const articleFaqsByPath: Readonly<Record<string, readonly ArticleFaq[]>> = {
   "/blog/where-to-stay-in-bali-2026": baliHotelPricesFaqs,
   "/blog/where-to-stay-in-bangkok-2026": bangkokHotelPricesFaqs,
@@ -340,6 +349,7 @@ export const articleFaqsByPath: Readonly<Record<string, readonly ArticleFaq[]>> 
   "/blog/tokyo-vs-osaka-2026": tokyoVsOsakaFaqs,
   "/blog/bangkok-vs-ho-chi-minh-city-2026": bangkokVsHoChiMinhFaqs,
   "/blog/barcelona-vs-lisbon-2026": barcelonaVsLisbonFaqs,
+  "/blog/tokyo-or-bangkok-flight-deals-2026": tokyoOrBangkokFlightDealsFaqs,
 };
 
 export function getArticleFaqs(pathname: string): readonly ArticleFaq[] {

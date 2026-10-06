@@ -278,6 +278,20 @@ export const pageMetadataConfig: Record<string, PageMetadata> = {
     keywords: "Barcelona vs Lisbon summer 2026, Barcelona or Lisbon, Barcelona hotel prices, Lisbon hotel prices, Europe summer city comparison",
   },
 
+  tokyoOrBangkokFlightDealsGuide: {
+    title: "Tokyo or Bangkok: Which Flight Is Cheaper in 2026?",
+    schemaTitle: "Tokyo or Bangkok: Which Flight Is Cheaper in 2026?",
+    description: "Tokyo or Bangkok in 2026? Compare published flight snapshots, seasonal booking windows, stopover trade-offs, and live Aviasales deals.",
+    image: `${SITE_URL}/manus-storage/blog-flights.png`,
+    url: "/blog/tokyo-or-bangkok-flight-deals-2026",
+    type: "article",
+    author: "The Stay & Wander",
+    publishedDate: "2026-10-07",
+    updatedDate: "2026-10-07",
+    includeRichSnippetSchemas: true,
+    keywords: "Tokyo or Bangkok flights 2026, Bangkok flight deals, Tokyo flight deals, cheapest flights to Asia, Aviasales",
+  },
+
   brazilTravelGuide: {
     title: "Brazil Travel Guide 2026 — Everything You Need to Know",
     description: "Plan a Brazil trip with practical guidance for Rio de Janeiro, the Amazon, São Paulo, and Florianópolis, including stays, tours, and budget tips.",
