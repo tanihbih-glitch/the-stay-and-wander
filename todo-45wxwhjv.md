@@ -523,3 +523,11 @@
 - [x] Preview visual checks passed at desktop and mobile widths; Bangkok save interaction updated the local summary to `1 saved`; UAE preview showed the saved-stays panel.
 - [x] Full validation passed: 39 test files / 221 tests, TypeScript, production build, and `git diff --check`.
 - [x] Publish and verify custom-domain propagation after checkpoint — all five affected custom-domain routes returned HTTP 200; the UAE hub was opened in a fresh browser session and visibly showed the browser-local saved-stays notice and single horizontal TOC.
+
+## Bangkok versus Ho Chi Minh City live verification — 2026-10-07
+- [x] Custom-domain page returned HTTP 200 with the approved title and canonical path.
+- [x] Live HTML includes BreadcrumbList and FAQPage JSON-LD; live sitemap includes the canonical comparison URL.
+- [x] Fresh browser review confirmed one shared horizontal TOC, breadcrumbs, comparison table, related guides, and live rate handoff.
+- [x] Live selector interaction changed the recommendation from Bangkok to Ho Chi Minh City when selecting “Food and café rhythm”.
+- [x] Fresh live screenshot captured after the selector update.
+- [x] Publication checkpoint: `e301e581`.
