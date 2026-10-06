@@ -51,6 +51,14 @@ describe("UAE extended-stay comparison hub", () => {
     expect(selector).not.toMatch(/fetch\(|trpc\.|axios|userId/i);
   });
 
+  it("renders a browser-local saved-stays summary with a clear action", () => {
+    const selector = readProjectFile("client/src/components/UaeExtendedStaySelector.tsx");
+    expect(selector).toContain('id="uae-saved-stays-title"');
+    expect(selector).toContain("Your UAE stay shortlist");
+    expect(selector).toContain("Clear saved stays");
+    expect(selector).toContain("tsw-uae-extended-stay-bookmarks");
+  });
+
   it("registers the new hub and retires the cannibalizing legacy article", () => {
     const blog = readProjectFile("client/src/pages/Blog.tsx");
     const redirects = readProjectFile("server/legacyRedirects.ts");

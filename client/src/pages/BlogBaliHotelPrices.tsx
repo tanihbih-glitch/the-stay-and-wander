@@ -9,6 +9,7 @@ import ArticleFAQ from "@/components/ArticleFAQ";
 import RelatedAsiaStayGuides from "@/components/RelatedAsiaStayGuides";
 import GuideMethodologyDecisionTree, { type GuideDecision } from "@/components/GuideMethodologyDecisionTree";
 import BaliBaseMatcher from "@/components/BaliBaseMatcher";
+import GuideSaveForLater from "@/components/GuideSaveForLater";
 import { baliHotelPricesFaqs } from "@shared/articleFaqs";
 import { ArrowLeft } from "lucide-react";
 
@@ -64,6 +65,7 @@ export const baliStayDecisions: readonly GuideDecision[] = [
   { condition: "cliffs, surf, and resort time are the priority", recommendation: "Uluwatu", detail: "Choose the Bukit coast when dramatic views and self-contained beach days are central to the trip.", href: "#uluwatu" },
   { condition: "you want cafés, surf, and a longer-stay feel", recommendation: "Canggu", detail: "Choose this base for remote-work energy and a broader day-to-day lifestyle rhythm.", href: "#canggu" },
 ];
+const baliSaveOptions = baliStayDecisions.map((decision) => ({ id: decision.recommendation.toLowerCase(), name: decision.recommendation, detail: decision.detail, href: decision.href }));
 
 export default function BlogBaliHotelPrices() {
   const canonicalUrl = `https://thestayandwander.com${articleMetadata.url}`;
@@ -143,6 +145,8 @@ export default function BlogBaliHotelPrices() {
           />
 
           <BaliBaseMatcher />
+
+          <GuideSaveForLater guideId="bali-stay" destination="Bali" options={baliSaveOptions} />
 
           <section className="mt-12 rounded-2xl bg-slate-900 p-6 text-white shadow-sm sm:p-8">
             <h2 className="font-playfair text-3xl font-bold">Bali Area-at-a-Glance for First-Timers</h2>

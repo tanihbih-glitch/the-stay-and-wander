@@ -86,6 +86,12 @@ describe("Bali Hotel Price Index", () => {
     expect(articleSource).toContain('<CompareDestinations current="bali" />');
   });
 
+  it("adds a browser-local saved-area shortlist to the canonical Bali stay guide", () => {
+    const stayGuideSource = fs.readFileSync(path.resolve(process.cwd(), "client/src/pages/BlogBaliHotelPrices.tsx"), "utf8");
+    expect(stayGuideSource).toContain('import GuideSaveForLater from "@/components/GuideSaveForLater"');
+    expect(stayGuideSource).toContain('<GuideSaveForLater guideId="bali-stay"');
+  });
+
   it("adds seasonal planning context to the cross-city comparison cards", () => {
     const comparisonSource = fs.readFileSync(path.resolve(process.cwd(), "client/src/components/CompareDestinations.tsx"), "utf8");
     expect(comparisonSource).toContain("Seasonal planning");

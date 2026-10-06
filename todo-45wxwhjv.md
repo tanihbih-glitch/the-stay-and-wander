@@ -513,3 +513,13 @@
 - [x] Validate full suite, TypeScript, production build, sitemap sync, and fresh desktop/mobile preview screenshots; checkpoint `67bc0423` records the release.
 - [x] Verify custom-domain propagation: both routes return HTTP 200; live HTML exposes canonical URLs, FAQPage and BreadcrumbList schema; live sitemap contains both routes.
 - [x] Verify fresh custom-domain browser views: Bangkok vs Seoul and Bali vs Phuket show the intended titles, one horizontal “In this guide” TOC, persona controls, source citations, related guides, and FAQ accordions. Phuket values remain dated planning benchmarks, not live rates or rankings.
+
+## Saved-stays engagement rollout — 2026-10-06
+- [x] Added reusable `GuideSaveForLater` browser-local bookmark/summary component with resilient storage handling.
+- [x] Added saved-area shortlist modules to the Bali, Bangkok, Seoul, and Tokyo first-timer stay guides.
+- [x] Added saved-stays summary panel and clear control to the UAE extended-stay selector; retained source-bounded property cards and compliant source links.
+- [x] Preserved privacy boundary: no account persistence, server storage, or visitor tracking; all state remains in the visitor's browser.
+- [x] Added focused regression coverage across UAE, Bali/Bangkok, Seoul/Tokyo bookmark wiring.
+- [x] Preview visual checks passed at desktop and mobile widths; Bangkok save interaction updated the local summary to `1 saved`; UAE preview showed the saved-stays panel.
+- [x] Full validation passed: 39 test files / 221 tests, TypeScript, production build, and `git diff --check`.
+- [ ] Publish and verify custom-domain propagation after checkpoint.

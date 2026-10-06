@@ -9,6 +9,7 @@ import ArticleFAQ from "@/components/ArticleFAQ";
 import RelatedAsiaStayGuides from "@/components/RelatedAsiaStayGuides";
 import GuideMethodologyDecisionTree, { type GuideDecision } from "@/components/GuideMethodologyDecisionTree";
 import CityStayMatcher from "@/components/CityStayMatcher";
+import GuideSaveForLater from "@/components/GuideSaveForLater";
 import { bangkokStayMatcherConfig } from "@/lib/cityStayMatcherConfigs";
 import { bangkokHotelPricesFaqs } from "@shared/articleFaqs";
 import { ArrowLeft } from "lucide-react";
@@ -94,6 +95,7 @@ export const bangkokStayDecisions: readonly GuideDecision[] = [
   { condition: "you are travelling on a tighter budget near Old City temples", recommendation: "Khao San Road", detail: "Choose the sociable backpacker base if quiet evenings and fast BTS access are not the main need.", href: "#khao-san-road" },
   { condition: "you prefer a quieter base for a longer stay", recommendation: "Sathorn", detail: "Choose a more residential central setting with rail and river-ferry connections nearby.", href: "#sathorn" },
 ];
+const bangkokSaveOptions = bangkokStayMatcherConfig.areas.map((area) => ({ id: area.key, name: area.name, detail: area.heading, href: area.anchor }));
 
 export default function BlogBangkokHotelPrices() {
   const canonicalUrl = `https://thestayandwander.com${articleMetadata.url}`;
@@ -168,6 +170,8 @@ export default function BlogBangkokHotelPrices() {
           />
 
           <CityStayMatcher config={bangkokStayMatcherConfig} />
+
+          <GuideSaveForLater guideId="bangkok-stay" destination="Bangkok" options={bangkokSaveOptions} />
 
           <section className="mt-12 rounded-2xl bg-slate-900 p-6 text-white shadow-sm sm:p-8">
             <h2 className="font-playfair text-3xl font-bold">Bangkok Area-at-a-Glance for First-Timers</h2>

@@ -88,6 +88,12 @@ describe("Bangkok Hotel Price Index", () => {
     expect(articleSource).toContain('<CompareDestinations current="bangkok" />');
   });
 
+  it("adds a browser-local saved-area shortlist to the canonical Bangkok stay guide", () => {
+    const stayGuideSource = fs.readFileSync(path.resolve(process.cwd(), "client/src/pages/BlogBangkokHotelPrices.tsx"), "utf8");
+    expect(stayGuideSource).toContain('import GuideSaveForLater from "@/components/GuideSaveForLater"');
+    expect(stayGuideSource).toContain('<GuideSaveForLater guideId="bangkok-stay"');
+  });
+
   it("retains the seasonal planning note in the shared comparison cards", () => {
     const comparisonSource = fs.readFileSync(path.resolve(process.cwd(), "client/src/components/CompareDestinations.tsx"), "utf8");
     expect(comparisonSource).toContain("Seasonal planning");

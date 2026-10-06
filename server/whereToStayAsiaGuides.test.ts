@@ -90,6 +90,19 @@ describe("Tokyo and Seoul where-to-stay guides", () => {
     expect(seoulPage).toContain('id="seoul-booking"');
   });
 
+  it("adds browser-local saved-area shortlists to both Asia guides", () => {
+    const seoulPage = readFileSync(path.resolve(process.cwd(), "client/src/pages/BlogSeoulStay.tsx"), "utf8");
+    const tokyoPage = readFileSync(path.resolve(process.cwd(), "client/src/pages/BlogTokyoStay.tsx"), "utf8");
+    const saveComponent = readFileSync(path.resolve(process.cwd(), "client/src/components/GuideSaveForLater.tsx"), "utf8");
+
+    expect(seoulPage).toContain('import GuideSaveForLater from "@/components/GuideSaveForLater"');
+    expect(seoulPage).toContain('<GuideSaveForLater guideId="seoul-stay"');
+    expect(tokyoPage).toContain('import GuideSaveForLater from "@/components/GuideSaveForLater"');
+    expect(tokyoPage).toContain('<GuideSaveForLater guideId="tokyo-stay"');
+    expect(saveComponent).toContain("localStorage");
+    expect(saveComponent).toContain("Your saved {destination} shortlist");
+  });
+
   it("adds the shared Pinterest guide module to both Asia price guides", () => {
     const seoulPage = readFileSync(path.resolve(process.cwd(), "client/src/pages/BlogSeoulStay.tsx"), "utf8");
     const tokyoPage = readFileSync(path.resolve(process.cwd(), "client/src/pages/BlogTokyoStay.tsx"), "utf8");
