@@ -505,3 +505,11 @@
 - [ ] Revisit a “View saved stays” summary panel on the UAE extended-stay hub after the next Search Console recovery report.
 - [ ] Revisit extending browser-local “Save for later” bookmarks to the Bali, Bangkok, Seoul, and Tokyo guides after the next Search Console recovery report.
 - [x] Prioritize booking-widget timeout and user-facing error handling before these engagement expansions.
+
+## Bangkok–Seoul and Bali–Phuket comparison pages — 2026-10-06
+- [x] Build `/blog/bangkok-vs-seoul-2026` with shared interactive comparison architecture, source-bounded tier benchmarks, browser-local persona selector, live-rate handoff, food/transport planning, single TOC, breadcrumbs, related guides, and six-question FAQ.
+- [x] Build `/blog/bali-vs-phuket-2026` with shared interactive comparison architecture, source-bounded Bali/Phuket planning bands, beach-fit selector, live resort-rate handoff, beach/activity planning, single TOC, breadcrumbs, related guides, and FAQ.
+- [x] Register both routes in client routing, SSR metadata/schema, FAQ mappings, homepage/blog discovery, destination-guide navigation, and canonical sitemap.
+- [x] Validate full suite, TypeScript, production build, sitemap sync, and fresh desktop/mobile preview screenshots; checkpoint `67bc0423` records the release.
+- [x] Verify custom-domain propagation: both routes return HTTP 200; live HTML exposes canonical URLs, FAQPage and BreadcrumbList schema; live sitemap contains both routes.
+- [x] Verify fresh custom-domain browser views: Bangkok vs Seoul and Bali vs Phuket show the intended titles, one horizontal “In this guide” TOC, persona controls, source citations, related guides, and FAQ accordions. Phuket values remain dated planning benchmarks, not live rates or rankings.
