@@ -502,8 +502,8 @@
 - [x] Publish and verify public propagation.
 
 ## Deferred backlog — 2026-10-05
-- [ ] Revisit a “View saved stays” summary panel on the UAE extended-stay hub after the next Search Console recovery report.
-- [ ] Revisit extending browser-local “Save for later” bookmarks to the Bali, Bangkok, Seoul, and Tokyo guides after the next Search Console recovery report.
+- [x] Revisit a “View saved stays” summary panel on the UAE extended-stay hub after the next Search Console recovery report — completed in the 2026-10-06 rollout; browser-local summary and clear controls are now live in the hub selector.
+- [x] Revisit extending browser-local “Save for later” bookmarks to the Bali, Bangkok, Seoul, and Tokyo guides after the next Search Console recovery report — completed in the 2026-10-06 rollout; each guide now has a browser-local shortlist and summary.
 - [x] Prioritize booking-widget timeout and user-facing error handling before these engagement expansions.
 
 ## Bangkok–Seoul and Bali–Phuket comparison pages — 2026-10-06
@@ -522,4 +522,4 @@
 - [x] Added focused regression coverage across UAE, Bali/Bangkok, Seoul/Tokyo bookmark wiring.
 - [x] Preview visual checks passed at desktop and mobile widths; Bangkok save interaction updated the local summary to `1 saved`; UAE preview showed the saved-stays panel.
 - [x] Full validation passed: 39 test files / 221 tests, TypeScript, production build, and `git diff --check`.
-- [ ] Publish and verify custom-domain propagation after checkpoint.
+- [x] Publish and verify custom-domain propagation after checkpoint — all five affected custom-domain routes returned HTTP 200; the UAE hub was opened in a fresh browser session and visibly showed the browser-local saved-stays notice and single horizontal TOC.
