@@ -531,3 +531,11 @@
 - [x] Live selector interaction changed the recommendation from Bangkok to Ho Chi Minh City when selecting “Food and café rhythm”.
 - [x] Fresh live screenshot captured after the selector update.
 - [x] Publication checkpoint: `e301e581`.
+
+## Corrected comparison copy live verification — 2026-10-07
+- [x] Corrected the inherited Phuket-specific methodology phrase in the shared comparison component so it now accurately refers to the dated source notes listed in each article.
+- [x] Full validation passed after correction: 39 test files / 223 tests, TypeScript, production build, sitemap sync, and diff checks.
+- [x] Custom-domain HTTP verification returned 200 with the expected canonical URL and title.
+- [x] Hydrated browser verification confirmed the corrected visible methodology sentence, one horizontal TOC, breadcrumbs, sharing controls, and normal comparison layout.
+- [x] Fresh production screenshot: `/home/ubuntu/screenshots/thestayandwander_2026-10-06_21-54-19_3374.webp`.
+- [x] Corrected release checkpoint: `0937fb8d`.
