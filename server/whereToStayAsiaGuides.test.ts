@@ -114,6 +114,12 @@ describe("Tokyo and Seoul where-to-stay guides", () => {
     }
   });
 
+  it("prominently links the Tokyo guide to the Tokyo–Osaka comparison", () => {
+    const tokyoPage = readFileSync(path.resolve(process.cwd(), "client/src/pages/BlogTokyoStay.tsx"), "utf8");
+    expect(tokyoPage).toContain('href="/blog/tokyo-vs-osaka-2026"');
+    expect(tokyoPage).toContain("Read Tokyo vs Osaka");
+  });
+
   it("keeps published visible and crawler modified dates aligned", () => {
     expect(tokyoMetadata.lastUpdated).toBe("2026-09-19");
     expect(seoulMetadata.lastUpdated).toBe("2026-09-19");

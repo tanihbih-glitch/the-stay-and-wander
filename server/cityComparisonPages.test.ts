@@ -38,10 +38,16 @@ describe("city comparison pages", () => {
 
   it("uses the shared single TOC mount and browser-local selectors", () => {
     const component = readFileSync(path.resolve(process.cwd(), "client/src/components/CityComparisonGuide.tsx"), "utf8");
+    const share = readFileSync(path.resolve(process.cwd(), "client/src/components/ComparisonShare.tsx"), "utf8");
     const header = readFileSync(path.resolve(process.cwd(), "client/src/components/Header.tsx"), "utf8");
     expect(header).toContain("<GuideTableOfContents />");
     expect(component).toContain("This browser-local selector");
     expect(component).toContain("<TripComHotelWidget");
+    expect(component).toContain("<ComparisonShare title={config.title}");
+    expect(component).toContain("motion-safe:animate-in");
     expect(component).not.toContain("StickyTableOfContents");
+    expect(share).toContain("Share this comparison");
+    expect(share).toContain("Comparison link copied.");
+    expect(share).toContain("twitter.com/intent/tweet");
   });
 });

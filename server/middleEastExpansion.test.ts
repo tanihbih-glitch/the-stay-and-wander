@@ -82,6 +82,12 @@ describe("Middle East destination expansion", () => {
     expect(dubaiGuide).toContain("PinterestImageSaveButton");
   });
 
+  it("prominently links the UAE extended-stay guide to the Dubai–Abu Dhabi comparison", () => {
+    const uaeGuide = readProjectFile("client/src/pages/BlogUaeExtendedStayHotels.tsx");
+    expect(uaeGuide).toContain('href="/blog/dubai-vs-abu-dhabi-2026"');
+    expect(uaeGuide).toContain("Read Dubai vs Abu Dhabi");
+  });
+
   it("keeps every shared destination message aligned with the expanded coverage", () => {
     const header = readProjectFile("client/src/components/Header.tsx");
     const footer = readProjectFile("client/src/components/Footer.tsx");
