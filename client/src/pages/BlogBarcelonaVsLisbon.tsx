@@ -61,6 +61,37 @@ const config: CityComparisonConfig = {
   transportCopy: "Barcelona is compact for a first city break: many central sights, beaches, and neighborhoods can be connected on foot or by metro. Lisbon is also easy to explore by public transport, but steep hills and cobbled streets make the exact hotel address more important—especially with luggage or in hot weather. Choose Barcelona for a more beach-connected urban grid; choose Lisbon for viewpoint-to-neighborhood wandering with more elevation changes.",
   activityTitle: "Summer weather and crowds: the 2026 trade-off",
   activityCopy: "Barcelona: Rick Steves' seasonal guidance describes July and August as hot, humid, and the city's biggest crowd period, with some shops and restaurants closing in August. The cited 2026 cost guide places June–August at the highest price level and says hotel rates often double, with major events capable of pushing demand higher. Lisbon: the same travel reference describes June–September as premium and crowded, with July and August at peak pricing and limited availability; its hotel guide says individual properties can rise about 50% from year-round averages. If you want warm evenings with less pressure, late May, June, or late September is the more balanced planning window for both cities.",
+  summerCalendar: {
+    intro: "Use this as a date-screening calendar rather than a promise of availability. Barcelona's official city calendar is especially dense from mid-June through August; Lisbon's biggest fixed city moment is the June Santo António cycle, followed by rolling cultural programming and late-summer festivals. Event weekends can tighten central inventory and lift rates, so compare flexible dates before locking in a stay.",
+    cities: [
+      {
+        name: "Barcelona",
+        note: "The city calendar combines major sports, electronic music, architecture, theatre, open-air film, and neighborhood festivals. The events below are the clearest 2026 summer planning anchors from Barcelona City Council.",
+        events: [
+          { month: "June", dates: "12–14 Jun", name: "Formula 1 MSC Cruises Barcelona-Catalunya Grand Prix", detail: "A major sports weekend that can push demand across the city and circuit-access corridors; book early if you want central Barcelona or easy rail access.", href: "https://www.meet.barcelona/en/main-events" },
+          { month: "June", dates: "18–20 Jun", name: "Sónar", detail: "Barcelona's internationally known electronic music and arts festival, with programming at Gran Via Fair in L'Hospitalet.", href: "https://sonar.es/en" },
+          { month: "June", dates: "23 Jun", name: "Sant Joan / Midsummer's Eve", detail: "Neighborhood bonfires, fireworks, street parties, music, and late-night celebrations across Catalonia; expect a lively and noisy night.", href: "https://www.barcelona.cat/culturapopular/en/festivals-and-traditions/nit-de-sant-joan" },
+          { month: "June–July", dates: "29 Jun–31 Jul", name: "Grec Festival de Barcelona", detail: "Theatre, music, dance, and circus across the city's cultural venues, making this a strong culture-first window rather than a low-crowd period.", href: "https://www.barcelona.cat/grec/en" },
+          { month: "July", dates: "8–11 Jul", name: "Cruïlla Festival", detail: "A sea-facing Parc del Fòrum music festival with comedy and alternative/indie programming; allow extra time for the venue transfer.", href: "https://www.cruillabarcelona.com/en/" },
+          { month: "July–August", dates: "10 Jul–5 Aug", name: "Sala Montjuïc", detail: "Open-air films, concerts, and picnics under the stars at Montjuïc; a useful evening plan for travelers who want culture without a full festival weekend.", href: "https://www.salamontjuic.org/en" },
+          { month: "August", dates: "1–9 Aug", name: "Circuit Festival", detail: "A large LGBTI leisure festival with beach, pool, terrace, and night events that can create concentrated August demand.", href: "https://circuitfestival.net/barcelona/" },
+          { month: "August", dates: "7–8 Aug", name: "Brunch Electronik Festival", detail: "Open-air electronic music at Parc del Fòrum, another weekend when sea-facing accommodation and transport can be busier.", href: "https://www.meet.barcelona/en/main-events" },
+        ],
+      },
+      {
+        name: "Lisbon",
+        note: "Lisbon's summer rhythm is strongest in June, when Santo António celebrations take over historic neighborhoods. Later summer dates are more programme-dependent, so use the official listings as a live check rather than treating every recurring event as fixed.",
+        events: [
+          { month: "May–June", dates: "31 May–13 Jun", name: "Trezena to Saint Anthony", detail: "A series of prayers, concerts, and Saint Anthony events leading into Lisbon's main June celebrations; the official Visit Lisboa listing marks this as free entry.", href: "https://www.visitlisboa.com/en/events/trezena-to-saint-anthony" },
+          { month: "June", dates: "12–13 Jun", name: "St. Anthony's Night and Marchas Populares", detail: "Lisbon's signature street-party window: neighborhood marches on Avenida da Liberdade, arraiais, grilled sardines, music, and all-night energy around Alfama, Bairro Alto, and other historic districts.", href: "https://www.visitlisboa.com/en/events/st-anthonys-night-12-13th-june" },
+          { month: "June", dates: "10 Jun", name: "Portugal Day / Dia de Camões", detail: "A national holiday with possible closures and public programming; check transport and attraction opening times if your Lisbon stay overlaps the date.", href: "https://www.ricksteves.com/europe/portugal/festivals" },
+          { month: "June", dates: "June programme", name: "Festas de Lisboa cultural programme", detail: "The national tourism board describes June as the main month, with fado, jazz, cinema, theatre, exhibitions, and neighborhood events extending into the summer.", href: "https://www.visitportugal.com/en/content/festas-de-lisboa" },
+          { month: "July", dates: "Dates to confirm", name: "Festival ao Largo and open-air culture", detail: "Lisbon's July cultural programming commonly includes symphony, ballet, and theatre. Check the organiser and Visit Lisboa calendar before planning a stay around a specific performance.", href: "https://www.visitlisboa.com/en/events" },
+          { month: "August–September", dates: "25 Aug–13 Sep", name: "TODOS Festival", detail: "A contemporary performing-arts festival celebrating Lisbon as an intercultural city; useful for late-summer travelers who prefer neighborhood-based arts programming.", href: "https://www.visitlisboa.com/en/events/c/other-events" },
+        ],
+      },
+    ],
+  },
   relatedHeading: "Keep planning your Europe summer",
   related: [
     { href: "/blog/where-to-stay-lisbon-2026", label: "Where to Stay in Lisbon", description: "Compare Alfama, Chiado, Bairro Alto, Belém, and calmer residential bases before booking a Lisbon stay." },
@@ -71,6 +102,10 @@ const config: CityComparisonConfig = {
     { href: "https://www.ricksteves.com/europe/spain/best-time-to-go-to-barcelona", label: "Rick Steves' Europe — When to Go to Barcelona", note: "Retrieved 2026-10-07; source for July–August heat, humidity, crowd, and August closure context." },
     { href: "https://lisbonlisboaportugal.com/lisbon-tour/cost-of-hotels-in-lisbon-accommodation-price-guide.html", label: "LisbonLisboaPortugal.com — Cost of Hotels in Lisbon for 2026", note: "Retrieved 2026-10-07; source for Lisbon 3-star, 4-star, 5-star averages and seasonal changes." },
     { href: "https://www.ricksteves.com/europe/portugal/best-time-to-go-to-portugal", label: "Rick Steves' Europe — When to Go to Portugal", note: "Retrieved 2026-10-07; source for Lisbon/Portugal summer crowd, price, and weather context." },
+    { href: "https://www.meet.barcelona/en/main-events", label: "Barcelona City Council — Main Events for 2026", note: "Retrieved 2026-10-07; source for the dated Barcelona Formula 1, Sónar, Sant Joan, Grec, Cruïlla, Sala Montjuïc, Circuit, and Brunch Electronik entries." },
+    { href: "https://www.visitlisboa.com/en/events/st-anthonys-night-12-13th-june", label: "Visit Lisboa — St. Anthony's Night", note: "Retrieved 2026-10-07; source for the 12–13 June 2026 Marchas Populares and neighborhood arraiais calendar anchor." },
+    { href: "https://www.visitlisboa.com/en/events/trezena-to-saint-anthony", label: "Visit Lisboa — Trezena to Saint Anthony", note: "Retrieved 2026-10-07; source for the 31 May–13 June 2026 Saint Anthony lead-in programme." },
+    { href: "https://www.visitportugal.com/en/content/festas-de-lisboa", label: "Visit Portugal — Festivities of Lisbon", note: "Retrieved 2026-10-07; official tourism context for June's peak festivities and summer cultural programming." },
     { href: "https://thestayandwander.com/blog/where-to-stay-lisbon-2026", label: "The Stay & Wander — Where to Stay in Lisbon 2026", note: "Published internal guide used for Lisbon neighborhood fit and the starting-price context." },
   ],
   faqs: barcelonaVsLisbonFaqs,
