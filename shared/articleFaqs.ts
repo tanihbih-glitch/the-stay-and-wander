@@ -269,6 +269,24 @@ export const brazilTravelGuideFaqs: readonly ArticleFaq[] = [
   },
 ];
 
+export const bangkokVsSeoulFaqs: readonly ArticleFaq[] = [
+  { question: "Is Bangkok or Seoul cheaper for hotels in 2026?", answer: "The published planning bands put Bangkok's budget floor lower, from about $8 per night, while Seoul's value-oriented districts start around $30. Final prices vary by district, dates, occupancy, taxes, and room type." },
+  { question: "Which city is better for a first-time Asia trip?", answer: "Bangkok is the stronger starting point when broad hotel choice, temples, street food, and BTS/MRT planning are the priority. Seoul is a strong fit for subway-connected neighborhoods, markets, cafés, shopping, and nightlife districts." },
+  { question: "Which city has better food for a budget traveler?", answer: "Both cities have strong value at markets and casual restaurants. Bangkok's guide emphasizes a broad street-food range, while Seoul's dining index separates market bites, Korean meals, cafés, and premium districts." },
+  { question: "Does transport change the hotel decision in Bangkok and Seoul?", answer: "Yes. Bangkok's guide notes that BTS/MRT proximity can cost more at the room level but reduce daily taxi spending. Seoul's subway access and station walk likewise belong in the total-stay comparison." },
+  { question: "Which city is better for nightlife?", answer: "Seoul is the clearer fit for comparing Hongdae, Itaewon, and Gangnam nightlife districts. Bangkok offers a different mix of riverside, Sukhumvit, Old City, and street-level evening experiences." },
+  { question: "Are these live hotel prices?", answer: "No. The ranges are directional planning benchmarks carried from the published city guides. Use the live search handoff for current availability, taxes, and final booking terms." },
+];
+
+export const baliVsPhuketFaqs: readonly ArticleFaq[] = [
+  { question: "Is Bali or Phuket cheaper for accommodation in 2026?", answer: "The published Bali index has a lower budget floor, beginning around $7 per night, while the cited Phuket budget research begins around $9. These are directional bands, not live quotes, and beach location and season can change the final price." },
+  { question: "Which is better for a family beach holiday?", answer: "Bali is the stronger comparison starting point when you want to choose between calmer, reef-protected and family-oriented regions such as Nusa Dua and Sanur. Phuket can work well when a compact resort base is the priority." },
+  { question: "Which destination is better for nightlife?", answer: "Phuket is the more compact nightlife-led choice around Patong. Bali spreads nightlife across several coastal areas, so the best fit depends on whether you want a single-base resort trip or more regional variety." },
+  { question: "Which destination is better for a quiet wellness trip?", answer: "Bali offers more distinct quiet-stay directions, including Ubud wellness and quieter east and north coast planning. Phuket can suit a slower resort stay, especially when minimizing transfers matters." },
+  { question: "How do Bali and Phuket differ for activities?", answer: "Bali combines beaches with surf, snorkeling, temples, wellness, and villa-group planning across multiple regions. Phuket is well suited to beach-resort days, boat trips, and a simpler single-base holiday rhythm." },
+  { question: "Are the Phuket rates live hotel prices?", answer: "No. The Phuket bands are source-bounded research notes used for orientation, while Bali's figures come from the published price index. Confirm current availability, taxes, room type, and resort terms through the live search handoff." },
+];
+
 export const articleFaqsByPath: Readonly<Record<string, readonly ArticleFaq[]>> = {
   "/blog/where-to-stay-in-bali-2026": baliHotelPricesFaqs,
   "/blog/where-to-stay-in-bangkok-2026": bangkokHotelPricesFaqs,
@@ -281,6 +299,8 @@ export const articleFaqsByPath: Readonly<Record<string, readonly ArticleFaq[]>> 
   "/blog/bali-hotel-price-index-2026": baliHotelPriceIndexFaqs,
   "/blog/bangkok-hotel-price-index-2026": bangkokHotelPriceIndexFaqs,
   "/blog/uae-extended-stay-hotels-2026": uaeExtendedStayHotelsFaqs,
+  "/blog/bangkok-vs-seoul-2026": bangkokVsSeoulFaqs,
+  "/blog/bali-vs-phuket-2026": baliVsPhuketFaqs,
 };
 
 export function getArticleFaqs(pathname: string): readonly ArticleFaq[] {

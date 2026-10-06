@@ -19,6 +19,8 @@ export const DESTINATION_GUIDE_PATHS = [
   "/blog/uae-extended-stay-sustainability-2026",
   "/blog/where-to-stay-in-tokyo-2026",
   "/blog/where-to-stay-in-seoul-2026",
+  "/blog/bangkok-vs-seoul-2026",
+  "/blog/bali-vs-phuket-2026",
   "/blog/seoul-food-price-index-2026",
   "/blog/best-4-star-hotels-bali-2026",
 ] as const;

@@ -84,6 +84,28 @@ export const featuredGuideDiscovery: readonly FeaturedGuideDiscovery[] = [
     date: "August 22, 2026",
     readTime: "9 min read",
   },
+  {
+    id: 16,
+    path: "/blog/bangkok-vs-seoul-2026",
+    slug: "bangkok-vs-seoul-2026",
+    title: "Bangkok vs Seoul 2026: Which City Costs Less?",
+    category: "Asia City Comparison · 2026 Planning",
+    image: "/manus-storage/bangkok-hotel-prices-hero_fb209c1a.jpg",
+    excerpt: "Compare published hotel tiers, food, transport, and traveler fit before choosing Bangkok or Seoul.",
+    date: "October 6, 2026",
+    readTime: "8 min read",
+  },
+  {
+    id: 15,
+    path: "/blog/bali-vs-phuket-2026",
+    slug: "bali-vs-phuket-2026",
+    title: "Bali vs Phuket 2026: Which Beach Trip Costs Less?",
+    category: "Beach Destination Comparison · 2026 Planning",
+    image: "/manus-storage/blog-bali_5a40f78c.png",
+    excerpt: "Compare accommodation tiers, beach styles, activity rhythms, and traveler fit for Bali and Phuket.",
+    date: "October 6, 2026",
+    readTime: "8 min read",
+  },
 ] as const;
 
 export const featuredGuidePaths = featuredGuideDiscovery.map((guide) => guide.path);
