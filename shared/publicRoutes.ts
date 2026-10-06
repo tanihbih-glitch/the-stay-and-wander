@@ -99,6 +99,7 @@ export const sitemapRoutes: readonly SitemapRoute[] = [
   { path: "/blog/bali-vs-phuket-2026", lastmod: "2026-10-06", changefreq: "monthly", priority: 0.8 },
   { path: "/blog/dubai-vs-abu-dhabi-2026", lastmod: "2026-10-07", changefreq: "monthly", priority: 0.8 },
   { path: "/blog/tokyo-vs-osaka-2026", lastmod: "2026-10-07", changefreq: "monthly", priority: 0.8 },
+  { path: "/blog/bangkok-vs-ho-chi-minh-city-2026", lastmod: "2026-10-07", changefreq: "monthly", priority: 0.8 },
   { path: "/blog/where-to-stay-lisbon-2026", lastmod: "2026-07-30", changefreq: "monthly", priority: 0.8 },
   { path: "/blog/things-to-do-in-bali-2026", lastmod: "2026-07-30", changefreq: "monthly", priority: 0.8 },
   { path: "/blog/bali-hotel-price-index-2026", lastmod: "2026-08-23", changefreq: "monthly", priority: 0.8 },

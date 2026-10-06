@@ -305,6 +305,15 @@ export const tokyoVsOsakaFaqs: readonly ArticleFaq[] = [
   { question: "Are the Tokyo and Osaka rates live hotel prices?", answer: "No. They are directional planning bands based on the cited Tokyo guide and Osaka tourism context. Use the live search handoff to confirm current availability, room type, taxes, and final terms." },
 ];
 
+export const bangkokVsHoChiMinhFaqs: readonly ArticleFaq[] = [
+  { question: "Is Bangkok or Ho Chi Minh City cheaper for hotels in 2026?", answer: "Bangkok has the lower published hotel floor at about $8 per night, while the dated Ho Chi Minh City hotel bands begin around $10. Ho Chi Minh City can be excellent value for independent rooms, but central 4-star and 5-star platform averages can be higher than the entry-level bands suggest." },
+  { question: "Which city is better for a budget traveler?", answer: "Bangkok is the stronger starting point when the lowest hotel floor and a wide choice of budget districts matter most. Ho Chi Minh City is a strong alternative when low-cost street food, coffee, and inexpensive short rides are more important than rail connectivity." },
+  { question: "Which city has cheaper food, Bangkok or Ho Chi Minh City?", answer: "Both cities support low-cost eating, but the cited Ho Chi Minh City research gives especially clear budget signals: banh mi around $0.80–$1.40, pho around $1.80–$2.80, and Vietnamese coffee around $0.80–$2.00. Bangkok's published guide emphasizes a broad street-food range rather than one fixed city average." },
+  { question: "Is Bangkok or Ho Chi Minh City easier to get around?", answer: "Bangkok is the better fit when BTS/MRT rail access is central to the plan. Ho Chi Minh City has inexpensive short GrabBike and Grab car trips, but traffic is a bigger part of the daily movement trade-off." },
+  { question: "Which city is better for a first-time Southeast Asia trip?", answer: "Bangkok is the more immediately varied first-time choice for temples, shopping, river access, rail-connected districts, street food, and nightlife. Ho Chi Minh City is a compelling first city when café culture, historic central districts, and a more compact street-level rhythm are the priority." },
+  { question: "Are the Bangkok and Ho Chi Minh City rates live hotel prices?", answer: "No. The comparison combines published planning bands, dated research, and a dynamic platform snapshot that is shown only as current context. Confirm the exact dates, taxes, room type, occupancy, and final availability through the live search handoff." },
+];
+
 export const articleFaqsByPath: Readonly<Record<string, readonly ArticleFaq[]>> = {
   "/blog/where-to-stay-in-bali-2026": baliHotelPricesFaqs,
   "/blog/where-to-stay-in-bangkok-2026": bangkokHotelPricesFaqs,
@@ -321,6 +330,7 @@ export const articleFaqsByPath: Readonly<Record<string, readonly ArticleFaq[]>> 
   "/blog/bali-vs-phuket-2026": baliVsPhuketFaqs,
   "/blog/dubai-vs-abu-dhabi-2026": dubaiVsAbuDhabiFaqs,
   "/blog/tokyo-vs-osaka-2026": tokyoVsOsakaFaqs,
+  "/blog/bangkok-vs-ho-chi-minh-city-2026": bangkokVsHoChiMinhFaqs,
 };
 
 export function getArticleFaqs(pathname: string): readonly ArticleFaq[] {

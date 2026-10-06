@@ -128,6 +128,17 @@ export const featuredGuideDiscovery: readonly FeaturedGuideDiscovery[] = [
     date: "October 7, 2026",
     readTime: "8 min read",
   },
+  {
+    id: 12,
+    path: "/blog/bangkok-vs-ho-chi-minh-city-2026",
+    slug: "bangkok-vs-ho-chi-minh-city-2026",
+    title: "Bangkok vs Ho Chi Minh City 2026: Which Costs Less?",
+    category: "Southeast Asia City Comparison · 2026 Planning",
+    image: "/manus-storage/bangkok-hotel-prices-hero_fb209c1a.jpg",
+    excerpt: "Compare Bangkok and Ho Chi Minh City hotel tiers, food, transport, and traveler fit before choosing your Southeast Asia base.",
+    date: "October 7, 2026",
+    readTime: "8 min read",
+  },
 ] as const;
 
 export const featuredGuidePaths = featuredGuideDiscovery.map((guide) => guide.path);

@@ -17,7 +17,7 @@ const sharedPageSources = [
 
 describe("destination-guide engagement and navigation", () => {
   it("covers the complete public destination-guide set", () => {
-    expect(DESTINATION_GUIDE_PATHS).toHaveLength(26);
+    expect(DESTINATION_GUIDE_PATHS).toHaveLength(27);
     expect(isDestinationGuidePath("/blog/where-to-stay-in-bali-2026")).toBe(true);
     expect(isDestinationGuidePath("/blog/uae-extended-stay-hotels-2026")).toBe(true);
     expect(isDestinationGuidePath("/blog")).toBe(false);

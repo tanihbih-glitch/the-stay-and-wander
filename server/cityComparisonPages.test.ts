@@ -3,7 +3,8 @@ import { articleMetadata as bangkokSeoulMetadata } from "../client/src/pages/Blo
 import { articleMetadata as baliPhuketMetadata } from "../client/src/pages/BlogBaliVsPhuket";
 import { articleMetadata as dubaiAbuDhabiMetadata } from "../client/src/pages/BlogDubaiVsAbuDhabi";
 import { articleMetadata as tokyoOsakaMetadata } from "../client/src/pages/BlogTokyoVsOsaka";
-import { getArticleFaqs, bangkokVsSeoulFaqs, baliVsPhuketFaqs, dubaiVsAbuDhabiFaqs, tokyoVsOsakaFaqs } from "../shared/articleFaqs";
+import { articleMetadata as bangkokHoChiMinhMetadata } from "../client/src/pages/BlogBangkokVsHoChiMinh";
+import { getArticleFaqs, bangkokVsSeoulFaqs, baliVsPhuketFaqs, dubaiVsAbuDhabiFaqs, tokyoVsOsakaFaqs, bangkokVsHoChiMinhFaqs } from "../shared/articleFaqs";
 import { pageMetadataConfig } from "../shared/seo";
 import { isApplicationRoute, sitemapRoutes } from "../shared/publicRoutes";
 import { readFileSync } from "node:fs";
@@ -11,7 +12,7 @@ import path from "node:path";
 
 describe("city comparison pages", () => {
   it("registers both canonical routes, metadata, and sitemap entries", () => {
-    for (const metadata of [bangkokSeoulMetadata, baliPhuketMetadata, dubaiAbuDhabiMetadata, tokyoOsakaMetadata]) {
+    for (const metadata of [bangkokSeoulMetadata, baliPhuketMetadata, dubaiAbuDhabiMetadata, tokyoOsakaMetadata, bangkokHoChiMinhMetadata]) {
       expect(isApplicationRoute(metadata.url)).toBe(true);
       expect(sitemapRoutes.map((route) => route.path)).toContain(metadata.url);
     }
@@ -19,10 +20,13 @@ describe("city comparison pages", () => {
     expect(pageMetadataConfig.baliVsPhuketGuide.url).toBe(baliPhuketMetadata.url);
     expect(pageMetadataConfig.dubaiVsAbuDhabiGuide.url).toBe(dubaiAbuDhabiMetadata.url);
     expect(pageMetadataConfig.tokyoVsOsakaGuide.url).toBe(tokyoOsakaMetadata.url);
+    expect(pageMetadataConfig.bangkokVsHoChiMinhGuide.url).toBe(bangkokHoChiMinhMetadata.url);
     expect(bangkokSeoulMetadata.title.length).toBeLessThanOrEqual(60);
     expect(baliPhuketMetadata.title.length).toBeLessThanOrEqual(60);
     expect(bangkokSeoulMetadata.description.length).toBeLessThanOrEqual(155);
     expect(baliPhuketMetadata.description.length).toBeLessThanOrEqual(155);
+    expect(bangkokHoChiMinhMetadata.title.length).toBeLessThanOrEqual(60);
+    expect(bangkokHoChiMinhMetadata.description.length).toBeLessThanOrEqual(155);
   });
 
   it("uses visible FAQ sources that are mapped to both canonical routes", () => {
@@ -30,10 +34,12 @@ describe("city comparison pages", () => {
     expect(baliVsPhuketFaqs).toHaveLength(6);
     expect(dubaiVsAbuDhabiFaqs).toHaveLength(6);
     expect(tokyoVsOsakaFaqs).toHaveLength(6);
+    expect(bangkokVsHoChiMinhFaqs).toHaveLength(6);
     expect(getArticleFaqs(bangkokSeoulMetadata.url)).toBe(bangkokVsSeoulFaqs);
     expect(getArticleFaqs(baliPhuketMetadata.url)).toBe(baliVsPhuketFaqs);
     expect(getArticleFaqs(dubaiAbuDhabiMetadata.url)).toBe(dubaiVsAbuDhabiFaqs);
     expect(getArticleFaqs(tokyoOsakaMetadata.url)).toBe(tokyoVsOsakaFaqs);
+    expect(getArticleFaqs(bangkokHoChiMinhMetadata.url)).toBe(bangkokVsHoChiMinhFaqs);
   });
 
   it("uses the shared single TOC mount and browser-local selectors", () => {

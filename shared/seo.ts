@@ -250,6 +250,20 @@ export const pageMetadataConfig: Record<string, PageMetadata> = {
     keywords: "Tokyo vs Osaka 2026, Tokyo or Osaka, Osaka hotel prices, Tokyo hotel prices, Japan city comparison",
   },
 
+  bangkokVsHoChiMinhGuide: {
+    title: "Bangkok vs Ho Chi Minh City 2026: Which Costs Less?",
+    schemaTitle: "Bangkok vs Ho Chi Minh City 2026: Which Costs Less?",
+    description: "Compare Bangkok and Ho Chi Minh City hotel bands, food, transport, and traveler fit in 2026—with a practical cost-of-living snapshot.",
+    image: `${SITE_URL}/manus-storage/bangkok-hotel-prices-hero_fb209c1a.jpg`,
+    url: "/blog/bangkok-vs-ho-chi-minh-city-2026",
+    type: "article",
+    author: "The Stay & Wander",
+    publishedDate: "2026-10-07",
+    updatedDate: "2026-10-07",
+    includeRichSnippetSchemas: true,
+    keywords: "Bangkok vs Ho Chi Minh City 2026, Bangkok hotel prices, Ho Chi Minh City hotel prices, Southeast Asia travel costs",
+  },
+
   brazilTravelGuide: {
     title: "Brazil Travel Guide 2026 — Everything You Need to Know",
     description: "Plan a Brazil trip with practical guidance for Rio de Janeiro, the Amazon, São Paulo, and Florianópolis, including stays, tours, and budget tips.",
