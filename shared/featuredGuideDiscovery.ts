@@ -139,6 +139,17 @@ export const featuredGuideDiscovery: readonly FeaturedGuideDiscovery[] = [
     date: "October 7, 2026",
     readTime: "8 min read",
   },
+  {
+    id: 11,
+    path: "/blog/barcelona-vs-lisbon-2026",
+    slug: "barcelona-vs-lisbon-2026",
+    title: "Barcelona vs Lisbon This Summer 2026: Which Wins?",
+    category: "Europe Summer Comparison · 2026 Planning",
+    image: "/manus-storage/blog-europe-cities_de773d0d.png",
+    excerpt: "Compare Barcelona and Lisbon hotel tiers, beach-and-city rhythm, nightlife, culture, weather, crowds, and summer planning trade-offs.",
+    date: "October 7, 2026",
+    readTime: "8 min read",
+  },
 ] as const;
 
 export const featuredGuidePaths = featuredGuideDiscovery.map((guide) => guide.path);

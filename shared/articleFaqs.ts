@@ -3,6 +3,14 @@ export type ArticleFaq = Readonly<{
   answer: string;
 }>;
 
+export const barcelonaVsLisbonFaqs: readonly ArticleFaq[] = [
+  { question: "Is Barcelona or Lisbon cheaper for hotels in summer 2026?", answer: "The cited planning ranges overlap, but they are not directly equivalent: Barcelona's source gives €22–€40 hostel dorms, €55–€95 budget hotels, €95–€190 3-star hotels, and €190–€550+ luxury, while Lisbon's guide gives €153, €220, and €365 averages for 3-, 4-, and 5-star rooms. Summer demand, taxes, location, and exact dates can change the result." },
+  { question: "Which city is better for a beach and city trip?", answer: "Barcelona is the clearer beach-and-city combination because urban beaches sit alongside the Gothic Quarter, Eixample, Gaudí architecture, dining, and nightlife. Lisbon is better for riverfront walks, viewpoints, tiled neighborhoods, and Atlantic day trips rather than a central-city beach holiday." },
+  { question: "Is Barcelona or Lisbon better for nightlife?", answer: "Barcelona is the stronger starting point when late dinners, beach bars, clubs, and a large summer city-energy scene are the priority. Lisbon's Bairro Alto and Príncipe Real provide a more compact bar-and-restaurant rhythm with a different, hillier feel." },
+  { question: "Which city is better for culture and architecture?", answer: "Both are strong. Choose Barcelona for Gaudí, Modernisme, the Gothic Quarter, and major urban landmarks; choose Lisbon for tiled façades, Alfama lanes, viewpoints, trams, Belém, and a more layered historic streetscape." },
+  { question: "Are Barcelona and Lisbon crowded in July and August?", answer: "Yes. The cited seasonal references describe July and August as Barcelona's hottest and most crowded period, while Lisbon's June–September window is premium and crowded, with July and August at peak pricing and tighter availability." },
+  { question: "Are these Barcelona and Lisbon hotel rates live prices?", answer: "No. They are source-bounded planning benchmarks. Confirm current availability, taxes, room type, occupancy, and cancellation terms with the live search handoff for your dates." },
+];
 export const baliHotelPricesFaqs: readonly ArticleFaq[] = [
   {
     question: "Where should first-timers stay in Bali?",
@@ -331,6 +339,7 @@ export const articleFaqsByPath: Readonly<Record<string, readonly ArticleFaq[]>> 
   "/blog/dubai-vs-abu-dhabi-2026": dubaiVsAbuDhabiFaqs,
   "/blog/tokyo-vs-osaka-2026": tokyoVsOsakaFaqs,
   "/blog/bangkok-vs-ho-chi-minh-city-2026": bangkokVsHoChiMinhFaqs,
+  "/blog/barcelona-vs-lisbon-2026": barcelonaVsLisbonFaqs,
 };
 
 export function getArticleFaqs(pathname: string): readonly ArticleFaq[] {

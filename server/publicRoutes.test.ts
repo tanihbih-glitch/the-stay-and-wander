@@ -29,6 +29,7 @@ describe("public route and sitemap cleanup", () => {
     expect(isApplicationRoute("/deals")).toBe(true);
     expect(isApplicationRoute("/booking/")).toBe(true);
     expect(isApplicationRoute("/blog/best-hotels-dubai-2026")).toBe(true);
+    expect(isApplicationRoute("/blog/barcelona-vs-lisbon-2026")).toBe(true);
     expect(isApplicationRoute("/blog/best-hotels-dubai-2026/")).toBe(true);
     expect(isApplicationRoute("/deals/")).toBe(true);
     expect(isApplicationRoute("/about")).toBe(true);
@@ -51,6 +52,7 @@ describe("public route and sitemap cleanup", () => {
     expect(sitemap).toContain("https://thestayandwander.com/booking/");
     expect(sitemap).not.toContain("https://thestayandwander.com/booking\n");
     expect(sitemap).toContain("/blog/best-hotels-dubai-2026");
+    expect(sitemap).toContain("/blog/barcelona-vs-lisbon-2026");
     expect(sitemap).toContain("/about");
     expect(sitemap).toContain("/privacy-policy");
     expect(sitemap).not.toContain("/exploring-the-best-travel-destinations-for-modern-wanderlust");

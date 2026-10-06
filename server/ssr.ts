@@ -227,6 +227,8 @@ export function ssrMiddleware(req: Request, res: Response, next: NextFunction) {
     metadata = pageMetadataConfig.tokyoVsOsakaGuide;
   } else if (path === "/blog/bangkok-vs-ho-chi-minh-city-2026") {
     metadata = pageMetadataConfig.bangkokVsHoChiMinhGuide;
+  } else if (path === "/blog/barcelona-vs-lisbon-2026") {
+    metadata = pageMetadataConfig.barcelonaVsLisbonGuide;
   } else if (path === "/blog/brazil-travel-guide-2026") {
     metadata = pageMetadataConfig.brazilTravelGuide;
   } else if (path === "/blog/best-flight-deals-asia-2026") {

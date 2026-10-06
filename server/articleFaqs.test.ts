@@ -19,6 +19,7 @@ describe("published article FAQ data", () => {
     "/blog/dubai-vs-abu-dhabi-2026",
     "/blog/tokyo-vs-osaka-2026",
     "/blog/bangkok-vs-ho-chi-minh-city-2026",
+    "/blog/barcelona-vs-lisbon-2026",
   ];
 
   it("provides four to six non-empty FAQ pairs for each requested article", () => {

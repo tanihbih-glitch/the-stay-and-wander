@@ -113,6 +113,7 @@ describe("server-rendered page metadata", () => {
       "/blog/dubai-vs-abu-dhabi-2026": pageMetadataConfig.dubaiVsAbuDhabiGuide,
       "/blog/tokyo-vs-osaka-2026": pageMetadataConfig.tokyoVsOsakaGuide,
       "/blog/bangkok-vs-ho-chi-minh-city-2026": pageMetadataConfig.bangkokVsHoChiMinhGuide,
+      "/blog/barcelona-vs-lisbon-2026": pageMetadataConfig.barcelonaVsLisbonGuide,
     } as const;
 
     featuredGuideDiscovery.forEach((guide) => {
@@ -187,7 +188,7 @@ describe("server-rendered page metadata", () => {
     const template = "<html><head><title>Default site title</title></head><body></body></html>";
     const blogGuides = Object.values(pageMetadataConfig).filter((metadata) => metadata.type === "article" && metadata.url.startsWith("/blog/"));
 
-    expect(blogGuides).toHaveLength(27);
+    expect(blogGuides).toHaveLength(28);
     for (const metadata of blogGuides) {
       const rendered = injectSSRHead(template, metadata, articleFaqsByPath[metadata.url] ?? []);
       expect(metadata.updatedDate).toMatch(/^2026-(09-(06|12|16|19)|10-(06|07))$/);

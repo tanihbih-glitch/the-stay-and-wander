@@ -5,7 +5,7 @@
 - [x] Added an explicit January–December 2026 month selector using only documented KAYAK seasonal direction; no interpolated rates are presented.
 - [x] Updated the reusable `travel-site-engagement-rollout` skill with comparison-planner patterns using the skill-creator workflow; validation passed.
 - [x] Added regression coverage for planner, neighborhood, seasonal, source-boundary, route, FAQ, and SSR behavior.
-- [x] Focused planner tests: 22 passed after the final month-selector refinement.
-- [x] Full suite: 39 test files / 224 tests passed before the final selector-only refinement; TypeScript and production build passed.
-- [x] Fresh desktop and mobile screenshots reviewed; live browser selected December 2026, displayed the documented $225 source rate and high-season signal, and confirmed “PDF downloaded” status.
-- [ ] Save the publication checkpoint and verify custom-domain propagation.
+- [x] Full suite: 39 test files / 224 tests passed.
+- [x] TypeScript, production build, sitemap synchronization, and diff checks passed.
+- [x] Fresh custom-domain browser review confirmed HTTP 200 rendering, canonical URL, FAQPage and BreadcrumbList markers, sitemap inclusion, single horizontal TOC, December 2026 selection, documented `$225/night` source signal, and visible `PDF downloaded` confirmation.
+- [x] Publication checkpoint saved as version `9ca4fff0`.

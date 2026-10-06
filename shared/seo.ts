@@ -264,6 +264,20 @@ export const pageMetadataConfig: Record<string, PageMetadata> = {
     keywords: "Bangkok vs Ho Chi Minh City 2026, Bangkok hotel prices, Ho Chi Minh City hotel prices, Southeast Asia travel costs",
   },
 
+  barcelonaVsLisbonGuide: {
+    title: "Barcelona vs Lisbon This Summer 2026: Which Wins?",
+    schemaTitle: "Barcelona vs Lisbon This Summer 2026: Which Wins?",
+    description: "Barcelona vs Lisbon this summer: compare 2026 hotel tiers, beach-and-city feel, nightlife, culture, weather, crowds, and travel budgets.",
+    image: `${SITE_URL}/manus-storage/blog-europe-cities_de773d0d.png`,
+    url: "/blog/barcelona-vs-lisbon-2026",
+    type: "article",
+    author: "The Stay & Wander",
+    publishedDate: "2026-10-07",
+    updatedDate: "2026-10-07",
+    includeRichSnippetSchemas: true,
+    keywords: "Barcelona vs Lisbon summer 2026, Barcelona or Lisbon, Barcelona hotel prices, Lisbon hotel prices, Europe summer city comparison",
+  },
+
   brazilTravelGuide: {
     title: "Brazil Travel Guide 2026 — Everything You Need to Know",
     description: "Plan a Brazil trip with practical guidance for Rio de Janeiro, the Amazon, São Paulo, and Florianópolis, including stays, tours, and budget tips.",
