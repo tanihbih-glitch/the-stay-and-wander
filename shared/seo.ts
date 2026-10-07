@@ -292,6 +292,20 @@ export const pageMetadataConfig: Record<string, PageMetadata> = {
     keywords: "Tokyo or Bangkok flights 2026, Bangkok flight deals, Tokyo flight deals, cheapest flights to Asia, Aviasales",
   },
 
+  hoChiMinhCityHotelPriceIndex: {
+    title: "Ho Chi Minh City Hotel Prices 2026: By District & Budget",
+    schemaTitle: "Ho Chi Minh City Hotel Prices 2026: By District & Budget",
+    description: "Compare 2026 Ho Chi Minh City hotel rates by District 1, Thao Dien, Phu Nhuan and more. Filter budget, mid-range and luxury stays.",
+    image: `${SITE_URL}/manus-storage/bangkok-hotel-prices-hero_fb209c1a.jpg`,
+    url: "/blog/ho-chi-minh-city-hotel-price-index-2026",
+    type: "article",
+    author: "The Stay & Wander",
+    publishedDate: "2026-10-07",
+    updatedDate: "2026-10-07",
+    includeRichSnippetSchemas: true,
+    keywords: "Ho Chi Minh City hotel prices 2026, HCMC hotel rates, District 1 hotels, Thao Dien hotels, Vietnam hotel budget",
+  },
+
   brazilTravelGuide: {
     title: "Brazil Travel Guide 2026 — Everything You Need to Know",
     description: "Plan a Brazil trip with practical guidance for Rio de Janeiro, the Amazon, São Paulo, and Florianópolis, including stays, tours, and budget tips.",

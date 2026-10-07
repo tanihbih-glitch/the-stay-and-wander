@@ -331,6 +331,15 @@ export const tokyoOrBangkokFlightDealsFaqs: readonly ArticleFaq[] = [
   { question: "Is a one-stop flight worth considering for Asia?", answer: "Often. The existing guide notes that a connection can save money, but the total value depends on the connection length, airport change, baggage, and overnight costs. Compare the complete itinerary rather than the lowest headline fare alone." },
 ];
 
+export const hoChiMinhCityHotelPriceIndexFaqs: readonly ArticleFaq[] = [
+  { question: "What is the average hotel price in Ho Chi Minh City in 2026?", answer: "The cited planning bands are about $10–$20 per night for budget stays, $30–$60 for 3–4-star mid-range stays, and $120–$400 for luxury stays. These are city-level research bands, not live quotes or guarantees for every district." },
+  { question: "Which area is best for a first-time visitor to Ho Chi Minh City?", answer: "District 1 is the simplest first search when landmarks, nightlife, international dining, and compact central access matter most. District 3 is a close-in alternative with more local texture, while Thao Dien suits travelers who prefer cafés, space, and a longer-stay rhythm." },
+  { question: "Is District 1 safe for tourists?", answer: "District 1 is the most searched and practical tourist base in the cited research, but normal city precautions still apply: keep valuables secure, use reputable transport, check your exact street at night, and read recent property reviews before booking." },
+  { question: "How many nights should I spend in Ho Chi Minh City?", answer: "Three nights works for a first overview of the central landmarks, food, and nightlife. Four to five nights gives more room for District 3, Cho Lon, Thao Dien, and a slower café or day-trip rhythm." },
+  { question: "Is Thao Dien good for digital nomads and families?", answer: "Thao Dien is a strong first search for digital nomads and families who value cafés, international services, extra space, and longer-stay flexibility. The trade-off is a longer commute to central District 1 and possible seasonal flooding in some streets." },
+  { question: "Are these Ho Chi Minh City hotel prices live rates?", answer: "No. The bands are dated planning benchmarks, supplemented by dynamic platform context in the interactive guide. Use the live Stay22 handoff for exact dates, availability, taxes, room type, cancellation terms, and final prices." },
+];
+
 export const articleFaqsByPath: Readonly<Record<string, readonly ArticleFaq[]>> = {
   "/blog/where-to-stay-in-bali-2026": baliHotelPricesFaqs,
   "/blog/where-to-stay-in-bangkok-2026": bangkokHotelPricesFaqs,
@@ -350,6 +359,7 @@ export const articleFaqsByPath: Readonly<Record<string, readonly ArticleFaq[]>> 
   "/blog/bangkok-vs-ho-chi-minh-city-2026": bangkokVsHoChiMinhFaqs,
   "/blog/barcelona-vs-lisbon-2026": barcelonaVsLisbonFaqs,
   "/blog/tokyo-or-bangkok-flight-deals-2026": tokyoOrBangkokFlightDealsFaqs,
+  "/blog/ho-chi-minh-city-hotel-price-index-2026": hoChiMinhCityHotelPriceIndexFaqs,
 };
 
 export function getArticleFaqs(pathname: string): readonly ArticleFaq[] {

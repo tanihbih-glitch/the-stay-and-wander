@@ -161,6 +161,17 @@ export const featuredGuideDiscovery: readonly FeaturedGuideDiscovery[] = [
     date: "October 7, 2026",
     readTime: "8 min read",
   },
+  {
+    id: 9,
+    path: "/blog/ho-chi-minh-city-hotel-price-index-2026",
+    slug: "ho-chi-minh-city-hotel-price-index-2026",
+    title: "Ho Chi Minh City Hotel Prices 2026: By District & Budget",
+    category: "City Cost Index · Vietnam Travel",
+    image: "/manus-storage/bangkok-hotel-prices-hero_fb209c1a.jpg",
+    excerpt: "Compare HCMC hotel planning bands, district fit, seasonality, and live date-based availability for a first trip or longer stay.",
+    date: "October 7, 2026",
+    readTime: "8 min read",
+  },
 ] as const;
 
 export const featuredGuidePaths = featuredGuideDiscovery.map((guide) => guide.path);
