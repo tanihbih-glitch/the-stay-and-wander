@@ -20,6 +20,7 @@ describe("Ho Chi Minh City hotel price index", () => {
   it("uses one shared TOC mount and source-bounded interactive rate tools", () => {
     const page = readFileSync(path.resolve(process.cwd(), "client/src/pages/BlogHoChiMinhCityHotelPriceIndex.tsx"), "utf8");
     const explorer = readFileSync(path.resolve(process.cwd(), "client/src/components/HcmcHotelPriceExplorer.tsx"), "utf8");
+    const neighborhoods = readFileSync(path.resolve(process.cwd(), "client/src/components/HcmcNeighborhoodBreakdown.tsx"), "utf8");
     const liveSearch = readFileSync(path.resolve(process.cwd(), "client/src/components/HcmcLiveHotelSearch.tsx"), "utf8");
     const header = readFileSync(path.resolve(process.cwd(), "client/src/components/Header.tsx"), "utf8");
     expect(page).toContain("<HcmcHotelPriceExplorer />");
@@ -28,6 +29,13 @@ describe("Ho Chi Minh City hotel price index", () => {
     expect(page).toContain("/blog/bangkok-vs-ho-chi-minh-city-2026");
     expect(explorer).toContain("city-level planning bands");
     expect(explorer).toContain("District 1");
+    expect(explorer).toContain("Dry season");
+    expect(explorer).toContain("Rainy season");
+    expect(explorer).toContain('aria-pressed={season === "dry"}');
+    expect(neighborhoods).toContain("Filter HCMC neighborhoods by trip type");
+    expect(neighborhoods).toContain("aria-pressed={tripType === type.id}");
+    expect(neighborhoods).toContain("Top attractions & vibe");
+    expect(neighborhoods).toContain("hover:-translate-y-1");
     expect(liveSearch).toContain("buildHcmcStay22SearchUrl");
     expect(liveSearch).toContain('rel="sponsored nofollow"');
     expect(header).toContain("<GuideTableOfContents />");
