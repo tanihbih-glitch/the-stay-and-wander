@@ -31,3 +31,16 @@ Hilton remains in the guide’s comparison framework because Homewood Suites and
 | IHG | Journey to Tomorrow is IHG’s responsible-business plan addressing carbon and energy, waste, water, people, and communities. | [IHG: Journey to Tomorrow](https://www.ihgplc.com/en/responsible-business/journey-to-tomorrow) |
 
 These are corporate frameworks, not independent, property-specific sustainability scores. The guide invites readers with a sustainability priority to check the chosen property’s current certifications, resource disclosures, and operating policies before booking.
+
+
+## Abu Dhabi property addendum — 2026-10-12
+
+The canonical UAE extended-stay hub previously documented Dubai properties only. The new Abu Dhabi comparison block is limited to first-party property details and does not rank price, quality, sustainability performance, or live availability.
+
+| Abu Dhabi option | Verified first-party details used in the guide | Source |
+|---|---|---|
+| Marriott Executive Apartments Downtown Abu Dhabi | Furnished apartments in central Abu Dhabi with fully equipped kitchens, dedicated work and relaxation areas, washer/dryer facilities, and 24-hour laundry services. | [Marriott official rooms page](https://www.marriott.com/en-us/hotels/auher-marriott-executive-apartments-downtown-abu-dhabi/rooms/) |
+| Aparthotel Adagio Abu Dhabi Al Bustan | Accor lists 279 apartments from studios to three-bedroom units, fully equipped serviced apartments with kitchens and laundry rooms, long-stay rates, and a location about 20 minutes from Zayed International Airport and five minutes from ADNEC. | [Accor official property page](https://all.accor.com/hotel/7872/index.en.shtml) |
+| Staybridge Suites Abu Dhabi – Yas Island | IHG documents included breakfast, a 24-hour business centre, paid laundry and dry-cleaning pickup, and daily or weekly housekeeping options. The guide tells readers to confirm the exact suite layout, kitchen features, and long-stay terms for their dates. | [IHG official amenities page](https://www.ihg.com/staybridge/hotels/us/en/abu-dhabi/auhis/hoteldetail/amenities) |
+
+The addendum intentionally avoids quoting nightly prices because the official pages reviewed do not provide a stable comparable long-stay rate dataset. It also distinguishes verified property amenities from general brand-level sustainability or loyalty frameworks.

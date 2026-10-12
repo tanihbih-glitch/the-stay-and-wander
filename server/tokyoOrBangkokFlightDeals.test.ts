@@ -17,6 +17,11 @@ describe("Tokyo or Bangkok flight-deal comparison", () => {
     expect(getArticleFaqs(articleMetadata.url)).toBe(tokyoOrBangkokFlightDealsFaqs);
   });
 
+  it("keeps the refreshed flight comparison copy concrete", () => {
+    expect(articleMetadata.title).toBe("Tokyo or Bangkok Flights 2026: Compare Prices and Deals");
+    expect(articleMetadata.description).toContain("live fare checks");
+  });
+
   it("reuses the established Aviasales widget and canonical affiliate destination", () => {
     const page = readFileSync(path.resolve(process.cwd(), "client/src/pages/BlogTokyoOrBangkokFlightDeals.tsx"), "utf8");
     const widget = readFileSync(path.resolve(process.cwd(), "client/src/components/AviasalesFlightWidget.tsx"), "utf8");

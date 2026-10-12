@@ -31,8 +31,8 @@ export const articleMetadata = {
 };
 
 export const searchMetadata = {
-  title: "Bali Hotel Prices 2026: $7–$1,200+ Nightly Rates",
-  description: "Compare 2026 Bali hotel rates by region: $7–$30 budget, $30–$160 boutique, $90–$400 villas and $180–$1,200+ resorts. Includes seasonal planning tools.",
+  title: "Bali Hotel Prices 2026: $7–$1,200+ Nightly Rates | Updated",
+  description: "Compare Bali hotel prices for 2026: $7–$30 budget, $30–$160 boutique, $90–$400 villas and $180–$1,200+ resorts, plus seasonal planning tools.",
 };
 
 export const hotelRateRows = [

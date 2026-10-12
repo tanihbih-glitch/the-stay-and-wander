@@ -21,7 +21,7 @@ describe("UAE extended-stay comparison hub", () => {
     expect(articleMetadata.description.length).toBeLessThanOrEqual(155);
     expect(pageMetadataConfig.uaeExtendedStayHotels.url).toBe(articleMetadata.url);
     expect(getArticleFaqs(articleMetadata.url)).toHaveLength(5);
-    expect(UAE_EXTENDED_STAY_SOURCE_LINKS).toHaveLength(15);
+    expect(UAE_EXTENDED_STAY_SOURCE_LINKS).toHaveLength(18);
     expect(UAE_EXTENDED_STAY_SOURCE_LINKS.every((source) => source.href.startsWith("https://"))).toBe(true);
   });
 

@@ -10,8 +10,8 @@ import ArticleFAQ from '@/components/ArticleFAQ';
 import { asiaFlightDealsFaqs } from '@shared/articleFaqs';
 
 const articleMetadata = {
-  title: 'Best Flight Deals to Asia in 2026 — Cheapest Routes From the UAE, UK & US',
-  description: 'Looking for the best flight deals to Asia in 2026? We compare the cheapest routes to Tokyo, Bangkok, Bali and Seoul from the UAE, UK and US. Find and book the best prices here.',
+  title: 'Best Flight Deals to Asia 2026: Cheapest Routes UAE, UK & US',
+  description: 'Compare Asia flight prices for Tokyo, Bangkok, Bali, and Seoul from the UAE, UK, and US, with booking windows, current route checks, and price-saving tips.',
   url: '/blog/best-flight-deals-asia-2026',
   image: '/manus-storage/blog-flights.png',
   keywords: 'cheap flights to Asia, flight deals, Tokyo flights, Bangkok flights, Bali flights, Seoul flights',
@@ -67,7 +67,7 @@ export default function BlogFlightDeals() {
           <div className="absolute inset-0 bg-black/30 flex flex-col justify-center items-center text-center">
             <p className="text-yellow-400 text-sm font-semibold mb-2 uppercase tracking-wider">FLIGHTS · ASIA TRAVEL</p>
             <h1 className="font-playfair text-5xl md:text-6xl font-bold text-white mb-4 max-w-4xl">
-              Best Flight Deals to Asia in 2026
+              {articleMetadata.title}
             </h1>
             <p className="text-xl text-gray-100 max-w-2xl">
               Cheapest routes from the UAE, UK & US to Tokyo, Bangkok, Bali and Seoul

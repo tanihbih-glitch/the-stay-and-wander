@@ -56,8 +56,8 @@ describe("server-rendered page metadata", () => {
     const template = "<html><head><title>Default site title</title></head><body></body></html>";
     const budget = injectSSRHead(template, pageMetadataConfig.bangkokHotelBudgetBreakdown);
 
-    expect(budget).toContain("<title>Bangkok Budget Hotels 2026: $10–$300+ Cost Breakdown</title>");
-    expect(budget).toContain('name="description" content="See typical Bangkok hotel rates in 2026: $10–$20 hostels, $30–$80 mid-range rooms and $120–$300+ five-star stays, plus booking factors."');
+    expect(budget).toContain("<title>Bangkok Hotel Costs 2026: $10–$300+ Per Night Guide</title>");
+    expect(budget).toContain('name="description" content="See Bangkok hotel prices for 2026: $10–$20 hostels, $30–$80 mid-range rooms and $120–$300+ luxury stays, plus booking tips for every budget."');
     expect(budget).toContain('href="https://thestayandwander.com/blog/bangkok-hotel-budget-breakdown-2026"');
   });
 
@@ -74,8 +74,8 @@ describe("server-rendered page metadata", () => {
     const template = "<html><head><title>Default site title</title></head><body></body></html>";
     const uae = injectSSRHead(template, pageMetadataConfig.uaeExtendedStaySustainability);
 
-    expect(uae).toContain("<title>UAE Extended Stay Hotels: Sustainability Guide 2026</title>");
-    expect(uae).toContain('name="description" content="Compare Hilton, Marriott, Accor and IHG sustainability frameworks for UAE extended stays, plus source-aware questions to ask before booking."');
+    expect(uae).toContain("<title>UAE Extended Stays 2026: 4 Brands, Greener Booking Checks</title>");
+    expect(uae).toContain('name="description" content="Compare 4 UAE extended-stay brands for 2026: sustainability frameworks, kitchens, laundry, and practical booking checks in Dubai and Abu Dhabi."');
     expect(uae).toContain('href="https://thestayandwander.com/blog/uae-extended-stay-sustainability-2026"');
   });
 
@@ -130,11 +130,11 @@ describe("server-rendered page metadata", () => {
     const bali = injectSSRHead(template, pageMetadataConfig.baliHotelPriceIndex);
     const bangkok = injectSSRHead(template, pageMetadataConfig.bangkokHotelPriceIndex);
 
-    expect(bali).toContain("<title>Bali Hotel Prices 2026: $7–$1,200+ Nightly Rates</title>");
-    expect(bali).toContain('name="description" content="Compare 2026 Bali hotel rates by region: $7–$30 budget, $30–$160 boutique, $90–$400 villas and $180–$1,200+ resorts. Includes seasonal planning tools."');
+    expect(bali).toContain("<title>Bali Hotel Prices 2026: $7–$1,200+ Nightly Rates | Updated</title>");
+    expect(bali).toContain('name="description" content="Compare Bali hotel prices for 2026: $7–$30 budget, $30–$160 boutique, $90–$400 villas and $180–$1,200+ resorts, plus seasonal planning tools."');
     expect(bali).toContain('"headline":"Bali Hotel Prices in 2026: Average Rates by Neighborhood & Budget"');
-    expect(bangkok).toContain("<title>Bangkok Hotel Prices 2026: $8–$850+ Nightly Rates</title>");
-    expect(bangkok).toContain('name="description" content="Compare 2026 Bangkok hotel rates by district: $8–$35 budget, $35–$150 mid-range and $120–$850+ luxury. Includes tax and transfer planning tools."');
+    expect(bangkok).toContain("<title>Bangkok Hotel Prices 2026: $8–$850+ Nightly Rates | Updated</title>");
+    expect(bangkok).toContain('name="description" content="Compare Bangkok hotel prices for 2026 by district: $8–$35 budget, $35–$150 mid-range and $120–$850+ luxury, with tax and transfer planning tools."');
     expect(bangkok).toContain('"headline":"Bangkok Hotel Price Index (2026): Nightly Cost Breakdown & Interactive Tool"');
   });
 
@@ -144,6 +144,8 @@ describe("server-rendered page metadata", () => {
       pageMetadataConfig.bangkokHotelPriceIndex,
       pageMetadataConfig.bangkokHotelBudgetBreakdown,
       pageMetadataConfig.uaeExtendedStaySustainability,
+      pageMetadataConfig.asiaFlightDealsGuide,
+      pageMetadataConfig.tokyoOrBangkokFlightDealsGuide,
     ];
 
     for (const item of metadata) {

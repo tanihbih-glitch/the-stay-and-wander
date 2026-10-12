@@ -43,7 +43,7 @@ describe("Bali Hotel Price Index", () => {
     expect(articleSource).toContain('import ArticleFAQ from "@/components/ArticleFAQ"');
     expect(articleSource).toContain('import { baliHotelPriceIndexFaqs } from "@shared/articleFaqs"');
     expect(articleSource).toContain('<ArticleFAQ faqs={baliHotelPriceIndexFaqs} title="Bali Hotel Price Questions, Answered" />');
-    expect(articleSource).toContain("Bali Hotel Prices 2026: $7–$1,200+ Nightly Rates");
+    expect(articleSource).toContain("Bali Hotel Prices 2026: $7–$1,200+ Nightly Rates | Updated");
   });
 
   it("renders the shared crawler-visible Recently Updated signal for the current price-index revision", () => {

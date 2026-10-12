@@ -33,8 +33,8 @@ export const articleMetadata = {
 };
 
 export const searchMetadata = {
-  title: "Bangkok Hotel Prices 2026: $8–$850+ Nightly Rates",
-  description: "Compare 2026 Bangkok hotel rates by district: $8–$35 budget, $35–$150 mid-range and $120–$850+ luxury. Includes tax and transfer planning tools.",
+  title: "Bangkok Hotel Prices 2026: $8–$850+ Nightly Rates | Updated",
+  description: "Compare Bangkok hotel prices for 2026 by district: $8–$35 budget, $35–$150 mid-range and $120–$850+ luxury, with tax and transfer planning tools.",
 };
 
 export const bangkokHotelPriceRows = [

@@ -14,8 +14,8 @@ import { DEALS_AFFILIATE_LINKS } from "@/lib/affiliateLinks";
 import { tokyoOrBangkokFlightDealsFaqs } from "@shared/articleFaqs";
 
 export const articleMetadata = {
-  title: "Tokyo or Bangkok: Which Flight Is Cheaper in 2026?",
-  description: "Tokyo or Bangkok in 2026? Compare published flight snapshots, seasonal booking windows, stopover trade-offs, and live Aviasales deals.",
+  title: "Tokyo or Bangkok Flights 2026: Compare Prices and Deals",
+  description: "Compare Tokyo and Bangkok flight prices for 2026, with live fare checks, booking windows, stopover trade-offs, and practical deal-hunting tips.",
   url: "/blog/tokyo-or-bangkok-flight-deals-2026",
   image: "/manus-storage/blog-flights.png",
   keywords: "Tokyo or Bangkok flights 2026, Bangkok flight deals, Tokyo flight deals, cheapest flights to Asia, Aviasales",

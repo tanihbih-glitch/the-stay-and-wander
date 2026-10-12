@@ -279,9 +279,9 @@ export const pageMetadataConfig: Record<string, PageMetadata> = {
   },
 
   tokyoOrBangkokFlightDealsGuide: {
-    title: "Tokyo or Bangkok: Which Flight Is Cheaper in 2026?",
-    schemaTitle: "Tokyo or Bangkok: Which Flight Is Cheaper in 2026?",
-    description: "Tokyo or Bangkok in 2026? Compare published flight snapshots, seasonal booking windows, stopover trade-offs, and live Aviasales deals.",
+    title: "Tokyo or Bangkok Flights 2026: Compare Prices and Deals",
+    schemaTitle: "Tokyo or Bangkok Flights 2026: Compare Prices and Deals",
+    description: "Compare Tokyo and Bangkok flight prices for 2026, with live fare checks, booking windows, stopover trade-offs, and practical deal-hunting tips.",
     image: `${SITE_URL}/manus-storage/blog-flights.png`,
     url: "/blog/tokyo-or-bangkok-flight-deals-2026",
     type: "article",
@@ -319,8 +319,9 @@ export const pageMetadataConfig: Record<string, PageMetadata> = {
   },
 
   asiaFlightDealsGuide: {
-    title: "Best Flight Deals to Asia in 2026 — Cheapest Routes From the UAE, UK & US",
-    description: "Compare practical flight-planning guidance for Tokyo, Bangkok, Bali, and Seoul from the UAE, UK, and US.",
+    title: "Best Flight Deals to Asia 2026: Cheapest Routes UAE, UK & US",
+    schemaTitle: "Best Flight Deals to Asia 2026: Cheapest Routes UAE, UK & US",
+    description: "Compare Asia flight prices for Tokyo, Bangkok, Bali, and Seoul from the UAE, UK, and US, with booking windows, current route checks, and price-saving tips.",
     image: `${SITE_URL}/manus-storage/blog-flights.png`,
     url: "/blog/best-flight-deals-asia-2026",
     type: "article",
@@ -399,9 +400,9 @@ export const pageMetadataConfig: Record<string, PageMetadata> = {
   },
 
   baliHotelPriceIndex: {
-    title: "Bali Hotel Prices 2026: $7–$1,200+ Nightly Rates",
+    title: "Bali Hotel Prices 2026: $7–$1,200+ Nightly Rates | Updated",
     schemaTitle: "Bali Hotel Prices in 2026: Average Rates by Neighborhood & Budget",
-    description: "Compare 2026 Bali hotel rates by region: $7–$30 budget, $30–$160 boutique, $90–$400 villas and $180–$1,200+ resorts. Includes seasonal planning tools.",
+    description: "Compare Bali hotel prices for 2026: $7–$30 budget, $30–$160 boutique, $90–$400 villas and $180–$1,200+ resorts, plus seasonal planning tools.",
     image: `${SITE_URL}/manus-storage/blog-bali_5a40f78c.png`,
     url: "/blog/bali-hotel-price-index-2026",
     type: "article",
@@ -443,10 +444,10 @@ export const pageMetadataConfig: Record<string, PageMetadata> = {
   },
 
   bangkokHotelBudgetBreakdown: {
-    title: "Bangkok Budget Hotels 2026: $10–$300+ Cost Breakdown",
+    title: "Bangkok Hotel Costs 2026: $10–$300+ Per Night Guide",
     schemaTitle: "How Much Does a Hotel in Bangkok Really Cost in 2026? (Budget to Luxury Breakdown)",
     description:
-      "See typical Bangkok hotel rates in 2026: $10–$20 hostels, $30–$80 mid-range rooms and $120–$300+ five-star stays, plus booking factors.",
+      "See Bangkok hotel prices for 2026: $10–$20 hostels, $30–$80 mid-range rooms and $120–$300+ luxury stays, plus booking tips for every budget.",
     image: `${SITE_URL}/manus-storage/bangkok-hotel-prices-hero_fb209c1a.jpg`,
     url: "/blog/bangkok-hotel-budget-breakdown-2026",
     type: "article",
@@ -458,9 +459,9 @@ export const pageMetadataConfig: Record<string, PageMetadata> = {
   },
 
   bangkokHotelPriceIndex: {
-    title: "Bangkok Hotel Prices 2026: $8–$850+ Nightly Rates",
+    title: "Bangkok Hotel Prices 2026: $8–$850+ Nightly Rates | Updated",
     schemaTitle: "Bangkok Hotel Price Index (2026): Nightly Cost Breakdown & Interactive Tool",
-    description: "Compare 2026 Bangkok hotel rates by district: $8–$35 budget, $35–$150 mid-range and $120–$850+ luxury. Includes tax and transfer planning tools.",
+    description: "Compare Bangkok hotel prices for 2026 by district: $8–$35 budget, $35–$150 mid-range and $120–$850+ luxury, with tax and transfer planning tools.",
     image: `${SITE_URL}/manus-storage/bangkok-hotel-prices-hero_fb209c1a.jpg`,
     url: "/blog/bangkok-hotel-price-index-2026",
     type: "article",
@@ -486,10 +487,10 @@ export const pageMetadataConfig: Record<string, PageMetadata> = {
   },
 
   uaeExtendedStaySustainability: {
-    title: "UAE Extended Stay Hotels: Sustainability Guide 2026",
+    title: "UAE Extended Stays 2026: 4 Brands, Greener Booking Checks",
     schemaTitle: "Extended Stays in the UAE: How Sustainable Are Hilton, Marriott, and Accor?",
     description:
-      "Compare Hilton, Marriott, Accor and IHG sustainability frameworks for UAE extended stays, plus source-aware questions to ask before booking.",
+      "Compare 4 UAE extended-stay brands for 2026: sustainability frameworks, kitchens, laundry, and practical booking checks in Dubai and Abu Dhabi.",
     image: `${SITE_URL}/manus-storage/dubai-middle-east-destination_1431ce58.png`,
     url: "/blog/uae-extended-stay-sustainability-2026",
     type: "article",

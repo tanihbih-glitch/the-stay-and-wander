@@ -12,8 +12,8 @@ describe("UAE extended-stay sustainability article", () => {
   it("preserves its visible article title while using the CTR-focused crawler snippet", () => {
     expect(articleMetadata.title).toBe("Extended Stays in the UAE: How Sustainable Are Hilton, Marriott, and Accor?");
     expect(articleMetadata.url).toBe("/blog/uae-extended-stay-sustainability-2026");
-    expect(searchMetadata.title).toBe("UAE Extended Stay Hotels: Sustainability Guide 2026");
-    expect(searchMetadata.description).toBe("Compare Hilton, Marriott, Accor and IHG sustainability frameworks for UAE extended stays, plus source-aware questions to ask before booking.");
+    expect(searchMetadata.title).toBe("UAE Extended Stays 2026: 4 Brands, Greener Booking Checks");
+    expect(searchMetadata.description).toBe("Compare 4 UAE extended-stay brands for 2026: sustainability frameworks, kitchens, laundry, and practical booking checks in Dubai and Abu Dhabi.");
     expect(pageMetadataConfig.uaeExtendedStaySustainability.url).toBe(articleMetadata.url);
   });
 
