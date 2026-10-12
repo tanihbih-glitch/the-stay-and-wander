@@ -244,20 +244,20 @@ export default function BlogFlightDeals() {
               <h2 className="font-playfair text-3xl font-bold text-gray-900 mb-6">Best Time to Buy Flights to Asia</h2>
               <div className="space-y-4">
                 <div className="pb-4 border-b">
-                  <p className="font-semibold text-gray-900">Summer travel (June–August)</p>
-                  <p className="text-gray-700">Book by April at the latest. Summer is peak season for Asia travel and prices rise sharply after April.</p>
+                  <p className="font-semibold text-gray-900">Late-2026 travel (November–December)</p>
+                  <p className="text-gray-700">Compare remaining 2026 dates now and monitor flexible departures weekly. Check the final fare, baggage, stopover, and change rules before booking.</p>
                 </div>
                 <div className="pb-4 border-b">
-                  <p className="font-semibold text-gray-900">Autumn travel (September–November)</p>
-                  <p className="text-gray-700">Book June–July for best prices. Autumn is shoulder season — great weather and lower fares.</p>
+                  <p className="font-semibold text-gray-900">Winter travel (December 2026–February 2027)</p>
+                  <p className="text-gray-700">Start comparing now for Christmas, New Year, and other winter dates. Holiday demand can lift fares, so compare nearby airports and one-stop alternatives.</p>
                 </div>
                 <div className="pb-4 border-b">
-                  <p className="font-semibold text-gray-900">Winter travel (December–February)</p>
-                  <p className="text-gray-700">Book September–October. Christmas and New Year periods command premium prices so book early.</p>
+                  <p className="font-semibold text-gray-900">Spring travel (March–May 2027)</p>
+                  <p className="text-gray-700">Begin monitoring in late 2026, especially for Japan&apos;s late-March to early-April blossom period. Use flexible dates rather than relying on a fixed fare promise.</p>
                 </div>
                 <div>
-                  <p className="font-semibold text-gray-900">Spring travel (March–May)</p>
-                  <p className="text-gray-700">Book December–January. Cherry blossom season in Japan (late March to early April) is extremely popular — hotel and flight prices spike significantly during this period.</p>
+                  <p className="font-semibold text-gray-900">Summer travel (June–August 2027)</p>
+                  <p className="text-gray-700">Start comparing in early 2027. Summer is a high-demand period, so check multiple departure days, nearby airports, and one-stop itineraries before committing.</p>
                 </div>
               </div>
             </section>

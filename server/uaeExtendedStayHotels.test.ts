@@ -19,6 +19,10 @@ describe("UAE extended-stay comparison hub", () => {
     expect(articleMetadata.url).toBe("/blog/uae-extended-stay-hotels-2026");
     expect(articleMetadata.title.length).toBeLessThanOrEqual(60);
     expect(articleMetadata.description.length).toBeLessThanOrEqual(155);
+    expect(articleMetadata.title).toContain("Extended Stay Hotels Dubai & Abu Dhabi");
+    expect(articleMetadata.title).toContain("2026");
+    expect(articleMetadata.description).toContain("Dubai");
+    expect(articleMetadata.description).toContain("Abu Dhabi");
     expect(pageMetadataConfig.uaeExtendedStayHotels.url).toBe(articleMetadata.url);
     expect(getArticleFaqs(articleMetadata.url)).toHaveLength(5);
     expect(UAE_EXTENDED_STAY_SOURCE_LINKS).toHaveLength(18);

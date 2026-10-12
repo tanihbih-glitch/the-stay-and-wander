@@ -56,8 +56,8 @@ describe("server-rendered page metadata", () => {
     const template = "<html><head><title>Default site title</title></head><body></body></html>";
     const budget = injectSSRHead(template, pageMetadataConfig.bangkokHotelBudgetBreakdown);
 
-    expect(budget).toContain("<title>Bangkok Hotel Costs 2026: $10–$300+ Per Night Guide</title>");
-    expect(budget).toContain('name="description" content="See Bangkok hotel prices for 2026: $10–$20 hostels, $30–$80 mid-range rooms and $120–$300+ luxury stays, plus booking tips for every budget."');
+    expect(budget).toContain("<title>Bangkok Daily Travel Costs 2026: Hotel, Food &amp; Transport</title>");
+    expect(budget).toContain('name="description" content="Plan Bangkok daily spend in 2026 with hotel bands of $8–$35, $35–$150 and $120–$850+, plus food, transport and booking guidance."');
     expect(budget).toContain('href="https://thestayandwander.com/blog/bangkok-hotel-budget-breakdown-2026"');
   });
 
@@ -83,7 +83,7 @@ describe("server-rendered page metadata", () => {
     const template = "<html><head><title>Default site title</title></head><body></body></html>";
     const hub = injectSSRHead(template, pageMetadataConfig.uaeExtendedStayHotels, articleFaqsByPath["/blog/uae-extended-stay-hotels-2026"]);
 
-    expect(hub).toContain("<title>UAE Extended-Stay Hotels 2026: Find Your Best Fit</title>");
+    expect(hub).toContain("<title>Extended Stay Hotels Dubai &amp; Abu Dhabi 2026</title>");
     expect(hub).toContain('href="https://thestayandwander.com/blog/uae-extended-stay-hotels-2026"');
     expect(hub).toContain('"@type":"BlogPosting"');
     expect(hub).toContain('"@type":"BreadcrumbList"');

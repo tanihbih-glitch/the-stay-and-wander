@@ -39,10 +39,10 @@ const selectors = [
 ] as const;
 
 const bookingWindows = [
-  { season: "Summer travel · June–August", timing: "Search and compare by April", detail: "Summer demand can rise quickly. Start with flexible dates, then compare nearby airports and one-stop options before committing." },
-  { season: "Autumn travel · September–November", timing: "Search in June–July", detail: "The existing Asia guide treats autumn as a useful shoulder-season window for both destinations, with good reason to compare several departure days." },
-  { season: "Winter travel · December–February", timing: "Search in September–October", detail: "Christmas and New Year can lift fares. Keep cancellation and change rules visible when comparing the cheapest headline fare." },
-  { season: "Spring travel · March–May", timing: "Search in December–January", detail: "Tokyo's late-March to early-April blossom period is especially demand-sensitive; Bangkok may offer the cleaner value alternative in the same planning window." },
+  { season: "Late-2026 travel · November–December", timing: "Compare now and monitor weekly", detail: "For remaining 2026 departures, check flexible dates, nearby airports, and one-stop options now. Keep cancellation and baggage rules visible as availability changes." },
+  { season: "Winter travel · December 2026–February 2027", timing: "Compare now for holiday dates", detail: "Christmas and New Year can lift fares. Search both cities against the same dates and compare the total after baggage, stopovers, and change rules." },
+  { season: "Spring travel · March–May 2027", timing: "Start comparing in late 2026", detail: "Tokyo's late-March to early-April blossom period is especially demand-sensitive. Begin with flexible dates and use the live widget to validate current availability." },
+  { season: "Summer travel · June–August 2027", timing: "Start monitoring in early 2027", detail: "Summer demand can rise quickly. Compare several departure days and nearby airports before committing; this page does not promise a fixed fare." },
 ];
 
 export default function BlogTokyoOrBangkokFlightDeals() {

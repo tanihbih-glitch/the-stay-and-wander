@@ -9,11 +9,12 @@ import TripComHotelWidget, { TRIP_COM_HOTEL_WIDGET_URL } from "@/components/Trip
 import { ArrowLeft } from "lucide-react";
 
 const BANGKOK_STAY_GUIDE_URL = "/blog/where-to-stay-in-bangkok-2026";
+const BANGKOK_PRICE_INDEX_URL = "/blog/bangkok-hotel-price-index-2026";
 
 export const articleMetadata = {
   title: "How Much Does a Hotel in Bangkok Really Cost in 2026? (Budget to Luxury Breakdown)",
   description:
-    "Bangkok hotel prices in 2026, broken down from hostels to 5-star luxury — real ranges, top picks, and booking tips for every budget.",
+    "Plan a Bangkok daily budget for 2026 with source-backed hotel, food, and transport costs, plus tier ranges and practical booking tips.",
   url: "/blog/bangkok-hotel-budget-breakdown-2026",
   image: "/manus-storage/bangkok-hotel-prices-hero_fb209c1a.jpg",
   keywords:
@@ -25,15 +26,15 @@ export const articleMetadata = {
 };
 
 export const searchMetadata = {
-  title: "Bangkok Hotel Costs 2026: $10–$300+ Per Night Guide",
+  title: "Bangkok Daily Travel Costs 2026: Hotel, Food & Transport",
   description:
-    "See Bangkok hotel prices for 2026: $10–$20 hostels, $30–$80 mid-range rooms and $120–$300+ luxury stays, plus booking tips for every budget.",
+    "Plan Bangkok daily spend in 2026 with hotel bands of $8–$35, $35–$150 and $120–$850+, plus food, transport and booking guidance.",
 };
 
 export const nightlyRateRows = [
-  ["Hostel", "$10–$20", "Dorm bed or basic private room, shared bathroom common"],
-  ["Mid-Range / Boutique", "$30–$80", "Private en-suite room, AC, often a pool"],
-  ["5-Star Luxury", "$120–$300+", "Full-service resort-style hotel, spa, multiple restaurants"],
+  ["Hostel / Budget", "$8–$35", "Dorm bed or basic private room, shared bathroom common"],
+  ["Mid-Range / Boutique", "$35–$150", "Private en-suite room, AC, often a pool"],
+  ["5-Star Luxury", "$120–$850+", "Full-service resort-style hotel, spa, multiple restaurants"],
 ] as const;
 
 type HotelPick = {
@@ -50,7 +51,7 @@ type HotelTier = {
 
 export const hotelTiers: readonly HotelTier[] = [
   {
-    heading: "Budget Tier: Hostels ($10–$20/night)",
+    heading: "Budget Tier: Hostels ($8–$35/night)",
     expectation:
       "What to expect: clean dorm beds or basic private rooms, shared or en-suite bathrooms depending on the property, AC in the room (though not always in shared hallways), and usually a common area or rooftop. Wi-Fi is standard; breakfast sometimes is, sometimes isn't.",
     stay22Url: "https://booking.stay22.com/thestayandwander/ucN0nPA-z0-",
@@ -68,7 +69,7 @@ export const hotelTiers: readonly HotelTier[] = [
     ],
   },
   {
-    heading: "Mid-Range Tier: Boutique Hotels ($30–$80/night)",
+    heading: "Mid-Range Tier: Boutique Hotels ($35–$150/night)",
     expectation:
       "What to expect: private en-suite rooms, reliable AC, often a small pool, and a genuine boutique feel — this tier is where Bangkok offers the strongest value-to-experience ratio on this list.",
     stay22Url: "https://booking.stay22.com/thestayandwander/8S9p00Hygg-",
@@ -86,7 +87,7 @@ export const hotelTiers: readonly HotelTier[] = [
     ],
   },
   {
-    heading: "Luxury Tier: 5-Star Hotels ($120–$300+/night)",
+    heading: "Luxury Tier: 5-Star Hotels ($120–$850+/night)",
     expectation:
       "What to expect: full-service resort-style properties, spa facilities, multiple on-site restaurants, and — for the riverside options — some of the best skyline and Chao Phraya River views in the city.",
     stay22Url: "https://booking.stay22.com/thestayandwander/RMACbPYy60-",
@@ -204,7 +205,7 @@ export default function BlogBangkokHotelBudgetBreakdown() {
 
           <div className="space-y-6 text-lg leading-relaxed text-gray-700">
             <p>
-              Bangkok hotel prices span a wider range than most cities its size — a clean hostel bed and a five-star suite can sit a few blocks apart. Here&apos;s what you&apos;ll actually pay at each level, and how to book smart.
+              Bangkok planning works best as a daily-spend calculation: start with the hotel tier, then add the food rhythm and transport pattern that fit your trip. Here&apos;s how to use the published hotel bands without treating them as your whole budget.
             </p>
           </div>
 
@@ -216,7 +217,7 @@ export default function BlogBangkokHotelBudgetBreakdown() {
           </aside>
 
           <section className="mt-12">
-            <h2 className="font-playfair text-3xl font-bold text-gray-900">Quick Summary: Nightly Rates by Tier</h2>
+            <h2 className="font-playfair text-3xl font-bold text-gray-900">Daily Spend Starts with the Hotel Tier</h2>
             <div className="mt-6 overflow-x-auto rounded-xl border border-gray-200">
               <table className="min-w-full text-left text-sm sm:text-base">
                 <thead className="bg-slate-900 text-white">
@@ -237,7 +238,17 @@ export default function BlogBangkokHotelBudgetBreakdown() {
                 </tbody>
               </table>
             </div>
-            <p className="mt-4 text-sm italic text-gray-600">Rates reflect typical shoulder-season pricing. High season and holiday weeks push all three tiers higher — see below.</p>
+            <p className="mt-4 text-sm italic text-gray-600">These hotel bands match the <a href={BANGKOK_PRICE_INDEX_URL} className="font-semibold text-[#0077B6] hover:underline">Bangkok Hotel Price Index</a>, the source of truth for district-level pricing. Add meals and local transport separately rather than double-counting them here.</p>
+          </section>
+
+          <section className="mt-12">
+            <h2 className="font-playfair text-3xl font-bold text-gray-900">Build a Bangkok Daily Budget</h2>
+            <div className="mt-6 space-y-5 text-lg leading-relaxed text-gray-700">
+              <p><strong className="text-gray-900">Hotel.</strong> Use the tier table above as the accommodation component: $8–$35 for budget stays, $35–$150 for mid-range, and $120–$850+ for luxury.</p>
+              <p><strong className="text-gray-900">Food.</strong> Bangkok&apos;s published planning guidance emphasizes a broad street-food range and a budget-to-luxury restaurant ladder. Choose the eating pattern that matches your itinerary instead of assuming the hotel tier predicts every meal.</p>
+              <p><strong className="text-gray-900">Transport.</strong> The price index notes that BTS/MRT-connected hotels can carry a 15%–20% room premium, while reducing taxi time and spend. Treat proximity as a daily trade-off, not an automatic extra cost.</p>
+              <p>For district-by-district rates, transit access, the 17.7% surcharge context, and the interactive tax and transfer tools, continue to the <a href={BANGKOK_PRICE_INDEX_URL} className="font-semibold text-[#0077B6] hover:underline">Bangkok Hotel Price Index</a>.</p>
+            </div>
           </section>
 
           <section className="mt-12">
@@ -285,6 +296,7 @@ export default function BlogBangkokHotelBudgetBreakdown() {
             <h2 className="font-playfair text-2xl font-bold text-gray-900">Related Bangkok planning</h2>
             <div className="mt-4 flex flex-col gap-3">
               <a href={BANGKOK_STAY_GUIDE_URL} className="font-semibold text-[#0077B6] hover:underline">Where to Stay in Bangkok: Best Areas for First-Timers (2026 Guide) →</a>
+              <a href={BANGKOK_PRICE_INDEX_URL} className="font-semibold text-[#0077B6] hover:underline">Bangkok Hotel Price Index: District Rates, Tax and Transfer Tools →</a>
               <a href="/blog/bangkok-airport-hotels-2026" className="font-semibold text-[#0077B6] hover:underline">Where to Stay Near Bangkok Airport (Suvarnabhumi) for Quick Layovers →</a>
             </div>
           </section>

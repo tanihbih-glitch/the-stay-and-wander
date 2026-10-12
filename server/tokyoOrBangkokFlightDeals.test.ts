@@ -20,6 +20,10 @@ describe("Tokyo or Bangkok flight-deal comparison", () => {
   it("keeps the refreshed flight comparison copy concrete", () => {
     expect(articleMetadata.title).toBe("Tokyo or Bangkok Flights 2026: Compare Prices and Deals");
     expect(articleMetadata.description).toContain("live fare checks");
+    const page = readFileSync(path.resolve(process.cwd(), "client/src/pages/BlogTokyoOrBangkokFlightDeals.tsx"), "utf8");
+    expect(page).toContain("December 2026–February 2027");
+    expect(page).toContain("March–May 2027");
+    expect(page).not.toContain("Search and compare by April");
   });
 
   it("reuses the established Aviasales widget and canonical affiliate destination", () => {

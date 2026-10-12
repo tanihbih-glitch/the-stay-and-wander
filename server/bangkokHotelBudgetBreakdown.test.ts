@@ -13,10 +13,11 @@ describe("Bangkok hotel budget breakdown article", () => {
   it("preserves the visible article title and canonical route while using the approved budget-to-luxury snippet", () => {
     expect(articleMetadata.title).toBe("How Much Does a Hotel in Bangkok Really Cost in 2026? (Budget to Luxury Breakdown)");
     expect(articleMetadata.url).toBe("/blog/bangkok-hotel-budget-breakdown-2026");
-    expect(searchMetadata.title).toBe("Bangkok Hotel Costs 2026: $10–$300+ Per Night Guide");
-    expect(searchMetadata.description).toBe("See Bangkok hotel prices for 2026: $10–$20 hostels, $30–$80 mid-range rooms and $120–$300+ luxury stays, plus booking tips for every budget.");
+    expect(searchMetadata.title).toBe("Bangkok Daily Travel Costs 2026: Hotel, Food & Transport");
+    expect(searchMetadata.description).toBe("Plan Bangkok daily spend in 2026 with hotel bands of $8–$35, $35–$150 and $120–$850+, plus food, transport and booking guidance.");
     expect(pageMetadataConfig.bangkokHotelBudgetBreakdown.url).toBe(articleMetadata.url);
     expect(nightlyRateRows).toHaveLength(3);
+    expect(nightlyRateRows.map((row) => row[1])).toEqual(["$8–$35", "$35–$150", "$120–$850+"]);
   });
 
   it("uses the requested tier-specific Stay22 links and common Trip.com destination", () => {

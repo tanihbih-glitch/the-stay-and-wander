@@ -444,10 +444,10 @@ export const pageMetadataConfig: Record<string, PageMetadata> = {
   },
 
   bangkokHotelBudgetBreakdown: {
-    title: "Bangkok Hotel Costs 2026: $10–$300+ Per Night Guide",
+    title: "Bangkok Daily Travel Costs 2026: Hotel, Food & Transport",
     schemaTitle: "How Much Does a Hotel in Bangkok Really Cost in 2026? (Budget to Luxury Breakdown)",
     description:
-      "See Bangkok hotel prices for 2026: $10–$20 hostels, $30–$80 mid-range rooms and $120–$300+ luxury stays, plus booking tips for every budget.",
+      "Plan Bangkok daily spend in 2026 with hotel bands of $8–$35, $35–$150 and $120–$850+, plus food, transport and booking guidance.",
     image: `${SITE_URL}/manus-storage/bangkok-hotel-prices-hero_fb209c1a.jpg`,
     url: "/blog/bangkok-hotel-budget-breakdown-2026",
     type: "article",
@@ -502,9 +502,9 @@ export const pageMetadataConfig: Record<string, PageMetadata> = {
   },
 
   uaeExtendedStayHotels: {
-    title: "UAE Extended-Stay Hotels 2026: Find Your Best Fit",
+    title: "Extended Stay Hotels Dubai & Abu Dhabi 2026",
     schemaTitle: "UAE Extended-Stay Hotels: Find Your Best Fit for 2026",
-    description: "Compare verified UAE extended-stay options by traveler type—kitchens, laundry, workspace, group capacity, loyalty and local fit—with a planning selector.",
+    description: "Compare extended-stay hotels in Dubai and Abu Dhabi for 2026, with source-backed kitchens, laundry, workspace, and traveler-fit guidance.",
     image: `${SITE_URL}/manus-storage/dubai-middle-east-destination_1431ce58.png`,
     url: "/blog/uae-extended-stay-hotels-2026",
     type: "article",
