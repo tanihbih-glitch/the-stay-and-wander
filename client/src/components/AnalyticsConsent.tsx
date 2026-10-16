@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import { installAnalyticsDelegation, trackAnalyticsEvent } from "@/lib/analytics";
+import { enableGaDebugIfRequested, installAnalyticsDelegation, trackAnalyticsEvent } from "@/lib/analytics";
 
 const CONSENT_KEY = "staywander_analytics_consent";
 const MEASUREMENT_ID = import.meta.env.VITE_GA4_MEASUREMENT_ID as string | undefined;
 
 function loadGa4(isInternal: boolean) {
   if (typeof window === "undefined" || !MEASUREMENT_ID || window.gtag) return;
+  enableGaDebugIfRequested();
   window.dataLayer = window.dataLayer || [];
   window.gtag = (...args: unknown[]) => window.dataLayer?.push(args);
   window.gtag("js", new Date());
@@ -14,6 +15,7 @@ function loadGa4(isInternal: boolean) {
     allow_google_signals: false,
     allow_ad_personalization_signals: false,
     traffic_type: isInternal ? "internal" : "external",
+    ...(window.__stayWanderGaDebug ? { debug_mode: true } : {}),
   });
   const script = document.createElement("script");
   script.async = true;
@@ -46,6 +48,7 @@ export default function AnalyticsConsent() {
     window.__stayWanderAnalyticsConsent = next;
     setChoice(next);
     if (next === "granted") {
+      enableGaDebugIfRequested();
       void fetch("/api/analytics/config", { credentials: "same-origin" })
         .then(response => response.json())
         .then(config => loadGa4(Boolean(config.isInternal)))

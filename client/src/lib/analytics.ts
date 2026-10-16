@@ -12,6 +12,7 @@ declare global {
     dataLayer?: unknown[];
     gtag?: (...args: unknown[]) => void;
     __stayWanderAnalyticsConsent?: "granted" | "denied";
+    __stayWanderGaDebug?: boolean;
     __stayWanderTrack?: (name: AnalyticsEventName, params?: AnalyticsEventParams) => void;
   }
 }
@@ -20,11 +21,23 @@ export function pageSlug(pathname = typeof window !== "undefined" ? window.locat
   return pathname.replace(/^\/+|\/+$/g, "") || "home";
 }
 
+export function isGaDebugRequested() {
+  if (typeof window === "undefined") return false;
+  return new URLSearchParams(window.location.search).get("ga_debug") === "1";
+}
+
+export function enableGaDebugIfRequested() {
+  if (typeof window !== "undefined" && isGaDebugRequested()) {
+    window.__stayWanderGaDebug = true;
+  }
+}
+
 export function trackAnalyticsEvent(name: AnalyticsEventName, params: AnalyticsEventParams = {}) {
   if (typeof window === "undefined" || window.__stayWanderAnalyticsConsent !== "granted" || !window.gtag) return;
   window.gtag("event", name, {
     ...params,
     page_slug: params.page_slug ?? pageSlug(),
+    ...(window.__stayWanderGaDebug ? { debug_mode: true } : {}),
   });
 }
 
