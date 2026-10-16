@@ -90,7 +90,7 @@ export default function PrivacyPolicy() {
 
               <PolicySection title="Cookies and similar technologies">
                 <p>
-                  We use cookies and similar technologies to help the website function, remember preferences, understand how visitors use the site, and measure the performance of content and affiliate links. Cookies are small text files stored by your browser.
+                  We use essential browser storage for site functionality and, only when you choose “Allow analytics” in the consent notice, optional analytics cookies and similar technologies to understand aggregate usage and measure content performance. Cookies are small text files stored by your browser.
                 </p>
                 <p>
                   You can manage or delete cookies through your browser settings. Blocking some cookies may affect features or the way parts of the site work. Third-party providers may also set cookies according to their own policies.
@@ -99,10 +99,10 @@ export default function PrivacyPolicy() {
 
               <PolicySection title="Google Analytics">
                 <p>
-                  We use Google Analytics to understand aggregate website traffic and engagement, such as which pages are visited, how visitors arrive at the site, and how the site performs. Google Analytics may collect identifiers, browser and device information, IP-derived location and usage data through cookies or similar technologies.
+                  We use Google Analytics only after consent to understand aggregate website traffic and engagement, such as which pages are visited, how visitors arrive at the site, and how the site performs. Google Analytics may collect identifiers, browser and device information, IP-derived location and usage data through cookies or similar technologies.
                 </p>
                 <p>
-                  Google processes this information under its own privacy practices. You can control analytics cookies through your browser settings and may use Google&apos;s available opt-out tools where applicable.
+                  Google processes this information under its own privacy practices. You can decline optional analytics in the consent notice or control analytics cookies through your browser settings. We also send a first-party internal traffic marker for the site owner&apos;s configured IP so internal visits can be excluded from GA4 reporting when the corresponding GA4 internal-traffic filter is enabled.
                 </p>
               </PolicySection>
 

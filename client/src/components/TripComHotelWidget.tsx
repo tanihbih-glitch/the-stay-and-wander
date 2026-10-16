@@ -49,6 +49,9 @@ export default function TripComHotelWidget({
     <div
       className={`relative flex w-full justify-center ${className}`.trim()}
       aria-busy={status === "loading"}
+      data-tool-name="tripcom_hotel_search"
+      data-affiliate-partner="trip.com"
+      data-affiliate-category="Hotels"
     >
       <div
         className={`pointer-events-none absolute inset-0 mx-auto flex max-w-[320px] items-center justify-center rounded-md bg-white/80 text-center text-sm text-gray-600 transition-opacity duration-200 ${status === "loading" ? "opacity-100" : "opacity-0"}`}

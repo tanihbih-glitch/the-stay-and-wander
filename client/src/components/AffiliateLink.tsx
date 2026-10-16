@@ -65,6 +65,10 @@ export function AffiliateLink({
       className={className}
       target={target}
       rel={rel}
+      data-affiliate-partner={partner}
+      data-affiliate-category={category}
+      data-property-link={/hotel|property/i.test(category) ? "true" : undefined}
+      data-property-name={destination || undefined}
     >
       {children}
     </a>

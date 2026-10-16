@@ -140,7 +140,7 @@ export default function TripPlanner() {
         </section>
 
         <section className="container -mt-7 px-4 pb-16 sm:-mt-9 sm:pb-24">
-          <form onSubmit={handlePreview} className="rounded-2xl border border-[#d9d2c6] bg-white p-5 shadow-[0_18px_55px_rgba(23,54,74,0.12)] sm:p-8">
+          <form onSubmit={handlePreview} data-enquiry-form="trip_planner_preview" data-tool-name="trip_planner" className="rounded-2xl border border-[#d9d2c6] bg-white p-5 shadow-[0_18px_55px_rgba(23,54,74,0.12)] sm:p-8">
             <div className="flex flex-col justify-between gap-4 border-b border-[#e9e3d9] pb-6 sm:flex-row sm:items-end">
               <div>
                 <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#b3842d]">Step 1</p>

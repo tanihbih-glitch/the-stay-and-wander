@@ -194,7 +194,7 @@ function ContactForm() {
   const inputClass = "mt-2 h-11 w-full rounded-md border border-[#d7cbb9] bg-white px-3 text-sm text-[#0D1B2A] outline-none focus:border-[#0077B6] focus:ring-2 focus:ring-[#0077B6]/20";
 
   return (
-    <form onSubmit={handleSubmit} className="mt-10 grid gap-5 md:grid-cols-2" noValidate>
+    <form onSubmit={handleSubmit} data-enquiry-form="corporate_travel" className="mt-10 grid gap-5 md:grid-cols-2" noValidate>
       <label className="text-sm font-semibold text-[#0D1B2A]">Full Name<input required className={inputClass} value={form.fullName} onChange={event => updateField("fullName", event.target.value)} /></label>
       <label className="text-sm font-semibold text-[#0D1B2A]">Company Name<input required className={inputClass} value={form.companyName} onChange={event => updateField("companyName", event.target.value)} /></label>
       <label className="text-sm font-semibold text-[#0D1B2A]">Email Address<input required type="email" className={inputClass} value={form.email} onChange={event => updateField("email", event.target.value)} /></label>

@@ -98,7 +98,7 @@ export default function Booking() {
               <h2 className="font-display text-2xl font-bold text-gray-900 mb-6">
                 Find Your Perfect Hotel
               </h2>
-              <form onSubmit={handleHotelSearch} className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6" aria-describedby="hotel-search-status">
+              <form onSubmit={handleHotelSearch} data-enquiry-form="booking_hotel_search" data-tool-name="booking_search" className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6" aria-describedby="hotel-search-status">
                 <div>
                   <label className="text-sm font-semibold text-gray-700 mb-2 block">
                     Destination

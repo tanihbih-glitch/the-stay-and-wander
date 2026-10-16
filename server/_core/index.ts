@@ -13,6 +13,7 @@ import { ssrMiddleware } from "../ssr";
 import { legacyRedirectMiddleware, trailingSlashRedirectMiddleware } from "../legacyRedirects";
 import { registerGoogleSearchConsoleOAuthRoutes } from "../googleSearchConsoleOAuthRoutes";
 import { registerSearchConsoleCtrMonitoringRoutes } from "../searchConsoleCtrMonitoringRoutes";
+import { registerAnalyticsConfigRoute } from "../analyticsConfig";
 
 function isPortAvailable(port: number): Promise<boolean> {
   return new Promise(resolve => {
@@ -46,6 +47,7 @@ async function startServer() {
   registerOAuthRoutes(app);
   registerGoogleSearchConsoleOAuthRoutes(app);
   registerSearchConsoleCtrMonitoringRoutes(app);
+  registerAnalyticsConfigRoute(app);
   // tRPC API
   app.use(
     "/api/trpc",
