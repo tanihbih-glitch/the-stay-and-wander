@@ -181,6 +181,19 @@ export const pageMetadataConfig: Record<string, PageMetadata> = {
     updatedDate: "2026-09-06",
     keywords: "best cities Europe summer, Europe travel guide, European cities to visit, summer travel Europe, Lisbon, Dubrovnik, Budapest, Porto, Athens",
   },
+  skiInSkiOutHotelsGuide: {
+    title: "Ski-In Ski-Out Hotels 2026–2027: Hand-Picked Stays",
+    schemaTitle: "Ski-In Ski-Out Hotels 2026–2027: Hand-Picked Stays",
+    description: "Compare six source-bounded ski stays for winter 2026–2027 across Verbier, Courchevel, Megève, Niseko, Hakuba, and Dubai’s indoor snow exception.",
+    image: `${SITE_URL}/og-image.png`,
+    url: "/blog/ski-in-ski-out-hotels-2026-2027",
+    type: "article",
+    author: "The Stay & Wander",
+    publishedDate: "2026-10-23",
+    updatedDate: "2026-10-23",
+    includeRichSnippetSchemas: true,
+    keywords: "ski-in ski-out hotels 2026 2027, ski hotels Switzerland, Courchevel ski hotels, Megève hotels, Niseko ski hotels, Hakuba ski hotels, Dubai Ski Dubai hotel",
+  },
 
   tokyoBangkokGuide: {
     title: "Tokyo vs Bangkok: Which Should You Visit First? (2026 Honest Guide)",

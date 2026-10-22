@@ -27,6 +27,7 @@ export const DESTINATION_GUIDE_PATHS = [
   "/blog/barcelona-vs-lisbon-2026",
   "/blog/tokyo-or-bangkok-flight-deals-2026",
   "/blog/ho-chi-minh-city-hotel-price-index-2026",
+  "/blog/ski-in-ski-out-hotels-2026-2027",
   "/blog/seoul-food-price-index-2026",
   "/blog/best-4-star-hotels-bali-2026",
 ] as const;

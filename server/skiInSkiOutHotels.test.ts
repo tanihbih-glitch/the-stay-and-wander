@@ -1,0 +1,45 @@
+import { describe, expect, it } from "vitest";
+import { readFileSync } from "node:fs";
+import path from "node:path";
+import { articleMetadata } from "../client/src/pages/BlogSkiInSkiOutHotels";
+import { skiInSkiOutHotelsFaqs, getArticleFaqs } from "../shared/articleFaqs";
+import { pageMetadataConfig } from "../shared/seo";
+import { isApplicationRoute, sitemapRoutes } from "../shared/publicRoutes";
+import { featuredGuideDiscovery } from "../shared/featuredGuideDiscovery";
+import { SKI_HOTELS_AFFILIATE_LINKS } from "../client/src/lib/affiliateLinks";
+
+describe("ski-in/ski-out hotel guide", () => {
+  it("registers the canonical route, metadata, discovery card, and sitemap entry", () => {
+    expect(articleMetadata.url).toBe("/blog/ski-in-ski-out-hotels-2026-2027");
+    expect(articleMetadata.title.length).toBeLessThanOrEqual(60);
+    expect(articleMetadata.description.length).toBeLessThanOrEqual(155);
+    expect(isApplicationRoute(articleMetadata.url)).toBe(true);
+    expect(sitemapRoutes.map((route) => route.path)).toContain(articleMetadata.url);
+    expect(featuredGuideDiscovery.some((guide) => guide.path === articleMetadata.url)).toBe(true);
+    expect(pageMetadataConfig.skiInSkiOutHotelsGuide.url).toBe(articleMetadata.url);
+  });
+
+  it("keeps the facts source-bounded and avoids unsupported price or review claims", () => {
+    const source = readFileSync(path.resolve(process.cwd(), "client/src/pages/BlogSkiInSkiOutHotels.tsx"), "utf8");
+    expect(source).toContain("No hotel photos, prices, star scores, or review scores are used here");
+    expect(source).toContain("Check lift access with the hotel");
+    expect(source).toContain("Bourbon Hotel (Chapitre Six)");
+    expect(source).toContain("Aspen Ski Chalets, Kempinski Mall of the Emirates");
+    expect(source).toContain("<AffiliateLink");
+  });
+
+  it("uses centralized sponsored affiliate destinations and a visible enquiry fallback", () => {
+    expect(SKI_HOTELS_AFFILIATE_LINKS.theSkiLodgeVerbier.href).toContain("trip.com/partners/ad/S18723294");
+    expect(SKI_HOTELS_AFFILIATE_LINKS.zannierLeChalet.href).toContain("booking.stay22.com/thestayandwander");
+    expect(SKI_HOTELS_AFFILIATE_LINKS.laVigneHakuba.href).toContain("trip.com/partners/ad/S18723294");
+    const source = readFileSync(path.resolve(process.cwd(), "client/src/pages/BlogSkiInSkiOutHotels.tsx"), "utf8");
+    expect(source).toContain('rel="sponsored nofollow"');
+    expect(source).toContain("mailto:thestayandwander@thestayandwander.com");
+    expect(source).toContain("ski-in-ski-out-hotels-2026-2027");
+  });
+
+  it("maps six visible FAQs to the canonical page", () => {
+    expect(skiInSkiOutHotelsFaqs).toHaveLength(6);
+    expect(getArticleFaqs(articleMetadata.url)).toBe(skiInSkiOutHotelsFaqs);
+  });
+});

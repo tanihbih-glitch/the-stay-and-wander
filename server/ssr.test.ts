@@ -116,6 +116,7 @@ describe("server-rendered page metadata", () => {
       "/blog/barcelona-vs-lisbon-2026": pageMetadataConfig.barcelonaVsLisbonGuide,
       "/blog/tokyo-or-bangkok-flight-deals-2026": pageMetadataConfig.tokyoOrBangkokFlightDealsGuide,
       "/blog/ho-chi-minh-city-hotel-price-index-2026": pageMetadataConfig.hoChiMinhCityHotelPriceIndex,
+      "/blog/ski-in-ski-out-hotels-2026-2027": pageMetadataConfig.skiInSkiOutHotelsGuide,
     } as const;
 
     featuredGuideDiscovery.forEach((guide) => {
@@ -192,10 +193,10 @@ describe("server-rendered page metadata", () => {
     const template = "<html><head><title>Default site title</title></head><body></body></html>";
     const blogGuides = Object.values(pageMetadataConfig).filter((metadata) => metadata.type === "article" && metadata.url.startsWith("/blog/"));
 
-    expect(blogGuides).toHaveLength(30);
+    expect(blogGuides).toHaveLength(31);
     for (const metadata of blogGuides) {
       const rendered = injectSSRHead(template, metadata, articleFaqsByPath[metadata.url] ?? []);
-      expect(metadata.updatedDate).toMatch(/^2026-(09-(06|12|16|19)|10-(06|07))$/);
+      expect(metadata.updatedDate).toMatch(/^2026-(09-(06|12|16|19)|10-(06|07|23))$/);
       expect(rendered).toContain(`property="article:modified_time" content="${metadata.updatedDate}"`);
       expect(rendered).toContain('"@type":"BreadcrumbList"');
       expect(rendered).toContain(`"@id":"https://thestayandwander.com${metadata.url}"`);

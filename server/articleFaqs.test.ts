@@ -22,6 +22,7 @@ describe("published article FAQ data", () => {
     "/blog/barcelona-vs-lisbon-2026",
     "/blog/tokyo-or-bangkok-flight-deals-2026",
     "/blog/ho-chi-minh-city-hotel-price-index-2026",
+    "/blog/ski-in-ski-out-hotels-2026-2027",
   ];
 
   it("provides four to six non-empty FAQ pairs for each requested article", () => {

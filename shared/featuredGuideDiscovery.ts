@@ -19,6 +19,17 @@ export interface FeaturedGuideDiscovery {
 
 export const featuredGuideDiscovery: readonly FeaturedGuideDiscovery[] = [
   {
+    id: 23,
+    path: "/blog/ski-in-ski-out-hotels-2026-2027",
+    slug: "ski-in-ski-out-hotels-2026-2027",
+    title: "Ski-In Ski-Out Hotels 2026–2027: Hand-Picked Stays",
+    category: "Ski Stays · Winter Travel",
+    image: "/og-image.png",
+    excerpt: "Filter six source-bounded winter stays across the Alps, Japan, and Dubai’s indoor-snow exception by access, region, tier, and traveler fit.",
+    date: "October 23, 2026",
+    readTime: "9 min read",
+  },
+  {
     id: 22,
     path: "/blog/uae-extended-stay-hotels-2026",
     slug: "uae-extended-stay-hotels-2026",

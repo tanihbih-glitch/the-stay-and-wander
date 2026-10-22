@@ -340,6 +340,15 @@ export const hoChiMinhCityHotelPriceIndexFaqs: readonly ArticleFaq[] = [
   { question: "Are these Ho Chi Minh City hotel prices live rates?", answer: "No. The bands are dated planning benchmarks, supplemented by dynamic platform context in the interactive guide. Use the live Stay22 handoff for exact dates, availability, taxes, room type, cancellation terms, and final prices." },
 ];
 
+export const skiInSkiOutHotelsFaqs: readonly ArticleFaq[] = [
+  { question: "Are all six properties true ski-in/ski-out hotels?", answer: "No. The shortlist deliberately distinguishes supplied access labels: Bourbon Hotel is marked ski-in/ski-out, Sansui Niseko is marked ski-in/ski-out, while Zannier Le Chalet requires lift-access confirmation, The Ski Lodge Verbier and La Vigne Hakuba use the supplied central or shuttle context, and Aspen Ski Chalets is the Dubai indoor-snow exception." },
+  { question: "When should I book a winter 2026–2027 ski stay?", answer: "Book as soon as your dates are firm for expected-opening properties and peak school-holiday weeks, but verify the operating calendar first. New or seasonal properties can change opening timing, room inventory, and access details before the season begins." },
+  { question: "Which stay is best for a quieter luxury trip?", answer: "Zannier Le Chalet is the clearest quiet-luxury fit in the supplied shortlist because it is described as a small family-owned group with three chalets, fireplaces, Mont Blanc views, and a spa with indoor pool. Confirm lift access directly before booking." },
+  { question: "Which property works best for a group or longer stay?", answer: "La Vigne Hakuba is the strongest group-oriented option in the supplied facts: it is an apartment-hotel with full kitchens and Northern Alps views. Confirm room configuration, shuttle times, and the operating calendar for your dates." },
+  { question: "Why is a Dubai hotel included in a ski-stay guide?", answer: "Aspen Ski Chalets at Kempinski Mall of the Emirates is included as the explicit indoor-snow exception. Its rooms overlook the Ski Dubai indoor slope, so it is relevant for a snow-focused stopover or city break rather than an outdoor alpine resort week." },
+  { question: "Are prices, reviews, and star ratings included?", answer: "No. This page intentionally excludes nightly prices, review scores, and star ratings. Use the booking handoff or direct enquiry route to verify current availability, final terms, access, and any seasonal operating changes." },
+];
+
 export const articleFaqsByPath: Readonly<Record<string, readonly ArticleFaq[]>> = {
   "/blog/where-to-stay-in-bali-2026": baliHotelPricesFaqs,
   "/blog/where-to-stay-in-bangkok-2026": bangkokHotelPricesFaqs,
@@ -360,6 +369,7 @@ export const articleFaqsByPath: Readonly<Record<string, readonly ArticleFaq[]>> 
   "/blog/barcelona-vs-lisbon-2026": barcelonaVsLisbonFaqs,
   "/blog/tokyo-or-bangkok-flight-deals-2026": tokyoOrBangkokFlightDealsFaqs,
   "/blog/ho-chi-minh-city-hotel-price-index-2026": hoChiMinhCityHotelPriceIndexFaqs,
+  "/blog/ski-in-ski-out-hotels-2026-2027": skiInSkiOutHotelsFaqs,
 };
 
 export function getArticleFaqs(pathname: string): readonly ArticleFaq[] {

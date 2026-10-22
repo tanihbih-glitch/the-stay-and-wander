@@ -233,6 +233,8 @@ export function ssrMiddleware(req: Request, res: Response, next: NextFunction) {
     metadata = pageMetadataConfig.tokyoOrBangkokFlightDealsGuide;
   } else if (path === "/blog/ho-chi-minh-city-hotel-price-index-2026") {
     metadata = pageMetadataConfig.hoChiMinhCityHotelPriceIndex;
+  } else if (path === "/blog/ski-in-ski-out-hotels-2026-2027") {
+    metadata = pageMetadataConfig.skiInSkiOutHotelsGuide;
   } else if (path === "/blog/brazil-travel-guide-2026") {
     metadata = pageMetadataConfig.brazilTravelGuide;
   } else if (path === "/blog/best-flight-deals-asia-2026") {

@@ -132,6 +132,30 @@ export const UAE_EXTENDED_STAY_AFFILIATE_LINKS = {
   tripCom: "https://www.trip.com/partners/ad/S18723294?Allianceid=9322314&SID=324726991&trip_sub1=",
 } as const;
 
+/** Approved booking handoffs for the source-bounded winter ski-stay shortlist. */
+export const SKI_HOTELS_AFFILIATE_LINKS = {
+  theSkiLodgeVerbier: {
+    href: "https://www.trip.com/partners/ad/S18723294?Allianceid=9322314&SID=324726991&trip_sub1=",
+    campaign: "ski-in-ski-out-hotels-2026-2027",
+  },
+  zannierLeChalet: {
+    href: "https://booking.stay22.com/thestayandwander/bEUkQtNQBH",
+    campaign: "ski-in-ski-out-hotels-2026-2027",
+  },
+  sansuiNiseko: {
+    href: "https://booking.stay22.com/thestayandwander/bEUkQtNQBH",
+    campaign: "ski-in-ski-out-hotels-2026-2027",
+  },
+  laVigneHakuba: {
+    href: "https://www.trip.com/partners/ad/S18723294?Allianceid=9322314&SID=324726991&trip_sub1=",
+    campaign: "ski-in-ski-out-hotels-2026-2027",
+  },
+  aspenSkiChalets: {
+    href: "https://booking.stay22.com/thestayandwander/bEUkQtNQBH",
+    campaign: "ski-in-ski-out-hotels-2026-2027",
+  },
+} as const;
+
 export const BALI_SEASONAL_STAY22_DATE_PRESETS = [
   { checkIn: "2026-01-10", checkOut: "2026-01-17" },
   { checkIn: "2026-02-10", checkOut: "2026-02-17" },
