@@ -29,9 +29,11 @@ describe("ski-in/ski-out hotel guide", () => {
   });
 
   it("uses centralized sponsored affiliate destinations and a visible enquiry fallback", () => {
-    expect(SKI_HOTELS_AFFILIATE_LINKS.theSkiLodgeVerbier.href).toContain("trip.com/partners/ad/S18723294");
-    expect(SKI_HOTELS_AFFILIATE_LINKS.zannierLeChalet.href).toContain("booking.stay22.com/thestayandwander");
-    expect(SKI_HOTELS_AFFILIATE_LINKS.laVigneHakuba.href).toContain("trip.com/partners/ad/S18723294");
+    expect(SKI_HOTELS_AFFILIATE_LINKS.theSkiLodgeVerbier.href).toBe("https://www.trip.com/t/skIrXWGSrW2");
+    expect(SKI_HOTELS_AFFILIATE_LINKS.zannierLeChalet.href).toBe("https://booking.stay22.com/thestayandwander/t0TbOoot1M");
+    expect(SKI_HOTELS_AFFILIATE_LINKS.sansuiNiseko.href).toBe("https://booking.stay22.com/thestayandwander/S4gJ409szW");
+    expect(SKI_HOTELS_AFFILIATE_LINKS.laVigneHakuba.href).toBe("https://www.trip.com/t/LYyYP58SrW2");
+    expect(SKI_HOTELS_AFFILIATE_LINKS.aspenSkiChalets.href).toBe("https://booking.stay22.com/thestayandwander/5vPFBcmoMP");
     const source = readFileSync(path.resolve(process.cwd(), "client/src/pages/BlogSkiInSkiOutHotels.tsx"), "utf8");
     expect(source).toContain('rel="sponsored nofollow"');
     expect(source).toContain("mailto:thestayandwander@thestayandwander.com");

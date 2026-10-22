@@ -100,7 +100,7 @@ const properties: readonly Property[] = [
     tier: "Upscale",
     access: "Shuttle",
     bestFor: ["Self-catering groups", "Longer mountain stays"],
-    details: ["38-room apartment-hotel", "Full kitchens", "Northern Alps views", "Wine programme", "Part of a small boutique group"],
+    details: ["38-room apartment-hotel", "Full kitchens", "Northern Alps views", "Wine programme", "Shuttle to Happo-One / Hakuba 47", "Part of a small boutique group"],
     opening: "Season timing was not supplied; confirm opening dates and shuttle schedules with the hotel.",
     link: { href: SKI_HOTELS_AFFILIATE_LINKS.laVigneHakuba.href, partner: "trip.com", category: "hotel", source: "ski-in-ski-out-hotels-2026-2027", label: "Check La Vigne Hakuba" },
   },
