@@ -12,6 +12,7 @@ export interface FeaturedGuideDiscovery {
   title: string;
   category: string;
   image: string;
+  imageAlt?: string;
   excerpt: string;
   date: string;
   readTime: string;
@@ -24,7 +25,8 @@ export const featuredGuideDiscovery: readonly FeaturedGuideDiscovery[] = [
     slug: "ski-in-ski-out-hotels-2026-2027",
     title: "Ski & Snow Hotels 2026–2027: Hand-Picked Stays",
     category: "Ski Stays · Winter Travel",
-    image: "/og-image.png",
+    image: "/manus-storage/ski-snow-hotels-2026-2027_3fcf7161.webp",
+    imageAlt: "Snow-covered Alpine mountains and ski lifts under a clear blue sky",
     excerpt: "Filter nine source-bounded winter stays across the Alps, Japan, Nordic Lapland, and Dubai’s indoor-snow exception by snow type, region, tier, and traveler fit.",
     date: "October 23, 2026",
     readTime: "11 min read",
@@ -167,7 +169,8 @@ export const featuredGuideDiscovery: readonly FeaturedGuideDiscovery[] = [
     slug: "tokyo-or-bangkok-flight-deals-2026",
     title: "Tokyo or Bangkok: Which Flight Is Cheaper in 2026?",
     category: "Flight Deals · Asia Travel",
-    image: "/manus-storage/blog-flights.png",
+    image: "/manus-storage/tokyo-bangkok-flight-deals-2026_56660b58.webp",
+    imageAlt: "Airplane wing above clouds at sunset, representing flights between Tokyo and Bangkok",
     excerpt: "Compare published Tokyo and Bangkok fare snapshots, seasonal booking windows, stopover trade-offs, and live Aviasales deals.",
     date: "October 7, 2026",
     readTime: "8 min read",

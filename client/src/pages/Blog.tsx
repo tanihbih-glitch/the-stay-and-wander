@@ -10,6 +10,34 @@ import MobileBottomNav from "@/components/MobileBottomNav";
 import { OrganizationSchema, BreadcrumbSchema } from "@/components/BlogArticleSchema";
 import { featuredGuideDiscovery } from "@shared/featuredGuideDiscovery";
 
+function BlogCardImage({ src, alt }: { src: string; alt: string }) {
+  const [hasError, setHasError] = useState(false);
+
+  if (hasError) {
+    return (
+      <div
+        role="img"
+        aria-label={alt}
+        className="flex h-48 w-full items-center justify-center bg-gradient-to-br from-[#0D1B2A] via-[#0077B6] to-[#F4A261] px-6 text-center text-sm font-semibold text-white"
+      >
+        The Stay &amp; Wander
+      </div>
+    );
+  }
+
+  return (
+    <img
+      src={src}
+      alt={alt}
+      width={1200}
+      height={675}
+      loading="lazy"
+      onError={() => setHasError(true)}
+      className="h-48 w-full object-cover group-hover:scale-105 transition-transform"
+    />
+  );
+}
+
 export default function Blog() {
   const [activeCategory, setActiveCategory] = useState("all");
 
@@ -277,10 +305,9 @@ export default function Blog() {
               >
                 {/* Featured Image */}
                 <div className="relative h-48 overflow-hidden">
-                  <img
+                  <BlogCardImage
                     src={article.image}
-                    alt={article.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                    alt={("imageAlt" in article ? article.imageAlt : undefined) ?? article.title}
                   />
                   <div className="absolute top-4 left-4 bg-yellow-500 text-white px-3 py-1 rounded-full text-xs font-semibold">
                     {article.category}
