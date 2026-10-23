@@ -36,7 +36,7 @@ describe("ski-in/ski-out hotel guide", () => {
     expect(SKI_HOTELS_AFFILIATE_LINKS.zannierLeChalet.href).toBe("https://booking.stay22.com/thestayandwander/t0TbOoot1M");
     expect(SKI_HOTELS_AFFILIATE_LINKS.sansuiNiseko.href).toBe("https://booking.stay22.com/thestayandwander/S4gJ409szW");
     expect(SKI_HOTELS_AFFILIATE_LINKS.laVigneHakuba.href).toBe("https://www.trip.com/t/LYyYP58SrW2");
-    expect(SKI_HOTELS_AFFILIATE_LINKS.hakubaAlpineHotel.href).toBe("https://booking.stay22.com/thestayandwander/38ahvqCFMS");
+    expect(SKI_HOTELS_AFFILIATE_LINKS.hakubaAlpineHotel.href).toBe("https://www.stay22.com/allez/booking?aid=thestayandwander&link=https%3A%2F%2Fwww.booking.com%2Fhotel%2Fjp%2Fhakuba-alpine.html&campaign=ski_in_ski_out_hotels_2026_2027");
     expect(SKI_HOTELS_AFFILIATE_LINKS.hakubaAlpineHotel.tripComHref).toBe("https://www.trip.com/t/znzNFqMorW2");
     expect(SKI_HOTELS_AFFILIATE_LINKS.aspenSkiChalets.href).toBe("https://booking.stay22.com/thestayandwander/5vPFBcmoMP");
     expect(SKI_HOTELS_AFFILIATE_LINKS.treehotel.href).toBe("https://booking.stay22.com/thestayandwander/1TiRHL_1uE");
