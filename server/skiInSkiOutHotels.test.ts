@@ -19,12 +19,15 @@ describe("ski-in/ski-out hotel guide", () => {
     expect(pageMetadataConfig.skiInSkiOutHotelsGuide.url).toBe(articleMetadata.url);
   });
 
-  it("keeps the facts source-bounded and avoids unsupported price or review claims", () => {
+  it("keeps the facts source-bounded and avoids unsupported price, photo, or review claims", () => {
     const source = readFileSync(path.resolve(process.cwd(), "client/src/pages/BlogSkiInSkiOutHotels.tsx"), "utf8");
     expect(source).toContain("No hotel photos, prices, star scores, or review scores are used here");
-    expect(source).toContain("Check lift access with the hotel");
+    expect(source).toContain("Nordic snow stays");
+    expect(source).toContain("Aurora viewing is possible in winter, not guaranteed");
     expect(source).toContain("Bourbon Hotel (Chapitre Six)");
     expect(source).toContain("Aspen Ski Chalets, Kempinski Mall of the Emirates");
+    expect(source).toContain("Treehotel");
+    expect(source).toContain("Arcora Boutique Hotel & Villas");
     expect(source).toContain("<AffiliateLink");
   });
 
@@ -34,8 +37,11 @@ describe("ski-in/ski-out hotel guide", () => {
     expect(SKI_HOTELS_AFFILIATE_LINKS.sansuiNiseko.href).toBe("https://booking.stay22.com/thestayandwander/S4gJ409szW");
     expect(SKI_HOTELS_AFFILIATE_LINKS.laVigneHakuba.href).toBe("https://www.trip.com/t/LYyYP58SrW2");
     expect(SKI_HOTELS_AFFILIATE_LINKS.aspenSkiChalets.href).toBe("https://booking.stay22.com/thestayandwander/5vPFBcmoMP");
+    expect(SKI_HOTELS_AFFILIATE_LINKS.treehotel.href).toBe("https://booking.stay22.com/thestayandwander/1TiRHL_1uE");
+    expect(SKI_HOTELS_AFFILIATE_LINKS.arcoraLapland.href).toBe("https://booking.stay22.com/thestayandwander/XPUPEWVXq4");
     const source = readFileSync(path.resolve(process.cwd(), "client/src/pages/BlogSkiInSkiOutHotels.tsx"), "utf8");
     expect(source).toContain('rel="sponsored nofollow"');
+    expect(source).toContain('data-property-link="true"');
     expect(source).toContain("mailto:thestayandwander@thestayandwander.com");
     expect(source).toContain("ski-in-ski-out-hotels-2026-2027");
   });

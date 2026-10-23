@@ -154,6 +154,14 @@ export const SKI_HOTELS_AFFILIATE_LINKS = {
     href: "https://booking.stay22.com/thestayandwander/5vPFBcmoMP",
     campaign: "ski-in-ski-out-hotels-2026-2027",
   },
+  treehotel: {
+    href: "https://booking.stay22.com/thestayandwander/1TiRHL_1uE",
+    campaign: "ski-in-ski-out-hotels-2026-2027",
+  },
+  arcoraLapland: {
+    href: "https://booking.stay22.com/thestayandwander/XPUPEWVXq4",
+    campaign: "ski-in-ski-out-hotels-2026-2027",
+  },
 } as const;
 
 export const BALI_SEASONAL_STAY22_DATE_PRESETS = [
