@@ -150,6 +150,11 @@ export const SKI_HOTELS_AFFILIATE_LINKS = {
     href: "https://www.trip.com/t/LYyYP58SrW2",
     campaign: "ski-in-ski-out-hotels-2026-2027",
   },
+  hakubaAlpineHotel: {
+    href: "https://booking.stay22.com/thestayandwander/38ahvqCFMS",
+    tripComHref: "https://www.trip.com/t/znzNFqMorW2",
+    campaign: "ski-in-ski-out-hotels-2026-2027",
+  },
   aspenSkiChalets: {
     href: "https://booking.stay22.com/thestayandwander/5vPFBcmoMP",
     campaign: "ski-in-ski-out-hotels-2026-2027",
