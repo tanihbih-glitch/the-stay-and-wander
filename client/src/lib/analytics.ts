@@ -5,7 +5,8 @@ export type AnalyticsEventName =
   | "enquiry_submit"
   | "tool_use"
   | "flight_widget_click"
-  | "outbound_affiliate_click";
+  | "outbound_affiliate_click"
+  | "email_signup";
 
 type AnalyticsEventParams = Record<string, string | number | boolean | undefined>;
 
@@ -16,7 +17,35 @@ declare global {
     __stayWanderAnalyticsConsent?: "granted" | "denied";
     __stayWanderGaDebug?: boolean;
     __stayWanderTrack?: (name: AnalyticsEventName, params?: AnalyticsEventParams) => void;
+    fbq?: (...args: unknown[]) => void;
+    __stayWanderMarketingConsent?: "unknown" | "granted" | "denied";
   }
+}
+
+const META_PIXEL_ID = (import.meta.env.VITE_META_PIXEL_ID as string | undefined) || "";
+
+export function isSkiGuidePage(pathname = typeof window !== "undefined" ? window.location.pathname : "") {
+  return pathname === "/blog/ski-in-ski-out-hotels-2026-2027";
+}
+
+export function loadMetaPixelIfAllowed() {
+  if (typeof window === "undefined" || !META_PIXEL_ID || !isSkiGuidePage() || window.__stayWanderMarketingConsent !== "granted" || window.fbq) return;
+  window.fbq = (...args: unknown[]) => {
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push(["meta", ...args]);
+  };
+  window.fbq("init", META_PIXEL_ID);
+  window.fbq("track", "PageView");
+  const script = document.createElement("script");
+  script.async = true;
+  script.src = "https://connect.facebook.net/en_US/fbevents.js";
+  script.dataset.marketing = "meta-pixel";
+  document.head.appendChild(script);
+}
+
+export function trackMetaPixelEvent(name: "CheckAvailability" | "Lead", params: Record<string, string> = {}) {
+  if (typeof window === "undefined" || !window.fbq || !isSkiGuidePage() || window.__stayWanderMarketingConsent !== "granted") return;
+  window.fbq("track", name, params);
 }
 
 export function pageSlug(pathname = typeof window !== "undefined" ? window.location.pathname : "/") {
@@ -58,11 +87,13 @@ export function installAnalyticsDelegation() {
     const enquiryButton = target?.closest<HTMLElement>("[data-enquiry-click]");
 
     if (cta?.getAttribute("data-cta-type") === "check_availability_click") {
+      const propertyName = cta.getAttribute("data-property-name") || undefined;
       trackAnalyticsEvent("check_availability_click", {
-        property_name: cta.getAttribute("data-property-name") || undefined,
+        property_name: propertyName,
         partner: cta.getAttribute("data-affiliate-partner") || undefined,
         cta_type: "check_availability",
       });
+      if (propertyName) trackMetaPixelEvent("CheckAvailability", { content_name: propertyName });
     }
 
     if (enquiryButton) {
@@ -104,10 +135,19 @@ export function installAnalyticsDelegation() {
 
   const onSubmit = (event: SubmitEvent) => {
     const form = event.target as HTMLFormElement | null;
-    if (!form?.matches("[data-enquiry-form]")) return;
-    trackAnalyticsEvent("enquiry_submit", {
-      form_name: form.getAttribute("data-enquiry-form") || "enquiry",
-    });
+    if (!form) return;
+    if (form.matches("[data-enquiry-form]")) {
+      trackAnalyticsEvent("enquiry_submit", {
+        form_name: form.getAttribute("data-enquiry-form") || "enquiry",
+      });
+      return;
+    }
+    if (form.matches("[data-email-signup-form]")) {
+      trackAnalyticsEvent("email_signup", {
+        signup_name: form.getAttribute("data-email-signup-form") || "email_signup",
+      });
+      trackMetaPixelEvent("Lead");
+    }
   };
 
   document.addEventListener("click", onClick, true);

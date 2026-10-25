@@ -63,7 +63,7 @@ export default function PrivacyPolicy() {
             <div className="flex flex-col gap-5 border-b border-[#e4dcc7] bg-[#f8f4e9] px-6 py-7 sm:flex-row sm:items-center sm:justify-between sm:px-9">
               <div>
                 <p className="text-sm font-semibold uppercase tracking-[0.16em] text-[#b3842d]">The Stay &amp; Wander</p>
-                <p className="mt-2 text-sm text-slate-600">Last updated: July 28, 2026</p>
+                <p className="mt-2 text-sm text-slate-600">Last updated: October 26, 2026</p>
               </div>
               <span className="inline-flex w-fit items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-medium text-[#17364a] shadow-sm ring-1 ring-[#d9cfae]">
                 <Cookie className="h-4 w-4 text-[#b3842d]" aria-hidden="true" />
@@ -104,6 +104,9 @@ export default function PrivacyPolicy() {
                 <p>
                   Google processes this information under its own privacy practices. You can decline optional analytics in the consent notice or control analytics cookies through your browser settings. We also send a first-party internal traffic marker for the site owner&apos;s configured IP so internal visits can be excluded from GA4 reporting when the corresponding GA4 internal-traffic filter is enabled.
                 </p>
+                <p>
+                  On the ski and snow hotels guide only, the consent notice may also offer a separate marketing choice for a future Meta Pixel. The Pixel is inactive until a Pixel ID is configured and marketing consent is granted. No marketing script is loaded on other pages, and declining marketing prevents any such request.
+                </p>
               </PolicySection>
 
               <PolicySection title="Anonymous guide engagement">
@@ -117,10 +120,10 @@ export default function PrivacyPolicy() {
 
               <PolicySection title="Mailchimp newsletter sign-ups">
                 <p>
-                  If you choose to subscribe to our newsletter, your email address and any other information you submit are collected through Mailchimp. We use this information to send travel tips, updates and offers that you requested, and to understand newsletter engagement such as opens and link clicks.
+                  If you choose to subscribe to our newsletter or the ski-stay opening-date alerts, your email address is sent directly to Mailchimp through its subscription form. For the ski alerts, we also send the selected alert tag, consent timestamp and source page so Mailchimp can apply the correct list label and record how the subscription was requested. This website does not store those signup details in its own database.
                 </p>
                 <p>
-                  You can unsubscribe at any time using the unsubscribe link in any marketing email. Mailchimp processes newsletter information under its own privacy policy and may use cookies or similar technologies in its services.
+                  Mailchimp uses double opt-in for the ski alerts: after submitting the form, you must confirm through the email it sends before receiving messages. You can unsubscribe at any time using the unsubscribe link in any marketing email. Mailchimp processes newsletter information under its own privacy policy and may use cookies or similar technologies in its services.
                 </p>
               </PolicySection>
 

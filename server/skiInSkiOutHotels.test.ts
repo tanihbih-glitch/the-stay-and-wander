@@ -56,4 +56,24 @@ describe("ski-in/ski-out hotel guide", () => {
     expect(skiInSkiOutHotelsFaqs).toHaveLength(6);
     expect(getArticleFaqs(articleMetadata.url)).toBe(skiInSkiOutHotelsFaqs);
   });
+
+  it("keeps ski alerts on Mailchimp without local database storage", () => {
+    const source = readFileSync(path.resolve(process.cwd(), "client/src/components/SkiAlertsSignup.tsx"), "utf8");
+    expect(source).toContain("thestayandwander.us10.list-manage.com/subscribe/post");
+    expect(source).toContain('name="tags" value="ski-2026-27"');
+    expect(source).toContain('name="CONSENT_TIMESTAMP"');
+    expect(source).toContain('data-email-signup-form="ski-2026-27"');
+    expect(source).toContain("Check your inbox to confirm.");
+    expect(source).toContain("/privacy-policy");
+  });
+
+  it("keeps the future Meta Pixel inactive until a configured ID and marketing consent exist", () => {
+    const analytics = readFileSync(path.resolve(process.cwd(), "client/src/lib/analytics.ts"), "utf8");
+    const consent = readFileSync(path.resolve(process.cwd(), "client/src/components/AnalyticsConsent.tsx"), "utf8");
+    expect(analytics).toContain("VITE_META_PIXEL_ID");
+    expect(analytics).toContain("isSkiGuidePage");
+    expect(analytics).toContain('"CheckAvailability" | "Lead"');
+    expect(consent).toContain("Allow marketing");
+    expect(consent).toContain("MARKETING_CONSENT_KEY");
+  });
 });

@@ -14,6 +14,9 @@ describe("analytics helpers", () => {
     expect(source).toContain('"tool_use"');
     expect(source).toContain('"flight_widget_click"');
     expect(source).toContain('"outbound_affiliate_click"');
+    expect(source).toContain('"email_signup"');
+    expect(source).toContain("data-email-signup-form");
+    expect(source).toContain('trackMetaPixelEvent("Lead")');
   });
 
   it("keeps the debug switch query-driven and session-only", async () => {
