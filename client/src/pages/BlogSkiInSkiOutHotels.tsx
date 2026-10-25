@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useMemo, useState, type FormEvent } from "react";
 import { ArrowRight, CheckCircle2, ExternalLink, Filter, Snowflake } from "lucide-react";
 import { Link } from "wouter";
 import Head from "@/components/Head";
@@ -39,7 +39,6 @@ type Property = {
   details: string[];
   opening: string;
   link?: { href: string; partner: "stay22" | "tripcom" | "hotel_direct"; category: string; source: string; label: string; rel?: string };
-  secondaryLink?: { href: string; partner: "stay22" | "tripcom" | "hotel_direct"; label: string; rel?: string };
   enquiry?: boolean;
   note?: string;
 };
@@ -58,7 +57,7 @@ const properties: readonly Property[] = [
     bestFor: ["Recovery-focused stays", "Design-conscious travelers"],
     details: ["Independent 36-room boutique", "TV-free rooms", "Recovery spa", "Vinyl bar"],
     opening: "Expected to open in December 2026; confirm with the hotel.",
-    link: { href: SKI_HOTELS_AFFILIATE_LINKS.theSkiLodgeVerbier.href, partner: "hotel_direct", category: "hotel", source: campaign, label: "Check The Ski Lodge Verbier" },
+    link: { href: SKI_HOTELS_AFFILIATE_LINKS.theSkiLodgeVerbier.href, partner: "hotel_direct", category: "hotel", source: campaign, label: "Check availability" },
   },
   {
     id: "bourbon-courchevel",
@@ -85,7 +84,7 @@ const properties: readonly Property[] = [
     bestFor: ["Quiet luxury", "Spa and mountain views"],
     details: ["12 rooms and suites in three chalets", "Fireplaces", "Mont Blanc views", "Spa with indoor pool", "Small family-owned group"],
     opening: "Expected opening date not supplied; confirm with the hotel.",
-    link: { href: SKI_HOTELS_AFFILIATE_LINKS.zannierLeChalet.href, partner: "stay22", category: "hotel", source: campaign, label: "Check Zannier Le Chalet" },
+    link: { href: SKI_HOTELS_AFFILIATE_LINKS.zannierLeChalet.href, partner: "stay22", category: "hotel", source: campaign, label: "Check availability" },
     note: "Lift access was not supplied; confirm it directly before booking.",
   },
   {
@@ -99,7 +98,7 @@ const properties: readonly Property[] = [
     bestFor: ["Onsen and food", "Luxury powder-ski trips"],
     details: ["Onsen", "In-house sushi restaurant"],
     opening: "Season expected from late November; confirm with the hotel.",
-    link: { href: SKI_HOTELS_AFFILIATE_LINKS.sansuiNiseko.href, partner: "stay22", category: "hotel", source: campaign, label: "Check Sansui Niseko" },
+    link: { href: SKI_HOTELS_AFFILIATE_LINKS.sansuiNiseko.href, partner: "stay22", category: "hotel", source: campaign, label: "Check availability" },
   },
   {
     id: "la-vigne-hakuba",
@@ -127,7 +126,6 @@ const properties: readonly Property[] = [
     details: ["Small independent hotel of about 14 rooms", "Outdoor onsen", "Mountain views"],
     opening: "Operating dates were not supplied; confirm with the hotel.",
     link: { href: SKI_HOTELS_AFFILIATE_LINKS.hakubaAlpineHotel.href, partner: "stay22", category: "hotel", source: campaign, label: "Check availability", rel: "sponsored" },
-    secondaryLink: { href: SKI_HOTELS_AFFILIATE_LINKS.hakubaAlpineHotel.tripComHref, partner: "tripcom", label: "Also on Trip.com", rel: "sponsored" },
   },
   {
     id: "aspen-ski-chalets",
@@ -154,7 +152,7 @@ const properties: readonly Property[] = [
     bestFor: ["Design-led winter escapes", "Forest stays"],
     details: ["Architect-designed treehouse rooms", "Forest setting near the Arctic Circle"],
     opening: "Operating dates were not supplied; confirm with the hotel.",
-    link: { href: SKI_HOTELS_AFFILIATE_LINKS.treehotel.href, partner: "stay22", category: "hotel", source: campaign, label: "Check Treehotel" },
+    link: { href: SKI_HOTELS_AFFILIATE_LINKS.treehotel.href, partner: "stay22", category: "hotel", source: campaign, label: "Check availability" },
     note: "Ask the hotel about winter activities. Aurora viewing is possible in winter, not guaranteed.",
   },
   {
@@ -168,8 +166,7 @@ const properties: readonly Property[] = [
     bestFor: ["Family-owned retreats", "Guided Arctic experiences"],
     details: ["Suites and villas", "Rooftop spa", "Family-owned retreat", "Edge of Pallas-Yllästunturi National Park"],
     opening: "Expected to open on 14 December 2026; confirm with the hotel.",
-    link: { href: SKI_HOTELS_AFFILIATE_LINKS.arcoraLapland.href, partner: "stay22", category: "hotel", source: campaign, label: "Check Arcora Boutique Hotel & Villas" },
-    secondaryLink: { href: "https://arcora.fi", partner: "hotel_direct", label: "Official site" },
+    link: { href: SKI_HOTELS_AFFILIATE_LINKS.arcoraLapland.href, partner: "stay22", category: "hotel", source: campaign, label: "Check availability" },
     note: "Ask the hotel about skiing options. Aurora viewing is possible in winter, not guaranteed.",
   },
 ] as const;
@@ -197,6 +194,8 @@ export default function BlogSkiInSkiOutHotels() {
   const [tier, setTier] = useState<(typeof tierOptions)[number]>("All tiers");
   const [snowType, setSnowType] = useState<(typeof snowTypeOptions)[number]>("All snow types");
   const [traveler, setTraveler] = useState<(typeof travelerOptions)[number]>("All traveler types");
+  const [enquiryProperty, setEnquiryProperty] = useState("");
+  const [enquirySent, setEnquirySent] = useState(false);
 
   const filteredProperties = useMemo(() => properties.filter((property) =>
     (region === "All regions" || property.region === region) &&
@@ -210,6 +209,17 @@ export default function BlogSkiInSkiOutHotels() {
     setTier("All tiers");
     setSnowType("All snow types");
     setTraveler("All traveler types");
+  };
+
+  const openEnquiry = (propertyName: string) => {
+    setEnquiryProperty(propertyName);
+    setEnquirySent(false);
+    window.setTimeout(() => document.getElementById("ski-enquiry-form")?.scrollIntoView({ behavior: "smooth", block: "start" }), 0);
+  };
+
+  const submitEnquiry = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setEnquirySent(true);
   };
 
   const canonical = `https://thestayandwander.com${articleMetadata.url}`;
@@ -249,8 +259,10 @@ export default function BlogSkiInSkiOutHotels() {
         </section>
 
         <section id="ski-shortlist" className="mt-12 scroll-mt-28"><div className="flex items-end justify-between gap-4"><div><p className="text-xs font-bold uppercase tracking-[0.16em] text-[#0077B6]">The shortlist</p><h2 className="mt-2 font-playfair text-3xl font-bold text-[#0D1B2A]">Nine stays to verify for winter 2026–2027</h2></div><Snowflake className="hidden h-9 w-9 text-[#F4A261] sm:block" aria-hidden="true" /></div><div className="mt-6 grid gap-5 md:grid-cols-2">
-          {filteredProperties.map((property) => <article key={property.id} className="group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition duration-200 hover:-translate-y-1 hover:border-[#0077B6] hover:shadow-lg"><div className="flex flex-wrap items-start justify-between gap-3"><div><p className="text-xs font-bold uppercase tracking-[0.16em] text-[#0077B6]">{property.region} · {property.tier}</p><h3 className="mt-2 font-playfair text-2xl font-bold text-[#0D1B2A]">{property.name}</h3><p className="mt-1 text-sm font-semibold text-slate-500">{property.location}</p></div><span className="rounded-full bg-[#edf7fb] px-3 py-1 text-xs font-bold text-[#0077B6]">{property.accessLabel}</span></div><ul className="mt-5 space-y-2 text-sm leading-relaxed text-slate-700">{property.details.map((detail) => <li key={detail} className="flex gap-2"><CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#0077B6]" aria-hidden="true" />{detail}</li>)}</ul><div className="mt-5 rounded-xl bg-slate-50 p-4 text-sm leading-relaxed text-slate-700"><p><strong>Best for:</strong> {property.bestFor.join(" · ")}</p><p className="mt-2"><strong>Opening:</strong> {property.opening}</p>{property.note && <p className="mt-2 text-[#70451f]">{property.note}</p>}</div><div className="mt-5 flex flex-wrap gap-3">{property.link ? <AffiliateLink href={property.link.href} partner={property.link.partner} category={property.link.category} source={property.link.source} destination={property.name} rel={property.link.rel ?? "sponsored nofollow"} className="inline-flex items-center gap-2 rounded-full bg-[#F4A261] px-4 py-2.5 text-sm font-bold text-[#0D1B2A] transition hover:-translate-y-0.5 hover:bg-[#f7b47c] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0077B6]"><span>{property.link.label}</span><ExternalLink className="h-4 w-4" aria-hidden="true" /></AffiliateLink> : property.enquiry ? <a href={`mailto:thestayandwander@thestayandwander.com?subject=${encodeURIComponent(`${property.name} enquiry`)}`} data-property-link="true" data-property-partner="hotel_direct" data-property-name={property.name} rel="sponsored" className="inline-flex items-center gap-2 rounded-full border border-[#0D1B2A] bg-white px-4 py-2.5 text-sm font-bold text-[#0D1B2A] transition hover:-translate-y-0.5 hover:border-[#0077B6] hover:text-[#0077B6] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0077B6]">Ask us about this stay <ArrowRight className="h-4 w-4" aria-hidden="true" /></a> : null}{property.secondaryLink && <AffiliateLink href={property.secondaryLink.href} partner={property.secondaryLink.partner} category="hotel" source={campaign} destination={property.name} rel={property.secondaryLink.rel ?? "sponsored nofollow"} className="inline-flex items-center gap-2 rounded-full border border-slate-300 bg-white px-4 py-2.5 text-sm font-bold text-[#0D1B2A] transition hover:-translate-y-0.5 hover:border-[#0077B6] hover:text-[#0077B6] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0077B6]">{property.secondaryLink.label}</AffiliateLink>}</div></article>)}
+          {filteredProperties.map((property) => <article key={property.id} className="group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition duration-200 hover:-translate-y-1 hover:border-[#0077B6] hover:shadow-lg"><div className="flex flex-wrap items-start justify-between gap-3"><div><p className="text-xs font-bold uppercase tracking-[0.16em] text-[#0077B6]">{property.region} · {property.tier}</p><h3 className="mt-2 font-playfair text-2xl font-bold text-[#0D1B2A]">{property.name}</h3><p className="mt-1 text-sm font-semibold text-slate-500">{property.location}</p></div><span className="rounded-full bg-[#edf7fb] px-3 py-1 text-xs font-bold text-[#0077B6]">{property.accessLabel}</span></div><ul className="mt-5 space-y-2 text-sm leading-relaxed text-slate-700">{property.details.map((detail) => <li key={detail} className="flex gap-2"><CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#0077B6]" aria-hidden="true" />{detail}</li>)}</ul><div className="mt-5 rounded-xl bg-slate-50 p-4 text-sm leading-relaxed text-slate-700"><p><strong>Best for:</strong> {property.bestFor.join(" · ")}</p><p className="mt-2"><strong>Opening:</strong> {property.opening}</p>{property.note && <p className="mt-2 text-[#70451f]">{property.note}</p>}</div><div className="mt-5">{property.link ? <AffiliateLink href={property.link.href} partner={property.link.partner} category={property.link.category} source={property.link.source} destination={property.name} ctaType="check_availability_click" rel="sponsored" className="inline-flex items-center gap-2 rounded-full bg-[#F4A261] px-4 py-2.5 text-sm font-bold text-[#0D1B2A] transition hover:-translate-y-0.5 hover:bg-[#f7b47c] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0077B6]"><span>Check availability</span><ExternalLink className="h-4 w-4" aria-hidden="true" /></AffiliateLink> : property.enquiry ? <button type="button" onClick={() => openEnquiry(property.name)} data-enquiry-click="true" data-property-name={property.name} className="inline-flex items-center gap-2 rounded-full border border-[#0D1B2A] bg-white px-4 py-2.5 text-sm font-bold text-[#0D1B2A] transition hover:-translate-y-0.5 hover:border-[#0077B6] hover:text-[#0077B6] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0077B6]">Ask us <ArrowRight className="h-4 w-4" aria-hidden="true" /></button> : null}</div></article>)}
         </div>{filteredProperties.length === 0 && <div className="mt-6 rounded-2xl border border-dashed border-slate-300 p-8 text-center text-slate-600">No stays match all four filters. Reset one filter to widen the shortlist.</div>}<p className="mt-5 text-xs leading-relaxed text-slate-500">No hotel photos, prices, star scores, or review scores are used here. Opening signals are expected dates and should be confirmed with each hotel.</p></section>
+
+        <section id="ski-enquiry-form" className="mt-12 scroll-mt-28 rounded-2xl border border-[#cfe4ee] bg-[#f5fbfd] p-6 md:p-8"><p className="text-xs font-bold uppercase tracking-[0.18em] text-[#0077B6]">Property enquiry</p><h2 className="mt-2 font-playfair text-3xl font-bold text-[#0D1B2A]">Ask us about a stay</h2><p className="mt-3 text-slate-700">Tell us which property you want to check. We’ll use the details only to respond to your enquiry.</p><form data-enquiry-form="ski_property_enquiry" onSubmit={submitEnquiry} className="mt-6 grid gap-4 md:grid-cols-2"><label className="text-sm font-semibold text-[#0D1B2A]">Property<input name="property" value={enquiryProperty} onChange={(event) => setEnquiryProperty(event.target.value)} required className="mt-2 w-full rounded-xl border border-slate-300 bg-white px-3 py-3 font-normal" /></label><label className="text-sm font-semibold text-[#0D1B2A]">Email<input name="email" type="email" required className="mt-2 w-full rounded-xl border border-slate-300 bg-white px-3 py-3 font-normal" /></label><label className="text-sm font-semibold text-[#0D1B2A] md:col-span-2">Message<textarea name="message" rows={4} className="mt-2 w-full rounded-xl border border-slate-300 bg-white px-3 py-3 font-normal" placeholder="What would you like to know?" /></label>{enquirySent && <p className="md:col-span-2 rounded-xl bg-emerald-50 p-3 text-sm text-emerald-800" role="status">Thanks — your enquiry is ready for follow-up.</p>}<button type="submit" className="w-fit rounded-full bg-[#F4A261] px-5 py-3 font-bold text-[#0D1B2A]">Send enquiry</button></form></section>
 
         <section id="nordic-snow-stays" className="mt-12 scroll-mt-28 rounded-2xl border border-[#cfe4ee] bg-[#f5fbfd] p-6 md:p-8"><p className="text-xs font-bold uppercase tracking-[0.18em] text-[#0077B6]">Nordic snow stays</p><h2 className="mt-2 font-playfair text-3xl font-bold text-[#0D1B2A]">Lapland for winter experiences, not ski-in/ski-out access</h2><p className="mt-4 leading-relaxed text-slate-700">{nordicProperties.map((property) => property.name).join(" and ")} are included for their supplied Nordic winter setting and experience-led positioning. They are not ski-in/ski-out hotels. Ask each property about skiing, snow activities, transfers, and operating dates. Aurora viewing is possible in winter, not guaranteed.</p></section>
 

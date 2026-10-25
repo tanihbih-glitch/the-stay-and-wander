@@ -11,6 +11,7 @@ interface AffiliateLinkProps {
   className?: string;
   target?: string;
   rel?: string;
+  ctaType?: string;
 }
 
 export function AffiliateLink({
@@ -23,6 +24,7 @@ export function AffiliateLink({
   className,
   target = '_blank',
   rel = 'noopener noreferrer',
+  ctaType,
 }: AffiliateLinkProps) {
   const trackClickMutation = trpc.analytics.trackClick.useMutation();
 
@@ -69,6 +71,7 @@ export function AffiliateLink({
       data-affiliate-category={category}
       data-property-link={/hotel|property/i.test(category) ? "true" : undefined}
       data-property-name={destination || undefined}
+      data-cta-type={ctaType}
     >
       {children}
     </a>

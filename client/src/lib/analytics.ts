@@ -1,4 +1,6 @@
 export type AnalyticsEventName =
+  | "check_availability_click"
+  | "enquiry_click"
   | "property_link_click"
   | "enquiry_submit"
   | "tool_use"
@@ -52,8 +54,25 @@ export function installAnalyticsDelegation() {
     const flightRoot = target?.closest<HTMLElement>("[data-flight-widget]");
     const propertyLink = target?.closest<HTMLElement>("[data-property-link]");
     const affiliate = target?.closest<HTMLElement>("[data-affiliate-partner]");
+    const cta = target?.closest<HTMLElement>("[data-cta-type]");
+    const enquiryButton = target?.closest<HTMLElement>("[data-enquiry-click]");
 
-    if (propertyLink) {
+    if (cta?.getAttribute("data-cta-type") === "check_availability_click") {
+      trackAnalyticsEvent("check_availability_click", {
+        property_name: cta.getAttribute("data-property-name") || undefined,
+        partner: cta.getAttribute("data-affiliate-partner") || undefined,
+        cta_type: "check_availability",
+      });
+    }
+
+    if (enquiryButton) {
+      trackAnalyticsEvent("enquiry_click", {
+        property_name: enquiryButton.getAttribute("data-property-name") || undefined,
+        cta_type: "ask_us",
+      });
+    }
+
+    if (propertyLink && cta?.getAttribute("data-cta-type") !== "check_availability_click") {
       trackAnalyticsEvent("property_link_click", {
         property_name: propertyLink.getAttribute("data-property-name") || undefined,
         partner: propertyLink.getAttribute("data-affiliate-partner") || undefined,
