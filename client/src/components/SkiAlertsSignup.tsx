@@ -10,6 +10,7 @@ interface SkiAlertsSignupProps {
 
 export default function SkiAlertsSignup({ compact = false }: SkiAlertsSignupProps) {
   const [submitted, setSubmitted] = useState(false);
+  const responseTarget = compact ? "ski-mailchimp-response-top" : "ski-mailchimp-response-full";
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     setSubmitted(true);
@@ -35,10 +36,10 @@ export default function SkiAlertsSignup({ compact = false }: SkiAlertsSignupProp
         </div>
       </div>
       <p className="mt-3 text-sm leading-relaxed text-slate-700">We'll email confirmed opening dates and any early-booking offers we spot for these hotels. About 1-2 emails a month; unsubscribe any time.</p>
-      {submitted ? (
+      {submitted && (
         <p className="mt-5 rounded-xl bg-emerald-50 p-4 text-sm font-semibold text-emerald-800" role="status">Check your inbox to confirm.</p>
-      ) : (
-        <form action={MAILCHIMP_ACTION} method="post" target="ski-mailchimp-response" onSubmit={handleSubmit} className="mt-5 space-y-4" data-email-signup-form="ski-2026-27">
+      )}
+      <form action={MAILCHIMP_ACTION} method="post" target={responseTarget} onSubmit={handleSubmit} className="mt-5 space-y-4" data-email-signup-form="ski-2026-27">
           <label className="block text-sm font-semibold text-[#0D1B2A]">
             Email address
             <input name="EMAIL" type="email" autoComplete="email" required className="mt-2 w-full rounded-xl border border-slate-300 bg-white px-3 py-3 font-normal outline-none focus:border-[#0077B6] focus:ring-2 focus:ring-[#0077B6]/20" />
@@ -52,10 +53,9 @@ export default function SkiAlertsSignup({ compact = false }: SkiAlertsSignupProp
           <input type="hidden" name="CONSENT_TIMESTAMP" value="" />
           <div aria-hidden="true" className="absolute left-[-5000px] h-px w-px overflow-hidden"><input type="text" name="b_48ee0dc10117e46d5a5e32365_4512b2fda5" tabIndex={-1} defaultValue="" /></div>
           <button type="submit" className="inline-flex items-center justify-center rounded-full bg-[#F4A261] px-5 py-3 text-sm font-bold text-[#0D1B2A] transition hover:-translate-y-0.5 hover:bg-[#f7b47c] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0077B6]">Get the alerts</button>
-        </form>
-      )}
+      </form>
       <p className="mt-4 flex items-start gap-2 text-xs leading-relaxed text-slate-500"><ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-[#0077B6]" aria-hidden="true" /> Your email is sent to Mailchimp for double opt-in confirmation and is not stored in this website's database.</p>
-      <iframe title="Mailchimp signup response" name="ski-mailchimp-response" className="hidden" />
+      <iframe title="Mailchimp signup response" name={responseTarget} className="hidden" />
     </section>
   );
 }
