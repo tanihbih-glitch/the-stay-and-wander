@@ -59,12 +59,15 @@ describe("ski-in/ski-out hotel guide", () => {
 
   it("keeps ski alerts on Mailchimp without local database storage", () => {
     const source = readFileSync(path.resolve(process.cwd(), "client/src/components/SkiAlertsSignup.tsx"), "utf8");
-    expect(source).toContain("thestayandwander.us10.list-manage.com/subscribe/post");
-    expect(source).toContain('name="tags" value="ski-2026-27"');
-    expect(source).toContain('name="CONSENT_TIMESTAMP"');
+    const endpoint = readFileSync(path.resolve(process.cwd(), "server/mailchimpSubscribe.ts"), "utf8");
+    expect(source).toContain('fetch("/api/subscribe"');
+    expect(source).toContain('name="company"');
     expect(source).toContain('data-email-signup-form="ski-2026-27"');
     expect(source).toContain("Check your inbox to confirm.");
     expect(source).toContain("/privacy-policy");
+    expect(endpoint).toContain('status_if_new: "pending"');
+    expect(endpoint).toContain('SUBSCRIBER_TAG = "ski-2026-27"');
+    expect(endpoint).toContain("MAX_REQUESTS_PER_WINDOW");
   });
 
   it("keeps the future Meta Pixel inactive until a configured ID and marketing consent exist", () => {

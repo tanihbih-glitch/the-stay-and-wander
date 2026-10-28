@@ -14,6 +14,7 @@ import { legacyRedirectMiddleware, trailingSlashRedirectMiddleware } from "../le
 import { registerGoogleSearchConsoleOAuthRoutes } from "../googleSearchConsoleOAuthRoutes";
 import { registerSearchConsoleCtrMonitoringRoutes } from "../searchConsoleCtrMonitoringRoutes";
 import { registerAnalyticsConfigRoute } from "../analyticsConfig";
+import { registerMailchimpSubscribeRoute } from "../mailchimpSubscribe";
 
 function isPortAvailable(port: number): Promise<boolean> {
   return new Promise(resolve => {
@@ -48,6 +49,7 @@ async function startServer() {
   registerGoogleSearchConsoleOAuthRoutes(app);
   registerSearchConsoleCtrMonitoringRoutes(app);
   registerAnalyticsConfigRoute(app);
+  registerMailchimpSubscribeRoute(app);
   // tRPC API
   app.use(
     "/api/trpc",

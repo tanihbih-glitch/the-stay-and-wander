@@ -142,12 +142,6 @@ export function installAnalyticsDelegation() {
       });
       return;
     }
-    if (form.matches("[data-email-signup-form]")) {
-      trackAnalyticsEvent("email_signup", {
-        signup_name: form.getAttribute("data-email-signup-form") || "email_signup",
-      });
-      trackMetaPixelEvent("Lead");
-    }
   };
 
   document.addEventListener("click", onClick, true);

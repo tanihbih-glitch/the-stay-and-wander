@@ -15,8 +15,10 @@ describe("analytics helpers", () => {
     expect(source).toContain('"flight_widget_click"');
     expect(source).toContain('"outbound_affiliate_click"');
     expect(source).toContain('"email_signup"');
-    expect(source).toContain("data-email-signup-form");
-    expect(source).toContain('trackMetaPixelEvent("Lead")');
+    expect(source).not.toContain("form.matches(\"[data-email-signup-form]\")");
+    const signupSource = await import("fs").then(fs => fs.readFileSync(new URL("../components/SkiAlertsSignup.tsx", import.meta.url), "utf8"));
+    expect(signupSource).toContain('trackAnalyticsEvent("email_signup"');
+    expect(signupSource).toContain('trackMetaPixelEvent("Lead")');
   });
 
   it("keeps the debug switch query-driven and session-only", async () => {
