@@ -26,9 +26,9 @@ export const articleMetadata = {
 };
 
 export const searchMetadata = {
-  title: "Bangkok Daily Travel Costs 2026: Hotel, Food & Transport",
+  title: "Bangkok Daily Budget 2026: What a Day Really Costs",
   description:
-    "Plan Bangkok daily spend in 2026 with hotel bands of $8–$35, $35–$150 and $120–$850+, plus food, transport and booking guidance.",
+    "How much does a day in Bangkok really cost? See what hotels, food and getting around add up to, from backpacker to comfortable, and plan your budget.",
 };
 
 export const nightlyRateRows = [
@@ -153,8 +153,8 @@ export default function BlogBangkokHotelBudgetBreakdown() {
         title={searchMetadata.title}
         description={searchMetadata.description}
         canonical={canonicalUrl}
-        ogTitle={articleMetadata.title}
-        ogDescription={articleMetadata.description}
+        ogTitle={searchMetadata.title}
+        ogDescription={searchMetadata.description}
         ogImage={articleMetadata.image}
         ogUrl={canonicalUrl}
         keywords={articleMetadata.keywords}
