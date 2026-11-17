@@ -12,8 +12,8 @@ import { UAE_EXTENDED_STAY_AFFILIATE_LINKS } from "@/lib/affiliateLinks";
 import { uaeExtendedStayHotelsFaqs } from "@shared/articleFaqs";
 
 export const articleMetadata = {
-  title: "Extended Stay Hotels Dubai & Abu Dhabi 2026",
-  description: "Compare extended-stay hotels in Dubai and Abu Dhabi for 2026, with source-backed kitchens, laundry, workspace, and traveler-fit guidance.",
+  title: "Compare Extended-Stay Hotels in Dubai & Abu Dhabi (2026)",
+  description: "Compare extended-stay hotels in Dubai and Abu Dhabi for 2026: kitchens, laundry, workspace, group capacity and loyalty perks, matched to your trip type.",
   url: "/blog/uae-extended-stay-hotels-2026",
   image: "/manus-storage/dubai-middle-east-destination_1431ce58.png",
   keywords: "UAE extended stay hotels, Dubai serviced apartments, Dubai long stay hotels, UAE aparthotels, Staybridge Dubai, Residence Inn Dubai, Adagio Dubai",

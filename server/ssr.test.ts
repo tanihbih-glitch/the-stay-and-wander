@@ -83,7 +83,7 @@ describe("server-rendered page metadata", () => {
     const template = "<html><head><title>Default site title</title></head><body></body></html>";
     const hub = injectSSRHead(template, pageMetadataConfig.uaeExtendedStayHotels, articleFaqsByPath["/blog/uae-extended-stay-hotels-2026"]);
 
-    expect(hub).toContain("<title>Extended Stay Hotels Dubai &amp; Abu Dhabi 2026</title>");
+    expect(hub).toContain("<title>Compare Extended-Stay Hotels in Dubai &amp; Abu Dhabi (2026)</title>");
     expect(hub).toContain('href="https://thestayandwander.com/blog/uae-extended-stay-hotels-2026"');
     expect(hub).toContain('"@type":"BlogPosting"');
     expect(hub).toContain('"@type":"BreadcrumbList"');

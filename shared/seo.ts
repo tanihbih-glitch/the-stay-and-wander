@@ -515,9 +515,9 @@ export const pageMetadataConfig: Record<string, PageMetadata> = {
   },
 
   uaeExtendedStayHotels: {
-    title: "Extended Stay Hotels Dubai & Abu Dhabi 2026",
+    title: "Compare Extended-Stay Hotels in Dubai & Abu Dhabi (2026)",
     schemaTitle: "UAE Extended-Stay Hotels: Find Your Best Fit for 2026",
-    description: "Compare extended-stay hotels in Dubai and Abu Dhabi for 2026, with source-backed kitchens, laundry, workspace, and traveler-fit guidance.",
+    description: "Compare extended-stay hotels in Dubai and Abu Dhabi for 2026: kitchens, laundry, workspace, group capacity and loyalty perks, matched to your trip type.",
     image: `${SITE_URL}/manus-storage/dubai-middle-east-destination_1431ce58.png`,
     url: "/blog/uae-extended-stay-hotels-2026",
     type: "article",
