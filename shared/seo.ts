@@ -105,6 +105,16 @@ export const pageMetadataConfig: Record<string, PageMetadata> = {
     keywords: "itineraries, travel plans, guided tours, travel packages",
   },
 
+  tripPlanner: {
+    title: "Trip Planner — Free 15-Minute Travel Chat | The Stay & Wander",
+    description:
+      "Shape your next trip with a free 15-minute planning chat from The Stay & Wander. Limited monthly places, practical guidance and no obligation.",
+    image: DEFAULT_IMAGE,
+    url: "/trip-planner",
+    type: "website",
+    keywords: "free trip planning chat, travel planning help, trip planner",
+  },
+
   booking: {
     title: "Book Your Trip - Hotels, Flights & More | The Stay & Wander",
     description:

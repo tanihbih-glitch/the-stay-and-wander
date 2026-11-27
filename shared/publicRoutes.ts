@@ -83,7 +83,7 @@ export const sitemapRoutes: readonly SitemapRoute[] = [
   { path: "/booking/", lastmod: "2026-10-05", changefreq: "weekly", priority: 0.9 },
   { path: "/deals", lastmod: "2026-07-28", changefreq: "weekly", priority: 0.9 },
   { path: "/corporate-travel", lastmod: "2026-07-30", changefreq: "weekly", priority: 0.9 },
-  { path: "/trip-planner", lastmod: "2026-07-28", changefreq: "weekly", priority: 0.9 },
+  { path: "/trip-planner", lastmod: "2026-11-27", changefreq: "weekly", priority: 0.9 },
   { path: "/about", lastmod: "2026-07-28", changefreq: "yearly", priority: 0.5 },
   { path: "/privacy-policy", lastmod: "2026-07-28", changefreq: "yearly", priority: 0.4 },
   { path: "/blog", lastmod: "2026-07-28", changefreq: "daily", priority: 0.8 },

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "wouter";
 import { Check, Compass, Loader2, LockKeyhole, MapPinned, Sparkles } from "lucide-react";
 import Header from "@/components/Header";
@@ -45,11 +45,20 @@ export default function TripPlanner() {
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
   const [checkoutNotice, setCheckoutNotice] = useState("");
+  const [chatSource, setChatSource] = useState("");
+  const [chatMessage, setChatMessage] = useState("");
+  const [chatError, setChatError] = useState("");
+  const [chatSent, setChatSent] = useState(false);
 
   const createPreview = trpc.tripPlanner.createPreview.useMutation();
   const createCheckout = trpc.tripPlanner.createCheckout.useMutation();
+  const submitChat = trpc.tripPlanningChat.submitEnquiry.useMutation();
   const tripLength = Number(form.tripLength);
   const travelDates = [form.startDate, form.endDate].filter(Boolean).join(" to ");
+
+  useEffect(() => {
+    setChatSource(new URLSearchParams(window.location.search).get("utm_source")?.trim().slice(0, 120) || "");
+  }, []);
 
   const setField = <K extends keyof typeof initialForm>(field: K, value: (typeof initialForm)[K]) => {
     setForm(current => ({ ...current, [field]: value }));
@@ -111,6 +120,34 @@ export default function TripPlanner() {
       setCheckoutNotice("Stripe Checkout opened in a new tab. Return here anytime; your itinerary will also be delivered by email after payment.");
     } catch (requestError) {
       setError(requestError instanceof Error ? requestError.message : "We could not open secure checkout. Please try again.");
+    }
+  };
+
+  const handleChatSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setChatError("");
+    setChatSent(false);
+    const formData = new FormData(event.currentTarget);
+    if (formData.get("consent") !== "on") {
+      setChatError("Please agree to the privacy policy before sending.");
+      return;
+    }
+    try {
+      await submitChat.mutateAsync({
+        name: String(formData.get("name") || ""),
+        email: String(formData.get("email") || ""),
+        destination: String(formData.get("destination") || ""),
+        approximateDates: String(formData.get("approximateDates") || ""),
+        budgetBand: String(formData.get("budgetBand") || "Not sure") as "Under $1,000" | "$1,000–2,500" | "$2,500–5,000" | "$5,000+" | "Not sure",
+        message: String(formData.get("message") || ""),
+        consent: true,
+        source: String(formData.get("source") || "") || undefined,
+      });
+      setChatSent(true);
+      setChatMessage("");
+      event.currentTarget.reset();
+    } catch (requestError) {
+      setChatError(requestError instanceof Error ? requestError.message : "We could not send your request. Please try again shortly.");
     }
   };
 
@@ -272,6 +309,38 @@ export default function TripPlanner() {
             </div>
           </section>
         )}
+
+        <section id="free-trip-planning-chat" className="border-y border-[#d9d2c6] bg-[#fffdf8] px-4 py-16 sm:py-20">
+          <div className="container grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
+            <div className="max-w-xl">
+              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#b3842d]">A little human guidance</p>
+              <h2 className="mt-2 font-display text-4xl font-bold leading-tight text-[#17364a]">Free 15-minute trip-planning chat</h2>
+              <p className="mt-5 text-base leading-7 text-slate-600">Have a destination in mind but want a clearer starting point? Book a free 15-minute chat to shape the idea, talk through your priorities, and leave with a more confident next step.</p>
+              <div className="mt-6 space-y-3 text-sm leading-6 text-slate-700">
+                <p className="flex gap-3"><Check className="mt-1 size-4 shrink-0 text-[#b3842d]" />Free, friendly and focused on your trip idea.</p>
+                <p className="flex gap-3"><Check className="mt-1 size-4 shrink-0 text-[#b3842d]" />Limited places available each month.</p>
+                <p className="flex gap-3"><Check className="mt-1 size-4 shrink-0 text-[#b3842d]" />No obligation to book anything afterwards.</p>
+              </div>
+              <p className="mt-7 text-xs leading-5 text-slate-500">Some links on The Stay &amp; Wander earn us a commission at no extra cost to you. This does not affect how we shape your chat.</p>
+            </div>
+
+            <form onSubmit={handleChatSubmit} data-enquiry-form="trip_planning_chat" className="rounded-2xl border border-[#d9d2c6] bg-white p-5 shadow-[0_18px_55px_rgba(23,54,74,0.10)] sm:p-8">
+              <div className="grid gap-5 sm:grid-cols-2">
+                <div className="space-y-2"><Label htmlFor="chat-name">Name</Label><Input id="chat-name" name="name" autoComplete="name" required className="h-11 border-[#d9d2c6] bg-[#fffefb]" /></div>
+                <div className="space-y-2"><Label htmlFor="chat-email">Email</Label><Input id="chat-email" name="email" type="email" autoComplete="email" required className="h-11 border-[#d9d2c6] bg-[#fffefb]" /></div>
+                <div className="space-y-2"><Label htmlFor="chat-destination">Destination</Label><Input id="chat-destination" name="destination" required placeholder="e.g., Japan or Bali" className="h-11 border-[#d9d2c6] bg-[#fffefb]" /></div>
+                <div className="space-y-2"><Label htmlFor="chat-dates">Approximate dates</Label><Input id="chat-dates" name="approximateDates" required placeholder="e.g., October 2027" className="h-11 border-[#d9d2c6] bg-[#fffefb]" /></div>
+                <div className="space-y-2 sm:col-span-2"><Label htmlFor="chat-budget">Budget band</Label><select id="chat-budget" name="budgetBand" defaultValue="Not sure" className="h-11 w-full rounded-md border border-[#d9d2c6] bg-[#fffefb] px-3 text-sm text-[#17364a]"><option>Under $1,000</option><option>$1,000–2,500</option><option>$2,500–5,000</option><option>$5,000+</option><option>Not sure</option></select></div>
+                <div className="space-y-2 sm:col-span-2"><Label htmlFor="chat-message">What would you like help shaping? <span className="font-normal text-slate-500">(optional)</span></Label><textarea id="chat-message" name="message" value={chatMessage} onChange={event => setChatMessage(event.target.value)} maxLength={1200} rows={4} placeholder="Tell us the rough idea, who is travelling, or the decision you are stuck on." className="w-full rounded-md border border-[#d9d2c6] bg-[#fffefb] px-3 py-3 text-sm leading-6 outline-none focus:border-[#b3842d] focus:ring-2 focus:ring-[#b3842d]/20" /></div>
+              </div>
+              <input type="hidden" name="source" value={chatSource} />
+              <label className="mt-5 flex items-start gap-3 text-sm leading-5 text-slate-600"><input name="consent" type="checkbox" required className="mt-1 size-4 accent-[#17364a]" /><span>I agree that The Stay &amp; Wander may use these details to respond to my request. Read the <Link href="/privacy-policy" className="font-semibold text-[#17364a] underline underline-offset-2">privacy policy</Link>.</span></label>
+              {chatError && <p className="mt-5 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700" role="alert">{chatError}</p>}
+              {chatSent && <p className="mt-5 rounded-lg border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-800" role="status">Thanks — your request is on its way. We’ll be in touch about available chat times.</p>}
+              <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between"><p className="text-xs text-slate-500">We’ll only use these details to respond to your enquiry.</p><Button type="submit" disabled={submitChat.isPending} className="h-11 bg-[#17364a] px-6 text-white hover:bg-[#0e2839]">{submitChat.isPending ? <><Loader2 className="size-4 animate-spin" /> Sending…</> : "Request my free chat"}</Button></div>
+            </form>
+          </div>
+        </section>
 
         {!preview && <section className="container px-4 pb-20"><div className="flex flex-col items-start justify-between gap-5 rounded-2xl bg-[#e9e3d8] p-7 sm:flex-row sm:items-center"><div><p className="font-display text-2xl font-bold text-[#17364a]">Already have a stay in mind?</p><p className="mt-1 text-sm text-slate-600">Explore hotels, flights, cars, and activities from one place.</p></div><Button asChild variant="outline" className="border-[#17364a] text-[#17364a]"><Link href="/booking/">Explore booking</Link></Button></div></section>}
       </main>

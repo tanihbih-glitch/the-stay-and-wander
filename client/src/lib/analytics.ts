@@ -139,6 +139,7 @@ export function installAnalyticsDelegation() {
     if (form.matches("[data-enquiry-form]")) {
       trackAnalyticsEvent("enquiry_submit", {
         form_name: form.getAttribute("data-enquiry-form") || "enquiry",
+        source: (form.elements.namedItem("source") as HTMLInputElement | null)?.value || undefined,
       });
       return;
     }
