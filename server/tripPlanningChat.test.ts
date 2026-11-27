@@ -15,6 +15,7 @@ describe("free trip-planning chat request", () => {
     expect(pageSource).toContain('name="destination"');
     expect(pageSource).toContain('name="approximateDates"');
     expect(pageSource).toContain('name="budgetBand"');
+    expect(pageSource).toContain('name="interests"');
     expect(pageSource).toContain('name="message"');
     expect(pageSource).toContain('name="consent" type="checkbox" required');
     expect(pageSource).toContain('href="/privacy-policy"');
@@ -23,6 +24,9 @@ describe("free trip-planning chat request", () => {
     expect(pageSource).toContain("Free 15-minute trip-planning chat");
     expect(pageSource).toContain("Limited places available each month");
     expect(pageSource).toContain("No obligation");
+    expect(pageSource).toContain("How the 15-minute chat works");
+    expect(pageSource).toContain("Sending your request…");
+    expect(pageSource).toContain("Your chat request is on its way.");
   });
 
   it("passes only the source attribution alongside the form name to enquiry_submit", () => {
@@ -39,6 +43,7 @@ describe("free trip-planning chat request", () => {
       destination: "Bali",
       approximateDates: "October 2027",
       budgetBand: "Not sure",
+      interests: ["Food & wine", "Culture & history"],
       message: "Please help with a relaxed route.",
       source: "pinterest",
     });
@@ -46,6 +51,7 @@ describe("free trip-planning chat request", () => {
     expect(payload.reply_to).toBe("traveller@example.com");
     expect(payload.html).toContain("A &lt;traveller&gt;");
     expect(payload.html).toContain("pinterest");
+    expect(payload.html).toContain("Food &amp; wine, Culture &amp; history");
     expect(routerSource).toContain("consent: z.literal(true");
     expect(routerSource).toContain("sendTripPlanningChatEmail");
     expect(routerSource).not.toContain("db.");

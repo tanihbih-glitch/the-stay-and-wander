@@ -9,6 +9,7 @@ const tripPlanningChatInput = z.object({
   destination: z.string().trim().min(2, "Tell us where you would like to go.").max(160),
   approximateDates: z.string().trim().min(2, "Add approximate travel dates.").max(120),
   budgetBand: z.enum(["Under $1,000", "$1,000–2,500", "$2,500–5,000", "$5,000+", "Not sure"]),
+  interests: z.array(z.string().trim().min(1).max(40)).max(8).default([]),
   message: z.string().trim().max(1200).optional(),
   consent: z.literal(true, { error: "Please agree to the privacy policy before sending." }),
   source: z.string().trim().max(120).optional(),

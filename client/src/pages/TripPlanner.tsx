@@ -49,6 +49,7 @@ export default function TripPlanner() {
   const [chatMessage, setChatMessage] = useState("");
   const [chatError, setChatError] = useState("");
   const [chatSent, setChatSent] = useState(false);
+  const [chatInterests, setChatInterests] = useState<string[]>([]);
 
   const createPreview = trpc.tripPlanner.createPreview.useMutation();
   const createCheckout = trpc.tripPlanner.createCheckout.useMutation();
@@ -71,6 +72,10 @@ export default function TripPlanner() {
         ? current.interests.filter(item => item !== interest)
         : [...current.interests, interest],
     }));
+  };
+
+  const toggleChatInterest = (interest: string) => {
+    setChatInterests(current => current.includes(interest) ? current.filter(item => item !== interest) : [...current, interest]);
   };
 
   const handlePreview = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -139,12 +144,14 @@ export default function TripPlanner() {
         destination: String(formData.get("destination") || ""),
         approximateDates: String(formData.get("approximateDates") || ""),
         budgetBand: String(formData.get("budgetBand") || "Not sure") as "Under $1,000" | "$1,000–2,500" | "$2,500–5,000" | "$5,000+" | "Not sure",
+        interests: formData.getAll("interests").map(String),
         message: String(formData.get("message") || ""),
         consent: true,
         source: String(formData.get("source") || "") || undefined,
       });
       setChatSent(true);
       setChatMessage("");
+      setChatInterests([]);
       event.currentTarget.reset();
     } catch (requestError) {
       setChatError(requestError instanceof Error ? requestError.message : "We could not send your request. Please try again shortly.");
@@ -331,14 +338,38 @@ export default function TripPlanner() {
                 <div className="space-y-2"><Label htmlFor="chat-destination">Destination</Label><Input id="chat-destination" name="destination" required placeholder="e.g., Japan or Bali" className="h-11 border-[#d9d2c6] bg-[#fffefb]" /></div>
                 <div className="space-y-2"><Label htmlFor="chat-dates">Approximate dates</Label><Input id="chat-dates" name="approximateDates" required placeholder="e.g., October 2027" className="h-11 border-[#d9d2c6] bg-[#fffefb]" /></div>
                 <div className="space-y-2 sm:col-span-2"><Label htmlFor="chat-budget">Budget band</Label><select id="chat-budget" name="budgetBand" defaultValue="Not sure" className="h-11 w-full rounded-md border border-[#d9d2c6] bg-[#fffefb] px-3 text-sm text-[#17364a]"><option>Under $1,000</option><option>$1,000–2,500</option><option>$2,500–5,000</option><option>$5,000+</option><option>Not sure</option></select></div>
+                <fieldset className="space-y-3 sm:col-span-2">
+                  <legend className="text-sm font-medium text-[#17364a]">Primary interests <span className="font-normal text-slate-500">(choose any)</span></legend>
+                  <div className="flex flex-wrap gap-2">
+                    {INTERESTS.map(interest => {
+                      const selected = chatInterests.includes(interest);
+                      return <span key={interest}><button type="button" aria-pressed={selected} onClick={() => toggleChatInterest(interest)} className={`rounded-full border px-3 py-2 text-sm font-medium transition-all duration-200 hover:-translate-y-0.5 ${selected ? "border-[#17364a] bg-[#17364a] text-white shadow-sm" : "border-[#d9d2c6] bg-[#fffefb] text-[#38505e] hover:border-[#b3842d]"}`}>{selected && <Check className="mr-1 inline size-3.5" />}{interest}</button>{selected && <input type="hidden" name="interests" value={interest} />}</span>;
+                    })}
+                  </div>
+                </fieldset>
                 <div className="space-y-2 sm:col-span-2"><Label htmlFor="chat-message">What would you like help shaping? <span className="font-normal text-slate-500">(optional)</span></Label><textarea id="chat-message" name="message" value={chatMessage} onChange={event => setChatMessage(event.target.value)} maxLength={1200} rows={4} placeholder="Tell us the rough idea, who is travelling, or the decision you are stuck on." className="w-full rounded-md border border-[#d9d2c6] bg-[#fffefb] px-3 py-3 text-sm leading-6 outline-none focus:border-[#b3842d] focus:ring-2 focus:ring-[#b3842d]/20" /></div>
               </div>
               <input type="hidden" name="source" value={chatSource} />
               <label className="mt-5 flex items-start gap-3 text-sm leading-5 text-slate-600"><input name="consent" type="checkbox" required className="mt-1 size-4 accent-[#17364a]" /><span>I agree that The Stay &amp; Wander may use these details to respond to my request. Read the <Link href="/privacy-policy" className="font-semibold text-[#17364a] underline underline-offset-2">privacy policy</Link>.</span></label>
               {chatError && <p className="mt-5 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700" role="alert">{chatError}</p>}
-              {chatSent && <p className="mt-5 rounded-lg border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-800" role="status">Thanks — your request is on its way. We’ll be in touch about available chat times.</p>}
-              <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between"><p className="text-xs text-slate-500">We’ll only use these details to respond to your enquiry.</p><Button type="submit" disabled={submitChat.isPending} className="h-11 bg-[#17364a] px-6 text-white hover:bg-[#0e2839]">{submitChat.isPending ? <><Loader2 className="size-4 animate-spin" /> Sending…</> : "Request my free chat"}</Button></div>
+              {chatSent && <div className="mt-5 overflow-hidden rounded-xl border border-emerald-200 bg-gradient-to-r from-emerald-50 to-[#f4fbf7] p-4 text-emerald-900 shadow-sm" role="status"><div className="flex items-start gap-3"><span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-emerald-600 text-white"><Check className="size-4" /></span><div><p className="font-semibold">Your chat request is on its way.</p><p className="mt-1 text-sm leading-5 text-emerald-800">Thanks for sharing the idea. We’ll be in touch about available 15-minute chat times.</p></div></div></div>}
+              <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between"><p className="text-xs text-slate-500">We’ll only use these details to respond to your enquiry.</p><Button type="submit" disabled={submitChat.isPending} className="h-11 bg-[#17364a] px-6 text-white hover:bg-[#0e2839]">{submitChat.isPending ? <><Loader2 className="size-4 animate-spin motion-safe:animate-spin" /> Sending your request…</> : "Request my free chat"}</Button></div>
             </form>
+          </div>
+        </section>
+
+        <section className="border-b border-[#d9d2c6] bg-[#f1ede4] px-4 py-14 sm:py-16" aria-labelledby="chat-faq-heading">
+          <div className="container max-w-4xl">
+            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#b3842d]">A few quick answers</p>
+            <h2 id="chat-faq-heading" className="mt-2 font-display text-3xl font-bold text-[#17364a]">How the 15-minute chat works</h2>
+            <div className="mt-8 grid gap-4 md:grid-cols-2">
+              {[
+                ["What happens on the call?", "We’ll talk through your destination idea, priorities and practical questions, then suggest a clear next step for shaping the trip."],
+                ["Is the chat really free?", "Yes. The introductory chat is free, lasts 15 minutes and comes with no obligation to book an itinerary or any other service."],
+                ["Do I need fixed dates first?", "No. Approximate timing is helpful, but you can still request a chat while your dates or destination are taking shape."],
+                ["How quickly will you reply?", "We review requests personally and will follow up with available chat times by email."],
+              ].map(([question, answer]) => <details key={question} className="group rounded-xl border border-[#d9d2c6] bg-[#fffdf8] p-5"><summary className="cursor-pointer list-none pr-6 font-semibold text-[#17364a] marker:hidden group-open:text-[#b3842d]">{question}<span className="float-right text-[#b3842d] transition-transform group-open:rotate-45">+</span></summary><p className="mt-3 text-sm leading-6 text-slate-600">{answer}</p></details>)}
+            </div>
           </div>
         </section>
 

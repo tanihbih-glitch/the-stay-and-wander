@@ -4,6 +4,7 @@ export type TripPlanningChatEnquiry = {
   destination: string;
   approximateDates: string;
   budgetBand: string;
+  interests?: string[];
   message?: string;
   source?: string;
 };
@@ -40,6 +41,7 @@ export function buildTripPlanningChatNotification(enquiry: TripPlanningChatEnqui
           ${formatRow("Destination", enquiry.destination)}
           ${formatRow("Approximate dates", enquiry.approximateDates)}
           ${formatRow("Budget band", enquiry.budgetBand)}
+          ${formatRow("Primary interests", enquiry.interests?.join(", ") || "Not provided")}
           ${formatRow("Source", enquiry.source || "Direct")}
           ${formatRow("Message", enquiry.message || "None provided")}
         </table>
